@@ -1,0 +1,264 @@
+﻿@{
+    ViewBag.Title = "Materiales - Revisión de Déficit";
+}
+
+@section breadcrumb {
+    <li class="active">
+        <a href="@Url.Action("RevisionDeficit", "Materiales")"><span id="RevisionDeficit0001"></span></a>
+    </li>
+}
+
+<div class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section">
+                            <button type="button" class="btn btn-primary" id="solucionar">Solucionar</button>
+                            <button type="button" class="btn" id="cancelar">Cancelar</button>
+                        </div>
+                        <div class="button-section"></div>
+                        <div class="btn-group">
+                            <button id="acciones" onclick="javascript:void(0);" type="button" class="btn">Acciones</button>
+                            <button id="dropdown-toggle" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caretWhite"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a id="revNot" href="@Url.Action("NotificacionDeficit", "Materiales")">Ir a listado</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="ordtrabajo" id="NotificacionDeficit0001"></label>
+                            <input id="ordtrabajo" type="text" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="gridIC"></div>
+            <div id="gridSp" style="margin-top:20px"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+@section JavascriptGlobalVariables {
+    var spools=[];
+    var once=true;
+}
+
+@section JavascriptGlobalFunctions {
+    function regenerarGrid(grid){
+        var options = grid.options;
+        var tmp=grid.element.context;
+        grid.destroy();
+        $("#"+tmp.id).empty().kendoGrid(options);
+    }
+
+    function detailInit(e) {
+        $("<div/>").appendTo(e.detailCell).kendoGrid({
+            dataSource: {
+                data:e.data.ItemCodes,
+                schema: {
+                    model: {
+                        id:"ItemCodeID",
+                        fields:{
+                            ItemCodeID:{ editable: false, nullable: true },
+                            ItemCode: { editable: false,type:"string",validation: { required: false } },
+                            Diametro1: { editable: false,type:"number", validation: { required: false } },
+                            Diametro2: { editable: false,type:"number", validation: { required: false } },
+                            Cantidad:{editable: false,type:"number"},
+                        }
+                    },
+                },
+            },
+            scrollable: true,
+            columns: [
+                {field:"ItemCode",title:"Item Code"},
+                {field:"Diametro1",title:"Diametro 1"},
+                {field:"Diametro2",title:"Diametro 2"},
+                {field:"Cantidad"},
+            ]
+        });
+    }
+
+    function checarPorCubrir(dataItemCantidad,dataItemDeficit){
+        dataItemCantidad.forEach(function(d){
+            try{
+                dataItemDeficit.forEach(function(e){
+                    e.ItemCodeID==d.ItemCodeID ? e.PorCubrir=(parseInt(e.PorCubrir)-parseInt(d.Cantidad)).toString() : 1;
+                    
+                })
+            }catch(e){}
+        });
+        $("#gridIC").data("kendoGrid").refresh();
+    }
+};
+
+@section JavascriptDocumentReadyFunctions {
+    //$authorizationModel["AsociacionItemCodes"] = $AsociacionItemCodesModel;
+
+    $("#ordtrabajo").kendoComboBox({
+        dataSource: {
+            transport: {
+                read: {
+                    url:$NotificacionDeficit.NotificacionDeficit.urlNoId + "?token=" + Cookies.get("token"),
+                    dataType: "json",
+                    type:"GET"
+                }
+            }
+        },
+        minLength: 3,
+        change:function(e){
+            once=true;
+            $RevisionDeficit.RevisionDeficit.read({},{ordenTrabajoID:$("#ordtrabajo").data("kendoComboBox").value(),token:Cookies.get("token")}).done(function(data){
+                $("#gridIC").data("kendoGrid").dataSource.data(data);
+            })
+            $RevisionDeficit.RevisionDeficit.read({},{ordenTrabajo:$("#ordtrabajo").data("kendoComboBox").value(),token:Cookies.get("token")}).done(function(data){
+                $("#gridSp").data("kendoGrid").dataSource.data(data);
+            })
+        },
+        dataTextField: "value",
+        dataValueField: "id"
+    });
+
+    $("#gridIC").kendoGrid({
+        columns: [
+            {field:"ItemCode",title:"Item Code"},
+            {field:"Diametro1",title:"Diametro 1"},
+            {field:"Diametro2",title:"Diametro 2"},
+            {field:"Cantidad"},
+            {field:"Deficit",title:"Deficit"},
+            {field:"PorCubrir",title:"Por cubrir"},
+            { command: "edit", title: "Editar", width: "91px" },
+            { command: "destroy", title: "Borrar", width: "91px" }
+        ],
+        dataSource: {
+            data: [],
+            schema:{
+                model: {
+                    id:"SpoolID",
+                    fields:{
+                        SpoolID:{ editable: false, nullable: true },
+                        ItemCodeID:{ editable: false, nullable: true },
+                        ItemCode: { editable: false,type:"string",validation: { required: false } },
+                        Diametro1: { editable: false,type:"number", validation: { required: false } },
+                        Diametro2: { editable: false,type:"number", validation: { required: false } },
+                        Cantidad:{editable: false,type:"number"},
+                        Deficit:{editable: true,type:"number",defaultvalue:0},
+                        PorCubrir:{editable: false,type:"number",defaultvalue:0}
+                    }
+                },
+            },
+            transport:{
+                read:{
+                    url:"",
+                    dataType:"json",
+                    type:"GET"
+                },
+                update:{
+                    url:"",
+                    dataType:"json",
+                    type:"PUT"
+                },
+                destroy:{
+                    url:"",
+                    dataType:"json",
+                    type:"DELETE"
+                }
+            }
+        },
+        autoHeight: true,
+        sortable: false,
+        scrollable: false,
+        filterable: false,
+        pageable: false,
+        editable:"inline",
+        save: function(e) {
+            //console.log(e);
+        },
+        remove: function(e) {
+            $RevisionDeficit.RevisionDeficit.destroy({},{deficitID:e.model.DeficitID,token:Cookies.get("token")}).done(function(){
+                displayMessage("","Borrado exitosamente","0");
+            });
+        },
+        dataBound: function(e) {
+            if(once){
+                once=false;
+                $("#gridIC").data("kendoGrid").dataSource.data().forEach(function(d){
+                    d.PorCubrir=d.Deficit;
+                })
+                $("#gridIC").data("kendoGrid").refresh();
+            }
+        },
+        edit:function(e){
+        }
+    });
+
+    $("#gridSp").kendoGrid({
+        columns: [
+            { template: '<input type="checkbox" class="sub" >', width: 45 },
+            {field:"SpoolID",title:"SpoolID"},
+            {field:"Spool",title:"Spool"},
+            {field:"Prioridad",title:"Prioridad"},
+            {field:"Peqs"},
+            {field:"Peso"},
+        ],
+        dataSource: {
+            data: [],
+            schema: {
+                model: {
+                    id:"SpoolID",
+                    fields:{
+                        SpoolID:{ editable: false, nullable: true },
+                        Spool: { editable: false,type:"string",validation: { required: false } },
+                        Prioridad: { editable: false,type:"number", validation: { required: false } },
+                        Peqs: { editable: false,type:"string", validation: { required: false } },
+                        Peso:{editable: false,type:"number"},
+                        ItemCodeID:{editable: false,type:"number"}
+                    }
+                },
+            },
+        },
+        detailInit: detailInit,
+        autoHeight: true,
+        sortable: false,
+        scrollable: false,
+        filterable: false,
+        editable:"inline",
+        pageable: false,
+        editable:false,
+        save: function(e) {
+            //console.log(e);
+        },
+        remove: function(e) {
+            //console.log(e);
+        },
+        dataBound: function(e) {
+            $(".sub").on("change",function(){
+                if(this.checked){
+                    var dataItemCantidad=$("#gridSp").data("kendoGrid").dataItem($(this).closest("tr")).ItemCodes;
+                    var dataItemDeficit=$("#gridIC").data("kendoGrid").dataSource.data();
+                    checarPorCubrir(dataItemCantidad,dataItemDeficit);
+                }
+            })
+        },
+        edit:function(e){
+            //console.log(e);
+        },
+    });
+
+    $("#solucionar").on("click",function(){});
+};
+    
+@section JavascriptDocumentReadyHomeCookie {
+    //Cookies.set("home", true, { path: '/' });
+    //Cookies.set("navegacion", "46", { path: '/' });
+};
+</script>

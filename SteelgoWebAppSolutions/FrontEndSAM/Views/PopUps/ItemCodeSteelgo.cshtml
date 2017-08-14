@@ -1,0 +1,305 @@
+﻿@{
+    ViewBag.Title = "Item Code Steelgo";
+}
+
+ <div id="modalItemCodeSteelgo" class="form clearfix popup col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div id="Descripcion_ItemCodeSteelgoDiv" class="form-group">
+                    <label id="Cuantificacion0051"></label>
+                    <input id="Descripcion_ItemCodeSteelgo" class="general-input" />
+                </div>
+                <div id="Familia_ItemCodeSteelgoDiv" class="form-group">
+                    <label id="Cuantificacion0052"></label>
+                    <input id="Familia_ItemCodeSteelgo" class="" />
+                </div>
+                <div id="Peso_ItemCodeSteelgoDiv" class="form-group">
+                    <label id="Cuantificacion0069"></label>
+                    <input id="Peso_ItemCodeSteelgo" class="general-input"  />
+                </div>
+                <div id="Diametro1_ItemCodeSteelgoDiv" class="form-group">
+                    <label id="Cuantificacion0070"></label>
+                    <input id="Diametro1_ItemCodeSteelgo" class="general-input"  />
+                </div>
+                <div id="Diametro2_ItemCodeSteelgoDiv" class="form-group">
+                    <label id="Cuantificacion0071"></label>
+                    <input id="Diametro2_ItemCodeSteelgo" class="general-input"  />
+                </div>
+                <div id="Area_ItemCodeSteelgoDiv" class="form-group">
+                    <label id="Cuantificacion0072"></label>
+                    <input id="Area_ItemCodeSteelgo" class="general-input" />
+                </div>
+                <div id="Cedula_ItemCodeSteelgoDiv" class="form-group">
+                    <label id="Cuantificacion0073"></label>
+                    <input id="Cedula_ItemCodeSteelgo" class="" />
+                </div>
+                <div id="Codigo_ItemCodeSteelgoDiv" class="form-group">
+                    <label id="Cuantificacion0074"></label>
+                    <input id="Codigo_ItemCodeSteelgo" class="general-input"  />
+                </div>
+                <div class="buttonSave">
+                    <a id="GuardarItemCodeSteelgo" href="#" class="btn btn-primary">
+                        <span id="Cuantificacion0053"></span>
+                    </a>
+                    <a id="CancelarItemCodeSteelgo" href="#" class="btn btn-primary">
+                        <span id="Cuantificacion0054"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    @section JavascriptGlobalVariables {
+    var familiaItemCodeSteelgo = {}, cedulasItemCodeSteelgo = {};
+
+    var $ItemCodeSteelgoModel = {
+        listContainer: {
+            create: "",
+            list: "",
+            detail: "",
+            destroy: ""
+        },
+        properties: {
+            descripcion: {
+                visible: "#Descripcion_ItemCodeSteelgoDiv",
+                editable: "#Descripcion_ItemCodeSteelgo",
+                required: "#Descripcion_ItemCodeSteelgo"
+            },
+            familia: {
+                visible: "#Familia_ItemCodeSteelgoDiv",
+                editable: "#Familia_ItemCodeSteelgo",
+                required: "#Familia_ItemCodeSteelgo"
+            },
+            peso: {
+                visible: "#Peso_ItemCodeSteelgoDiv",
+                editable: "#Peso_ItemCodeSteelgo",
+                required: "#Peso_ItemCodeSteelgo"
+            },
+            diametro1: {
+                visible: "#Diametro1_ItemCodeSteelgoDiv",
+                editable: "#Diametro1_ItemCodeSteelgo",
+                required: "#Diametro1_ItemCodeSteelgo"
+            },
+            diametro2: {
+                visible: "#Diametro2_ItemCodeSteelgoDiv",
+                editable: "#Diametro2_ItemCodeSteelgo",
+                required: "#Diametro2_ItemCodeSteelgo"
+            },
+            area: {
+                visible: "#Area_ItemCodeSteelgoDiv",
+                editable: "#Area_ItemCodeSteelgo",
+                required: "#Area_ItemCodeSteelgo"
+            },
+            cedula: {
+                visible: "#Cedula_ItemCodeSteelgoDiv",
+                editable: "#Cedula_ItemCodeSteelgo",
+                required: "#Cedula_ItemCodeSteelgo"
+            },
+            codigo: {
+                visible: "#Codigo_ItemCodeSteelgoDiv",
+                editable: "#Codigo_ItemCodeSteelgo",
+                required: "#Codigo_ItemCodeSteelgo"
+            }
+        }
+    };
+    }
+
+    @section JavascriptGlobalFunctions {
+    function CargarInicial() {
+        hideElementsItemCodeSteelgo();
+
+        window.parent.$(".k-i-close").click(function (e) {
+            CancelarItemCodeSteelgo();
+        });
+        $("#Familia_ItemCodeSteelgo").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "FamiliaAceroID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarFamiliaItemCodeSteelgo(dataItem.FamiliaAceroID):CargarFamiliaItemCodeSteelgo("");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    familiaItemCodeSteelgo = {};
+                    this.value("");
+                };
+            },
+            filter: "contains",
+        });
+        ObtenerFamiliaItemCodeSteelgo();
+
+        $("#Cedula_ItemCodeSteelgo").kendoComboBox({
+            dataTextField: "value",
+            dataValueField: "id",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarCedulasItemCodeSteelgo(dataItem.id):CargarCedulasItemCodeSteelgo("");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    cedulasItemCodeSteelgo = {};
+                    this.value("");
+                };
+            },
+            filter: "contains",
+        });
+        ObtenerCedulasItemCodeSteelgo();
+
+        $("#GuardarItemCodeSteelgo").click(function () {
+            if (validarRequeridosModalItemCodeSteelgo()) {
+                GuardarItemCodeSteelgo();
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            }
+        });
+        $("#CancelarItemCodeSteelgo").click(function () { CancelarItemCodeSteelgo(); });
+    };
+
+    function hideElementsItemCodeSteelgo() {
+        $(".sidebar").hide();
+        $(".logo").hide();
+        $(".search-bar").hide();
+        $(".notifications").hide();
+        $(".logged-user").hide();
+        $(".content-container").removeClass("topbar").addClass("printView");
+        $(".breadcrumb-container").hide();
+        $(".languageSelector").hide();
+        $(".pull-right").hide();
+        $("header").hide();
+        $(".content-frame").removeClass("content-frame");
+        $("body").css("background", "#FFFFFF");
+    };
+
+    function CargarFamiliaItemCodeSteelgo(id) {
+        familiaItemCodeSteelgo = {};
+        familiaItemCodeSteelgo = { FamiliaID: id };
+    };
+
+    function CargarCedulasItemCodeSteelgo(id) {
+        cedulasItemCodeSteelgo = {};
+        cedulasItemCodeSteelgo = { CedulaID: id };
+    };
+    
+    function ObtenerFamiliaItemCodeSteelgo() {
+        $Familia.Familia.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("Familia_ItemCodeSteelgo", result);
+        });
+    };
+    function ObtenerCedulasItemCodeSteelgo() {
+        $Cedulas.Cedulas.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("Cedula_ItemCodeSteelgo", result);
+        });
+    };
+    function validarRequeridosModalItemCodeSteelgo() {
+        var bool = true;
+        $("#modalItemCodeSteelgo .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if (!$(this).val()) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                    $(this).closest("div").addClass("clearfix");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                    $(this).closest("div").removeClass("clearfix");
+                };
+            };
+        });
+        return bool;
+    };
+
+    function LimpiarModalItemCodeSteelgo() {
+        $("#Descripcion_ItemCodeSteelgo").val("");
+        $("#Familia_ItemCodeSteelgo").data("kendoComboBox").value("");
+        $("#Peso_ItemCodeSteelgo").val("");
+        $("#Diametro1_ItemCodeSteelgo").val("");
+        $("#Diametro2_ItemCodeSteelgo").val("");
+        $("#Area_ItemCodeSteelgo").val("");
+        $("#Cedula_ItemCodeSteelgo").val("");
+        $("#Codigo_ItemCodeSteelgo").val("");
+
+        familiaItemCodeSteelgo = {};
+        cedulasItemCodeSteelgo = {};
+    };
+
+    function cerrarVentanaModal() {
+        window.parent.$("#window").data("kendoWindow").close();
+        cleanDisplayMessage();
+    };
+
+    function GuardarItemCodeSteelgo() {
+        ItemCodeSteelgo = { Descripcion: "", FamiliaID: "", Peso: "", Diametro1: "", Diametro2: "", Area: "", CedulaID: "", Codigo: "" };
+        ItemCodeSteelgo.DescripcionEspanol = $("#Descripcion_ItemCodeSteelgo").val();
+        ItemCodeSteelgo.FamiliaAceroID = familiaItemCodeSteelgo.FamiliaID;
+        ItemCodeSteelgo.Peso = $("#Peso_ItemCodeSteelgo").val();
+        ItemCodeSteelgo.Diametro1 = $("#Diametro1_ItemCodeSteelgo").val();
+        ItemCodeSteelgo.Diametro2 = $("#Diametro2_ItemCodeSteelgo").val();
+        ItemCodeSteelgo.Area = $("#Area_ItemCodeSteelgo").val();
+        ItemCodeSteelgo.CedulaID = cedulasItemCodeSteelgo.CedulaID;
+        ItemCodeSteelgo.Codigo = $("#Codigo_ItemCodeSteelgo").val();
+
+        $ItemCodeSteelgo.ItemCodeSteelgo.create({}, { json: JSON.stringify(ItemCodeSteelgo), token: Cookies.get("token") }).done(function (data) {
+            LimpiarModalItemCodeSteelgo();
+            if (Error(data)) {
+                cerrarVentanaModal();
+            };
+        });
+
+    };
+
+    function cancelarvalidacionRequeridosModalItemCodeSteelgo() {
+        $("#modalItemCodeSteelgo .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                $(this).closest("div").find("label").removeClass("error");
+                $(this).closest("div").removeClass("clearfix");
+            };
+        });
+    };
+
+    function CancelarItemCodeSteelgo() {
+        LimpiarModalItemCodeSteelgo();
+        cerrarVentanaModal();
+        cancelarvalidacionRequeridosModalItemCodeSteelgo();
+        window.parent.ActualizarCookie();
+    };
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Item Code Steelgo"] = $ItemCodeSteelgoModel;
+    CargarInicial();
+    }
+
+    @section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "34", { path: '/' });
+    }
+</script>

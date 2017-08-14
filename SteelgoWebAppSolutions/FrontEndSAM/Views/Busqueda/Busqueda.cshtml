@@ -1,0 +1,209 @@
+﻿@{
+    ViewBag.Title = "Búsqueda";
+}
+
+@section breadcrumb {
+    <li>
+        <span id="Busqueda0001"></span>
+    </li>
+}
+
+<div id="formBusqueda" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <label for="dropProyecto" id="Busqueda0002"></label>
+                    <input type="text" name="name" class="" id="dropProyecto" />
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-9">
+                    <label id="Busqueda0003"></label>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                            <input type="checkbox" id="requireFolio" />
+                            <label for="requireFolio" class="checkLabel" id="Busqueda0004"></label>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                            <input type="checkbox" id="requirePacking" />
+                            <label for="requirePacking" class="checkLabel" id="Busqueda0005"></label>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                            <input type="checkbox" id="requireIC" />
+                            <label for="requireIC" class="checkLabel">Item Code</label>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                            <input type="checkbox" id="requireNumUnico" />
+                            <label for="requireNumUnico" class="checkLabel" id="Busqueda0006"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="grid"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="pager">
+                        <a id="anterior" href="#"><span id="Busqueda0007"></span></a>
+                        <span id="actuales"></span> <span id="Busqueda0009">de</span> <span id="totales"></span>
+                        <a id="siguiente" href="#"><span id="Busqueda0008"></span></a>
+                        <select id="elementos">
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20" selected>20</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+@section JavascriptGlobalVariables {
+    loaded=true;
+    queryString=getUrlParameter("q","");
+    queryRes=null;
+    filtros=[{ field: "Proyecto", operator: "", value: "Todos"||"All" },{ field: "TipoRegistro", operator: "eq", value: "AE" },{ field: "TipoRegistro", operator: "eq", value: "Cu" },{ field: "TipoRegistro", operator: "eq", value: "IC" },{ field: "TipoRegistro", operator: "eq", value: "NU" }]
+    dataGrid=[];
+    parametros={ q: queryString, start: "0", rows: "20", wt: "json", indent: "true", defType: "edismax", qf: "AvisoLlegada Proyecto Cliente AvisoEntrada ItemCodeSteelgo ItemCode TipoRegistro Cuantificacion NumeroUnicoID", stopwords: "true", lowercaseOperators: "true" };
+}
+
+@section JavascriptGlobalFunctions {
+    function getDataGrid() {
+        $Proxy.Proxy.read({},
+       {
+           url: $Busqueda.select.urlNoId + "?q=" + parametros.q + "&start=" + parametros.start + "&rows=" + parametros.rows + "&wt=" + parametros.wt + "&indent=" + parametros.indent + "&defType=" + parametros.defType + "&qf=" + parametros.qf + "&stopwords=" + parametros.stopwords + "&lowercaseOperators=" + parametros.lowercaseOperators,
+           proxyID:1, token: Cookies.get("token")
+       }).done(function (data) {
+           data = JSON.parse(data);
+           if (Error(data)) {
+               parametros = data.responseHeader.params;
+               queryRes = data.response.numFound;
+
+               $("#grid").data("kendoGrid").dataSource.data(data.response.docs);
+               $("#dropProyecto").data("kendoComboBox").dataSource.data(getProyectos());
+           }
+       });
+
+        //$Busqueda.select.read({},parametros).done(function(data){
+        //    //$Patio.Patio.read({},{token:Cookies.get("token"),esAvisoEntrada:0,PaginaID:0}).done(function(result){
+        //    //    var idPatios=[];
+        //    //    result.forEach(function(r){
+        //    //        idPatios.push(r.PatioID);
+        //    //    });
+        //    //    dataGrid=[];
+        //    //    $.grep(data.response.docs,function(d){
+        //    //        if(idPatios.indexOf(d.Patio)!=-1){
+        //    //            dataGrid.push(d);
+        //    //        }
+        //    //    });
+        //        parametros=data.responseHeader.params;
+        //        queryRes=data.response.numFound;
+        //        //$("#grid").data("kendoGrid").dataSource.data(dataGrid);
+        //        $("#grid").data("kendoGrid").dataSource.data(data.response.docs);
+        //        $("#dropProyecto").data("kendoComboBox").dataSource.data(getProyectos());  
+        //    //})
+        //})
+    }
+
+    function changeLanguageCall() {
+        getDataGrid();
+    };
+    removeGrid($("#grid"));
+    $("#grid").kendoGrid({
+        dataSource: {
+            data:[],
+            total:"0",
+        },
+        rowTemplate: kendo.template('<tr data-uid="#= uid #" style="border-bottom:1px solid black"><td colspan="15"> # if (typeof NumeroUnicoID !== "undefined" && NumeroUnicoID !== null && NumeroUnicoID !== "") { # <h4 style="display:inline">Número único:</h4> <span>#= NumeroUnico #</span><br/> # } if (typeof Proyecto !== "undefined" && Proyecto !== null && Proyecto !== "") { # <h4 style="display:inline">Proyecto:</h4> <span>#= Proyecto #</span><br/> # } if (typeof Cliente !== "undefined" && Cliente !== null && Cliente !== "") { # <h4 style="display:inline">Cliente:</h4> <span>#= Cliente #</span><br/> # } if (typeof AvisoEntrada !== "undefined" && AvisoEntrada !== null && AvisoEntrada !== "") { # <h4 style="display:inline">Folio de Entrada:</h4> <span>#= AvisoEntrada #</span><br/> # } if (typeof Cuantificacion !== "undefined" && Cuantificacion !== null && Cuantificacion !== "") { # <h4 style="display:inline">Cuantificación:</h4> <span>#= Cuantificacion #</span><br/> # } if (typeof ItemCode!== "undefined" && ItemCode!== null && ItemCode!== "") { # <h4 style="display:inline">Item Code:</h4> <span>#= ItemCode#</span><br/> # } if (typeof ItemCodeSteelgo!== "undefined" && ItemCodeSteelgo!== null && ItemCodeSteelgo!== "") { # <h4 style="display:inline">Item Code Steelgo:</h4> <span>#= ItemCodeSteelgo#</span><br/># } # <a href="\\#" class="detalles">Detalles</a></td></tr>'),
+        dataBound:function(e){
+            $(".k-grid .k-grid-header").hide();
+            document.getElementById("actuales").innerHTML=parametros.start+" - "+ (parseInt(parametros.start)+parseInt(parametros.rows)-1);
+            document.getElementById("totales").innerHTML=queryRes;
+            $(".detalles").on("click",function(){
+                var dataItem = $("#grid").data("kendoGrid").dataItem($(this).closest("tr"));
+                switch(dataItem.TipoRegistro){
+                    case "AE":
+                        window.open(window.location.origin+"/AvisoLLegada/DetalleAvisoLLegada?leng="+$("#language").data("kendoDropDownList").value()+"&folio="+dataItem.AvisoEntrada,"_blank");
+                        break;
+                    case "Cu":
+                        window.open(window.location.origin+"/Cuantificacion/Cuantificacion?leng="+$("#language").data("kendoDropDownList").value()+"&EdicionPackingList=1&FolioAvisoEntradaID="+dataItem.Cuantificacion,"_blank");
+                        break;
+                    case "IC":
+                        window.open(window.location.origin+"/ListadoMateriales/ListadoMaterialesItemCode?leng="+$("#language").data("kendoDropDownList").value()+"&PatioID="+dataItem.Patio+"&ProyectoID="+dataItem.Proyecto.split(" ").join("+")+"&IC="+dataItem.ItemCodeID,"_blank");
+                        break;
+                    case "NU":
+                        window.open(window.location.origin+"/ListadoMateriales/DetalleNumeroUnico?leng="+$("#language").data("kendoDropDownList").value()+"&NumeroUnico="+dataItem.NumeroUnicoID,"_blank");
+                        break;
+                }
+            })
+        },
+        scrollable: true
+    });
+    
+    $("#dropProyecto").kendoComboBox({
+        dataSource: [],
+        change:function(e){
+            $("#grid").data("kendoGrid").dataSource.filter(getFiltros());  
+        },
+    });
+
+    $("#requireFolio,#requirePacking,#requireIC,#requireNumUnico").on("change",function(){
+        $("#grid").data("kendoGrid").dataSource.filter(getFiltros());
+    })
+
+    function regenerarGrid(){
+        var options = $("#grid").data("kendoGrid").options;
+        $("#grid").data("kendoGrid").destroy();
+        $("#grid").empty().kendoGrid(options);
+    }
+
+    function getProyectos(){
+        data=["Todos"];
+        dataGrid.forEach(function(d){
+            data.indexOf(d.Proyecto)==-1 ? data.push(d.Proyecto) : 0;
+        })
+        return data;
+    }
+
+    function getFiltros(){
+        $("#dropProyecto").data("kendoComboBox").value() && $("#dropProyecto").data("kendoComboBox").value()!=="Todos" ? filtros[0]["value"]=$("#dropProyecto").data("kendoComboBox").value() : filtros[0]["value"]="";
+        var tmp=[];
+        $("#dropProyecto").data("kendoComboBox").value() && $("#dropProyecto").data("kendoComboBox").value()!=="Todos" ? tmp.push(filtros[0]) : 0;
+        document.getElementById("requireFolio").checked ? tmp.push(filtros[1]) : 0;
+        document.getElementById("requirePacking").checked ? tmp.push(filtros[2]) : 0;
+        document.getElementById("requireIC").checked ? tmp.push(filtros[3]) : 0;
+        document.getElementById("requireNumUnico").checked ? tmp.push(filtros[4]) : 0;
+        return tmp;
+    }
+};
+
+@section JavascriptDocumentReadyFunctions {
+    $("#siguiente").on("click",function(){
+        queryRes > parseInt(parametros.start)+parseInt($("#elementos").val()) ? parametros.start=parseInt(parametros.start)+parseInt($("#elementos").val()) : 0;
+        getDataGrid();
+    })
+
+    $("#anterior").on("click",function(){
+        parseInt(parametros.start)-parseInt($("#elementos").val()) > -1 ? parametros.start=parseInt(parametros.start)-parseInt($("#elementos").val()) : 0;
+        getDataGrid();
+    })
+
+    $("#elementos").on("change",function(){
+        parametros.rows=this.value;
+    })
+};
+    
+@section JavascriptDocumentReadyHomeCookie {
+    //Cookies.set("home", true, { path: '/' });
+    //Cookies.set("navegacion", "52", { path: '/' });
+};
+
+</script>

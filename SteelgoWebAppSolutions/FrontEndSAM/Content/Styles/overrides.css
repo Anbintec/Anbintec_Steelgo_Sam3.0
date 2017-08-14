@@ -1,0 +1,1029 @@
+﻿/**********************************************************************************
+    File name: overrides.css
+    Description: CSS Framework overrides.
+
+    Index: 
+
+    01  $_languageSelector
+    02  $_k-widget
+    03  $_k-grid
+    04  $_input-group
+    05  $_calendar
+    06  $_tabstrip
+    07  $_
+    08  $_
+    09  $_
+    10  $_
+    11  $_
+
+
+    Color Palette: Look at site.css
+
+**********************************************************************************/
+
+
+
+/**********************************************************************************
+ Class name:    $_languageSelector
+ Description:   Override kendo language input section.
+**********************************************************************************/
+.languageSelector {
+    position: relative;
+    margin-left: 15px;
+    top: 1px;
+}
+
+    .languageSelector .k-widget.k-dropdown {
+        width: 55px;
+    }
+
+        .languageSelector .k-widget.k-dropdown .k-dropdown-wrap span.k-i-arrow-s {
+            background-size: 32% 13%;
+            background-position: 10px 13px;
+        }
+
+        .languageSelector .k-widget.k-dropdown .k-dropdown-wrap.k-state-border-down span.k-i-arrow-s {
+            background-position: 10px 21px;
+        }
+
+    .languageSelector .k-dropdown-wrap.k-state-default {
+        border-color: transparent;
+        box-shadow: none;
+        outline: none;
+        background: none;
+        background-color: #FFFFFF;
+        padding-right: 19px;
+    }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_k-widget
+ Description:   Overrides for kendo widgets.
+**********************************************************************************/
+.form-group {
+    margin-bottom: 29px;
+}
+
+.k-widget {
+    background: #FFFFFF;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border-color: #CCCCCC;
+    box-sizing: border-box;
+}
+
+.k-state-default, .k-state-hover {
+    background: none;
+    background-color: #FFFFFF !important;
+}
+
+    .k-state-default.error,
+    .k-multiselect.error {
+        border-color: #EC4F50;
+    }
+
+.k-widget.k-state-focused, .k-picker-wrap.k-state-focused,
+.k-multiselect.k-header.k-state-focused, .k-dropdown-wrap.k-state-focused {
+    border-color: #4486CB;
+    -moz-box-shadow: 0px 0px 3px #4486CB; /* FF3.5+ */
+    -webkit-box-shadow: 0px 0px 3px #4486CB; /* Saf3.0+, Chrome */
+    box-shadow: 0px 0px 3px #4486CB; /* Opera 10.5, IE9, Chrome 10+ */
+}
+
+.k-textbox > input, .k-autocomplete .k-input,
+.k-picker-wrap .k-input, .k-numeric-wrap .k-input,
+.k-dropdown-wrap .k-input, .k-selectbox .k-input {
+    border-radius: 0;
+    min-height: 34px;
+    height: 34px;
+    font-weight: normal;
+    font-size: 14px;
+    color: #1B3F70;
+    width: 100%;
+    padding: 2px 0;
+}
+
+.form .k-dropdown-wrap .k-input {
+    line-height: 2.4;
+}
+
+.k-filter-menu .k-dropdown .k-input {
+    min-height: inherit;
+    height: inherit;
+}
+
+.k-multiselect, .k-combobox,
+.k-autocomplete, .k-dropdown.fullWidth,
+.k-numerictextbox {
+    width: 100%;
+}
+
+    .k-numerictextbox .k-numeric-wrap .k-link {
+        height: 1.4em;
+    }
+
+.k-multiselect-wrap {
+    color: #000000;
+    background: none;
+    min-height: 30px;
+    height: 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 4px;
+}
+
+    .k-multiselect-wrap span {
+        line-height: normal;
+    }
+
+    .k-multiselect-wrap li {
+        border-color: #305E8E !important;
+        box-shadow: none !important;
+        background: #305E8E !important;
+        padding: 2.5px 7px;
+        margin-right: 5px;
+        border-radius: 3px;
+        color: #fff;
+    }
+
+        .k-multiselect-wrap li span {
+            color: #FFFFFF;
+        }
+
+            .k-multiselect-wrap li span.k-delete {
+                display: none;
+            }
+
+.k-block, .k-button, .k-textbox, .k-drag-clue,
+.k-touch-scrollbar, .k-window, .k-window-titleless .k-window-content,
+.k-window-action, .k-inline-block, .k-grid .k-filter-options,
+.k-grouping-header .k-group-indicator, .k-autocomplete, .k-multiselect,
+.k-multiselect.k-state-border-down, .k-combobox, .k-dropdown, .k-dropdown-wrap,
+.k-dropdown-wrap.k-state-border-down, .k-datepicker, .k-timepicker, .k-colorpicker,
+.k-datetimepicker, .k-notification, .k-numerictextbox, .k-picker-wrap,
+.k-picker-wrap.k-state-border-down, .k-numeric-wrap, .k-colorpicker, .k-list-container,
+.k-calendar-container, .k-calendar td, .k-calendar .k-link, .k-treeview .k-in, .k-editor-inline,
+.k-tooltip, .k-tile, .k-slider-track, .k-slider-selection, .k-upload, .k-autocomplete.k-state-border-down {
+    border-radius: 0;
+}
+
+.k-datepicker {
+    width: 100%;
+}
+
+    .k-datepicker .k-picker-wrap .k-select {
+        border: none;
+        width: 38px;
+    }
+
+    .k-datepicker .k-picker-wrap span.k-i-calendar {
+        height: 100%;
+        width: 100%;
+        background-image: url("/Content/images/SAMC_Datepicker.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 16px 16px;
+    }
+
+.k-combobox .k-dropdown-wrap .k-select {
+    border: none;
+    width: 38px;
+}
+
+.k-combobox .k-dropdown-wrap span.k-i-arrow-s,
+.k-dropdown .k-dropdown-wrap span.k-i-arrow-s {
+    height: 100%;
+    width: 100%;
+    background: none;
+    background-image: url("/Content/images/SAMC_DropdownArrow.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 11px 6px;
+}
+
+.k-combobox .k-dropdown-wrap.k-state-border-down span.k-i-arrow-s,
+.k-dropdown .k-dropdown-wrap.k-state-border-down span.k-i-arrow-s {
+    -moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+}
+
+.k-upload, .k-upload-files {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.k-dropzone {
+    margin-top: 7px;
+    padding: 0;
+    border: 1px solid #c5c5c5; /* For Default; Different for each theme */
+    border-radius: 5px;
+}
+
+    .k-dropzone em {
+        visibility: visible;
+        position: relative;
+        top: 8px;
+    }
+
+    .k-dropzone .k-upload-button,
+    .k-dropzone .k-upload-button.k-state-focused,
+    .k-upload .k-upload-button,
+    .k-upload .k-upload-selected,
+    .k-upload .k-upload-selected.k-state-focused {
+        color: #FFFFFF;
+        background: none;
+        background-color: #305E8E;
+        border: none;
+        border-radius: 3px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: 1px solid #234568;
+        padding: 5px 14px;
+        font-size: 14px;
+        box-sizing: border-box;
+        letter-spacing: 0.6px;
+        height: 34px;
+        -moz-box-shadow: 0px 2px 2px #ccc; /* FF3.5+ */
+        -webkit-box-shadow: 0px 2px 2px #ccc; /* Saf3.0+, Chrome */
+        box-shadow: 0px 2px 2px #ccc; /* Opera 10.5, IE9, Chrome 10+ */
+        vertical-align: text-top;
+    }
+
+.k-upload > .k-upload-button {
+    border-radius: 3px;
+    margin-top: 2px;
+}
+
+.k-upload .k-upload-selected,
+.k-upload .k-upload-selected.k-state-focused {
+    margin-left: 0;
+    border-radius: 3px;
+}
+
+    .k-dropzone .k-upload-button:hover,
+    .k-upload .k-upload-button:hover,
+    .k-upload .k-upload-selected:hover,
+    .k-upload .k-button:focus:not(.k-state-disabled):not([disabled]) {
+        background-color: rgba(048, 094, 142, 0.9);
+        border-color: transparent;
+        border-bottom-color: rgba(035, 069, 104, 0.5);
+        box-shadow: none;
+    }
+
+.k-upload .k-upload-files .k-file .k-icon {
+    background-image: url("/Content/images/SAMC_Attachtment.png");
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.k-icon.k-i-close.k-delete {
+    background-image:url("/Content/images/SAMC_Delete.png") !important;
+}
+
+.k-list-container {
+    color: #000000;
+    background-color: white;
+    box-shadow: none;
+    border-radius: 0 !important;
+    padding: 0 !important;
+}
+
+    .k-list-container .k-list .k-item {
+        box-shadow: none;
+        border: 0 !important;
+        padding: 4px 10px !important;
+        border-radius: 0;
+    }
+
+        .k-list-container .k-list .k-item.k-state-hover {
+            background: none;
+            background-color: rgba(048, 094, 142, 0.2) !important;
+        }
+
+        .k-list-container .k-list .k-item.k-state-selected {
+            font-weight: 600;
+            color: #000000;
+            background: none;
+            background-color: white;
+        }
+
+        .k-list-container .k-list .k-item.k-state-focused {
+            font-weight: 600;
+            color: #000000;
+            background: none;
+            background-color: #FCEED9;
+        }
+
+.k-state-hover, .k-state-focused.k-state-border-down {
+    background: red;
+}
+
+.k-state-disabled {
+    background-color: #F5F5F5;
+}
+
+.popup .k-dropdown {
+    width: 30%;
+}
+
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_k-grid
+ Description:   Override kendo grid.
+**********************************************************************************/
+.k-grid {
+    /*margin-top: 15px;*/
+    background-color: #EEEEEE;
+    z-index: 1;
+}
+
+    /* header + data table */
+    .k-grid > table {
+        table-layout: fixed;
+    }
+
+    .k-grid td {
+        padding: 7.5px 13px;
+        font-size: 12px;
+        line-height: 1.4;
+        color: #111111;
+        font-weight: 100;
+        border-bottom: 1px solid #CCCCCC;
+        text-overflow: clip;
+        word-wrap:break-word;
+    }
+
+    .k-grid td.command {
+        padding: 7.5px;
+    }
+
+    .k-grid tr:last-child td {
+        border-bottom: none;
+    }
+
+    .k-grid tr {
+        background-color: #FFFFFF;
+    }
+
+        .k-grid tr.k-alt {
+            background-color: #F5F5F5;
+        }
+
+        .k-grid tr:not(.k-detail-row):hover {
+            background-color: #FCEED9;
+        }
+
+    .k-grid .k-grid-header tr,
+    .k-grid tbody .k-grouping-row > td {
+        min-height: 39px;
+        height: 39px;
+    }
+
+        .k-grid .k-grid-header tr th {
+            background: none;
+            background-color: #EEEEEE;
+            padding-left: 15px;
+            padding-right: 19px;
+        }
+
+            .k-grid .k-grid-header tr th a.k-link,
+            .k-grid .k-grid-header tr th.k-header,
+            .k-grid tbody .k-grouping-row p.k-reset {
+                font-size: 11.5px;
+                font-weight: 600;
+                text-transform: uppercase;
+                white-space: pre-wrap;
+            }
+
+            .k-grid .k-grid-header tr th .k-filter {
+                background-image: url("/Content/images/SAMC_SearchIconChart.png");
+                background-size: auto;
+                background-position: center 1px;
+            }
+
+            .k-grid .k-grid-header tr th .k-i-arrow-n {
+                background-image: url("/Content/images/SAMC_FilterUp.png");
+                background-size: auto;
+                background-position: center !important;
+                vertical-align: middle;
+            }
+
+            .k-grid .k-grid-header tr th .k-i-arrow-s {
+                background-image: url("/Content/images/SAMC_FilterDown.png");
+                background-size: auto;
+                background-position: center !important;
+                vertical-align: middle;
+            }
+
+        .k-grid .k-grid-header tr.k-filter-row th {
+            border-bottom: 1px solid #CCCCCC;
+            border-top: none;
+        }
+
+        .k-grid .k-grid-header tr th .k-grid-filter{
+            background-color: transparent;
+        }
+
+        .k-grid .k-grid-header tr th .k-grid-filter.k-state-active {
+            background-color: #F35800;
+        }
+
+        .k-grid .k-grid-header tr th > input {
+            width: 100%;
+            box-shadow: none!important;                      
+            text-indent: initial;
+        }
+
+    .k-grid tbody tr td a.k-button {
+        display: block;
+        color: transparent !important;
+        height: 27px;
+        max-width: 18px;
+        padding: 0;
+        margin: 0 auto;
+        font-size: 0;
+        border: none;
+        outline: none;
+        background: none;
+        background-color: transparent !important;
+        background-repeat: no-repeat;
+        background-position: center !important;
+        box-shadow: none !important;
+    }
+
+        .k-grid tbody tr td a.k-button.k-grid-edit {
+            padding: 5px 0;
+        }
+
+        .k-grid tbody tr td a.k-button.k-grid-delete {
+            padding: 7px 0;
+        }
+
+    .k-grid tbody tr td > input.k-textbox {
+        height: 40px;
+        font-size: 14px;
+            color: #1B3F70;
+    }
+
+    .k-grid tbody tr td.k-state-selected {
+        background-color: transparent;
+    }
+
+    .k-grid.entradaMaterial tbody tr td a.k-button {
+        margin: 0 -25px;
+    }
+
+    .k-grid.gridWithInputs tbody tr.k-detail-row .k-grid thead tr th:first-child,
+    .k-grid.gridWithInputs tbody tr.k-detail-row .k-grid tbody tr td:first-child,
+    .k-grid.gridWithInputsStorage tbody tr.k-detail-row .k-grid thead tr th:nth-child(2),
+    .k-grid.gridWithInputsStorage tbody tr.k-detail-row .k-grid tbody tr.k-detail-row .k-grid tr th:first-child {
+        padding: 0;
+    }
+
+    .k-grid.gridWithInputs tbody tr.k-detail-row .k-grid thead tr th:first-child label,
+    .k-grid.gridWithInputsStorage tbody tr.k-detail-row .k-grid thead tr th label {
+        margin: 0;
+    }
+
+    .k-grid tbody tr td a.k-button:active:hover {
+        box-shadow: none !important;
+    }
+
+    .k-grid tbody tr td a.k-button.k-grid-Detalle,
+    .k-grid tbody tr td a.k-button.k-grid-Detail,
+    .k-grid tbody tr td a.k-button.k-grid-Archivos,
+    .k-grid tbody tr td a.k-button.k-grid-Files {
+        background-image: url("/Content/images/SAMC_DetailIcon.png");
+    }
+
+    .k-grid tbody tr td a.k-button.k-grid-Cancelar,
+    .k-grid tbody tr td a.k-button.k-grid-Cancel {
+        background-image: url("/Content/images/SAMC_Delete.png");
+    }
+
+    .k-grid tbody tr td a.k-button.k-grid-Complemento,
+    .k-grid tbody tr td a.k-button.k-grid-Complement {
+        background-image: url("/Content/images/SAMC_ComplementoIcon.png");
+    }
+
+    .k-grid tbody tr td a.k-button.k-grid-Cuantificacion,
+    .k-grid tbody tr td a.k-button.k-grid-Quantification {
+        background-image: url("/Content/images/SAMC_CuantificacionIcon.png");
+    }
+
+    .k-grid tbody tr td a.k-button.k-grid-Imprimir,
+    .k-grid tbody tr td a.k-button.k-grid-Print,
+    .k-grid tbody tr td a.k-button.k-grid-ImprimirEtiquetas,
+    .k-grid tbody tr td a.k-button.k-grid-PrintLabels {
+        background-image: url("/Content/images/SAMC_Print.png");
+    }
+
+.k-grid-pager {
+    background-color: #EEEEEE;
+    height: 54px; /*57px*/
+    padding: 12px 9px;
+}
+
+    /*.k-grid-pager .k-pager-first,
+    .k-grid-pager .k-pager-last {
+        display: none;
+    }*/
+
+    /*.k-grid-pager .k-pager-nav {
+        border-radius: 0;
+        background: none;
+        background-color: #FFFFFF;
+        height: 34px;
+        width: 34px;
+        border-color: #CCCCCC;
+    }*/
+
+    .k-grid-pager .k-pager-nav:hover {
+        background-color: #FCEED9;
+    }
+
+    /*.k-grid-pager .k-pager-nav .k-icon,
+            .k-grid-pager .k-pager-nav:hover .k-icon {
+                height: 16px;
+                width: 9px;
+                position: relative;
+                top: 2px;
+                background-repeat: no-repeat;
+                background-position: 0 0;
+                background-color: transparent;
+                background-size: auto;
+            }
+
+        .k-grid-pager .k-pager-nav .k-i-arrow-w {
+            background-image: url("/Content/images/SAMC_NavigationLeft.png");
+            left: -2px;
+        }
+
+        .k-grid-pager .k-pager-nav .k-i-arrow-e {
+            background-image: url("/Content/images/SAMC_NavigationRight.png");
+            right: -1px;
+        }*/
+
+    /*.k-grid-pager .k-pager-input {
+        background-color: #FFFFFF;
+        height: 26px;
+        border-top: 1px solid #CCCCCC;
+        border-bottom: 1px solid #CCCCCC;
+        margin: 0px -1px;
+        padding: 3px 16px 5px 7.5px;
+    }
+
+        .k-grid-pager .k-pager-input input.k-textbox {
+            padding: 0;
+            margin: 0 0 4px 2px;
+            min-height: 20px;
+            height: 20px;
+            width: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            box-shadow: none !important;
+        }
+
+    .k-grid-pager .k-pager-numbers {
+        margin: 2px;
+    }*/
+
+    .k-grid-pager .k-pager-sizes {
+        color: #666666;
+        float: right;
+        /*padding: 3px 0 0;*/
+        padding: 0;
+        margin-top: 1px;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.9px;
+    }
+
+        .k-grid-pager .k-pager-sizes .k-dropdown {
+            float: right;
+            width: 63px;
+            margin-right: 0px;
+            margin-top: -4px;
+            margin-left: 10px;
+        }
+
+        .k-grid-pager .k-pager-sizes .k-dropdown-wrap .k-input {
+            min-height: 24px;
+            height: 24px;
+            font-size: 14px;
+            padding: 5px;
+            letter-spacing: normal;
+            line-height: 1.7;
+        }
+
+        .k-grid-pager .k-pager-sizes .k-dropdown .k-dropdown-wrap .k-select {
+            width: 35px;
+        }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_calendar
+ Description:   Override kendo datepicker calendar.
+**********************************************************************************/
+.k-calendar-container {
+    padding: 0 !important;
+    background-color: #FFFFFF;
+    border-radius: 0;
+}
+
+    .k-calendar-container.k-group {
+        border-color: transparent;
+        border: 0;
+        border-bottom: 1px solid #c5c5c5;
+    }
+
+    .k-calendar-container.k-state-border-up {
+        border-radius: 0;
+    }
+
+.k-calendar {
+    font-size: 12px;
+    border-radius: 0;
+}
+
+    .k-calendar .k-header {
+        background: none;
+        font-weight: 600;
+        background-color: #1B3F70;
+        border: 1px solid #1B3F70;
+        border-bottom: 0;
+    }
+
+        .k-calendar .k-header .k-i-arrow-w {
+            background-image: url("/Content/images/SAMC_Icon_Calendar_Left.png");
+            background-position: center 2px !important;
+        }
+
+        .k-calendar .k-header .k-i-arrow-e {
+            background-image: url("/Content/images/SAMC_Icon_Calendar_Right.png");
+            background-position: center 2px !important;
+        }
+
+        .k-calendar .k-header .k-link,
+        .k-calendar .k-header .k-link.k-state-hover {
+            color: #FFFFFF;
+            background: none !important;
+            padding: 6px 0;
+            text-transform: uppercase;
+        }
+
+    .k-calendar table {
+        color: #202020 !important;
+        font-weight: 600;
+        border-right: 1px solid #c5c5c5;
+        border-left: 1px solid #c5c5c5;
+    }
+
+        .k-calendar table thead tr th {
+            background-color: #FFFFFF;
+            padding: 5.6px 7.5px;
+            font-weight: 600;
+        }
+
+        .k-calendar table tbody tr td {
+            padding: 3.6px 6.5px;
+        }
+
+            .k-calendar table tbody tr td.k-state-focused {
+                box-shadow: inset 0 0 5px 1px #1B3F70;
+                background: none;
+            }
+
+            .k-calendar table tbody tr td.k-state-selected {
+                box-shadow: none;
+                background: none;
+                background-color: #1B3F70;
+            }
+
+            .k-calendar table tbody tr td.k-state-hover {
+                box-shadow: none;
+                background: none;
+                background-color: #FCEED9 !important;
+            }
+
+    .k-calendar .k-footer {
+        display: none;
+    }
+/**********************************************************************************/
+
+/**********************************************************************************
+ Class name:    $_tabstrip
+ Description:   Override kendo tabstrip.
+**********************************************************************************/
+#tabstrip {
+    padding: 0 15px;
+    border: none;
+}
+
+.k-tabstrip .k-tabstrip-items {
+    display: none;
+    padding: 0;
+}
+
+.k-tabstrip-items .k-loading.k-complete {
+    border: none;
+}
+
+.k-tabstrip-items .k-item {
+    background: #FFFFFF;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 600;
+    z-index: 1;
+}
+
+    .k-tabstrip-items .k-item .k-link {
+        color: #305E8E;
+        letter-spacing: .8px;
+        padding: 0 25px 14px 0;
+    }
+
+    .k-tabstrip-items .k-item.k-state-active .k-link {
+        color: #333333;
+    }
+
+.k-tabstrip .k-content {
+    border: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .k-tabstrip .k-content > div,
+    .k-tabstrip .k-content > div * {
+        box-sizing: border-box;
+    }
+
+    .k-tabstrip .k-content.k-state-active {
+    }
+
+    .k-tabstrip .k-content .addedSection {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+/**Widgets and inputs inside tabs**/
+.k-tabstrip .k-multiselect-wrap,
+.k-tabstrip .k-textbox > input, .k-tabstrip .k-autocomplete .k-input,
+.k-tabstrip .k-picker-wrap .k-input, .k-tabstrip .k-numeric-wrap .k-input,
+.k-tabstrip .k-dropdown-wrap .k-input, .k-tabstrip .k-selectbox .k-input,
+.k-tabstrip.form input.general-input {
+    min-height: 36px;
+    height: 36px;
+}
+
+.k-tabstrip.form input.general-input,
+.k-tabstrip .k-dropzone .k-upload-button,
+.k-tabstrip .k-upload .k-upload-selected {
+    min-height: 38px;
+    height: 38px;
+}
+
+.k-tabstrip .k-multiselect.k-header {
+    max-width: 100%;
+}
+/**********************************************************************************/
+
+/* Media Queries */
+
+/* xs viewport */
+@media screen and (max-width: 767px) {
+
+    /*$_languageSelector*/
+    .languageSelector {
+        margin-left: 0px;
+    }
+
+    /*$_input-group*/
+    /*Override bootstrap input group display for mobiles*/
+    .form .input-group {
+        display: block;
+    }
+
+        .form .input-group > .input-group-btn {
+            display: none;
+        }
+
+    /*$_k-widget*/
+    .k-widget.k-window {
+        min-width: 100%!important;
+        left: 0!important;        
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .k-upload > .k-upload-button {
+        margin-top: 5px;
+    }
+
+    /*$_k-grid*/
+    .k-grid {
+        overflow: hidden;
+        overflow-x: auto;
+    }       
+
+        .k-grid > table {
+            table-layout: auto;
+            margin-left: -1px;
+        }
+
+        .k-grid .k-grid-footer {
+            border-top: none;
+        }
+
+        .k-grid tbody tr td a.k-button {
+            max-width: 100%;
+        }
+
+        .k-grid tbody tr:last-child td {
+            border-bottom: 1px solid #CCCCCC;
+        }
+
+        .k-grid tbody tr.k-footer-template {
+            border: none;
+        }
+
+            .k-grid tbody tr.k-footer-template td {
+                border-bottom: none;
+                border-left: none;
+            }
+
+    .k-grid-pager {
+        border-top: none;
+    }
+
+        .k-grid-pager .k-pager-sizes {
+            letter-spacing: 0;
+            max-width: 120px;
+            white-space: normal;
+            line-height: normal;
+        }
+
+            .k-grid-pager .k-pager-sizes .k-dropdown {
+                margin-left: 5px;
+            }
+
+            .k-grid-pager .k-pager-sizes .k-dropdown-wrap .k-input {
+                line-height: 1.7;
+            }
+
+    .k-grid .k-grouping-header,
+    .k-grid .k-grid-toolbar {
+        border: none;
+    }
+
+        .k-grid .k-grouping-header + table .k-grid-header tr th.k-header,
+        .k-grid .k-grouping-header + .k-grid-header tr th.k-header,
+        .k-grid .k-grid-toolbar + .k-grouping-header,
+        .k-grid .k-grid-toolbar + table .k-grid-header tr th.k-header,
+        .k-grid .k-grid-toolbar + .k-grid-header {
+            border-top: 1px solid #CCCCCC;
+        }
+
+    /*.k-grid .k-grid-header > tr:first-child th {
+        border-bottom: none;
+    }*/
+
+    .k-grid .k-grid-header > tr:last-child th {
+        border-bottom: 1px solid #CCCCCC;
+    }
+
+    .gridWithInputs.k-grid tbody tr.k-detail-row td.k-detail-cell table,
+    .gridWithInputsStorage.k-grid tbody tr.k-detail-row td.k-detail-cell table {
+        min-width: 641px;
+    }
+
+    .gridWithInputs.k-grid tbody tr.k-detail-row td.k-detail-cell .k-grid input[type="checkbox"],
+    .gridWithInputsStorage.k-grid tbody tr.k-detail-row td.k-detail-cell .k-grid input[type="checkbox"] {
+        width: auto;
+        margin-left: 30%;
+    }
+
+    .gridWithInputsStorage.k-grid tbody tr.k-detail-row td.k-detail-cell .k-grid th input[type="checkbox"] {
+        margin-left: 40%;
+    }
+
+    .gridWithInputs.k-grid tbody tr.k-detail-row td.k-detail-cell .k-grid tr:last-child td,
+    .gridWithInputsStorage.k-grid tbody tr.k-detail-row td.k-detail-cell .k-grid tr:last-child td {
+        border-bottom: none;
+    }
+
+    .popup .k-grid > table {
+        table-layout: fixed;
+    }
+
+    .popup .k-dropdown {
+        width: 100%;
+    }
+
+}
+
+/* sm viewport */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* tablet viewport*/
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    /*$_k-widget*/
+    .k-multiselect, .k-combobox,
+    .k-autocomplete, .k-datepicker {
+        max-width: 100%;
+    }
+
+    /*$_input-group*/
+    /*Override bootstrap input group display for tablets*/
+    .form .input-group {
+        display: block;
+    }
+
+        .form .input-group > .input-group-btn {
+            display: none;
+        }
+
+    /*$_k-grid*/
+    .k-grid {
+        overflow: hidden;
+        overflow-x: auto;
+    }
+
+        .k-grid > table {
+            table-layout: auto;
+            margin-left: -1px;
+        }
+
+        .k-grid tbody tr td a.k-button {
+            max-width: 100%;
+        }
+
+        .k-grid tr:last-child td {
+            border-bottom: 1px solid #CCCCCC;
+        }
+
+        .k-grid .k-grouping-header,
+        .k-grid .k-grid-toolbar {
+            border: none;
+        }
+
+            .k-grid .k-grouping-header + table .k-grid-header tr th.k-header,
+            .k-grid .k-grid-toolbar + table .k-grid-header tr th.k-header,
+            .k-grid .k-grid-toolbar + .k-grid-header {
+                border-top: 1px solid #CCCCCC;
+            }
+
+        .k-grid .k-grid-header > tr:first-child th {
+            //border-bottom: none;
+        }
+
+    .gridWithInputs.k-grid tbody tr.k-detail-row td.k-detail-cell table,
+    .gridWithInputsStorage.k-grid tbody tr.k-detail-row td.k-detail-cell table {
+        min-width: 641px;
+    }
+
+    .gridWithInputs.k-grid tbody tr.k-detail-row td.k-detail-cell .k-grid input[type="checkbox"],
+    .gridWithInputsStorage.k-grid tbody tr.k-detail-row td.k-detail-cell .k-grid input[type="checkbox"] {
+        width: auto;
+        margin-left: 30%;
+    }
+
+    .gridWithInputsStorage.k-grid tbody tr.k-detail-row td.k-detail-cell .k-grid th input[type="checkbox"] {
+        margin-left: 40%;
+    }
+
+    .gridWithInputs.k-grid tbody tr.k-detail-row td.k-detail-cell .k-grid tr:last-child td,
+    .gridWithInputsStorage.k-grid tbody tr.k-detail-row td.k-detail-cell .k-grid tr:last-child td {
+        border-bottom: none;
+    }
+
+    .k-grid-pager {
+        border-top: none;
+    }
+}
+
+/* md viewport */
+@media (min-width: 992px) and (max-width: 1024px) {
+}
+
+/* lg viewport */
+@media (min-width: 1025px) {
+}

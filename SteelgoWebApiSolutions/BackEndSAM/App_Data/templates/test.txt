@@ -1,0 +1,5 @@
+Hola <<nombreUsuario>>
+Tienes la siguiente notificacion: <<mensaje>>
+Enviada por <<remitente>>
+
+Saludos

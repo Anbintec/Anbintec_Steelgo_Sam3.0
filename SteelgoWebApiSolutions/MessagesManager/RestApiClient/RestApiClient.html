@@ -1,0 +1,28 @@
+<!-- jQuery -->
+<script src="jquery-2.1.4.js"></script>
+
+<!-- jQuery rest -->
+<script src="jquery.rest.js"></script>
+
+
+
+<script>
+    var client = new $.RestClient('http://localhost:60966/messagesManager/api/');
+    client.add('messageManager');
+    client.messageManager.read({ token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc3VhcmlvSUQiOjEsIk5vbWJyZVVzdWFyaW8iOiJzYW1BZG1pbiIsIkNvbnRyYXNlbmFIYXNoIjoic2FtYWRtaW4iLCJQZXJmaWxJRCI6MSwiQmxvcXVlYWRvUG9yQWRtaW5pc3RyYWNpb24iOmZhbHNlLCJBY3Rpdm8iOnRydWUsImV4cCI6MTQzNTY3Mjc4MH0.UUiZ7RX0W0P6263KLIgSVCXsNeIhpDdsdc03vtH02MQ" }).done(function (data) {
+        console.log(data);
+    });
+                                                        //{"NotificacionID":2, "UsuarioIDReceptor":1,"UsuarioIDEmisor":1,"TipoNotificacionID":1, "Mensaje":"Mensaje de ejemplo"}
+    client.messageManager.create({}, { objectEncrypted: "ew0KCSJOb3RpZmljYWNpb25JRCI6MiwNCgkiVXN1YXJpb0lEUmVjZXB0b3IiOjEsDQoJIlVzdWFyaW9JREVtaXNvciI6MSwNCgkiVGlwb05vdGlmaWNhY2lvbklEIjoxLA0KCSJNZW5zYWplIjoiTWVuc2FqZSBkZSBlamVtcGxvIg0KfQ==", typeMessage: 1 }).done(function (data) {
+        console.log(data);
+    });
+
+    client.messageManager.update({}, { token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc3VhcmlvSUQiOjEsIk5vbWJyZVVzdWFyaW8iOiJzYW1BZG1pbiIsIkNvbnRyYXNlbmFIYXNoIjoic2FtYWRtaW4iLCJQZXJmaWxJRCI6MSwiQmxvcXVlYWRvUG9yQWRtaW5pc3RyYWNpb24iOmZhbHNlLCJBY3Rpdm8iOnRydWUsImV4cCI6MTQzNTY3Mjc4MH0.UUiZ7RX0W0P6263KLIgSVCXsNeIhpDdsdc03vtH02MQ", id: 4 }).done(function (data) {
+        console.log(data);
+    });
+
+    client.messageManager.destroy({}, { id: 4 }).done(function (data) {
+        console.log(data);
+    });
+
+</script>

@@ -1,0 +1,7 @@
+Mensaje para <<nombreUsuario>>
+Aviso de notificacion: 
+<<mensaje>>
+
+Saludos
+
+Atte <<remitente>>

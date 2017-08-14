@@ -1,0 +1,3 @@
+ALTER TABLE Sam3_NumeroUnico
+ALTER COLUMN [Cedula]
+VARCHAR(100) COLLATE Latin1_General_CI_AS NULL

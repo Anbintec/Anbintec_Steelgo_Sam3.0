@@ -1,0 +1,101 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="departurePermit clearfix">
+    <div class="header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <label id="FormatoPaseSalida0001" class="title"></label>
+                <div class="projectName">
+                    <label id="FormatoPaseSalida0002"></label>
+                    <input id="Proyecto" type="text" />
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img src="~/Content/images/logoPase.png" class="logo" />
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+            <table id="tblPaseSalida" class="departureTable clearfix">
+                <thead>
+                    <tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    @section JavascriptGlobalVariables {
+        var folioAvisoLlegadaID = getUrlParameter("FolioAvisoLlegadaID", "-1");
+    }
+
+    @section JavascriptGlobalFunctions {
+
+       
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+        //ocultar menu y sidebar
+        $(".pull-right").hide();
+        $(".sidebar").hide();
+        $(".breadcrumb-container").hide();
+        $("header").hide();
+        $(".content-container").removeClass("topbar").addClass("printView");
+        $(".content-frame").removeClass("content-frame");
+        $("body").css("background", "#FFFFFF");
+
+        $PaseSalida.PaseSalida.read({ folio: folioAvisoLlegadaID, token: Cookies.get("token") }).done(function (data) {
+
+            $("#Proyecto").val(data.Proyecto).prop("readonly", "true");
+
+            var strhtml = "", strThead = "", i = 1, strTbodyRow1 = "", strTbodyPlanas = "";
+            strThead = "<th><label id='FormatoPaseSalida0003'></label></th><th><label id='FormatoPaseSalida0004'></label></th><th><label id='FormatoPaseSalida0005'></label></th><th><label id='FormatoPaseSalida0006'></label></th>";
+
+            $.each(data.Planas, function (index, key) {
+                strThead += "<th><label>Placa Plana " + i + "</label></th>";
+                strTbodyPlanas += "<td>" + key + "</td>";
+                i++;
+            });
+            
+            $("#tblPaseSalida thead tr").append(strThead);
+
+            strTbodyRow1 = "<td>" + data.Fecha + "</td><td>" + data.NombreOperador + "</td><td>" + data.NumeroPlanas + "</td><td>" + data.Tracto + "</td>" + strTbodyPlanas;
+            $("#tblPaseSalida tbody tr").append(strTbodyRow1);
+
+            var strTbodyRow2 = "", col = 2 + i;
+            var strHeadRow2 = "<thead><tr><th><label id='FormatoPaseSalida0007'></label></th><th><label id='FormatoPaseSalida0011'></label></th></tr></thead>";
+
+            strTbodyRow2 = "<tr><td><label id='FormatoPaseSalida0008'></label> <span class='iconDoc " + data.PackingListFirmado + "'></span></td><td><label id='FormatoPaseSalida0012'></label> <span>" + data.FechaLlegada + "</span></td></tr>";
+            strTbodyRow2 += "<tr><td><label id='FormatoPaseSalida0009'></label> <span class='iconDoc " + data.IncidenciasFirmada + "'></span></td><td><label id='FormatoPaseSalida0013'></label> <span>" + data.FechaInicioDescarga + "</span></td></tr>";
+            strTbodyRow2 += "<tr><td>&nbsp;</td><td><label id='FormatoPaseSalida0014'></label> <span>" + data.FechaFinDescarga + "</span></td></tr>";
+
+            var strHeadRowIncidencia = "", strTbodyIncidencia = "", si=true, no=false;
+            var strHeadRowIncidencia = "<thead><th><label id='FormatoPaseSalida0015'></label></th></thead>";
+
+            if (data.TieneIncidencia)
+            {
+                strTbodyIncidencia = "<tr><td><input id='CheckNo' type='checkbox' disabled> <label for='CheckNo' id='FormatoPaseSalida0017'></label></td></tr>";
+                strTbodyIncidencia += "<tr><td><input  id='CheckSi' type='checkbox' checked='checked' disabled> <label for='CheckSi' id='FormatoPaseSalida0016'></label> <label id='FormatoPaseSalida0018'></label> <span class='incidenceNumber'>" + data.NumeroIncidencia + "</span></td></td></tr>";
+            } else {
+                strTbodyIncidencia = "<tr><td><input id='CheckNo' type='checkbox' checked='checked' disabled> <label for='CheckNo' id='FormatoPaseSalida0017'></label></td></tr>";
+                strTbodyIncidencia += "<tr><td><input id='CheckSi' type='checkbox' disabled> <label for='CheckSi' id='FormatoPaseSalida0016'></label> <label id='FormatoPaseSalida0018'></label> <span class='incidenceNumber'>" + data.NumeroIncidencia + "</span></td></td></tr>";
+            }
+
+            $("#tblPaseSalida tbody").append("<tr><td colspan='2'><table>" + strHeadRow2 + "<tbody>" + strTbodyRow2 + "</tboby></table></td><td colspan=" + (col) + "><table>" + strHeadRowIncidencia + "<tbody>" + strTbodyIncidencia + "</tbody>" + "</table></td></tr>");
+            changeLayoutLabels($("#language").data("kendoDropDownList").value());
+        });
+
+    }
+</script>

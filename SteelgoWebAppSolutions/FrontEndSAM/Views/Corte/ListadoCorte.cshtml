@@ -1,0 +1,486 @@
+﻿@{
+    ViewBag.Title = "Listado de Cortes";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="ListadoCorte0001"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("ListadoCorte", "ListadoCorte")"><span id="ListadoCorte0002"></span></a>
+    </li>
+}
+
+<div class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav filtersFields clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-1">
+                        <div class="button-section">
+                            <button id="Nuevo" type="button" class="btn btn-yellow"><span id="ListadoCorte0003"></span></button>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-9 filter-section">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="ListadoCorte0004"></label>
+                                <input id="ProyectoID" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="ListadoCorte0005"></label>
+                                <input id="FechaInicial" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="ListadoCorte0006"></label>
+                                <input id="FechaFinal" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="ListadoCorte0007"></label>
+                                <input id="PeriodoTiempo" class="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input id="hdAccionFiltrado" type="hidden" />
+
+<script>
+
+    @section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "29", { path: '/' });
+    }
+
+    @section JavascriptGlobalVariables {
+    //your partial views variables
+    var Proyecto = {}, PeriodoTiempo = {},
+        FechaInicial, FechaFinal, resultadoJson;
+    var _CorteUrl = "@Url.Action("Corte", "Corte")";
+    var $ListadoCorteModel = {
+        listContainer: {
+            create: "#Nuevo",
+            list: "#grid",
+            detail: ".detailLink",
+            destroy: ""
+        },
+        properties: {
+            username: {
+                visible: "",
+                editable: "",
+                required: ""
+            }
+        }
+    };
+    }
+
+    @section JavascriptGlobalFunctions {
+    //Your partial views specific functions
+    //Es la carga inicial de las fechas  para el multilenguaje
+    //Funcion: changeDatePickerDateFormat
+    //Parametros: datePickerOptions
+    //Return:     N/A
+    function changeDatePickerDateFormat(datePickerOptions) {
+        FechaInicial.setOptions(datePickerOptions);
+        FechaFinal.setOptions(datePickerOptions);
+    };
+    //Es la carga inicial del grid para el multilenguaje
+    //Funcion: changeLanguageCall
+    //Parametros: N/A
+    //Return:     N/A
+    function changeLanguageCall() {
+        var tmp = removeGrid($("#grid"));
+        CargarGrid();
+        $("#grid").data("kendoGrid").dataSource.data(tmp);
+        CrearPeriodoTiempo();
+    }
+
+    //Es la carga inicial de los controles
+    //Funcion: cargaInicial
+    //Parametros: N/A
+    //Return:     N/A
+    function cargaInicial() {
+        $("#Nuevo").click(function (e) {
+            window.location.href = _CorteUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
+        });
+
+        $("#ProyectoID").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "ProyectoID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarProyecto(dataItem.ProyectoID, dataItem.Nombre):CargarProyecto("", "");
+                var value = this.value();
+                if (!value) {
+                    Proyecto = {};
+                }
+                Filtros();
+            },
+            filter: "contains",
+        });
+        ObtenerProyecto();
+
+        FechaInicial = new kendo.ui.DatePicker($("#FechaInicial"));
+        FechaFinal = new kendo.ui.DatePicker($("#FechaFinal"));
+
+        $("#FechaInicial").bind("change", function () {
+            if (!$("#FechaInicial").val()) {
+                $("#FechaInicial").data("kendoDatePicker").value("");
+            }
+            Filtros();
+        });
+
+        $("#FechaFinal").bind("change", function () {
+            if (!$("#FechaFinal").val()) {
+                $("#FechaFinal").data("kendoDatePicker").value("");
+            }
+            Filtros();
+        });
+
+        ObtenerFechasporDefecto();
+        Filtros();
+    };
+    //Es la carga del grid donde especifican las propiedades y columnas
+    //Funcion: CargarGrid
+    //Parametros: N/A
+    //Return:     N/A
+    function CargarGrid() {
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            FolioAvisoLlegadaID: { type: "string" },
+                            FechaRecepcion: { type: "date" },
+                            FechaGeneracion: { type: "date" },
+                            Estatus: { type: "string" }
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            },
+            autoHeight: true,
+            sortable: true,
+            scrollable: false,
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+                buttonCount: 2
+            },
+            columns: [
+                { field: "FolioAvisoLlegadaID", title: _dictionary.ListadoAvisoLlegada0008[$("#language").data("kendoDropDownList").value()] },
+                { field: "FechaRecepcion", title: _dictionary.ListadoAvisoLlegada0028[$("#language").data("kendoDropDownList").value()], filterable: true, format: "{0:dd/MM/yyyy}", },
+                { field: "FechaGeneracion", title: _dictionary.ListadoAvisoLlegada0013[$("#language").data("kendoDropDownList").value()], filterable: true, format: "{0:dd/MM/yyyy}", },
+               
+            ],
+            dataBound: function (e) {
+                //$(".k-grid input.k-textbox").prop('readonly', true);
+                //$(".k-grid td .k-button").text('');
+                //$(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
+                quickHeadFilter($("#grid").data("kendoGrid"));
+            }
+        });
+    };
+
+    function CrearPeriodoTiempo() {
+        $("#PeriodoTiempo").kendoComboBox({
+            dataTextField: "Periodo",
+            dataValueField: "PeriodoID",
+            dataSource: [
+                { "PeriodoID": "1", "Periodo": _dictionary.ListadoCorte0008[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "2", "Periodo": _dictionary.ListadoCorte0009[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "3", "Periodo": _dictionary.ListadoCorte0010[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "4", "Periodo": _dictionary.ListadoCorte0011[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "5", "Periodo": _dictionary.ListadoCorte0012[$("#language").data("kendoDropDownList").value()] }
+            ],
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarPeriodoTiempo(dataItem.PeriodoID):CargarPeriodoTiempo("");
+                var value = this.value();
+
+                if (!value) {
+                    PeriodoTiempo = {};
+                }
+                ObtenerFechasporPeriodo(value);
+                Filtros();
+            },
+            filter: "contains",
+        });
+    };
+
+
+    //Se carga el Proyecto
+    //Funcion: CargarProyecto
+    //Parametros: id,value
+    //Return:     N/A
+    function CargarProyecto(id, value) {
+        Proyecto = {};
+        Proyecto = { ProyectoID: id, Nombre: value };
+    };
+    //Se carga el Objeto Periodo de tiempo
+    //Funcion: CargarPeriodoTiempo
+    //Parametros: id
+    //Return:     N/A
+    function CargarPeriodoTiempo(id) {
+        PeriodoTiempo = {};
+        PeriodoTiempo = { PeriodoTiempo: id };
+    };
+
+    //Se realiza una peticion para obtenr los Proyectos y cargar el combo con los valores
+    //Funcion: ObtenerProyecto
+    //Parametros: N/A
+    //Return:     N/A
+    function ObtenerProyecto() {
+        $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("ProyectoID", result);
+        });
+    };
+    //Se forma un objeto con todos los filtros
+    //Funcion: ArregloListado
+    //Parametros: accion
+    //Return:    Listado
+    function ArregloListado(accion) {
+        var Listado;
+        Listado = {ProyectoID: "", FechaInicial: "", FechaFinal: "", token: "" };
+
+        var d = new Date($("#FechaInicial").data("kendoDatePicker").value());
+        var d1 = new Date($("#FechaFinal").data("kendoDatePicker").value());
+
+
+        if (d.getFullYear() == "1969") {
+            d = new Date();
+            d.setDate(d.getDate() - 30);
+        }
+        if (d1.getFullYear() == "1969") {
+            d1 = new Date();
+        }
+
+        Listado.ProyectoID = Proyecto.ProyectoID ? Proyecto.ProyectoID : "";
+        Listado.FechaInicial = obtenerFormatoFecha(d);
+        Listado.FechaFinal = obtenerFormatoFecha(d1);
+        Listado.token = Cookies.get("token");
+        //console.log(JSON.stringify(Listado));
+        return Listado;
+    };
+
+    //Se realiza una peticion para obtener los datos y llenar el grid dependiendo de la accion que se realizo
+    //Funcion: AccionesListado
+    //Parametros: accion
+    //Return:    N/A
+    function AccionesListado(accion) {
+        //loadingStart();
+        var Listado;
+        Listado = ArregloListado(accion);
+
+        $("#hdAccionFiltrado").val(accion);
+
+        $FiltrosListadoEntradaMaterial.AvisoLlegada.read({}, { data: JSON.stringify(Listado) }).done(function (data) {
+            if (Error(data)) {
+                resultadoJson = data;
+                if ($("#grid").data("kendoGrid")) {
+                    if (resultadoJson.length > 0) {
+                        $("#grid").data("kendoGrid").dataSource.data(resultadoJson);
+                        $("#grid").data("kendoGrid").dataSource.page(1);
+                    } else {
+                        $("#grid").data("kendoGrid").dataSource.data([]);
+                        $("#grid").data("kendoGrid").dataSource.page(0);
+                    };
+                    AsignarPaginaActualCookie();
+                    applySecurityPolicy(false);
+                };
+            };
+            //loadingStop();
+        });
+    };
+    function AsignarPaginaActualCookie() {
+        Cookies.set("navegacion", "29", { path: '/' });
+    }
+    //Se envia la accion a la funcion de acconeslistado donde se forma el objeto con todos los filtros
+    //Funcion: Filtros
+    //Parametros: N/A
+    //Return:    N/A
+    function Filtros() {
+        var Listado;
+        var accion = $("#hdAccionFiltrado").val() ? $("#hdAccionFiltrado").val() : 1;
+        //console.log(accion);
+        AccionesListado(accion);
+    };
+
+    //Se obtiene la fecha y se convierte al formato año, mes, dia y horas.
+    //Funcion: obtenerFormatoFecha
+    //Parametros: datetime d
+    //Return:    string
+    function obtenerFormatoFecha(d) {
+        var curr_date = d.getDate();
+        var curr_month = d.getMonth() + 1; //Months are zero based
+        var curr_year = d.getFullYear();
+        var horaActual = new Date();
+
+        return curr_year + "-" + curr_month + "-" + curr_date + " " + horaActual.getHours() + ":" + horaActual.getMinutes() + ":" + horaActual.getSeconds();
+    };
+
+
+    //Se obtienen las fechas inicial y final de hace una semana y la actual
+    //Funcion: ObtenerFechasporDefecto
+    //Parametros: N/A
+    //Return:    N/A
+    function ObtenerFechasporDefecto() {
+        var fechaFinal = new Date();
+        var fechainicio = new Date(fechaFinal.getTime() - (7 * 24 * 3600 * 1000));
+
+        if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+            format = "dd/MM/yyyy";
+        } else {
+            format = "MM/dd/yyyy";
+        };
+
+        var curr_date0 = fechainicio.getDate();
+        var curr_month0 = fechainicio.getMonth() + 1; //Months are zero based
+        var curr_year0 = fechainicio.getFullYear();
+
+
+        var curr_date = fechaFinal.getDate();
+        var curr_month = fechaFinal.getMonth() + 1; //Months are zero based
+        var curr_year = fechaFinal.getFullYear();
+
+
+        var fechaInicial = new Date(curr_year0, curr_month0 - 1, curr_date0);
+        var fechFinal = new Date(curr_year, curr_month - 1, curr_date);
+
+        var fechaInicialkendo = kendo.parseDate(fechaInicial, format);
+        var fechaFinalkendo = kendo.parseDate(fechFinal, format);
+
+        $("#FechaInicial").data("kendoDatePicker").value(fechaInicialkendo);
+        $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
+    };
+
+    function ObtenerFechasporPeriodo(id) {
+        var fechaInicio = FechaFinal.value();
+        var fechaFin = FechaFinal.value();
+
+        if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+            format = "dd/MM/yyyy";
+        } else {
+            format = "MM/dd/yyyy";
+        }
+
+        if (!fechaInicio) {
+            var todayInicio = new Date();
+            var curr_dateInicio = todayInicio.getDate();
+            var curr_monthInicio = todayInicio.getMonth() + 1;
+            var curr_yearInicio = todayInicio.getFullYear();
+
+            var todayInicial = new Date(curr_yearInicio, curr_monthInicio - 1, curr_dateInicio);
+            fechaInicio = kendo.parseDate(todayInicial, format);
+        }
+
+        if (!fechaFin) {
+            var todayFinal = new Date();
+            var curr_dateFinal = todayFinal.getDate();
+            var curr_monthFinal = todayFinal.getMonth() + 1;
+            var curr_yearFinal = todayFinal.getFullYear();
+
+            var todayFinal = new Date(curr_yearFinal, curr_monthFinal - 1, curr_dateFinal);
+            fechaFin = kendo.parseDate(todayFinal, format);
+        }
+
+        
+
+        var curr_date = fechaFin.getDate();
+        var curr_month = fechaFin.getMonth() + 1;
+        var curr_year = fechaFin.getFullYear();
+
+        var fechaFinal = new Date(curr_year, curr_month - 1, curr_date);
+        var fechaFinalkendo = kendo.parseDate(fechaFinal, format);
+
+        switch (parseInt(id)) {
+            case 1: //Semana Actual
+                fechaInicio.setDate(fechaInicio.getDate() - 7);
+                break;
+            case 2: //Dos Semanas
+                fechaInicio.setDate(fechaInicio.getDate() - 14);
+                break;
+            case 3: //Mes
+                fechaInicio.setMonth(fechaInicio.getMonth() - 1);
+                break;
+            case 4: //Trimestre
+                fechaInicio.setMonth(fechaInicio.getMonth() - 3);
+                break;
+            case 5: //Año
+                fechaInicio.setFullYear(fechaInicio.getFullYear() - 1);
+                break;
+            default:
+                fechaInicio.setDate(fechaInicio.getDate() - 7);
+                break;
+        }
+
+        var curr_date0 = fechaInicio.getDate();
+        var curr_month0 = fechaInicio.getMonth() + 1;
+        var curr_year0 = fechaInicio.getFullYear();
+
+        var fechaInicial = new Date(curr_year0, curr_month0 - 1, curr_date0);
+
+        var fechaInicialkendo = kendo.parseDate(fechaInicial, format);
+
+        $("#FechaInicial").data("kendoDatePicker").value(fechaInicialkendo);
+        $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
+    };
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+    }
+    
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Corte"] = $ListadoCorteModel;
+        cargaInicial();
+    }
+
+</script>
+
+

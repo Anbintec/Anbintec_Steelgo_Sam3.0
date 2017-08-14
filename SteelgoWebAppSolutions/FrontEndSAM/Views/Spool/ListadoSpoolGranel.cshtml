@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "Transacciones - Lista de Spool a Granel";
+}
+
+@section breadcrumb {
+    <li class="">
+        <a href="@Url.Action("landing", "Home")"><span id="ListadoSpoolGranel0002"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("ListadoSpoolGranel", "Spool")"><span id="ListadoSpoolGranel0001"></span></a>
+    </li>
+}
+
+<div class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <button id="Guardar" class="btn btn-yellow"><span id="ListadoSpoolGranel0003"></span></button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="proyecto" id="ListadoSpoolGranel0004"></label>
+                            <input id="proyecto" type="text" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="nombre" id="ListadoSpoolGranel0005"></label>
+                            <input id="nombre" type="text" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label>  </label>
+                            <button id="Buscar" class="btn btn-blue"><span id="ListadoSpoolGranel0006"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="grid"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+@section JavascriptGlobalVariables {
+    filtrosBase=[{ field: "a", operator: "contains", value: "" },{ field: "b", operator: "contains", value: "" }]
+}
+
+@section JavascriptGlobalFunctions {
+    function updateFiltros(){
+        filtros=[];
+        $("#proyectos").data("kendoComboBox").value() ? filtrosBase[0]["value"]=$("#proyectos").data("kendoComboBox").value() : 0;
+        $("#nombre").data("kendoAutoComplete").value() ? filtrosBase[1]["value"]=$("#proyectos").data("kendoComboBox").value() : 0;
+    }
+};
+
+@section JavascriptDocumentReadyFunctions {
+    $("#proyecto").kendoComboBox({
+        dataSource: {
+            transport: {
+                read: {
+                    url: "#",
+                    dataType: "json",
+                    type:"GET"
+                }
+            }
+        },
+        dataTextField: "value",
+        dataValueField: "id",
+        select:function(e){
+            updateFiltros();
+        },
+    });
+
+    $("#nombre").kendoAutoComplete({
+        dataSource:{
+            transport: {
+                read: {
+                    url: "#",
+                    dataType: "jsonp"
+                }
+            }
+        } ,
+        dataTextField: "value",
+        select:function(e){
+            updateFiltros();
+        },
+    });
+
+    $("#grid").kendoGrid({
+        filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+        columns: [
+            { field: "a", title: _dictionary.ListadoSpoolGranel0007[$("#language").data("kendoDropDownList").value()], filterable: { cell: { showOperators: false, operator: "contains", delay: 10, dataTextField: "a"} }, template:"<a href='@Url.Action("SpoolGranel", "Spool")'>#: id # </strong>", width: "120px" },
+            { field: "b", title: _dictionary.ListadoSpoolGranel0008[$("#language").data("kendoDropDownList").value()], filterable: { cell: { showOperators: false, operator: "contains", delay: 10, dataTextField: "b"} }, width: "120px" },
+            { field: "c", title: _dictionary.ListadoSpoolGranel0009[$("#language").data("kendoDropDownList").value()], filterable: { cell: { showOperators: false, operator: "contains", delay: 10, dataTextField: "c"} }, width: "120px" },
+        ],
+        dataSource: {
+            data: [],
+            schema: {
+                model: {
+                    id:"",
+                    fields: {}
+                }
+            },
+            serverPaging: false,
+            serverFiltering: false,
+            serverSorting: false,
+            pageSize: 20,
+            transport:{
+                read:{
+                    url:"#",
+                    dataType:"json",
+                    type:"GET",
+                    cache: false
+                },
+            },
+        },
+        autoHeight: true,
+        sortable: false,
+        scrollable: false,
+        pageable: {
+            refresh: false,
+            pageSizes: [10, 15, 20],
+            info: false,
+            input: false,
+            numeric: true,
+            buttonCount: 2
+        },
+        dataBound: function(e) {
+            quickHeadFilter(this);
+        },
+    });
+
+    $("#buscar").on("click",function(){
+        $("#grid").data("kendoGrid").dataSource.filter(filtrosBase);
+    })
+};
+    
+@section JavascriptDocumentReadyHomeCookie {
+ 
+};
+</script>

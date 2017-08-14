@@ -1,0 +1,790 @@
+﻿
+@{
+    ViewBag.Title = "Entrega";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="Despacho0001"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("DashboardDespachoCorte", "DashboardDespachoCorte")"><span id="Despacho0027"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("DashboardDespachoCorte", "DashboardDespachoCorte")"><span id="Despacho0025"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("Entrega", "Entrega")"><span id="Entrega0002"></span></a>
+    </li>
+}
+
+<div id="formaEntrega" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section editButtonSection">
+                            <div class="btn-group save-group">
+                                <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow creacion"><span id="Predespacho0003">Guardar</span></button>
+                                <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle creacion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caretWhite"></span>
+                                </button>
+                                <ul class="dropdown-menu creacion">
+                                    <li id="MenuTerminar" style="display: block;"><a id="TerminaryNuevo" href="#"><span id="Predespacho0026"></span></a></li>
+                                </ul>
+                            </div>
+                            <a id="Cancelar" class="btn btn-black"><span id="Entrega0004"></span></a>
+                        </div>
+                        <div class="button-section actionButtonSection">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="Entrega0005"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="Acciones">
+                                     <li class="listado"><a id="RedirectDashboard" href="#"><span id="Entrega0015"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection disabled"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-2">
+                                    <div class="row">
+                                        <div id="MasivoDiv" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <label id="Entrega0006" class="centered"></label>
+                                            <input id="Masivo" class="" type="radio" name="radio" checked value="1">
+                                        </div>
+                                        <div id="1a1Div" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <label id="Entrega0007" class="centered"></label>
+                                            <input id="1a1" class="" type="radio" name="radio" value="2" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="ProyectoDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <label id="ListadoOrdenRecepcion0003"></label>
+                                    <input id="ProyectoID" class="" />
+                                </div>
+                                <div id="FechaEntregaDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <label id="Entrega0008"></label>
+                                    <input id="FechaEntrega" class="" />
+                                </div>
+                                <div id="EmpleadoEntregaDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <label id="Entrega0009"></label>
+                                    <input id="EmpleadoEntrega" />
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <label id="Entrega0016"></label>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                            <label id="Entrega0017" class="centered"></label>
+                                            <input id="todos" class="" type="radio" name="llenadomasivo" value="1">
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                            <label id="Entrega0018" class="centered"></label>
+                                            <input id="vacios" class="" type="radio" name="llenadomasivo" checked value="2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row listado">
+                <div class="addedSection clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    @section JavascriptDocumentReadyHomeCookie {
+        Cookies.set("home", true, { path: '/' });
+        Cookies.set("navegacion", "42", { path: '/' });
+    }
+
+    @section JavascriptGlobalVariables {
+        var EmpleadoEntrega = {}, resultadoJson = "", FechaEntrega, Proyecto = {}, EmpleadoRecibe = {}, PickingTicketID = "", EntregaID = ""
+        lastEditedCellIDSEmpleadoEntrega = "", lastEditedCellIDSEmpleadoRecibe = "",
+        lastEditedCellIDSPickingTicket = "";
+
+        var _UrlEntrega = "@Url.Action("Entrega", "Entrega")";
+        var _UrlDashboardDespachoCorte = "@Url.Action("DashboardDespachoCorte", "DashboardDespachoCorte")";
+
+        var $EntregaModel = {
+            listContainer: {
+                create: ".save-group",
+                list: ".listado",
+                detail: ".editButtonSection",
+                destroy: ".k-grid-Cancelar"
+            },
+            properties: {
+                masivo: {
+                    visible: "#MasivoDiv",
+                    editable: "#Masivo",
+                    required: "#Masivo"
+                },
+                unoauno: {
+                    visible: "#1a1Div",
+                    editable: "#1a1",
+                    required: "#1a1"
+                },
+                fechaentrega: {
+                    visible: "#FechaEntregaDiv",
+                    editable: "#FechaEntrega",
+                    required: "#FechaEntrega"
+                },
+                empleadoentrega: {
+                    visible: "#EmpleadoEntregaDiv",
+                    editable: "#EmpleadoEntrega",
+                    required: "#EmpleadoEntrega"
+                }
+            }
+        };
+    }
+
+    @section JavascriptGlobalFunctions {
+        function changeLanguageCall() {
+            var tmp = removeGrid($("#grid"));
+            CargarGridEntrega();
+            $("#grid").data("kendoGrid").dataSource.data(tmp);
+        };
+        function changeDatePickerDateFormat(datePickerOptions) {
+            FechaEntrega.setOptions(datePickerOptions);
+        };
+
+        function CargaInicial() {
+            //$("#1a1").click(function () { GuardarUnoAUno(); });
+            $("#Guardar").click(function () { Guardar(); });
+            $("#TerminaryNuevo").click(function () { Guardar(true); });
+            $("#Cancelar").click(function () { Cancelar(); });
+            $("#RedirectDashboard").click(function () { window.location.href = _UrlDashboardDespachoCorte + "?leng=" + $("#language").data("kendoDropDownList").value(); });
+        
+            $("#ProyectoID").kendoComboBox({
+                dataTextField: "Nombre",
+                dataValueField: "ProyectoID",
+                select: function (e) {
+                },
+                change: function (e) {
+                    var dataItem = this.dataItem();
+                    dataItem!==undefined ? CargarProyecto(dataItem.ProyectoID, dataItem.Nombre):CargarProyecto("", "");
+                    var value = this.value();
+
+                    if (!value || this.selectedIndex == -1) {
+                        messageindexKendoCombobox(this);
+                        Proyecto = {};
+                        this.value("");
+                    }
+                    //Filtros();
+                },
+                dataBound: function(e){checkIfOne(this);},
+                filter: "contains",
+            });        
+
+            ObtenerProyecto();
+
+            $("#EmpleadoEntrega").kendoComboBox({
+                dataTextField: "value",
+                dataValueField: "id",
+                select: function (e) {
+                },
+                change: function (e) {
+                    var dataItem = this.dataItem();
+                    dataItem!==undefined ? CargarEmpleado(dataItem.id, dataItem.value):CargarEmpleado("", "");
+                    var value = this.value();
+                    if (!value || this.selectedIndex == -1) {
+                        messageindexKendoCombobox(this);
+                        EmpleadoEntrega = {};
+                        this.value("");
+                        changeValueColumnEmpleadoEntrega("");
+                    } else {
+                        changeValueColumnEmpleadoEntrega(value);
+                        this.value("");
+                    }
+                },
+                dataBound: function(e){checkIfOne(this);},
+                filter: "contains",
+            });
+            ObtenerEmpleadoEntrega();
+
+            FechaEntrega = new kendo.ui.DatePicker($("#FechaEntrega"));
+
+            $("#FechaEntrega").bind("change", function () {
+                if (!$("#FechaEntrega").data("kendoDatePicker").value() && this.value !== "") {
+                    displayMessage("notificationslabel0082", "", "2")
+                } else {
+                    var d = new Date($("#FechaEntrega").data("kendoDatePicker").value());
+                    if (d.getFullYear() == "1969") {
+                        d = new Date();
+                    };
+                    var FechaEntrega = obtenerFormatoFechaPlanchado(d);
+                    changeValueColumnFechaEntrega(FechaEntrega);
+                    $("#FechaEntrega").data("kendoDatePicker").value("");
+                    this.value = "";
+                };
+            });
+        };
+
+        function CargarProyecto(id, value) {
+            Proyecto = {};
+            Proyecto = { ProyectoID: id, Nombre: value };
+        };    
+
+        function ObtenerProyecto() {
+            $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox("ProyectoID", result);
+            });
+        };
+
+        function changeValueColumnFechaEntrega(value) {
+            var allData = $("#grid").data("kendoGrid").dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var result = query.data;
+            var datasource = result;
+
+            $(datasource).each(function () {
+                if ($('#vacios').is(":checked")) {
+                    if (this.get("FechaEntrega") == "")
+                    {
+                        this.set("FechaEntrega", value);
+                    }
+                } else
+                {
+                    this.set("FechaEntrega", value);
+                }
+            });
+        };
+
+        function changeValueColumnEmpleadoEntrega(value) {
+            var allData = $("#grid").data("kendoGrid").dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var result = query.data;
+            var datasource = result;
+
+            $(datasource).each(function () {
+                if ($('#vacios').is(":checked")) {
+                    if (this.get("NoEmpleadoEntrega") == "")
+                    {
+                        this.set("NoEmpleadoEntrega", value);
+                    }
+                } else
+                {
+                    this.set("NoEmpleadoEntrega", value);
+                }
+            
+            });
+        };
+
+        function CargarEmpleado(id, value) {
+            EmpleadoEntrega = {};
+            EmpleadoEntrega = { EmpleadoID: id, Empleado: value };
+        };
+
+        function CargarEmpleadoRecibe(id, value) {
+            EmpleadoEntrega = {};
+            EmpleadoEntrega = { EmpleadoID: id, Empleado: value };
+        };
+
+        function ObtenerEmpleadoEntrega() {
+            $Entrega.Entrega.read({ token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox("EmpleadoEntrega", result);
+            });
+        };
+
+        function AgregarRow() {
+            var row = { NoPickingTicket: "", NoEmpleadoEntrega: "", NoEmpleadoRecibe: "" };
+            $("#grid").data("kendoGrid").dataSource.insert(row);
+        };
+   
+
+        function getFields() {
+            return {
+                NoPickingTicket: { type: "string", editable: true },
+                NoEmpleadoEntrega: { type: "string", editable: true },
+                NoEmpleadoRecibe: { type: "string", editable: true },
+                FechaEntrega: { type: "date", editable: true, defaultValue:"" },
+                EntregaID:{ type: "string", editable: false },
+                value:{type:"string",editable:true,defaultValue:""}
+            }
+        }
+
+        function CargarGridEntrega() {
+            $("#grid").kendoGrid({
+                dataSource: {
+                    data: resultadoJson,
+                    schema: {
+                        model: {
+                            id: "EntregaID",
+                            fields: getFields(),
+                        }
+                    },
+                    pageSize: 10,
+                    serverPaging: false,
+                    serverFiltering: false,
+                    serverSorting: false
+                },
+                autoHeight: true,
+                sortable: true,
+                scrollable: false,
+                editable: {
+                    mode: "incell",
+                    confirmation: false
+                },
+                toolbar: [{
+                    name: "create",
+                    click: function (e) { alert("toolbar");}}
+                ],
+                pageable: {
+                    refresh: false,
+                    pageSizes: [10, 15, 20],
+                    info: false,
+                    input: false,
+                    numeric: true,
+                    buttonCount: 2
+                },
+                filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+                columns: [
+                    { field: "NoPickingTicket", title: _dictionary.Entrega0010[$("#language").data("kendoDropDownList").value()], editor: ObtenerPickingTicket, template:function(d){return d.value} },
+                    { field: "NoEmpleadoEntrega", title: _dictionary.Entrega0011[$("#language").data("kendoDropDownList").value()], editor: EmpleadoEntregaAutocomplete },
+                    { field: "NoEmpleadoRecibe", title: _dictionary.Entrega0012[$("#language").data("kendoDropDownList").value()], editor: EmpleadoRecibeAutocomplete },
+                    { field: "FechaEntrega", title: _dictionary.Entrega0014[$("#language").data("kendoDropDownList").value()], format: "{0:dd/MM/yyyy}", editor: FechaEntregaDateTimePicker },
+                    { command: { text: _dictionary.Entrega0013[$("#language").data("kendoDropDownList").value()], click: CancelarPickingTicket }, title: " ", width: "99px" }
+                ],
+                dataBound: function (e) {
+                    //$(".k-grid input.k-textbox").prop('readonly', true);
+                    $(".k-grid td .k-button").text('');
+                    $(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
+                    quickHeadFilter($("#grid").data("kendoGrid"));
+                    stringifyDate(this);
+                    //plancharRows(this);
+               
+                }
+            });
+        };
+
+        function validarPickingTicket(value)
+        {
+            var result = $("#grid").data("kendoGrid").dataSource.data();
+            var datasource = result;
+            var count = 0;
+
+            $(datasource).each(function () {
+                if (this.get("NoPickingTicket")) {
+                    if (this.get("NoPickingTicket") == value)
+                        count++;
+                }
+            });
+
+            if (count > 1)
+                return false;
+            else
+                return true;
+        };
+
+    function plancharRows(g) {
+        var d = new Date($("#FechaEntrega").data("kendoDatePicker").value());
+        if (d.getFullYear() == "1969") {
+            d = new Date();
+        };
+        var fechaEntrega = obtenerFormatoFechaPlanchado(d);
+        var noEmpleadoEntrega = $("#EmpleadoEntrega").data("kendoComboBox").value();
+
+        g.dataSource.data().forEach(function (n) {
+            if (noEmpleadoEntrega != "")
+                n.NoEmpleadoEntrega = noEmpleadoEntrega;
+
+            n.FechaEntrega = fechaEntrega;
+        });
+
+        $("#grid table tbody tr").each(function (e) {
+            $(this).find("td")[3].innerHTML = fechaEntrega;
+            if (noEmpleadoEntrega != "")
+                $(this).find("td")[1].innerHTML = noEmpleadoEntrega;
+        });
+    };
+
+        function ObtenerPickingTicket(container, options) {
+            $('<input data-text-field="value" data-value-field="id" data-bind="value:value"/>')
+               .appendTo(container)
+               .kendoComboBox({
+                   autoBind: false,
+                   dataSource: {
+                       type: "json",
+                       serverFiltering: true,
+                       transport: {
+                           read: $UrlNoPickingTicket + "proyectoID="+ Proyecto.ProyectoID + "&token=" + Cookies.get("token")
+                       },
+                   },
+                   select: function (e) {
+                  
+                   },
+                   change: function (e) {
+                   
+                       var value = this.value();
+                       if(validarPickingTicket(value)){
+
+                           if (this.selectedIndex == -1) {
+                               lastEditedCellIDSPickingTicket.NoPickingTicket = "";
+                               lastEditedCellIDSPickingTicket.NoEmpleadoEntrega = "";
+                           } else {
+                               lastEditedCellIDSPickingTicket.NoPickingTicket = value;
+                               lastEditedCellIDSPickingTicket.NoEmpleadoEntrega = $("#EmpleadoEntrega").data("kendoComboBox").value();
+                           };
+                           var dataItem=this.dataItem();
+                           if(dataItem!==undefined&&dataItem!==null){
+                               $PickingTicket.PickingTicket.read({},{pickingTicketID:dataItem.id,token:Cookies.get("token")}).done(function(data){
+                                   if (!Array.isArray(data) && Error(data)) {
+                                       if (data.EntregaID > 0) {
+                                           options.model.EntregaID = data.EntregaID;
+                                           options.model.NoEmpleadoEntrega = data.EmpleadoEntrega.id;
+                                           options.model.NoEmpleadoRecibe = data.EmpleadoRecibe.id;
+                                           options.model.FechaEntrega = data.FechaEntrega;
+                                       } else {
+                                           options.model.EntregaID = "";
+                                           options.model.NoEmpleadoEntrega = "";
+                                           options.model.NoEmpleadoRecibe = "";
+                                           options.model.FechaEntrega = "";
+                                       }
+                                       $('#grid').data('kendoGrid').refresh();
+                                   }
+                               })
+                               options.model.value=dataItem.value;
+                           }
+                       } else {
+                           this.value("");
+                           lastEditedCellIDSPickingTicket.NoPickingTicket = "";
+                           displayMessage("notificationslabel0108", "", "2");
+                       }
+                   },
+                   filter: "contains",
+               });
+
+            lastEditedCellIDSPickingTicket = options.model;
+
+        };
+
+        function EmpleadoEntregaAutocomplete(container, options) {
+            $('<input data-text-field="value" data-value-field="id" data-bind="value:' + options.field + '"/>')
+                .appendTo(container)
+                .kendoAutoComplete({
+                    autoBind: false,
+                    dataSource: {
+                        type: "json",
+                        transport: {
+                            read: $UrlNoEmpleado + "token=" + Cookies.get("token")
+                        },
+                    },
+                    select: function (e) {
+
+                    },
+                    change: function (e) {
+                        var value = this.value();
+                        //CargarEmpleadoRecibe(this.id, this.value());
+                        lastEditedCellIDSEmpleadoEntrega.NoEmpleadoEntrega = value;
+                        $('#grid').data('kendoGrid').refresh();
+                    },
+                    filter: "contains",
+                });
+
+            lastEditedCellIDSEmpleadoEntrega = options.model;
+        };
+
+
+        function EmpleadoRecibeAutocomplete(container, options) {
+            $('<input data-text-field="value" data-value-field="id" data-bind="value:' + options.field + '"/>')
+                .appendTo(container)
+                .kendoAutoComplete({
+                    autoBind: false,
+                    dataSource: {
+                        type: "json",
+                        transport: {
+                            read: $UrlNoEmpleado + "token=" + Cookies.get("token")
+                        },
+                    },
+                    select: function (e) {
+                    },
+                    change: function (e) {
+                        var value = this.value();
+                        lastEditedCellIDSEmpleadoRecibe.NoEmpleadoRecibe = value;
+                        $('#grid').data('kendoGrid').refresh();
+                    },
+                    filter: "contains",
+                });
+
+            lastEditedCellIDSEmpleadoRecibe = options.model;
+        };
+
+        function FechaEntregaDateTimePicker(container, options) {
+            $('<input data-text-field="' + options.field + '" data-value-field="' + options.field + '" data-bind="value:' + options.field + '" data-format="' + options.format + '"/>')
+               .appendTo(container)
+               .kendoDatePicker({});
+        };
+
+        function CancelarPickingTicket(e) {
+            e.preventDefault();
+            //loadingStart();
+            var dataitem = $('#grid').data('kendoGrid').dataItem(e.target.closest("tr"));
+            if(dataitem.EntregaID!==undefined && dataitem.EntregaID!==null &&dataitem.EntregaID!==0 && dataitem.EntregaID!==""){
+                if(confirm(_dictionary.notificationslabel0109[$("#language").data("kendoDropDownList").value()])){
+                    $PickingTicket.PickingTicket.destroy({},{entregaID:dataitem.EntregaID,token:Cookies.get("token")}).done(function(data){
+                        if(Error(data)){
+                            displayMessage("notificationslabel0056", "", "1");
+                            var grid = $("#grid").data("kendoGrid");
+                            var tr = $(e.currentTarget).closest("tr");
+                            grid.removeRow(tr);
+                        }
+                    })
+                }
+            }else{
+                var grid = $("#grid").data("kendoGrid");
+                var tr = $(e.currentTarget).closest("tr");
+                grid.removeRow(tr);
+            }
+            //loadingStop();
+        };
+
+        function validarRequeridosFormaEntrega() {
+            var bool = true;
+            $("#formaEntrega .security_required").each(function (i, elem) {
+                if (elem.tagName.toLowerCase() != 'label') {
+                    if (!$(this).val()) {
+                        bool = false;
+                        $(this).closest("div").find("label").addClass("error");
+                    } else {
+                        $(this).closest("div").find("label").removeClass("error");
+                    };
+                };
+            });
+            return bool;
+        };
+        function GuardarUnoAUno(nuevo) {
+            //loadingStart();
+            var datasource = $("#grid").data("kendoGrid").dataSource.data();
+            BorrarVacios(datasource);
+            if (validarRequeridosFormaEntrega() && datasource.length > 0) {
+                var Listado = { Entregas: "" };
+                Listado.Entregas = ListadoAGuardar(datasource);
+
+                if (!BorrarVacios(datasource)) {
+                    displayMessage("notificationslabel0075", "", "2");
+                    //loadingStop();
+                    return;
+                };
+
+                if (datasource.length > 1) {
+                    displayMessage("notificationslabel0077", "", "2");
+                    //loadingStop();
+                    return;
+                };
+
+                $Entrega.Entrega.create(Listado, { token: $.cookie("token") }).done(function (result) {
+                    if (Error(result))
+                    {
+                        if(!nuevo){
+                            $("#grid").data("kendoGrid").dataSource.data([]);
+                            displayMessage("notificationslabel0056", "", '0');
+                        }else{
+                            window.location.reload()
+                        }
+                    }
+                    //loadingStop();
+                });
+            } else if($("#grid").data("kendoGrid").dataSource.data()){
+                displayMessage("notificationslabel0089", "", '1');
+                //loadingStop();
+            }
+            else{
+                displayMessage("notificationslabel0031", "", '1');
+                //loadingStop();
+            }
+        };
+        function Guardar(nuevo) {
+            nuevo = typeof nuevo === "undefined" ? false : nuevo;
+            var datasource = $("#grid").data("kendoGrid").dataSource.data();
+            BorrarVacios(datasource);
+            if ($("#1a1").is(":checked")) {
+                GuardarUnoAUno(nuevo);
+            } else {
+                GuardarMasivo(nuevo);
+            }
+        };
+        function GuardarMasivo(nuevo) {
+            //loadingStart();
+            var datasource = $("#grid").data("kendoGrid").dataSource.data();
+            BorrarVacios(datasource);
+            if (validarRequeridosFormaEntrega() && datasource.length > 0) {
+                var Listado = { Entregas: "" };
+                Listado.Entregas = ListadoAGuardar(datasource);
+
+                if (!BorrarVacios(datasource)) {
+                    displayMessage("notificationslabel0075", "", "2");
+                    //loadingStop();
+                    return;
+                }
+            
+                $Entrega.Entrega.create(Listado, { token: $.cookie("token") }).done(function (result) {
+                    if (Error(result))
+                    {
+                        if(!nuevo){
+                            $("#grid").data("kendoGrid").dataSource.data([]);
+                            EmpleadoEntrega = {};
+                            $("#EmpleadoEntrega").data("kendoComboBox").value("");
+                            displayMessage("notificationslabel0056", "", '0');
+                        }else{
+                            window.location.reload()
+                        }
+                    }
+                    //loadingStop();
+                });
+            } else if($("#grid").data("kendoGrid").dataSource.data()){
+                displayMessage("notificationslabel0089", "", '1');
+                //loadingStop();
+            }
+            else{
+                displayMessage("notificationslabel0031", "", '1');
+                //loadingStop();
+            }
+        };
+    
+        function Cancelar() {
+            window.location.href = _UrlEntrega + "?leng=" + $("#language").data("kendoDropDownList").value();
+        };
+
+        function obtenerFormatoFecha(d) {
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+            var horaActual = new Date();
+
+            return curr_year + "-" + curr_month + "-" + curr_date + " " + horaActual.getHours() + ":" + horaActual.getMinutes() + ":" + horaActual.getSeconds();
+        };
+
+        function obtenerFormatoFechaPlanchado(d) {
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+            var horaActual = new Date();
+
+            var compD = "";
+            var compM = "";
+            10 > d.getDate() ? compD = "0" : null;
+            10 > (d.getMonth() + 1) ? compM = "0" : null;
+
+            return compD + curr_date + "/" + compM + curr_month + "/" + curr_year;
+        };
+
+        function AgregarRowGrid(container) {
+            var tdIndex = $(container).closest('td').index();
+            //get the next row's cell
+            var nextRow = $(container.parent()).next();
+            var nextRowCell = $(nextRow).find('td:eq(' + tdIndex + ')');
+            if (nextRowCell.length == 0) {
+                var grids = $("#grid").data("kendoGrid");
+                if (grids) {
+                    var dataSource = grids.dataSource;
+                    var total = dataSource.data().length;
+                    dataSource.insert(total, {});
+                }
+                //find index of the td element
+                tdIndex = tdIndex;
+                //get the next row's cell
+                nextRow = $(container.parent()).next();
+                nextRowCell = $(nextRow).find('td:eq(' + tdIndex + ')');
+            }
+        };
+
+        function ControlErroresObjetosComboBox(control, result) {
+            if (Error(result)) {
+                $("#" + control).data("kendoComboBox").dataSource.data(result);
+            } else {
+                $("#" + control).data("kendoComboBox").dataSource.data([]);
+            };
+        };
+
+        function Error(data) {
+            if (data.ReturnCode) {
+                if (data.ReturnCode != 200) {
+                    if (data.ReturnCode == 401) {
+                        removeUserSession();
+                        return false;
+                    } else {
+                        displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        };
+
+    }; 
+    function BorrarVacios(datasource) {
+        var bool = true;
+        var d = new Date($("#FechaEntrega").data("kendoDatePicker").value());
+        var FechaEntrega = obtenerFormatoFecha(d);
+        for (var i = 0; i < datasource.length; i++) {
+            var NoPickingTicket = datasource[i].NoPickingTicket;
+            var NoEmpleadoEntrega = datasource[i].NoEmpleadoEntrega;
+            var NoEmpleadoRecibe = datasource[i].NoEmpleadoRecibe;
+            var FechaEntrega = datasource[i].FechaEntrega;
+
+            if (!NoPickingTicket || !NoEmpleadoEntrega || !NoEmpleadoRecibe || !FechaEntrega) {
+                bool = false;
+                datasource.remove(datasource[i]);
+            }
+        };
+
+        return bool;
+    };
+
+    function ListadoAGuardar(datasource) {
+        var Listado = {};
+        for (var i = 0; i < datasource.length; i++) {
+            var NoPickingTicket = datasource[i].NoPickingTicket;
+            var NoEmpleadoEntrega = datasource[i].NoEmpleadoEntrega;
+            var NoEmpleadoRecibe = datasource[i].NoEmpleadoRecibe;
+            var FechaEntrega = datasource[i].FechaEntrega;
+            var EntregaID = datasource[i].EntregaID;
+
+            var token = $.cookie("token");
+            Listado[i] = { FechaEntrega: FechaEntrega, 
+                NoPickingTicket: NoPickingTicket, 
+                NoEmpleadoEntrega: NoEmpleadoEntrega, 
+                NoEmpleadoRecibe: NoEmpleadoRecibe, 
+                token: token,
+                EntregaID: EntregaID};
+        };
+        return Listado;
+    };
+
+    @section JavascriptDocumentReadyFunctions {
+        $authorizationModel["Entrega"] = $EntregaModel;
+        CargaInicial();
+        $("#FechaEntrega").on("change",function(){
+            if (!$("#FechaEntrega").data("kendoDatePicker").value() && this.value!=="") {
+                $("#FechaEntrega").css("color","#EB4D50");
+                displayMessage("notificationslabel0082","","2")
+            }else{
+                $("#FechaEntrega").attr("style","");
+            }
+        })
+    }
+
+</script>

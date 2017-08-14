@@ -1,0 +1,362 @@
+﻿@{
+    ViewBag.Title = "Materiales - Revisión de Déficit";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("NotificacionDeficit", "Materiales")"><span id="NotificacionDeficit0020"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("NotificacionDeficit", "Materiales")"><span id="NotificacionDeficit0021"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("NotificacionDeficit", "Materiales")"><span id="NotificacionDeficit0003"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("RevisionDeficit", "Materiales")"><span id="RevisionDeficit0001"></span></a>
+    </li>
+}
+
+<div class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section">
+                            <button type="button" class="btn btn-primary" id="solucionar"><span id="RevisionDeficit0006"></span></button>
+                            <button type="button" class="btn btn-black" id="cancelar"><span id="RevisionDeficit0007"></span></button>
+                        </div>
+
+                        <div class="button-section listado">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="Predespacho0005"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="Acciones">
+                                    <li><a id="revNot" href="@Url.Action("NotificacionDeficit", "Materiales")"><span id="RevisionDeficit0009"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection disabled"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2" id="ordtrabajoDiv">
+                                    <label for="ordtrabajo" id="RevisionDeficit0005"></label>
+                                    <input id="ordtrabajo" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="addedSection clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="gridIC"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="gridSp"></div>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>
+<script>
+@section JavascriptGlobalVariables {
+    unaVez=null;
+    deficitPrevio=0;
+    var $RevisionDeficitModel = {
+        listContainer: {
+            create: "#solucionar",
+            list: ["gridIC","gridSp"],
+            detail: "k-detail-row",
+            destroy: "k-grid-delete"
+        },
+        properties:{
+            ordentrabajo:{
+                visible: "#ordtrabajoDiv",
+                editable: "#ordtrabajo",
+                required: "#ordtrabajo"
+            },
+        }
+    };
+}
+
+@section JavascriptGlobalFunctions {
+    function changeLanguageCall(){
+        cargarGrids();
+    }
+
+    function getICfields(){
+        return {
+            DeficitID:{type:"number",nullable:false,editable:false},
+            SpoolID:{type:"number",nullable:false,editable:false},
+            ItemCodeID:{type:"number",nullable:false,editable:false},
+            ItemCode:{type:"string",nullable:false,editable:false},
+            Diametro1:{type:"number",nullable:false,editable:false},
+            Diametro2:{type:"number",nullable:false,editable:false},
+            Descripcion:{type:"string",nullable:false,editable:false},
+            Cantidad:{type:"number",nullable:false,editable:false},
+            Deficit:{type:"number",nullable:false,editable:true},
+            PorCubrir:{type:"number",nullable:false,editable:false,defaultValue:0},
+        }
+    }
+
+    function cargarGrids(){
+        var tmpIC=removeGrid($("#gridIC"));
+        var tmpSp=removeGrid($("#gridSp"));
+
+        $("#gridIC").kendoGrid({
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            columns:[
+                {field:"ItemCode"},
+                {field:"Diametro1",title:_dictionary.RevisionDeficit0011[$("#language").data("kendoDropDownList").value()]},
+                {field:"Diametro2",title:_dictionary.RevisionDeficit0012[$("#language").data("kendoDropDownList").value()]},
+                {field:"Descripcion",title:_dictionary.RevisionDeficit0013[$("#language").data("kendoDropDownList").value()]},
+                {field:"Cantidad",title:_dictionary.RevisionDeficit0014[$("#language").data("kendoDropDownList").value()]},
+                {field:"Deficit",title:_dictionary.RevisionDeficit0015[$("#language").data("kendoDropDownList").value()]},
+                {field:"PorCubrir",title:_dictionary.RevisionDeficit0016[$("#language").data("kendoDropDownList").value()]},
+                { command: "destroy", title: "Borrar", width: "91px" }
+            ],
+            dataSource:{
+                data:[],
+                schema:{
+                    model:{
+                        id:"DeficitID",
+                        fields:getICfields(),
+                    }
+                },
+                transport:{
+                    read:{
+                        url:"",
+                        dataType:"JSON",
+                        type:"GET"
+                    },
+                    update:{
+                        url:"",
+                        dataType:"JSON",
+                        type:"PUT"
+                    },
+                    destroy:{},
+                }
+            },
+            editable:true,
+            batch:true,
+            dataBound:function(e){
+                if(unaVez){
+                    unaVez=false;
+                    $("#gridIC").data("kendoGrid").dataSource.data().forEach(function(d){
+                        d.PorCubrir=d.Deficit;
+                    })
+                    $("#gridIC").data("kendoGrid").refresh();
+                }
+                quickHeadFilter($("#gridIC").data("kendoGrid"));
+            },
+            edit:function(e){
+                deficitPrevio=e.model.Deficit;
+            },
+            save:function(e){
+                if(!(parseFloat(e.values.Deficit)>parseFloat(e.model.Cantidad))){
+                    e.model.PorCubrir=parseFloat(e.model.PorCubrir)+(e.values.Deficit-parseFloat(deficitPrevio));
+                    $("#gridSp").data("kendoGrid").dataSource.data().forEach(function(d){
+                        var tmp=$.grep(d.ItemCodes,function(n){
+                            return n.ItemCodeID===e.model.ItemCodeID;
+                        })
+                        tmp.forEach(function(t){
+                            e.model.PorCubrir=parseFloat(e.model.PorCubrir)-parseFloat(t.Cantidad);
+                        })
+                        0>parseFloat(e.PorCubrir) ? e.PorCubrir="0": false;
+                    })
+                    $("#gridIC").data("kendoGrid").refresh();
+                }else{
+                    displayMessage("",_dictionary.RevisionDeficit0002[$("#language").data("kendoDropDownList").value()], '2');
+                }
+            },
+            remove:function(e){
+                $("#gridIC").data("kendoGrid").options.dataSource.transport.delete.url=$RevisionsDeficit.RevisionDeficit.urlNoId+"?deficitID="+e.model.id+"&token="+Cookies.get("token");
+            }
+        });
+        $("#gridIC").data("kendoGrid").dataSource.data(tmpIC);
+
+        function getSPfields(){
+            return {
+                SpoolID:{type:"number",nullable:false,editable:false},
+                Spool:{type:"String",nullable:false,editable:false},
+                Prioridad:{type:"number",nullable:false,editable:false},
+                Peso:{type:"number",nullable:false,editable:false},
+                Peqs:{type:"string",nullable:false,editable:false},
+                ItemCodeID:{type:"number",nullable:false,editable:false},
+                Seleccionado:{type:"boolean",nullable:false,editable:false}
+            }
+        }
+
+        $("#gridSp").kendoGrid({
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            columns:addTo([
+                { template: '<input type="checkbox" class="sub" >', width: 45 },
+                {field:"SpoolID"},
+                {field:"Spool"},
+                {field:"Prioridad",title:_dictionary.RevisionDeficit0017[$("#language").data("kendoDropDownList").value()]},
+                {field:"Peso",title:_dictionary.RevisionDeficit0018[$("#language").data("kendoDropDownList").value()]},
+                {field:"Peqs"},
+            ],getSPfields()),
+            dataSource:{
+                data:[],
+                schema:{
+                    model:{
+                        id:"SpoolID",
+                        fields:getSPfields(),
+                    }
+                }
+            },
+            detailInit:detailInit,
+            dataBound:function(e){
+                $("#gridSp").data("kendoGrid").dataSource.data().forEach(function(d){
+                    if(d.Seleccionado){
+                        var input=$("[data-uid="+d.uid+"] input[type=checkbox]");
+                        input.attr("checked","true");
+                        checarPorCubrir($(input).closest("tr"));
+                    }
+                })
+                $(".sub").on("change",function(){
+                    if(this.checked){
+                        checarPorCubrir($(this).closest("tr"));
+                    }
+                })
+                quickHeadFilter($("#gridSp").data("kendoGrid"));
+            }
+        });
+        $("#gridSp").data("kendoGrid").dataSource.data(tmpSp);
+    }
+
+    function getDetFields(){
+        return {
+            ItemCodeID:{ editable: false, nullable: true },
+            ItemCode: { editable: false,type:"string",validation: { required: false } },
+            Diametro1: { editable: false,type:"number", validation: { required: false } },
+            Diametro2: { editable: false,type:"number", validation: { required: false } },
+            Cantidad:{editable: false,type:"number"},
+        }
+    }
+
+    function detailInit(e) {
+        $("<div/>").appendTo(e.detailCell).kendoGrid({
+            dataSource: {
+                data:e.data.ItemCodes,
+                schema: {
+                    model: {
+                        id:"ItemCodeID",
+                        fields:getDetFields(),
+                    },
+                },
+            },
+            scrollable: true,
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            columns:[
+                {field:"ItemCode",title:"Item Code"},
+                {field:"Diametro1",title:"Diametro 1"},
+                {field:"Diametro2",title:"Diametro 2"},
+                {field:"Cantidad"},
+            ],
+        });
+    }
+
+    function checarPorCubrir(fila){
+        var dataItemCantidad=$("#gridSp").data("kendoGrid").dataItem(fila).ItemCodes;
+        var dataItemDeficit=$("#gridIC").data("kendoGrid").dataSource.data();
+        $.grep(dataItemCantidad,function(d){
+            $.grep(dataItemDeficit,function(e){
+                e.ItemCodeID==d.ItemCodeID ? e.PorCubrir=parseFloat(e.PorCubrir)-parseFloat(d.Cantidad) : false;
+                0>parseFloat(e.PorCubrir) ? e.PorCubrir="0": false;
+            })
+        })
+        $("#gridIC").data("kendoGrid").refresh();
+    }
+}
+
+@section JavascriptDocumentReadyFunctions {
+    $("#ordtrabajo").kendoComboBox({
+        dataSource: {
+            transport: {
+                read: {
+                    url:$NotificacionDeficit.NotificacionDeficit.urlNoId + "?token=" + Cookies.get("token"),
+                    dataType: "json",
+                    type:"GET"
+                }
+            }
+        },
+        minLength: 3,
+        dataTextField:"value",
+        dataValueField:"id",
+        change:function(e){
+            unaVez=true;
+            ////loadingStart();
+            $RevisionDeficit.RevisionDeficit.read({},{ordenTrabajoID:e.sender._selectedValue,token:Cookies.get("token")}).done(function(data){
+                if(data.length>0){
+                    $RevisionDeficit.RevisionDeficit.read({},{ordenTrabajo:e.sender._selectedValue,token:Cookies.get("token")}).done(function(data){
+                        $("#gridSp").data("kendoGrid").dataSource.data(data);
+                        ////loadingStop();
+                    })
+                    $("#gridIC").data("kendoGrid").dataSource.data(data);
+                }else{
+                    displayMessage("",_dictionary.RevisionDeficit0010[$("#language").data("kendoDropDownList").value()],"1");
+                }
+                ////loadingStop();
+            })
+        },
+        dataBound: function(e){checkIfOne(this);},
+    });
+
+    $("#solucionar").on("click",function(){
+        var solucionado=true;
+        ////loadingStart();
+        $("#gridIC tr[data-uid]").each(function(){
+            var dataItem=$("#gridIC").data("kendoGrid").dataItem($(this).closest("tr"));
+            dataItem.PorCubrir.toString()=="0" ? solucionado=false : 0;
+        })
+        if(solucionado){
+            var datosDeficit=[];
+            var datosSpools=[];
+            $("#gridIC").data("kendoGrid").dataSource.data().forEach(function(d){
+                datosDeficit.push({DeficitID:d.DeficitID,Deficit:d.Deficit});
+            });
+            $("[data-uid] input:checked").each(function(){
+                var dataItem=$("#gridSp").data("kendoGrid").dataItem($(this).closest("tr"));
+                var ItemCodes=[]
+                dataItem.ItemCodes.forEach(function(i){
+                    ItemCodes.push(i.ItemCodeID);
+                })
+                datosSpools.push({Spool:dataItem.SpoolID,ItemCodeID:ItemCodes});
+            })
+            $RevisionDeficit.RevisionDeficit.update({},{ordenTrabajoID:$("#ordtrabajo").data("kendoComboBox").value(),datosDeficit:JSON.stringify(datosDeficit),datosSpools:JSON.stringify(datosSpools),token:Cookies.get("token")}).done(function(data){
+                if(data.ReturnCode==200){
+                    displayMessage("",_dictionary.RevisionDeficit0003[$("#language").data("kendoDropDownList").value()], '0');
+                }else{
+                    displayMessage("",data.ReturnMessage[0],"2");
+                }
+                ////loadingStop();
+            })
+        }else{
+            displayMessage("",_dictionary.RevisionDeficit0004[$("#language").data("kendoDropDownList").value()], '2');
+            ////loadingStop();
+        }
+    })
+    $authorizationModel["Materiales"] = $RevisionDeficitModel;
+}
+
+@section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "50", { path: '/' });
+}
+</script>

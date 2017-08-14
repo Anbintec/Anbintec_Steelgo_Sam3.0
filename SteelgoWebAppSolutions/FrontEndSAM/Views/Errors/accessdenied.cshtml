@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NO</title>
+</head>
+<body>
+    <div> 
+        <hgroup class="title">
+            <h1 class="error">Lo sentimos usted no tiene acceso al recurso solicitado.</h1>
+            <h2 class="error">Sorry, You do not have access to the requested resource.</h2>
+        </hgroup>
+    </div>
+</body>
+<script>
+    if (window.location !== window.parent.location) {
+        $(".sidebar").hide();
+        $(".logo").hide();
+        $(".search-bar").hide();
+        $(".notifications").hide();
+        $(".logged-user").hide();
+        $(".content-container").removeClass("topbar").addClass("printView");
+        $(".breadcrumb-container").hide();
+        $(".languageSelector").hide();
+        $(".pull-right").hide();
+        $("header").hide();
+        $(".content-frame").removeClass("content-frame");
+        $("body").css("background", "#FFFFFF");
+    }
+</script>
+</html>

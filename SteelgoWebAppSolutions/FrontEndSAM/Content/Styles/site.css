@@ -1,0 +1,1145 @@
+﻿/**********************************************************************************
+    File name: site.css
+    Description: CSS Framework customization.
+
+    Index: 
+
+    01  $_html
+    02  $_body
+    03  $_header
+    04  $_footer
+    05  $_content-frame
+    06  $_label
+    07  $_links
+    08  $_input
+    09  $_btn
+    10  $_headings
+    11  $_dropdown
+    12  $_
+
+
+    Color Palette: 
+
+    Do Not Use Class security_required        
+
+**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_html
+ Description:   Customize html tag.
+**********************************************************************************/
+html {
+    position: relative;
+    min-height: 100%;
+    height: 100%;
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_body
+ Description:   Customize body tag.
+**********************************************************************************/
+body {
+    /*background-color: #305E8E;*/
+    color: #202020;
+    margin: 0;
+    min-height: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    -webkit-print-color-adjust: exact;
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_header
+ Description:   Customize header tag.
+**********************************************************************************/
+header {
+    background: #FFFFFF;
+}
+
+    header .content-wrapper {
+        margin: 14px 0;
+    }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_footer
+ Description:   Customize footer tag.
+**********************************************************************************/
+footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 100px;
+}
+
+    footer .content-wrapper {
+        width: 60%;
+        border-top: 1px solid #CCCCCC;
+        margin: 0 auto;
+        padding-top: 30px;
+    }
+
+    footer .footerLinks {
+        text-align: right;
+    }
+
+    footer label {
+        color: #898989;
+        font-weight: normal;
+        font-size: 12px;
+        margin-left: 10px;
+        letter-spacing: 0.8px;
+    }
+
+    footer a {
+        margin-left: 27px;
+    }
+
+        footer a span {
+            color: #305E8E;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+        }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_content-frame
+ Description:   Customize label tag.
+**********************************************************************************/
+.content-frame {
+    background-color: #305E8E;
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+    .content-frame .container {
+        background-color: white;
+        max-width: 100%;
+        width: 100%;
+        min-height: 100%;
+        height: auto;
+    }
+
+        .content-frame .container > .row {
+            min-height: 100%;
+            height: 100%;
+        }
+
+        .content-frame .container .main-content {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_label
+ Description:   Customize label tag.
+**********************************************************************************/
+label {
+    margin: 0;
+    padding: 0;
+}
+
+    label.centered {
+        text-align: center;
+    }
+
+.form label,
+#window label,
+.popup label {
+    text-transform: uppercase;
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+    .form label.security_required::after {
+        position: relative;
+    }
+
+    .form label.security_required::after {
+        content: '*';
+        font-size: 19px;
+        position: absolute;
+        top: -6px;
+    }
+
+    #window label.security_required::after,
+    .popup label.security_required::after {
+        content: '*';
+        font-size: 19px;
+        position: relative;
+        top: 1px;
+    }
+
+    .form label.security_required.error::after,
+    #window label.security_required.error::after,
+    .popup label.security_required.error::after {
+        color: #EC4F50;
+    }
+
+    #window label.checkLabel,
+    .popup label.checkLabel,
+    .form label.checkLabel {
+        display: inline-block;
+    }
+
+.form h2 label {
+    color: #666666;
+    text-transform: none;
+    font-size: 16.5px;
+    font-weight: 400;
+    margin-bottom: 18px;
+    margin-right: 13px;
+    letter-spacing: .8px;
+}
+
+.form .folioLabel {
+    color: #666666;
+    font-weight: 100;
+    font-size: 18px;
+    letter-spacing: 0px;
+    position: relative;
+    top: -4px;
+}
+
+    .form .folioLabel #spanFolio,
+    .folioLabel .statusLabel {
+        color: #000000;
+        margin-right: 28px;
+    }
+
+.form .title {
+    color: #202020;
+}
+
+.form label.download {
+    margin: 5.2% auto;
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_links
+ Description:   Customize anchor tag.
+**********************************************************************************/
+a, a:link, a:hover, a:visited {
+    color: #305E8E;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_input
+ Description:   Customize input tag.
+**********************************************************************************/
+input {
+    border-color: transparent;
+    border-style: solid;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+    box-sizing: border-box;    
+}    
+
+    input:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    input:-moz-placeholder {
+        font-style: italic;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    /*Para inputs no generados por kendo-ui*/
+    input.general-input.error {
+        border-color: #EC4F50 !important;
+    }
+
+    input.disabled, input[disabled] {
+        background-color: #F5F5F5;
+    }
+
+::-webkit-input-placeholder {
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+::-moz-placeholder {
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+:-ms-input-placeholder {
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/*Para inputs no generados por kendo-ui*/
+.content-container .form input.general-input {
+    height: 40px;
+    min-height: 40px;
+    color: #1B3F70;
+    border: 1px solid #CCCCCC!important;
+    border-radius: 0;
+    font-size: 14px;
+    padding: 0 5px;
+    z-index: 1;
+    -webkit-appearance: none;
+}
+
+    .content-container .form input.general-input:focus {
+        border-color: #4486CB;
+        -moz-box-shadow: 0px 0px 3px #4486CB; /* FF3.5+ */
+        -webkit-box-shadow: 0px 0px 3px #4486CB; /* Saf3.0+, Chrome */
+        box-shadow: 0px 0px 3px #4486CB; /* Opera 10.5, IE9, Chrome 10+ */
+        z-index: 3;
+    }
+
+.content-container .form input[type="radio"],
+.content-container .form input[type="checkbox"] {
+    width: 100%;
+    min-height: 13px;
+    height: auto;
+    margin: 4px auto 0;
+    outline: none;
+    border: none;
+    box-shadow: none !important;
+}
+
+.content-container .form input[type="checkbox"] {
+    width: auto;
+    //min-height: 31px;
+}
+
+#window input[type="checkbox"], 
+.popup input[type="checkbox"],
+#formBusqueda input[type="checkbox"] {
+    width: auto!important;
+    position: relative;
+    top: 2px;     
+}
+
+input.quickFilters {
+    position: relative;
+    //width: 31.34%;
+    width: auto;
+    margin: 0 -5px -1px 0;
+}
+
+    input.quickFilters[disabled] {
+        background: #FFFFFF;
+        opacity: 1!important;
+        max-width: 100px;
+        //min-width: 100px;
+        width: 100px;
+    }
+
+        input.quickFilters[disabled]:last-of-type.scroll {
+            max-width: 17px;
+            min-width: 17px;
+        }
+
+/*.expanded input.quickFilters {
+    width: 31.54%;
+}
+
+    .expanded input.quickFilters:first-of-type {
+        width: 31.55%;        
+    }*/
+
+/*.expanded input.quickFilters.button-input {
+        width: 5.54%;
+    }*/
+
+/*input.quickFilters.arrivalMaterial {
+    width: 18.57%;
+}
+
+    input.quickFilters.arrivalMaterial:first-of-type {
+        width: 18.55%;
+    }
+
+    input.quickFilters.arrivalMaterial:last-of-type {
+        width: 7.5%;
+    }
+
+.expanded input.quickFilters.arrivalMaterial {
+    width: 18.7%;
+}
+
+    .expanded input.quickFilters.arrivalMaterial:first-of-type {
+        width: 18.76%;
+    }
+
+    .expanded input.quickFilters.arrivalMaterial:last-of-type {
+        width: 6.7%;
+    }*/
+
+.content-container .input-group .input-group-btn a {
+    padding: 19px 18px;
+    border: 1px solid #ccc;
+    border-left: none;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.content-container .form textarea {
+    width: 100%;
+    border: 1px solid #CCCCCC!important;
+    resize:none;
+    overflow:auto;
+    border-radius: 0!important;
+    -webkit-appearance: none;
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_btn
+ Description:   Customize button tag.
+**********************************************************************************/
+.btn, .btn:hover, .btn:focus {
+    color: #FFFFFF;
+    text-transform: capitalize;
+    border-radius: 3px;
+    font-size: 14px;
+    letter-spacing: .5px;
+    height: 34px;
+    margin-top: 3px;
+    padding: 7px 15px;
+    box-sizing: border-box;
+    -moz-box-shadow: 0px 2px 2px #ccc; /* FF3.5+ */
+    -webkit-box-shadow: 0px 2px 2px #ccc; /* Saf3.0+, Chrome */
+    box-shadow: 0px 2px 2px #ccc; /* Opera 10.5, IE9, Chrome 10+ */
+    outline: none;
+}
+
+    .btn.disabled, .btn[disabled] {
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+
+    .btn span, .btn label {
+        color: #FFFFFF;
+    }
+
+.btn-group > .btn:hover, .btn-group > .btn:focus,
+.btn-group > .btn.active {
+    z-index: 0!important;
+}
+
+.btn-default span, .btn-default label {
+    color: #305E8E;
+}
+
+.btn-yellow {
+    background-color: #EC8B00;
+    border: none;
+}
+
+    .btn-yellow:hover {
+        background-color: #C56E00;
+    }
+
+    .btn-yellow:focus {
+        background-color: #C56E00;
+    }
+
+.btn-blue {
+    background-color: #305E8E;
+    border: 1px solid #234568;
+}
+
+    .btn-blue:hover {
+        background-color: #1C4070;
+        border-bottom-color: #152F52;
+    }
+
+.btn-primary, .btn-primary.disabled,
+.btn-primary[disabled] {
+    background-color: #305E8E;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #1C4070;
+    }
+
+.btn-black {
+    background-color: #444444;
+    border: none;
+}
+
+    .btn-black:hover {
+        background-color: #000000;
+    }
+
+.btn-default {
+}
+
+    .btn-default:hover {
+        background-color: rgba(048, 094, 142, 0.5);
+    }
+
+    .btn-default:focus {
+        background-color: #FFFFFF;
+    }
+
+.btn-fadeBlue {
+    background-color: rgba(048, 094, 142, 0.5);
+    border: none;
+    box-shadow: none;
+}
+
+    .btn-fadeBlue:hover {
+        background-color: rgba(048, 094, 142, 0.7);
+    }
+
+.btn.btn-tab {
+    background-color: #FFFFFF;
+    border-color: #CCCCCC;
+    margin: 0;
+    height: 112px;
+    width: 25.04%;
+    box-shadow: none;
+    padding-right: 0;
+    padding-left: 0;
+    border-radius: 5px;
+}
+
+.btn-tab label {
+    color: #000000;
+    font-weight: 100;
+    font-size: 14px;
+    margin: 6px 0px 3px 0;
+    white-space: normal;
+    position: absolute;
+    top: 7px;
+    left: 0;
+    right: 0;
+}
+
+.btn-tab.Accesorios label,
+.btn-tab.Tubos label,
+.btn-tab.General label {
+    font-size: 11px;
+}
+
+.btn-tab span {
+    position: absolute;
+    bottom: 0;
+    left: 0; 
+    right: 0;
+    width: 100%;
+    color: #305E8D;
+    font-size: 50px;
+    letter-spacing: 1.1px;
+}
+
+.btn-tab.btn-dashLlegada {
+    width: 33.37%;
+}
+
+.btn-tab.Accesorios,
+.btn-tab.Tubos,
+.btn-tab.General {
+    width: 12.54%;
+}
+
+#DespachoCorte .btn-tab.Accesorios,
+#DespachoCorte .btn-tab.Tubos {
+    width: 14.33%;
+}
+
+/*.btn-tab span#spanSinAutorizacion {
+        color: #E90000;
+    }*/
+
+.btn-tab:hover, .btn-tab.active {
+    outline: none;
+    -moz-box-shadow: 0px 0px 20px -6px #888888 inset; /* FF3.5+ */
+    -webkit-box-shadow: 0px 0px 20px -6px #888888 inset; /* Saf3.0+, Chrome */
+    box-shadow: 0px 0px 20px -6px #888888 inset; /* Opera 10.5, IE9, Chrome 10+ */
+}
+
+.btn.btn-tabList, .btn.btn-tabList:hover {
+    margin: 0;
+    background-color: #FFFFFF;
+    border-color: #CCCCCC;
+    border-bottom: none;
+    border-left: none;
+    box-shadow: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 25%;
+    height: 40px;
+    z-index: 0;
+}
+
+    .btn.btn-tabList.btn-listLlegada {
+        width: 33.33%;
+    }
+
+    .btn.btn-tabList:focus {
+        outline: 0;
+    }
+
+    .btn.btn-tabList:first-of-type {
+        border-left: 1px solid #CCCCCC;
+    }
+
+    .btn.btn-tabList.active {
+        height: 44px;
+        margin-top: -4px;
+        border-top-left-radius: 4px !important;
+        border-top-right-radius: 4px !important;
+        -moz-box-shadow: 0px 5px 10px #888888; /* FF3.5+ */
+        -webkit-box-shadow: 0px 5px 10px #888888; /* Saf3.0+, Chrome */
+        box-shadow: 0px 5px 10px #888888; /* Opera 10.5, IE9, Chrome 10+ */
+        z-index: 1;
+    }
+
+    .btn.btn-tabList:first-of-type.active {
+        -moz-box-shadow: 5px 2px 10px -3px #888888; /* FF3.5+ */
+        -webkit-box-shadow: 5px 2px 10px -3px #888888; /* Saf3.0+, Chrome */
+        box-shadow: 5px 2px 10px -3px #888888; /* Opera 10.5, IE9, Chrome 10+ */
+    }
+
+    .btn.btn-tabList:last-of-type.active {
+        -moz-box-shadow: -5px 2px 10px -3px #888888; /* FF3.5+ */
+        -webkit-box-shadow: -5px 2px 10px -3px #888888; /* Saf3.0+, Chrome */
+        box-shadow: -5px 2px 10px -3px #888888; /* Opera 10.5, IE9, Chrome 10+ */
+    }
+
+.btn-tabList span {
+    color: #305E8E;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.btn-tabList.active span {
+    color: #000000;
+}
+
+.btn-group.tabList .btn + .btn {
+    margin-left: 0;
+}
+
+.buttonBar {
+    margin-top: 21px;
+    text-align: right;
+}
+
+    .buttonBar .btn:nth-child(even) {
+        margin-right: 16px;
+        margin-left: 16px;
+    }
+
+    .buttonBar .btn:last-child {
+        margin-right: 0;
+    }
+
+    .buttonBar.left {
+        text-align: justify;
+        margin-bottom: 20px;
+    }
+
+        .buttonBar.left .btn {
+            margin-left: 0;
+        }
+
+/*.buttonBar.top,
+    .buttonBar.top .btn {
+        margin-top: 0;
+    }
+
+        .buttonBar.top .btn {
+            margin-right: -5px;
+            margin-left: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }*/
+
+#Creacion.btn {
+    background-image: url("/Content/images/SAMC_AddIcon.png");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 34px;
+}
+
+#Refrescar.btn {
+    background-image: url("/Content/images/SAMC_RefreshIcon.png");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 34px;
+}
+
+/*.formButtons {
+    margin-top: 15px;
+    padding-bottom: 20px;
+}
+
+    .formButtons .divisor {
+        margin: auto 15px;
+        padding-top: 20px;
+        border-top: 1px solid #CCCCCC;
+    }*/
+
+.btn-group > .btn + .dropdown-toggle {
+    padding-right: 11px;
+    padding-left: 11px;
+}
+
+#Imprimir.btn {
+    background-image: url("/Content/images/SAMC_Printer.png");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 34px;
+}
+
+#Nuevo.btn {
+    padding: 2px 37px 0 9px;
+    background-image: url("/Content/images/Text_Add_Button.png");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: 86% center;
+}
+
+    #Nuevo.btn.btn-newArrival,
+    #Nuevo.btn.btn-newReception {
+        background-position: 93% center;
+    }
+
+    #Nuevo.btn.btn-newStorage {
+        background-position: 96% center;
+        padding: 2px 29px 0 9px;
+    }
+
+    #Nuevo.btn.btn-Despachar {
+        height: 34px!important;
+        padding-right: 33px;
+    }
+
+#massiveUpload.btn {
+    margin-bottom: 3px;
+}
+
+/*Form button without label*/
+.standalone {
+    margin-top: 24px;
+}
+
+    .standalone > .btn {
+        position: relative;
+        top: -5px;
+    }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_headings
+ Description:   Customize headings tag.
+**********************************************************************************/
+h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+    h2 label {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 7px;
+    }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_dropdown
+ Description:   Customize dropdown menu.
+**********************************************************************************/
+.dropdown {
+}
+
+    .dropdown.open a {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+.dropdown-menu {
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    border-color: #CCCCCC;
+}
+
+    .dropdown-menu > li > a {
+        padding: 5.6px 7px;
+        color: #000000;
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+
+        .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+            background-color: rgba(048, 094, 142, 0.2);
+        }
+/**********************************************************************************/
+
+
+/* Media Queries */
+
+/* xs viewport */
+@media screen and (max-width: 767px) {
+
+    /*$_content-frame*/
+    .content-frame {
+        top: 110px;
+    }
+
+        .content-frame .container .main-content {
+            margin: 0;
+        }
+
+    /*$_footer*/
+    footer {
+        text-align: center;
+        bottom: 20px;
+    }
+
+        footer .content-wrapper {
+            border: none;
+            width: 90%;
+        }
+
+        footer label {
+            margin: 0;
+            display: block;
+            font-size: 9px;
+        }
+
+    /*$_btn*/
+    .btn.btn-tab {
+        padding: 7px;
+    }
+
+    .btn-tab label {
+        letter-spacing: 0;
+        font-size: 11px;
+    }
+
+    .btn-tab.Accesorios, .btn-tab.Tubos,
+    .btn-tab.General, #DespachoCorte .btn-tab.Accesorios,
+    #DespachoCorte .btn-tab.Tubos {
+        width: 25.1%;
+        border-radius: 0;
+        margin-top: -1px;
+        margin-left: -1px!important;
+    }
+
+    .btn.btn-tabList,
+    .btn.btn-tabList:hover {
+        height: 50px;
+        white-space: normal;
+        padding: 4px;
+    }
+
+        .btn.btn-tabList.active {
+            height: 54px;
+        }
+
+    .btn-tabList span {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 0;
+    }
+
+    .standalone {
+    margin-top: 0;
+}
+
+    .standalone > .btn,
+    #selectFiles, #fcarga {
+        width: 100%;
+    }
+
+    /*$_input*/
+    .content-container .form input[type="radio"] {
+        width: auto;
+        text-align: center;
+        margin: 4px 45% 0;        
+    }
+
+    input.quickFilters,
+    .expanded input.quickFilters {
+        //width: 25%;
+        -webkit-appearance: none;
+    }
+
+        /*input.quickFilters:first-of-type,
+        .expanded input.quickFilters:first-of-type {
+            width: 24.9%;
+        }
+
+        input.quickFilters:last-of-type,
+        .expanded input.quickFilters:last-of-type {
+            width: 25.96%;
+        }*/
+
+    /*$_dropdown*/
+    .dropdown-menu > li > a {
+        white-space: normal;
+    }
+
+}
+
+/* sm viewport */
+@media (min-width: 768px) and (max-width: 991px) {
+
+    /*$_footer*/
+    footer {
+        text-align: center;
+    }
+
+    /*$_btn*/
+    .btn-tab label {
+        font-size: 11px;
+    }
+
+    .btn-tab.Accesorios,
+    .btn-tab.Tubos,
+    .btn-tab.General {
+        width: 25.04%;
+        border-radius: 0;
+        margin-top: -1px;
+        margin-left: -1px!important;
+    }
+
+    #DespachoCorte .btn-tab.Accesorios,
+    #DespachoCorte .btn-tab.Tubos {
+        width: 14.41%;
+    }
+
+    .btn-tabList span {
+        display: block;
+        font-size: 11px;
+    }    
+
+    /*input*/
+    /*input.quickFilters {
+        width: 27.1%;
+    }
+
+        input.quickFilters:first-of-type {
+            width: 27.3%;
+        }
+
+        input.quickFilters:last-of-type {
+            width: 19%;
+        }
+
+    .expanded input.quickFilters {
+        width: 28.3%;
+    }
+
+        .expanded input.quickFilters:first-of-type {
+            width: 28.5%;
+        }
+
+        .expanded input.quickFilters:last-of-type {
+            width: 15.4%;
+        }
+
+    input.quickFilters.arrivalMaterial {
+        width: 15.54%;
+    }
+
+        input.quickFilters.arrivalMaterial:first-of-type {
+            width: 15.6%;
+        }
+
+        input.quickFilters.arrivalMaterial:last-of-type {
+            width: 23.2%;
+        }
+
+    .expanded input.quickFilters.arrivalMaterial {
+        width: 16.44%;
+    }
+
+        .expanded input.quickFilters.arrivalMaterial:first-of-type {
+            width: 16.4%;
+        }
+
+        .expanded input.quickFilters.arrivalMaterial:last-of-type {
+            width: 18.6%;
+        }*/
+
+    .content-container .form input[type="radio"] {
+        width: auto;
+        margin: 4px 48% 0;
+    }
+
+    .content-container #formDespacho.form input[type="radio"] {
+        margin: 4px 38% 0;
+    }
+}
+
+/* tablet viewport*/
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    /*$_footer*/
+    footer .content-wrapper {
+        width: 80%;
+    }
+
+    /*$_btn*/
+    #ImprimirPase {
+        margin-top: 21px;
+    }
+
+    .standalone > .btn {
+        width: 100%;
+    }
+
+    /*.formButtons {
+        margin-top: 25px;
+    }*/    
+}
+
+@media (max-width: 1199px) {
+
+    /*$_btn*/
+    .buttonBar {
+        margin-top: 0;
+    }
+
+    .btn-tab span {
+        font-size: 46px;        
+    }
+}
+
+/* md viewport */
+@media (min-width: 992px) and (max-width: 1024px) {
+
+    /*$_footer*/
+    footer label {
+        font-size: 11px;
+    }
+
+    /*input*/
+    /*input.quickFilters {
+        width: 28.83%;
+    }
+
+        input.quickFilters:first-of-type {
+            width: 28.9%;
+        }
+
+        input.quickFilters:last-of-type {
+            width: 13.8%;
+        }
+
+    .expanded input.quickFilters {
+        width: 29.73%;
+    }
+
+        .expanded input.quickFilters:first-of-type {
+            width: 29.8%;
+        }
+
+        .expanded input.quickFilters:last-of-type {
+            width: 11.1%;
+        }
+
+    input.quickFilters.arrivalMaterial {
+        width: 16.76%;
+    }
+
+        input.quickFilters.arrivalMaterial:first-of-type {
+            width: 16.9%;
+        }
+
+        input.quickFilters.arrivalMaterial:last-of-type {
+            width: 16.7%;
+        }
+
+    .expanded input.quickFilters.arrivalMaterial {
+        width: 17.44%;
+    }
+
+        .expanded input.quickFilters.arrivalMaterial:first-of-type {
+            width: 17.4%;
+        }
+
+        .expanded input.quickFilters.arrivalMaterial:last-of-type {
+            width: 13.4%;
+        }*/
+
+    .content-container .form input[type="radio"] {
+        width: auto;
+        margin: 4px 45% 0;
+    }
+   
+}
+
+/* lg viewport */
+@media (min-width: 1025px) {
+}
+
+/* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   speak for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba( 255, 255, 255, .8 ) url(/Content/images/loadingGift/loading.gif) 50% 50% no-repeat;
+    pointer-events: none;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;
+    pointer-events: none;
+}
+
+    /* Anytime the body has the loading class, our
+   modal element will be visible */
+    body.loading .modal {
+        display: block;
+    }

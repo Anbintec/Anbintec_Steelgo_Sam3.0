@@ -1,0 +1,303 @@
+﻿
+@{
+    ViewBag.Title = "Convertir Spool a Granel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="ConvertirSpoolAGranel0001"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="ConvertirSpoolAGranel0002"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("ConvertirSpoolAGranel", "ConvertirSpoolAGranel")"><span id="ConvertirSpoolAGranel0005"></span></a>
+    </li>
+}
+
+<div id="formaConvertirSpoolAGranel" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section">
+                            <div class="btn-group save-group">
+                                <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="ConvertirSpoolAGranel0003"></span></button>
+                            </div>
+                            <a id="Cancelar" class="btn btn-black"><span id="ConvertirSpoolAGranel0004"></span></a>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="addedSection clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+                        <div id="SpoolDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <label id="ConvertirSpoolAGranel0006"></label>
+                            <input id="SpoolID" class="" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    @section JavascriptDocumentReadyHomeCookie {
+        Cookies.set("home", true, { path: '/' });
+        Cookies.set("navegacion", "51", { path: '/' });
+    }
+
+    @section JavascriptGlobalVariables {
+    var Spool = {}, resultadoJson = "";
+    var _ConvertirSpoolUrl = "@Url.Action("ConvertirSpoolAGranel", "ConvertirSpoolAGranel")";
+   
+    var $ConvertirSpoolAGranelModel = {
+        listContainer: {
+            create: ".save-group",
+            list: "#grid",
+            detail: ".detailLink",
+            destroy: ".k-grid-Cancelar",
+            createIncidence: ""
+        },
+        properties: {
+            spool: {
+                visible: "#SpoolDiv",
+                editable: "#SpoolID",
+                required: "#SpoolID"
+            }
+        }
+    };
+    }
+
+    @section JavascriptGlobalFunctions {
+    function changeLanguageCall() {
+        var tmp = removeGrid($("#grid"));
+        CargarGrid();
+        $("#grid").data("kendoGrid").dataSource.data(tmp);
+    };
+
+    function CargaInicial() {
+        $("#Guardar").click(function () { Guardar(); });
+        $("#Cancelar").click(function () { Cancelar(); });
+
+        $("#SpoolID").kendoComboBox({
+            dataTextField: "value",
+            dataValueField: "id",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarSpool(dataItem.id, dataItem.value) : CargarSpool("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Spool = {};
+                    this.value("");
+                }
+                ObtenerDatosGrid();
+            },
+            filter: "contains",
+        });
+        ObtenerSpool();
+    };
+
+    function CargarSpool(id, value) {
+        Spool = {};
+        Spool = { SpoolID: id, Nombre: value };
+    };
+    
+    function ObtenerSpool() {
+        $ConvertirSpoolAGranel.ConvertirSpoolAGranel.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("SpoolID", result);
+        });
+    };
+
+    function ObtenerDatosGrid() {
+        if (Spool.SpoolID){
+            $ConvertirSpoolAGranel.ConvertirSpoolAGranel.read({ spoolID: Spool.SpoolID, token: Cookies.get("token") }).done(function (result) {
+                if (Error(result)) {
+                    resultadoJson = result;
+                    if ($("#grid").data("kendoGrid")) {
+                        if (resultadoJson.length > 0) {
+                            $("#grid").data("kendoGrid").dataSource.data(resultadoJson);
+                            $("#grid").data("kendoGrid").dataSource.page(1);
+                        } else {
+                            $("#grid").data("kendoGrid").dataSource.data([]);
+                            $("#grid").data("kendoGrid").dataSource.page(0);
+                        };
+                        AsignarPaginaActualCookie();
+                        applySecurityPolicy(false);
+                    };
+                };
+                //loadingStop();
+            });
+        }
+    };
+
+    function AsignarPaginaActualCookie() {
+        Cookies.set("navegacion", "51", { path: '/' });
+    }
+
+    function CargarGrid() {
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            Junta: { type: "string", editable: false },
+                            TipoJunta: { type: "string", editable: false },
+                            Status: { type: "string", editable: false },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            },
+            autoHeight: true,
+            sortable: true,
+            scrollable: false,
+            selectable: true,
+            editable: {
+                mode: "incell",
+                confirmation: false
+            },
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+                buttonCount: 2
+            },
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            columns: [
+                { field: "Junta", title: _dictionary.ConvertirSpoolAGranel0007[$("#language").data("kendoDropDownList").value()] },
+                { field: "TipoJunta", title: _dictionary.ConvertirSpoolAGranel0008[$("#language").data("kendoDropDownList").value()] },
+                { field: "Status", title: _dictionary.ConvertirSpoolAGranel0009[$("#language").data("kendoDropDownList").value()] },
+            ],
+            dataBound: function (e) {
+                //$(".k-grid input.k-textbox").prop('readonly', true);
+                $(".k-grid td .k-button").text('');
+                $(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
+                quickHeadFilter($("#grid").data("kendoGrid"));
+            }
+        });
+
+        $("#grid").on("mousedown", "tr[role='row']", function (e) {
+            $('#grid').data("kendoGrid").select(e.target.parentElement);
+            $("#grid thead .k-state-selected> .k-link").css({
+                "color": "black"
+            });
+        });
+    };
+       
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+
+    function validarRequeridosForma() {
+        var bool = true;
+        $("#formaConvertirSpoolAGranel .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if (!$(this).val()) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                };
+            };
+        });
+        return bool;
+    };
+
+    function Guardar() {
+        //loadingStart();
+        if (validarRequeridosForma()) {
+            var datasource = $("#grid").data("kendoGrid").dataSource.data();
+            var Listado = { Items: "" };
+            var hayDatos = false;
+            Listado.Items = ListadoAGuardar(datasource);
+
+            
+            if (!Listado.Items[0]) {
+                displayMessage("notificationslabel0090", "", '1');
+                //loadingStop();
+                return;
+            };
+
+            $ConvertirSpoolAGranel.ConvertirSpoolAGranel.create({}, { ODTSID: Spool.SpoolID, token: $.cookie("token") }).done(function (result) {
+                if (Error(result)) {
+                    ObtenerDatosGrid();
+                };
+                //loadingStop();
+            });
+        } else {
+            displayMessage("notificationslabel0031", "", '1');
+            //loadingStop();
+        }
+    };
+
+    function Cancelar() {
+        window.location.href = _ConvertirSpoolUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+    }
+
+    function ListadoAGuardar(datasource) {
+        var Listado = {};
+        for (var i = 0; i < datasource.length; i++) {
+            var Junta = datasource[i].Junta;
+            var TipoJunta = datasource[i].TipoJunta;
+            var Status=datasource[i].Status;
+
+            if (!Status && TipoJunta != "Field") {
+                Listado[i] = { Spool: Spool.SpoolID, Junta: Junta, TipoJunta: TipoJunta };
+            };
+        };
+        return Listado;
+    };
+    
+
+
+
+    @section JavascriptDocumentReadyFunctions {
+        $authorizationModel["Convertir Spool a Granel"] = $ConvertirSpoolAGranelModel;
+        CargaInicial();
+    }
+
+</script>

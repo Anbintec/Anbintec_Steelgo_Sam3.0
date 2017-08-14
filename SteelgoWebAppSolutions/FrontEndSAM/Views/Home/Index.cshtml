@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+@section JavascriptGlobalVariables {
+    var $loginModel = {
+        listContainer: {
+            create: "",
+            list: "",
+            detail: "#loginLabel0009",
+            destroy: ""
+        },
+        properties: {
+            username: {
+                visible: "#usernamecontainer",
+                editable: "#username",
+                required: "#username"
+            },
+            password: {
+                visible: "#passwordcontainer",
+                editable: "#password",
+                required: "#password"
+            }
+        }
+    };
+    }
+
+@section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "1", { path: '/' });
+    }
+
+@section JavascriptDocumentReadyFunctions {
+    $authorizationModel.login = $loginModel
+    $(".menuMobile").hide();
+
+    $("#loginform").submit(function (event) {
+        $(".NotAuthenticated").addClass("hidden");
+        event.preventDefault();
+        if ($("#username").val() && $("#password").val()) {
+            authenticate($("#username").val(), $("#password").val());
+            $('#username').css('border-color', "red");
+            $('#password').css('border-color', "red");
+            validateCredentials();
+        }
+        else {
+            displayError("notificationslabel0068", "", '2');
+        }
+
+    });
+    }
+</script>
+
+<div class="login">
+    <div class="row">
+        <div class="NotAuthenticated hidden col-xs-12 col-sm-6 col-md-8">
+            <label id="loginLabel0010" class="loginLabel"></label>
+        </div>
+    </div>
+    <img src="~/Content/images/Logo_Login.jpg" />
+    <form id="loginform" name="loginform">
+        <div class="form-title">
+            <label id="loginLabel0001"></label>
+        </div>
+        <div id="usernamecontainer">
+            <label id="loginLabel0002" class="loginLabel" for="username"></label>
+            <input id="username" name="username" type="text" />
+        </div>
+        <div id="passwordcontainer">
+            <label id="loginLabel0003" class="loginLabel" for="password"></label>
+            <input id="password" name="password" type="password" />
+        </div>
+        <input id="loginLabel0009" type="submit" class="btn btn-yellow" value="Iniciar Sesión" />
+        <a target="_blank" href="http://www.samcontrol.net/RecuperaPassword.aspx" data-login="password">
+            <span id="loginLabel0004">¿Olvidaste tu contraseña?</span></a>
+    </form>
+</div>
+<footer>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                <img src="~/Content/images/FooterLogo.png" />
+                <label id="loginLabel0005"></label>
+            </div>
+            <div class="footerLinks hidden-xs hidden-sm col-md-5 col-lg-4">
+                <a href="#">
+                    <span id="loginLabel0006">Contacto</span></a>
+                <a href="#">
+                    <span id="loginLabel0007">¿Quiénes Somos?</span></a>
+                <a href="#">
+                    <span id="loginLabel0008">Servicios</span></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    if (isInPopUp()) {
+        alert("Sesión expirada");
+        window.parent.location.href = window.parent.location.origin;
+    }
+
+    window.onresize = screenSize;
+    window.onload = screenSize;
+
+    function screenSize() {
+        if (600 > window.innerHeight) {
+            document.querySelectorAll("footer div.content-wrapper")[0].style.display = "none";
+        } else {
+            document.querySelectorAll("footer div.content-wrapper")[0].style.display = "block";
+        }
+    }
+</script>

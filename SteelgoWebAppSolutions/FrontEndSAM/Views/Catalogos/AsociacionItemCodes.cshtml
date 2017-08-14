@@ -1,0 +1,748 @@
+﻿@{
+    ViewBag.Title = "Catálogos - Item Code Steelgo";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="ListadoCatalogos0041"></span></a>
+    </li>
+    @*<li>
+        <a href="@Url.Action("ItemCodeSteelGo", "Catalogos")"><span id="ItemCodeSteelGo0001"></span></a>
+    </li>*@
+    <li class="active">
+        <a href="@Url.Action("ListadoCatalogos", "Catalogos")"><span id="ListadoCatalogos0042"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("AsociacionItemCodes", "Catalogos")"><span id="AsociacionICS0004"></span></a>
+    </li>
+}
+
+<div id="formAsociacionItemCodes" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="nav1"  class="formNav clearfix">
+                <div id="SeccionBotones" class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section">
+                            <div class="btn-group save-group">
+                                <button id="GuardarICS" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="LlegadaMaterial0011"></span></button>
+                                @*<button id="EditarICS" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="LlegadaMaterial0064"></span></button>*@
+                            </div>
+                            <div id="DesasociarDiv" class="button-section hidden">
+                                <button id="Desasociar" onclick="javascript:void(0);" type="button" class="btn btn-blue"><span id="AsociacionICS0010"></span></button>
+                            </div>
+                             
+                            <a id="Cancelar" href="#" class="btn btn-black"><span id="LlegadaMaterial0012"></span></a>
+                        </div>
+                        
+               <div class="button-section actionButtonSection">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="DetalleAvisoLlegada0064"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="Acciones">
+                                    <li><a id="RedirectDashboard"><span id="AsociacionICS0008"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection disabled"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+                    <div class="row">
+                         <div id="proyectoDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                                    <label for="ProyectoID" id="AsociacionICS0009"></label>
+                                    <input id="ProyectoID" type="text" />
+                                </div>
+                        <div id="itemCodeDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="icinput" id="AsociacionICS0001"></label>
+                            <input id="icinput" type="text" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="D1">D1</label>
+                            <input id="D1" type="number" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="D2">D2</label>
+                            <input id="D2" type="number" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="descripcionIC" id="AsociacionICS0002"></label>
+                            <input id="descripcionIC" class="general-input" readonly disabled type="text" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="icsasociado" id="AsociacionICS0003"></label>
+                            <input id="icsasociado" class="general-input" readonly disabled type="text" />
+                            <input type="number" hidden id="idICS" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="addedSection clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="nav2"  class="formNav">
+                        <div id="SeccionBotones2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul id="context-menu">
+            <li>Seleccionar Item Code Steelgo</li>
+        </ul>
+
+        <input id="hdnICSID" type="hidden" value="" />
+    </div>
+</div>
+
+<script>
+@section JavascriptGlobalVariables {
+    once=true;
+    editado=false;
+    shouldSee=false;
+    itemActual={};
+    var $AsociacionItemCodesModel = {
+        listContainer: {
+            create: ".save-group",
+            list: ["#grid","#icinput"],
+            detail: "",
+            destroy: "#DesasociarDiv"
+        },
+        properties:{
+            icinput:{
+                visible: "itemCodeDiv",
+                editable: "#icinput",
+                required: "#icinput"
+            },
+            guardarics:{
+                visible: ".save-group",
+                editable: "#GuardarICS",
+                required: "#GuardarICS"
+            },
+            proyecto: {
+                visible: "proyectoDiv",
+                editable: "#ProyectoID",
+                required: "#ProyectoID"
+            }
+        }
+    };
+}
+
+@section JavascriptGlobalFunctions {
+    function changeLanguageCall() {
+        tmp=removeGrid($("#grid"));
+        cargarInicialGrid();
+        console.log("carga");
+        $("#grid").data("kendoGrid").dataSource.data(tmp);
+        $(".filter-row th input").attr("disabled", "disabled");
+    };
+
+    function regenerarCombo(combo){
+        var options = combo.data("kendoComboBox").options;
+        combo.data("kendoComboBox").destroy();
+        combo.empty().kendoComboBox(options);
+    }
+
+    function limpiarDatos(){
+        $("#descripcionIC").val("");
+        $("#icsasociado").val("");
+    }
+
+    $("#Cancelar").on("click", function () {
+        window.location.href = "@Url.Action("AsociacionItemCodes", "Catalogos")"; + "?leng=" + $("#language").data("kendoDropDownList").value();
+        //regenerarCombo($("#icinput"));
+        //regenerarCombo($("#D1"));
+        //regenerarCombo($("#D2"));
+        //$("#descripcionIC").val(null);
+        //$("#icsasociado").val(null);
+        //itemActual = [];
+        //editado = false;
+    });
+
+
+    $("#ProyectoID").kendoComboBox({
+        dataTextField: "Nombre",
+        dataValueField: "ProyectoID",
+        select: function (e) {
+            var dataItem = this.dataItem(e.item.index());
+            //if (dataItem.PatioID == 0) {
+            //    VentanaModal(4);
+            //    e.preventDefault();
+            //}
+            //CargarPatio(dataItem.PatioID, dataItem.Nombre);
+        },
+        change: function (e) {
+            shouldSee=false;
+            var value = this.value();
+            //$("#ClienteID").data("kendoComboBox").value("");
+            //$("#ClienteID").data("kendoComboBox").dataSource.data([]);
+            //Cliente = {};
+            if (!value || this.selectedIndex == -1) {
+                messageindexKendoCombobox(this);
+                //Patio = [];
+                this.value("");
+            }
+            else {
+                $("#icinput").data("kendoComboBox").value("");
+                $("#D1").data("kendoComboBox").value("");
+                $("#D2").data("kendoComboBox").value("");
+                $("#descripcionIC").val("");
+                $("#icsasociado").val("");
+                $(".filter-row th input").attr("disabled", "disabled");
+                //llamar a obtener item codes
+                var ds = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: $AsociacionICS.AsociacionICS.urlNoId + "?proyectoID=" + $("#ProyectoID").val() + "&token=" + Cookies.get("token"),
+                            dataType: "json",
+                            type:"GET"
+                        }
+                    }
+                });
+                var combobox = $("#icinput").data("kendoComboBox");
+                combobox.setDataSource(ds);
+            }
+            //ObtenerCliente();
+
+        },
+        filter: "contains",
+    });
+    ObtenerProyectos();
+
+    $("#icinput").kendoComboBox({
+        change: function (e) {
+            shouldSee=false;
+            var value = this.value();
+            if (!value || !e.sender.current()) {
+                messageindexKendoCombobox(this);
+                this.value("");
+            } else {
+                $("#DesasociarDiv").addClass("hidden");
+                botonDefault()
+                itemActual={};
+                itemActual["ItemCodeID"]=e.sender._old;
+                $("#D1").data("kendoComboBox").enable(false);
+                $("#D2").data("kendoComboBox").enable(false);
+                $("#grid").data("kendoGrid").dataSource.data([]);
+                //obtengo diametro 1
+                $AsociacionICS.AsociacionICS.read({}, { itemCode: $("#icinput").data("kendoComboBox").value(), token: Cookies.get("token") }).done(function (data) {
+                    if (Error(data)) {
+                        regenerarCombo($("#D1"));
+                        regenerarCombo($("#D2"));
+                        limpiarDatos();
+                        $(".k-grid .k-input").removeAttr("disabled");
+                        $(".k-grid .k-filter").show();
+                        if (data.length == 1)
+                        {
+                            $("#grid").data("kendoGrid").dataSource.data([]);
+                            itemActual["D1"] = data[0].id;
+                            $("#D1").data("kendoComboBox").value(data[0].value);
+                            $("#D1").data("kendoComboBox").enable(false);
+                            //obtengo diametro 2
+                            $AsociacionICS.AsociacionICS.read({}, { itemCode: $("#icinput").data("kendoComboBox").value(), diametro1ID: data[0].id, token: Cookies.get("token") }).done(function (result) {
+                                if (Error(result)) {
+                                    if (result.length == 1)
+                                    {
+                                        shouldSee=true;
+                                        $("#Guardar span").attr("id", "LlegadaMaterial0011");
+                                        $("#D2").data("kendoComboBox").value(result[0].value);
+                                        $("#D2").data("kendoComboBox").enable(false);
+                                        //obtengo la descripcion del ic
+                                        $("#grid").data("kendoGrid").dataSource.data([]);
+                                        limpiarDatos();
+                                        $("#grid").data("kendoGrid").dataSource.filter([]);
+                                        itemActual["D2"] = result[0].id;
+                                        $AsociacionICS.AsociacionICS.read({}, { itemCode: $("#icinput").data("kendoComboBox").value(), diametro1: data[0].id, diametro2: result[0].id, token: Cookies.get("token") }).done(function (res) {
+                                            if (Error(res)) {
+                                                $("#descripcionIC").val(res.Descripcion);
+                                                $("#icsasociado").val(res.ItemCodeSteelgo);
+                                                $("#grid").data("kendoGrid").options.dataSource.transport.read.url = $AsociacionICS.AsociacionICS.urlNoId + "?item=" + $("#icinput").data("kendoComboBox").value() + "&diametro1=" + data[0].id + "&diametro2=" + result[0].id + "&token=" + Cookies.get("token");
+                                   
+                                                $("#grid").data("kendoGrid").dataSource.read();
+                                                $("#grid").data("kendoGrid").refresh();
+                                                0 > $("#grid").data("kendoGrid").dataSource.data().length ? displayMessage("AsociacionICS0007", "", "2") : 0;
+                                                if (res.ItemCodeSteelgo !== null && res.ItemCodeSteelgo !== "") {
+                                                    $("#GuardarICS").css("display", "none");
+                                                    //$("#EditarICS").css("display", "block");
+                                                    $("#DesasociarDiv").removeClass("hidden");
+                                                    $(".filter-row th input").attr("disabled", "disabled");
+                                                    //$("#Desasociar").attr("disabled", "disabled");
+                                                    $("#context-menu").data("kendoContextMenu").bind("open", function (e) {
+                                                        e.preventDefault();
+                                                    });
+                                                    $(".k-grid .k-input").attr("disabled", "disabled");
+                                                    $(".k-grid .k-filter").hide();
+                                                }
+                                                else {
+                                                    $("#GuardarICS").css("display", "block");
+                                                    //$("#EditarICS").css("display", "none");
+                                                    $("#DesasociarDiv").addClass("hidden");
+                                                    $("#context-menu").data("kendoContextMenu").unbind("open");
+                                                    $(".k-grid .k-input").removeAttr("disabled");
+                                                    $(".k-grid .k-filter").show();
+                                                };
+                                            }
+                                        })
+                                    }
+                                    else if(result.length > 1) {
+                                        $("#Guardar span").attr("id", "LlegadaMaterial0011");
+                                        limpiarDatos();
+                                        regenerarCombo($("#D2"));
+                                        $("#D2").data("kendoComboBox").dataSource.data(result);
+                                        $("#D2").data("kendoComboBox").enable(true);
+                                    }
+                                }
+                            });
+                        }
+                        else if(data.length > 1)
+                        {
+                            var uniques=[];
+                            data.forEach(function(n){
+                                uniques.filter(function(t){ return t.id===n.id}).length===0 ? uniques.push(n) : null;
+                            })
+                            uniques.sort(function(a, b){return parseFloat(a.value)-parseFloat(b.value)})
+                            $("#D1").data("kendoComboBox").dataSource.data(uniques);
+                            $("#D1").data("kendoComboBox").enable(true);
+                        }
+                    }
+                })
+            }
+        },
+        dataTextField: "value",
+        dataValueField: "id",
+        filter: "startswith",
+    });
+    
+    $("#D1").kendoComboBox({
+        change: function (e) {
+            shouldSee=false;
+            var value = this.value();
+            if (!value || !e.sender.current()) {
+                messageindexKendoCombobox(this);
+                this.value("");
+            }else{
+                $("#grid").data("kendoGrid").dataSource.data([]);
+                itemActual["D1"]=e.sender._old;
+                $AsociacionICS.AsociacionICS.read({},{itemCode:$("#icinput").data("kendoComboBox").value(), diametro1ID:e.sender._old ,token:Cookies.get("token")}).done(function(data){
+                    if (Error(data)) {
+                        if (data.length == 1) {
+                            shouldSee=true;
+                            $("#Guardar span").attr("id", "LlegadaMaterial0011");
+                            $("#D2").data("kendoComboBox").value(data[0].value);
+                            $("#D2").data("kendoComboBox").enable(false);
+                            //obtengo la descripcion del ic
+                            $("#grid").data("kendoGrid").dataSource.data([]);
+                            limpiarDatos();
+                            $("#grid").data("kendoGrid").dataSource.filter([]);
+                            itemActual["D2"] = data[0].id;
+                            $AsociacionICS.AsociacionICS.read({}, { itemCode: $("#icinput").data("kendoComboBox").value(), diametro1: e.sender._old, diametro2: data[0].id, token: Cookies.get("token") }).done(function (res) {
+                                if (Error(res)) {
+                                    $("#hdnICSID").val(res.ItemCodeSteelgoID);
+                                    $("#descripcionIC").val(res.Descripcion);
+                                    $("#icsasociado").val(res.ItemCodeSteelgo);
+                                    $("#grid").data("kendoGrid").options.dataSource.transport.read.url = $AsociacionICS.AsociacionICS.urlNoId + "?item=" + $("#icinput").data("kendoComboBox").value() + "&diametro1=" + e.sender._old + "&diametro2=" + data[0].id + "&token=" + Cookies.get("token");
+                           
+                                    $("#grid").data("kendoGrid").dataSource.read();
+                                    $("#grid").data("kendoGrid").refresh();
+                                    0 > $("#grid").data("kendoGrid").dataSource.data().length ? displayMessage("AsociacionICS0007", "", "2") : 0;
+                                    if (res.ItemCodeSteelgo !== null && res.ItemCodeSteelgo !== "") {
+                                        $("#GuardarICS").css("display", "none");
+                                        //$("#EditarICS").css("display", "block");
+                                        $("#DesasociarDiv").removeClass("hidden");
+                                        //$("#Desasociar").attr("disabled", "disabled");
+                                        $("#context-menu").data("kendoContextMenu").bind("open", function (e) {
+                                            e.preventDefault();
+                                        });
+                                        $(".k-grid .k-input").attr("disabled", "disabled");
+                                        $(".k-grid .k-filter").hide();
+                                    }
+                                    else {
+                                        $("#GuardarICS").css("display", "block");
+                                        //$("#EditarICS").css("display", "none");
+                                        $("#DesasociarDiv").addClass("hidden");
+                                        $("#context-menu").data("kendoContextMenu").unbind("open");
+                                        $(".k-grid .k-input").removeAttr("disabled");
+                                        $(".k-grid .k-filter").show();
+                                    };
+                                }
+                            })
+                        }
+                        else if (data.length > 1) {
+                            $("#Guardar span").attr("id", "LlegadaMaterial0011");
+                            limpiarDatos();
+                            regenerarCombo($("#D2"));
+                            $("#D2").data("kendoComboBox").dataSource.data(data);
+                            $("#D2").data("kendoComboBox").enable(true);
+                        }
+                    }
+                })
+            }
+        },
+        //dataBound:checkIfOne,
+        dataTextField: "value",
+        dataValueField: "id"
+    });
+
+    $("#D2").kendoComboBox({
+        change: function (e) {
+            var value = this.value();
+            if (!value || !e.sender.current()) {
+                messageindexKendoCombobox(this);
+                this.value("");
+            }else{
+                $("#grid").data("kendoGrid").dataSource.data([]);
+                limpiarDatos();
+                $("#grid").data("kendoGrid").dataSource.filter([]);
+                itemActual["D2"]=e.sender._old;
+                $AsociacionICS.AsociacionICS.read({}, { itemCode: $("#icinput").data("kendoComboBox").value(), diametro1: $("#D1").data("kendoComboBox").value(), diametro2: e.sender._old, token: Cookies.get("token") }).done(function (data) {
+                    if (Error(data)) {
+                        $("#hdnICSID").val(data.ItemCodeSteelgoID);
+                        $("#descripcionIC").val(data.Descripcion);
+                        $("#icsasociado").val(data.ItemCodeSteelgo);
+                        $("#grid").data("kendoGrid").options.dataSource.transport.read.url = $AsociacionICS.AsociacionICS.urlNoId + "?item=" + $("#icinput").data("kendoComboBox").value() + "&diametro1=" + $("#D1").data("kendoComboBox").value() + "&diametro2=" + $("#D2").data("kendoComboBox").value() + "&token=" + Cookies.get("token");
+                        $("#grid").data("kendoGrid").dataSource.read();
+                        $("#grid").data("kendoGrid").refresh();
+                        0>$("#grid").data("kendoGrid").dataSource.data().length ? displayMessage("AsociacionICS0007","","2") : shouldSee=true;
+                        if(data.ItemCodeSteelgo!==null && data.ItemCodeSteelgo!==""){
+                            $("#GuardarICS").css("display", "none");
+                            //$("#EditarICS").css("display", "block");
+                            $("#DesasociarDiv").removeClass("hidden")
+                            //$("#Desasociar").attr("disabled", "disabled");
+                            $("#context-menu").data("kendoContextMenu").bind("open", function (e) {
+                                e.preventDefault();
+                            });
+                            $(".k-grid .k-input").attr("disabled", "disabled");
+                            $(".k-grid .k-filter").hide();
+                        }
+                    }
+                })
+            }
+        },
+        dataTextField: "value",
+        dataValueField: "id"
+    });
+
+    function ObtenerProyectos() {
+        $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("ProyectoID", result);
+        });
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+    function cargarInicialGrid() {
+ 
+        $("#grid").kendoGrid({
+            columns: [
+                { field: "Codigo", title: _dictionary.ItemCodeSteelGo0001[$("#language").data("kendoDropDownList").value()], filterable: { 
+                    cell: { 
+                        showOperators: false,
+                        operator: "contains",
+                        delay: 10,
+                        dataTextField: "Codigo"
+                    } 
+                }, width: "120px" },
+                { field: "Descripcion", title: _dictionary.ItemCodeSteelGo0005[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "Diametro1", title: _dictionary.ItemCodeSteelGo0009[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "Diametro2", title: _dictionary.ItemCodeSteelGo0010[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "Grupo", title: _dictionary.ItemCodeSteelGo0011[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "Acero", title: _dictionary.ItemCodeSteelGo0012[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "FamiliaMaterial", title: _dictionary.AsociacionICS0011[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "CedulaA", title: _dictionary.ItemCodeSteelGo0013[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "CedulaB", title: _dictionary.ItemCodeSteelGo0014[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "Libra", title: _dictionary.ItemCodeSteelGo0015[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "Inch", title: _dictionary.ItemCodeSteelGo0016[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "MM", title: _dictionary.ItemCodeSteelGo0017[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "Peso", title: _dictionary.ItemCodeSteelGo0018[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "Area", title: _dictionary.ItemCodeSteelGo0019[$("#language").data("kendoDropDownList").value()], width: "120px" },
+            ],
+            dataSource: {
+                data: [],
+                schema: {
+                    model: {
+                        id:"ItemCodeSteelgoID",
+                        fields: {
+                            ItemCodeSteelgoID: { editable: false, nullable: true },
+                            Codigo: { type:"string",validation: { required: false } },
+                            Descripcion: { type:"string",validation: { required: false } },
+                            //DescripcionLarga: { type:"string",validation: { required: false } },
+                            //DescripcionIngles: { type:"string",validation: { required: false } },
+                            //DescripcionLargaIngles: { type:"string",validation: { required: false } },
+                            FamiliaMaterialID: {type: "number", validation: { required: true },editable: false},
+                            FamiliaMaterial: { type: "string", validation: { required: true },editable: false},
+                            Diametro1: { type:"number", validation: { required: false } },
+                            Diametro2: { type:"number", validation: { required: false } },
+                            Grupo: { type:"string",validation: { required: false } },
+                            GrupoID: { editable: false, nullable: true },
+                            Acero: { type:"string",validation: { required: false } },
+                            AceroID: { editable: false, nullable: true },
+                            CedulaID: { editable: false, nullable: true },
+                            CedulaA: { type:"string",validation: { required: false }},
+                            CedulaB: { type:"string",validation: { required: false }},
+                            Libra: { type:"string",validation: { required: false }},
+                            Inch: { type: "number", validation: { required: false }, editable: false },
+                            MM: { type: "number", validation: { required: false }, editable: false },
+                            //Espesor: { type: "string", validation: { required: false }, editable: false },
+                            Peso: { type: "string", validation: { required: true }, editable: false },
+                            Area: { type: "number", validation: { required: false }, editable: false },
+                        }
+                    },
+                    errors: function (response) {
+                        if (response.ReturnCode) {
+                            if (response.ReturnCode != 200) {
+                                if (response.ReturnCode == 401) {
+                                    removeUserSession();
+                                    //return true;
+                                } else {
+                                    displayMessage("notificationslabel0008", response.ReturnMessage, '2');
+                                    //return false;
+                                }
+                            } else {
+                                //return true;
+                            }
+                        } else {
+                            //return true;
+                        }
+                    },
+                    parse:function(response){
+                        if($("#icinput").data("kendoComboBox").dataItem()!==undefined && $("#icinput").data("kendoComboBox").dataItem().tipoGrupo===1){
+                            response=response.filter(function(n){return parseInt(n.GrupoID)===1})
+                        }else if($("#icinput").data("kendoComboBox").dataItem()!==undefined && $("#icinput").data("kendoComboBox").dataItem().tipoGrupo>1){
+                            response=response.filter(function(n){return parseInt(n.GrupoID)>1})
+                        }
+                        return response;
+                    }
+                },
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                pageSize: 20,
+                transport:{
+                    read:{
+                        url: $AsociacionICS.AsociacionICS.urlNoId + "?token=" + Cookies.get("token"),
+                        dataType:"json",
+                        type:"GET",
+                        cache: false
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return {models: kendo.stringify(options.models)};
+                        }
+                    }
+                },
+                requestEnd:function(e){
+                    
+                }
+            },
+            autoHeight: true,
+            sortable: false,
+            scrollable: false,
+            filterable:{
+                extra: false,
+                mode: "menu",
+                cell: {
+                    showOperators: false,
+                    operator: "contains"
+                }
+            },
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+                buttonCount: 2
+            },
+            dataBound: function(e) {
+                if(once){
+                    once=false;
+                    $("#grid").data("kendoGrid").dataSource.data([]);
+                }
+                quickHeadFilter($("#grid").data("kendoGrid"));
+                $("#context-menu").kendoContextMenu({
+                    //target: "#grid tr td:first-child",
+                    target: "#grid",
+                    filter: "td",
+                    alignToAnchor: true,
+                    select:function(e){
+                        var dataItem = $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr"));
+                        $("#icsasociado").val(dataItem.Codigo);
+                        itemActual["ItemCodeSteelgoIDNuevo"]=dataItem.ItemCodeSteelgoID;
+                        editado=true;
+                        this.close();
+                    },
+                    open:function(e){
+                        if(!$("#GuardarICS").is(":visible")){
+                            e.preventDefault();
+                        }
+                    },
+                })
+                if(!shouldSee){
+                    $("#grid").data("kendoGrid").tbody.hide();
+                }else{
+                    $("#grid").data("kendoGrid").tbody.show()
+                }
+            },
+        });
+        //$(".k-grid .filter-row input").attr("disabled", "disabled");
+        $(".k-grid .k-filter").hide();
+       
+        applySecurityPolicy(false);
+    }
+
+    $("#GuardarICS").on("click", function () {
+        if (itemActual["ItemCodeSteelgoIDNuevo"]) {
+            $AsociacionICS.AsociacionICS.create({}, { itemCode: itemActual["ItemCodeID"], itemCodeSteelgo: itemActual["ItemCodeSteelgoIDNuevo"], diametro1ID: itemActual["D1"], diametro2ID: itemActual["D2"], token: Cookies.get("token") }).done(function (data) {
+                if (Error(data)) {
+                    //if (data.ReturnMessage[0] == "OK") {
+                    $(".k-i-close").trigger("click");
+                    $(".k-grid .k-input").val("");
+                    $("#GuardarICS").css("display", "none");
+                    //$("#EditarICS").css("display", "block");
+                    $("#DesasociarDiv").removeClass("hidden");
+                    //$("#Desasociar").attr("disabled", "disabled");
+                    $("#context-menu").data("kendoContextMenu").bind("open", function (e) {
+                        e.preventDefault();
+                    });
+                    $(".filter-row th input").attr("disabled", "disabled");
+                    $(".k-grid .k-input").attr("disabled", "disabled");
+                    $(".k-grid .k-filter").hide();
+                    displayMessage("AsociacionICS0005", "", '0');
+                    if (isInPopUp() && window.parent.$("#hdnOcultarMenus").val() == "1") {
+                        window.parent.RecargarFilaSeleccionada();
+                    }
+                    applySecurityPolicy(false);
+                    //}else{
+                    //    displayMessage("",data.ReturnMessage[0], '2');
+                    //}
+                }
+            });
+        } else {
+            displayMessage("AsociacionICS0006", "", '1');
+        }
+    });
+
+    $("#Desasociar").on("click", function () {
+        $AsociacionICS.AsociacionICS.destroy({}, { itemCode: itemActual["ItemCodeID"], itemCodeSteelgo: $("#icsasociado").val(), diametro1ID: itemActual["D1"], diametro2ID: itemActual["D2"], token: Cookies.get("token") }).done(function (data) {
+            if (Error(data)) {
+                if (data.ReturnMessage[0] == "OK") {
+                    $("#icsasociado").val("");
+                    $("#DesasociarDiv").addClass("hidden");
+                    botonDefault();
+                    if(isInPopUp()){
+                        window.parent.RecargarFilaSeleccionada();
+                    }
+                    applySecurityPolicy(false);
+                }else{
+                    displayMessage("",data.ReturnMessage[0], '2');
+                }
+            }
+        });
+    });
+
+
+    //$("#EditarICS").on("click",botonDefault);
+
+    function botonDefault() {
+        //$("#EditarICS").css("display", "none");
+        //$("#Desasociar").removeAttr("disabled");
+        //$(".filter-row th input").attr("disabled", "disabled");
+        $(".filter-row th input").removeAttr("disabled");
+        $("#GuardarICS").css("display", "block");
+        $("#context-menu").data("kendoContextMenu").unbind("open");
+        $(".k-grid .k-input").removeAttr("disabled");
+        $(".k-grid .k-filter").show();
+    }
+
+    function hideElementsItemCodeSteelgo() {
+        $(".sidebar").hide();
+        $(".logo").hide();
+        $(".search-bar").hide();
+        $(".notifications").hide();
+        $(".logged-user").hide();
+        $(".content-container").removeClass("topbar").addClass("printView");
+        $(".breadcrumb-container").hide();
+        $(".languageSelector").hide();
+        $(".pull-right").hide();
+        $("header").hide();
+        $(".content-frame").removeClass("content-frame");
+        $("body").css("background", "#FFFFFF");
+        $(".actionButtonSection").hide();
+        $('#SeccionBotones').appendTo('#SeccionBotones2');
+        $('#nav1').css('border-bottom', 'none');
+        $('#nav2').css('border-bottom', 'none');
+        $('#nav2 .button-section').css('border-left', 'none');
+        $('#nav2 .button-section').css('border-right', 'none');
+    };
+};
+
+@section JavascriptDocumentReadyFunctions {
+    //$("#EditarICS").hide();
+
+    $authorizationModel["AsociacionItemCodes"] = $AsociacionItemCodesModel;
+    $("#D1").data("kendoComboBox").enable(false);
+    $("#D2").data("kendoComboBox").enable(false);
+    //$("#context-menu").data("kendoContextMenu").unbind("open");
+    //$(".k-grid .k-input").attr("disabled", "disabled");
+    $(".k-grid .k-filter").hide();
+    //$(".k-grid .k-input").attr("disabled", "disabled");
+
+    $("#RedirectDashboard").click(function (e) {
+        var detalleIdeaUrl = "@Url.Action("ItemCodeSteelGo", "Catalogos")";
+        window.location.href = detalleIdeaUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
+    });
+
+
+    if (isInPopUp() && window.parent.$("#hdnOcultarMenus").val() == "1") {
+        hideElementsItemCodeSteelgo();
+    }
+};
+    
+@section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("home", true, { path: '/' });
+    if (!isInPopUp()) {
+        Cookies.set("navegacion", "46", { path: '/' });
+    }else if (window.parent.$("#hdnOcultarMenus").val() == "1") {
+        window.parent.$(".k-i-close").click(function (e) {
+            window.parent.AsignarPaginaActualCookie();
+            window.parent.RecargarFilaSeleccionada();
+        });
+    }
+};
+
+</script>

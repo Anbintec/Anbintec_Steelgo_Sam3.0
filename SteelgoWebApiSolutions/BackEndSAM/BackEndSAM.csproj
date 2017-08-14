@@ -1,0 +1,678 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{73477E9B-F54F-4B7E-9A6A-4BFA07895278}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BackEndSAM</RootNamespace>
+    <AssemblyName>BackEndSAM</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\Dlls\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportingServices.Interfaces, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.Interfaces.1.0.0\lib\Microsoft.ReportingServices.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc.Extensions, Version=1.0.9.0, Culture=neutral, PublicKeyToken=17e35335fc9f8fc8, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Web.Mvc.Extensions.Mvc.4.1.0.9\lib\net40\System.Web.Mvc.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="RestApiClient\jquery-2.1.4.js" />
+    <Content Include="RestApiClient\jquery.rest.js" />
+    <Content Include="RestApiClient\RestApiClient.html" />
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.DocumentMapNode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.ExecutionHeader.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.ExecutionInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.ExecutionInfo2.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.Extension.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.FindStringResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.GetDocumentMapResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.GetExecutionInfo2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.GetExecutionInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.GetRenderResourceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.ListRenderingExtensionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.ListSecureMethodsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.LoadDrillthroughTarget2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.LoadDrillthroughTargetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.LoadReport2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.LoadReportDefinition2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.LoadReportDefinitionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.LoadReportResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.LogoffResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.LogonUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.NavigateBookmarkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.NavigateDocumentMapResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.Render2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.RenderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.RenderStreamResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.ResetExecution2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.ResetExecutionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.ServerInfoHeader.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.SetExecutionCredentials2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.SetExecutionCredentialsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.SetExecutionParameters2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.SetExecutionParametersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.Sort2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.SortResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.ToggleItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\BackEndSAM.Sam3Reportes.Warning.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\configuration91.svcinfo" />
+    <Content Include="Service References\Sam3Reportes\configuration.svcinfo">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Service References\Sam3Reportes\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdministracionCatalogosController.cs" />
+    <Compile Include="Controllers\AlmacenajeController.cs" />
+    <Compile Include="Controllers\AsociacionICSController.cs" />
+    <Compile Include="Controllers\CambiarEstatusCuantificacionController.cs" />
+    <Compile Include="Controllers\CargarGridCuantificacionController.cs" />
+    <Compile Include="Controllers\CatalogoICSteelgoController.cs" />
+    <Compile Include="Controllers\CedulasController.cs" />
+    <Compile Include="Controllers\ClasificacionController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\ColadaController.cs" />
+    <Compile Include="Controllers\ComplementarRecepcionController.cs" />
+    <Compile Include="Controllers\ConvertirSpoolAGranelController.cs" />
+    <Compile Include="Controllers\CortadorController.cs" />
+    <Compile Include="Controllers\CorteController.cs" />
+    <Compile Include="Controllers\DespachoController.cs" />
+    <Compile Include="Controllers\DetalleNumeroUnicoController.cs" />
+    <Compile Include="Controllers\DiametrosController.cs" />
+    <Compile Include="Controllers\DocumentoAvisoLlegadaController.cs" />
+    <Compile Include="Controllers\DocumentoController.cs" />
+    <Compile Include="Controllers\DocumentoFolioAvisoEntradaController.cs" />
+    <Compile Include="Controllers\DocumentoIncidenciaController.cs" />
+    <Compile Include="Controllers\DocumentoLlegadaMaterialController.cs" />
+    <Compile Include="Controllers\DocumentoPaseSalidaController.cs" />
+    <Compile Include="Controllers\DocumentoPermisoAduanaController.cs" />
+    <Compile Include="Controllers\DocumentosCatalogosController.cs" />
+    <Compile Include="Controllers\DummyAceroController.cs" />
+    <Compile Include="Controllers\DummyAlmacenajeRackController.cs" />
+    <Compile Include="Controllers\DummyColadaController.cs" />
+    <Compile Include="Controllers\DummyColadasPorProyectoController.cs" />
+    <Compile Include="Controllers\DummyDespachoController.cs" />
+    <Compile Include="Controllers\DummyGenerarOrdenAlmacenajeController.cs" />
+    <Compile Include="Controllers\DummyGridOrdenRecepcionController.cs" />
+    <Compile Include="Controllers\DummyItemCodeSteelgoController.cs" />
+    <Compile Include="Controllers\DummyMaquinaController.cs" />
+    <Compile Include="Controllers\EntregaController.cs" />
+    <Compile Include="Controllers\EspesorController.cs" />
+    <Compile Include="Controllers\IncidenciaPaseSalidaController.cs" />
+    <Compile Include="Controllers\MaterialPendienteController.cs" />
+    <Compile Include="Controllers\MaterialSpoolController.cs" />
+    <Compile Include="Controllers\MTRController.cs" />
+    <Compile Include="Controllers\NotificacionDeficitController.cs" />
+    <Compile Include="Controllers\NumerosUnicosController.cs" />
+    <Compile Include="Controllers\DummyObtenerDatosFolioAvisoEntradaController.cs" />
+    <Compile Include="Controllers\DummyObtenerDatosFolioLlegadaMaterialController.cs" />
+    <Compile Include="Controllers\DummyOperadorController.cs" />
+    <Compile Include="Controllers\DummyOrdenAlmacenajeController.cs" />
+    <Compile Include="Controllers\DummyOrdenRecepcionFoliosAvisoEntradaController.cs" />
+    <Compile Include="Controllers\DummyOrdenRecepcionItemCodeController.cs" />
+    <Compile Include="Controllers\DummyTipoPackingListController.cs" />
+    <Compile Include="Controllers\DummyTipoUsoController.cs" />
+    <Compile Include="Controllers\DumyValidarItemCodeNuCuantificacionController.cs" />
+    <Compile Include="Controllers\DummyFabricanteController.cs" />
+    <Compile Include="Controllers\FabricantesController.cs" />
+    <Compile Include="Controllers\FamiliaAceroController.cs" />
+    <Compile Include="Controllers\FolioAvisoEntradaController.cs" />
+    <Compile Include="Controllers\DummyFormatoIncidenciasController.cs" />
+    <Compile Include="Controllers\DummyIncidenciasController.cs" />
+    <Compile Include="Controllers\DummyPaseSalidaEnviadoController.cs" />
+    <Compile Include="Controllers\FoliosCuantificacionController.cs" />
+    <Compile Include="Controllers\DummyGuardarFolioLlegadaCuantificacionController.cs" />
+    <Compile Include="Controllers\GenerarOrdenAlmacenajeController.cs" />
+    <Compile Include="Controllers\GrupoController.cs" />
+    <Compile Include="Controllers\GuardarFolioLlegadaCuantificacionController.cs" />
+    <Compile Include="Controllers\ImpresionDocumentalController.cs" />
+    <Compile Include="Controllers\IncidenciaController.cs" />
+    <Compile Include="Controllers\ItemCodeController.cs" />
+    <Compile Include="Controllers\ItemCodeSteelgoController.cs" />
+    <Compile Include="Controllers\ListadoCuantificacionController.cs" />
+    <Compile Include="Controllers\ListadoMaterialesController.cs" />
+    <Compile Include="Controllers\ListadoMaterialesPorItemCodeController.cs" />
+    <Compile Include="Controllers\MaquinaController.cs" />
+    <Compile Include="Controllers\NumeroUnicoController.cs" />
+    <Compile Include="Controllers\ObtenerDatosFolioAvisoEntradaController.cs" />
+    <Compile Include="Controllers\ObtenerDatosFolioLlegadaMaterialController.cs" />
+    <Compile Include="Controllers\ObtenerItemCodesController.cs" />
+    <Compile Include="Controllers\ObtenerRelacionItemCodeSteelgoController.cs" />
+    <Compile Include="Controllers\OrdenAlmacenajeController.cs" />
+    <Compile Include="Controllers\OrdenDescargaController.cs" />
+    <Compile Include="Controllers\OrdenRecepcionController.cs" />
+    <Compile Include="Controllers\OrdenTrabajoController.cs" />
+    <Compile Include="Controllers\OrdenTrabajoSpoolController.cs" />
+    <Compile Include="Controllers\PaseSalidaController.cs" />
+    <Compile Include="Controllers\PickingTicketController.cs" />
+    <Compile Include="Controllers\PreDespachoController.cs" />
+    <Compile Include="Controllers\ProxyController.cs" />
+    <Compile Include="Controllers\ProyectosCuantificacionController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
+    <Compile Include="Controllers\RevisionDeficitController.cs" />
+    <Compile Include="Controllers\TipoAceroController.cs" />
+    <Compile Include="Controllers\TipoArchivoController.cs" />
+    <Compile Include="Controllers\TipoAvisoController.cs" />
+    <Compile Include="Controllers\TipoIncidenciaController.cs" />
+    <Compile Include="Controllers\TipoPackingListController.cs" />
+    <Compile Include="Controllers\TipoUsoController.cs" />
+    <Compile Include="Controllers\TipoVehiculoController.cs" />
+    <Compile Include="Controllers\TractoController.cs" />
+    <Compile Include="Controllers\ChoferController.cs" />
+    <Compile Include="Controllers\DummyCambiarEstatusCuantificacionController.cs" />
+    <Compile Include="Controllers\DummyCargarGridPackingListController.cs" />
+    <Compile Include="Controllers\DummyCedulaController.cs" />
+    <Compile Include="Controllers\AvisoLlegadaController.cs" />
+    <Compile Include="Controllers\DummyCancelacionListadoAvisoLlegadaController.cs" />
+    <Compile Include="Controllers\ContactoController.cs" />
+    <Compile Include="Controllers\DummyAvisoLlegadaController.cs" />
+    <Compile Include="Controllers\DummyCamionController.cs" />
+    <Compile Include="Controllers\DummyCancelacionListadoLlegadaMaterialController.cs" />
+    <Compile Include="Controllers\DummyChoferController.cs" />
+    <Compile Include="Controllers\DummyDescargarArchivoController.cs" />
+    <Compile Include="Controllers\DummyEdicionCuantificacionController.cs" />
+    <Compile Include="Controllers\DummyFamiliaController.cs" />
+    <Compile Include="Controllers\DummyFileManagerController.cs" />
+    <Compile Include="Controllers\DummyFolioEntradaController.cs" />
+    <Compile Include="Controllers\DummyFoliosEntradaLlegadaController.cs" />
+    <Compile Include="Controllers\DummyFoliosGeneradosController.cs" />
+    <Compile Include="Controllers\DummyItemCodeController.cs" />
+    <Compile Include="Controllers\DummyListadoAvisoLlegadaController.cs" />
+    <Compile Include="Controllers\DummyListadoCuantificacionController.cs" />
+    <Compile Include="Controllers\DummyListadoLlegadaMaterialController.cs" />
+    <Compile Include="Controllers\DummyObtenerItemCodesController.cs" />
+    <Compile Include="Controllers\DummyPackingListController.cs" />
+    <Compile Include="Controllers\DummyPlanaController.cs" />
+    <Compile Include="Controllers\DummyProveedorController.cs" />
+    <Compile Include="Controllers\DummyTipoAceroController.cs" />
+    <Compile Include="Controllers\DummyTramitarPermisoController.cs" />
+    <Compile Include="Controllers\DummyTransportistaController.cs" />
+    <Compile Include="Controllers\DummyPatioController.cs" />
+    <Compile Include="Controllers\DummyEntradaMaterialController.cs" />
+    <Compile Include="Controllers\DummyEstatusController.cs" />
+    <Compile Include="Controllers\FamiliaController.cs" />
+    <Compile Include="Controllers\FolioLlegadaController.cs" />
+    <Compile Include="Controllers\FormatoPaseSalidaController.cs" />
+    <Compile Include="Controllers\ListadoController.cs" />
+    <Compile Include="Controllers\NotificacionController.cs" />
+    <Compile Include="Controllers\FolioLlegadaPorProyectoController.cs" />
+    <Compile Include="Controllers\PatioController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\PermisoAduanaController.cs" />
+    <Compile Include="Controllers\PlanaController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\ProyectoController.cs" />
+    <Compile Include="Controllers\DummyVerificarCancelacionController.cs" />
+    <Compile Include="Controllers\ProyectoPorFolioLlegadaController.cs" />
+    <Compile Include="Controllers\TransportistaController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\ValidacionesFolioAvisoLlegadaController.cs" />
+    <Compile Include="Controllers\ValidacionFolioConPermisoAduanaController.cs" />
+    <Compile Include="Controllers\ValidarCedulasController.cs" />
+    <Compile Include="Controllers\ValidarItemCodeNuCuantificacionController.cs" />
+    <Compile Include="DataAcces\AlmacenajeBd.cs" />
+    <Compile Include="DataAcces\AsociacionICSBd.cs" />
+    <Compile Include="DataAcces\AvisoLlegadaBd.cs" />
+    <Compile Include="DataAcces\CatalogosBd.cs" />
+    <Compile Include="DataAcces\CedulasBd.cs" />
+    <Compile Include="DataAcces\ClienteBd.cs" />
+    <Compile Include="DataAcces\ColadaBd.cs" />
+    <Compile Include="DataAcces\ComplementoRecepcionBd.cs" />
+    <Compile Include="DataAcces\CortadorBd.cs" />
+    <Compile Include="DataAcces\CorteBd.cs" />
+    <Compile Include="DataAcces\CuantificacionBd.cs" />
+    <Compile Include="DataAcces\DeficitBd.cs" />
+    <Compile Include="DataAcces\DespachoBd.cs" />
+    <Compile Include="DataAcces\DetalleNumeroUnicoBd.cs" />
+    <Compile Include="DataAcces\DocumentosBd.cs" />
+    <Compile Include="DataAcces\EntregaBd.cs" />
+    <Compile Include="DataAcces\EnviarAvisosBd.cs" />
+    <Compile Include="DataAcces\EspesorBd.cs" />
+    <Compile Include="DataAcces\EstatusCuantificacionBd.cs" />
+    <Compile Include="DataAcces\FabricantesBd.cs" />
+    <Compile Include="DataAcces\FamiliaBd.cs" />
+    <Compile Include="DataAcces\FolioAvisoEntradaBd.cs" />
+    <Compile Include="DataAcces\GrupoBd.cs" />
+    <Compile Include="DataAcces\GuardarFolioLlegadaCuantificacionBd.cs" />
+    <Compile Include="DataAcces\GuardarItemCodesBd.cs" />
+    <Compile Include="DataAcces\ImpresionDocumentalBd.cs" />
+    <Compile Include="DataAcces\IncidenciaBd.cs" />
+    <Compile Include="DataAcces\ItemCodeBd.cs" />
+    <Compile Include="DataAcces\ItemCodeSteelgoBd.cs" />
+    <Compile Include="DataAcces\FoliosCuantificacionBd.cs" />
+    <Compile Include="DataAcces\ListadoBd.cs" />
+    <Compile Include="DataAcces\ListadoMaterialesBd.cs" />
+    <Compile Include="DataAcces\ListadoMaterialesPorItemCodeBd.cs" />
+    <Compile Include="DataAcces\LoggerBd.cs" />
+    <Compile Include="DataAcces\MaquinaBd.cs" />
+    <Compile Include="DataAcces\MaterialSpoolBd.cs" />
+    <Compile Include="DataAcces\MTRBd.cs" />
+    <Compile Include="DataAcces\NumeroUnicoBd.cs" />
+    <Compile Include="DataAcces\OrdenAlmacenajeBd.cs" />
+    <Compile Include="DataAcces\OrdenRecepcionBd.cs" />
+    <Compile Include="DataAcces\OrdenTrabajoBd.cs" />
+    <Compile Include="DataAcces\OrdenTrabajoSpoolBd.cs" />
+    <Compile Include="DataAcces\PaseSalidaBd.cs" />
+    <Compile Include="DataAcces\PickingTicketBd.cs" />
+    <Compile Include="DataAcces\PreDespachoBd.cs" />
+    <Compile Include="DataAcces\ReportesBd.cs" />
+    <Compile Include="DataAcces\SpoolBd.cs" />
+    <Compile Include="DataAcces\TipoAceroBd.cs" />
+    <Compile Include="DataAcces\TipoArchivoBd.cs" />
+    <Compile Include="DataAcces\TipoAvisoBd.cs" />
+    <Compile Include="DataAcces\TipoPackingListBd.cs" />
+    <Compile Include="DataAcces\TipoUsoBd.cs" />
+    <Compile Include="DataAcces\TractoBd.cs" />
+    <Compile Include="DataAcces\ChoferBd.cs" />
+    <Compile Include="DataAcces\ContactoBd.cs" />
+    <Compile Include="DataAcces\PatioBd.cs" />
+    <Compile Include="DataAcces\PermisoAduanaBd.cs" />
+    <Compile Include="DataAcces\PlanaBd.cs" />
+    <Compile Include="DataAcces\ProveedorBd.cs" />
+    <Compile Include="DataAcces\ProyectoBd.cs" />
+    <Compile Include="DataAcces\TransportistaBd.cs" />
+    <Compile Include="DataAcces\UsuarioBd.cs" />
+    <Compile Include="DataAcces\ValidarCedulasBd.cs" />
+    <Compile Include="DataAcces\ValidarItemCodeNUBd.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AsociacionItemCodeSteelgo.cs" />
+    <Compile Include="Models\AvisoLlegadaJson.cs" />
+    <Compile Include="Models\CantidadesDashboard.cs" />
+    <Compile Include="Models\Catalogos.cs" />
+    <Compile Include="Models\ConsultaReportes.cs" />
+    <Compile Include="Models\CuantificacionListado.cs" />
+    <Compile Include="Models\DashBoardDespacho.cs" />
+    <Compile Include="Models\DatosFolioLlegadaCuantificacion.cs" />
+    <Compile Include="Models\Deficit.cs" />
+    <Compile Include="Models\DocumentoPosteado.cs" />
+    <Compile Include="Models\DocumentosEnCatalogos.cs" />
+    <Compile Include="Models\Dummy\Accesorios.cs" />
+    <Compile Include="Models\Dummy\AlmacenajeRack.cs" />
+    <Compile Include="Models\Dummy\ArchivoAutorizado.cs" />
+    <Compile Include="Models\Dummy\AvisoLlegada.cs" />
+    <Compile Include="Models\Dummy\Camion.cs" />
+    <Compile Include="Models\Dummy\Cedula.cs" />
+    <Compile Include="Models\Dummy\Chofer.cs" />
+    <Compile Include="Models\Dummy\Clasificacion.cs" />
+    <Compile Include="Models\Dummy\Cliente.cs" />
+    <Compile Include="Models\Dummy\Coladas.cs" />
+    <Compile Include="Models\Dummy\Contacto.cs" />
+    <Compile Include="Models\Dummy\DummyDespacho.cs" />
+    <Compile Include="Models\Dummy\DummyFabricante.cs" />
+    <Compile Include="Models\Dummy\DummyGridOrdenRecepcion.cs" />
+    <Compile Include="Models\Dummy\DummyOrdenAlmacenaje.cs" />
+    <Compile Include="Models\Dummy\EdicionCuantificacion.cs" />
+    <Compile Include="Models\Dummy\EdicionLlegadaMaterial.cs" />
+    <Compile Include="Models\Dummy\EntradaMaterial.cs" />
+    <Compile Include="Models\Dummy\Entrega.cs" />
+    <Compile Include="Models\Dummy\Estatus.cs" />
+    <Compile Include="Models\Dummy\Familia.cs" />
+    <Compile Include="Models\Dummy\FamiliaAcero.cs" />
+    <Compile Include="Models\Dummy\Files.cs" />
+    <Compile Include="Models\Dummy\FolioCuantificacion.cs" />
+    <Compile Include="Models\Dummy\FolioEntrada.cs" />
+    <Compile Include="Models\Dummy\FolioLlegada.cs" />
+    <Compile Include="Models\Dummy\FoliosGenerados.cs" />
+    <Compile Include="Models\Dummy\FormatoIncidencias.cs" />
+    <Compile Include="Models\Dummy\FormatoPaseSalida.cs" />
+    <Compile Include="Models\Dummy\GridCuantificacion.cs" />
+    <Compile Include="Models\Dummy\ImpresionDocumental.cs" />
+    <Compile Include="Models\Dummy\ListadoImpresionDocumental.cs" />
+    <Compile Include="Models\Incidencia.cs" />
+    <Compile Include="Models\Dummy\ItemCode.cs" />
+    <Compile Include="Models\Dummy\ListadoCuantificacion.cs" />
+    <Compile Include="Models\Dummy\ListadoFolioAvisoLlegada.cs" />
+    <Compile Include="Models\ListadoConvertirSpoolAGranel.cs" />
+    <Compile Include="Models\ListadoIncidencias.cs" />
+    <Compile Include="Models\Dummy\ListadoItemCodes.cs" />
+    <Compile Include="Models\Dummy\ListadoLlegadaMaterial.cs" />
+    <Compile Include="Models\Dummy\NumeroControl.cs" />
+    <Compile Include="Models\Dummy\Maquina.cs" />
+    <Compile Include="Models\Dummy\NumerosUnicos.cs" />
+    <Compile Include="Models\Dummy\Operador.cs" />
+    <Compile Include="Models\Dummy\PackingList.cs" />
+    <Compile Include="Models\Dummy\PackingListOrdenRecepcion.cs" />
+    <Compile Include="Models\Dummy\PaseSalida.cs" />
+    <Compile Include="Models\Dummy\Patio.cs" />
+    <Compile Include="Models\Dummy\PermisoAduana.cs" />
+    <Compile Include="Models\Dummy\Plana.cs" />
+    <Compile Include="Models\Dummy\PlanaEntradaMat.cs" />
+    <Compile Include="Models\Dummy\Proveedor.cs" />
+    <Compile Include="Models\Dummy\Proyecto.cs" />
+    <Compile Include="Models\Dummy\RegistroTiempos.cs" />
+    <Compile Include="Models\Dummy\TipoAcero.cs" />
+    <Compile Include="Models\Dummy\TipoAviso.cs" />
+    <Compile Include="Models\Dummy\TipoIncidencia.cs" />
+    <Compile Include="Models\Dummy\TipoVehiculo.cs" />
+    <Compile Include="Models\Dummy\Transportista.cs" />
+    <Compile Include="Models\Dummy\Tubos.cs" />
+    <Compile Include="Models\ElementoListadoFolioAvisoLlegada.cs" />
+    <Compile Include="Models\Fabricante.cs" />
+    <Compile Include="Models\FiltrosJson.cs" />
+    <Compile Include="Models\FolioAvisoEntradaJson.cs" />
+    <Compile Include="Models\FolioCuantificacionItemCode.cs" />
+    <Compile Include="Models\FolioLlegadaCuantificacion.cs" />
+    <Compile Include="Models\FormatoPermisoAduana.cs" />
+    <Compile Include="Models\InfoEtiquetaNumeroUnico.cs" />
+    <Compile Include="Models\InfoFolioCuantificacion.cs" />
+    <Compile Include="Models\ItemCodeJson.cs" />
+    <Compile Include="Models\ItemCodeSteelgoJson.cs" />
+    <Compile Include="Models\ListaCombos.cs" />
+    <Compile Include="Models\Almacenaje.cs" />
+    <Compile Include="Models\ListaDocumentos.cs" />
+    <Compile Include="Models\ListadoGenerarOrdenAlmacenaje.cs" />
+    <Compile Include="Models\ListadoGenerarOrdenRecepcion.cs" />
+    <Compile Include="Models\ListadoMaterialesPorPL.cs" />
+    <Compile Include="Models\ListadoMaterialesSinCuantificar.cs" />
+    <Compile Include="Models\GridGeneracionOrdenAlmacenaje.cs" />
+    <Compile Include="Models\ListadoOrdeRecepcion.cs" />
+    <Compile Include="Models\ListadosPreDespacho.cs" />
+    <Compile Include="Models\ListObject.cs" />
+    <Compile Include="DataAcces\PerfilBd.cs" />
+    <Compile Include="Models\ListadoMaterialesPorItemCode.cs" />
+    <Compile Include="Models\lstCortes.cs" />
+    <Compile Include="Models\LstDespacho.cs" />
+    <Compile Include="Models\OrdenAlmacenaje.cs" />
+    <Compile Include="Models\PaseSalidaJson.cs" />
+    <Compile Include="Models\PreDespacho.cs" />
+    <Compile Include="Models\TipoArchivo.cs" />
+    <Compile Include="Models\VehiculoJson.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\Sam3Reportes\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\Conversiones.cs" />
+    <Compile Include="Utilities\Enums.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\BackEnd-PROD.pubxml" />
+    <None Include="Properties\PublishProfiles\BackEnd-QA.pubxml" />
+    <None Include="Properties\PublishProfiles\BackEnd.pubxml" />
+    <None Include="Properties\PublishProfiles\backendSAM.pubxml" />
+    <None Include="Properties\PublishProfiles\BackEndSamSam3.0.pubxml" />
+    <None Include="Properties\PublishProfiles\BackEnd_Prod.pubxml" />
+    <None Include="Properties\PublishProfiles\samBE.pubxml" />
+    <Content Include="Service References\Sam3Reportes\ReportExecution2005.wsdl" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\templates\" />
+    <Folder Include="App_Data\uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonTools\CommonTools.csproj">
+      <Project>{bb113978-d8cb-4855-8be1-8b5eeab0a526}</Project>
+      <Name>CommonTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DatabaseManager\DatabaseManager.csproj">
+      <Project>{6b1ad69e-07da-4d33-9d07-0868aaaaa780}</Project>
+      <Name>DatabaseManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MessagesManager\MessagesManager.csproj">
+      <Project>{b29e3866-bba6-41a2-93a9-6079552a4c50}</Project>
+      <Name>MessagesManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SecurityManager\SecurityManager.csproj">
+      <Project>{fadb83c7-600e-43cd-8493-0ea5929e1536}</Project>
+      <Name>SecurityManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Sam3Reportes\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>60960</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

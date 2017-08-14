@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+@section breadcrumb {
+    <li class="active">
+        <a href="@Url.Action("landing", "Home")"><span id="layoutLabel0023"></span></a>
+    </li>
+}
+
+<script>
+    @section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("navegacion", "2", { path: '/' });
+    }
+
+    @section JavascriptGlobalVariables {
+        //your partial views variables
+    }
+
+    @section JavascriptGlobalFunctions {
+        //Your partial views specific functions
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+    //Your partial view document ready functions
+    }
+</script>

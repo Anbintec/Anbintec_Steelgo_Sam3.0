@@ -1,0 +1,340 @@
+﻿@{
+    ViewBag.Title = "Transacciones - Ingeniería";
+}
+
+@section breadcrumb {
+    <li class="">
+        <a href="@Url.Action("landing", "Home")"><span id="ListadoSpoolGranel0002"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("ListadoSpoolGranel", "Spool")"><span id="SpoolGranel0001"></span></a>
+    </li>
+}
+
+<div id="SpoolGranelBody" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section">
+                            <div class="btn-group save-group">
+                                <button id="Guardar" type="button" class="btn btn-yellow"><span id="SpoolGranel0017"></span></button>
+                                <button id="Editar" type="button" class="btn btn-yellow"><span id="SpoolGranel0018"></span></button>
+                            </div>
+                            <a id="Cancelar" href="#" class="btn btn-black"><span id="LlegadaMaterial0012"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="proyecto" id="SpoolGranel0002"></label>
+                            <input id="proyecto" type="text" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="tipoSpool" id="SpoolGranel0003"></label>
+                            <input id="tipoSpool" type="text" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="nombreSpool" id="SpoolGranel0004"></label>
+                            <input id="nombreSpool" type="text" class="general-input"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="familiaAcero" id="SpoolGranel0005"></label>
+                            <input id="familiaAcero" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="dibujo" id="SpoolGranel0006"></label>
+                            <input id="dibujo" type="text" class="general-input"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="itemCode" id="SpoolGranel0007"></label>
+                            <input id="itemCode" type="text" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="d1" id="SpoolGranel0008"></label>
+                            <input id="d1" type="text" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="d2" id="SpoolGranel0009"></label>
+                            <input id="d2" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11" id="seccionAccesorio">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="cantMateriales" id="SpoolGranel0010"></label>
+                            <input id="cantMateriales" type="text" class="general-input"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11" id="seccionTuberia">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="tipoCorte" id="SpoolGranel0011"></label>
+                            <input id="tipoCorte" type="text" class="general-input"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label id="SpoolGranel0012"></label>
+                            <label id="SpoolGranel0015" for="si"></label>
+                            <input type="radio" name="tolerancia" value="si" id="si">
+                            <label id="SpoolGranel0016" for="no"></label>
+                            <label> <input type="radio" name="tolerancia" value="no" id="no"></label>
+                            <div id="especificacionesTolerancia">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                                    <label for="sup">SUP</label>
+                                    <input id="sup" type="text" class="general-input"/>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                                    <label for="min">MIN</label>
+                                    <input id="min" type="text" class="general-input"/>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                                    <label for="inf">INF</label>
+                                    <input id="inf" type="text" class="general-input"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="longitudTotal" id="SpoolGranel0013"></label>
+                            <input id="longitudTotal" type="text" class="general-input"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <label for="longitudMaterial" id="SpoolGranel0014"></label>
+                            <input id="longitudMaterial" type="text" class="general-input"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="addedSection clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+@section JavascriptGlobalVariables {
+    spoolObj={};
+    spool=getUrlParameter("SpoolID","");
+}
+
+@section JavascriptGlobalFunctions {
+    function SpoolDesdeServidor(){
+        //loadingStart();
+        $Spool.Spool.read({},{SpoolID:spool}).done(function(data){
+            spoolObj=data;
+            $("#proyecto").data("kendoComboBox").select(function(){
+                return dataItem.text === spoolObj.Proyecto;
+            })
+            $("#tipoSpool").data("kendoComboBox").select(function(){
+                return dataItem.text === spoolObj.TipoSpool;
+            })
+            $("#nombreSpool").val(spoolObj.NombreSpool);
+            $("#familiaAcero").data("kendoComboBox").select(function(){
+                return dataItem.text === spoolObj.FamiliaAcero;
+            })
+        }).fail(function(){
+            //loadingStop();
+        })
+    }
+
+    function esAccesorio(val){
+        return !(+new Date()%2);//Temporary
+    }
+
+    function cambiarEstadoWidgets(val){
+        $("#SpoolGranelBody input").each(function(){
+            var widget = kendo.widgetInstance($(this));
+            widget!==undefined ? widget.enable(val) : this.disabled=!val;
+        })
+    }
+
+    function verificarSpoolInicial(){
+        if(spool!==""){
+            cambiarEstadoWidgets(false);
+            SpoolDesdeServidor();
+            $("#Guardar").hide();
+            $("#Editar").show();
+        }
+    }
+};
+
+@section JavascriptDocumentReadyFunctions {
+    $("#Editar").hide();
+    $("#seccionAccesorio").hide();
+    $("#seccionTuberia").hide();
+
+    $("#proyecto").kendoComboBox({
+        dataSource: {
+            transport: {
+                read: {
+                    url: "#",
+                    dataType: "json",
+                    type:"GET"
+                }
+            }
+        },
+        dataTextField: "value",
+        dataValueField: "id",
+        select:function(e){
+            //console.log(e)
+        },
+        cascade:function(e){
+        }
+    });
+
+    $("#tipoSpool").kendoComboBox({
+        dataSource: {
+            transport: {
+                read: {
+                    url: "#",
+                    dataType: "json",
+                    type:"GET"
+                }
+            }
+        },
+        dataTextField: "value",
+        dataValueField: "id",
+        select:function(e){
+            //console.log(e)
+        },
+        cascade:function(e){
+        }
+    });
+
+    $("#familiaAcero").kendoComboBox({
+        dataSource: {
+            transport: {
+                read: {
+                    url: "#",
+                    dataType: "json",
+                    type:"GET"
+                }
+            }
+        },
+        dataTextField: "value",
+        dataValueField: "id",
+        select:function(e){
+            //console.log(e)
+        },
+        cascade:function(e){
+            if (Object.keys(spoolObj).length>0){
+                $Itemcode.Itemcode({},{ProyectoID:$("#Proyecto").data("kendoComboBox").value,FamiliaID:$("#familiaAcero").data("kendoComboBox").value}).done(function(data){
+                    $("#itemCode").data("kendoComboBox").dataSource.data(data);
+                    $("#itemCode").data("kendoComboBox").select(function(){
+                        return dataItem.text === spoolObj.ItemCode;
+                    })
+                    $("#itemCode").data("kendoComboBox").trigger("select");
+                })
+            }
+        }
+    });
+
+    $("#itemCode").kendoComboBox({
+        dataSource: {
+            data:[],
+            transport: {
+                read: {
+                    url: "#",
+                    dataType: "json",
+                    type:"GET"
+                }
+            }
+        },
+        dataTextField: "value",
+        dataValueField: "id",
+        select:function(e){
+            if($("#itemCode").data("kendoComboBox").value()){
+                esAccesorio($("#itemCode").data("kendoComboBox").value()) ? $("#seccionAccesorio").show() : $("#seccionTuberia").show();
+                rellenarSeccion();
+            }else{
+                $("#seccionAccesorio").hide();
+                $("#seccionTuberia").hide();
+            }
+        },
+        cascade:function(e){
+            if (Object.keys(spoolObj).length>0){
+                $Diametro1.Diametro1({},{ItemCodeID:$("#itemCode").data("kendoComboBox").value()}).done(function(data){
+                    $("#d1").data("kendoComboBox").dataSource.data(data);
+                    $("#d1").data("kendoComboBox").select(function(){
+                        return dataItem.text === spoolObj.D1;
+                    })
+                    //loadingStop();
+                })
+            }
+        }
+    });
+
+    $("#d1").kendoComboBox({
+        dataSource: {
+            transport: {
+                read: {
+                    url: "#",
+                    dataType: "json",
+                    type:"GET"
+                }
+            }
+        },
+        dataTextField: "value",
+        dataValueField: "id",
+        select:function(e){
+            //console.log(e)
+        },
+        cascade:function(e){
+            if (Object.keys(spoolObj).length>0){
+                $Diametro2.Diametro2({},{ItemCodeID:$("#itemCode").data("kendoComboBox").value()}).done(function(data){
+                    $("#d2").data("kendoComboBox").dataSource.data(data);
+                    $("#d2").data("kendoComboBox").select(function(){
+                        return dataItem.text === spoolObj.D2;
+                    })
+                })
+            }
+        }
+    });
+
+    $("#d2").kendoComboBox({
+        dataSource: {
+            transport: {
+                read: {
+                    url: "#",
+                    dataType: "json",
+                    type:"GET"
+                }
+            }
+        },
+        dataTextField: "value",
+        dataValueField: "id",
+        select:function(e){
+            //console.log(e)
+        },
+    });
+
+    $("#grid").kendoGrid({});
+
+    verificarSpoolInicial();
+
+    $("#Editar").on("click",function(){
+        cambiarEstadoWidgets(true);
+        $(this).hide();
+        $("#Guardar").show();
+    })
+};
+    
+@section JavascriptDocumentReadyHomeCookie {
+};
+</script>

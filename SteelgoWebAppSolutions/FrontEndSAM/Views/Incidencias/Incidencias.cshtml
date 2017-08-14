@@ -1,0 +1,2814 @@
+﻿@{
+    ViewBag.Title = "Incidencias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="Incidencias0001"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("Incidencias", "Incidencias")"><span id="Incidencias0002"></span></a>
+    </li>
+}
+
+<div id="formaIncidencias" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <span id="divFolio" class="folioLabel hidden">
+                <span id="Incidencias0035"></span>
+                <span id="spanFolio"></span>
+                <div class="branchCut"></div>
+            </span>
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section editButtonSection">
+                            <div class="btn-group save-group">
+                                <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow guardarSecurity"><span id="Incidencias0025"></span></button>
+                                <button id="Editar" onclick="javascript:void(0);" type="button" class="btn btn-yellow editarIncidencia" style="display: none"><span id="Incidencias0026"></span></button>
+                                <button id="EditarResolucion" onclick="javascript:void(0);" type="button" class="btn btn-yellow editarIncidencia" style="display: none"><span id="Incidencias0060"></span></button>
+                                <button id="EditarRespuesta" onclick="javascript:void(0);" type="button" class="btn btn-yellow editarIncidencia" style="display: none"><span id="Incidencias0061"></span></button>
+                                <button id="EditarIncidencia" onclick="javascript:void(0);" type="button" class="btn btn-yellow editarIncidencia hidden"><span id="Incidencias0009"></span></button>
+                                <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle guardarSecurity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caretWhite"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li id="menuGuardaryNuevoIncidencia"><a id="GuardaryNuevoIncidencia" href="#"><span id="Incidencias0028"></span></a></li>
+                                    @* <li id="menuresolverIncidencia" class="resolverIncidencia"><a id="ResolverIncidencia" href="#"><span id="Incidencias0010"></span></a></li>
+                                    <li id="menucancelarIncidencia" class="cancelar"><a id="CancelarIncidencia" href="#"><span id="Incidencias0011"></span></a></li>
+                                    <li id="menuEditarIncidencias" style="display:none"><a id="EditarIncidencia" href="#"><span id="Incidencias0009"></span></a></li>*@
+                                </ul>
+                            </div>
+                            <div id="nuevaIncidenciaDiv" class="button-section responderIncidencia hidden">
+                                <a id="NuevaIncidencia" href="#" class="btn btn-primary"><span id="Incidencias0063"></span></a>
+                            </div>
+                            <div id="responderIncidenciaDiv" class="button-section responderIncidencia hidden">
+                                <a id="ResponderIncidencia" href="#" class="btn btn-primary"><span id="Incidencias0037"></span></a>
+                            </div>
+                            <div id="resolverIncidenciaDiv" class="button-section resolverIncidencia hidden">
+                                <a id="ResolverIncidencia" href="#" class="btn btn-primary"><span id="Incidencias0010"></span></a>
+                            </div>
+                            <div id="cancelarIncidenciaDiv" class="button-section cancelar hidden">
+                                <a id="CancelarIncidencia" href="#" class="btn btn-primary"><span id="Incidencias0011"></span></a>
+                            </div>
+                            <a id="Cancelar" href="#" class="btn btn-black"><span id="Incidencias0027"></span></a>
+                        </div>
+                        <div class="button-section actionButtonSection">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="LlegadaMaterial0040"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="Acciones">
+                                    <li class="listado"><a id="RedirectDashboard"><span id="Incidencias0062"></span></a></li>
+                                    <li><a id="RedirectIncidencia" href="#" class="hidden"><span id="Incidencias0072"></span></a></li>
+                                    <li><a id="RedirectResolver" href="#" class="hidden"><span id="Incidencias0073"></span></a></li>
+                                    <li><a id="RedirectResponder" href="#" class="hidden"><span id="Incidencias0074"></span></a></li>
+                                    <li><a id="RedirectCancelar" href="#" class="hidden"><span id="Incidencias0079"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button id="Imprimir" type="button" class="btn btn-blue"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearfix">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearfix">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearfix">
+                                    <div class="row">
+                                        <div id="tabstrip">
+                                            <ul>
+                                                <li class="k-state-active">
+                                                    <span id="Incidencias0038"></span>
+                                                </li>
+                                                <li>
+                                                    <span id="Incidencias0039"></span>
+                                                </li>
+                                                <li>
+                                                    <span id="Incidencias0040"></span>
+                                                </li>
+                                                <li>
+                                                    <span id="Incidencias0041"></span>
+                                                </li>
+                                            </ul>
+                                            <div id="incidencia">
+                                                <div class="row">
+                                                    <div id="ClasificacionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                                        <label id="Incidencias0003"></label>
+                                                        <input id="Clasificacion" class="" />
+                                                    </div>
+                                                    <div id="TipoIncidenciaDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                                        <label id="Incidencias0004"></label>
+                                                        <input id="TipoIncidencia" class="" />
+                                                    </div>
+                                                    <div id="RegistroDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                                        <label id="Incidencias0036"></label>
+                                                        <input id="Registro" class="" />
+                                                    </div>
+                                                    <div id="VersionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                        <label id="Incidencias0005"></label>
+                                                        <input id="Version" class="general-input" disabled />
+                                                    </div>
+                                                    <div id="TituloDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                        <label id="Incidencias0006"></label>
+                                                        <input id="Titulo" class="general-input" maxlength="100"/>
+                                                    </div>
+                                                    <div id="DescripcionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                        <label id="Incidencias0007"></label>
+                                                        <textarea id="Descripcion" rows="4" cols="50" maxlength="1500"></textarea>
+                                                    </div>
+                                                    <div id="RegistradoPorDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <label id="Incidencias0014"></label>
+                                                        <input id="RegistradoPor" class="" />
+                                                    </div>
+                                                    <div id="FechaRegistroDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <label id="Incidencias0015"></label>
+                                                        <input id="FechaRegistro" class="" />
+                                                    </div>
+
+                                                    @* Archivos //////////////////// *@
+
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="row">
+                                                            <div class="addedSection clearfix">
+                                                                <div id="DescripcionArchivoIncidenciaDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                                    <label id="Incidencias0021"></label>
+                                                                    <input id="DescripcionArchivoIncidencia" class="general-input" maxlength="1500"/>
+                                                                </div>
+                                                                <div id="AdjuntarArchivosIncidenciaDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                                    <label id="Incidencias0020"></label>
+                                                                    <input name="files" id="AdjuntarArchivosIncidencia" type="file" />
+                                                                </div>
+                                                                <div id="listaArchivosIncidenciaDiv" class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 listado">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                            <table id="listaArchivosIncidencia" class="filesTable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0022"></label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0023"></label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0024"></label>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="resuelta">
+                                                <div class="row">
+                                                    <div id="ResueltoPorDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <label id="Incidencias0016"></label>
+                                                        <input id="ResueltoPor" class="" />
+                                                    </div>
+                                                    <div id="FechaResolucionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <label id="Incidencias0017"></label>
+                                                        <input id="FechaResolucion" class="" />
+                                                    </div>
+
+                                                    <div id="DetalleResolucionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                        <label id="Incidencias0013"></label>
+                                                        <textarea id="DetalleResolucion" rows="4" cols="50" re></textarea>
+                                                    </div>
+
+                                                    @* Archivos ///////////////////////////////////// *@
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="row">
+                                                            <div class="addedSection clearfix">
+                                                                <div id="DescripcionArchivoResolverDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                                    <label id="Incidencias0046"></label>
+                                                                    <input id="DescripcionArchivoResolver" class="general-input" />
+                                                                </div>
+                                                                <div id="AdjuntarArchivosResolverDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                                    <label id="Incidencias0045"></label>
+                                                                    <input name="files" id="AdjuntarArchivosResolver" type="file" />
+                                                                </div>
+                                                                <div id="listaArchivosResolverDiv" class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                            <table id="listaArchivosResolver" class="filesTable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0047"></label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0048"></label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0049"></label>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="respondida">
+                                                <div class="row">
+                                                    <div id="RespuestaDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                        <label id="Incidencias0008"></label>
+                                                        <textarea id="Respuesta" rows="4" cols="50" re></textarea>
+                                                    </div>
+                                                    <div id="RespondidoPorDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <label id="Incidencias0018"></label>
+                                                        <input id="RespondidoPor" class="" />
+                                                    </div>
+                                                    <div id="FechaRespuestaDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                        <label id="Incidencias0019"></label>
+                                                        <input id="FechaRespuesta" class="" />
+                                                    </div>
+
+                                                    @* Archivos ///////////////////////////////////// *@
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="row">
+                                                            <div class="addedSection clearfix">
+                                                                <div id="DescripcionArchivoResponderDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                                    <label id="Incidencias0051"></label>
+                                                                    <input id="DescripcionArchivoResponder" class="general-input" />
+                                                                </div>
+                                                                <div id="AdjuntarArchivosResponderDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                                    <label id="Incidencias0050"></label>
+                                                                    <input name="files" id="AdjuntarArchivosResponder" type="file" />
+                                                                </div>
+                                                                <div id="listaArchivosResponderDiv" class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                            <table id="listaArchivosResponder" class="filesTable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0052"></label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0053"></label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0054"></label>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="cancelar">
+                                                <div class="row">
+                                                    <div id="MotivoCancelacionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                        <label id="Incidencias0012"></label>
+                                                        <textarea id="MotivoCancelacion" rows="4" cols="50" re></textarea>
+                                                    </div>
+
+                                                    @* Archivos ///////////////////////////////////// *@
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="row">
+                                                            <div class="addedSection clearfix">
+                                                                <div id="DescripcionArchivoCancelarDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                                    <label id="Incidencias0056"></label>
+                                                                    <input id="DescripcionArchivoCancelar" class="general-input" />
+                                                                </div>
+                                                                <div id="AdjuntarArchivosCancelarDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                                    <label id="Incidencias0055"></label>
+                                                                    <input name="files" id="AdjuntarArchivosCancelar" type="file" />
+                                                                </div>
+                                                                <div id="listaArchivosCancelarDiv" class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                                            <table id="listaArchivosCancelar" class="filesTable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0057"></label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0058"></label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <label id="Incidencias0059"></label>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @* Div principal *@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="row">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="hdEstatus" type="hidden" value="Abierta" />
+<script>
+    kendo.ui.Upload.fn._supportsDrop = function () { return false; }
+    @section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "38", { path: '/' });
+    }
+
+    
+    @section JavascriptGlobalVariables {
+    var Clasificacion = {}, TipoIncidencia = {},
+        FechaRegistro, FechaResolucion,
+        FechaRespuesta, Registro = {},
+        RegistradoPor = {}, ResueltoPor = {},
+        RespondidoPor = {};
+    var tabSelected = "Incidencia";
+    var edicion = false;
+    var hasFiles=false;
+
+    var _incidenciasURL = "@Url.Action("Incidencias", "Incidencias")";
+    var _ListadoIncidenciasUrl = "@Url.Action("ListadoIncidencias", "Incidencias")";
+
+    var _ReferenciaID = getUrlParameter("ReferenciaID", "-1");
+    var _TipoIncidencia = getUrlParameter("TipoIncidencia", "-1");
+    var _folioOriginalID = "";
+    var _FolioIncidencia = getUrlParameter("FolioIncidenciaID", "-1");
+    var _Edicion = getUrlParameter("Edicion", "-1");
+    var _LevantarIncidencia = getUrlParameter("LevantarIncidencia", "-1");
+    var _Clasificacion = getUrlParameter("Clasificacion", "-1");
+    var _Editando = { "Incidencia": 0, "Resolver": 0, "Responder": 0, "Cancelar": 0 };
+    var _ConInformacion = { "Incidencia": 0, "Resolver": 0, "Responder": 0, "Cancelar": 0 };
+
+    var $IncidenciasModel = {
+        listContainer: {
+            create: ".guardarSecurity",
+            list: ".listado",
+            detail: "#Editar",
+            destroy: "",
+            solutionincidence: ""
+        },
+        properties: {
+            clasificacion: {
+                visible: "#ClasificacionDiv",
+                editable: "#Clasificacion",
+                required: "#Clasificacion"
+            },
+            tipoincidencia: {
+                visible: "#TipoIncidenciaDiv",
+                editable: "#TipoIncidencia",
+                required: "#TipoIncidencia"
+            },
+            registro: {
+                visible: "#RegistroDiv",
+                editable: "#Registro",
+                required: "#Registro"
+            },
+            version: {
+                visible: "#VersionDiv",
+                editable: "#Version",
+                required: "#Version"
+            },
+            titulo: {
+                visible: "#TituloDiv",
+                editable: "#Titulo",
+                required: "#Titulo"
+            },
+            descripcion: {
+                visible: "#DescripcionDiv",
+                editable: "#Descripcion",
+                required: "#Descripcion"
+            },
+            registradopor: {
+                visible: "#RegistradoPorDiv",
+                editable: "#RegistradoPor",
+                required: "#RegistradoPor"
+            },
+            fecharegistro: {
+                visible: "#FechaRegistroDiv",
+                editable: "#FechaRegistro",
+                required: "#FechaRegistro"
+            },
+            descripcionarchivo: {
+                visible: "#DescripcionArchivoIncidenciaDiv",
+                editable: "#DescripcionArchivoIncidencia",
+                required: "#DescripcionArchivoIncidencia"
+            },
+            adjuntararchivos: {
+                visible: "#AdjuntarArchivosIncidenciaDiv",
+                editable: "#AdjuntarArchivosIncidencia",
+                required: "#AdjuntarArchivosIncidencia"
+            },
+            listaarchivos: {
+                visible: "#listaArchivosIncidenciaDiv",
+                editable: "#listaArchivosIncidencia",
+                required: "#listaArchivosIncidencia"
+            }
+        }
+    };
+    var $RespuestaModel = {
+        listContainer: {
+            create: "",
+            list: "#listaArchivosResponderDiv",
+            detail: "",
+            destroy: "",
+            solutionincidence: ""
+        },
+        properties: {
+            respuesta: {
+                visible: "#RespuestaDiv",
+                editable: "#Respuesta",
+                required: "#Respuesta"
+            },
+            respondidopor: {
+                visible: "#RespondidoPorDiv",
+                editable: "#RespondidoPor",
+                required: "#RespondidoPor"
+            },
+            fecharespuesta: {
+                visible: "#FechaRespuestaDiv",
+                editable: "#FechaRespuesta",
+                required: "#FechaRespuesta"
+            },
+            descripcionarchivo: {
+                visible: "#DescripcionArchivoResponderDiv",
+                editable: "#DescripcionArchivoResponder",
+                required: "#DescripcionArchivoResponder"
+            },
+            adjuntararchivos: {
+                visible: "#AdjuntarArchivosResponderaDiv",
+                editable: "#AdjuntarArchivosResponder",
+                required: "#AdjuntarArchivosResponder"
+            },
+            listaarchivos: {
+                visible: "#listaArchivosResponderDiv",
+                editable: "#listaArchivosResponder",
+                required: "#listaArchivosResponder"
+            }
+        }
+    };
+
+    var $ResolucionModel = {
+        listContainer: {
+            create: "",
+            list: "#listaArchivosResolverDiv",
+            detail: "",
+            destroy: "",
+            solutionincidence: ""
+        },
+        properties: {
+            detalleresolucion: {
+                visible: "#DetalleResolucionDiv",
+                editable: "#DetalleResolucion",
+                required: "#DetalleResolucion"
+            },
+            resuelto: {
+                visible: "#ResueltoPorDiv",
+                editable: "#ResueltoPor",
+                required: "#ResueltoPor"
+            },
+            fecharesolucion: {
+                visible: "#FechaResolucionDiv",
+                editable: "#FechaResolucion",
+                required: "#FechaResolucion"
+            },
+            descripcionarchivo: {
+                visible: "#DescripcionArchivoResolverDiv",
+                editable: "#DescripcionArchivoResolver",
+                required: "#DescripcionArchivoResolver"
+            },
+            adjuntararchivos: {
+                visible: "#AdjuntarArchivosResolverDiv",
+                editable: "#AdjuntarArchivosResolver",
+                required: "#AdjuntarArchivosResolver"
+            },
+            listaarchivos: {
+                visible: "#listaArchivosResolverDiv",
+                editable: "#listaArchivosResolver",
+                required: "#listaArchivosResolver"
+            }
+        }
+    };
+
+    var $CancelarModel = {
+        listContainer: {
+            create: "",
+            list: "#listaArchivosCancelarDiv",
+            detail: "",
+            destroy: ".cancelar",
+            solutionincidence: ""
+        },
+        properties: {
+            motivocancelacion: {
+                visible: "#MotivoCancelacionDiv",
+                editable: "#MotivoCancelacion",
+                required: "#MotivoCancelacion"
+            },
+            descripcionarchivo: {
+                visible: "#DescripcionArchivoCancelarDiv",
+                editable: "#DescripcionArchivoCancelar",
+                required: "#DescripcionArchivoCancelar"
+            },
+            adjuntararchivos: {
+                visible: "#AdjuntarArchivosCancelarDiv",
+                editable: "#AdjuntarArchivosCancelar",
+                required: "#AdjuntarArchivosCancelar"
+            },
+            listaarchivos: {
+                visible: "#listaArchivosCancelarDiv",
+                editable: "#listaArchivosCancelar",
+                required: "#listaArchivosCancelar"
+            }
+        }
+    };
+    }
+
+    @section JavascriptGlobalFunctions {
+    function cambiaActivosClick(tabSelected) {
+        switch (tabSelected) {
+
+            case "Incidencia":
+
+                if ($("#hdEstatus").val() != "Cancelado") {
+                    if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["Incidencias"]) != undefined
+                         && typeof (returnOfSecurityCheck["Incidencias"].create) != undefined
+                            && !returnOfSecurityCheck["Incidencias"].create) {
+                        $("#Editar").css("display", "none");
+                        $("#Guardar").css("display", "none");
+                        $("#dropdown-toggle").hide();
+                    } else if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["Incidencias"]) != undefined
+                         && typeof (returnOfSecurityCheck["Incidencias"].create) != undefined
+                            && returnOfSecurityCheck["Incidencias"].create) {
+                        if (_Editando[tabSelected] == 0) {
+                            $("#Editar").css("display", "block");
+                            $("#Guardar").css("display", "none");
+                            $("#dropdown-toggle").hide();
+                        } else {
+                            $("#Guardar").css("display", "block");
+                            $("#dropdown-toggle").show();
+                            $("#Editar").css("display", "none");
+                            habilitarControles();
+                        }
+                    }
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").removeClass("hidden");
+
+                    //Cambio el nombre del boton Guardar
+                    $("#Guardar").text(_dictionary.Incidencias0064[$("#language").data("kendoDropDownList").value()]);
+                    $("#Editar").text(_dictionary.Incidencias0065[$("#language").data("kendoDropDownList").value()]);
+                }
+                else {
+                    $("#Editar").css("display", "none");
+                    $("#Guardar").css("display", "none");
+                    $("#dropdown-toggle").hide();
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").removeClass("hidden");
+                    //Cambio nombre a Ver Resolucion
+                    $("#Incidencias0010").text(_dictionary.Incidencias0076[$("#language").data("kendoDropDownList").value()]);
+                }
+                break;
+
+            case "Resolver":
+                if ($("#hdEstatus").val() != "Cancelado") {
+                    if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["ResolucionIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["ResolucionIncidencia"].create) != undefined
+                            && !returnOfSecurityCheck["ResolucionIncidencia"].create) {
+                        $("#Editar").css("display", "none");
+                        $("#Guardar").css("display", "none");
+                        $("#dropdown-toggle").hide();
+                    } else if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["ResolucionIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["ResolucionIncidencia"].create) != undefined
+                            && returnOfSecurityCheck["ResolucionIncidencia"].create) {
+                        if (_Editando[tabSelected] == 0 && _ConInformacion[tabSelected] == 1) {
+                            $("#Editar").css("display", "block");
+                            $("#Guardar").css("display", "none");
+                            $("#dropdown-toggle").hide();
+                        }
+                        else {
+                            $("#Guardar").css("display", "block");
+                            $("#dropdown-toggle").show();
+                            $("#Editar").css("display", "none");
+                            habilitarControles();
+                        }
+                    }
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").removeClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio el nombre del boton Guardar
+                    $("#Guardar").text(_dictionary.Incidencias0066[$("#language").data("kendoDropDownList").value()]);
+                    $("#Editar").text(_dictionary.Incidencias0067[$("#language").data("kendoDropDownList").value()]);
+                }
+                else {
+                    $("#Editar").css("display", "none");
+                    $("#Guardar").css("display", "none");
+                    $("#dropdown-toggle").hide();
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").removeClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio nombre a Ver Respuesta
+                    $("#Incidencias0037").text(_dictionary.Incidencias0077[$("#language").data("kendoDropDownList").value()]);
+                }
+                break;
+
+            case "Responder":
+                if ($("#hdEstatus").val() != "Cancelado") {
+                    if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["RespuestaIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["RespuestaIncidencia"].create) != undefined
+                            && !returnOfSecurityCheck["RespuestaIncidencia"].create) {
+                        $("#Editar").css("display", "none");
+                        $("#Guardar").css("display", "none");
+                        $("#dropdown-toggle").hide();
+                    } else if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["RespuestaIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["RespuestaIncidencia"].create) != undefined
+                            && returnOfSecurityCheck["RespuestaIncidencia"].create) {
+                        if (_Editando[tabSelected] == 0 && _ConInformacion[tabSelected] == 1) {
+                            $("#Editar").css("display", "block");
+                            $("#Guardar").css("display", "none");
+                            $("#dropdown-toggle").hide();
+                        } else {
+                            $("#Guardar").css("display", "block");
+                            $("#dropdown-toggle").show();
+                            $("#Editar").css("display", "none");
+                            habilitarControles();
+                        }
+                    }
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").removeClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio el nombre del boton Guardar
+                    $("#Guardar").text(_dictionary.Incidencias0068[$("#language").data("kendoDropDownList").value()]);
+                    $("#Editar").text(_dictionary.Incidencias0069[$("#language").data("kendoDropDownList").value()]);
+                }
+                else {
+                    $("#Editar").css("display", "none");
+                    $("#Guardar").css("display", "none");
+                    $("#dropdown-toggle").hide();
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").removeClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio nombre a Ver Cancelacion
+                    $("#Incidencias0011").text(_dictionary.Incidencias0078[$("#language").data("kendoDropDownList").value()]);
+                }
+                break;
+
+            case "Cancelar":
+                if ($("#hdEstatus").val() != "Cancelado") {
+                    if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["CancelarIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["CancelarIncidencia"].create) != undefined
+                            && !returnOfSecurityCheck["CancelarIncidencia"].create) {
+                        $("#Editar").css("display", "none");
+                        $("#Guardar").css("display", "none");
+                        $("#dropdown-toggle").hide();
+                    } else if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["CancelarIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["CancelarIncidencia"].create) != undefined
+                            && returnOfSecurityCheck["CancelarIncidencia"].create) {
+                        if (_Editando[tabSelected] == 0 && _ConInformacion[tabSelected] == 1) {
+                            $("#Editar").css("display", "block");
+                            $("#Guardar").css("display", "none");
+                            $("#dropdown-toggle").hide();
+                        } else {
+                            $("#Guardar").css("display", "block");
+                            $("#dropdown-toggle").show();
+                            $("#Editar").css("display", "none");
+                            habilitarControles();
+                        }
+                    }
+                    //Oculto boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").removeClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio el nombre del boton Guardar
+                    $("#Guardar").text(_dictionary.Incidencias0070[$("#language").data("kendoDropDownList").value()]);
+                    $("#Editar").text(_dictionary.Incidencias0071[$("#language").data("kendoDropDownList").value()]);
+                }
+                else {
+                    $("#Editar").css("display", "none");
+                    $("#Guardar").css("display", "none");
+                    $("#dropdown-toggle").hide();
+                    //Oculto boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").removeClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio nombre a Ver Incidencia
+                    $("#Incidencias0063").text(_dictionary.Incidencias0075[$("#language").data("kendoDropDownList").value()]);
+                }
+                break;
+        };
+    }
+
+    function cambiaActivos(e) {
+        tabSelected = $(e.item).find("> .k-link").text();
+        switch (tabSelected) {
+
+            case "Incidencia":
+
+                if ($("#hdEstatus").val() != "Cancelado") {
+                    if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["Incidencias"]) != undefined
+                         && typeof (returnOfSecurityCheck["Incidencias"].create) != undefined
+                            && !returnOfSecurityCheck["Incidencias"].create) {
+                        $("#Editar").css("display", "none");
+                        $("#Guardar").css("display", "none");
+                        $("#dropdown-toggle").hide();
+                    } else if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["Incidencias"]) != undefined
+                         && typeof (returnOfSecurityCheck["Incidencias"].create) != undefined
+                            && returnOfSecurityCheck["Incidencias"].create) {
+                        if (_Editando[tabSelected] == 0) {
+                            $("#Editar").css("display", "block");
+                            $("#Guardar").css("display", "none");
+                            $("#dropdown-toggle").hide();
+                        } else {
+                            $("#Guardar").css("display", "block");
+                            $("#dropdown-toggle").show();
+                            $("#Editar").css("display", "none");
+                            habilitarControles();
+                        }
+                    }
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").removeClass("hidden");
+
+                    //Cambio el nombre del boton Guardar
+                    $("#Guardar").text(_dictionary.Incidencias0064[$("#language").data("kendoDropDownList").value()]);
+                    $("#Editar").text(_dictionary.Incidencias0065[$("#language").data("kendoDropDownList").value()]);
+                }
+                else {
+                    $("#Editar").css("display", "none");
+                    $("#Guardar").css("display", "none");
+                    $("#dropdown-toggle").hide();
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").removeClass("hidden");
+                    //Cambio nombre a Ver Resolucion
+                    $("#Incidencias0010").text(_dictionary.Incidencias0076[$("#language").data("kendoDropDownList").value()]);
+                }
+                break;
+
+            case "Resolver":
+                if ($("#hdEstatus").val() != "Cancelado") {
+                    if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["ResolucionIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["ResolucionIncidencia"].create) != undefined
+                            && !returnOfSecurityCheck["ResolucionIncidencia"].create) {
+                        $("#Editar").css("display", "none");
+                        $("#Guardar").css("display", "none");
+                        $("#dropdown-toggle").hide();
+                    } else if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["ResolucionIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["ResolucionIncidencia"].create) != undefined
+                            && returnOfSecurityCheck["ResolucionIncidencia"].create) {
+                        if (_Editando[tabSelected] == 0 && _ConInformacion[tabSelected] == 1) {
+                            $("#Editar").css("display", "block");
+                            $("#Guardar").css("display", "none");
+                            $("#dropdown-toggle").hide();
+                        } else {
+                            $("#Guardar").css("display", "block");
+                            $("#dropdown-toggle").show();
+                            $("#Editar").css("display", "none");
+                            habilitarControles();
+                        }
+                    }
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").removeClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio el nombre del boton Guardar
+                    $("#Guardar").text(_dictionary.Incidencias0066[$("#language").data("kendoDropDownList").value()]);
+                    $("#Editar").text(_dictionary.Incidencias0067[$("#language").data("kendoDropDownList").value()]);
+                }
+                else {
+                    $("#Editar").css("display", "none");
+                    $("#Guardar").css("display", "none");
+                    $("#dropdown-toggle").hide();
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").removeClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio nombre a Ver Respuesta
+                    $("#Incidencias0037").text(_dictionary.Incidencias0077[$("#language").data("kendoDropDownList").value()]);
+                }
+                break;
+
+            case "Responder":
+                if ($("#hdEstatus").val() != "Cancelado") {
+                    if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["RespuestaIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["RespuestaIncidencia"].create) != undefined
+                            && !returnOfSecurityCheck["RespuestaIncidencia"].create) {
+                        $("#Editar").css("display", "none");
+                        $("#Guardar").css("display", "none");
+                        $("#dropdown-toggle").hide();
+                    } else if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["RespuestaIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["RespuestaIncidencia"].create) != undefined
+                            && returnOfSecurityCheck["RespuestaIncidencia"].create) {
+                        if (_Editando[tabSelected] == 0 && _ConInformacion[tabSelected] == 1) {
+                            $("#Editar").css("display", "block");
+                            $("#Guardar").css("display", "none");
+                            $("#dropdown-toggle").hide();
+                        } else {
+                            $("#Guardar").css("display", "block");
+                            $("#dropdown-toggle").show();
+                            $("#Editar").css("display", "none");
+                            habilitarControles();
+                        }
+                    }
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").removeClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio el nombre del boton Guardar
+                    $("#Guardar").text(_dictionary.Incidencias0068[$("#language").data("kendoDropDownList").value()]);
+                    $("#Editar").text(_dictionary.Incidencias0069[$("#language").data("kendoDropDownList").value()]);
+                }
+                else {
+                    $("#Editar").css("display", "none");
+                    $("#Guardar").css("display", "none");
+                    $("#dropdown-toggle").hide();
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").removeClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio nombre a Ver Cancelacion
+                    $("#Incidencias0011").text(_dictionary.Incidencias0078[$("#language").data("kendoDropDownList").value()]);
+                }
+                break;
+
+            case "Cancelar":
+                if ($("#hdEstatus").val() != "Cancelado") {
+                    if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["CancelarIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["CancelarIncidencia"].create) != undefined
+                            && !returnOfSecurityCheck["CancelarIncidencia"].create) {
+                        $("#Editar").css("display", "none");
+                        $("#Guardar").css("display", "none");
+                        $("#dropdown-toggle").hide();
+                    } else if (typeof (returnOfSecurityCheck) != undefined
+                        && typeof (returnOfSecurityCheck["CancelarIncidencia"]) != undefined
+                         && typeof (returnOfSecurityCheck["CancelarIncidencia"].create) != undefined
+                            && returnOfSecurityCheck["CancelarIncidencia"].create) {
+                        if (_Editando[tabSelected] == 0 && _ConInformacion[tabSelected] == 1) {
+                            $("#Editar").css("display", "block");
+                            $("#Guardar").css("display", "none");
+                            $("#dropdown-toggle").hide();
+                        } else {
+                            $("#Guardar").css("display", "block");
+                            $("#dropdown-toggle").show();
+                            $("#Editar").css("display", "none");
+                            habilitarControles();
+                        }
+                    }
+                    //Oculto boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").removeClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio el nombre del boton Guardar
+                    $("#Guardar").text(_dictionary.Incidencias0070[$("#language").data("kendoDropDownList").value()]);
+                    $("#Editar").text(_dictionary.Incidencias0071[$("#language").data("kendoDropDownList").value()]);
+                }
+                else {
+                    $("#Editar").css("display", "none");
+                    $("#Guardar").css("display", "none");
+                    $("#dropdown-toggle").hide();
+                    //Oculto boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").removeClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").addClass("hidden");
+
+                    //Cambio nombre a Ver Incidencia
+                    $("#Incidencias0063").text(_dictionary.Incidencias0075[$("#language").data("kendoDropDownList").value()]);
+                }
+                break;
+        };
+
+    }
+    function changeLanguageCall() {
+        var options = $("#AdjuntarArchivosIncidencia").data("kendoUpload").options;
+        $("#AdjuntarArchivosIncidenciaDiv .k-button.k-upload-button").remove();
+        options.localization = getKendoUploadLocalization($("#language").data("kendoDropDownList").value());
+        $("#AdjuntarArchivosIncidenciaDiv").append("<input type='file' id='AdjuntarArchivosIncidencia'>");
+        $("#AdjuntarArchivosIncidencia").kendoUpload(options);
+        var tmp = {};
+        $("#AdjuntarArchivosIncidencia").data("kendoUpload").options.async.saveUrl.split("?")[1].split("&").forEach(function (n) { tmp[n.split("=")[0]] = n.split("=")[1] });
+
+        if ((0 > tmp.incidenciaID)) {
+
+            $("#AdjuntarArchivosIncidencia").data("kendoUpload").disable();
+        }
+    };
+
+    function changeDatePickerDateFormat(datePickerOptions) {
+        FechaRegistro.setOptions(datePickerOptions);
+        FechaResolucion.setOptions(datePickerOptions);
+        FechaRespuesta.setOptions(datePickerOptions);
+    };
+
+    function CargaInicial() {
+        ocultarTabsNuevaIncidencia();
+
+        if (_Edicion == 1) {
+            ////Muestro boton de siguiente paso
+            //$("#nuevaIncidenciaDiv").addClass("hidden");
+            //$("#responderIncidenciaDiv").addClass("hidden");
+            //$("#cancelarIncidenciaDiv").addClass("hidden");
+            //$("#resolverIncidenciaDiv").removeClass("hidden");
+            //$("#Incidencias0010").text("dshadhasjhdasjd");
+            habilitarAcciones();
+        }
+
+        $("#Guardar").text(_dictionary.Incidencias0064[$("#language").data("kendoDropDownList").value()]);
+        $("#Editar").text(_dictionary.Incidencias0065[$("#language").data("kendoDropDownList").value()]);
+        $("#Imprimir").on("click",function(e){ Imprimir()})
+        //ALTA DE UNA INCIDENCIA
+        $("#Guardar").click(function () {
+            edicion = false;
+            Guardar();
+        });
+        $("#GuardaryNuevoIncidencia").click(function () {
+            edicion = false;
+            GuardaryNuevoIncidencia();
+        });
+        $("#Cancelar").click(function () { Cancelar(); });
+        $("#Editar").click(function () {
+            edicion = true;
+            BotonEdicion();
+
+            switch (tabSelected) {
+                case "Incidencia":
+                        setTimeout(function () {
+                            $("#Incidencias0021").addClass("security_required");
+                        }, 200);
+                    break;
+                case "Resolver":
+                        setTimeout(function () {
+                            $("#Incidencias0046").addClass("security_required");
+                        }, 200);
+                    
+                    break;
+                case "Responder":
+                        setTimeout(function () {
+                            $("#Incidencias0051").addClass("security_required");
+                        }, 200);
+                   
+                    break;
+                case "Cancelar":
+                        setTimeout(function () {
+                            $("#Incidencias0056").addClass("security_required");
+                        }, 200);
+                    break;
+            }
+        });
+
+        //EDICION DESDE LISTADO
+        $("#EditarResolucion").click(function () { edicion = true; BotonEditarResolucion(); });
+        $("#EditarRespuesta").click(function () { edicion = true; BotonEditarRespuesta(); });
+        $("#EditarIncidencia").click(function () { edicion = true; EditarIncidencia(); });
+        $("#ResolverIncidencia").click(function () { ResolverIncidencia(); });
+        $("#CancelarIncidencia").click(function () { CancelarIncidencia(); });
+        $("#ResponderIncidencia").click(function () { ResponderIncidencia(); });
+        $("#NuevaIncidencia").click(function () { NuevaIncidencia(); });
+
+        $("#RedirectDashboard").click(function (e) {
+            var detalleIdeaUrl = "@Url.Action("ListadoIncidencias", "Incidencias")";
+            window.location.href = detalleIdeaUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
+        });
+
+        FechaRegistro = new kendo.ui.DatePicker($("#FechaRegistro"));
+        FechaResolucion = new kendo.ui.DatePicker($("#FechaResolucion"));
+        FechaRespuesta = new kendo.ui.DatePicker($("#FechaRespuesta"));
+
+        $('#AdjuntarArchivosIncidencia').kendoUpload({
+            async: {
+                saveUrl: $DocumentoIncidenciasUploadFiles + _FolioIncidencia + "&descripcion=" + $("#DescripcionArchivoIncidencia").val() + "&token=" + Cookies.get("token"),
+                removeUrl: "#",
+                autoUpload: false,
+                withCredentials: false,
+                batch: true
+            },
+            success: function (data) {
+                HabilitarObtenerDocumentosIncidencias();
+            },
+            error: function (data) { },
+            upload: onUploadAdjuntarArchivosIncidencia,
+            localization: getKendoUploadLocalization($("#language").data("kendoDropDownList").value()),
+            select: function(e){notDotName(e);hasFiles=true;},
+        });
+        $("#AdjuntarArchivosIncidencia").data("kendoUpload").disable();
+        $("#DescripcionArchivoIncidencia").attr("disabled", "disabled");
+
+        //$("#AdjuntarArchivosIncidencia").data("kendoUpload").enable(true);
+        $("#AdjuntarArchivosIncidencia").on('drop', function (event) {
+            event.preventDefault();
+        });
+
+        $('#AdjuntarArchivosResolver').kendoUpload({
+            async: {
+                saveUrl: $DocumentoIncidenciasUploadFiles + _FolioIncidencia + "&descripcion=" + $("#DescripcionArchivoIncidencia").val() + "&token=" + Cookies.get("token"),
+                removeUrl: "#",
+                autoUpload: false,
+                withCredentials: false,
+                batch: true
+            },
+            success: function (data) {
+                HabilitarObtenerDocumentosResolver();
+            },
+            error: function (data) { },
+            upload: onUploadAdjuntarArchivosResolver,
+            localization: getKendoUploadLocalization($("#language").data("kendoDropDownList").value()),
+            select: function(e){notDotName(e);hasFiles=true;},
+        });
+        $("#AdjuntarArchivosResolver").data("kendoUpload").enable(true);
+        $("#DescripcionArchivoResolver").attr("disabled", "disabled");
+        $("#AdjuntarArchivosResolver").on('drop', function (event) {
+            event.preventDefault();
+        });
+
+        $('#AdjuntarArchivosResponder').kendoUpload({
+            async: {
+                saveUrl: $DocumentoIncidenciasUploadFiles + _FolioIncidencia + "&descripcion=" + $("#DescripcionArchivoIncidencia").val() + "&token=" + Cookies.get("token"),
+                removeUrl: "#",
+                autoUpload: false,
+                withCredentials: false,
+                batch: true
+            },
+            success: function (data) {
+                HabilitarObtenerDocumentosResponder();
+            },
+            error: function (data) { },
+            upload: onUploadAdjuntarArchivosResponder,
+            localization: getKendoUploadLocalization($("#language").data("kendoDropDownList").value()),
+            select: function(e){notDotName(e);hasFiles=true;},
+        });
+        $("#AdjuntarArchivosResponder").data("kendoUpload").enable(true);
+        $("#DescripcionArchivoResponder").attr("disabled", "disabled");
+        $("#AdjuntarArchivosResponder").on('drop', function (event) {
+            event.preventDefault();
+        });
+
+        $('#AdjuntarArchivosCancelar').kendoUpload({
+            async: {
+                saveUrl: $DocumentoIncidenciasUploadFiles + _FolioIncidencia + "&descripcion=" + $("#DescripcionArchivoIncidencia").val() + "&token=" + Cookies.get("token"),
+                removeUrl: "#",
+                autoUpload: false,
+                withCredentials: false,
+                batch: true
+            },
+            success: function (data) {
+                HabilitarObtenerDocumentosCancelar();
+            },
+            error: function (data) { },
+            upload: onUploadAdjuntarArchivosCancelar,
+            localization: getKendoUploadLocalization($("#language").data("kendoDropDownList").value()),
+            select: function(e){notDotName(e);hasFiles=true;},
+        });
+        $("#AdjuntarArchivosCancelar").data("kendoUpload").enable(true);
+        $("#DescripcionArchivoCancelar").attr("disabled", "disabled");
+        $("#AdjuntarArchivosCancelar").on('drop', function (event) {
+            event.preventDefault();
+        });
+
+        $("#Clasificacion").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "ClasificacionID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem !== undefined ? CargarClasificacion(dataItem.ClasificacionID, dataItem.Nombre) : CargarClasificacion("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Clasificacion = {};
+                    this.value("");
+                }
+            },
+            filter: "contains",
+            dataBound: function (e) { 
+                checkIfOne(this);
+                if(this.dataSource.data().length>0 && _Clasificacion!=="-1"){
+                    this.select(function(e){
+                        return e.ClasificacionID===_Clasificacion;
+                    })
+                    this.trigger("change")
+                }
+            },
+        });
+        ObtenerClasificacion();
+
+
+        $("#TipoIncidencia").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "TipoIncidenciaID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem !== undefined ? CargarTipoIncidencia(dataItem.TipoIncidenciaID, dataItem.Nombre) : CargarTipoIncidencia("", "");
+                var value = this.value();
+                limpiarRegistro();
+
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    TipoIncidencia = {};
+                    this.value("");
+                }
+                else { 
+                    ObtenerRegistro(this.value());
+                    if(this.value()!=="7"){
+                        document.getElementById("ClasificacionDiv").className="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4";
+                        document.getElementById("TipoIncidenciaDiv").className="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4";
+                        document.getElementById("RegistroDiv").className="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4";
+                    }else{
+                        document.getElementById("ClasificacionDiv").className="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3";
+                        document.getElementById("TipoIncidenciaDiv").className="form-group col-xs-12 col-sm-3 col-md-3 col-lg-3";
+                        document.getElementById("RegistroDiv").className="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6";
+                    }
+                }
+            },
+            filter: "contains",
+            dataBound: function (e) { 
+                checkIfOne(this);
+                if(this.dataSource.data().length>0 && _TipoIncidencia !== "-1"){
+                    this.select(function(e){
+                        return e.TipoIncidenciaID===_TipoIncidencia ;
+                    })
+                    this.trigger("change")
+                }
+            },
+        });
+        ObtenerTipoIncidencia();
+
+        $("#Registro").kendoComboBox({
+            dataTextField: "value",
+            dataValueField: "id",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem !== undefined ? CargarRegistro(dataItem.id) : CargarRegistro("");
+                var value = this.value();
+
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Registro = {};
+                    this.value("");
+                }
+            },
+            filter: "contains",
+            dataBound: function (e) { 
+                checkIfOne(this);
+                if(_TipoIncidencia==="7" && this.select()===-1 && isInPopUp()){
+                    this.select(function(e){return e.id==_ReferenciaID});
+                    this.trigger("change");
+                    this.enable(false);
+                }
+            },
+        });
+
+
+
+        $("#RegistradoPor").kendoComboBox({
+            dataTextField: "value",
+            dataValueField: "id",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem !== undefined ? CargarRegistradoPor(dataItem.id) : CargarRegistradoPor("");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    RegistradoPor = {};
+                    this.value("");
+                }
+            },
+            dataBound: function (e) { checkIfOne(this); },
+            filter: "contains",
+        });
+        ObtenerUsuarios("RegistradoPor");
+        ObtenerUsuarioActual("RegistradoPor");
+
+        $("#ResueltoPor").kendoComboBox({
+            dataTextField: "value",
+            dataValueField: "id",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem !== undefined ? CargarResueltoPor(dataItem.id) : CargarResueltoPor("");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    ResueltoPor = {};
+                    this.value("");
+                }
+            },
+            dataBound: function (e) { checkIfOne(this); },
+            filter: "contains",
+        });
+
+        ObtenerUsuarios("ResueltoPor");
+        ObtenerUsuarioActual("ResueltoPor");
+
+        $("#RespondidoPor").kendoComboBox({
+            dataTextField: "value",
+            dataValueField: "id",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem !== undefined ? CargarRespondidoPor(dataItem.id) : CargarRespondidoPor("");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    RespondidoPor = {};
+                    this.value("");
+                }
+            },
+            dataBound: function (e) { checkIfOne(this); },
+            filter: "contains",
+        });
+        ObtenerUsuarios("RespondidoPor");
+        ObtenerUsuarioActual("RespondidoPor");
+
+        if (_Edicion == "-1") {
+            $("#Clasificacion").data("kendoComboBox").value(1);//default materiales 
+            CargarClasificacion(1, "");
+        };
+
+        ObtenerFechaDefault();
+        };
+
+    function CargaInicialEdicion(id) {
+
+        if (_Editando["Incidencia"] == 0) {
+            setTimeout(function () {
+                $("#Incidencias0021").removeClass("security_required");
+            }, 600);
+        } else {
+            setTimeout(function () {
+                $("#Incidencias0021").addClass("security_required");
+            }, 600);
+        }
+        if (_Editando["Resolver"] == 0) {
+            setTimeout(function () {
+                $("#Incidencias0046").removeClass("security_required");
+            }, 600);
+        } else {
+            setTimeout(function () {
+                $("#Incidencias0046").addClass("security_required");
+            }, 600);
+        }
+        if (_Editando["Responder"] == 0) {
+            setTimeout(function () {
+                $("#Incidencias0051").removeClass("security_required");
+            }, 600);
+        } else {
+            setTimeout(function () {
+                $("#Incidencias0051").addClass("security_required");
+            }, 600);
+        }
+        if (_Editando["Cancelar"] == 0) {
+            setTimeout(function () {
+                $("#Incidencias0056").removeClass("security_required");
+            }, 600);
+        } else {
+            setTimeout(function () {
+                $("#Incidencias0056").addClass("security_required");
+            }, 600);
+        }
+
+            //loadingStart();
+            //cargarTituloFolio();
+            habilitarTabsNuevaIncidencia();
+            //habilitarAcciones();
+
+            $Incidencia.Incidencia.read({}, { folioIncidenciaID: id, token: Cookies.get("token") }).done(function (data) {
+                if (Error(data)) {
+                    if (_Edicion != "-1") {
+                        if (data.Estatus != "Cancelado") {
+                            //BotonAlta();
+                            DeshabilitarAlIniciar();
+                            //habilitarAcciones();
+                            $("#EditarIncidencia").attr("hidden");
+                            $("#Editar").removeAttr("hidden");
+                            //Muestro boton de siguiente paso
+                            $("#nuevaIncidenciaDiv").addClass("hidden");
+                            $("#responderIncidenciaDiv").addClass("hidden");
+                            $("#cancelarIncidenciaDiv").addClass("hidden");
+                            $("#resolverIncidenciaDiv").removeClass("hidden");
+                        }
+                        else {
+                            DeshabilitarAlCancelar();
+                            habilitarAcciones();
+                            //habilitarTabsNuevaIncidencia();
+                            //$("#AdjuntarArchivosIncidencia").data("kendoUpload").disable();
+                            $("#dropdown-toggle").hide();
+                            $("#Guardar").css("display", "none");
+                            $("#Editar").css("display", "none");
+                            //Muestro boton de siguiente paso
+                            $("#nuevaIncidenciaDiv").addClass("hidden");
+                            $("#responderIncidenciaDiv").addClass("hidden");
+                            $("#cancelarIncidenciaDiv").addClass("hidden");
+                            $("#resolverIncidenciaDiv").removeClass("hidden");
+                            //Cambio nombre a Ver Resolucion
+                            $("#ResolverIncidencia").text(_dictionary.Incidencias0076[$("#language").data("kendoDropDownList").value()]);
+                            $("#ResolverIncidencia").css("color", "white");
+                        }
+                    };
+
+                    $("#Clasificacion").data("kendoComboBox").value(data.ClasificacionID);
+                    CargarClasificacion(data.ClasificacionID);
+
+                    $("#TipoIncidencia").data("kendoComboBox").value(data.TipoIncidenciaID);
+                    CargarTipoIncidencia(data.TipoIncidenciaID);
+
+                    $("#Version").val(data.Version);
+                    $("#Titulo").val(data.Titulo);
+                    $("#Descripcion").val(data.Descripcion);
+                    $("#Respuesta").val(data.Respuesta);
+                    if (data.MotivoCancelacion) {
+                        $("#MotivoCancelacion").val(data.MotivoCancelacion);
+                        _ConInformacion["Cancelar"] = 1;
+                    }
+                    else {
+                        _ConInformacion["Cancelar"] = 0;
+                    }
+
+                    $("#DetalleResolucion").val(data.DetalleResolucion);
+
+                    if (data.RegistradoPor) {
+                        $("#RegistradoPor").data("kendoComboBox").value(data.RegistradoPor)
+                        CargarRegistradoPor(data.RegistradoPor);
+                    }
+
+                    if (data.ResueltoPor) {
+                        $("#ResueltoPor").data("kendoComboBox").value(data.ResueltoPor)
+                        CargarResueltoPor(data.ResueltoPor);
+                        _ConInformacion["Resolver"] = 1;
+                    }
+                    else { _ConInformacion["Resolver"] = 0; }
+
+                    if (data.RespondidoPor) {
+                        $("#RespondidoPor").data("kendoComboBox").value(data.RespondidoPor)
+                        CargarRespondidoPor(data.RespondidoPor);
+                        _ConInformacion["Responder"] = 1;
+                    }
+                    else { _ConInformacion["Responder"] = 0; }
+
+                    if (data.FechaRegistro) {
+                        var splitYear = data.FechaRegistro.split("-")[0];
+                        var splitMonth = data.FechaRegistro.split("-")[1];
+                        var splitDay = data.FechaRegistro.split("-")[2];
+
+                        var fechakendoRegistro = formatoFechaKendo(splitYear, splitMonth, splitDay);
+                        $("#FechaRegistro").data("kendoDatePicker").value(fechakendoRegistro);
+                    }
+
+                    if (data.FechaResolucion) {
+                        var splitYear1 = data.FechaResolucion.split("-")[0];
+                        var splitMonth1 = data.FechaResolucion.split("-")[1];
+                        var splitDay1 = data.FechaResolucion.split("-")[2];
+
+                        var fechakendoResolucion = formatoFechaKendo(splitYear1, splitMonth1, splitDay1);
+                        $("#FechaResolucion").data("kendoDatePicker").value(fechakendoResolucion);
+                    };
+
+                    if (data.FechaRespuesta) {
+                        var splitYear2 = data.FechaRespuesta.split("-")[0];
+                        var splitMonth2 = data.FechaRespuesta.split("-")[1];
+                        var splitDay2 = data.FechaRespuesta.split("-")[2];
+
+                        var fechakendoRespuesta = formatoFechaKendo(splitYear2, splitMonth2, splitDay2);
+                        $("#FechaRespuesta").data("kendoDatePicker").value(fechakendoRespuesta);
+                    }
+
+                    $("#Registro").data("kendoComboBox").value(data.ValorReferencia);
+                    CargarRegistro(data.ReferenciaID);
+
+                    $("#hdEstatus").val(data.Estatus);
+                    $("#listaArchivosIncidencia tbody").empty();
+                    $("#listaArchivosResolver tbody").empty();
+                    $("#listaArchivosResponder tbody").empty();
+                    $("#listaArchivosCancelar tbody").empty();
+                    $.each(data.ArchivosIncidencia, function (index, value) {
+                        $("#listaArchivosIncidencia tbody").append("<tr id='" + value.DocumentoID + "," + value.Extension + "'><td><a href='" + value.Url + "'>" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' >" + "<span class='delete disable'></span>" + "</a></td></tr>");
+                    });
+
+                    $.each(data.ArchivosResolver, function (index, value) {
+                        $("#listaArchivosResolver tbody").append("<tr id='" + value.DocumentoID + "," + value.Extension + "'><td><a href='" + value.Url + "'>" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' >" + "<span class='delete disable'></span>" + "</a></td></tr>");
+                    });
+
+                    $.each(data.ArchivosResponder, function (index, value) {
+                        $("#listaArchivosResponder tbody").append("<tr id='" + value.DocumentoID + "," + value.Extension + "'><td><a href='" + value.Url + "'>" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' >" + "<span class='delete disable'></span>" + "</a></td></tr>");
+                    });
+
+                    $.each(data.ArchivosCancelar, function (index, value) {
+                        $("#listaArchivosCancelar tbody").append("<tr id='" + value.DocumentoID + "," + value.Extension + "'><td><a href='" + value.Url + "'>" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' >" + "<span class='delete disable'></span>" + "</a></td></tr>");
+                    });
+                    
+                    _folioOriginalID=data.FolioOriginalID;
+                    
+                    AsignarPaginaActualCookie();
+                    applySecurityPolicy(false);
+                };
+                //loadingStop();
+            });
+        };
+        function AsignarPaginaActualCookie() {
+            Cookies.set("navegacion", "38", { path: '/' });
+        }
+        function cargaInicialLentarNuevaIncidencia(tipoincidenciaID, clasificacion, referenciaID) {
+            //loadingStart();
+            $("#Clasificacion").data("kendoComboBox").value(clasificacion);//Materiales
+            $("#Clasificacion").data("kendoComboBox").enable(false);
+            CargarClasificacion(clasificacion);
+
+            if (tipoincidenciaID != "-1") {
+                $("#TipoIncidencia").data("kendoComboBox").value(tipoincidenciaID);
+                $("#TipoIncidencia").data("kendoComboBox").enable(false);
+                CargarTipoIncidencia(tipoincidenciaID);
+            }
+
+            if (referenciaID != "-1") {
+                $TipoIncidencia.TipoIncidencia.read({ tipoIncidencia: tipoincidenciaID, busqueda: referenciaID, levantarincidencia: _LevantarIncidencia, token: Cookies.get("token") }).done(function (data) {
+                    if (Error(data)) {
+                        if (data.length && _TipoIncidencia!=="7") {
+                            $("#Registro").data("kendoComboBox").value(data[0].value);
+                            $("#Registro").data("kendoComboBox").enable(false);
+                            CargarRegistro(data[0].id);
+                        }else{
+                            $("#TipoIncidencia").data("kendoComboBox").trigger("change");
+                            //setTimeout(function(){
+                            //    $("#Registro").data("kendoComboBox").select(function(e){return e.id==_ReferenciaID});
+                            //    $("#Registro").data("kendoComboBox").trigger("change");
+                            //    $("#Registro").data("kendoComboBox").enable(false);
+                            //},800)
+                        }
+                    }
+                    //loadingStop();
+                    AsignarPaginaActualCookie();
+                    applySecurityPolicy(false);
+                });
+            } else {
+                //loadingStop();
+                AsignarPaginaActualCookie();
+                applySecurityPolicy(false);
+            };
+        };
+
+        function CargarClasificacion(id, value) {
+            Clasificacion = {};
+            Clasificacion = { ClasificacionID: id, Nombre: value };
+        };
+
+        function CargarTipoIncidencia(id, value) {
+            TipoIncidencia = {};
+            TipoIncidencia = { TipoIncidenciaID: id, Nombre: value };
+        };
+
+        function CargarRegistro(id) {
+            Registro = {};
+            Registro = { RegistroID: id };
+        };
+
+        function CargarRegistradoPor(id) {
+            RegistradoPor = {};
+            RegistradoPor = { RegistradoPorID: id };
+        };
+
+        function CargarResueltoPor(id) {
+            ResueltoPor = {};
+            ResueltoPor = { ResueltoPorID: id };
+        };
+
+        function CargarRespondidoPor(id) {
+            RespondidoPor = {};
+            RespondidoPor = { RespondidoPorID: id };
+        };
+
+        function ObtenerClasificacion() {
+            $Clasificacion.Clasificacion.read({ token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox("Clasificacion", result);
+            });
+        };
+
+        function ObtenerTipoIncidencia() {
+            $TipoIncidencia.TipoIncidencia.read({ token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox("TipoIncidencia", result);
+            });
+        };
+
+        function ObtenerUsuarios(control) {
+            $Usuario.Usuario.read({ token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox(control, result);
+            });
+        };
+
+        function ObtenerUsuarioActual(control) {
+            if (Cookies.get("user") != null) {
+                $("#" + control).data("kendoComboBox").value(Cookies.get("nameUserLogged"));
+            }
+        };
+        function ObtenerRegistro(id) {
+            $TipoIncidencia.TipoIncidencia.read({ tipoIncidencia: id, token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox("Registro", result);
+            });
+        }
+
+        function ObtenerFechaDefault() {
+            var today = new Date();
+            var curr_date = today.getDate();
+            var curr_month = today.getMonth() + 1; //Months are zero based
+            var curr_year = today.getFullYear();
+
+            if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+                format = "dd/MM/yyyy";
+            } else {
+                format = "MM/dd/yyyy";
+            };
+
+            var fecha = new Date(curr_year, curr_month - 1, curr_date);
+            var fechakendo = kendo.parseDate(fecha, format);
+
+            $("#FechaRegistro").data("kendoDatePicker").value(fechakendo);
+            $("#FechaResolucion").data("kendoDatePicker").value(fechakendo);
+            $("#FechaRespuesta").data("kendoDatePicker").value(fechakendo);
+        };
+
+        function limpiarRegistro() {
+            Registro = {};
+        };
+
+        function onUploadAdjuntarArchivosIncidencia() {
+            var bool = false;
+            $("#formaIncidencias .security_required").each(function (i, elem) {
+                if (elem.tagName.toLowerCase() != 'label') {
+                    if ($(elem).attr("id") == "DescripcionArchivoIncidencia") {
+                        if (!$(this).val()) {
+                            bool = true;
+                            $(this).closest("div").find("label").addClass("error");
+                            $(this).closest("div").addClass("clearfix");
+                        } else {
+                            $(this).closest("div").find("label").removeClass("error");
+                            $(this).closest("div").removeClass("clearfix");
+                        };
+                    }
+                };
+            });
+
+            if (bool) {
+                if (!$("#DescripcionArchivoIncidencia").val()) {
+                    displayMessage("notificationslabel0025", "", '1');
+                    e.preventDefault();
+                }
+            }
+
+            if (_FolioIncidencia == "-1") {
+                displayMessage("notificationslabel0078", "", '1');
+                e.preventDefault();
+            }
+
+            $("#AdjuntarArchivosIncidencia").data("kendoUpload").options.async.saveUrl = $DocumentoIncidenciasUploadFiles + _FolioIncidencia + "&descripcion=" + $("#DescripcionArchivoIncidencia").val() + "&estatusDocumento=" + "Incidencia" + "&token=" + Cookies.get("token");
+        };
+
+        function onUploadAdjuntarArchivosResolver() {
+            var bool = false;
+            $("#formaIncidencias .security_required").each(function (i, elem) {
+                if (elem.tagName.toLowerCase() != 'label') {
+                    if ($(elem).attr("id") == "DescripcionArchivoResolver") {
+                        if (!$(this).val()) {
+                            bool = true;
+                            $(this).closest("div").find("label").addClass("error");
+                            $(this).closest("div").addClass("clearfix");
+                        } else {
+                            $(this).closest("div").find("label").removeClass("error");
+                            $(this).closest("div").removeClass("clearfix");
+                        };
+                    }
+                };
+            });
+
+            if (bool) {
+                if (!$("#DescripcionArchivoResolver").val()) {
+                    displayMessage("notificationslabel0025", "", '1');
+                    e.preventDefault();
+                }
+            }
+
+            if (_FolioIncidencia == "-1") {
+                displayMessage("notificationslabel0078", "", '1');
+                e.preventDefault();
+            }
+
+            $("#AdjuntarArchivosResolver").data("kendoUpload").options.async.saveUrl = $DocumentoIncidenciasUploadFiles + _FolioIncidencia + "&descripcion=" + $("#DescripcionArchivoResolver").val() + "&estatusDocumento=" + "Resolver" + "&token=" + Cookies.get("token");
+        };
+
+        function onUploadAdjuntarArchivosResponder() {
+            var bool = false;
+            $("#formaIncidencias .security_required").each(function (i, elem) {
+                if (elem.tagName.toLowerCase() != 'label') {
+                    if ($(elem).attr("id") == "DescripcionArchivoResponder") {
+                        if (!$(this).val()) {
+                            bool = true;
+                            $(this).closest("div").find("label").addClass("error");
+                            $(this).closest("div").addClass("clearfix");
+                        } else {
+                            $(this).closest("div").find("label").removeClass("error");
+                            $(this).closest("div").removeClass("clearfix");
+                        };
+                    }
+                };
+            });
+
+            if (bool) {
+                if (!$("#DescripcionArchivoResponder").val()) {
+                    displayMessage("notificationslabel0025", "", '1');
+                    e.preventDefault();
+                }
+            }
+
+            if (_FolioIncidencia == "-1") {
+                displayMessage("notificationslabel0078", "", '1');
+                e.preventDefault();
+            }
+
+            $("#AdjuntarArchivosResponder").data("kendoUpload").options.async.saveUrl = $DocumentoIncidenciasUploadFiles + _FolioIncidencia + "&descripcion=" + $("#DescripcionArchivoResponder").val() + "&estatusDocumento=" + "Responder" + "&token=" + Cookies.get("token");
+        };
+
+        function onUploadAdjuntarArchivosCancelar() {
+            var bool = false;
+            $("#formaIncidencias .security_required").each(function (i, elem) {
+                if (elem.tagName.toLowerCase() != 'label') {
+                    if ($(elem).attr("id") == "DescripcionArchivoCancelar") {
+                        if (!$(this).val()) {
+                            bool = true;
+                            $(this).closest("div").find("label").addClass("error");
+                            $(this).closest("div").addClass("clearfix");
+                        } else {
+                            $(this).closest("div").find("label").removeClass("error");
+                            $(this).closest("div").removeClass("clearfix");
+                        };
+                    }
+                };
+            });
+
+            if (bool) {
+                if (!$("#DescripcionArchivoCancelar").val()) {
+                    displayMessage("notificationslabel0025", "", '1');
+                    e.preventDefault();
+                }
+            }
+
+            if (_FolioIncidencia == "-1") {
+                displayMessage("notificationslabel0078", "", '1');
+                e.preventDefault();
+            }
+
+            $("#AdjuntarArchivosCancelar").data("kendoUpload").options.async.saveUrl = $DocumentoIncidenciasUploadFiles + _FolioIncidencia + "&descripcion=" + $("#DescripcionArchivoCancelar").val() + "&estatusDocumento=" + "Cancelar" + "&token=" + Cookies.get("token");
+        };
+
+        function DesahabilitarObtenerDocumentosIncidencias() {
+            $DocumentoIncidencia.DocumentoIncidencia.read({ incidenciaID: _FolioIncidencia, estatusDocumento: "Incidencia", token: Cookies.get("token") }).done(function (result) {
+                //loadingStart();
+                if (Error(result)) {
+                    if (result.length > 0) {
+                        $("#listaArchivosIncidencia tbody").empty();
+                        $.each(result, function (index, value) {
+                            $("#listaArchivosIncidencia tbody").append("<tr id='" + value.DocumentoID + "," + value.Extencion + "'><td><a target='_blank' href='" + value.Url + "'>" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' >" + "<span class='delete disable'></span>" + "</a></td></tr>");
+                        });
+                    }
+                };
+                //loadingStop();
+            });
+        };
+
+        function HabilitarObtenerDocumentosIncidencias() {
+
+            $DocumentoIncidencia.DocumentoIncidencia.read({ incidenciaID: _FolioIncidencia, estatusDocumento: "Incidencia", token: Cookies.get("token") }).done(function (result) {
+                //loadingStart();
+                if (Error(result)) {
+                    if (result.length > 0) {
+                        $("#listaArchivosIncidencia tbody").empty();
+                        $.each(result, function (index, value) {
+                            $("#listaArchivosIncidencia tbody").append("<tr id='" + value.DocumentoID + "," + value.Extencion + "'><td><a target='_blank' href='" + value.Url + "' >" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' onclick='borrarArchivo(" + value.DocumentoID + ",$(this));' >" + "<span class='delete'></span>" + "</a></td></tr>");
+                        });
+                    }
+                };
+                //loadingStop();
+            });
+        };
+
+        function DesahabilitarObtenerDocumentosResolver() {
+            $DocumentoIncidencia.DocumentoIncidencia.read({ incidenciaID: _FolioIncidencia, estatusDocumento: "Resolver", token: Cookies.get("token") }).done(function (result) {
+                //loadingStart();
+                if (Error(result)) {
+                    if (result.length > 0) {
+                        $("#listaArchivosResolver tbody").empty();
+                        $.each(result, function (index, value) {
+                            $("#listaArchivosResolver tbody").append("<tr id='" + value.DocumentoID + "," + value.Extencion + "'><td><a target='_blank' href='" + value.Url + "'>" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' >" + "<span class='delete disable'></span>" + "</a></td></tr>");
+                        });
+                    }
+                };
+                //loadingStop();
+            });
+        };
+
+        function HabilitarObtenerDocumentosResolver() {
+
+            $DocumentoIncidencia.DocumentoIncidencia.read({ incidenciaID: _FolioIncidencia, estatusDocumento: "Resolver", token: Cookies.get("token") }).done(function (result) {
+                //loadingStart();
+                if (Error(result)) {
+                    if (result.length > 0) {
+                        $("#listaArchivosResolver tbody").empty();
+                        $.each(result, function (index, value) {
+                            $("#listaArchivosResolver tbody").append("<tr id='" + value.DocumentoID + "," + value.Extencion + "'><td><a target='_blank' href='" + value.Url + "' >" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' onclick='borrarArchivo(" + value.DocumentoID + ",$(this));' >" + "<span class='delete'></span>" + "</a></td></tr>");
+                        });
+                    }
+                    else { LimpiarHistorialFiles(); }
+                };
+                //loadingStop();
+            });
+        };
+
+        function DesahabilitarObtenerDocumentosResponder() {
+            $DocumentoIncidencia.DocumentoIncidencia.read({ incidenciaID: _FolioIncidencia, estatusDocumento: "Responder", token: Cookies.get("token") }).done(function (result) {
+                //loadingStart();
+                if (Error(result)) {
+                    if (result.length > 0) {
+                        $("#listaArchivosResponder tbody").empty();
+                        $.each(result, function (index, value) {
+                            $("#listaArchivosResponder tbody").append("<tr id='" + value.DocumentoID + "," + value.Extencion + "'><td><a target='_blank' href='" + value.Url + "'>" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' >" + "<span class='delete disable'></span>" + "</a></td></tr>");
+                        });
+                    }
+                };
+                //loadingStop();
+            });
+        };
+
+        function HabilitarObtenerDocumentosResponder() {
+            $DocumentoIncidencia.DocumentoIncidencia.read({ incidenciaID: _FolioIncidencia, estatusDocumento: "Responder", token: Cookies.get("token") }).done(function (result) {
+                //loadingStart();
+                if (Error(result)) {
+                    if (result.length > 0) {
+                        $("#listaArchivosResponder tbody").empty();
+                        $.each(result, function (index, value) {
+                            $("#listaArchivosResponder tbody").append("<tr id='" + value.DocumentoID + "," + value.Extencion + "'><td><a target='_blank' href='" + value.Url + "' >" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' onclick='borrarArchivo(" + value.DocumentoID + ",$(this));' >" + "<span class='delete'></span>" + "</a></td></tr>");
+                        });
+                    }
+                };
+                //loadingStop();
+            });
+        };
+
+        function DesahabilitarObtenerDocumentosCancelar() {
+            $DocumentoIncidencia.DocumentoIncidencia.read({ incidenciaID: _FolioIncidencia, estatusDocumento: "Cancelar", token: Cookies.get("token") }).done(function (result) {
+                //loadingStart();
+                if (Error(result)) {
+                    if (result.length > 0) {
+                        $("#listaArchivosCancelar tbody").empty();
+                        $.each(result, function (index, value) {
+                            $("#listaArchivosCancelar tbody").append("<tr id='" + value.DocumentoID + "," + value.Extencion + "'><td><a target='_blank' href='" + value.Url + "'>" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' >" + "<span class='delete disable'></span>" + "</a></td></tr>");
+                        });
+                    }
+                };
+                //loadingStop();
+            });
+        };
+
+        function HabilitarObtenerDocumentosCancelar() {
+            $DocumentoIncidencia.DocumentoIncidencia.read({ incidenciaID: _FolioIncidencia, estatusDocumento: "Cancelar", token: Cookies.get("token") }).done(function (result) {
+                //loadingStart();
+                if (Error(result)) {
+                    if (result.length > 0) {
+                        $("#listaArchivosCancelar tbody").empty();
+                        $.each(result, function (index, value) {
+                            $("#listaArchivosCancelar tbody").append("<tr id='" + value.DocumentoID + "," + value.Extencion + "'><td><a target='_blank' href='" + value.Url + "' >" + value.Nombre + "</a></td><td>" + value.Descripcion + "</td><td><a href='#' onclick='borrarArchivo(" + value.DocumentoID + ",$(this));' >" + "<span class='delete'></span>" + "</a></td></tr>");
+                        });
+                    }
+                };
+                //loadingStop();
+            });
+        };
+
+        function borrarArchivo(id, fila) {
+            $DocumentoIncidencia.DocumentoIncidencia.destroy({}, { documentoID: id, token: Cookies.get("token") }).done(function (data) {
+                fila.closest("tr").remove();
+            });
+        };
+
+        function cargarTituloFolio() {
+            $("#divFolio").removeClass("hidden");
+            $("#spanFolio").html(_FolioIncidencia);
+        };
+
+        function limpiarTituloFolio() {
+            $("#divFolio").addClass("hidden");
+            $("#spanFolio").html("");
+        }
+        function validarRequeridosFormaIncidenciasGuardar() {
+            var bool = true;
+            $("#formaIncidencias .security_required").each(function (i, elem) {
+                if (elem.tagName.toLowerCase() != 'label') {
+                    if ($(elem).attr("id") != "DescripcionArchivoIncidencia" && $(elem).attr("id") != "MotivoCancelacion"
+                        && $(elem).attr("id") != "DetalleResolucion" && $(elem).attr("id") != "Respuesta"
+                        && $(elem).attr("id") != "RespondidoPor" && $(elem).attr("id") != "FechaRespuesta"
+                        && $(elem).attr("id") != "DescripcionArchivoResolver" && $(elem).attr("id") != "DescripcionArchivoResponder"
+                        && $(elem).attr("id") != "DescripcionArchivoCancelar") {
+                        if (!$(this).val()) {
+                            bool = false;
+                            $(this).closest("div").find("label").addClass("error");
+                        } else {
+                            $(this).closest("div").find("label").removeClass("error");
+                        };
+                    }
+                    if (_Editando["Incidencia"] && $(elem).attr("id") == "DescripcionArchivoIncidencia") {
+                        if (!$(this).val() && hasFiles) {
+                            bool = false;
+                            $(this).closest("div").find("label").addClass("error");
+                            $(this).closest("div").addClass("clearfix");
+                        } else if(!$(this).val() && !hasFiles) {
+                            $(this).closest("div").find("label").removeClass("error");
+                            $(this).closest("div").removeClass("clearfix");
+                        };
+                    }
+                };
+            });
+            return bool;
+        };
+
+        function validarRequeridosFormaIncidenciasResolverIncidencia() {
+            var bool = true;
+            $("#formaIncidencias .security_required").each(function (i, elem) {
+                if (elem.tagName.toLowerCase() != 'label') {
+                    if ($(elem).attr("id") != "MotivoCancelacion" && $(elem).attr("id") != "DescripcionArchivoIncidencia" && $(elem).attr("id") != "Respuesta"
+                        && $(elem).attr("id") != "RespondidoPor" && $(elem).attr("id") != "FechaRespuesta" && $(elem).attr("id") != "DescripcionArchivoResponder"
+                        && $(elem).attr("id") != "DescripcionArchivoCancelar" && $(elem).attr("id") != "DescripcionArchivoResolver") {
+                        if (!$(this).val()) {
+                            bool = false;
+                            $(this).closest("div").find("label").addClass("error");
+                        } else {
+                            $(this).closest("div").find("label").removeClass("error");
+                        };
+                    }
+                };
+
+                if (_Editando["Resolver"] && $(elem).attr("id") == "DescripcionArchivoResolver") {
+                    if (!$(this).val()) {
+                        bool = false;
+                        $(this).closest("div").find("label").addClass("error");
+                        $(this).closest("div").addClass("clearfix");
+                    } else {
+                        $(this).closest("div").find("label").removeClass("error");
+                        $(this).closest("div").removeClass("clearfix");
+                    };
+                }
+            });
+            return bool;
+        };
+        
+        function validarRequeridosFormaIncidenciasCancelarIncidencia() {
+            var bool = true;
+            $("#formaIncidencias .security_required").each(function (i, elem) {
+                if (elem.tagName.toLowerCase() != 'label') {
+                    if ($(elem).attr("id") != "DetalleResolucion" && $(elem).attr("id") != "DescripcionArchivoIncidencia" && $(elem).attr("id") != "Respuesta"
+                        && $(elem).attr("id") != "RespondidoPor" && $(elem).attr("id") != "FechaRespuesta"
+                        && $(elem).attr("id") != "DescripcionArchivoResolver" && $(elem).attr("id") != "DescripcionArchivoResponder" && $(elem).attr("id") != "DescripcionArchivoCancelar") {
+                        if (!$(this).val()) {
+                            bool = false;
+                            $(this).closest("div").find("label").addClass("error");
+                        } else {
+                            $(this).closest("div").find("label").removeClass("error");
+                        };
+                    }
+                };
+
+                if (_Editando["Cancelar"] && $(elem).attr("id") == "DescripcionArchivoCancelar") {
+                    if (!$(this).val()) {
+                        bool = false;
+                        $(this).closest("div").find("label").addClass("error");
+                        $(this).closest("div").addClass("clearfix");
+                    } else {
+                        $(this).closest("div").find("label").removeClass("error");
+                        $(this).closest("div").removeClass("clearfix");
+                    };
+                }
+            });
+            return bool;
+        };
+
+        function validarRequeridosFormaIncidenciasResponderIncidenciaIncidencia() {
+            var bool = true;
+            $("#formaIncidencias .security_required").each(function (i, elem) {
+                if (elem.tagName.toLowerCase() != 'label') {
+                    if ($(elem).attr("id") != "DetalleResolucion" && $(elem).attr("id") != "MotivoCancelacion"
+                        && $(elem).attr("id") != "DescripcionArchivoIncidencia" && $(elem).attr("id") != "DescripcionArchivoResolver"
+                        && $(elem).attr("id") != "DescripcionArchivoCancelar" && $(elem).attr("id") != "DescripcionArchivoResponder") {
+                        if (!$(this).val()) {
+                            bool = false;
+                            $(this).closest("div").find("label").addClass("error");
+                        } else {
+                            $(this).closest("div").find("label").removeClass("error");
+                        };
+                    }
+                };
+
+                if (_Editando["Responder"] && $(elem).attr("id") == "DescripcionArchivoResponder") {
+                    if (!$(this).val()) {
+                        bool = false;
+                        $(this).closest("div").find("label").addClass("error");
+                        $(this).closest("div").addClass("clearfix");
+                    } else {
+                        $(this).closest("div").find("label").removeClass("error");
+                        $(this).closest("div").removeClass("clearfix");
+                    };
+                }
+            });
+            return bool;
+        };
+
+        function obtenerFormatoFechaConHora(d) {
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+
+            var horaActual = new Date();
+            if (curr_year == "1969") {
+                return null;
+            } else {
+                return curr_year + "-" + curr_month + "-" + curr_date + " " + horaActual.getHours() + ":" + horaActual.getMinutes() + ":" + horaActual.getSeconds();
+            }
+        };
+
+        function ObtenerFechasporDefecto() {
+            var fecha = new Date();
+
+            if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+                format = "dd/MM/yyyy";
+            } else {
+                format = "MM/dd/yyyy";
+            }
+
+            var curr_date = fecha.getDate();
+            var curr_month = fecha.getMonth() + 1;
+            var curr_year = fecha.getFullYear();
+
+            var fecha = new Date(curr_year, curr_month - 1, curr_date);
+            var fechakendo = kendo.parseDate(fecha, format);
+
+            $("#FechaRegistro").data("kendoDatePicker").value(fechakendo);
+            $("#FechaResolucion").data("kendoDatePicker").value(fechakendo);
+            $("#FechaRespuesta").data("kendoDatePicker").value(fechakendo);
+        };
+
+        function ArrayListado() {
+            var Listado = {
+                ClasificacionID: "", TipoIncidenciaID: "", Version: "",
+                Titulo: "", Descripcion: "", Respuesta: "", MotivoCancelacion: "",
+                DetalleResolucion: "", RegistradoPor: "", FechaRegistro: "",
+                ResueltoPor: "", FechaResolucion: "", RespondidoPor: "",
+                FechaRespuesta: "", Nuevo: "", ReferenciaID: "", Estatus: ""
+            };
+
+            var d = new Date($("#FechaRegistro").data("kendoDatePicker").value());
+            var d1 = new Date($("#FechaResolucion").data("kendoDatePicker").value());
+            var d2 = new Date($("#FechaRespuesta").data("kendoDatePicker").value());
+            CargarRegistradoPor($("#RegistradoPor").data("kendoComboBox").value());
+            CargarResueltoPor($("#ResueltoPor").data("kendoComboBox").value());
+            CargarRespondidoPor($("#RespondidoPor").data("kendoComboBox").value());
+
+            Listado.FolioIncidenciaID = _FolioIncidencia;
+            Listado.ClasificacionID = Clasificacion.ClasificacionID;
+            Listado.TipoIncidenciaID = TipoIncidencia.TipoIncidenciaID;
+            Listado.Version = $("#Version").val();
+            Listado.Titulo = $("#Titulo").val();
+            Listado.Descripcion = $("#Descripcion").val();
+            Listado.Respuesta = $("#Respuesta").val();
+            Listado.MotivoCancelacion = $("#MotivoCancelacion").val();
+            Listado.DetalleResolucion = $("#DetalleResolucion").val();
+            Listado.RegistradoPor = RegistradoPor.RegistradoPorID;
+            Listado.FechaRegistro = obtenerFormatoFechaConHora(d);
+            Listado.ResueltoPor = ResueltoPor.ResueltoPorID;
+            Listado.FechaResolucion = obtenerFormatoFechaConHora(d1);
+            Listado.RespondidoPor = RespondidoPor.RespondidoPorID;
+            Listado.FechaRespuesta = obtenerFormatoFechaConHora(d2);
+            Listado.ReferenciaID = Registro.RegistroID;
+            Listado.Nuevo = false;
+            Listado.Estatus = $("#hdEstatus").val();
+            Listado.FolioOriginalID=_folioOriginalID;
+            return Listado;
+        };
+
+        function habilitarControles() {
+            if ($("#hdEstatus").val() != "Cancelado") {
+
+                $("#Clasificacion").data("kendoComboBox").enable(false);
+                $("#TipoIncidencia").data("kendoComboBox").enable(false);
+                $("#Registro").data("kendoComboBox").enable(false);
+
+                switch (tabSelected) {
+                    case "Incidencia":
+                        $("#Titulo").removeAttr("disabled");
+                        $("#Descripcion").removeAttr("disabled");
+                        $("#RegistradoPor").data("kendoComboBox").enable(true);
+                        $("#FechaRegistro").data("kendoDatePicker").enable(true);
+                        $("#DescripcionArchivoIncidencia").removeAttr("disabled");
+                        $("#AdjuntarArchivosIncidencia").data("kendoUpload").enable(true);
+                        HabilitarObtenerDocumentosIncidencias();
+                        break;
+                    case "Resolver":
+                        $("#DetalleResolucion").removeAttr("disabled");
+                        $("#FechaResolucion").data("kendoDatePicker").enable(true);
+                        $("#ResueltoPor").data("kendoComboBox").enable(true);
+                        $("#AdjuntarArchivosResolver").data("kendoUpload").enable(true);
+                        $("#DescripcionArchivoResolver").removeAttr("disabled");
+                        $("#AdjuntarArchivosResolver").data("kendoUpload").enable(true);
+                        HabilitarObtenerDocumentosResolver();
+                        break;
+                    case "Responder":
+                        $("#Respuesta").removeAttr("disabled");
+                        $("#FechaRespuesta").data("kendoDatePicker").enable(true);
+                        $("#RespondidoPor").data("kendoComboBox").enable(true);
+                        $("#AdjuntarArchivosResponder").data("kendoUpload").enable(true);
+                        $("#DescripcionArchivoResponder").removeAttr("disabled");
+                        $("#AdjuntarArchivosResponder").data("kendoUpload").enable(true);
+                        HabilitarObtenerDocumentosResponder();
+                        break;
+                    case "Cancelar":
+                        $("#MotivoCancelacion").removeAttr("disabled");
+                        $("#AdjuntarArchivosCancelar").data("kendoUpload").enable(true);
+                        $("#DescripcionArchivoCancelar").removeAttr("disabled");
+                        $("#AdjuntarArchivosCancelar").data("kendoUpload").enable(true);
+                        HabilitarObtenerDocumentosCancelar();
+                        break;
+                }
+            }
+        };
+        
+        function Imprimir() {
+            downloadPDF($Reporte.Reporte.urlNoId, {TipoReporte:6,IncidenciaID:_FolioIncidencia});
+        };
+
+        function downloadPDF(url, pdf) {
+            var req = new XMLHttpRequest();
+            req.open("GET",(url + "?data=" + encodeURI(JSON.stringify(pdf)) + "&token=" + Cookies.get("token")),true)
+            req.responseType = "blob";
+
+            if (_folioOriginalID != null && _folioOriginalID != "")
+                name = "Incidencia" + _folioOriginalID;
+            else
+                name = "Incidencia" + _FolioIncidencia;
+
+            req.onload = function (event) {
+                var blob = req.response;
+                console.log(blob.size);
+                var link=document.createElement('a');
+                link.href=window.URL.createObjectURL(blob);
+                link.download=name + ".pdf";
+                link.click();
+            };
+            req.send();
+            displayMessage("notificationslabel0100", "", "1")
+        }
+        
+        function DeshabilitarControles() {
+
+            $("#Clasificacion").data("kendoComboBox").enable(false);
+            $("#TipoIncidencia").data("kendoComboBox").enable(false);
+            $("#Registro").data("kendoComboBox").enable(false);
+            $("#Version").attr("disabled", "disabled");
+
+            switch (tabSelected) {
+                case "Incidencia":
+                    $("#Titulo").attr("disabled", "disabled");
+                    $("#Descripcion").attr("disabled", "disabled");
+                    $("#FechaRegistro").data("kendoDatePicker").enable(false);
+                    $("#AdjuntarArchivosIncidencia").data("kendoUpload").enable(false);
+                    $("#DescripcionArchivoIncidencia").attr("disabled", "disabled");
+                    $("#RegistradoPor").data("kendoComboBox").enable(false);
+                    break;
+
+                case "Resolver":
+                    $("#DetalleResolucion").attr("disabled", "disabled");
+                    $("#FechaResolucion").data("kendoDatePicker").enable(false);
+                    $("#AdjuntarArchivosResolver").data("kendoUpload").enable(false);
+                    $("#DescripcionArchivoResolver").attr("disabled", "disabled");
+                    $("#ResueltoPor").data("kendoComboBox").enable(false);
+                    break;
+
+                case "Responder":
+                    $("#Respuesta").attr("disabled", "disabled");
+                    $("#FechaRespuesta").data("kendoDatePicker").enable(false);
+                    $("#AdjuntarArchivosResponder").data("kendoUpload").enable(false);
+                    $("#DescripcionArchivoResponder").attr("disabled", "disabled");
+                    $("#RespondidoPor").data("kendoComboBox").enable(false);
+                    break;
+
+                case "Cancelar":
+                    $("#MotivoCancelacion").attr("disabled", "disabled");
+                    $("#AdjuntarArchivosCancelar").data("kendoUpload").enable(false);
+                    $("#DescripcionArchivoCancelar").attr("disabled", "disabled");
+
+                    break;
+            }
+        };
+
+        function DeshabilitarAlIniciar() {
+            $("#dropdown-toggle").hide();
+            $("#Editar").css("display", "block");
+            $("#Guardar").css("display", "none");
+            _Editando[tabSelected] = 0;
+
+            $("#Clasificacion").data("kendoComboBox").enable(false);
+            $("#TipoIncidencia").data("kendoComboBox").enable(false);
+            $("#Registro").data("kendoComboBox").enable(false);
+            $("#Version").attr("disabled", "disabled");
+
+            $("#Titulo").attr("disabled", "disabled");
+            $("#Descripcion").attr("disabled", "disabled");
+            $("#FechaRegistro").data("kendoDatePicker").enable(false);
+            $("#AdjuntarArchivosIncidencia").data("kendoUpload").enable(false);
+            $("#DescripcionArchivoIncidencia").attr("disabled", "disabled");
+            $("#RegistradoPor").data("kendoComboBox").enable(false);
+
+            $("#DetalleResolucion").attr("disabled", "disabled");
+            $("#FechaResolucion").data("kendoDatePicker").enable(false);
+            $("#AdjuntarArchivosResolver").data("kendoUpload").enable(false);
+            $("#DescripcionArchivoResolver").attr("disabled", "disabled");
+            $("#ResueltoPor").data("kendoComboBox").enable(false);
+
+            $("#Respuesta").attr("disabled", "disabled");
+            $("#FechaRespuesta").data("kendoDatePicker").enable(false);
+            $("#AdjuntarArchivosResponder").data("kendoUpload").enable(false);
+            $("#DescripcionArchivoResponder").attr("disabled", "disabled");
+            $("#RespondidoPor").data("kendoComboBox").enable(false);
+
+            $("#MotivoCancelacion").attr("disabled", "disabled");
+            $("#AdjuntarArchivosCancelar").data("kendoUpload").enable(false);
+            $("#DescripcionArchivoCancelar").attr("disabled", "disabled");
+        }
+
+        function DeshabilitarAlCancelar() {
+            $("#Editar").css("display", "none");
+            $("#dropdown-toggle").hide();
+            $("#Guardar").css("display", "none");
+            $("#EditarResolucion").css("display", "none");
+            $("#EditarRespuesta").css("display", "none");
+            //$("#responderIncidenciaDiv").addClass("hidden");
+            //$("#resolverIncidenciaDiv").addClass("hidden");
+            $("#Clasificacion").data("kendoComboBox").enable(false);
+            $("#TipoIncidencia").data("kendoComboBox").enable(false);
+            $("#Registro").data("kendoComboBox").enable(false);
+            $("#Version").attr("disabled", "disabled");
+            $("#Titulo").attr("disabled", "disabled");
+            $("#Descripcion").attr("disabled", "disabled");
+            $("#Respuesta").attr("disabled", "disabled");
+            $("#MotivoCancelacion").attr("disabled", "disabled");
+            $("#DetalleResolucion").attr("disabled", "disabled");
+            $("#FechaRegistro").data("kendoDatePicker").enable(false);
+            $("#FechaResolucion").data("kendoDatePicker").enable(false);
+            $("#FechaRespuesta").data("kendoDatePicker").enable(false);
+            $("#AdjuntarArchivosIncidencia").data("kendoUpload").enable(false);
+            $("#DescripcionArchivoIncidencia").attr("disabled", "disabled");
+            $("#AdjuntarArchivosResolver").data("kendoUpload").disable();
+            $("#AdjuntarArchivosResponder").data("kendoUpload").disable();
+            $("#AdjuntarArchivosCancelar").data("kendoUpload").disable();
+            $("#DescripcionArchivoResolver").attr("disabled", "disabled");
+            $("#DescripcionArchivoResponder").attr("disabled", "disabled");
+            $("#DescripcionArchivoCancelar").attr("disabled", "disabled");
+            $("#RegistradoPor").data("kendoComboBox").enable(false);
+            $("#ResueltoPor").data("kendoComboBox").enable(false);
+            $("#RespondidoPor").data("kendoComboBox").enable(false);
+
+            DesahabilitarObtenerDocumentosIncidencias();
+            DesahabilitarObtenerDocumentosResponder();
+            DesahabilitarObtenerDocumentosResolver();
+            DesahabilitarObtenerDocumentosCancelar();
+        }
+
+        function BotonAlta() {
+            /*if (tabSelected == "Resolver" || tabSelected == "Responder" || tabSelected == "Cancelar") {
+                $("#dropdown-toggle").hide();
+                $("#Editar").css("display", "none");
+                $("#Guardar").css("display", "none");
+            }
+            else {
+                $("#dropdown-toggle").hide();
+                $("#Editar").css("display", "block");
+                $("#Guardar").css("display", "none");
+            }
+            */
+            $("#dropdown-toggle").hide();
+            $("#Editar").css("display", "block");
+            $("#Guardar").css("display", "none");
+            DeshabilitarControles();
+            _Editando[tabSelected] = 0;
+            //ocultarTabsNuevaIncidencia();
+        };
+
+        function BotonEdicion() {
+            $("#dropdown-toggle").show();
+            $("#Editar").css("display", "none");
+            $("#Guardar").css("display", "block");
+            $("#AdjuntarArchivosIncidencia").data("kendoUpload").enable(true);
+            habilitarControles();
+            _Editando[tabSelected] = 1;
+            //habilitarTabsNuevaIncidencia(false);
+        };
+
+        function BotonEditarResolucion() {
+            $("#resolverIncidenciaDiv").removeClass("hidden");
+            $("#EditarResolucion").css("display", "none");
+            $("#EditarRespuesta").css("display", "none");
+            $("#dropdown-toggle").hide();
+            $("#Guardar").css("display", "none");
+            $("#Editar").css("display", "none");
+            $("#AdjuntarArchivosIncidencia").data("kendoUpload").enable(true);
+
+            $("#responderIncidenciaDiv").addClass("hidden");
+            $("#cancelarIncidenciaDiv").addClass("hidden");
+            habilitarControles();
+            //habilitarTabsNuevaIncidencia(false);
+        };
+
+        function BotonAltaResolucion() {
+            $("#dropdown-toggle").hide();
+            $("#EditarResolucion").css("display", "block");
+            $("#EditarRespuesta").css("display", "none");
+            $("#resolverIncidenciaDiv").addClass("hidden");
+            $("#Editar").css("display", "none");
+            $("#Guardar").css("display", "none");
+            DeshabilitarControles();
+            //ocultarTabsNuevaIncidencia();
+        };
+
+        function BotonEditarRespuesta() {
+            $("#resolverIncidenciaDiv").removeClass("hidden");
+            $("#EditarRespuesta").css("display", "none");
+            $("#EditarResolucion").css("display", "none");
+            $("#dropdown-toggle").hide();
+            $("#Guardar").css("display", "none");
+            $("#Editar").css("display", "none");
+            $("#AdjuntarArchivosIncidencia").data("kendoUpload").enable(true);
+            $("#resolverIncidenciaDiv").addClass("hidden");
+            $("#cancelarIncidenciaDiv").addClass("hidden");
+            habilitarControles();
+            //habilitarTabsNuevaIncidencia(false);
+        };
+
+        function BotonAltaRespuesta() {
+            $("#dropdown-toggle").hide();
+            $("#EditarRespuesta").css("display", "block");
+            $("#responderIncidenciaDiv").addClass("hidden");
+            $("#EditarResolucion").css("display", "none");
+            $("#Editar").css("display", "none");
+            $("#Guardar").css("display", "none");
+            DeshabilitarControles();
+            //ocultarTabsNuevaIncidencia();
+        };
+
+        function BotonAltaCancelar() {
+            $("#dropdown-toggle").hide();
+            $("#EditarResolucion").css("display", "none");
+            $("#EditarRespuesta").css("display", "none");
+            $("#resolverIncidenciaDiv").addClass("hidden");
+            $("#Editar").css("display", "none");
+            $("#Guardar").css("display", "none");
+            $("#dropdown-toggle").hide();
+            $("#Guardar").css("display", "none");
+            $("#cancelarIncidenciaDiv").addClass("hidden");
+            $("#resolverIncidenciaDiv").addClass("hidden");
+            $("#responderIncidenciaDiv").addClass("hidden");
+
+            DeshabilitarAlCancelar();
+            //habilitarTabsNuevaIncidencia(true);
+        };
+
+
+        function Alta(Listado) {
+            $Incidencia.Incidencia.create(Listado, { token: $.cookie("token") }).done(function (result) {
+                if (Error(result)) {
+                    if (Listado.Nuevo) {
+                        Nuevo();
+                    }
+                    _FolioIncidencia = result.FolioIncidenciaID;
+                    _folioOriginalID=result.FolioOriginalID;
+                    _Edicion = "1";
+                    $("#Version").val(result.Version);
+                    BotonAlta();
+                    habilitarTabsNuevaIncidencia();
+                    //Muestro boton de siguiente paso
+                    $("#nuevaIncidenciaDiv").addClass("hidden");
+                    $("#responderIncidenciaDiv").addClass("hidden");
+                    $("#cancelarIncidenciaDiv").addClass("hidden");
+                    $("#resolverIncidenciaDiv").removeClass("hidden");
+                    $("#divFolio").removeClass("hidden");
+                    $("#spanFolio").text(result.FolioConfiguracionIncidenciaID);
+                    habilitarAcciones();
+                    //cargarTituloFolio();
+                    LimpiarHistorialFiles();
+                    displayMessage("notificationslabel0056", "", '0');
+                    CargaInicialEdicion(_FolioIncidencia);
+                }
+                //loadingStop();
+            });
+        };
+
+        function Editar(Listado) {
+            $Incidencia.Incidencia.update(Listado, { token: $.cookie("token") }).done(function (result) {
+                if (Error(result)) {
+                    if (Listado.Nuevo) {
+                        Nuevo();
+                    }
+                    _FolioIncidencia = result.ReturnMessage[0].split(",")[0]
+                    _folioOriginalID = result.ReturnMessage[0].split(",")[1]
+                    //LimpiarHistorialFiles();
+                    CargaInicialEdicion(_FolioIncidencia);
+                    displayMessage("notificationslabel0056", "", '0');
+                }
+                //loadingStop();
+            });
+        };
+
+        function LimpiarHistorialFiles() {
+            $(".k-upload-files").remove();
+            $(".k-upload-status").remove();
+            $(".k-upload-selected").remove();
+            $(".k-upload.k-header").addClass("k-upload-empty");
+            $(".k-upload-button").removeClass("k-state-focused");
+            $("#DescripcionArchivoIncidencia").val("");
+            $("#DescripcionArchivoResolver").val("");
+            $("#DescripcionArchivoResponder").val("");
+            $("#DescripcionArchivoCancelar").val("");
+        };
+        function EditarIncidencia() {
+            $("#Titulo").removeAttr("disabled");
+            $("#Descripcion").removeAttr("disabled");
+            Guardar();
+        };
+        function Guardar() {
+            if ($("#FechaRegistro").data("kendoDatePicker").value() === null) {
+                displayMessage("notificationslabel0082", "", "2");
+                return 0;
+            }
+            //loadingStart();
+            switch (tabSelected) {
+
+                case "Incidencia":
+                    if (validarRequeridosFormaIncidenciasGuardar()) {
+                        var Listado = ArrayListado();
+                        Listado.Estatus = "Abierta";
+                        $("#hdEstatus").val(Listado.Estatus);
+                        if (Listado.FolioIncidenciaID != "-1") {
+                            Editar(Listado);
+                            BotonAlta();
+                        } else {
+                            //habilitarControles();
+                            BotonAlta();
+                            Alta(Listado);
+                        }
+                    } else {
+                        displayMessage("notificationslabel0031", "", '1');
+                        //loadingStop();
+                    }
+                    break;
+
+                case "Resolver":
+                    //loadingStart();
+                    if (validarRequeridosFormaIncidenciasResolverIncidencia()) {
+                        var Listado = ArrayListado();
+
+                        Listado.Estatus = "Resuelto";
+                        $("#hdEstatus").val(Listado.Estatus);
+                        if (Listado.FolioIncidenciaID != "-1") {
+                            Editar(Listado);
+                            BotonAlta();
+                        } else {
+                            BotonAlta();
+                            Alta(Listado);
+                        }
+                    } else {
+                        displayMessage("notificationslabel0031", "", '1');
+                        //loadingStop();
+                        //$("#DetalleResolucionDiv").removeClass("hidden");
+                        //$("#ResueltoPorDiv").removeClass("hidden");
+                        //$("#FechaResolucionDiv").removeClass("hidden");
+                        //$("#MotivoCancelacionDiv").addClass("hidden");
+                    }
+                    //loadingStop();
+                    break;
+
+                case "Responder":
+                    //loadingStart();
+                    if (validarRequeridosFormaIncidenciasResponderIncidenciaIncidencia()) {
+                        var Listado = ArrayListado();
+                        Listado.Estatus = "Respondido";
+                        $("#hdEstatus").val(Listado.Estatus);
+                        if (Listado.FolioIncidenciaID != "-1") {
+                            Editar(Listado);
+                            BotonAlta();
+                        } else {
+                            BotonAlta();
+                            Alta(Listado);
+                        }
+                    } else {
+                        displayMessage("notificationslabel0031", "", '1');
+                        //loadingStop();
+                    };
+                    //loadingStop();
+                    break;
+
+                case "Cancelar":
+                    //loadingStart();
+                    if (validarRequeridosFormaIncidenciasCancelarIncidencia()) {
+                        var Listado = ArrayListado();
+                        Listado.Estatus = "Cancelado";
+                        $("#hdEstatus").val(Listado.Estatus);
+                        if (Listado.FolioIncidenciaID != "-1") {
+                            Editar(Listado);
+                            BotonAlta();
+                            $("#Editar").css("display", "none");
+                            $("#Guardar").css("display", "none");
+                            $("#dropdown-toggle").hide();
+                            //$("#nuevaIncidenciaDiv").addClass("hidden");
+                            //$("#responderIncidenciaDiv").addClass("hidden");
+                            //$("#cancelarIncidenciaDiv").addClass("hidden");
+                            //$("#resolverIncidenciaDiv").addClass("hidden");
+
+                        } else {
+                            BotonAlta();
+                            Alta(Listado);
+                        }
+                    } else {
+                        displayMessage("notificationslabel0031", "", '1');
+                        //loadingStop();
+                        //$("#MotivoCancelacionDiv").removeClass("hidden");
+                        //$("#DetalleResolucionDiv").addClass("hidden");
+                        //$("#ResueltoPorDiv").addClass("hidden");
+                        //$("#FechaResolucionDiv").addClass("hidden");
+                    }
+                    //loadingStop();
+                    break;
+            };
+        };
+
+        function GuardaryNuevoIncidencia() {
+            if ($("#FechaRegistro").data("kendoDatePicker").value() === null) {
+                displayMessage("notificationslabel0082", "", "2");
+                return 0;
+            }
+            //loadingStart();
+            if (validarRequeridosFormaIncidenciasGuardar()) {
+                var Listado = ArrayListado();
+                Listado.Estatus = "Abierta";
+                $("#hdEstatus").val(Listado.Estatus);
+                Listado.Nuevo = true;
+                if (Listado.FolioIncidenciaID != "-1") {
+                    Editar(Listado);
+                } else {
+                    //habilitarControles();
+                    BotonAlta();
+                    Alta(Listado);
+                }
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+                //loadingStop();
+            }
+        };
+
+        $("#RedirectIncidencia").click(function (e) {
+            e.preventDefault();
+            $("#tabstrip").data("kendoTabStrip").select(0);
+            tabSelected = "Incidencia";
+            cambiaActivosClick(tabSelected);
+        });
+
+        $("#RedirectResolver").click(function (e) {
+            e.preventDefault();
+            $("#tabstrip").data("kendoTabStrip").select(1);
+            tabSelected = "Resolver";
+            cambiaActivosClick(tabSelected);
+        });
+
+        $("#RedirectResponder").click(function (e) {
+            e.preventDefault();
+            $("#tabstrip").data("kendoTabStrip").select(2);
+            tabSelected = "Responder";
+            cambiaActivosClick(tabSelected);
+        });
+
+        $("#RedirectCancelar").click(function (e) {
+            e.preventDefault();
+            $("#tabstrip").data("kendoTabStrip").select(3);
+            tabSelected = "Cancelar";
+            cambiaActivosClick(tabSelected);
+        });
+
+        function NuevaIncidencia() {
+            $("#tabstrip").data("kendoTabStrip").select(0);
+            tabSelected = "Incidencia";
+            cambiaActivosClick(tabSelected);
+        };
+        function ResolverIncidencia() {
+            $("#tabstrip").data("kendoTabStrip").select(1);
+            tabSelected = "Resolver";
+            cambiaActivosClick(tabSelected);
+        };
+        function ResponderIncidencia() {
+            $("#tabstrip").data("kendoTabStrip").select(2);
+            tabSelected = "Responder";
+            cambiaActivosClick(tabSelected);
+        };
+        function CancelarIncidencia() {
+            $("#tabstrip").data("kendoTabStrip").select(3);
+            tabSelected = "Cancelar";
+            cambiaActivosClick(tabSelected);
+        };
+
+        function Nuevo() {
+            window.location.href = _incidenciasURL + "?leng=" + $("#language").data("kendoDropDownList").value();
+        };
+
+        function Cancelar() {
+            if (_Edicion != "-1") {
+                window.location.href = _ListadoIncidenciasUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
+            }
+            else {
+                window.location.href = _incidenciasURL + "?leng=" + $("#language").data("kendoDropDownList").value();
+            }
+        };
+
+        function LimpiarPantalla() {
+            //loadingStart();
+            $("#Clasificacion").data("kendoComboBox").value("");
+            $("#TipoIncidencia").data("kendoComboBox").value("");
+            $("#Version").val("");
+            $("#Titulo").val("");
+            $("#Descripcion").val("");
+            $("#Respuesta").val("");
+            $("#MotivoCancelacion").val("");
+            $("#DetalleResolucion").val("");
+            $("#RegistradoPor").val("");
+            $("#ResueltoPor").val("");
+            $("#RespondidoPor").val("");
+            $("#DescripcionArchivoIncidencia").val("");
+            Clasificacion = {};
+            TipoIncidencia = {};
+            _FolioIncidencia = "-1";
+            //ObtenerFechasporDefecto();
+            //loadingStop();
+        };
+        function hideElementsIncidencias() {
+            $(".sidebar").hide();
+            $(".logo").hide();
+            $(".search-bar").hide();
+            $(".notifications").hide();
+            $(".logged-user").hide();
+            $(".content-container").removeClass("topbar").addClass("printView");
+            $(".breadcrumb-container").hide();
+            $(".languageSelector").hide();
+            $(".pull-right").hide();
+            $("header").hide();
+            $(".content-frame").removeClass("content-frame");
+            $("body").css("background", "#FFFFFF");
+
+        };
+
+        function ocultarTabsNuevaIncidencia() {
+            if (tabSelected == "Incidencia") {
+                var tabStrip1 = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                tabStrip1.disable(tabStrip1.tabGroup.children().eq(1));
+                var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                tabStrip.disable(tabStrip.tabGroup.children().eq(2));
+                var tabStrip2 = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                tabStrip2.disable(tabStrip2.tabGroup.children().eq(3));
+            }
+        }
+
+        function habilitarTabsNuevaIncidencia(cancelar) {
+            var tabStrip1 = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+            tabStrip1.enable(tabStrip1.tabGroup.children().eq(1));
+            var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+            tabStrip.enable(tabStrip.tabGroup.children().eq(2));
+            var tabStrip2 = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+            tabStrip2.enable(tabStrip2.tabGroup.children().eq(3));
+        }
+
+        function habilitarAcciones() {
+            $("#RedirectIncidencia").removeClass("hidden");
+            $("#RedirectResponder").removeClass("hidden");
+            $("#RedirectResolver").removeClass("hidden");
+            $("#RedirectCancelar").removeClass("hidden");
+        }
+
+        function deshabilitarAcciones() {
+            $("#RedirectIncidencia").addClass("hidden");
+            $("#RedirectResponder").addClass("hidden");
+            $("#RedirectResolver").addClass("hidden");
+            $("#RedirectCancelar").addClass("hidden");
+        }
+
+        function formatoFechaKendo(splitYear, splitMonth, splitDay) {
+            var FechaRegistro = new Date(splitYear, splitMonth - 1, splitDay);
+            var curr_date = FechaRegistro.getDate();
+            var curr_month = FechaRegistro.getMonth() + 1; //Months are zero based
+            var curr_year = FechaRegistro.getFullYear();
+
+            if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+                format = "dd/MM/yyyy";
+            } else {
+                format = "MM/dd/yyyy";
+            };
+
+            var fecha = new Date(curr_year, curr_month - 1, curr_date);
+            var fechakendo = kendo.parseDate(fecha, format);
+
+            return fechakendo
+        };
+
+        function ControlErroresObjetosComboBox(control, result) {
+            if (Error(result)) {
+                $("#" + control).data("kendoComboBox").dataSource.data(result);
+            } else {
+                $("#" + control).data("kendoComboBox").dataSource.data([]);
+            };
+        };
+
+        function Error(data) {
+            if (data.ReturnCode) {
+                if (data.ReturnCode != 200) {
+                    if (data.ReturnCode == 401) {
+                        removeUserSession();
+                        return false;
+                    } else {
+                        displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        };
+
+        function hideElementsIncidencia() {
+            $(".sidebar").hide();
+            $(".logo").hide();
+            $(".search-bar").hide();
+            $(".notifications").hide();
+            $(".logged-user").hide();
+            $(".content-container").removeClass("topbar").addClass("printView");
+            $(".breadcrumb-container").hide();
+            $(".languageSelector").hide();
+            $(".pull-right").hide();
+            $("header").hide();
+            $(".content-frame").removeClass("content-frame");
+            $("body").css("background", "#FFFFFF");
+            $(".actionButtonSection").hide();
+        };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Incidencias"] = $IncidenciasModel;
+    $authorizationModel["RespuestaIncidencia"] = $RespuestaModel;
+    $authorizationModel["ResolucionIncidencia"] = $ResolucionModel;
+    $authorizationModel["CancelarIncidencia"] = $CancelarModel;
+
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            open: {
+                effects: "fadeIn"
+            }
+        },
+        //select: tabSeleccionado,
+        select: cambiaActivos,
+    });
+
+    CargaInicial();
+
+    if (_Edicion != "-1") {
+        CargaInicialEdicion(_FolioIncidencia);
+        //$("#RedirectIncidencia").trigger("click");
+    };
+
+    if (_LevantarIncidencia != "-1") {
+        cargaInicialLentarNuevaIncidencia(_TipoIncidencia, _Clasificacion, _ReferenciaID);
+    };
+
+    $("#FechaRegistro").on("change", function () {
+        if (!$("#FechaRegistro").data("kendoDatePicker").value() && this.value !== "") {
+            $("#FechaRegistro").css("color", "#EB4D50");
+            displayMessage("notificationslabel0082", "", "2")
+        } else {
+            $("#FechaRegistro").attr("style", "");
+        }
+    });
+    if (isInPopUp() && window.parent.$("#hdnOcultarMenus").val() == "1") {
+        hideElementsIncidencia();
+    };
+
+    if (!edicion) {
+        setTimeout(function () {
+            if ($("#Incidencias0021").hasClass("security_required") && !edicion) {
+                    $("#Incidencias0021").removeClass("security_required");
+                    $("#Incidencias0046").removeClass("security_required");
+                    $("#Incidencias0051").removeClass("security_required");
+                    $("#Incidencias0056").removeClass("security_required");
+            }
+        }, 200);
+        setTimeout(function () {
+            if ($("#Incidencias0021").hasClass("security_required") && !edicion) {
+                    $("#Incidencias0021").removeClass("security_required");
+                    $("#Incidencias0046").removeClass("security_required");
+                    $("#Incidencias0051").removeClass("security_required");
+                    $("#Incidencias0056").removeClass("security_required");
+            }
+        }, 2000);
+    }
+    }
+
+</script>

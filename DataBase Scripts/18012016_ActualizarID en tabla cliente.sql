@@ -1,0 +1,1 @@
+update Sam3_Cliente set Sam2ClienteID = -1 where ClienteID = 1

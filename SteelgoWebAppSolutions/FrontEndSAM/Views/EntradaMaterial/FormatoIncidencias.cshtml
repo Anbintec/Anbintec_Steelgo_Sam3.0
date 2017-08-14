@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Formato Incidencias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div id="incidencias" >
+            
+</div>
+
+
+<script>
+    @section JavascriptGlobalVariables {
+    var incidencias = Cookies.get("Incidencias");
+    }
+
+    @section JavascriptGlobalFunctions {
+
+    }
+    
+    @section JavascriptDocumentReadyFunctions {
+        //ocultar menu y sidebar
+        $(".pull-right").hide();
+        $(".sidebar").hide();
+        $(".breadcrumb-container").hide();
+        $("header").hide();
+        $(".content-container").removeClass("topbar").addClass("printView");
+        $(".content-frame").removeClass("content-frame");
+        $("body").css("background", "#FFFFFF");
+
+        var Client = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+        Client.add('DummyFormatoIncidencias');
+
+        Client.DummyFormatoIncidencias.read({}, { incidencias: JSON.stringify(incidencias), token: Cookies.get("token") }).done(function (data) {
+            //console.log("Client.DummyFormatoIncidencias.read");
+            var strhtml = "";
+            $.each(data, function (key) {
+                var strchecked = "";
+                var strTableRowspan = "<table>";
+                strTableRowspan += "<tr><td><label id='FormatoIncicencias0012'></label></td><td>" + data[key].Reference + "</td></tr>";
+                strTableRowspan += "<tr><td><label id='FormatoIncicencias0013'></label></td><td>&nbsp;</td></tr>";
+                strTableRowspan += "<tr><td colspan='2'>" + data[key].mmQuestion + "</td><td>&nbsp;</td></tr>";
+                strTableRowspan += "<tr><td><label id='FormatoIncicencias0014'></label></td><td>&nbsp;</td></tr>";
+                strTableRowspan += "<tr><td colspan='2'>" + data[key].mmResponse + "</td><td>&nbsp;</td></tr>";
+                strTableRowspan += "</table>";
+
+                strhtml = "<table>";
+                strhtml += "<tr><td><label id='FormatoIncicencias0001'></label></td><td>" + data[key].numRFI + "</td><td rowspan='11' style='vertical-align: top'>" + strTableRowspan + "</td></tr>";
+                strhtml += "<tr><td><label id='FormatoIncicencias0002'></label></td><td>" + data[key].numRFIRevNo + "</td></tr>";
+                strhtml += "<tr><td><label id='FormatoIncicencias0003'></label></td><td>" + data[key].numNoOfAttachmen + "</td></tr>";
+                strhtml += "<tr><td><label id='FormatoIncicencias0004'></label></td><td>" + data[key].datDate + "</td></tr>";
+                strhtml += "<tr><td><label id='FormatoIncicencias0005'></label></td><td>" + data[key].txtAskedBy + "</td></tr>";
+                strhtml += "<tr><td><label id='FormatoIncicencias0006'></label></td><td>" + data[key].ResponseBy + "</td></tr>";
+                strhtml += "<tr><td><label id='FormatoIncicencias0007'></label></td><td>" + data[key].ResponseDate + "</td></tr>";
+                strhtml += "<tr><td><label id='FormatoIncicencias0008'></label></td><td>" + data[key].TransNo + "</td></tr>";
+                strhtml += "<tr><td><label id='FormatoIncicencias0009'></label></td><td>" + data[key].ActionBy + "</td></tr>";
+                strhtml += "<tr><td><label id='FormatoIncicencias0010'></label></td><td>" + data[key].ActionDate + "</td></tr>";
+                if (data[key].ynClosed) strchecked = "checked='checked'";
+                strhtml += "<tr><td><label id='FormatoIncicencias0011'></label></td><td><input id='CheckNo' type='checkbox' " + strchecked + " disabled></td></tr>";
+                strhtml += "</table><br/>";
+                $("#incidencias").append(strhtml);
+            });
+            $("label[id*='FormatoIncicencias0001']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0001"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0002']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0002"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0003']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0003"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0004']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0004"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0005']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0005"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0006']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0006"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0007']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0007"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0008']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0008"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0009']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0009"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0010']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0010"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0011']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0011"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0012']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0012"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0013']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0013"][$("#language").data("kendoDropDownList").value()]);
+            });
+            $("label[id*='FormatoIncicencias0014']").each(function (index) {
+                $(this).text(_dictionary["FormatoIncicencias0014"][$("#language").data("kendoDropDownList").value()]);
+            });
+
+        });
+
+    }
+
+</script>

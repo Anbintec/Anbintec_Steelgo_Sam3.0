@@ -1,0 +1,351 @@
+﻿
+@{
+    ViewBag.Title = "Tracto";
+}
+
+ <div id="modalCamion"  class="form clearfix popup col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div id="TipoVehiculo_CamionDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0071"></label>
+                    <input id="TipoVehiculo_Camion" class="" />
+                </div>
+                <div id="TransportistaID_CamionDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0056"></label>
+                    <input id="TransportistaID_Camion" class="" />
+                </div>
+                @*<div id="ChoferID_CamionDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0057"></label>
+                    <input id="ChoferID_Camion" class="" />
+                </div>*@
+                <div id="Placas_CamionDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0058"></label>
+                    <input id="Placas_Camion" class="general-input" />
+                </div>
+                <div id="TarjetaCirculacion_CamionDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0059"></label>
+                    <input id="TarjetaCirculacion_Camion" class="general-input" />
+                </div>
+                <div id="PolizaSeguroDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0060"></label>
+                    <input id="PolizaSeguro" class="general-input" />
+                </div>
+                <div id="Unidad_CamionDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0072"></label>
+                    <input id="Unidad_Camion" class="general-input" />
+                </div>
+                <div id="Modelo_CamionDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0073"></label>
+                    <input id="Modelo_Camion" class="general-input" />
+                </div>
+                <div class="buttonSave">
+                    <a id="GuardarCamion" href="#" class="btn btn-primary">
+                        <span id="DetalleAvisoLlegada0061"></span>
+                    </a>
+                    <a id="CancelarCamion" href="#" class="btn btn-primary">
+                        <span id="DetalleAvisoLlegada0081"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+    @section JavascriptGlobalVariables {
+    var TipoVehiculoTracto = {}, TransportistaCamion = {}, ChoferCamion = {};
+    var $TractoModel = {
+        listContainer: {
+            create: "#GuardarCamion",
+            list: "",
+            detail: "",
+            destroy: ""
+        },
+        properties: {
+            tipoVehiculo: {
+                visible: "#TipoVehiculo_CamionDiv",
+                editable: "#TipoVehiculo_Camion",
+                required: "#TipoVehiculo_Camion"
+            },
+            transportista: {
+                visible: "#TransportistaID_CamionDiv",
+                editable: "#TransportistaID_Camion",
+                required: "#TransportistaID_Camion"
+            },
+            chofer: {
+                visible: "#ChoferID_CamionDiv",
+                editable: "#ChoferID_Camion",
+                required: "#ChoferID_Camion"
+            },
+            placas: {
+                visible: "#Placas_CamionDiv",
+                editable: "#Placas_Camion",
+                required: "#Placas_Camion"
+            },
+            tarjetacirculacion: {
+                visible: "#TarjetaCirculacion_CamionDiv",
+                editable: "#TarjetaCirculacion_Camion",
+                required: "#TarjetaCirculacion_Camion"
+            },
+            poliza: {
+                visible: "#PolizaSeguroDiv",
+                editable: "#PolizaSeguro",
+                required: "#PolizaSeguro"
+            },
+            unidad: {
+                visible: "#Unidad_CamionDiv",
+                editable: "#Unidad_Camion",
+                required: "#Unidad_Camion"
+            },
+            modelo: {
+                visible: "#Modelo_CamionDiv",
+                editable: "#Modelo_Camion",
+                required: "#Modelo_Camion"
+            },
+        }
+    };
+    }
+
+    @section JavascriptGlobalFunctions {
+    function CargaInicial() {
+        hideElementsTracto();
+        window.parent.$(".k-i-close").click(function (e) {
+            CancelarCamion();
+        });
+        $("#TipoVehiculo_Camion").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "TipoVehiculoID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarTipoVehiculoTracto(dataItem.TipoVehiculoID, dataItem.Nombre):CargarTipoVehiculoTracto("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    TipoVehiculoTracto = [];
+                    this.value("");
+                };
+            },
+            filter: "contains",
+        });
+        ObtenerTipoVehiculoTracto();
+        
+        $("#TransportistaID_Camion").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "TransportistaID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarTransportistaCamion(dataItem.TransportistaID, dataItem.Nombre):CargarTransportistaCamion("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    TransportistaCamion = {};
+                    this.value("");
+                };
+            },
+            filter: "contains",
+        });
+        ObtenerTransportistaCamion();
+
+        //$("#ChoferID_Camion").kendoComboBox({
+        //    dataTextField: "Nombre",
+        //    dataValueField: "ChoferID",
+        //    select: function (e) {
+        //        var dataItem = this.dataItem(e.item.index());
+        //        CargarChoferCamion(dataItem.ChoferID, dataItem.Nombre);
+
+        //    },
+        //    change: function (e) {
+        //        var value = this.value();
+        //        if (!value || this.selectedIndex == -1) {
+        //            ChoferCamion = {};
+        //            this.value("");
+        //        };
+        //    },
+        //    filter: "contains",
+        //});
+        //ObtenerChoferCamion();
+
+        $("#GuardarCamion").click(function (e) {
+            if (validarRequeridosModalCamion()) {
+                GuardarCamion();
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            };
+        });
+        $("#CancelarCamion").click(function (e) { CancelarCamion(); });
+
+        $("#TipoVehiculo_Camion").data("kendoComboBox").value(1);
+        $("#TipoVehiculo_Camion").data("kendoComboBox").enable(false);
+        CargarTipoVehiculoTracto(1, "Tracto");
+    };
+
+
+    function CargarTipoVehiculoTracto(id, value) {
+        TipoVehiculoTracto ={};
+        TipoVehiculoTracto = { TipoVehiculoID: id, Nombre: value };
+    };
+    
+    function CargarTransportistaCamion(id, value) {
+        TransportistaCamion = {};
+        TransportistaCamion = { TransportistaID: id, Nombre: value };
+    };
+
+    function CargarChoferCamion(id, value) {
+        ChoferCamion = {};
+        ChoferCamion = { ChoferID: id, Nombre: value };
+    };
+
+    function ObtenerTipoVehiculoTracto() {
+        $TipoVehiculo.TipoVehiculo.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("TipoVehiculo_Camion", result);
+        });
+    };
+
+    function ObtenerTransportistaCamion() {
+        $Transportista.Transportista.read({ esAvisoEntrada: 0, paginaID:Cookies.get("navegacion"), token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("TransportistaID_Camion", result);
+        });
+    };
+
+    function ObtenerChoferCamion() {
+        $Chofer.Chofer.read({ esAvisoEntrada: 0, token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("ChoferID_Camion", result);
+        });
+    };
+
+    function cerrarVentanaModal() {
+        window.parent.$("#window").data("kendoWindow").close();
+        cleanDisplayMessage();
+    };
+
+   
+    function hideElementsTracto() {
+        $(".sidebar").hide();
+        $(".logo").hide();
+        $(".search-bar").hide();
+        $(".notifications").hide();
+        $(".logged-user").hide();
+        $(".content-container").removeClass("topbar").addClass("printView");
+        $(".breadcrumb-container").hide();
+        $(".languageSelector").hide();
+        $(".pull-right").hide();
+        $("header").hide();
+        $(".content-frame").removeClass("content-frame");
+        $("body").css("background", "#FFFFFF");
+    };
+
+    function LimpiarModalCamion() {
+        $("#TransportistaID_Camion").data("kendoComboBox").value("");
+        //$("#ChoferID_Camion").data("kendoComboBox").value("");
+        $("#Placas_Camion").val("");
+        $("#TarjetaCirculacion_Camion").val("");
+        $("#PolizaSeguro").val("");
+        $("#Unidad_Camion").val("");
+        $("#Modelo_Camion").val("");
+        TransportistaCamion = {};
+        ChoferCamion = {};
+        TipoVehiculoTracto = {};
+    };
+
+    function validarRequeridosModalCamion() {
+        var bool = true;
+        $("#modalCamion .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if (!$(this).val()) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                    $(this).closest("div").addClass("clearfix");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                    $(this).closest("div").removeClass("clearfix");
+                };
+            };
+        });
+        return bool;
+    };
+
+    function cancelarvalidacionRequeridosModalCamion() {
+        $("#modalCamion .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                $(this).closest("div").find("label").removeClass("error");
+                $(this).closest("div").removeClass("clearfix");
+            };
+        });
+    };
+
+    function GuardarCamion() {
+        var transportistaID = TransportistaCamion.TransportistaID ? TransportistaCamion.TransportistaID : "-1";
+        var choferid = ChoferCamion.ChoferID ? ChoferCamion.ChoferID : "-1";
+
+        CamionModal = [];
+        CamionModal[0] = { TipoVehiculoID: "", Placas: "", TarjetaCirculacion: "", PolizaSeguro: "", Unidad: "", Modelo: "", VehiculoID: "", ChoferID: "", TransportistaID: "", TractoID: "" };
+
+        CamionModal[0].TipoVehiculoID = $("#TipoVehiculo_Camion").val();
+        CamionModal[0].Placas = $("#Placas_Camion").val();
+        CamionModal[0].TarjetaCirculacion = $("#TarjetaCirculacion_Camion").val();
+        CamionModal[0].PolizaSeguro = $("#PolizaSeguro").val();
+        CamionModal[0].Unidad = $("#Unidad_Camion").val();
+        CamionModal[0].Modelo = $("#Modelo_Camion").val();
+        CamionModal[0].VehiculoID = "";
+        CamionModal[0].ChoferID = 1;//choferid;
+        CamionModal[0].TransportistaID = transportistaID;
+        CamionModal[0].TractoID = "";
+
+        $Camion.Tracto.create(CamionModal[0], { token: Cookies.get("token") }).done(function (data) {
+            LimpiarModalCamion();
+            if (Error(data)) {
+                cerrarVentanaModal();
+                window.parent.ObtenerCamionEntradaMaterial();
+            };
+        });
+    };
+
+
+    function CancelarCamion() {
+        LimpiarModalCamion();
+        cerrarVentanaModal();
+        cancelarvalidacionRequeridosModalCamion();
+    };
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Tracto"] = $TractoModel;
+    CargaInicial();
+    $("#language").data("kendoDropDownList").select(_languageOrder[window.parent.$("#language").data("kendoDropDownList").value()]);
+    $("#language").data("kendoDropDownList").trigger("change");
+    applySecurityPolicy(false);
+    }
+    @section JavascriptDocumentReadyHomeCookie {
+    //Cookies.set("home", true, { path: '/' });
+    //Cookies.set("navegacion", "36", { path: '/' });
+    }
+</script>

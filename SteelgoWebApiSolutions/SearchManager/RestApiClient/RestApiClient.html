@@ -1,0 +1,20 @@
+<!-- jQuery -->
+<script src="jquery-2.1.4.js"></script>
+
+<!-- jQuery rest -->
+<script src="jquery.rest.js"></script>
+
+
+<script>
+	var client = new $.RestClient('http://localhost:60921/securitymanager/api/');
+	client.add('authentication');
+	client.authentication.read({username:"YWRtaW4",token:"RXN0ZUVzVW5Ub2tlbkdlbmVyYWRvRGVBbGd1bmFNYW5lcmE"}).done(function(data) {
+		console.log(data);
+	});
+	client.authentication.create({}, {username:"YWRtaW4", password:"Q2hlbHNlYTEwMiE"}).done(function(data) {
+		console.log(data);
+	});
+	client.authentication.destroy({}, {username:"YWRtaW4",token:"RXN0ZUVzVW5Ub2tlbkdlbmVyYWRvRGVBbGd1bmFNYW5lcmE"}).done(function(data) {
+		console.log(data);
+	});
+</script>

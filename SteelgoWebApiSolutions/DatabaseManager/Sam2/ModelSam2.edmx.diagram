@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="296cd0c1043b4c099bb278b53a1ed16d" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="ModelSam2.Acero" Width="1.5" PointX="8.25" PointY="301" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.AgrupadoresPND" Width="1.5" PointX="35.25" PointY="329.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.AgrupadoresPorJunta" Width="1.5" PointX="35.25" PointY="333.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.AgrupadoresReparaciones" Width="1.5" PointX="35.25" PointY="337.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.AgrupadoresSoportes" Width="1.5" PointX="35.25" PointY="341.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.AgrupadoresSpoolPND" Width="1.5" PointX="30" PointY="323.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.aplicaPND" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.aspnet_Applications" Width="1.5" PointX="0.75" PointY="292.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.aspnet_Membership" Width="1.5" PointX="8.25" PointY="295" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.aspnet_SchemaVersions" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.aspnet_Users" Width="1.5" PointX="3" PointY="285.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.BastonSpool" Width="1.5" PointX="33" PointY="308.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.BastonSpoolJunta" Width="1.5" PointX="38.25" PointY="314.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.BuscaArchivo" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CampoSeguimientoJunta" Width="1.5" PointX="7.5" PointY="306" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CampoSeguimientoSpool" Width="1.5" PointX="36.75" PointY="289.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CategoriaPendiente" Width="1.5" PointX="5.25" PointY="253.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Cedula" Width="1.5" PointX="5.25" PointY="257" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Cliente" Width="1.5" PointX="5.25" PointY="261" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Colada" Width="1.5" PointX="27.75" PointY="287.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ColadaMTR" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Color" Width="1.5" PointX="5.25" PointY="264.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ConceptoEstimacion" Width="1.5" PointX="5.25" PointY="267.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ConfiguracionArmadoMaterial" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ConfiguracionDestajoArmado" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ConfiguracionDestajoSoldadorRaiz" Width="1.5" PointX="5.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ConfiguracionDestajoSoldadorRelleno" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CongeladoParcial" Width="1.5" PointX="41.25" PointY="306.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Consumible" Width="1.5" PointX="10.5" PointY="314" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Contacto" Width="1.5" PointX="5.25" PointY="275.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ContactoCliente" Width="1.5" PointX="7.5" PointY="287.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Cortador" Width="1.5" PointX="10.5" PointY="331.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Corte" Width="1.5" PointX="46.5" PointY="304.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CorteDetalle" Width="1.5" PointX="51.75" PointY="304.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CorteSpool" Width="1.5" PointX="30" PointY="317.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CorteSpoolDeleted" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CorteSpoolHistorico" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CorteSpoolPendiente" Width="1.5" PointX="27" PointY="313.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CostoArmado" Width="1.5" PointX="10.5" PointY="302.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CostoProcesoRaiz" Width="1.5" PointX="10.5" PointY="308.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CostoProcesoRelleno" Width="1.5" PointX="13.5" PointY="308.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Cuadrante" Width="1.5" PointX="7.5" PointY="335.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.CuadranteHistorico" Width="1.5" PointX="30" PointY="314" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Defecto" Width="1.5" PointX="7.5" PointY="327.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Despachador" Width="1.5" PointX="10.5" PointY="327.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Despacho" Width="1.5" PointX="41.25" PointY="300.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DestajoSoldador" Width="1.5" PointX="7.5" PointY="316.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DestajoSoldadorDetalle" Width="1.5" PointX="48.75" PointY="319.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DestajoSoldadorRellenadorFaltante" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DestajoSoldaduraRellenador" Width="1.5" PointX="12.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DestajoTubero" Width="1.5" PointX="10.5" PointY="317.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DestajoTuberoDetalle" Width="1.5" PointX="54.75" PointY="311.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Destino" Width="1.5" PointX="9.75" PointY="335.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DetallePersonalizacionSeguimientoJunta" Width="1.5" PointX="21.75" PointY="311.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DetallePersonalizacionSeguimientoSpool" Width="1.5" PointX="39" PointY="309.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Diametro" Width="1.5" PointX="5.25" PointY="294.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DocIsoLog" Width="1.5" PointX="13.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DTSErrorLog" Width="1.5" PointX="5.25" PointY="298.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DTSExecLog" Width="1.5" PointX="7.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DTSSummaryLog" Width="1.5" PointX="5.25" PointY="302.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DupontSpool" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Embarque" Width="1.5" PointX="15.75" PointY="293.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.EmbarqueInventario" Width="1.5" PointX="46.5" PointY="300.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.EmbarqueSpool" Width="1.5" PointX="30" PointY="298.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Espesor" Width="1.5" PointX="7.5" PointY="283.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.EspesorComercial" Width="1.5" PointX="9.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Estacion" Width="1.5" PointX="24.75" PointY="316.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.EstatusOrden" Width="1.5" PointX="5.25" PointY="305.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Estimacion" Width="1.5" PointX="18.75" PointY="297" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.EstimacionJunta" Width="1.5" PointX="48.75" PointY="299" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.EstimacionSpool" Width="1.5" PointX="24" PointY="284.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.FabArea" Width="1.5" PointX="5.25" PointY="308.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Fabricante" Width="1.5" PointX="13.5" PointY="287.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.FabricanteProyecto" Width="1.5" PointX="18.75" PointY="301.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.FactorDiametro" Width="1.5" PointX="11.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.FactorMaterial" Width="1.5" PointX="13.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.FactorTipoJunta" Width="1.5" PointX="15.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.FamiliaAcero" Width="1.5" PointX="16.5" PointY="302.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.FamiliaMaterial" Width="1.5" PointX="5.25" PointY="311.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.FrentePintura" Width="1.5" PointX="5.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.HistoricoWorkstatus" Width="1.5" PointX="33" PointY="303.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.InspeccionDimensionalPatio" Width="1.5" PointX="40.5" PointY="316" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.InspeccionVisual" Width="1.5" PointX="18.75" PointY="293" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.InspeccionVisualCampo" Width="1.5" PointX="49.5" PointY="326.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.InspeccionVisualPatio" Width="1.5" PointX="54.75" PointY="317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.InspeccionVisualPatioDefecto" Width="1.5" PointX="60" PointY="303.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Inspector" Width="1.5" PointX="12.5" PointY="335.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Isolog" Width="1.5" PointX="15.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.IsoPrioridadEtileno" Width="1.5" PointX="15.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ItemCode" Width="1.5" PointX="18.75" PointY="320.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ItemCodeEquivalente" Width="1.5" PointX="33" PointY="293.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaArmado" Width="1.5" PointX="41.25" PointY="310.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaArmadoPagado" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaCampo" Width="1.5" PointX="46.5" PointY="334" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaCampoArmado" Width="1.5" PointX="44.25" PointY="305.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaCampoInspeccionVisual" Width="1.5" PointX="51.75" PointY="314.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaCampoInspeccionVisualDefecto" Width="1.5" PointX="57" PointY="310.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaCampoReportePND" Width="1.5" PointX="48.75" PointY="330.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaCampoReportePNDCuadrante" Width="1.5" PointX="57" PointY="314.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaCampoReportePNDSector" Width="1.5" PointX="57" PointY="301.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaCampoReporteTT" Width="1.5" PointX="48.75" PointY="315.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaCampoRequisicion" Width="1.5" PointX="51.75" PointY="310.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaCampoSoldadura" Width="1.5" PointX="51.75" PointY="318.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaCampoSoldaduraDetalle" Width="1.5" PointX="57" PointY="305.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaInspeccionVisual" Width="1.5" PointX="54.75" PointY="306.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaInspeccionVisualDefecto" Width="1.5" PointX="60" PointY="307.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaPruebaDig" Width="1.5" PointX="17.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaReporteDiarioSoldadura" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaReportePnd" Width="1.5" PointX="45.75" PointY="328.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaReportePndCuadrante" Width="1.5" PointX="52" PointY="300.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaReportePndSector" Width="1.5" PointX="55" PointY="297.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaReporteTt" Width="1.5" PointX="54.75" PointY="320.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaRequisicion" Width="1.5" PointX="54.75" PointY="301.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaSoldadura" Width="1.5" PointX="51.75" PointY="324.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaSoldaduraDetalle" Width="1.5" PointX="57" PointY="320.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaSoldaduraPagado" Width="1.5" PointX="5.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaSpool" Width="1.5" PointX="33" PointY="315.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaSpoolDeleted" Width="1.5" PointX="17.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaSpoolHistorico" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaSpoolPendiente" Width="1.5" PointX="27" PointY="319.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaWorkstatus" Width="1.5" PointX="43.5" PointY="333.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.KgTeorico" Width="1.5" PointX="7.5" PointY="276" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.LotePintura" Width="1.5" PointX="41.25" PointY="325.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Maquina" Width="1.5" PointX="13.5" PointY="314" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.MaterialSpool" Width="1.5" PointX="36" PointY="303.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.MaterialSpoolDeleted" Width="1.5" PointX="7.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.MaterialSpoolHistorico" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.MaterialSpoolPendiente" Width="1.5" PointX="36" PointY="298.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.MivDragados" Width="1.5" PointX="9.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Modulo" Width="1.5" PointX="5.25" PointY="324.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ModuloSeguimientoJunta" Width="1.5" PointX="5.25" PointY="327.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ModuloSeguimientoSpool" Width="1.5" PointX="34.5" PointY="289.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.NumeroUnico" Width="1.5" PointX="36" PointY="316.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.NumeroUnicoCorte" Width="1.5" PointX="44.25" PointY="299.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.NumeroUnicoInventario" Width="1.5" PointX="44.25" PointY="311" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.NumeroUnicoMovimiento" Width="1.5" PointX="38.25" PointY="323.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.NumeroUnicoSegmento" Width="1.5" PointX="38.25" PointY="297.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.OptEntregaOrdenesTrabajo" Width="1.5" PointX="11.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.OptInfoArmadoSoldadura" Width="1.5" PointX="17.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.OptProgramacionOT" Width="1.5" PointX="17.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.OptReporteFaltantes" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.OptReportes" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.OrdenTrabajo" Width="1.5" PointX="18.75" PointY="304.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.OrdenTrabajoDetallesEntrega" Width="1.5" PointX="21" PointY="299.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.OrdenTrabajoFechaPrevSoldadura" Width="1.5" PointX="2.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.OrdenTrabajoJunta" Width="1.5" PointX="38.25" PointY="303.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.OrdenTrabajoMaterial" Width="1.5" PointX="49.5" PointY="303.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.OrdenTrabajoSpool" Width="1.5" PointX="33" PointY="298.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Pagina" Width="1.5" PointX="30.75" PointY="302.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PathOT" Width="1.5" PointX="19.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Patio" Width="1.5" PointX="5.25" PointY="330.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Pendiente" Width="1.5" PointX="7.5" PointY="311.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PendienteDetalle" Width="1.5" PointX="21.75" PointY="285.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Peq" Width="1.5" PointX="13.5" PointY="301.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Perfil" Width="1.5" PointX="5.25" PointY="335.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PerfilPermiso" Width="1.5" PointX="21.75" PointY="314.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PeriodoDestajo" Width="1.5" PointX="5.25" PointY="339" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PeriodoPrograma" Width="1.5" PointX="30" PointY="293.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Permiso" Width="1.5" PointX="16.5" PointY="309.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PersonalizacionSeguimientoJunta" Width="1.5" PointX="30.75" PointY="305.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PersonalizacionSeguimientoSpool" Width="1.5" PointX="30.75" PointY="309.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PinturaAvance" Width="1.5" PointX="43.5" PointY="316.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PinturaCondicionesAmbientales" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PinturaNumeroUnico" Width="1.5" PointX="41.25" PointY="295.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PinturaReporteInspeccionDetalle" Width="1.5" PointX="19.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PinturaSpool" Width="1.5" PointX="40.5" PointY="320" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PreList" Width="1.5" PointX="38.25" PointY="294.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PrioridadDragados" Width="1.5" PointX="19.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProcesoPinturaDetalle" Width="1.5" PointX="43.5" PointY="320.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProcesoRaiz" Width="1.5" PointX="5.25" PointY="342.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProcesoRelleno" Width="1.5" PointX="5.25" PointY="346.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Proveedor" Width="1.5" PointX="13.5" PointY="291.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProveedorPintura" Width="1.5" PointX="41.25" PointY="328.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProveedorProyecto" Width="1.5" PointX="21.75" PointY="296.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Proyecto" Width="1.5" PointX="10.5" PointY="288.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProyectoCamposRecepcion" Width="1.5" PointX="21.75" PointY="302.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProyectoConfiguracion" Width="1.5" PointX="15.75" PointY="288.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProyectoConsecutivo" Width="1.5" PointX="18.75" PointY="289.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProyectoDossier" Width="1.5" PointX="12.75" PointY="328.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProyectoNomenclaturaSpool" Width="1.5" PointX="21.75" PointY="291.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProyectoPendiente" Width="1.5" PointX="21.75" PointY="327.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProyectoPrograma" Width="1.5" PointX="21.75" PointY="307.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProyectoReporte" Width="1.5" PointX="14.75" PointY="336.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Recepcion" Width="1.5" PointX="24.75" PointY="296.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.RecepcionNumeroUnico" Width="1.5" PointX="49.5" PointY="311.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ReporteCampoPND" Width="1.5" PointX="46.5" PointY="341.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ReporteCampoTT" Width="1.5" PointX="46.5" PointY="296.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ReporteDiarioSoldadura" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ReporteDimensional" Width="1.5" PointX="15.75" PointY="329.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ReporteDimensionalDetalle" Width="1.5" PointX="46.5" PointY="318.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ReporteDimensionalDetalleDeleted" Width="1.5" PointX="19.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ReportePnd" Width="1.5" PointX="12.75" PointY="324.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ReporteSpoolPnd" Width="1.5" PointX="15.75" PointY="325.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ReporteTt" Width="1.5" PointX="18.75" PointY="327.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Requisicion" Width="1.5" PointX="18.75" PointY="331.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.RequisicionCampo" Width="1.5" PointX="49.5" PointY="294.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.RequisicionNumeroUnico" Width="1.5" PointX="24.75" PointY="293" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.RequisicionNumeroUnicoDetalle" Width="1.5" PointX="38.25" PointY="306.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.RequisicionPintura" Width="1.5" PointX="24.75" PointY="301" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.RequisicionPinturaDetalle" Width="1.5" PointX="46.5" PointY="315" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.RequisicionSpool" Width="1.5" PointX="17.75" PointY="336.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Reserva" Width="1.5" PointX="30.75" PointY="333.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ReservaItemcode" Width="1.5" PointX="33" PointY="312.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ResultadoPND" Width="1.5" PointX="19.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.RSF_Settings" Width="1.5" PointX="17.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SAC_Temp_area" Width="1.5" PointX="19.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SAC_Temp_BHTecnip" Width="1.5" PointX="4.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SAC_Temp_BHTInventario" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SAC_Temp_WPS" Width="1.5" PointX="9.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SistemaPintura" Width="1.5" PointX="11.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SistemaPinturaConfig" Width="1.5" PointX="13.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Soldador" Width="1.5" PointX="16.5" PointY="314.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Spool" Width="1.5" PointX="27.75" PointY="292.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SpoolDimensionPintura" Width="1.5" PointX="21.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SpoolHistorico" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SpoolHold" Width="1.5" PointX="30" PointY="327.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SpoolHoldHistorial" Width="1.5" PointX="30" PointY="330.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SpoolHoldUpdate" Width="1.5" PointX="21.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SpoolPendiente" Width="1.5" PointX="24.75" PointY="304.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SpoolReportePnd" Width="1.5" PointX="46.5" PointY="310.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SpoolRequisicion" Width="1.5" PointX="46.5" PointY="323" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.SpoolsDeleted" Width="1.5" PointX="21.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.StatusEmbarque" Width="1.5" PointX="21.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Subparte_Dragados" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.sysdiagrams" Width="1.5" PointX="6.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Taller" Width="1.5" PointX="13.5" PointY="317.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TecnicaSoldador" Width="1.5" PointX="54.75" PointY="294.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TempCodigo" Width="1.5" PointX="15.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoCorte" Width="1.5" PointX="5.25" PointY="350.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoJunta" Width="1.5" PointX="5.25" PointY="354.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoMaterial" Width="1.5" PointX="5.25" PointY="359.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoMovimiento" Width="1.5" PointX="5.25" PointY="362.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoPendiente" Width="1.5" PointX="5.25" PointY="366.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoPrueba" Width="1.5" PointX="5.25" PointY="369.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoPruebaSpool" Width="1.5" PointX="5.25" PointY="373.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoRechazo" Width="1.5" PointX="5.25" PointY="376.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoReporteDimensional" Width="1.5" PointX="5.25" PointY="379.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoReporteProyecto" Width="1.5" PointX="5.25" PointY="382.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Transferencia" Width="1.5" PointX="24.75" PointY="325" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TransferenciaSpool" Width="1.5" PointX="36" PointY="311.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Transportista" Width="1.5" PointX="13.5" PointY="295.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TransportistaProyecto" Width="1.5" PointX="24.75" PointY="289.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Tubero" Width="1.5" PointX="16.5" PointY="319.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.UbicacionFisica" Width="1.5" PointX="16.5" PointY="298" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.UltimoProceso" Width="1.5" PointX="5.25" PointY="385.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.UrlProyecto" Width="1.5" PointX="17.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Usuario" Width="1.5" PointX="19.5" PointY="314" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.UsuarioProyecto" Width="1.5" PointX="27.75" PointY="307.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.WorkstatusSpool" Width="1.5" PointX="38.25" PointY="339.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Wpq" Width="1.5" PointX="36" PointY="294.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.Wps" Width="1.5" PointX="21.75" PointY="318.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.WpsProyecto" Width="1.5" PointX="18.75" PointY="310.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.BI_Join_MaterialSeguimiento" Width="1.5" PointX="0.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.DestajoArmado" Width="1.5" PointX="23.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.FactorCedula" Width="1.5" PointX="23.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.FechasDestajo" Width="1.5" PointX="8.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.JuntaInspeccionDig" Width="1.5" PointX="23.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.PinturaReporteInspeccion" Width="1.5" PointX="10.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.ProcesoPintura" Width="1.5" PointX="23.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.RespaldoTransferencias" Width="1.5" PointX="23.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.RespaldoTransferenciasSpool" Width="1.5" PointX="23.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.RevisadosAsignacionMateriales" Width="1.5" PointX="23.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.rid_dragados" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TempCargaMasiva" Width="1.5" PointX="2.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.tempDespachos20150205" Width="1.5" PointX="25.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.tempMovimientosInventario" Width="1.5" PointX="4.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TempNumerosTransferencias" Width="1.5" PointX="25.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TempNumeroUnico" Width="1.5" PointX="25.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.tempNumeroUnicoInventario0210" Width="1.5" PointX="12.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.tempNumeroUnicoInventarioRespaldo" Width="1.5" PointX="25.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.tempNumeroUnicoMovimiento0210" Width="1.5" PointX="14.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.tempNumeroUnicoSegmento0210" Width="1.5" PointX="16.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TempSpoolCargaJuntasPND" Width="1.5" PointX="25.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TempTransferenciaModificado" Width="1.5" PointX="18.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TempTransferenciaSpoolModificado" Width="1.5" PointX="20.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.tempWksSpool" Width="1.5" PointX="25.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoFabClass" Width="1.5" PointX="6.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TipoFabLine" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TMP_UpdateSpool" Width="1.5" PointX="22.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelSam2.TMP_UpdateSpoolID" Width="1.5" PointX="27.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="ModelSam2.FK_Acero_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Acero_FamiliaAcero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Colada_Acero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Agrupador__Junta__42E385AC" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Agrupador__Junta__59C6EB04" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Agrupador__Junta__4C6CEFE6" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Agrupador__Junta__47A83AC9" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Agrupador__Spool__348057BC" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Agrupador__TipoJ__35747BF5" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__aspnet_Me__Appli__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__aspnet_Us__Appli__0DAF0CB0" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__aspnet_Me__UserI__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CampoSeguimientoJunta_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CategoriaPendiente_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Cedula_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Cliente_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Colada_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Color_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ConceptoEstimacion_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CongeladoParcial_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Consumible_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Contacto_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ContactoCliente_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Corte_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteDetalle_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteSpool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteSpoolPendiente_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoArmado_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRaiz_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRelleno_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Defecto_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Despacho_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoSoldador_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoSoldadorDetalle_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoTubero_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoTuberoDetalle_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Diametro_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DTSErrorLog_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DTSSummaryLog_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Embarque_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EmbarqueInventario_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EmbarqueSpool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Espesor_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EstatusOrden_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Estimacion_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EstimacionDetalle_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EstimacionSpool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_FabArea_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Fabricante_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_FabricanteProyecto_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_FamiliaAcero_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_FamiliaMaterial_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_InspeccionDimensionalPatio_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_InspeccionVisual_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_InspeccionVisualPatio_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_InspeccionVisualPatioDefecto_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ItemCode_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ItemCodeEquivalente_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaArmado_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampo_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoArmado_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoInspeccionVisual_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoInspeccionVisualDefecto_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReportePND_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReportePNDCuadrante_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReportePNDSector_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReporteTT_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoRequisicion_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoSoldadura_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoSoldaduraDetalle_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaInspeccionVisual_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaInspeccionVisualDefecto_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePnd_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePndCuadrante_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePndSector_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReporteTt_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaRequisicion_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSoldadura_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpoolPendiente_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaWorkstatus_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Maquina_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_MaterialSpool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_MaterialSpoolPendiente_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Modulo_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ModuloSeguimientoJunta_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnico_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoCorte_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoInventario_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoMovimiento_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoSegmento_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajo_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoJunta_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoMaterial_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoSpool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Pagina_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Patio_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Pendiente_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PendienteDetalle_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Peq_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Perfil_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PerfilPermiso_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PeriodoDestajo_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PeriodoPrograma_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Permiso_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PersonalizacionSeguimientoJunta_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PersonalizacionSeguimientoSpool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PinturaNumeroUnico_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PinturaSpool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProcesoRaiz_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProcesoRelleno_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Proveedor_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProveedorProyecto_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Proyecto_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoConfiguracion_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoConsecutivo_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoNomenclaturaSpool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoPrograma_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoReporte_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Recepcion_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RecepcionNumeroUnico_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteDimensional_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteDimensionalDetalle_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReportePnd_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteSpoolPnd_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteTt_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Requisicion_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionNumeroUnico_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionNumeroUnicoDetalle_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionPintura_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionPinturaDetalle_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionSpool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Soldador_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Spool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolPendiente_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolReportePnd_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolRequisicion_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Taller_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TipoCorte_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TipoJunta_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TipoMaterial_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TipoMovimiento_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TipoPendiente_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TipoPrueba_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TipoPruebaSpool_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TipoRechazo_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TipoReporteDimensional_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TipoReporteProyecto_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Transportista_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TransportistaProyecto_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Tubero_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_UbicacionFisica_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_UltimoProceso_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Usuario_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Usuario_aspnet_Users_UsuarioModifica" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_UsuarioProyecto_aspnet_UsuarioModifica" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Wpq_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Wps_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_WpsProyecto_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__BastonSpo__Talle__092B1A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_BastonSpool_Estacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_BastonSpool_Spool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_BastonSpool_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_BastonSpoolJunta_BastonSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_BastonSpoolJunta_JuntaSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_BastonSpoolJunta_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CampoSeguimientoJunta_ModuloSeguimientoJunta" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DetallePersonalizacionSeguimientoJunta_CampoSeguimientoJunta" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CampoSeguimientoSpool_ModuloSeguimientoSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DetallePersonalizacionSeguimientoSpool_CampoSeguimientoSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Pendiente_CategoriaPendiente" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PendienteDetalle_CategoriaPendiente" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoArmado_Cedula" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRaiz_Cedula" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRelleno_Cedula" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Espesor_Cedula" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_KgTeorico_Cedula" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Peq_Cedula" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ContactoCliente_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Proyecto_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Colada_Fabricante" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Colada_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnico_Colada" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Proyecto_Color" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EstimacionJunta_ConceptoEstimacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EstimacionSpool_ConceptoEstimacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CongeladoParcial_MaterialSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CongeladoParcial_NumeroUnico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Consumible_Patio" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoSoldaduraDetalle_Consumible" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSoldaduraDetalle_Consumible" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Fabricante_Contacto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Proveedor_Contacto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Proyecto_Contacto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Transportista_Contacto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Cortador__PatioI__613302A2" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Cortador__Taller__603EDE69" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Corte_NumeroUnicoCorte" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Corte_NumeroUnicoMovimiento_Merma" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Corte_NumeroUnicoMovimiento_Preparacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Corte_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteDetalle_Corte" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteDetalle_Maquina" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteDetalle_MaterialSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteDetalle_NumeroUnicoMovimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteDetalle_OrdenTrabajoSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoMaterial_CorteDetalle" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteSpool_ItemCode" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteSpool_Spool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteSpool_TipoCorte_Material1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteSpool_TipoCorte_Material2" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteSpoolHistorico_SpoolHistorico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteSpoolPendiente_ItemCode" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteSpoolPendiente_SpoolPendiente" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteSpoolPendiente_TipoCorte_Material1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CorteSpoolPendiente_TipoCorte_Material2" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoArmado_Diametro" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoArmado_FamiliaAcero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoArmado_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoArmado_TipoJunta" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRaiz_Diametro" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRaiz_FamiliaAcero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRaiz_ProcesoRaiz" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRaiz_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRaiz_TipoJunta" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRelleno_Diametro" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRelleno_FamiliaAcero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRelleno_ProcesoRelleno" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRelleno_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CostoProcesoRelleno_TipoJunta" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Cuadrante__Patio__77816B1D" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CuadranteHistorico_Cuadrante" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Destino_CuadranteID" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CuadranteHistorico_Spool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_CuadranteHistorico_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Defecto_TipoPrueba" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoInspeccionVisualDefecto_Defecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReportePNDCuadrante_Defecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReportePNDSector_Defecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaInspeccionVisualDefecto_Defecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePndCuadrante_Defecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePndSector_Defecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Despachad__Patio__5B7A294C" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Despachad__Talle__5A860513" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Despacho_MaterialSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Despacho_NumeroUnico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Despacho_NumeroUnicoMovimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Despacho_OrdenTrabajoSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Despacho_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoMaterial_Despacho" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoSoldador_PeriodoDestajo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoSoldador_Soldador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoSoldadorDetalle_DestajoSoldador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoSoldadorDetalle_JuntaWorkstatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoSoldadorDetalle_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoTubero_PeriodoDestajo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoTubero_Tubero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoTuberoDetalle_DestajoTubero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoTuberoDetalle_JuntaWorkstatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DestajoTuberoDetalle_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Destino_Patio" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Destino_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Transferencia_DestinoID" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DetallePersonalizacionSeguimientoJunta_PersonalizacionSeguimientoJunta" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_DetallePersonalizacionSeguimientoSpool_PersonalizacionSeguimientoSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Espesor_Diametro" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_KgTeorico_Diametro" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Peq_Diametro" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Embarque_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EmbarqueSpool_Embarque" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EmbarqueInventario_NumeroUnicoMovimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EmbarqueInventario_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EmbarqueSpool_WorkstatusSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Estacion_Taller" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Estacion_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpool_Estacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajo_EstatusOrden" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Estimacion_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EstimacionJunta_Estimacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EstimacionSpool_Estimacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EstimacionDetalle_JuntaWorkstatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_EstimacionSpool_WorkstatusSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpool_FabArea" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpoolPendiente_FabArea" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_FabricanteProyecto_Fabricante" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnico_Fabricante" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_FabricanteProyecto_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_FamiliaAcero_FamiliaMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ItemCode_FamiliaAcero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpool_FamiliaAcero_1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpool_FamiliaAcero_2" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpoolPendiente_FamiliaAcero_1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpoolPendiente_FamiliaAcero_2" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Peq_FamiliaAcero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Spool_FamiliaAcero_1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Spool_FamiliaAcero_2" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolPendiente_FamiliaAcero_1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolPendiente_FamiliaAcero_2" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Wps_FamiliaAcero_Mb1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Wps_FamiliaAcero_Mb2" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__PinturaCo__Frent__6A676721" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_HistoricoWorkstatus_Spool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_HistoricoWorkstatus_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_InspeccionDimensionalPatio_WorkstatusSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_InspeccionVisual_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaInspeccionVisual_InspeccionVisual" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoInspeccionVisual_InspeccionVisualCampo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_InspeccionVisualPatio_JuntaWorkstatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_InspeccionVisualPatioDefecto_InspeccionVisualPatio" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Inspector__Patio__2DD35A2D" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__Inspector__Talle__2CDF35F4" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ReservaIt__ItemC__2CB44D6B" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ItemCode_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ItemCode_TipoMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ItemCodeEquivalente_ItemCode_ItemBase" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ItemCodeEquivalente_ItemCode_ItemEquivalente" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_MaterialSpool_ItemCode" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_MaterialSpoolPendiente_ItemCode" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnico_ItemCode" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaArmado_JuntaWorkstatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaArmado_NumeroUnico_Numero1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaArmado_NumeroUnico_Numero2" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaArmado_Taller" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaArmado_Tubero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaWorkstatus_JuntaArmado" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampo_JuntaCampo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampo_JuntaCampoArmado" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampo_JuntaCampoInspeccionVisual" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampo_JuntaCampoSoldadura" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampo_JuntaSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampo_OrdenTrabajoSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampo_UltimoProceso" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoArmado_JuntaCampo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoInspeccionVisual_JuntaCampo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReportePND_JuntaCampo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReporteTT_JuntaCampo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoRequisicion_JuntaCampo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoSoldadura_JuntaCampo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoArmado_NumeroUnico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoArmado_NumeroUnico1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoArmado_Spool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoArmado_Spool1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoArmado_Tubero" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoInspeccionVisualDefecto_JuntaCampoInspeccionVisual" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReportePND_JuntaCampoRequisicion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReportePND_ReporteCampoPND" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReportePND_TipoRechazo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReportePNDCuadrante_JuntaCampoReportePND" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReportePNDSector_JuntaCampoReportePND" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReporteTT_JuntaCampoRequisicion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoReporteTT_ReporteCampoTT" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoRequisicion_RequisicionCampo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoSoldadura_ProcesoRaiz" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoSoldadura_ProcesoRelleno" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoSoldadura_Wps" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoSoldadura_Wps1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoSoldaduraDetalle_JuntaCampoSoldadura" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoSoldaduraDetalle_Soldador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaCampoSoldaduraDetalle_TecnicaSoldador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__JuntaInsp__Talle__2EC77E66" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaInspeccionVisual_JuntaWorkstatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaInspeccionVisualDefecto_JuntaInspeccionVisual" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaWorkstatus_JuntaInspeccionVisual" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__JuntaRepo__Repor__73E5E463" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePnd_JuntaRequisicion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePnd_JuntaWorkstatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePnd_ReportePnd" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePnd_TipoRechazo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePndCuadrante_JuntaReportePnd" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePndSector_JuntaReportePnd" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePndCuadrante_Soldador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReportePndSector_Soldador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReporteTt_JuntaRequisicion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReporteTt_JuntaWorkstatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaReporteTt_ReporteTt" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaRequisicion_JuntaWorkstatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaRequisicion_Requisicion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSoldadura_JuntaWorkstatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSoldadura_ProcesoRaiz" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSoldadura_ProcesoRelleno" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSoldadura_Taller" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSoldadura_Wps" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSoldadura_WpsRelleno" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSoldaduraDetalle_JuntaSoldadura" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaWorkstatus_JuntaSoldadura" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSoldaduraDetalle_Soldador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSoldaduraDetalle_TecnicaSoldador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpool_Spool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpool_TipoJunta" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaWorkstatus_JuntaSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoJunta_JuntaSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpoolHistorico_SpoolHistorico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpoolPendiente_SpoolPendiente" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaSpoolPendiente_TipoJunta" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaAnterior" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaWorkstatus_OrdenTrabajoSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_JuntaWorkstatus_UltimoProceso" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ProcesoPi__LoteA__28CEADEE" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ProcesoPi__LoteI__26E6657C" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ProcesoPi__LoteP__24FE1D0A" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Maquina_Patio" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_MaterialSpool_Spool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoMaterial_MaterialSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_MaterialSpoolHistorico_SpoolHistorico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_MaterialSpoolPendiente_SpoolPendiente" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Permiso_Modulo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnico_Proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnico_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnico_TipoCorte_1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnico_TipoCorte_2" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoCorte_NumeroUnico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoInventario_NumeroUnico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoMovimiento_NumeroUnico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoSegmento_NumeroUnico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoMaterial_NumeroUnico_Asignado" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoMaterial_NumeroUnico_Congelado" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoMaterial_NumeroUnico_Despachado" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoMaterial_NumeroUnico_Sugerido" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PinturaNumeroUnico_NumeroUnico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RecepcionNumeroUnico_NumeroUnico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionNumeroUnicoDetalle_NumeroUnico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoCorte_NumeroUnicoMovimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoCorte_OrdenTrabajo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoCorte_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoCorte_UbicacionFisica" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoInventario_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoMovimiento_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoMovimiento_TipoMovimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RecepcionNumeroUnico_NumeroUnicoMovimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_NumeroUnicoSegmento_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__OrdenTrab__Orden__3CD5A69B" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajo_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajo_Taller" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoSpool_OrdenTrabajo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoJunta_OrdenTrabajoSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoMaterial_OrdenTrabajoSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_OrdenTrabajoSpool_Spool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_WorkstatusSpool_OrdenTrabajoSpool1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Pagina_Permiso" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Proyecto_Patio" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Soldador_Patio" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Taller_Patio" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Tubero_Patio" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_UbicacionFisica_Patio" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Pendiente_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Pendiente_TipoPendiente" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Pendiente_Usuario_AsignadoA" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Pendiente_Usuario_GeneradoPor" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PendienteDetalle_Pendiente" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PendienteDetalle_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Peq_ProyectoID" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Peq_TipoJunta" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PerfilPermiso_Perfil" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Usuario_Perfil" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PerfilPermiso_Permiso" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PeriodoPrograma_ProyectoPrograma" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PersonalizacionSeguimientoJunta_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PersonalizacionSeguimientoSpool_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__PinturaAv__Proye__5EF5B475" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__PinturaAv__Requi__5FE9D8AE" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__PinturaAv__Works__60DDFCE7" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PinturaNumeroUnico_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PinturaNumeroUnico_RequisicionNumeroUnicoDetalle" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PinturaSpool_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_PinturaSpool_WorkstatusSpool1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__PreList__Proyect__737BD00F" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ProcesoPi__Prove__25F24143" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ProcesoPi__Prove__27DA89B5" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ProcesoPi__Prove__29C2D227" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ProcesoPi__Proye__2315D498" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ProcesoPi__Works__2409F8D1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Wps_ProcesoRaiz" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Wps_ProcesoRelleno" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProveedorProyecto_Proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProveedorProyecto_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoCamposRecepcion_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoConfiguracion_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoConsecutivo_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoDossier_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoNomenclaturaSpool_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoPendiente_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoPrograma_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoReporte_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Recepcion_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteDimensional_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReportePnd_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteSpoolPnd_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteTt_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Requisicion_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionNumeroUnico_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionPintura_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionSpool_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Spool_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolPendiente_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TransportistaProyecto_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_UsuarioProyecto_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_WpsProyecto_Proyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoCamposRecepcion_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoPendiente_TipoPendiente" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoPendiente_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ProyectoReporte_TipoReporteProyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Recepcion_Transportista" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RecepcionNumeroUnico_Recepcion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteDimensional_TipoReporteDimensional" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteDimensionalDetalle_ReporteDimensional" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ReporteDi__Talle__2FBBA29F" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteDimensionalDetalle_WorkstatusSpool1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReportePnd_TipoPrueba" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteSpoolPnd_TipoPruebaSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolReportePnd_ReporteSpoolPnd" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_ReporteTt_TipoPrueba" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Requisicion_TipoPrueba" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionNumeroUnicoDetalle_RequisicionNumeroUnico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionPinturaDetalle_RequisicionPintura" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionPinturaDetalle_WorkstatusSpool1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_RequisicionSpool_TipoPruebaSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolRequisicion_RequisicionSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ReservaIt__Reser__2DA871A4" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK__ReservaIt__Spool__2E9C95DD" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Wpq_Soldador" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolHold_Spool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolHoldHistorial_Spool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TransferenciaSpool_Spool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolReportePnd_SpoolRequisicion" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolReportePnd_WorkstatusSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_SpoolRequisicion_WorkstatusSpool" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Transferencia_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TransferenciaSpool_TransferenciaID" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TransferenciaSpool_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_TransportistaProyecto_Transportista" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_WorkstatusSpool_UltimoProceso" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_UsuarioProyecto_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_Wpq_Wps" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.FK_WpsProyecto_Wps" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelSam2.PreListSpool" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,713 @@
+﻿@{
+    ViewBag.Title = "Listado Orden Recepcion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="ListadoOrdenRecepcion0025"></span></a>
+    </li>
+    @*<li>
+        <a href="@Url.Action("DashboardRecepcionAlmacenaje", "DashboardRecepcionAlmacenaje")"><span id="ListadoOrdenRecepcion0027"></span></a>
+    </li>*@
+    <li class="active">
+        <a href="@Url.Action("ListadoOrdenRecepcion", "OrdenRecepcion")"><span id="ListadoOrdenRecepcion0026"></span></a>
+    </li>
+}
+
+<div class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav filtersFields clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 col-md-4 col-lg-4 extralongButton">
+                        <div class="button-section">
+                            <button id="Nuevo" type="button" class="btn btn-newArrival btn-yellow"><span id="ListadoOrdenRecepcion0001"></span></button>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-9 col-md-8 col-lg-8 filter-section">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="ListadoOrdenRecepcion0002"></label>
+                                <input id="ClienteID" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="ListadoOrdenRecepcion0003"></label>
+                                <input id="ProyectoID" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="ListadoOrdenRecepcion0004"></label>
+                                <input id="FolioAvisoEntradaID" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="ListadoOrdenRecepcion0005"></label>
+                                <input id="FechaInic" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="ListadoOrdenRecepcion0006"></label>
+                                <input id="FechaFinal" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="ListadoOrdenRecepcion0007"></label>
+                                <input id="PeriodoTiempo" class="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                        <div class="button-section left">
+                            <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection disabled"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 listado">
+            <div class="row">
+                <div id="filterContainer" class="quick-filters col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="clearfix">
+                        <input id="FechaOrdenRecepcion" class="quickFilters general-input" />
+                        <input id="OrdenRecepcion" class="quickFilters general-input" />
+                        <input id="ImprimirOrden" class="quickFilters general-input" disabled />
+                        <input id="ImprimirEtiquetas" class="quickFilters general-input" disabled />
+                    </div>
+                </div>
+            </div>
+            <div id="grid"></div>
+        </div>
+    </div>
+</div>
+<input id="hdAccionFiltrado" type="hidden" />
+<script>
+    @section JavascriptGlobalVariables 
+    {
+        var detailID=0;
+    var Cliente = {}, Proyecto = {}, FolioAvisoEntrada = {}, FechaInic, FechaFinal, PeriodoTiempo, resultadoJson;
+    var _generarOrdenUrl = "@Url.Action("GenerarOrdenRecepcion", "OrdenRecepcion")";
+    var _detalleOrdenUrl = "@Url.Action("DetalleOrdenRecepcion", "OrdenRecepcion")";
+    var _formatoEtiquetasUrl = "@Url.Action("FormatoEtiquetas", "OrdenRecepcion")";
+    var _UrlReporte = $UrlReportingServices;
+
+    var $ListadoOrdenRecepcionModel = {
+        listContainer: {
+            create: ".button-section",
+            list: ".listado",
+            detail: ".detailLink",
+            destroy: ".k-grid-Cancelar",
+            createIncidence: ""
+        },
+    };
+    }
+
+    @section JavascriptGlobalFunctions 
+    {
+    function changeDatePickerDateFormat(datePickerOptions) {
+        FechaInic.setOptions(datePickerOptions);
+        FechaFinal.setOptions(datePickerOptions);
+    };
+
+    function changeLanguageCall() {
+        var tmp = removeGrid($("#grid"));
+        cargarInicialGrid();
+        $("#grid").data("kendoGrid").dataSource.data(tmp);
+        createPeriodoTiempo();
+    };
+
+    function CargaInicial() {
+        $("#FechaOrdenRecepcion").val("");
+        $("#OrdenRecepcion").val("");
+        $("#ImprimirOrden").val("");
+        $("#ImprimirEtiquetas").val("");
+
+        $("#FechaOrdenRecepcion").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "FechaOrdenRecepcion",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+            if(!$("#FechaOrdenRecepcion").val().length){ $("#FechaOrdenRecepcion").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#FechaOrdenRecepcion").focus();
+        });
+
+        $("#OrdenRecepcion").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "OrdenRecepcion",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+            if(!$("#OrdenRecepcion").val().length){ $("#OrdenRecepcion").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#OrdenRecepcion").focus();
+        });
+
+        $("#Nuevo").click(function () {
+            window.location.href = _generarOrdenUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
+        });
+
+        $("#ClienteID").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "ClienteID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarCliente(dataItem.ClienteID, dataItem.Nombre):CargarCliente("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Cliente = {};
+                    this.value("");
+                }
+                Filtros();
+            },
+            filter: "contains",
+        });
+        ObtenerCliente();
+
+        $("#ProyectoID").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "ProyectoID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarProyecto(dataItem.ProyectoID, dataItem.Nombre):CargarProyecto("", "");
+                var value = this.value();
+
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Proyecto = {};
+                    this.value("");
+                }
+                Filtros();
+            },
+            dataBound: function(e){checkIfOne(this);},
+            filter: "contains",
+        });
+
+        ObtenerProyecto();
+
+
+        $("#FolioAvisoEntradaID").kendoComboBox({
+            dataTextField: "value",
+            dataValueField: "id",
+            filter: "contains",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarFolio(dataItem.id):CargarFolio("");
+                var value = this.value();
+
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    FolioAvisoEntrada = {};
+                    this.value("")
+                }
+                Filtros();
+            },
+        });
+
+        ObtenerFolioAvisoEntrada();
+
+        $("#PeriodoTiempo").kendoComboBox({});
+
+        FechaInic = new kendo.ui.DatePicker($("#FechaInic"));
+        FechaFinal = new kendo.ui.DatePicker($("#FechaFinal"));
+
+        $("#FechaInic").bind("change", function () {
+            if (!$("#FechaInic").data("kendoDatePicker").value() && this.value!=="") {
+                $("#FechaInic").css("color","#EB4D50");
+                displayMessage("notificationslabel0082","","2")
+            }else{
+                $("#FechaInic").attr("style","");
+                Filtros();
+            }
+        });
+
+        $("#FechaFinal").bind("change", function () {
+            if (!$("#FechaFinal").data("kendoDatePicker").value() && this.value!=="") {
+                $("#FechaFinal").css("color","#EB4D50");
+                displayMessage("notificationslabel0082","","2")
+            }else{
+                $("#FechaFinal").attr("style","");
+                Filtros();
+            }
+        });
+
+        ObtenerFechasporDefecto();
+        Filtros();
+    };
+
+    function getFilterG(){
+        return {
+            FechaOrdenRecepcion: { type: "date" },
+            OrdenRecepcion: { type: "string" },
+            OrdenRecepcionID: {type: "number"}
+        }
+    }
+
+    function cargarInicialGrid() {
+
+        $("#FechaOrdenRecepcion").val("");
+        $("#OrdenRecepcion").val("");
+        $("#ImprimirOrden").val("");
+        $("#ImprimirEtiquetas").val("");
+
+        var grid = $("#grid").kendoGrid({
+            dataSource: {
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: getFilterG(),
+                    }
+                },
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                pageSize: 20,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            },
+            autoHeight: true,
+            sortable: true,
+            scrollable: false,
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+                buttonCount: 2
+            },
+            detailInit: detailInit,
+            columns: [
+                { field: "FechaOrdenRecepcion", title: _dictionary.ListadoOrdenRecepcion0019[$("#language").data("kendoDropDownList").value()], format: "{0:dd/MM/yyyy}", template: "#= kendo.toString(kendo.parseDate(FechaOrdenRecepcion, 'MM/dd/yyyy'), 'dd/MM/yyyy') #" },
+                { field: "OrdenRecepcion", title: _dictionary.ListadoOrdenRecepcion0020[$("#language").data("kendoDropDownList").value()], template: "<a class='detailLink' onclick='mostrarDetalle(#:OrdenRecepcionID#)'>#:OrdenRecepcion#</a>" },
+                { command: { text: _dictionary.ListadoOrdenRecepcion0023[$("#language").data("kendoDropDownList").value()], click: ImprimirOrden }, title: _dictionary.ListadoOrdenRecepcion0031[$("#language").data("kendoDropDownList").value()], width: "120px"},
+                { command: { text: _dictionary.ListadoOrdenRecepcion0029[$("#language").data("kendoDropDownList").value()], click: ImprimirEtiquetas }, title: _dictionary.ListadoOrdenRecepcion0029[$("#language").data("kendoDropDownList").value()], width: "120px" },
+                { field: "OrdenRecepcionID", title: _dictionary.ListadoOrdenRecepcion0020[$("#language").data("kendoDropDownList").value()], hidden: true}
+                //{ command: { text: _dictionary.ListadoOrdenRecepcion0028[$("#language").data("kendoDropDownList").value()], click: CancelarOrden }, title: " ", width: "99px" }
+            ],
+            dataBound: function (e) {
+                checkTH(this);
+                quickHeadFilter(this);
+                //stringifyDate(this);
+                //$(".k-grid input.k-textbox").prop('readonly', true);
+                //$(".k-grid td .k-button").text('');
+                //$(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
+
+                //$("th[data-field='FechaOrdenRecepcion']").append($("#FechaOrdenRecepcion"));
+                //$("th[data-field='OrdenRecepcion']").append($("#OrdenRecepcion"));
+
+                //$("#FechaOrdenRecepcion").click(function( event ) {event.stopPropagation();});
+                //$("#OrdenRecepcion").click(function( event ) {event.stopPropagation();});               
+            }
+        }).getKendoGrid();
+    };
+
+    function getDetFields(){
+        return {
+            FolioConfiguracion: { type: "string" },
+            AvisoEntrada: { type: "string" },
+            ItemCode: { type: "string" },
+            Cantidad: { type: "number" },
+        }
+    }
+
+    function detailInit(e) {
+        $("<div id='detail"+ detailID++ +"'/>").appendTo(e.detailCell).kendoGrid({
+            dataSource: {
+                data: e.data.Detalle,
+                schema: {
+                    model: {
+                        fields: getDetFields(),
+                    }
+                }
+            },
+            autoBind: true,
+            scrollable: false,
+            sortable: false,
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            columns: [
+                { field: "FolioConfiguracion", title: _dictionary.ListadoOrdenRecepcion0024[$("#language").data("kendoDropDownList").value()], width: "110px", },
+                { field: "Itemcode", title: _dictionary.ListadoOrdenRecepcion0021[$("#language").data("kendoDropDownList").value()], width: "110px", },
+                { field: "Cantidad", title: _dictionary.ListadoOrdenRecepcion0022[$("#language").data("kendoDropDownList").value()], width: "50px" },
+                { field: "AvisoEntrada", title: _dictionary.ListadoOrdenRecepcion0024[$("#language").data("kendoDropDownList").value()], width: "110px",hidden:true },
+                //{ command: { text: _dictionary.ListadoOrdenRecepcion0028[$("#language").data("kendoDropDownList").value()], click: CancelarItemCode }, title: " ", width: "99px" }
+            ],
+            dataBound:function(e){
+                checkTH(this);
+                quickHeadFilter(this);
+            }
+        });
+    };
+
+    function CancelarOrden(e) {
+        e.preventDefault();
+        var dataItem = $("#grid").data("kendoGrid").dataItem($(e.currentTarget).closest("tr"));
+        var ordenRecepcionID = dataItem.OrdenRecepcion
+
+        if (confirm("Estas seguro de cancelar la orden de recepción?")) {
+            $OrdenRecepcion.OrdenRecepcion.destroy({}, { ordenRecepcionID: ordenRecepcionID, token: Cookies.get("token") }).done(function (data) {
+                Filtros();
+            });
+        };
+    };
+
+    function CancelarItemCode(e) {
+        e.preventDefault();
+        var dataItem = $("#grid").data("kendoGrid").dataItem($(e.currentTarget).closest("tr"));
+        var ordenRecepcionID = dataItem.OrdenRecepcion
+
+        if (confirm("Estas seguro de cancelar el item code de la orden de recepción?")) {
+            $OrdenRecepcion.OrdenRecepcion.destroy({}, { ordenRecepcionID: ordenRecepcionID, token: Cookies.get("token") }).done(function (data) {
+                Filtros();
+            });
+        };
+    };
+
+    function ArregloPDF(tipo,id) {
+        return { 
+            TipoReporte: tipo, 
+            FolioOrdenRecepcion: id,
+            Cadena:""
+        };
+    }
+
+    function ImprimirEtiquetas(e) {
+        e.preventDefault();
+        var dataItem = $("#grid").data("kendoGrid").dataItem($(e.currentTarget).closest("tr"));
+        var ordenRecepcionID = dataItem.OrdenRecepcion
+        downloadPDF($Reporte.Reporte.urlNoId, ArregloPDF(1,ordenRecepcionID));
+    };
+
+    function downloadPDF(url, pdf) {
+        var req = new XMLHttpRequest();
+        req.open("GET",(url + "?data=" + encodeURI(JSON.stringify(pdf)) + "&token=" + Cookies.get("token")),true)
+        req.responseType = "blob";
+        var name="";
+        switch(pdf.TipoReporte){
+            case 1:
+                name="Etiquetas - "+pdf.FolioOrdenRecepcion;
+                break;
+            case 4:
+                name="OrdenRecepcion - "+pdf.FolioOrdenRecepcion;
+                break;
+        }
+        req.onload = function (event) {
+            var blob = req.response;
+            console.log(blob.size);
+            var link=document.createElement('a');
+            link.href=window.URL.createObjectURL(blob);
+            link.download=name + ".pdf";
+            link.click();
+        };
+        req.send();
+        displayMessage("notificationslabel0100", "", "1")
+    }
+
+    function ObtenerFechasporDefecto() {
+        var fechaFinal = new Date();
+        var fechainicio = new Date(fechaFinal.getTime() - (7 * 24 * 3600 * 1000));
+
+        if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+            format = "dd/MM/yyyy";
+        } else {
+            format = "MM/dd/yyyy";
+        };
+
+        var curr_date0 = fechainicio.getDate();
+        var curr_month0 = fechainicio.getMonth() + 1; //Months are zero based
+        var curr_year0 = fechainicio.getFullYear();
+
+
+        var curr_date = fechaFinal.getDate();
+        var curr_month = fechaFinal.getMonth() + 1; //Months are zero based
+        var curr_year = fechaFinal.getFullYear();
+
+
+        var fechaInicial = new Date(curr_year0, curr_month0 - 1, curr_date0);
+        var fechFinal = new Date(curr_year, curr_month - 1, curr_date);
+
+        var fechaInicialkendo = kendo.parseDate(fechaInicial, format);
+        var fechaFinalkendo = kendo.parseDate(fechFinal, format);
+
+        $("#FechaInic").data("kendoDatePicker").value(fechaInicialkendo);
+        $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
+    };
+
+    function createPeriodoTiempo() {
+        $("#PeriodoTiempo").kendoComboBox({
+            dataTextField: "Periodo",
+            dataValueField: "PeriodoID",
+            dataSource: [
+                { "PeriodoID": "1", "Periodo": _dictionary.ListadoOrdenRecepcion0014[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "2", "Periodo": _dictionary.ListadoOrdenRecepcion0015[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "3", "Periodo": _dictionary.ListadoOrdenRecepcion0016[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "4", "Periodo": _dictionary.ListadoOrdenRecepcion0017[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "5", "Periodo": _dictionary.ListadoOrdenRecepcion0018[$("#language").data("kendoDropDownList").value()] }
+            ],
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarPeriodoTiempo(dataItem.PeriodoID):CargarPeriodoTiempo("");
+                var value = this.value();
+
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    PeriodoTiempo = [];
+                    this.value("");
+                }
+                ObtenerFechasporPeriodo(value);
+
+                Filtros();
+            },
+            filter: "contains",
+        });
+    };
+
+    function ObtenerFechasporPeriodo(id) {
+        var fechaInicio = FechaFinal.value();
+        var fechaFin = FechaFinal.value();
+        if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+                    format = "dd/MM/yyyy";
+                } else {
+                    format = "MM/dd/yyyy";
+        }
+
+
+        if (!fechaInicio) {
+            var todayInicio = new Date();
+            var curr_dateInicio = todayInicio.getDate();
+            var curr_monthInicio = todayInicio.getMonth() + 1;
+            var curr_yearInicio = todayInicio.getFullYear();
+
+            var todayInicial = new Date(curr_yearInicio, curr_monthInicio - 1, curr_dateInicio);
+            fechaInicio = kendo.parseDate(todayInicial, format);
+        }
+
+        if (!fechaFin) {
+            var todayFinal = new Date();
+            var curr_dateFinal = todayFinal.getDate();
+            var curr_monthFinal = todayFinal.getMonth() + 1;
+            var curr_yearFinal = todayFinal.getFullYear();
+
+            var todayFinal = new Date(curr_yearFinal, curr_monthFinal - 1, curr_dateFinal);
+            fechaFin = kendo.parseDate(todayFinal, format);
+        }
+
+        
+
+        var curr_date = fechaFin.getDate();
+        var curr_month = fechaFin.getMonth() + 1;
+        var curr_year = fechaFin.getFullYear();
+
+        var fechaFinal = new Date(curr_year, curr_month - 1, curr_date);
+        var fechaFinalkendo = kendo.parseDate(fechaFinal, format);
+
+        switch (parseInt(id)) {
+            case 1: //Semana Actual
+                fechaInicio.setDate(fechaInicio.getDate() - 7);
+                break;
+            case 2: //Dos Semanas
+                fechaInicio.setDate(fechaInicio.getDate() - 14);
+                break;
+            case 3: //Mes
+                fechaInicio.setMonth(fechaInicio.getMonth() - 1);
+                break;
+            case 4: //Trimestre
+                fechaInicio.setMonth(fechaInicio.getMonth() - 3);
+                break;
+            case 5: //Año
+                fechaInicio.setFullYear(fechaInicio.getFullYear() - 1);
+                break;
+            default:
+                fechaInicio.setDate(fechaInicio.getDate() - 7);
+                break;
+        }
+
+        var curr_date0 = fechaInicio.getDate();
+        var curr_month0 = fechaInicio.getMonth() + 1;
+        var curr_year0 = fechaInicio.getFullYear();
+
+        var fechaInicial = new Date(curr_year0, curr_month0 - 1, curr_date0);
+
+        var fechaInicialkendo = kendo.parseDate(fechaInicial, format);
+
+        $("#FechaInic").data("kendoDatePicker").value(fechaInicialkendo);
+        $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
+    };
+
+    function CargarCliente(id, value) {
+        Cliente = {};
+        Cliente = { ClienteID: id };
+    };
+
+    function CargarProyecto(id, value) {
+        Proyecto = {};
+        Proyecto = { ProyectoID: id, Nombre: value };
+    };
+
+    function CargarFolio(id) {
+        FolioAvisoEntrada = {};
+        FolioAvisoEntrada = { FolioAvisoEntradaID: id };
+    };
+
+    function CargarPeriodoTiempo(id) {
+        PeriodoTiempo = {};
+        PeriodoTiempo = { PeriodoTiempo: id };
+    };
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+
+    function ObtenerProyecto() {
+        $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("ProyectoID", result);
+        });
+    };
+
+    function ObtenerCliente() {
+        $Cliente.Cliente.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("ClienteID", result);
+        });
+    };
+
+    function ObtenerFolioAvisoEntrada() {
+        var buscarJson;
+        buscarJson = { tipoListado: 1, token: Cookies.get("token"), parametroBusqueda: "" };
+        $folioEntradaMaterial.Listado.read({}, {data: JSON.stringify(buscarJson)}).done(function (result) {
+            ControlErroresObjetosComboBox("FolioAvisoEntradaID", result);
+        });
+    };
+
+    function Filtros() {
+        var Listado;
+        var accion = $("#hdAccionFiltrado").val() ? $("#hdAccionFiltrado").val() : 1;
+        AccionesListado(accion);
+    };
+
+    function AccionesListado(accion) {
+        //loadingStart();
+        var Listado;
+        Listado = ArregloListado(accion);
+
+        $("#hdAccionFiltrado").val(accion);
+
+        $OrdenRecepcion.OrdenRecepcion.read({}, { data: JSON.stringify(Listado) }).done(function (data) {
+            if (Error(data)) {
+                resultadoJson = data;
+                if ($("#grid").data("kendoGrid")) {
+                    if (resultadoJson.length > 0) {
+                        $("#grid").data("kendoGrid").dataSource.data(resultadoJson);
+                        $("#grid").data("kendoGrid").dataSource.page(1);
+                    } else {
+                        $("#grid").data("kendoGrid").dataSource.data([]);
+                        $("#grid").data("kendoGrid").dataSource.page(0);
+                    };
+                    AsignarPaginaActualCookie();
+                    applySecurityPolicy(false);
+                };
+            };
+            //loadingStop();
+        });
+    };
+    function AsignarPaginaActualCookie() {
+        Cookies.set("navegacion", "15", { path: '/' });
+    }
+    function ArregloListado(accion) {
+        var Listado;
+        Listado = { FolioAvisoEntradaID: "", ProyectoID: "", ClienteID: "", FechaInicial: "", FechaFinal: "", token: "" };
+
+        var d = new Date($("#FechaInic").data("kendoDatePicker").value());
+        var d1 = new Date($("#FechaFinal").data("kendoDatePicker").value());
+
+        if (d.getFullYear() == "1969") {
+            d = new Date();
+            d.setDate(d.getDate() - 30);
+        }
+        if (d1.getFullYear() == "1969") {
+            d1 = new Date();
+        }
+
+        Listado.FolioAvisoLlegadaID = FolioAvisoEntrada.FolioAvisoEntradaID ? FolioAvisoEntrada.FolioAvisoEntradaID : "";
+        Listado.ProyectoID = Proyecto.ProyectoID ? Proyecto.ProyectoID : "";
+        Listado.ClienteID = Cliente.ClienteID ? Cliente.ClienteID : "";
+        Listado.FechaInicial = obtenerFormatoFecha(d);
+        Listado.FechaFinal = obtenerFormatoFecha(d1);
+        Listado.token = Cookies.get("token");
+        return Listado;
+    };
+
+    function mostrarDetalle(ordenid) {
+        if ((typeof returnOfSecurityCheck != 'undefined') && (typeof returnOfSecurityCheck["Orden Recepcion"] != 'undefined') && (typeof returnOfSecurityCheck["Orden Recepcion"]["detail"] != 'undefined') && returnOfSecurityCheck["Orden Recepcion"]["detail"]) {
+            var url = _detalleOrdenUrl + "?leng=" + $("#language").data("kendoDropDownList").value() + "&OrdenRecepcionID=" + ordenid;
+            openFromList(event,url);
+        }  
+    };
+
+    function ImprimirOrden(e) {
+        e.preventDefault();
+        var dataItem = $("#grid").data("kendoGrid").dataItem($(e.currentTarget).closest("tr"));
+        var ordenRecepcionID = dataItem.OrdenRecepcion
+        downloadPDF($Reporte.Reporte.urlNoId, ArregloPDF(4,ordenRecepcionID));
+    };
+
+    function obtenerFormatoFecha(d) {
+        var curr_date = d.getDate();
+        var curr_month = d.getMonth() + 1; //Months are zero based
+        var curr_year = d.getFullYear();
+        var horaActual = new Date();
+
+        if (curr_year == "1969") {
+            return null;
+        } else {
+            return curr_year + "-" + curr_month + "-" + curr_date + " " + horaActual.getHours() + ":" + horaActual.getMinutes() + ":" + horaActual.getSeconds();
+        }
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+
+    CargaInicial();
+
+
+    }
+    @section JavascriptDocumentReadyHomeCookie {
+    $authorizationModel["Orden Recepcion"] = $ListadoOrdenRecepcionModel;
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "15", { path: '/' });
+    }
+
+</script>

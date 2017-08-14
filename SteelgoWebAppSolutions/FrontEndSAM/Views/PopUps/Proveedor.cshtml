@@ -1,0 +1,246 @@
+﻿
+@{
+    ViewBag.Title = "Proveedor";
+}
+
+ <div id="modalProveedor"  class="form clearfix popup col-xs-12 col-sm-12 col-md-12 col-lg-12">
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+         <div class="row">
+            <div id="ContactoID_ProveedorDiv" class="form-group">
+                <label id="LlegadaMaterial0052"></label>
+                <input id="ContactoID_Proveedor" class="" />
+            </div>
+            <div id="Nombre_ProveedorDiv" class="form-group">
+                <label id="LlegadaMaterial0053"></label>
+                <input id="Nombre_Proveedor" class="general-input" />
+            </div>
+            <div id="Descripcion_ProveedorDiv" class="form-group">
+                <label id="LlegadaMaterial0054"></label>
+                <input id="Descripcion_Proveedor" class="general-input" />
+            </div>
+            <div id="Direccion_ProveedorDiv" class="form-group">
+                <label id="LlegadaMaterial0055"></label>
+                <input id="Direccion_Proveedor" class="general-input" />
+            </div>
+            <div id="Telefono_ProveedorDiv" class="form-group">
+                <label id="LlegadaMaterial0056"></label>
+                <input id="Telefono_Proveedor" class="general-input" />
+            </div>
+            <div class="buttonSave">
+                <a id="GuardarProveedor" href="javascript:void(0);" class="btn btn-primary">
+                    <span id="LlegadaMaterial0057"></span>
+                </a>
+                <a id="CancelarProveedor" href="javascript:void(0);" class="btn btn-primary">
+                    <span id="LlegadaMaterial0058"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    @section JavascriptGlobalVariables {
+    var Contacto = {};
+    var $ProveedorModel = {
+        listContainer: {
+            create: "",
+            list: "",
+            detail: "",
+            destroy: ""
+        },
+        properties: {
+            contacto: {
+                visible: "#ContactoID_ProveedorDiv",
+                editable: "#ContactoID_Proveedor",
+                required: "#ContactoID_Proveedor"
+            },
+            nombre: {
+                visible: "#Nombre_ProveedorDiv",
+                editable: "#Nombre_Proveedor",
+                required: "#Nombre_Proveedor"
+            },
+            descripcion: {
+                visible: "#Descripcion_ProveedorDiv",
+                editable: "#Descripcion_Proveedor",
+                required: "#Descripcion_Proveedor"
+            },
+            direccion: {
+                visible: "#Direccion_ProveedorDiv",
+                editable: "#Direccion_Proveedor",
+                required: "#Direccion_Proveedor"
+            },
+            telefono: {
+                visible: "#Telefono_ProveedorDiv",
+                editable: "#Telefono_Proveedor",
+                required: "#Telefono_Proveedor"
+            }
+        }
+    };
+    }
+    @section JavascriptGlobalFunctions {
+    function CargaInicial() {
+        hideElementsProveedor();
+
+        window.parent.$(".k-i-close").click(function (e) {
+            CancelarProveedor();
+        });
+
+        $("#ContactoID_Proveedor").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "ProveedorID",
+            select: function (e) {
+            },
+            filter: "contains",
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarContacto(dataItem.ContactoID, dataItem.Nombre):CargarContacto("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Contacto = {};
+                    this.value("");
+                };
+            },
+        });
+        ObtenerContacto();
+
+        // modal proveedor
+        $("#GuardarProveedor").click(function (e) {
+            if (validarRequeridosModalProveedor()) {
+                GuardarProveedor();
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            };
+        });
+        $("#CancelarProveedor").click(function (e) { CancelarProveedor(); });
+    };
+
+    function CargarContacto(id, value) {
+        Contacto = {};
+        Contacto = { ContactoID: id, Nombre: value };
+    };
+
+    function ObtenerContacto() {
+        $Contacto.Contacto.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("ContactoID_Proveedor", result);
+        });
+
+    };
+    function validarRequeridosModalProveedor() {
+        var bool = true;
+        $("#modalProveedor .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if (!$(this).val()) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                    $(this).closest("div").addClass("clearfix");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                    $(this).closest("div").removeClass("clearfix");
+                };
+            };
+        });
+        return bool;
+    }
+
+    function GuardarProveedor() {
+        ProveedorModal = {};
+        ProveedorModal = { ContactoID: "", Nombre: "", Descripcion: "", Direccion: "", Telefono: "" };
+        ProveedorModal.ContactoID = Contacto.ContactoID;
+        ProveedorModal.Nombre = $("#Nombre_Proveedor").val();
+        ProveedorModal.Descripcion = $("#Descripcion_Proveedor").val();
+        ProveedorModal.Direccion = $("#Direccion_Proveedor").val();
+        ProveedorModal.Telefono = $("#Telefono_Proveedor").val();
+
+        $Proveedor.Proveedor.create(ProveedorModal, { token: Cookies.get("token") }).done(function (data) {
+            LimpiarModalProveedor();
+            if (Error(data)) {
+                cerrarVentanaModal();
+                window.parent.ObtenerProveedor();
+            }
+        });
+    };
+
+    function LimpiarModalProveedor() {
+        $("#ContactoID_Proveedor").data("kendoComboBox").value("");
+        $("#Nombre_Proveedor").val("");
+        $("#Descripcion_Proveedor").val("");
+        $("#Direccion_Proveedor").val("");
+        $("#Telefono_Proveedor").val("");
+        Contacto = {};
+    };
+
+    function cerrarVentanaModal() {
+        window.parent.$("#window").data("kendoWindow").close();
+        cleanDisplayMessage();
+        window.parent.ActualizarCookie();
+    };
+
+    function cancelarvalidacionRequeridosModalChofer() {
+        $("#modalChofer .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                $(this).closest("div").find("label").removeClass("error");
+                $(this).closest("div").removeClass("clearfix");
+            };
+        });
+    };
+
+    function CancelarProveedor() {
+        LimpiarModalProveedor();
+        cerrarVentanaModal();
+        cancelarvalidacionRequeridosModalChofer();
+    };
+
+    function hideElementsProveedor() {
+        $(".sidebar").hide();
+        $(".logo").hide();
+        $(".search-bar").hide();
+        $(".notifications").hide();
+        $(".logged-user").hide();
+        $(".content-container").removeClass("topbar").addClass("printView");
+        $(".breadcrumb-container").hide();
+        $(".languageSelector").hide();
+        $(".pull-right").hide();
+        $("header").hide();
+        $(".content-frame").removeClass("content-frame");
+        $("body").css("background", "#FFFFFF");
+    };
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Proveedor"] = $ProveedorModel;
+    CargaInicial();
+    $("#language").data("kendoDropDownList").select(_languageOrder[window.parent.$("#language").data("kendoDropDownList").value()]);
+    $("#language").data("kendoDropDownList").trigger("change");
+    applySecurityPolicy(false);
+    }
+     @section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "33", { path: '/' });
+    }
+</script>

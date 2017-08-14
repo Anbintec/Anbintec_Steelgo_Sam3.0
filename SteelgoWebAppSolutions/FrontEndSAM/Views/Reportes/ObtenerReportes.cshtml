@@ -1,0 +1,26 @@
+﻿@using ReportViewerForMvc;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="quickLabel0001"></span></a>
+    </li>
+
+    <li class="active">
+        <a href="#"><span id="Reportes"></span></a>
+    </li>
+}
+
+<div id="miPatron" style="overflow: visible;">
+    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new
+{
+    scrolling = "yes",
+    width = "100%",
+    height = "auto",
+    style = "border: 0px; margin: 0px; padding: 0px; "
+
+})
+</div>

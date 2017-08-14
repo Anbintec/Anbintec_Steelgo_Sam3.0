@@ -1,0 +1,402 @@
+﻿@{
+    ViewBag.Title = "Colada";
+}
+
+
+<div id="modalColada" class="form clearfix popup col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+             <div id="ItemCode_ColadaDiv" class="form-group">
+                <label id="Cuantificacion0096"></label>
+                <input id="ItemCode_Colada" class="general-input" disabled />
+            </div>
+            <div id="Fabricante_ColadaDiv" class="form-group">
+                <label id="Cuantificacion0061"></label>
+                <input id="Fabricante_Colada" class="" />
+            </div>
+            <div id="FamiliaAcero_ColadaDiv" class="form-group">
+                <label id="Cuantificacion0098"></label>
+                <input id="FamiliaAcero_Colada" class="" />
+            </div>
+            <div id="Acero_ColadaDiv" class="form-group">
+                <label id="Cuantificacion0062"></label>
+                <input id="Acero_Colada" class="" />
+            </div>
+            <div id="Proyecto_ColadaDiv" class="form-group">
+                <label id="Cuantificacion0063"></label>
+                <input id="Proyecto_Colada" class="" disabled />
+            </div>
+            <div id="NumeroColada_ColadaDiv" class="form-group">
+                <label id="Cuantificacion0066"></label>
+                <input id="NumeroColada_Colada" class="general-input" maxlength="20"/>
+            </div>
+            <div id="NumeroCertificado_ColadaDiv" class="form-group">
+                <label id="Cuantificacion0067"></label>
+                <input id="NumeroCertificado_Colada" class="general-input" />
+            </div>
+            <div id="HoldCalidad_ColadaDiv" class="form-group">
+                <label id="Cuantificacion0068" class="checkLabel"></label>
+                <input id="HoldCalidad_Colada" type="checkbox" class="" />
+            </div>
+            <div class="buttonSave">
+                <a id="GuardarColada" href="#" class="btn btn-primary">
+                    <span id="Cuantificacion0064"></span>
+                </a>
+                <a id="CancelarColada" href="#" class="btn btn-primary">
+                    <span id="Cuantificacion0065"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    @section JavascriptGlobalVariables {
+    var FabricanteColada = {}, AceroColada = {}, ProyectoColada = {},
+        FamiliaAceroColada = {};
+
+    var $ColadaModel = {
+        listContainer: {
+            create: "#GuardarColada",
+            list: "",
+            detail: "",
+            destroy: ""
+        },
+        properties: {
+            fabricante: {
+                visible: "#Fabricante_ColadaDiv",
+                editable: "#Fabricante_Colada",
+                required: "#Fabricante_Colada"
+            },
+            acero: {
+                visible: "#Acero_ColadaDiv",
+                editable: "#Acero_Colada",
+                required: "#Acero_Colada"
+            },
+            proyecto: {
+                visible: "#Proyecto_ColadaDiv",
+                editable: "#Proyecto_Colada",
+                required: "#Proyecto_Colada"
+            },
+            numerocolada: {
+                visible: "#NumeroColada_ColadaDiv",
+                editable: "#NumeroColada_Colada",
+                required: "#NumeroColada_Colada"
+            },
+            numerocertificado: {
+                visible: "#NumeroCertificado_ColadaDiv",
+                editable: "#NumeroCertificado_Colada",
+                required: "#NumeroCertificado_Colada"
+            },
+            holdcalidad: {
+                visible: "#HoldCalidad_ColadaDivX",
+                editable: "#HoldCalidad_ColadaX",
+                required: "#HoldCalidad_ColadaX"
+            },
+            itemcode: {
+                visible: "#ItemCode_ColadaDiv",
+                editable: "#ItemCode_Colada",
+                required: "#ItemCode_Colada"
+            },
+            familiaacero: {
+                visible: "#FamiliaAcero_ColadaDiv",
+                editable: "#FamiliaAcero_Colada",
+                required: "#FamiliaAcero_Colada"
+            }
+        }
+    };
+    }
+
+    @section JavascriptGlobalFunctions {
+    function CargaInicial() {
+        hideElementsColada();
+        $("#ItemCode_Colada").val(window.parent.$("#hdnItemCodeSeleccionado").val());
+        window.parent.$(".k-i-close").click(function (e) {
+            CancelarColada();
+        });
+        $("#GuardarColada").click(function () {
+            if (validarRequeridosModalColada()) {
+                GuardarColada();
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            }
+        });
+        $("#CancelarColada").click(function () { CancelarColada(); });
+
+        $("#Fabricante_Colada").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "FabricanteID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarFabricanteColada(dataItem.FabricanteID, dataItem.Nombre):CargarFabricanteColada("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    FabricanteColada = {};
+                    this.value("");
+                };
+            },
+            filter: "contains",
+        });
+        ObtenerFabricanteColada();
+
+        $("#FamiliaAcero_Colada").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "FamiliaAceroID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarFamiliaAceroColada(dataItem.FamiliaAceroID, dataItem.Nombre):CargarFamiliaAceroColada("", "");
+                var value = this.value();
+                AceroColada = {};
+                $("#Acero_Colada").data("kendoComboBox").value("");
+                $("#Acero_Colada").data("kendoComboBox").dataSource.data([]);
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    FamiliaAceroColada = {};
+                    this.value("");
+                } else {
+                    ObtenerAceroColada();
+                }
+            },
+            filter: "contains",
+        });
+        ObtenerFamiliaAceroColada();
+
+        $("#Acero_Colada").kendoComboBox({
+            dataTextField: "Nomenclatura",
+            dataValueField: "AceroID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarAceroColada(dataItem.AceroID, dataItem.Nomenclatura):CargarAceroColada("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    AceroColada = {};
+                    this.value("");
+                };
+            },
+            filter: "contains",
+        });
+       
+
+        $("#Proyecto_Colada").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "ProyectoID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarProyectoColada(dataItem.ProyectoID, dataItem.Nombre):CargarProyectoColada("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    ProyectoColada = {};
+                    this.value("");
+                }
+            },
+            filter: "contains",
+        });
+        ObtenerProyecto();
+    };
+    function hideElementsColada() {
+        $(".sidebar").hide();
+        $(".logo").hide();
+        $(".search-bar").hide();
+        $(".notifications").hide();
+        $(".logged-user").hide();
+        $(".content-container").removeClass("topbar").addClass("printView");
+        $(".breadcrumb-container").hide();
+        $(".languageSelector").hide();
+        $(".pull-right").hide();
+        $("header").hide();
+        $(".content-frame").removeClass("content-frame");
+        $("body").css("background", "#FFFFFF");
+    };
+   
+    function CargarFabricanteColada(id, value) {
+        FabricanteColada = {};
+        FabricanteColada = { FabricanteID: id, Nombre: value };
+    };
+
+    function CargarFamiliaAceroColada(id, value) {
+        FamiliaAceroColada = {};
+        FamiliaAceroColada = { FamiliaAceroColadaID: id, Nombre: value };
+    };
+
+    function CargarAceroColada(id, value) {
+        AceroColada = {};
+        AceroColada = { AceroID: id, Nombre: value };
+    };
+
+    function CargarProyectoColada(id, value) {
+        ProyectoColada = {};
+        ProyectoColada = { ProyectoID: id, Nombre: value };
+    };
+    
+    function ObtenerFabricanteColada() {
+        $Fabricantes.Fabricantes.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("Fabricante_Colada", result);
+        });
+    };
+
+    function ObtenerFamiliaAceroColada() {
+        $FamiliaAcero.FamiliaAcero.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("FamiliaAcero_Colada", result);
+        });
+    };
+
+    function ObtenerAceroColada() {
+        $TipoAcero.TipoAcero.read({ familiaAceroID: FamiliaAceroColada.FamiliaAceroColadaID, token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("Acero_Colada", result);
+        });
+    };
+
+    function ObtenerProyecto() {
+        $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("Proyecto_Colada", result);
+            if(window.parent.location.pathname==="/ComplementoRecepcion/ComplementoRecepcion"){
+                $("#Proyecto_Colada").data("kendoComboBox").select(function(n){ return n.ProyectoID===window.parent.rowselected.ProyectoID.toString()})
+            }else{
+                $("#Proyecto_Colada").data("kendoComboBox").value(window.parent.Proyecto.ProyectoID);
+            }
+            CargarProyectoColada(window.parent.Proyecto.ProyectoID);
+        });
+    };
+
+    function LimpiarModalColada() {
+        $("#Fabricante_Colada").data("kendoComboBox").value("");
+        $("#Acero_Colada").data("kendoComboBox").value("");
+        $("#Proyecto_Colada").data("kendoComboBox").value("");
+        $("#NumeroColada_Colada").val("");
+        $("#NumeroCertificado_Colada").val("");
+        $("#HoldCalidad_Colada").attr("checked", false);
+
+        FabricanteColada = {};
+        AceroColada = {};
+        ProyectoColada = {};
+
+    };
+
+    function validarRequeridosModalColada() {
+        var bool = true;
+        $("#modalColada .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if ($(this).attr("id") == "HoldCalidad_Colada") {
+                    if (!$(this).is(':checked')) {
+                        bool = false;
+                        $(this).closest("div").find("label").addClass("error");
+                        $(this).closest("div").addClass("clearfix");
+                    } else {
+                        $(this).closest("div").find("label").removeClass("error");
+                        $(this).closest("div").removeClass("clearfix");
+                    }
+                } else {
+                    if (!$(this).val()) {
+                        bool = false;
+                        $(this).closest("div").find("label").addClass("error");
+                        $(this).closest("div").addClass("clearfix");
+                    } else {
+                        $(this).closest("div").find("label").removeClass("error");
+                        $(this).closest("div").removeClass("clearfix");
+                    };
+                }
+            };
+        });
+        return bool;
+    };
+
+    function cancelarvalidacionRequeridosModalColada() {
+        $("#modalColada .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                $(this).closest("div").find("label").removeClass("error");
+                $(this).closest("div").removeClass("clearfix");
+            };
+        });
+    };
+
+    function GuardarColada() {
+        ColadaModal = { ItemCodeID: "", FabricanteID: "", AceroID: "", ProyectoID: "", NumeroColada: "", NumeroCertificado: "", HoldCalidad: "" };
+        window.parent.location.pathname==="/Cuantificacion/Cuantificacion" ? window.parent._q.recents=true : 0;
+        ColadaModal.ItemCodeID = window.parent.$("#hdnItemCodeIDSeleccionado").val();
+        if (ColadaModal.ItemCodeID == undefined || ColadaModal.ItemCodeID == null || !(ColadaModal.ItemCodeID > 0)) {
+            ColadaModal.ItemCodeID = 0;
+        }
+        ColadaModal.FabricanteID = FabricanteColada.FabricanteID;
+        ColadaModal.AceroID = AceroColada.AceroID;
+        ColadaModal.ProyectoID = ProyectoColada.ProyectoID;
+        ColadaModal.NumeroColada = $("#NumeroColada_Colada").val();
+        ColadaModal.NumeroCertificado = $("#NumeroCertificado_Colada").val();
+        ColadaModal.HoldCalidad = $("#HoldCalidad_Colada").is(":checked");
+
+        //console.log(JSON.stringify(ColadaModal));
+        $Colada.Colada.create({}, { data: JSON.stringify(ColadaModal), token: Cookies.get("token") }).done(function (data) {
+            LimpiarModalColada();
+            if (Error(data)) {
+                cerrarVentanaModal();
+                window.parent.ActualizarPaginaPadre();
+            }
+            $("#Proyecto_Colada").data("kendoComboBox").value(window.parent.Proyecto.ProyectoID);
+        });
+    };
+
+    function CancelarColada() {
+        LimpiarModalColada();
+        cerrarVentanaModal();
+        cancelarvalidacionRequeridosModalColada();
+        if(window.parent.$("#hdnItemCodeIDSeleccionado").val()){
+            window.parent.CancelarPadre(1);
+        }
+    };
+
+    function cerrarVentanaModal() {
+        window.parent.$("#window").data("kendoWindow").close();
+        cleanDisplayMessage();
+    };
+
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Colada"] = $ColadaModel
+    CargaInicial();
+    $("#language").data("kendoDropDownList").select(_languageOrder[window.parent.$("#language").data("kendoDropDownList").value()]);
+    $("#language").data("kendoDropDownList").trigger("change");
+    applySecurityPolicy(false);
+    }
+
+    @section JavascriptDocumentReadyHomeCookie {
+    //Cookies.set("home", true, { path: '/' });
+    //Cookies.set("navegacion", "39", { path: '/' });
+    }
+</script>

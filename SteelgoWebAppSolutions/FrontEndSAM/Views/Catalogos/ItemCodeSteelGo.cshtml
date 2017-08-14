@@ -1,0 +1,1099 @@
+﻿@{
+    ViewBag.Title = "Catálogos - Item Code Steelgo";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="ListadoCatalogos0041"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("ListadoCatalogos", "Catalogos")"><span id="ListadoCatalogos0042"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("ItemCodeSteelGo", "Catalogos")"><span id="ItemCodeSteelGo0001"></span></a>
+    </li>
+}
+
+<div id="formItemCodeSteelgo" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        @*<div class="button-section">
+                            @*<div class="btn-group save-group">
+                                <button id="GuardarICS" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="LlegadaMaterial0011"></span></button>
+                                <button id="Editar" onclick="javascript:void(0);" type="button" class="btn btn-yellow" style="display: none"><span id="LlegadaMaterial0044"></span></button>
+                            </div>*@
+                            @*<a id="Cancelar" href="#" class="btn btn-black"><span id="LlegadaMaterial0012"></span></a>*@
+                            @*
+                        </div>*@
+                        <div class="button-section">
+                            <a href="@Url.Action("AsociacionItemCodes", "Catalogos")" class="btn btn-primary"><span id="ItemCodeSteelGo0004"></span></a>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection disabled"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div id="grid"></div>
+</div>
+
+<script>
+@section JavascriptGlobalVariables {
+    editado = false;
+    addedFilters=false;
+    lastEditedDocument="";
+    canSave = true;
+    justOneSaving = 0;
+    var creado = 0;
+    var idDiam1 = 0;
+    var DiametroCero = { id: "", value: "" };
+    var rowEditada = {
+        ItemCodeSteelgoID: "", Codigo: "", Descripcion: "", DescripcionLarga: "",
+        DescripcionIngles: "", DescripcionLargaIngles: "", Rel_ICS_DiametroID: "",
+        Diametro1ID: "", Diametro1: "", Diametro2ID: "",
+        Diametro2: "", Grupo: "", GrupoID: "", Acero: "", AceroID: "", CedulaID: "", CedulaA: "",
+        CedulaB: "", Libra: "", Inch: "", MM: "", Espesor: "", Peso: "", Area: ""
+    };
+    var rowError;
+    //var rowError = {
+    //    ItemCodeSteelgoID: "", Codigo: "", Descripcion: "", DescripcionLarga: "",
+    //    DescripcionIngles: "", DescripcionLargaIngles: "", Rel_ICS_DiametroID: "",
+    //    Diametro1ID: "", Diametro1: "", Diametro2ID: "",
+    //    Diametro2: "", Grupo: "", GrupoID: "", Acero: "", AceroID: "", CedulaID: "", CedulaA: "",
+    //    CedulaB: "", Libra: "", Inch: "", MM: "", Espesor: "", Peso: "", Area: ""
+    //};
+    var valDiam1 = "";
+    var valDiam2 = "";
+    var dsEspesorIN = "";
+    var dsEspesorMM = "";
+    var idDiam2 = 0;
+    var $ItemCodeSteelGoModel = {
+        listContainer: {
+            create: ".k-grid-add",
+            list: ["#grid", ".k-combobox"],
+            detail: "",
+            destroy: ".k-grid-delete"
+        },
+        properties: {}
+    };
+    }
+
+@section JavascriptGlobalFunctions {
+    function changeLanguageCall() {
+        var tmp = removeGrid($("#grid"));
+        cargarInicialGrid();
+        $("#grid").data("kendoGrid").dataSource.data(tmp);
+    };
+
+    function getDropData(e) {
+        var id = e.sender._old;
+        var nombre = e.sender._prev;
+        var grid = $("#grid").data("kendoGrid");
+        var dirty = $.map(grid._data, function (obj, index) {
+            if (obj.dirty == true) {
+                return index;
+            }
+        });
+        return { id: id, nombre: nombre, posicion: dirty[dirty.length - 1] }
+    }
+
+    //$("#Cancelar").on("click",function(){
+    //    var options = $("#grid").data("kendoGrid").options;
+    //    $("#grid").data("kendoGrid").destroy();
+    //    $("#grid").empty().kendoGrid(options);
+    //})
+    function ObtenerDiametroCero() {
+
+        $Diametros.Diametros.read({}, { Valor:0, token: Cookies.get("token") }).done(function (result) {
+            if (Error(result)) {
+                DiametroCero.id = result.id;
+                DiametroCero.value = result.value;
+            }
+        });
+    };
+
+    function ObtenerDiametros(container, options) {
+        $('<input data-text-field="value" data-value-field="id" data-bind="value:' + options.field + '"/>')
+               .appendTo(container)
+               .kendoComboBox({
+                   autoBind: false,
+                   dataSource: {
+                       type: "json",
+                       serverFiltering: true,
+                       transport: {
+                           read: $DiametrosCatalogos + "token=" + Cookies.get("token")
+                       }
+                   },
+                   select: function (e) {
+                       var dataItem = this.dataItem(e.item.index());
+                   },
+                   change: function (e) {
+                       var value = this.text();
+                       if (this.selectedIndex == -1) {
+                           messageindexKendoCombobox(this);
+                           this.value("");
+                       }
+                       //$('#grid').data('kendoGrid').refresh();
+                   },
+                   filter: "contains",
+               });
+    };
+
+    //function isNumeric(n) {
+    //    return !isNaN(parseFloat(n)) && isFinite(n);
+    //};
+
+    function getFields() {
+        return {
+            ItemCodeSteelgoID: { type: "number",editable: false, nullable: true, defaultValue:0 },
+            Codigo: { type: "string", validation: { required: true } },
+            Descripcion: { type: "string", validation: { required: true } },
+            DescripcionLarga: { type: "string", validation: { required: true } },
+            DescripcionIngles: { type: "string", validation: { required: true } },
+            DescripcionLargaIngles: { type: "string", validation: { required: true } },
+            Rel_ICS_DiametroID: { editable: false, nullable: true },
+            Grupo: { type: "string", validation: { required: true } },
+            GrupoID: { editable: false, nullable: true },
+            Diametro1ID: { editable: false, nullable: true },
+            Diametro1: { type: "number", validation: { required: true } },
+            Diametro2ID: { editable: false, nullable: true },
+            Diametro2: { type: "number", validation: { required: true } },
+            FamiliaMaterialID: {type: "number", validation: { required: true },editable: false},
+            FamiliaMaterial: { type: "string", validation: { required: true },editable: false},
+            Acero: { type: "string", validation: { required: true } },
+            AceroID: { editable: false, nullable: false },
+            CedulaID: { editable: false, nullable: true },
+            CedulaA: { type: "string", validation: { required: false } },
+            CedulaB: { type: "string", validation: { required: false } },
+            Libra: { type: "string", validation: { required: false } },
+            Inch: { type: "string", validation: { required: true } },
+            InchID: { type: "string", validation: { required: true } },
+            MM: { type: "string", validation: { required: true } },
+            MMID: { type: "string", validation: { required: true } },
+            //Espesor: { type: "number", validation: { required: true }, editable: false },
+            Peso: { type: "number", validation: { required: true }, editable: true },
+            Area: { type: "number", validation: { required: true }, editable: true },
+            TieneD2: { type: "string", validation: { required: true } },
+            Asociado: { type: "boolean", validation: { required: false }, editable: false },
+        }
+    };
+
+    function Error(data) {
+        if (data == null) {
+            displayMessage("notificationslabel0092", "", '2');
+            return false;
+        } else {
+            if (data.ReturnCode) {
+                if (data.ReturnCode != 200) {
+                    if (data.ReturnCode == 401) {
+                        removeUserSession();
+                        return false;
+                    } else {
+                        displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+    };
+
+    function cargarInicialGrid() {
+        $("#grid").kendoGrid({
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            columns: [
+                { field: "Codigo", title: _dictionary.ItemCodeSteelGo0024[$("#language").data("kendoDropDownList").value()], width: "150px" },
+                { field: "Descripcion", title: _dictionary.ItemCodeSteelGo0005[$("#language").data("kendoDropDownList").value()], width: "150px" },
+                { field: "DescripcionLarga", title: _dictionary.ItemCodeSteelGo0006[$("#language").data("kendoDropDownList").value()], width: "150px" },
+                { field: "DescripcionIngles", title: _dictionary.ItemCodeSteelGo0007[$("#language").data("kendoDropDownList").value()], width: "150px" },
+                { field: "DescripcionLargaIngles", title: _dictionary.ItemCodeSteelGo0008[$("#language").data("kendoDropDownList").value()], width: "150px" },
+                { field: "Grupo", title: _dictionary.ItemCodeSteelGo0011[$("#language").data("kendoDropDownList").value()], width: "150px", editor: grupoEditor},
+                { field: "Diametro1", title: _dictionary.ItemCodeSteelGo0009[$("#language").data("kendoDropDownList").value()], width: "150px", editor: d1Editor, template: d1Format},
+                { field: "Diametro2", title: _dictionary.ItemCodeSteelGo0010[$("#language").data("kendoDropDownList").value()], width: "150px", editor: d2Editor, template: d2Format},
+                { field: "Acero", title: _dictionary.ItemCodeSteelGo0026[$("#language").data("kendoDropDownList").value()], width: "150px", editor: aceroEditor},
+                { field: "FamiliaMaterial", title: _dictionary.ItemCodeSteelGo0012[$("#language").data("kendoDropDownList").value()], width: "150px"},
+                { field: "CedulaA", title: _dictionary.ItemCodeSteelGo0013[$("#language").data("kendoDropDownList").value()], width: "150px", /*editor: cedAEditor*/ },
+                { field: "CedulaB", title: _dictionary.ItemCodeSteelGo0014[$("#language").data("kendoDropDownList").value()], width: "150px", /*editor: cedBEditor */},
+                { field: "Libra", title: _dictionary.ItemCodeSteelGo0015[$("#language").data("kendoDropDownList").value()], width: "165px", editor: cedCEditor },
+                { field: "Inch", title: _dictionary.ItemCodeSteelGo0016[$("#language").data("kendoDropDownList").value()], width: "150px", editor: inchEditor },
+                { field: "MM", title: _dictionary.ItemCodeSteelGo0017[$("#language").data("kendoDropDownList").value()], width: "150px", editor: mmEditor },
+                { field: "Peso", title: _dictionary.ItemCodeSteelGo0018[$("#language").data("kendoDropDownList").value()], width: "150px" },
+                { field: "Area", title: _dictionary.ItemCodeSteelGo0019[$("#language").data("kendoDropDownList").value()], width: "150px" },
+                { field: "TieneD2", title: _dictionary.ItemCodeSteelGo0019[$("#language").data("kendoDropDownList").value()], width: "150px", hidden:true },
+                { command: "edit", title: "Editar", width: "91px" },
+                { command: "destroy", title: "Borrar", width: "91px" }
+            ],
+            dataSource: {
+                data: [],
+                schema: {
+                    model: {
+                        id: "ItemCodeSteelgoID",
+                        fields: getFields(),
+                    },
+                    errors: function (response) {
+                        if (response.ReturnCode) {
+                            if (response.ReturnCode != 200) {
+                                if (response.ReturnCode == 401) {
+                                    removeUserSession();
+                                } else {
+                                    displayMessage("notificationslabel0008", response.ReturnMessage, '2');
+                                }
+                            }
+                        }
+                    },
+                },
+                pageSize: 20,
+                transport: {
+                    read: {
+                        url: $CatalogoICSteelgo.CatalogoICSteelgo.urlNoId + "?token=" + Cookies.get("token"),
+                        dataType: "json",
+                        type: "GET",
+                        cache: false
+                    },
+                    create: {
+                        url: "save",
+                        dataType: "json",
+                        type: "POST",
+                        cache: false
+                    },
+                    update: {
+                        url: "update",
+                        dataType: "json",
+                        type: "PUT",
+                        cache: false
+                    },
+                    destroy: {
+                        url: "destroy",
+                        dataType: "json",
+                        type: "DELETE",
+                        cache: false
+                    },
+                    parameterMap: function (options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return { models: kendo.stringify(options.models) };
+                        }
+                    }
+                },
+                requestEnd: function (e) {
+                    setTimeout(function(){justOneSaving=0;},1000);
+                    if (e.type==="create" || e.type==="update" && e.response !== undefined && e.response.ReturnCode === undefined) {
+                        displayMessage("notificationslabel0052", "", '0');//notificationslabel0052
+                    }
+                    else if (e.response !== undefined && e.response.ReturnCode === 500) {
+                        var count = 0;
+                        setTimeout(function () {
+                            $("#grid").data("kendoGrid").dataSource.cancelChanges();
+                            rowEditada=null;
+                        }, 1);
+                    } else if (e.response !== undefined && e.response.ReturnCode == 401)
+                    {
+                        removeUserSession();
+                    }
+                    applySecurityPolicy(false);
+                },
+            },
+            autoHeight: true,
+            sortable: true,
+            scrollable: true,
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+                buttonCount: 2
+            },
+            toolbar: ["create"],
+            editable: "inline",
+            save: function (e) {
+                if(justOneSaving===0){
+                    justOneSaving=1;
+                    e.model=$("#grid").data("kendoGrid").dataItem(".k-grid-edit-row");
+                    var disabledDiametro2 = $("[name='Diametro2_input']", e.container).is(":disabled");
+                    var grid = $("#grid").data("kendoGrid");
+                    if(canSave){
+                        if(e.model.isNew()){
+                            var data = {};
+                            for (f in grid.options.dataSource.schema.model.fields) {
+                                data[f] = e.model[f];
+                            }
+                            if (data["Acero"] === "" || data["AceroID"] === "")
+                            {
+                                displayMessage("ItemCodeSteelGo0025", "", '1');
+                                e.preventDefault();
+                                return false;
+                            }
+
+                            if (data["Inch"] == 0 || data["MM"] == 0 || data["Inch"] === "" || data ["MM"] === "")
+                            {
+                                displayMessage("ItemCodeSteelGo0028", "", '1');
+                                e.preventDefault();
+                                return false;
+                            }
+
+                            if (data["Peso"] == 0 || data["Peso"] === "")
+                            {
+                                displayMessage("ItemCodeSteelGo0029", "", '1');
+                                e.preventDefault();
+                                return false;
+                            }
+                            rowEditada = e.model
+                            grid.options.dataSource.transport.create.url = $CatalogoICSteelgo.CatalogoICSteelgo.urlNoId + "?token=" + Cookies.get("token") + "&data=" + encodeURIComponent(JSON.stringify(data)) + "&editado=" + creado;
+                            editado = false;
+                        }else{
+                            var data = {};
+                            for (f in grid.options.dataSource.schema.model.fields) {
+                                data[f] = e.model[f];
+                            }
+                            if (data["Acero"] === "" || data["AceroID"] === "") {
+                                displayMessage("ItemCodeSteelGo0025", "", '1');
+                                e.preventDefault();
+                                return false;
+                            }
+                            grid.options.dataSource.transport.update.url = $CatalogoICSteelgo.CatalogoICSteelgo.urlNoId + "?token=" + Cookies.get("token") + "&data=" + encodeURIComponent(JSON.stringify(data)) + "&editado=1";
+                            editado = false;
+                        }
+                        rowEditada = e.model;
+                        rowEditada.TieneD2 = disabledDiametro2 ? "No" : "Si";
+                    }else{
+                        displayMessage("ItemCodeSteelGo0032", "", '1');
+                        e.preventDefault();
+                    }
+                }else{
+                    e.preventDefault();
+                }
+            },
+            edit: function (e) {
+                if(e.model.Asociado===true){
+                    $("[name='Grupo']").data("kendoComboBox").enable(false);
+                    $("[name='Diametro1']").data("kendoComboBox").enable(false);
+                    $("[name='Diametro2']").data("kendoComboBox").enable(false);
+                    displayMessage("ItemCodeSteelGo0027","","1");
+                    e.preventDefault();
+                }
+                if(e.model.GrupoID==="1"){
+                    $("[name='Diametro2']", e.container).data("kendoComboBox").enable(false);
+                    e.model.Diametro2ID = DiametroCero.id;
+                    e.model.Diametro2 = 0;
+                }
+                $("#grid td .k-grid-update").on("click",function(){
+                    e.preventDefault();
+                    $("#grid").data("kendoGrid").trigger("save");
+                    $("#grid").data("kendoGrid").dataSource.sync();
+                })
+            },
+            update: function (e) {},
+            cancel: function (e) {
+                editado = false;
+            },
+            remove: function (e) {},
+            dataBound: function (e) {
+                checkTH($("#grid").data("kendoGrid"))
+                quickHeadFilter($("#grid").data("kendoGrid"));
+            },
+        });
+        applySecurityPolicy(false);
+    };
+    
+    function grupoEditor(container, options) {
+        $("<input/>").attr("name", options.field).appendTo(container).kendoComboBox({
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "json",
+                        url: $Grupo.Grupo.urlNoId + "?token=" + Cookies.get("token")
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.response != undefined && e.response.ReturnCode == 401) {
+                        removeUserSession();
+                    }
+                }
+            },
+            change: function (e) {
+                if (this.value()==="" || this.select()===-1) {
+                    displayMessage("notificationslabel0083", "Grupo", '1');
+                    this.value("");
+                }else{
+                    var data = this.dataItem();
+                    options.model.GrupoID = data[this.options.dataValueField];
+                    options.model.Grupo = data[this.options.dataTextField];
+                    
+                    if (options.model.GrupoID!=="1") {
+                        $Grupo.Grupo.read({}, { grupoID: options.model.GrupoID, token: Cookies.get("token") }).done(function (result) {
+                            options.model.TieneD2 = result;
+                            if (result) {
+                                $("[name='Diametro2']").data("kendoComboBox").enable(true);
+                            } else {
+                                $("[name='Diametro2']").data("kendoComboBox").enable(false);
+                                options.model.Diametro2ID = DiametroCero.id;
+                                options.model.Diametro2 = DiametroCero.value;
+                                $("[name='Diametro2']").data("kendoComboBox").value(0);
+                            }
+                        });
+                    }else{
+                        options.model.Diametro2ID = DiametroCero.id;
+                        options.model.Diametro2 = DiametroCero.value;
+                        $("[name='Diametro2']").data("kendoComboBox").value("0.00");
+                        $("[name='Diametro2']").data("kendoComboBox").enable(false);
+                    }
+                }
+            },
+            dataTextField: "value",
+            dataValueField: "id",
+            suggest: true
+        });
+    }
+
+    function d1Editor(container, options) {
+        $("<input/>").attr("name", options.field).appendTo(container).kendoComboBox({
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "json",
+                        url: $DiametrosCatalogos + "token=" + Cookies.get("token")
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.response != undefined && e.response.ReturnCode == 401)
+                    {
+                        removeUserSession();
+                    }
+                }
+            },
+            change: function (e) {
+                cleanCedula(options.model)
+                cleanEspesor(options.model)
+                var data = this.dataItem();
+                var existeDiametro;
+                options.model.Diametro1ID = data.id;
+                options.model.Diametro1 = data.value;
+
+                if (this.value()==="" || this.select()===-1) {
+                    displayMessage("notificationslabel0083", "Diametro 1", '1');
+                    this.value("");
+                }
+
+                if ($("[name='Diametro2_input']", container).is(":disabled"))
+                {
+                    if (options.model.Diametro1ID != null
+                    && options.model.Diametro1 != 0
+                    && options.model.CedulaA == ""
+                    && options.model.CedulaB == ""
+                    && options.model.Libra == "") {
+
+                        //Si existe el diametro seleccionado el combo de espesor se llena con los espesores segun el diametro
+                        $Diametros.Diametros.read({}, { diametro: options.model.Diametro1, token: Cookies.get("token") }).done(function (result) {
+                            existeDiametro = result;
+
+                            if (existeDiametro) {
+                                //Obtengo los datos de Espesor en MM
+                                $Espesor.Espesor.read({}, { diametro1: options.model.Diametro1ID, diametro2: options.model.Diametro2ID, token: Cookies.get("token") }).done(function (result) {
+                                    if (result == null || result == []) {
+                                        //Obtengo todos los Espesores en MM
+                                        $Espesor.Espesor.read({}, { token: Cookies.get("token") }).done(function (result) {
+                                            dsEspesorMM = result;
+                                            $("input[name='MM']").data("kendoComboBox").enable(true);
+                                            $("input[name='MM']").data("kendoComboBox").dataSource.data(dsEspesorMM);
+                                        });
+                                    }
+                                    else {
+                                        //Obtengo los espesores que coinciden con el diametro
+                                        dsEspesorMM = result;
+                                        $("input[name='MM']").data("kendoComboBox").enable(true);
+                                        $("input[name='MM']").data("kendoComboBox").dataSource.data(dsEspesorMM);
+                                    }
+                                });
+
+                                var diametr1 = parseInt(options.model.Diametro1ID);
+                                var diametr2 = parseInt(options.model.Diametro2ID);
+                                //Obtengo los datos de espesor en IN
+                                $Espesor.Espesor.read({}, { diametro1IN: diametr1, diametro2IN: diametr2, token: Cookies.get("token") }).done(function (result) {
+
+                                    if (result == null || result == []) {
+                                        //Obtengo todos los espesores en IN
+                                        $Espesor.Espesor.read({}, { inches: true, token: Cookies.get("token") }).done(function (result) {
+                                            dsEspesorIN = result;
+                                            $("input[name='Inch']").data("kendoComboBox").enable(true);
+                                            $("input[name='Inch']").data("kendoComboBox").dataSource.data(dsEspesorIN);
+                                        });
+                                    }
+                                    else {
+                                        //Obtengo los espesores que coinciden con el diametro
+                                        dsEspesorIN = result;
+                                        $("input[name='Inch']").data("kendoComboBox").dataSource.data(dsEspesorIN);
+                                        $("input[name='Inch']").data("kendoComboBox").enable(true);
+                                    }
+                                });
+                            }
+                            else {//Si el diametro no existe
+                                //Obtengo todos los Espesores en MM
+                                $Espesor.Espesor.read({}, { token: Cookies.get("token") }).done(function (result) {
+                                    dsEspesorMM = result;
+                                    $("input[name='MM']").data("kendoComboBox").enable(true);
+                                    $("input[name='MM']").data("kendoComboBox").dataSource.data(dsEspesorMM);
+                                });
+
+                                //Obtengo todos los Espesores en IN
+                                $Espesor.Espesor.read({}, { inches: true, token: Cookies.get("token") }).done(function (result) {
+                                    dsEspesorIN = result;
+                                    $("input[name='Inch']").data("kendoComboBox").enable(true);
+                                    $("input[name='Inch']").data("kendoComboBox").dataSource.data(dsEspesorIN);
+                                });
+                            }
+                        });
+                    }
+                }
+                else
+                {
+                    if (options.model.Diametro1 != null
+                    && options.model.Diametro1 != 0
+                    && options.model.Diametro2 != null
+                    && options.model.Diametro2 != 0 
+                    && options.model.CedulaA == ""
+                    && options.model.CedulaB == ""
+                    && options.model.Libra == "") {
+
+                        //Si existe el diametro seleccionado el combo de espesor se llena con los espesores segun el diametro
+                        $Diametros.Diametros.read({}, { diametro: options.model.Diametro1, token: Cookies.get("token") }).done(function (result) {
+                            existeDiametro = result;
+
+                            if (existeDiametro) {
+                                //Obtengo los datos de Espesor en MM
+                                $Espesor.Espesor.read({}, { diametro1: options.model.Diametro1ID, diametro2: options.model.Diametro2ID, token: Cookies.get("token") }).done(function (result) {
+                                    if (result == null || result == []) {
+                                        //Obtengo todos los Espesores en MM
+                                        $Espesor.Espesor.read({}, { token: Cookies.get("token") }).done(function (result) {
+                                            dsEspesorMM = result;
+                                            $("input[name='MM']").data("kendoComboBox").enable(true);
+                                            $("input[name='MM']").data("kendoComboBox").dataSource.data(dsEspesorMM);
+                                        });
+                                    }
+                                    else {
+                                        //Obtengo los espesores que coinciden con el diametro
+                                        dsEspesorMM = result;
+                                        $("input[name='MM']").data("kendoComboBox").enable(true);
+                                        $("input[name='MM']").data("kendoComboBox").dataSource.data(dsEspesorMM);
+                                    }
+                                });
+
+                                var diametr1 = parseInt(options.model.Diametro1ID);
+                                var diametr2 = parseInt(options.model.Diametro2ID);
+                                //Obtengo los datos de espesor en IN
+                                $Espesor.Espesor.read({}, { diametro1IN: diametr1, diametro2IN: diametr2, token: Cookies.get("token") }).done(function (result) {
+
+                                    if (result == null || result == []) {
+                                        //Obtengo todos los espesores en IN
+                                        $Espesor.Espesor.read({}, { inches: true, token: Cookies.get("token") }).done(function (result) {
+                                            dsEspesorIN = result;
+                                            $("input[name='Inch']").data("kendoComboBox").enable(true);
+                                            $("input[name='Inch']").data("kendoComboBox").dataSource.data(dsEspesorIN);
+                                        });
+                                    }
+                                    else {
+                                        //Obtengo los espesores que coinciden con el diametro
+                                        dsEspesorIN = result;
+                                        $("input[name='Inch']").data("kendoComboBox").dataSource.data(dsEspesorIN);
+                                        $("input[name='Inch']").data("kendoComboBox").enable(true);
+                                    }
+                                });
+                            }
+                            else {//Si el diametro no existe
+                                //Obtengo todos los Espesores en MM
+                                $Espesor.Espesor.read({}, { token: Cookies.get("token") }).done(function (result) {
+                                    dsEspesorMM = result;
+                                    $("input[name='MM']").data("kendoComboBox").enable(true);
+                                    $("input[name='MM']").data("kendoComboBox").dataSource.data(dsEspesorMM);
+                                });
+
+                                //Obtengo todos los Espesores en IN
+                                $Espesor.Espesor.read({}, { inches: true, token: Cookies.get("token") }).done(function (result) {
+                                    dsEspesorIN = result;
+                                    $("input[name='Inch']").data("kendoComboBox").enable(true);
+                                    $("input[name='Inch']").data("kendoComboBox").dataSource.data(dsEspesorIN);
+                                });
+                            }
+                        });
+                    }
+                }
+                if(options.model.GrupoID==="1"){
+                    refreshRow(options,"Acero");
+                }else{
+                    refreshRow(options,true);
+                }
+            },
+            filter: "contains",
+            dataTextField: "value",
+            dataValueField: "value",
+            suggest: true
+        });
+    }
+
+    function d2Editor(container, options) {
+        $("<input/>").attr("name", options.field).appendTo(container).kendoComboBox({
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "json",
+                        url: $DiametrosCatalogos + "token=" + Cookies.get("token")
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.response != undefined && e.response.ReturnCode == 401) {
+                        removeUserSession();
+                    }
+                }
+            },
+            change: function (e) {
+                var data = this.dataItem();
+                options.model.Diametro2ID = data.id;
+                options.model.Diametro2 = data.value;
+
+                if (!$.isNumeric(this.value()) || this.select()===-1) {
+                    displayMessage("notificationslabel0083", "Diametro 2", '1');
+                    this.value("");
+                }
+
+                if (options.model.Diametro1 != null 
+                    && options.model.Diametro2 != null
+                    && options.model.CedulaA == ""
+                    && options.model.CedulaB == ""
+                    && options.model.Libra == "")
+                {
+                    //Si existe el diametro seleccionado el combo de espesor se llena con los espesores segun el diametro
+                    $Diametros.Diametros.read({}, { diametro: options.model.Diametro1, token: Cookies.get("token") }).done(function (result) {
+                        existeDiametro = result;
+
+                        if (existeDiametro) {
+                            //Obtengo los datos de Espesor en MM
+                            $Espesor.Espesor.read({}, { diametro1: options.model.Diametro1ID, diametro2: options.model.Diametro2ID, token: Cookies.get("token") }).done(function (result) {
+                                if (result == null || result == [])
+                                {
+                                    //Obtengo todos los Espesores en MM
+                                    $Espesor.Espesor.read({}, { token: Cookies.get("token") }).done(function (result) {
+                                        dsEspesorMM = result;
+                                        $("input[name='MM']").data("kendoComboBox").enable(true);
+                                        $("input[name='MM']").data("kendoComboBox").dataSource.data(dsEspesorMM);
+                                    });
+                                }
+                                else
+                                {
+                                    //Obtengo los espesores que coinciden con el diametro
+                                    dsEspesorMM = result;
+                                    $("input[name='MM']").data("kendoComboBox").enable(true);
+                                    $("input[name='MM']").data("kendoComboBox").dataSource.data(dsEspesorMM);
+                                }
+                            });
+
+                            var diametr1 = parseInt(options.model.Diametro1ID);
+                            var diametr2 = parseInt(options.model.Diametro2ID);
+                            //Obtengo los datos de espesor en IN
+                            $Espesor.Espesor.read({}, { diametro1IN: diametr1, diametro2IN: diametr2, token: Cookies.get("token") }).done(function (result) {
+                                                
+                                if (result == null || result == []){
+                                    //Obtengo todos los espesores en IN
+                                    $Espesor.Espesor.read({}, { inches: true, token: Cookies.get("token") }).done(function (result) {
+                                        dsEspesorIN = result;
+                                        $("input[name='Inch']").data("kendoComboBox").enable(true);
+                                        $("input[name='Inch']").data("kendoComboBox").dataSource.data(dsEspesorIN);
+                                    });
+                                }
+                                else {
+                                    //Obtengo los espesores que coinciden con el diametro
+                                    dsEspesorIN = result;
+                                    $("input[name='Inch']").data("kendoComboBox").dataSource.data(dsEspesorIN);
+                                    $("input[name='Inch']").data("kendoComboBox").enable(true);
+                                }
+                            });
+                        }
+                        else {//Si el diametro no existe
+                            //Obtengo todos los Espesores en MM
+                            $Espesor.Espesor.read({}, { token: Cookies.get("token") }).done(function (result) {
+                                dsEspesorMM = result;
+                                $("input[name='MM']").data("kendoComboBox").enable(true);
+                                $("input[name='MM']").data("kendoComboBox").dataSource.data(dsEspesorMM);
+                            });
+
+                            //Obtengo todos los Espesores en IN
+                            $Espesor.Espesor.read({}, { inches: true, token: Cookies.get("token") }).done(function (result) {
+                                dsEspesorIN = result;
+                                $("input[name='Inch']").data("kendoComboBox").enable(true);
+                                $("input[name='Inch']").data("kendoComboBox").dataSource.data(dsEspesorIN);
+                            });
+                        }
+                    }); 
+                }
+            },
+            filter: "contains",
+            dataTextField: "value",
+            dataValueField: "value",
+            suggest: true
+        });
+    }
+
+    function aceroEditor(container, options) {
+        $("<input/>").attr("name", options.field).appendTo(container).kendoComboBox({
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "json",
+                        url: $Familia.Familia.urlNoId + "?token=" + Cookies.get("token")
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.response != undefined && e.response.ReturnCode == 401) {
+                        removeUserSession();
+                    }
+                }
+            },
+            change: function (e) {
+                var value = this.value();
+                if ((!value || this.selectedIndex == -1) && value != "") {
+                    displayMessage("notificationslabel0083", "Acero", '1');
+                    this.value("");
+                }
+                var data = this.dataItem();
+                options.model.AceroID = data[this.options.dataValueField];
+                options.model.Acero = data[this.options.dataTextField];
+                $CatalogoICSteelgo.CatalogoICSteelgo.read({},{familiaAceroID:options.model.AceroID,token:Cookies.get("token")}).done(function(r){
+                    if(Error(r)){
+                        options.model.FamiliaMaterial = r;
+                        var disabledDiametro2 = $("[name='Diametro2_input']", e.container).is(":disabled");
+                        var disabledEspesorIN = $("[name='Inch']", e.container).is(":disabled");
+                        var disabledEspesorMM = $("[name='MM']", e.container).is(":disabled");
+                        var EspesorINvalue = options.model.Inch;
+                        var EspesorMMvalue = options.model.MM;
+                        refreshRow(options,"CedulaA")
+                        if (disabledDiametro2) {
+                            $("input[name='Diametro2']").data("kendoComboBox").enable(false);
+                        };
+
+                        if (disabledEspesorIN)
+                        {
+                            $("input[name='Inch']").data("kendoComboBox").value(EspesorINvalue);
+                            $("input[name='MM']").data("kendoComboBox").value(EspesorMMvalue);
+                        }
+                        else {
+                            $("input[name='Inch']").data("kendoComboBox").enable(true);
+                            $("input[name='MM']").data("kendoComboBox").enable(true);
+                            $("input[name='Inch']").data("kendoComboBox").dataSource.data(dsEspesorIN);
+                            $("input[name='Inch']").data("kendoComboBox").value(EspesorINvalue);
+                            $("input[name='MM']").data("kendoComboBox").dataSource.data(dsEspesorMM);
+                            $("input[name='MM']").data("kendoComboBox").value(EspesorMMvalue);
+                        };
+
+                    }
+                });
+            },
+            dataTextField: "Nombre",
+            dataValueField: "FamiliaAceroID",
+            suggest:true,
+        });
+    }
+
+    //function cedAEditor(container, options){
+    //    $("<input class='k-input k-textbox'/>").attr("name", options.field).appendTo(container).on("change",function(e){ onCedChange(options,this.name);searchCed(options,this,e)});
+    //}
+
+    //function cedBEditor(container, options){
+    //    $("<input class='k-input k-textbox'/>").attr("name", options.field).appendTo(container).on("change",function(e){ onCedChange(options,this.name);searchCed(options,this,e)});
+    //}
+
+    function cedCEditor(container, options){
+        $("<input class='k-input k-textbox'/>").attr("name", options.field).appendTo(container)/*.on("change",function(e){ onCedChange(options,this.name);searchCed(options,this,e)})*/.on("blur",function(e){searchCed(options,this,e)});
+    }
+
+    function inchEditor(container, options) {
+        $("<input/>").attr("name", options.field).appendTo(container).kendoComboBox({
+            dataSource: [],
+            change: function (e) {
+                var data = this.dataItem()
+                if(data===undefined){
+                    options.model.Inch = this.value();
+                }else{
+                    options.model.Inch = data[this.options.dataTextField];
+                    options.model.InchID = data[this.options.dataValueField];
+                }
+                options.model.MM = (options.model.Inch / 0.0393701).toFixed(4);
+                $("input[name='MM']").data("kendoComboBox").value(options.model.MM);
+                searchCedAlter({ model: options.model }, this.input[0]);
+                $("[data-container-for=Peso] input:first").focus();
+            },
+            enable: true,
+            filter: "contains",
+            dataTextField: "value",
+            dataValueField: "id"
+        });
+        $("input[name="+options.field+"]").data("kendoComboBox").input.on("change",function(){
+            $("input[name="+options.field+"]").data("kendoComboBox").trigger("change")
+        })
+    }
+
+    function mmEditor(container, options) {
+        $("<input/>").attr("name", options.field).appendTo(container).kendoComboBox({
+            dataSource: [],
+            select: function (e) {
+            },
+            change: function (e) {
+                var data = this.dataItem()
+                if(data===undefined){
+                    options.model.MM = this.value();
+                }else{
+                    options.model.MMID = data[this.options.dataValueField];
+                    options.model.MM = data[this.options.dataTextField];
+                }
+                options.model.Inch = (options.model.MM * 0.0393701).toFixed(4);
+                $("input[name='Inch']").data("kendoComboBox").value(options.model.Inch);
+                searchCedAlter({model:options.model},this.input[0]);
+                $("[data-container-for=Peso] input:first").focus();
+            },
+            enable: true,
+            filter: "contains",
+            dataTextField: "value",
+            dataValueField: "id"
+        });
+        $("input[name="+options.field+"]").data("kendoComboBox").input.on("change",function(){
+            $("input[name="+options.field+"]").data("kendoComboBox").trigger("change")
+        })
+    }
+
+    function onCedChange(options,name){
+        if (editado == false) {
+            var input = this;
+            $("[name='CedulaA'],[name='CedulaB'],[name='Libra']").each(function () {
+                if (this !== input) {
+                    options.model[name] = null;
+                }
+            })
+            options.model[name] = $("[name="+name+"]").val();
+            options.model.Inch = 0;
+            options.model.MM = 0;
+            $("#grid").data("kendoGrid").refresh();
+            $("#grid").data("kendoGrid").editRow($("#grid tr[data-uid=" + options.model.uid + "]"));
+            editado = true;
+        }
+    }
+    
+    function searchCed(options,input,e) {
+        cleanCedula(options.model);
+        setCedulas(options.model)
+        lastEditedDocument=$(input).attr("name");
+        var data = {
+            CedulaA:options.model.CedulaA,
+            CedulaB:options.model.CedulaB,
+            CedulaC:options.model.Libra,
+            Diametro1:options.model.Diametro1,
+            Diametro1ID:options.model.Diametro1ID,
+            Diametro2ID:options.model.Diametro2ID,
+            Diametro2:options.model.Diametro2,
+        };
+        options.model[input.name]=input.value;
+        //Obtengo los datos de Espesor en MM
+        $ValidarCedulas.ValidarCedulas.read({}, { diametro1ID: options.model.Diametro1ID, espesorIN: false, token: Cookies.get("token") }).done(function (result) {
+            dsEspesorMM = result;
+            $("[name='MM']").data("kendoComboBox").enable(true);
+            $("[name='MM']").data("kendoComboBox").dataSource.data(dsEspesorMM);
+        });
+        ////Obtengo los datos de espesor en IN
+        $ValidarCedulas.ValidarCedulas.read({}, { diametro1ID: options.model.Diametro1ID, espesorIN: true, token: Cookies.get("token") }).done(function (result) {
+            dsEspesorIN = result;
+            $("[name='Inch']").data("kendoComboBox").enable(true);
+            $("[name='Inch']").data("kendoComboBox").dataSource.data(dsEspesorIN);
+        });
+        var i = $(input);
+        var disabledDiametro2 = $("[name='Diametro2_input']").is(":disabled");
+        if (options.model.Diametro1 !== 0 && options.model.Diametro1 !== "") {
+            $CatalogoICSteelgo.CatalogoICSteelgo.read({}, { data: JSON.stringify(data), token: Cookies.get("token") }).done(function (response){
+                if (Error(response)){
+                    //If the CedulaA,B or C are empty
+                    if(options.model.CedulaA==="" && options.model.CedulaB==="" && options.model.Libra===""){
+                        if(response.EspesoresMm.length>0){
+                            $("[name='MM']").data("kendoComboBox").dataSource.data(response.EspesoresMm);
+                            $("[name='MM']").data("kendoComboBox").enable(true)
+                            $('[data-container-for="MM"] input').focus();
+                            response.EspesoresMm.forEach(function(n){ n.value= (n.value * 0.0393701).toFixed(4)});
+                            $("[name='Inch']").data("kendoComboBox").dataSource.data(response.EspesoresMm);
+                            $("[name='Inch']").data("kendoComboBox").enable(true);
+                            if(response.EspesoresMm.length===1){
+                                $("[name='MM']").data("kendoComboBox").select(0)
+                                $("[name='MM']").data("kendoComboBox").trigger("change");
+                                $("[name='Inch']").data("kendoComboBox").select(0)
+                                $("[data-container-for=Peso] input:first").focus();
+                            }else{
+                                $('[data-container-for="Inch"] input').focus();
+                            }
+                        }else if(response.EspesoresMm.length===0 && response.CedulaID!==null){
+                            successCed(options.model,response)
+                            canSave=true;
+                        }else{
+                            displayMessage("notificationslabel0008", response.ReturnMessage, '2');
+                            canSave=true;
+                        }
+                    }else{//If any cedula is filled
+                        if(response.EspesoresMm.length===0 && response.CedulaID!==null){
+                            successCed(options.model,response)
+                            $("[name='Inch']").data("kendoComboBox").enable(false);
+                            $("[name='MM']").data("kendoComboBox").enable(false);
+                            canSave=true;
+                        }else{
+                            cleanCedula(options.model);
+                            refreshRow(options,"CedulaA")
+                            displayMessage("notificationslabel0008", response.ReturnMessage, '2');
+                            canSave=false;
+                        }
+                    }
+                }else{
+                    displayMessage("notificationslabel0008", response.ReturnMessage, '2');
+                    if(options.model.CedulaA==="" && options.model.CedulaB==="" && options.model.Libra===""){
+                        canSave=true;
+                    }else{
+                        cleanCedula(options.model);
+                        refreshRow(options,"CedulaA");
+                        canSave=false;
+                    }
+                }
+            });
+        } else {
+            cleanCedula(options.model)
+            options.model.TieneD2 = disabledDiametro2 ? "No" : "Si";
+            displayMessage("ItemCodeSteelGo0022", "", '1');
+            e.preventDefault();
+            canSave=false;
+            return false;
+        }
+    }
+
+    function searchCedAlter(e,input){
+        var data={
+            "Diametro1":e.model.Diametro1,
+            "Diametro1ID":e.model.Diametro1ID,
+            "EspesorMM": input.name.indexOf("MM")>-1 ? input.value : 0,
+            "EspesorIn": input.name.indexOf("Inch")>-1 ? input.value : 0,
+        }
+        $CatalogoICSteelgo.CatalogoICSteelgo.read({}, { data: JSON.stringify(data), token: Cookies.get("token") }).done(function (data) {
+            if(Error(data)){
+                data.CedulaA===null ? data.CedulaA="" : null;
+                data.CedulaB===null ? data.CedulaB="" : null;
+                data.CedulaC===null ? data.CedulaC="" : null;
+                if(data.Correcta===true && (e.model.CedulaA === data.CedulaA && e.model.CedulaB === data.CedulaB && e.model.Libra === data.CedulaC)){
+                    canSave=true;
+                    e.model.CedulaID = data.CedulaID;
+                }else if(data.Correcta===true && (e.model.CedulaA !== data.CedulaA || e.model.CedulaB !== data.CedulaB || e.model.Libra !== data.CedulaC)){
+                    displayMessage("ItemCodeSteelGo0030", "", '1');
+                    canSave=false;
+                }else if(data.Correcta===true){
+                    displayMessage("ItemCodeSteelGo0030", "", '1');
+                    canSave=true;
+                }
+                else{
+                    e.model.CedulaID="";
+                    displayMessage("ItemCodeSteelGo0031", "", '1');
+                    canSave=true;
+                }
+            }else{
+                e.model.CedulaID="";
+                canSave=true;
+            }
+        });
+    }
+
+    function cleanCedula(model){
+        model.CedulaID = "";
+        model.CedulaA = "";
+        model.CedulaB = "";
+        model.Libra = "";
+    }
+
+    function cleanEspesor(model){
+        model.Inch = "";
+        model.MM = "";
+    }
+
+    function cleanMeasures(model){
+        model.Peso = "";
+        model.Area = "";
+    }
+
+    function setCedulas(model){
+        model.CedulaA=$("input[name=CedulaA]").val()
+        model.CedulaB=$("input[name=CedulaB]").val()
+        model.Libra=$("input[name=Libra]").val()
+    }
+
+    function refreshRow(options,next){
+        next=typeof next === "undefined" ? false : next;
+        $("#grid").data("kendoGrid").refresh();
+        $("#grid").data("kendoGrid").editRow($("[data-uid="+options.model.uid+"]"));
+        setTimeout(function(){
+            if(next===true){
+                var input= $("input[name="+$("input[name="+options.field+"]").closest("td").next().attr("data-container-for")+"]")
+                if(isKendoWidget(input)){
+                    input.data("kendoComboBox").focus();
+                }else{
+                    input.focus();
+                }
+            }else if(typeof next==="string"){
+                var input= $("input[name="+next+"]")
+                if(isKendoWidget(input)){
+                    input.data("kendoComboBox").focus();
+                }else{
+                    input.focus();
+                }
+            }else{
+                if(isKendoWidget($("[name="+options.field+"]"))){
+                    $("[name="+options.field+"]").data("kendoComboBox").focus();
+                }else{
+                    $("[name="+options.field+"]").focus();
+                }
+            }
+        },10);
+    }
+
+    function d1Format(dataItem){
+        return kendo.toString(dataItem.Diametro1,"n4")
+    }
+    
+    function d2Format(dataItem){
+        return kendo.toString(dataItem.Diametro2,"n4")
+    }
+
+    function successCed(model,response){
+        var disabledDiametro2 = $("[name='Diametro2_input']").is(":disabled");
+        model.CedulaID = response.CedulaID;
+        model.CedulaA = response.CedulaA;
+        model.CedulaB = response.CedulaB;
+        model.Libra = response.CedulaC;
+        model.Inch = response.CedulaIn;
+        model.MM = response.CedulaMM;
+        model.TieneD2 = disabledDiametro2 ? "No" : "Si";
+        $("[name='Inch']").data("kendoComboBox").select(function(n){ return n.value===model.Inch });
+        $("[name='MM']").data("kendoComboBox").select(function(n){return n.value===model.MM})
+        $("[name='Inch']").data("kendoComboBox").select()===-1 ? $("[name='Inch']").data("kendoComboBox").value(model.Inch):null;
+        $("[name='MM']").data("kendoComboBox").select()===-1 ? $("[name='MM']").data("kendoComboBox").value(model.MM):null;
+        $("[data-container-for='Peso'] input:first").focus();
+    }
+};
+
+
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["ItemCodeSteelGo"] = $ItemCodeSteelGoModel;
+    ObtenerDiametroCero();
+    };
+
+    
+    
+    @section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "44", { path: '/' });
+    };
+
+</script>

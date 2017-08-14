@@ -1,0 +1,583 @@
+﻿<!DOCTYPE html>
+@{
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title</title>
+
+    <!-- Styles -->
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/kendo/2014.2.716/kendo.common.min.css")
+    @Styles.Render("~/Content/kendo/2014.2.716/kendo.default.min.css")
+    @Styles.Render("~/Content/kendo/2014.2.716/kendo.dataviz.min.css")
+    @Styles.Render("~/Content/kendo/2014.2.716/kendo.dataviz.default.min.css")
+    @Styles.Render("~/Content/Styles/site.css")
+    @Styles.Render("~/Content/Styles/entities.css")
+    @Styles.Render("~/Content/Styles/overrides.css")
+
+
+    <!-- Scripts -->
+    @Scripts.Render("~/Scripts/xdomain.js")
+    @Scripts.Render("~/Scripts/jquery-2.1.4.js")
+    @Scripts.Render("~/Scripts/jquery.validate.js")
+    @Scripts.Render("~/Scripts/jquery.rest.js")
+    @Scripts.Render("~/Scripts/js.cookie.js")
+    @Scripts.Render("~/Scripts/kendo/2014.2.716/kendo.all.min.js")
+    @Scripts.Render("~/Scripts/kendo/2014.2.716/cultures/kendo.culture.es-MX.min.js")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    @Scripts.Render("~/Scripts/JsBarcode.js")
+    @Scripts.Render("~/Scripts/CODE128.js")
+    @Scripts.Render("~/Scripts/CODE39.js")
+    @Scripts.Render("~/Scripts/Chart.js")
+
+    <!-- App Scripts CORE -->
+    @Scripts.Render("~/Scripts/AppComponents/Core/AlertsManager.js")
+    @Scripts.Render("~/Scripts/AppComponents/Core/ApiManager.js")
+    @Scripts.Render("~/Scripts/AppComponents/Core/ContextMenuManager.js")
+    @Scripts.Render("~/Scripts/AppComponents/Core/DictionaryManager.js")
+    @Scripts.Render("~/Scripts/AppComponents/Core/GridExtensionsManager.js")
+    @Scripts.Render("~/Scripts/AppComponents/Core/MenuManager.js")
+    @Scripts.Render("~/Scripts/AppComponents/Core/NotificationsManager.js")
+    @Scripts.Render("~/Scripts/AppComponents/Core/SecurityManager.js")
+    @Scripts.Render("~/Scripts/AppComponents/Core/TranslationManager.js")
+    @Scripts.Render("~/Scripts/AppComponents/Core/UtilitiesManager.js")
+
+    @RenderSection("HtmlHead", required: false)
+
+</head>
+<body>
+    <header class="clearfix">
+        <div class="content-wrapper clearfix">
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+                <a class="logo" href="#" tabindex="9999"></a>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                <div class="row pull-right">
+                    <div class="col-lg-12 menu">
+                        <div class="search-bar">
+                            <div class="input-group">
+                                <input id="layoutLabel0001" type="text" class="form-control" placeholder="Buscar en todo el sitio...">
+                                <span class="input-group-btn">
+                                    <button class="btn spyglass btn-blue" type="button" id="globalSearch"></button>
+                                </span>
+                            </div>
+                        </div>
+                        <a href="#" id="mobile-menu" class="menuMobile hidden-sm hidden-md hidden-lg">                            
+                        </a>
+                        <div class="notifications">
+                            <div class="dropdown">
+                                <a id="notifications" role="button" data-target="#" href="#">
+                                    <img src="~/Content/images/SAMC_MenuIcon_02.png" />
+                                    <span class="count"></span>
+                                </a>
+                                <i class="peak hidden">
+                                    <img src="~/Content/images/SC_dd_Pico.png" />
+                                </i>
+                                <ul class="dropdown-menu notification-menu" role="menu" aria-labelledby="notifications">
+                                    <div class="notifications-header">
+                                        <span id="messagesCounter">( <span class="counter"></span> )<span id="" class="counterTag">Notificaciones</span></span>
+                                        <div class="message-header clearfix hidden">
+                                            @*<span class="backIcon">
+                                                <img id="" src="~/Content/images/SC_back.png" />
+                                            </span>*@
+                                            @*<span>Susana Garza</span>
+                                            <span class="deleteMessage">
+                                                <img id="" src="~/Content/images/SC_delete_Icon.png" />
+                                            </span>
+                                            <span class="messageDate">20/07/2015</span>*@
+                                        </div>
+                                    </div>
+                                    <div class="message-frame">
+                                       @* <li>
+                                            <a href="#" class="read">
+                                                <div class="notification-container">
+                                                    <div class="sender-info">
+                                                        <span class="senderName">Rogelio Martinez</span>
+                                                        <span class="deleteMessage">
+                                                            <img id="" src="~/Content/images/SC_delete_Icon.png" /></span>
+                                                        <span class="messageDate">20/07/2015</span>
+                                                    </div>
+                                                    <div class="message-info">Curabitur accumsam, risus vitae tincidunt rhoncus, metus neque</div>
+                                                </div>
+                                            </a>
+                                        </li>*@
+                                       @* <div class="notifications-footer hidden">
+                                            <a href="#" class="btn btn-primary"><span>Ver más</span></a>
+                                        </div>*@
+                                        @*<li class="messageBody hidden">
+                                            <span id="">Curabitur accumsam, risus vitae tincidunt rhoncus, metus neque</span>
+                                        </li>*@
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="logged-user">
+                            <div class="btn-group">
+                                <a id="logged-user" href="#" class="btn dropdown-toggle" data-toggle="dropdown">
+                                    <img src="/Content/images/SAMC_MenuIcon_03.png" />
+                                    <span class="name" id="nameSpan"></span>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a id="logout" href="#">
+                                            <span id="layoutLabel0004"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="languageSelector">
+                            <input id="language" value="es-MX" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="content-frame clearfix">
+        <!-- LEFT NAV AND RIGHT MAIN CONTENT -->
+        <div class="container clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <!-- sidebar -->
+                <div id="sidebar" class="col-xs-12 col-sm-2 col-md-2 col-lg-2 sidebar">
+                    <!-- main-nav -->
+                    <nav class="main-nav">
+                        <ul class="main-menu" id ="main-menu">
+                            <!-- The main menu is generated automatically here -->
+                        </ul>
+                    </nav>
+                    <!-- /main-nav -->
+
+                    <div class="nav-footer">
+                        <i class="icn right minify"></i>
+                        <img src="~/Content/images/SAMC_SteelLogo_Web_00.png" />
+                        <ul>
+                            <li><a href="http://www.steelgo.com"><span id="layoutLabel0015"></span></a></li>
+                            <li><a href="http://www.steelgo.com"><span id="layoutLabel0016"></span></a></li>
+                            <li><a href="http://www.steelgo.com"><span id="layoutLabel0017"></span></a></li>
+                            <li><a href="http://www.steelgo.com"><span id="layoutLabel0018"></span></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- end sidebar -->
+
+
+                <!-- content-wrapper -->
+                <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10 content-container topbar">                   
+                    <div class="row">
+                        <!-- breadcrumb-->
+                        <div class="col-sm-12 col-sm-12 col-md-12 col-lg-12 breadcrumb-container">
+                            <div class="row">
+                                <ul class="breadcrumb">
+                                    @RenderSection("breadcrumb", required: false)
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /breadcrumb-->
+                        <!-- alerts -->
+                        <div class="col-sm-12 col-sm-12 col-md-12 col-lg-12 alert-container">
+                            <div class="message">
+                                Mensaje de éxito/error/advertencia
+                            </div>
+                        </div>
+                        <!-- alerts -->
+                    </div>
+                    <!-- main -->
+                    <div class="row content">
+                        <div id="main-content" class="main-content clearfix">
+                            @RenderBody()
+                        </div>
+                        <!-- /main-content -->
+                    </div>
+                    <!-- /main -->
+                </div>
+                <!-- /content-wrapper -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- LEFT NAV AND RIGHT MAIN CONTENT -->
+        <!-- /container-frame -->
+    </div>
+
+
+    <div class="modal">
+        <!-- Place at bottom of page -->
+    </div>
+    <iframe id="my_iframe" name="my_iframe" src="@Url.Action("notfound", "Errors")" style="visibility: hidden; display: none"></iframe>
+
+    <script>
+        /****************************/
+        /*     Global Variables     */
+        /****************************/
+        var $body = $("body");
+        var $homeURI = '@Url.Action("Landing", "Home")';
+        var $errorURI = '@Url.Action("accessdenied", "Errors")';
+        var $contextMenu = {};
+        var $sideMenu = {};
+        var $sideMenuLayout = { 0: {}, 1: {}, 2: {}, 3: {} };
+        var $authorizationModel = {};
+        var returnOfSecurityCheck = {
+            "layout": {
+                "create": false,
+                "list": false,
+                "detail": false,
+                "destroy": false,
+                "properties": {
+                    "navigation": {
+                        "visible": true,
+                        "editable": true,
+                        "required": false
+                    },
+                    "search": {
+                        "visible": true,
+                        "editable": true,
+                        "required ": false
+                    },
+                    "notifications": {
+                        "visible": true,
+                        "editable": true,
+                        "required ": false
+                    },
+                    "useroptions": {
+                        "visible": true,
+                        "editable": true,
+                        "required ": false
+                    }
+                }
+            },
+            "login": {
+                "create": false,
+                "list": false,
+                "detail": true,
+                "destroy": false,
+                "properties": {
+                    "username": {
+                        "visible": true,
+                        "editable": true,
+                        "required": true
+                    },
+                    "password": {
+                        "visible": true,
+                        "editable": true,
+                        "required ": false
+                    }
+                }
+            }
+        };
+
+        var $layoutModel = {
+            listContainer: {
+                create: "",
+                list: "",
+                detail: "",
+                destroy: ""
+            },
+            properties: {
+                navigation: {
+                    visible: "#sidebar",
+                    editable: "#sidebar",
+                    required: "#sidebar"
+                },
+                search: {
+                    visible: ".search-bar",
+                    editable: "#layoutLabel0001",
+                    required: "#layoutLabel0001"
+                },
+                notifications: {
+                    visible: ".notifications",
+                    editable: "#notifications",
+                    required: "#notifications"
+                },
+                useroptions: {
+                    visible: ".logged-user",
+                    editable: "#logged-user",
+                    required: "#logged-user",
+                }
+            }
+        };
+
+        //Partial Views Javascript Code Container
+        @RenderSection("JavascriptGlobalVariables", required: false)
+
+        //Partial Views Javascript Code Container
+        @RenderSection("JavascriptGlobalFunctions", required: false)
+
+        /****************************/
+        /* Document Ready Variables */
+        /****************************/
+
+        //Document Ready Section
+        $(document).ready(function () {
+
+            //Set cookie of homepage to false
+            Cookies.set("home", false, {path: '/'});
+
+            //Partial Views Javascript Code Container
+            @RenderSection("JavascriptDocumentReadyHomeCookie", required: false)
+
+            //Validate Logged User Credentials
+            validateCredentials();
+
+            $("#logout").click(function (event) {
+                event.preventDefault();
+                removeUserSession();
+            });
+
+            //Add the language parameter to all url invoked by the <a> tag
+            $("a:not([data-login='password'])").on("click",function (event) {
+                redirectToLanguage(event,this);
+            });
+            
+            //Will be handled individually per page
+            //$("ul.breadcrumb li.active a").click(function (event) {
+            //    //this.href = this.href + window.location.search;
+            //    event.preventDefault()
+            //});
+
+            //Language dropdownlist inicialization method
+            $("#language").kendoDropDownList({
+                change: changeLanguage,
+                dataTextField: "text",
+                dataValueField: "value",
+                valueTemplate: '<img src=\"../Content/images/flags/#:data.text#.png\" alt=\"#:data.text#\" class="selected-value"/>',
+                template: '<img src=\"../Content/images/flags/#:data.text#.png\" alt=\"#:data.text#\" />',
+                width: 24,
+                dataSource: [
+                    { text: "es-MX" }, { text: "en-US" }
+                ]
+            });
+
+            //Hide elements for Login
+            hideElements();
+
+            //Menu Interactions Code 
+            menuManagerToBeExecutedOnDocumentReady();
+
+            //Context Menu Interactions Code
+            //contextMenuToBeExecutedOnDocumentReady();
+
+            //Alerts Interactions Code
+            alertsManagertoBeExecutedOnDocumentReady();
+
+            //Add layout element to the Authorization Model
+            $authorizationModel.Layout = $layoutModel;
+
+            //Add the body to the menu context
+            registerToContextMenu("main-content");
+
+            //Set on the dropdownlist the url language and change the current language
+            $("#language").data("kendoDropDownList").select(_languageOrder[getUrlParameter("leng", "es-MX")]);
+            $("#language").data("kendoDropDownList").trigger("change");
+            
+            //Partial Views Javascript Code Container
+            @RenderSection("JavascriptDocumentReadyFunctions", required: false)
+
+            //Apply Profile Security Policy
+            applySecurityPolicy(true);
+
+            //Hide side menu for all pages except landing and home
+            toggleSideMenu();
+
+            //Set the user name to the 
+            if (Cookies.get("user") != null) {
+                $("#nameSpan").text(Cookies.get("nameUserLogged"));
+            }
+
+            loadMessages();
+            
+            //Show message body when notification is clicked           
+            $("#notifications").click(function (e){
+                e.preventDefault();
+                $(this).parent().toggleClass("open");
+                $(".peak").toggleClass("hidden");
+            });
+
+            //$(".notification-menu li:not('.messageBody')").on("click", function () {
+            //    alert("hola");
+            //    $(".notification-menu li:not('.messageBody')").addClass("hidden");
+            //    $(".notifications .dropdown").addClass("open");
+            //    $("#messagesCounter").addClass("hidden");
+            //    //$(".notifications-footer").addClass("hidden");
+            //    $(".message-header").removeClass("hidden");
+            //    $(".notification-menu li.messageBody").removeClass("hidden");
+            //});
+
+            //$(".backIcon").on("click", function () {
+            //    $(".notification-menu li:not('.messageBody')").removeClass("hidden");
+            //    $("#messagesCounter").removeClass("hidden");
+            //    //$(".notifications-footer").removeClass("hidden");
+            //    $(".message-header").addClass("hidden");
+            //    $(".notification-menu li.messageBody").addClass("hidden");
+            //});
+
+            //Toggle sidebar when menuMobile is clicked           
+            var ios_devices = navigator.userAgent.match(/(iPhone|iPod|iPad)/) ? "touchstart" : "click"; //check if the devices are ios devices
+            $("#mobile-menu").on(ios_devices, function(event) {
+                event.preventDefault();
+                $("#sidebar").removeClass("minified");                
+                $("#sidebar").toggleClass("open");
+            });
+
+            //$("input").each(function () {
+            //    var cb = $(this).data("kendoComboBox");
+            //    var ka = $(this).data("kendoAutoComplete")
+            //    if (cb) {
+            //        $(this).focusout(function () {
+            //            if (!$(this).data("kendoComboBox").dataItem()) {
+            //                cb.value("");
+            //                cb.trigger("change");
+            //            }
+            //        });
+            //    };
+
+            //    if (ka) {
+            //        $(this).focusout(function () {
+            //            if (!$(this).data("kendoAutoComplete").dataItem()) {
+            //                ka.value("");
+            //                ka.trigger("change");
+            //            }
+            //        });
+            //    };
+            //});
+
+
+        });
+       
+        function loadMessages() {
+            $MessagesManager.MessageManager.read({ token: Cookies.get("token") }).done(function (data) {
+                if (ValidateError(data)) {
+                    $(".message-frame").empty();
+                    var contador = data.length, contadorLectura = 0, cantidadNotificaciones = 0;
+
+                    $.each(data, function (key) {
+                        var strhtml = "";
+                        if (data[key].EstatusLectura) {
+                            contadorLectura += 1;
+                            strhtml += "<li onclick='BindEventClick(" + data[key].NotificacionID + ");'><a id='" + data[key].NotificacionID + "' href='#' class='read'>";
+                        } else {
+                            strhtml += "<li onclick='BindEventClick(" + data[key].NotificacionID + ");'><a  id='" + data[key].NotificacionID + "' href='#'>";
+                        }
+                        var d = new Date(data[key].FechaEnvio);
+
+                        strhtml += "<div class='notification-container'>";
+                        strhtml += "<div class='sender-info'>";
+                        strhtml += "<span class='senderName'>" + data[key].NombreUsuarioEmisor + "</span>";
+                        strhtml += "<span class='deleteMessage'>";
+                        //strhtml += "<img id='' src='/Content/images/SC_delete_Icon.png' /></span>";
+                        strhtml += "<span class='messageDate'>" + obtenerFormatoFechaMensajes(d) + "</span>";
+                        strhtml += "</div>";
+                        strhtml += "<div class='message-info'>" + data[key].Mensaje + "</div>";
+                        strhtml += "</div>";
+                        strhtml += "</a></li>";
+
+                        $(".message-frame").append(strhtml);
+                    });
+
+                    strhtml = "";
+                    strhtml += "<li class='messageBody'>";
+                    strhtml += "<span id='message'></span>";
+                    strhtml += "</li>";
+
+                    cantidadNotificaciones = contador - contadorLectura;
+                    $(".count").html(cantidadNotificaciones ? cantidadNotificaciones : 0);
+                    $(".counter").html(data.length);
+                    $(".message-frame").append(strhtml);
+                }
+            });
+        };
+
+        function BindEventClick(NotificacionID) {
+            $MessagesManager.MessageManager.read({ notificacionID: NotificacionID, token: Cookies.get("token") }).done(function (data) {
+                if (ValidateError(data)) {
+                    updateEstatusRead(NotificacionID);
+                    $("#" + NotificacionID).addClass("read");
+                    var strhtml = "";
+                    var d = new Date(data.FechaEnvio);
+
+                    strhtml = "<span class='backIcon' onclick='backIcon();'>";
+                    strhtml += "<img id='' src='/Content/images/SC_back.png' />";
+                    strhtml += "</span>";
+                    strhtml += "<span>" + data.NombreUsuarioEmisor + "</span>";
+                    strhtml += "<span class='deleteMessage' onclick='deleteMessage(" + NotificacionID + ");'>";
+                    strhtml += "<img id='' src='/Content/images/SC_delete_Icon.png' />";
+                    strhtml += "</span>";
+                    strhtml += "<span class='messageDate'>" + obtenerFormatoFechaMensajes(d) + "</span>";
+
+                    
+                    var cantidadNotificaciones = (parseInt($("span.counter").text()) - parseInt($("a.read").length));
+                    $(".count").html(cantidadNotificaciones ? cantidadNotificaciones : 0);
+                    $(".message-header").empty();
+                    $(".message-header").append(strhtml);
+                    $("#message").html(data.Mensaje);
+                }
+            });
+
+            
+
+            $(".notification-menu li:not('.messageBody')").addClass("hidden");
+            $(".notifications .dropdown").addClass("open");
+            $("#messagesCounter").addClass("hidden");
+            $(".message-header").removeClass("hidden");
+            $(".notification-menu li.messageBody").removeClass("hidden");
+        };
+
+        function updateEstatusRead(NotificacionID) {
+            $MessagesManager.MessageManager.update({}, { notificacionID: NotificacionID, token: Cookies.get("token"), id: NotificacionID }).done(function (data) {
+                ValidateError(data);
+            });
+        };
+
+        function deleteMessage(NotificacionID) {
+            $MessagesManager.MessageManager.destroy({}, { token: Cookies.get("token"), id: NotificacionID }).done(function (data) {
+                if (ValidateError(data)) {
+                    loadMessages();
+                    backIcon();
+                }
+            });
+        };
+
+        function backIcon() {
+            $(".notification-menu li:not('.messageBody')").removeClass("hidden");
+            $("#messagesCounter").removeClass("hidden");
+            $(".message-header").addClass("hidden");
+            $(".notification-menu li.messageBody").addClass("hidden");
+        };
+
+        function obtenerFormatoFechaMensajes(d) {
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+
+            return curr_date + "/" + curr_month + "/" + curr_year;
+        };
+
+        function ValidateError(data) {
+                if (data.ReturnCode) {
+                    if (data.ReturnCode != 200) {
+                        if (data.ReturnCode == 401) {
+                            removeUserSession();
+                        } else {
+                            displayMessage("notificationslabel0009", data.ReturnMessage, '2');
+                            return;
+                        }
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+        };
+
+        //Search
+        $("#globalSearch[type=button].btn.spyglass.btn-blue").on("click",function(){
+            window.location.href=window.location.origin+"/Busqueda/Busqueda?q="+document.getElementById("layoutLabel0001").value.split(" ").join("+");
+        });
+    </script>
+</body>
+</html>

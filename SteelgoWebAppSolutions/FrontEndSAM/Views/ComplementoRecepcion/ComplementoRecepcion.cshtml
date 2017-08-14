@@ -1,0 +1,3047 @@
+﻿@{
+    ViewBag.Title = "Complemento Recepción";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="ComplementoRecepcion0001"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("DashboardRecepcionAlmacenaje", "DashboardRecepcionAlmacenaje")"><span id="ComplementoRecepcion0068"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("DashboardRecepcionAlmacenaje", "DashboardRecepcionAlmacenaje")"><span id="ComplementoRecepcion0002"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("ComplementoRecepcion", "ComplementoRecepcion")"><span id="ComplementoRecepcion0003"></span></a>
+    </li>
+}
+
+<div id="formComplementoRecepcion" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <span id="divFolio" class="folioLabel hidden">
+                <span id="ComplementoRecepcion0041"></span>
+                <span id="ComplementoRecepcion0042" class="statusLabel"></span>
+                <span id="ComplementoRecepcion0043" class="statusLabel"></span>
+                <span id="ComplementoRecepcion0052" class="statusLabel"></span>
+                <span id="ComplementoRecepcion0053" class="statusLabel"></span>
+                <div class="branchCut"></div>
+            </span>
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section ">
+                            <div class="btn-group save-group">
+                                <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow creacion"><span id="ComplementoRecepcion0004"></span></button>
+                                <button id="Editar" onclick="javascript:void(0);" type="button" class="btn btn-yellow editar" style="display: none"><span id="ComplementoRecepcion0033"></span></button>
+                                <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle creacion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caretWhite"></span>
+                                </button>
+                                <ul class="dropdown-menu creacion">
+                                    <li><a id="Terminar" href="#"><span id="ComplementoRecepcion0081"></span></a></li>
+                                    <li><a id="TerminaryNuevo" href="#"><span id="ComplementoRecepcion0005"></span></a></li>
+                                </ul>
+                            </div>
+                            <a id="Cancelar" href="#" class="btn btn-black"><span id="ComplementoRecepcion0008"></span></a>
+                        </div>
+                        <div class="button-section ordenAlmacenaje">
+                            <a id="GenerarOrdenAlmacenaje" href="#" class="btn btn-primary"><span id="ComplementoRecepcion0009"></span></a>
+                        </div>
+                        <div class="button-section">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="ComplementoRecepcion0010"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="Acciones">
+                                    <li><a href="#" id="IrListado"><span id="ComplementoRecepcion0011"></span></a></li>
+                                    @*<li><a href="#" id="IrIncidencia"><span id="ComplementoRecepcion0012"></span></a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection disabled"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11" id="noReq">
+                    <div class="row">
+                        <div id="ProyectoDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <label id="ComplementoRecepcion0013"></label>
+                            <input id="ProyectoID" />
+                        </div>
+                        <div id="FolioCuantificacionDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <label id="ComplementoRecepcion0014"></label>
+                            <input id="FolioCuantificacionID" />
+                        </div>
+                        <div id="MostrarDiv" class="form-group standalone col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <a id="Mostrar" href="#" class="btn btn-primary"><span id="ComplementoRecepcion0015"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="addedSection clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+                        <div id="EstatusFisicoDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <label id="ComplementoRecepcion0019"></label>
+                            <input id="EstatusFisico" class="" />
+                        </div>
+                        <div id="EstatusDocumentalDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <label id="ComplementoRecepcion0020"></label>
+                            <input id="EstatusDocumental" class="" />
+                        </div>
+                        <div id="TipoUsoDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <label id="ComplementoRecepcion0021"></label>
+                            <input id="TipoUso" class="" />
+                        </div>
+                        <div id="ColadaDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <label id="ComplementoRecepcion0062"></label>
+                            <input id="Colada" class="" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-2">
+                            <label id="ComplementoRecepcion0016"></label>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-5">
+                                    <label id="ComplementoRecepcion0017" class="centered"></label>
+                                    <input id="todos" class="" type="radio" name="radio" value="1">
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-5">
+                                    <label id="ComplementoRecepcion0018" class="centered"></label>
+                                    <input id="vacios" class="" type="radio" name="radio" checked value="2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-9 col-lg-10">
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                                    <label id="ComplementoRecepcion0099"></label>
+                                    <div class="row">
+                                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-6">
+                                            <input type="number" id="inicio" class="general-input"/>
+                                        </div>
+                                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-6">
+                                            <input type="number" id="fin" class="general-input"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
+                                    <div class="row">
+                                        <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-4">
+                                            <label id="ComplementoRecepcion0093"></label>
+                                            <input id="ItemCodeBusq" />
+                                        </div>
+                                        <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                    <label id="ComplementoRecepcion0095"></label>
+                                                    <input id="d1Busq" />
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                    <label id="ComplementoRecepcion0096"></label>
+                                                    <input id="d2Busq" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                            <label id="ComplementoRecepcion0100"></label>
+                                            <input id="NumUnicoB" class="general-input"/>
+                                        </div>
+                                        <div class="form-group standalone col-xs-12 col-sm-6 col-md-2 col-lg-1">
+                                            <a id="Aplicar" href="#" class="btn btn-primary"><span id="ComplementoRecepcion0097"></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-12 col-md-offset-2 col-md-13 col-md-offset-3 col-lg-13" style="margin-top:-35px;">
+                                    <label id="ComplementoRecepcion0094"></label>
+                                    <input id="Descripcion" class="general-input" readonly disabled/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul id="menu">
+            <li id="NuevaColada"><span id="ComplementoRecepcion0079"></span></li>
+            <li id="EditarColada"><span id="ComplementoRecepcion0063"></span></li>
+            <li id="Incidencia"><span id="ComplementoRecepcion0066"></span></li>
+            <li id="AgregarMTR"><span id="ComplementoRecepcion0090"></span></li>
+        </ul>
+    </div>
+</div>
+
+<div id="windowColada" class="popup">
+    <div id="modalEdicionColada" style="display: none">
+        <div class="alert-container">
+            <div class="message">
+                Mensaje de éxito/error/advertencia
+            </div>
+        </div>
+        <div id="EdicionColadaDiv" class="form-group">
+            <label id="ComplementoRecepcion0064"></label>
+            <input id="EdicionColada" class="" />
+        </div>
+
+
+        <div id="IncidenciaDiv" class="hidden">
+            <div class="form-group">
+                <span id="ComplementoRecepcion0078"></span>
+            </div>
+            <div id="TituloDiv" class="form-group">
+                <label id="ComplementoRecepcion0075"></label>
+                <input id="Titulo" class="general-input" disabled />
+            </div>
+            <div id="DescripcionDiv" class="form-group">
+                <label id="ComplementoRecepcion0076"></label>
+                <textarea id="DescripcionIncidencia" rows="4" cols="50"></textarea>
+            </div>
+        </div>
+        <div class="buttonSave">
+            <a id="GuardarColada" href="#" class="btn btn-primary">
+                <span id="ComplementoRecepcion0073"></span>
+            </a>
+            <a id="CancelarColada" href="#" class="btn btn-primary">
+                <span id="ComplementoRecepcion0074"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="windowMTR" class="popup">
+    <div id="modalMTR" style="display: none">
+        <div class="alert-container">
+            <div class="message">
+                Mensaje de éxito/error/advertencia
+            </div>
+        </div>
+
+        <div id="IncidenciasMTRDiv">
+            <div class="form-group">
+                <span id="ComplementoRecepcion0084"></span>
+            </div>
+            <div id="TituloMTRDiv" class="form-group">
+                <label id="ComplementoRecepcion0085"></label>
+                <input id="TituloMTR" class="general-input" disabled />
+            </div>
+            <div id="DescripcionMTRDiv" class="form-group">
+                <label id="ComplementoRecepcion0086"></label>
+                <textarea id="DescripcionIncidenciaMTR" rows="4" cols="50"></textarea>
+            </div>
+        </div>
+        <div class="buttonSave">
+            <a id="GuardarMTR" href="#" class="btn btn-primary">
+                <span id="ComplementoRecepcion0087"></span>
+            </a>
+            <a id="CancelarMTR" href="#" class="btn btn-primary">
+                <span id="ComplementoRecepcion0088"></span>
+            </a>
+        </div>
+    </div>
+</div>
+<div id="window">
+</div>
+<input id="hdnNavegacion" type="hidden" value="" />
+<input id="hdnItemCodeIDSeleccionado" type="hidden" />
+<input id="hdnItemCodeSeleccionado" type="hidden" />
+<script>
+    @section JavascriptGlobalVariables 
+    {
+    var Proyecto = {}, Cuantificacion = {}, TipoUso = {}, resultadoJson,
+        lastEditedFisicoCellIDS = "", lastEditedTipoUsoCellIDS = "",
+        lastEditedDepartamentalCellID = "", lastEditedCellIDSColada, lastEditedMTRCellID = "",
+        ctrlDown = false, ctrlKey = 17, vKey = 86, cKey = 67,
+        focusResp = "ProyectoID", sinColadaPL = "Sin Colada PL",
+        rowselected = "", coladaSeleccionada = "";
+    var sinColada = false;
+    var cantidadMayor = false;
+    var tituloIncidenciaMTR = "";
+    var MTRID = 0;
+    var fila = "";
+
+
+    var _ComplemementoUrl = "@Url.Action("ComplementoRecepcion", "ComplementoRecepcion")";
+    var _DashBoardRecepcionAlmacenaje = "@Url.Action("DashboardRecepcionAlmacenaje", "DashboardRecepcionAlmacenaje")";
+    var _GenerarOrdenAlmacenajeUrl = "@Url.Action("GenerarOrdenAlmacenaje", "OrdenAlmacenaje")";
+    var _folioAvisoEntradaID = getUrlParameter("FolioAvisoEntradaID", "-1");
+    var _folioCuantificacion = getUrlParameter("FolioCuantificacionID", "-1");
+    var _edicion = getUrlParameter("Edicion", "-1");
+    var _ordenRecepcion = getUrlParameter("ordenRecepcion",-1);
+    var _incidenciasURL = "@Url.Action("Incidencias", "Incidencias")";
+    //Mappeo de Controles y sus flechas
+    var mapeoNavegacion = {
+        "ProyectoID": { 37: "FolioCuantificacionID", 38: "ProyectoID", 39: "FolioCuantificacionID", 40: "EstatusFisico" },
+        "FolioCuantificacionID": { 37: "ProyectoID", 38: "ProyectoID", 39: "EstatusFisico", 40: "EstatusFisico" },
+        "EstatusFisico": { 37: "FolioCuantificacionID", 38: "ProyectoID", 39: "EstatusDocumental", 40: "grid" },
+        "EstatusDocumental": { 37: "EstatusFisico", 38: "ProyectoID", 39: "TipoUso", 40: "grid" },
+        "TipoUso": { 37: "EstatusDocumental", 38: "ProyectoID", 39: "Colada", 40: "grid" },
+        "Colada": { 37: "TipoUso", 38: "ProyectoID", 39: "grid", 40: "grid" },
+        "grid": { 37: "TipoUso", 38: "EstatusDocumental", 39: "grid", 40: "grid" },
+    };
+
+
+    //Mappeo de tipos de Controles
+    //--   Tipos 0 -> Elemento HTML
+    //--   Tipos 1 -> Elemento KendoAutocomplete
+    //--   Tipos 2 -> Elemento KendoComboBox
+    //--   Tipos 3 -> Elemento KendoDropDownList
+    //--   Tipos 4 -> Elemento KendoGrid
+    var mapeoTiposControles = {
+        "ProyectoID": 2,
+        "FolioCuantificacionID": 2,
+        "EstatusFisico": 2,
+        "EstatusDocumental": 2,
+        "TipoUso": 2,
+        "Colada": 2,
+        "grid": 4
+    };
+
+
+    var $ComplementoRecepcionModel = {
+        listContainer: {
+            create: ".creacion",
+            list: "#grid",
+            detail: ".editar",
+            destroy: ".k-grid-Cancelar"
+        },
+        properties: {
+            proyecto: {
+                visible: "#ProyectoDiv",
+                editable: "#ProyectoID",
+                required: "#ProyectoID"
+            },
+            foliocuantificacion: {
+                visible: "#FolioCuantificacionDiv",
+                editable: "#FolioCuantificacionID",
+                required: "#FolioCuantificacionID"
+            },
+            estatusfisico: {
+                visible: "#EstatusFisicoDiv",
+                editable: "#EstatusFisico",
+                required: "#EstatusFisico"
+            },
+            estatusdocumental: {
+                visible: "#EstatusDocumentalDiv",
+                editable: "#EstatusDocumental",
+                required: "#EstatusDocumental"
+            },
+            tipouso: {
+                visible: "#TipoUsoDiv",
+                editable: "#TipoUso",
+                required: "#TipoUso"
+            },
+            colada: {
+                visible: "#ColadaDiv",
+                editable: "#Colada",
+                required: "#Colada"
+            },
+            edicioncolada: {
+                visible: "#EdicionColadaDiv",
+                editable: "#EdicionColada",
+                required: "#EdicionColada"
+            },
+            descripcionincidencia: {
+                visible: "#DescripcionDiv",
+                editable: "#DescripcionIncidencia",
+                required: "#DescripcionIncidencia"
+            },
+            descripcionincidenciamtr: {
+                visible:"#DescripcionMTRDiv",
+                editable:"#DescripcionIncidenciaMTR",
+                required: "#DescripcionIncidenciaMTR"
+            }
+        }
+    };
+    var $OrdenAlmacenajeModel = {
+        listContainer: {
+            create: ".ordenAlmacenaje",
+            list: "",
+            detail: "",
+            destroy: ""
+        },
+        properties: {
+
+        }
+    };
+
+    var $TipoUsoModel = {
+        listContainer: {
+            create: "",
+            list: "",
+            detail: "",
+            destroy: "",
+            createIncidence: ""
+        },
+        properties: {
+
+        }
+    };
+
+    var $ColadaModel = {
+        listContainer: {
+            create: "",
+            list: "",
+            detail: "",
+            destroy: "",
+            createIncidence: ""
+        },
+        properties: {
+
+        }
+    };
+    };
+
+
+    @section JavascriptGlobalFunctions 
+    {
+    function changeLanguageCall() {
+        var tmp = removeGrid($("#grid"));
+        LoadGridQuantification();
+        $("#grid").data("kendoGrid").dataSource.data(tmp);
+        CargarEstatusFisico();
+        CargarEstatusDocumental();
+    }
+
+    function cargaInicial() {
+        //Botones
+        $("#Editar").click(function (e) { BotonEdicion(); });
+        $("#Guardar").click(function () {
+            if (validarRequeridosFormaComplementoRecepcion()) {
+                if (!ValidarMM()) {
+                    GuardarParcial();
+                }
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            }
+        });
+
+        $("#TerminaryNuevo").click(function () {
+            if (validarRequeridosFormaComplementoRecepcion()) {
+                if (!ValidarMM()) {
+                    TerminaryNuevo();
+                }
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            }
+        });
+
+        $("#Terminar").click(function () {
+            if (validarRequeridosFormaComplementoRecepcion()) {
+                if (!ValidarMM()) {
+                    Terminar();
+                }
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            }
+        });
+
+        $("#GenerarOrdenAlmacenaje").click(function () {
+            if (validarRequeridosFormaComplementoRecepcion()) {
+                GenerarOrdenAlmacenaje();
+            } else {
+                displayMessage("notificationslabel0054", "", '1');
+            }
+        });
+
+
+        $("#Mostrar").click(function () {
+            if (validarRequeridosFormaComplementoRecepcion()) {
+                ObtenerDatosDelFolioCuantificacion();
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            }
+        });
+
+        $("#Cancelar").click(function () { Cancelar(); });
+        $("#IrListado").click(function () {
+            IrListado();
+        });
+        $("#IrIncidencia").click(function () { Incidencias(); });
+        $("#GuardarColada").click(function () { GuardarColada(); });
+        $("#GuardarMTR").click(function () { GuardarMTR(); });
+        $("#CancelarColada").click(function () { CancelarColada() });
+        $("#ProyectoID").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "ProyectoID",
+            select: function (e) {
+            },
+            change: function (e) {
+                $("#ItemCodeBusq").data("kendoComboBox").options.dataSource.transport.read.url=$ItemCodeSteelgo.ItemCodeSteelgo.urlNoId+"?proyectoID="+this.value()+"&token="+ Cookies.get("token");
+                $("#ItemCodeBusq").data("kendoComboBox").dataSource.read();
+                var dataItem = this.dataItem();
+                dataItem !== undefined ? CargarProyecto(dataItem[this.options.dataValueField], dataItem[this.options.dataTextField]) : CargarProyecto("", "");
+                var value = this.value();
+                limpiarfiltrosProyecto();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Proyecto = {};
+                    this.value("");
+
+                    $("#Colada").data("kendoAutoComplete").value("");
+                    $("#EdicionColada").data("kendoAutoComplete").value("");
+                    $("#Colada").data("kendoAutoComplete").dataSource.data([]);
+                    $("#EdicionColada").data("kendoAutoComplete").dataSource.data([]);
+                } else {
+                    _ordenRecepcion===-1 ? ObtenerDatosFolioCuantificacion() : null;
+                    //ObtenerColada("Colada", 1, 0);
+                    //ObtenerColada("EdicionColada", 0, 1);
+                }
+            },
+            dataBound: function (e) { checkIfOne(this); },
+            filter: "contains",
+        });
+        ObtenerProyecto("ProyectoID");
+        $("#ProyectoID").data("kendoComboBox").input.focus();
+
+        $("#FolioCuantificacionID").kendoComboBox({
+            dataTextField: "value",
+            dataValueField: "id",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem !== undefined ? CargarFolioCuantificacion(dataItem.id) : CargarFolioCuantificacion("");
+                var value = this.value();
+                limpiarfiltrosFolioCuantificacion();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Cuantificacion = {};
+                    this.value("");
+                }
+            },
+            dataBound: function (e) { checkIfOne(this); },
+            filter: "contains",
+        });
+
+        $("#Colada").kendoAutoComplete({
+            dataTextField: "Nombre",
+            dataValueField: "ColadaID",
+            autoBind: false,
+            minLength: 3,
+            dataSource: {
+                type: "json",
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: function (op) {
+                            var val = "";
+                            if (op.filter) {
+                                val = op.filter.filters[0].value;
+                            }
+                            var allData = $("#grid").data("kendoGrid").dataSource.data();
+                            var queryData = new kendo.data.Query(allData);
+                            var resultData = queryData.data;
+                            var dtSource = resultData;
+                            var idNumUnico = dtSource[0].NumeroUnicoID;
+                            return $URLColada + "proyectoID=" + (Proyecto.ProyectoID ? Proyecto.ProyectoID : -1) + "&token=" + Cookies.get("token") + "&paginaID=" + Cookies.get("navegacion") + "&texto=" + val + "&idioma=" + $("#language").data("kendoDropDownList").value() + "&id=0&mostrarOpcion=0" + "&numeroUnicoID=" +  idNumUnico
+                        }
+                    }
+                },
+            },
+            change: function (e) {
+                var value = this.value();
+                if (!value || !e.sender.current()) {
+                    messageindexKendoCombobox(this);
+                    this.value("");
+                } else {
+                    changeValueColumnColada($("#Colada").data("kendoAutoComplete").value());
+                    $('#grid').data('kendoGrid').refresh();
+                }
+            },
+
+            filter: "contains",
+        });
+
+        $("#TipoUso").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "id",
+            change: function (e) {
+                var value = this.value();
+                if (this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    this.value("");
+                } else {
+                    changeValueColumnTipoUso($("#TipoUso").data("kendoComboBox").text());
+
+                }
+            },
+            filter: "contains",
+            dataBound: function (e) { checkIfOne(this); },
+        });
+        ObtenerTipoUso();
+
+
+        //$('input:radio').click(function () {
+        //    if ($(this).val() === '1') {
+        //        changeValueColumnsAll();
+        //    } else if ($(this).val() === '2') {
+        //        changeValueColumnsClear();
+        //    }
+        //});
+
+
+        //$("#Colada").kendoComboBox({
+        //    dataTextField: "Nombre",
+        //    dataValueField: "ColadaID",
+        //    change: function (e) {
+        //        var value = this.value();
+
+        //        if (this.selectedIndex == -1) {
+        //            messageindexKendoCombobox(this);
+        //            this.value("");
+        //        };
+        //        changeValueColumnColada($("#Colada").data("kendoComboBox").text());
+
+        //    },
+        //    filter: "contains",
+        //});
+
+
+        $("#EdicionColada").kendoAutoComplete({
+            dataTextField: "Nombre",
+            dataValueField: "ColadaID",
+            autoBind: false,
+            minLength: 3,
+            dataSource: {
+                type: "json",
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: function (op) {
+                            var val = "";
+                            if (op.filter) {
+                                val = op.filter.filters[0].value;
+                            }
+                            return $URLColada + "itemcode=" + (rowselected.ItemCodeID) + "&texto=" + val + "&token=" + Cookies.get("token") + "&paginaID=" + Cookies.get("navegacion") + "&idioma=" + $("#language").data("kendoDropDownList").value() + "&id=0&mostrarOpcion=0"
+                        }
+                    }
+                },
+            },
+            select: function (e) {
+                var dataItem = this.dataItem(e.item.index());
+                if (dataItem.ColadaID == "0") {
+                    if (!rowselected) {
+                        displayMessage("notificationslabel0086", "", '1');
+                        return;
+                    };
+                    if (!rowselected.ItemCodeID) {
+                        displayMessage("notificationslabel0086", "", '1');
+                        return;
+                    };
+                    VentanaModal(1);
+                    e.preventDefault();
+                }
+
+                $("#hdnItemCodeIDSeleccionado").val(rowselected.ItemCodeID);
+                $("#hdnItemCodeSeleccionado").val(rowselected.ItemCode);
+                if (dataItem.Nombre != rowselected.Colada) {
+                    if (dataItem.Nombre != sinColadaPL) {
+                        if (rowselected.ColadaOriginal == sinColadaPL) {
+                            sinColada = true;
+                            $("#IncidenciaDiv").addClass("hidden");
+                        }
+                        else {
+                            sinColada = false;
+                            $("#IncidenciaDiv").removeClass("hidden");
+                        }
+                    } else {
+                        sinColada = true;
+                        $("#IncidenciaDiv").addClass("hidden");
+                    }
+
+                    if (sinColada)
+                    {
+                        rowselected.Titulo = "";
+                    }
+                    else
+                    {
+                        if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+                            rowselected.Titulo = "El número único " + rowselected.NumeroUnico + " cambio de colada " + rowselected.ColadaOriginal + " a " + dataItem.Nombre;
+                        } else {
+                            rowselected.Titulo = "The unique Number " + rowselected.NumeroUnico + " change " + rowselected.ColadaOriginal + " to " + dataItem.Nombre;
+                        }
+                    }
+                    
+                    $("#Titulo").val(rowselected.Titulo);
+                    $("#DescripcionIncidencia").val(rowselected.DescripcionIncidencia);
+                } else {
+                    rowselected.Titulo = "";
+                    rowselected.DescripcionIncidencia = "";
+                    $("#Titulo").val("");
+                    $("#DescripcionIncidencia").val("");
+                }
+            },
+            change: function (e) {
+                var value = this.value();
+                if (!value || !e.sender.current()) {
+                    messageindexKendoCombobox(this);
+                    this.value("");
+                };
+
+            },
+
+            filter: "contains",
+        });
+
+        //$("#EdicionColada").kendoComboBox({
+        //    dataTextField: "Nombre",
+        //    dataValueField: "ColadaID",
+        //    select: function (e) {
+        //        var dataItem = this.dataItem(e.item.index());
+        //        if (dataItem.ColadaID == "0") {
+        //            VentanaModal(1);
+        //            e.preventDefault();
+        //        } 
+        //    },
+        //    change: function (e) {
+
+        //        if (this.selectedIndex == -1) {
+        //            messageindexKendoCombobox(this);
+        //            this.value("");
+        //        };
+
+        //        rowselected.Colada = $("#EdicionColada").data("kendoComboBox").text();
+        //        $('#grid').data('kendoGrid').refresh();
+        //    },
+        //    filter: "contains",
+        //});
+
+
+        //$("#CerrarEdicionColada").click(function () { LimpiarModalEdicionColada(); });
+        $(document).bind("contextmenu", function (e) {
+            if (e.target.attributes[10]) {
+                var elemento = e.target.attributes[10].value;
+                var index = elemento.indexOf("_");
+                var valor = elemento.substring(0, index);
+
+                if (valor == "TipoUso") {
+                    if ((typeof returnOfSecurityCheck != 'undefined') && (typeof returnOfSecurityCheck["Tipo Uso"] != 'undefined') && (typeof returnOfSecurityCheck["Tipo Uso"]["create"] != 'undefined') && returnOfSecurityCheck["Tipo Uso"]["create"]) {
+                        VentanaModal(2);
+                    }
+                }
+            }
+            return false;
+        });
+
+        $('#Colada').mousedown(function (e) {
+            if ((typeof returnOfSecurityCheck != 'undefined') && (typeof returnOfSecurityCheck["Colada"] != 'undefined') && (typeof returnOfSecurityCheck["Colada"]["create"] != 'undefined') && returnOfSecurityCheck["Colada"]["create"]) {
+                if (e.which == 3) {
+                    $("#hdnItemCodeIDSeleccionado").val("");
+                    $("#hdnItemCodeSeleccionado").val("");
+                    VentanaModal(1);
+                    e.preventDefault();
+                }
+            }
+        });
+
+        if(_ordenRecepcion!==-1){
+            $ComplementoRecepcionAlt.Listado.read({data:JSON.stringify({TipoListado:32,OrdenRecepcionID:_ordenRecepcion, token:Cookies.get("token")})}).done(function(data){
+                $("#ProyectoID").data("kendoComboBox").dataSource.data(data[0]);
+                if(data[0].length>0){
+                    var tmp = $("#ProyectoID").data("kendoComboBox").options;
+                    tmp.dataValueField="id";
+                    tmp.dataTextField="value";
+                    tmp.dataSource = data[0];
+                    $("#ProyectoID").kendoComboBox(tmp);
+                    $("#ProyectoID").data("kendoComboBox").select(0)
+                }else{
+                    $("#ProyectoID").data("kendoComboBox").enable(false);
+                }
+                $("#noReq .security_required").removeClass("security_required");
+                delete $ComplementoRecepcionModel.properties.proyecto;
+                delete $ComplementoRecepcionModel.properties.foliocuantificacion;
+                $("#FolioCuantificacionID").data("kendoComboBox").dataSource.data(data[1]);
+                if(data[0].length>0){
+                    $("#FolioCuantificacionID").data("kendoComboBox").select(0);
+                    $("#FolioCuantificacionID").data("kendoComboBox").trigger("change")
+                }
+                $("#grid").data("kendoGrid").dataSource.data(data[2]);
+            })
+        }
+        
+        $("#ItemCodeBusq").kendoComboBox({
+            dataSource:{
+                transport:{
+                    read:{
+                        url:"",
+                        type:"GET",
+                        dataType:"JSON",
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.response != undefined && e.response.ReturnCode == 401)
+                    {
+                        removeUserSession();
+                    }
+                },
+            },
+            dataTextField: "value",
+            dataValueField: "id",
+            change:function(e){
+                var dataItem=this.dataItem();
+                if(dataItem!==null && dataItem!==undefined){
+                    $("#Descripcion").val(dataItem.Descripcion);
+                }else{
+                    $("#Descripcion").val("");
+                }
+            }
+        })
+        $("#d1Busq").kendoComboBox({
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "json",
+                        url: $DiametrosCatalogos + "token=" + Cookies.get("token")
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.response != undefined && e.response.ReturnCode == 401)
+                    {
+                        removeUserSession();
+                    }
+                }
+            },
+            dataTextField: "value",
+            dataValueField: "id",
+        })
+        $("#d2Busq").kendoComboBox({
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "json",
+                        url: $DiametrosCatalogos + "token=" + Cookies.get("token")
+                    }
+                },
+                requestEnd: function (e) {
+                    if (e.response != undefined && e.response.ReturnCode == 401)
+                    {
+                        removeUserSession();
+                    }
+                }
+            },
+            dataTextField: "value",
+            dataValueField: "id",
+        })
+        $("#inicio,#fin").on("change",function(){
+            var error=false;
+            var errorMsg="";
+            if(this.id==="inicio" && this.value!=="" && (parseInt(this.value)>parseInt($("#fin").val()))){
+                errorMsg="ComplementoRecepcion0101"
+                error=true;
+            }
+            if(this.id==="fin" && this.value!=="" && (parseInt(this.value)<parseInt($("#inicio").val()))){
+                errorMsg="ComplementoRecepcion0102"
+                error=true;
+            }
+            if(parseInt(this.value)<0){
+                errorMsg="ComplementoRecepcion0103";
+                error=true;
+            }
+            if(error){
+                displayMessage(errorMsg, '', '1');
+                this.value="";
+                return false;
+            }
+            var tmpFilter={field:"NumeroUnico",value:this.value!==""?this.value:"0",extra:true}
+            var template="return ";
+            var start = $("#inicio").val()!=="" ? " parseInt(n.split('-')[1])>="+parseInt($("#inicio").val())+" " : "";
+            var andY= ($("#inicio").val()!=="" && $("#fin").val()!=="") ? " && " : "";
+            var end = $("#fin").val()!=="" ? " parseInt(n.split('-')[1])<="+parseInt($("#fin").val())+" " : "";
+            var predicate = template + start + andY + end;
+            var datasource=$("#grid").data("kendoGrid").dataSource;
+            if(predicate!==template){
+                tmpFilter.operator = new Function("n","v", predicate)
+                var f=datasource.filter()!==undefined && datasource.filter()!==null ? datasource.filter().filters.filter(function(n){return n.extra===undefined}) : [];
+                f.push(tmpFilter);
+                datasource.filter(f);
+            }else{
+                datasource.filter([]);
+            }
+            //
+        });
+        
+        $("#Aplicar").on("click",function(){
+            Aplicar()
+        })
+        
+    };
+
+    function sameData(data){
+        var ItemCode={ic:data[0].ItemCode,icid:data[0].ItemCodeID}
+        if(data.filter(function(n){ return n.ItemCode!==ItemCode.ic || n.ItemCodeID!==ItemCode.icid}).length>0){
+            displayMessage("ComplementoRecepcion0104", '', '1');
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    function Aplicar(){
+        var dataSource = $("#grid").data("kendoGrid").dataSource;
+        var filters = dataSource.filter();
+        var allData = dataSource.data();
+        var query = new kendo.data.Query(allData);
+        var data = query.filter(filters).data;
+        if($("#NumUnicoB").val()!=="" && $("#ItemCodeBusq").data("kendoComboBox").value()==="" && $("#d1Busq").data("kendoComboBox").value()==="" && $("#d2Busq").data("kendoComboBox").value()==="" && data.length>0){
+            //if(sameData(data)){
+                var dataTemp=[];
+                data.forEach(function(n){
+                    dataTemp.push({
+                        itemCode:n.ItemCodeID,
+                        d1:n.D1,
+                        d1id:n.Diametro1ID,
+                        d2:n.D2,
+                        d2id:n.Diametro2ID,
+                        nu:n.NumeroUnicoID,
+                        nuc:($("#NumUnicoB").val()!==""?$("#NumUnicoB").val():n.NumeroUnicoCliente)
+                    })
+                })
+                postApply(dataTemp);
+            //}
+        }
+        else{
+            var ItemCode={ic:data[0].ItemCode,icid:data[0].ItemCodeID}
+            if(sameData(data)){
+                var bit1=$("#ItemCodeBusq").data("kendoComboBox").value()!=="" ? 4 : 0;
+                var bit2=$("#d1Busq").data("kendoComboBox").value()!=="" ? 2 : 0;
+                var bit3=$("#d2Busq").data("kendoComboBox").value()!=="" ? 1 : 0;
+                var dataTemp=[];
+                var finalData=[];
+                switch(bit1+bit2+bit3){
+                    case 1:
+                        data.forEach(function(n){
+                            var data2=$("#d2Busq").data("kendoComboBox").dataItem();
+                            dataTemp.push({
+                                itemCode:n.ItemCodeID,
+                                d1:n.D1,
+                                d1id:n.Diametro1ID,
+                                d2:data2.value,
+                                d2id:data2.id,
+                                nu:n.NumeroUnicoID,
+                                nuc:($("#NumUnicoB").val()!==""?$("#NumUnicoB").val():n.NumeroUnicoCliente),
+                                fcid:n.RelFCID
+                            })
+                        })
+                        break;
+                    case 2:
+                        data.forEach(function(n){
+                            var data1=$("#d1Busq").data("kendoComboBox").dataItem();
+                            dataTemp.push({
+                                itemCode:n.ItemCodeID,
+                                d1:data1.value,
+                                d1id:data1.id,
+                                d2:n.D2,
+                                d2id:n.Diametro2ID,
+                                nu:n.NumeroUnicoID,
+                                nuc:($("#NumUnicoB").val()!==""?$("#NumUnicoB").val():n.NumeroUnicoCliente),
+                                fcid:n.RelFCID
+                            })
+                        })
+                        break;
+                    case 3:
+                        data.forEach(function(n){
+                            var data1=$("#d1Busq").data("kendoComboBox").dataItem();
+                            var data2=$("#d2Busq").data("kendoComboBox").dataItem();
+                            dataTemp.push({
+                                itemCode:n.ItemCodeID,
+                                d1:data1.value,
+                                d1id:data1.id,
+                                d2:data2.value,
+                                d2id:data2.id,
+                                nu:n.NumeroUnicoID,
+                                nuc:($("#NumUnicoB").val()!==""?$("#NumUnicoB").val():n.NumeroUnicoCliente),
+                                fcid:n.RelFCID
+                            })
+                        })
+                        break;
+                    case 4:
+                        data.forEach(function(n){
+                            dataTemp.push({
+                                itemCode:$("#ItemCodeBusq").data("kendoComboBox").value(),
+                                d1:n.D1,
+                                d1id:n.Diametro1ID,
+                                d2:n.D2,
+                                d2id:n.Diametro2ID,
+                                nu:n.NumeroUnicoID,
+                                nuc:($("#NumUnicoB").val()!==""?$("#NumUnicoB").val():n.NumeroUnicoCliente),
+                                fcid:n.RelFCID
+                            })
+                        })
+                        break;
+                    case 5:
+                        data.forEach(function(n){
+                            var data2=$("#d2Busq").data("kendoComboBox").dataItem();
+                            dataTemp.push({
+                                itemCode:$("#ItemCodeBusq").data("kendoComboBox").value(),
+                                d1:n.D1,
+                                d1id:n.Diametro1ID,
+                                d2:data2.value,
+                                d2id:data2.id,
+                                nu:n.NumeroUnicoID,
+                                nuc:($("#NumUnicoB").val()!==""?$("#NumUnicoB").val():n.NumeroUnicoCliente),
+                                fcid:n.RelFCID
+                            })
+                        })
+                        break;
+                    case 6:
+                        data.forEach(function(n){
+                            var data1=$("#d1Busq").data("kendoComboBox").dataItem();
+                            dataTemp.push({
+                                itemCode:$("#ItemCodeBusq").data("kendoComboBox").value(),
+                                d1:data1.value,
+                                d1id:data1.id,
+                                d2:n.D2,
+                                d2id:n.Diametro2ID,
+                                nu:n.NumeroUnicoID,
+                                nuc:($("#NumUnicoB").val()!==""?$("#NumUnicoB").val():n.NumeroUnicoCliente),
+                                fcid:n.RelFCID
+                            })
+                        })
+                        break;
+                    case 7:
+                        data.forEach(function(n){
+                            var data1=$("#d1Busq").data("kendoComboBox").dataItem();
+                            var data2=$("#d2Busq").data("kendoComboBox").dataItem();
+                            dataTemp.push({
+                                itemCode:$("#ItemCodeBusq").data("kendoComboBox").value(),
+                                d1:data1.value,
+                                d1id:data1.id,
+                                d2:data2.value,
+                                d2id:data2.id,
+                                nu:n.NumeroUnicoID,
+                                nuc:($("#NumUnicoB").val()!==""?$("#NumUnicoB").val():n.NumeroUnicoCliente),
+                                fcid:n.RelFCID
+                            })
+                        })
+                        break;
+                }
+                dataTemp.forEach(function(n){
+                    finalData.push(n);
+                })
+                function recursiveCalls(arr){
+                    var params=arr.pop();
+                    if(params!==undefined){
+                        $AsociacionICS.AsociacionICS.read({}, { itemCode: params.itemCode, diametro1: params.d1id, diametro2: params.d2id, token: Cookies.get("token") }).done(function (res) {
+                            if(res.ItemCodeSteelgoID!==undefined && res.ItemCodeSteelgoID!==null){
+                                recursiveCalls(arr);
+                            }else{
+                                displayMessage("ComplementoRecepcion0105", '', '1');
+                            }
+                        })
+                    }else{
+                        postApply(finalData)
+                    }
+                }
+                recursiveCalls(dataTemp);
+            }
+        }
+    }
+    
+    function postApply(arr){
+        var params=arr.pop();
+        if(params!==undefined){
+            params={NumerosUnicos:[params.nu],ItemCodeID:params.itemCode,d1:params.d1,d2:params.d2,NumeroUnicoCliente:params.nuc,RelFCID:params.fcid}
+            $ComplementarRecepcion.ComplementarRecepcion.create({},{datos:JSON.stringify(params),token:Cookies.get("token")}).done(function(res){
+                if(res.ReturnCode!==undefined && res.ReturnCode===200){
+                    postApply(arr)
+                }else{
+                    displayMessage("notificationslabel0109", '', '1');
+                }
+            })
+        }else{
+            $("#Mostrar").click()
+            displayMessage("notificationslabel0056", '', '0');
+        }
+    }
+    
+    function ActualizarPadre() {
+        ObtenerTipoUso();
+    };
+    function Cancelar() {
+        window.location.href = _ComplemementoUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
+    };
+
+    function cargaInicialEdicion() {
+        $("#FolioCuantificacionID").data("kendoComboBox").text(_folioCuantificacion);
+        CargarFolioCuantificacion(_folioCuantificacion);
+        ObtenerProyectoFolioCuantificacion();
+    };
+
+    function ObtenerProyectoFolioCuantificacion() {
+        $ObtenerDatosFolioLlegadaMaterial.ObtenerDatosFolioLlegadaMaterial.read({ folioCuantificacionID: Cuantificacion.FolioCuantificacionID, token: Cookies.get("token"), }).done(function (result) {
+            if (Error(result)) {
+                $("#ProyectoID").data("kendoComboBox").value(result);
+                CargarProyecto(result, $("#ProyectoID").data("kendoComboBox").text());
+                ObtenerDatosFolioCuantificacion();
+                ObtenerDatosDelFolioCuantificacion(_folioCuantificacion);
+            }
+        });
+    };
+    function BotonEdicion() {
+        //loadingStart();
+        $("#dropdown-toggle").show();
+        $("#Editar").css("display", "none");
+        $("#Guardar").css("display", "block");
+        habilitarControles();
+    };
+
+    function BotonAlta() {
+        $("#dropdown-toggle").hide();
+        $("#Editar").css("display", "block");
+        $("#Guardar").css("display", "none");
+        deshabilitarControles();
+    };
+
+    function habilitarControles() {
+        $("#ProyectoID").data("kendoComboBox").enable(true);
+        $("#FolioCuantificacionID").data("kendoComboBox").enable(true);
+        $("#EstatusFisico").data("kendoComboBox").enable(true);
+        $("#EstatusDocumental").data("kendoComboBox").enable(true);
+        $("#TipoUso").data("kendoComboBox").enable(true);
+        $(".k-button.k-button-icontext.k-grid-add").removeClass("k-state-disabled");
+        $("input:radio").removeAttr("disabled");
+        $(".k-button.k-button-icontext.k-grid-Cancelar").removeClass("hidden");
+        $("#Mostrar").removeAttr("disabled");
+        $("#Colada").data("kendoAutoComplete").enable(true);
+        $("#menu").data("kendoContextMenu").unbind("open");
+        CambiarEstatus("En Proceso de Recepción");
+    };
+
+    function CambiarEstatus(estatus) {
+        $ComplementarRecepcion.ComplementarRecepcion.update({}, {
+            folio: Cuantificacion.FolioCuantificacionID,
+            estatus: estatus,
+            token: Cookies.get("token")
+        }).done(function (data) {
+            //loadingStop();
+            Error(data);
+            CargarLabelEstatus(estatus);
+            ObtenerDatosDelFolioCuantificacion();
+        });
+    };
+    function deshabilitarControles() {
+        $("#ProyectoID").data("kendoComboBox").enable(false);
+        $("#FolioCuantificacionID").data("kendoComboBox").enable(false);
+        $("#EstatusFisico").data("kendoComboBox").enable(false);
+        $("#EstatusDocumental").data("kendoComboBox").enable(false);
+        $("#TipoUso").data("kendoComboBox").enable(false);
+        $(".k-button.k-button-icontext.k-grid-add").addClass("k-state-disabled");
+        $("input:radio").attr('disabled', "disabled");
+        $(".k-button.k-button-icontext.k-grid-Cancelar").addClass("hidden");
+        $("#Mostrar").attr("disabled", "disabled");
+        $("#Colada").data("kendoAutoComplete").enable(false);
+        $("#menu").data("kendoContextMenu").bind("open", function (e) {
+            e.preventDefault();
+        });
+        //$("#Colada").data("kendoComboBox").enable(false);
+    };
+
+
+    function CargarProyecto(id, value) {
+        Proyecto = {};
+        Proyecto = { ProyectoID: id, Nombre: value };
+    };
+
+    function CargarFolioCuantificacion(id) {
+        Cuantificacion = {};
+        Cuantificacion = { FolioCuantificacionID: id };
+    };
+
+    function CargarEstatusFisico() {
+        $("#EstatusFisico").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "EstatFisicoID",
+            dataSource: [
+                       { EstatFisicoID: 1, Nombre: _dictionary.ComplementoRecepcion0054[$("#language").data("kendoDropDownList").value()] },
+                       { EstatFisicoID: 2, Nombre: _dictionary.ComplementoRecepcion0055[$("#language").data("kendoDropDownList").value()] },
+                       { EstatFisicoID: 3, Nombre: _dictionary.ComplementoRecepcion0056[$("#language").data("kendoDropDownList").value()] }
+            ],
+            change: function (e) {
+                var value = this.value();
+                if (this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    this.value("");
+                } else {
+                    changeValueColumnEstatusFisico($("#EstatusFisico").data("kendoComboBox").text());
+
+                };
+            },
+            filter: "contains",
+        });
+    };
+
+    function CargarEstatusDocumental() {
+        $("#EstatusDocumental").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "EstatusDocumentalID",
+            dataSource: [
+                   { EstatusDocumentalID: 1, Nombre: _dictionary.ComplementoRecepcion0057[$("#language").data("kendoDropDownList").value()] },
+                   { EstatusDocumentalID: 2, Nombre: _dictionary.ComplementoRecepcion0058[$("#language").data("kendoDropDownList").value()] }
+            ],
+            change: function (e) {
+                var value = this.value();
+                if (this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    this.value("");
+                } else {
+                    changeValueColumnEstatusDocumental($("#EstatusDocumental").data("kendoComboBox").text());
+                };
+
+            },
+            filter: "contains",
+        });
+    };
+
+    function CancelarPadre() {
+        //VentanaEdicionColada(3);
+    };
+
+    function CancelarColada() {
+        LimpiarModalColada();
+        VentanaEdicionColada(3);
+        cancelarvalidacionRequeridosModalColada();
+    };
+
+    function LimpiarModalColada() {
+        $("#Fabricante_Colada").data("kendoComboBox").value("");
+        $("#Acero_Colada").data("kendoComboBox").value("");
+        $("#Proyecto_Colada").data("kendoComboBox").value("");
+        $("#NumeroColada_Colada").val("");
+        $("#NumeroCertificado_Colada").val("");
+        $("#HoldCalidad_Colada").attr("checked", false);
+
+        FabricanteColada = {};
+        AceroColada = {};
+        ProyectoColada = {};
+    };
+    function cancelarvalidacionRequeridosModalColada() {
+        $("#modalColada .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                $(this).closest("div").find("label").removeClass("error");
+                $(this).closest("div").removeClass("clearfix");
+            };
+        });
+    };
+
+    function LimpiarModalEdicionColada() {
+        $("#EdicionColada").data("kendoAutoComplete").value("");
+        $("#windowColada").data("kendoWindow").close();
+        $("#Titulo").val("");
+        $("#DescripcionIncidencia").val("");
+        $("#IncidenciaDiv").addClass("hidden");
+        cancelarvalidacionRequeridosModalEdicionColada();
+    };
+
+    function LimpiarModalMTR() {
+        //$("#EdicionColada").data("kendoAutoComplete").value("");
+        $("#windowMTR").data("kendoWindow").close();
+        //$("#TituloMTR").val("");
+        $("#DescripcionIncidenciaMTR").val("");
+        $("#IncidenciaMTRDiv").addClass("hidden");
+        //cancelarvalidacionRequeridosModalEdicionColada();
+    };
+
+    function cerrarVentanaModal() {
+        $("#window").data("kendoWindow").close();
+    };
+
+    function validarRequeridosFormaComplementoRecepcion() {
+        var bool = true;
+        $("#formComplementoRecepcion input.security_required,#formComplementoRecepcion select.security_required").not(".k-input").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if (!$(this).val() || ($(this).attr("id") == "ProyectoID" && $(this).val() == "1")) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                };
+            };
+        });
+        return bool;
+    };
+    function validarRequeridosFormaEdicionColada() {
+        var bool = true;
+        $("#modalEdicionColada .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if (sinColada) {
+                    $(this).closest("div").find("label").removeClass("error");
+                }
+                else if (!$(this).val()) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                };
+            };
+        });
+
+        if ($("#IncidenciaDiv").is(':hidden') && !sinColada) {
+            displayMessage("notificationslabel0106", '', '1');
+            e.preventDefault();
+        }
+        return bool;
+    };
+
+    function validarRequeridosFormaMTR()
+    {
+        var bool = true;
+        $("#modalMTR .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+               if (!$(this).val()) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                };
+            };
+        });
+
+        return bool;
+    }
+
+        function ValidarMM() {
+            var allData = $("#grid").data("kendoGrid").dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var result = query.data;
+            var datasource = result;
+            var Errorbool = false;
+            $(datasource).each(function () {
+                if (this.get("MM") != "N/A") {
+                    if (0 > this.get("MM") || !isNumeric(this.get("MM"))) {
+                        this.TieneError = true;
+                        Errorbool = true;
+                    }
+                }
+            });
+            ordenamientoGrid();
+
+            if (Errorbool) {
+                displayMessage("notificationslabel0104", '', '1');
+            };
+
+            return Errorbool;
+        };
+
+        function isNumeric(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        };
+
+        function cancelarvalidacionRequeridosModalEdicionColada() {
+            $("#modalEdicionColada .security_required").each(function (i, elem) {
+                if (elem.tagName.toLowerCase() != 'label') {
+                    $(this).closest("div").find("label").removeClass("error");
+                    $(this).closest("div").removeClass("clearfix");
+                };
+            });
+            cleanDisplayMessage();
+        };
+
+        function ocultarStatus() {
+            $("#ComplementoRecepcion0042").hide();
+            $("#ComplementoRecepcion0043").hide();
+            $("#ComplementoRecepcion0052").hide();
+            $("#ComplementoRecepcion0053").hide();
+        };
+
+        function IrListado() {
+            window.location.href = _DashBoardRecepcionAlmacenaje + "?leng=" + $("#language").data("kendoDropDownList").value()
+        };
+
+        function ObtenerColada(id, opciones, mostrarOpcionNuevo) {
+            
+
+            $Colada.Colada.read({ proyectoID: Proyecto.ProyectoID, token: Cookies.get("token"), paginaID: Cookies.get("navegacion"), id: opciones, mostrarOpcion: mostrarOpcionNuevo}).done(function (result) {
+                ControlErroresObjetosComboBox(id, result);
+            });
+        };
+
+        function GenerarOrdenAlmacenaje() {
+            if (Cuantificacion.FolioCuantificacionID) {
+                window.location.href = _GenerarOrdenAlmacenajeUrl + "?leng=" + $("#language").data("kendoDropDownList").value() + "&FolioCuantificacionID=" + Cuantificacion.FolioCuantificacionID + "&ProyectoID=" + Proyecto.ProyectoID;
+            } else {
+                displayMessage("notificationslabel0054", "", '1');
+            }
+        };
+
+        function ActualizarPaginaPadre() {
+            ObtenerColada("EdicionColada", 0, 1);
+            ObtenerColada("Colada", 1, 0);
+            //VentanaEdicionColada(3);
+        };
+
+        function getFields() {
+            return {
+                NumeroUnicoID: { type: "string", editable: false },
+                NumeroUnico: { type: "string", editable: false },
+                NumeroUnicoCliente: { type: "string", editable: true },
+                ItemCode: { type: "string", editable: false },
+                Descripcion: { type: "string", editable: false },
+                Cedula: { type: "string", editable: false },
+                TipoAcero: { type: "string", editable: false },
+                D1: { type: "number", editable: false },
+                D2: { type: "number", editable: false },
+                Cantidad: { type: "number", editable: false },
+                MM: { type: "string", editable: true },
+                Colada: { type: "string", editable: false },
+                EstatusFisico: { type: "string", editable: true },
+                EstatusDocumental: { type: "string", editable: true },
+                TipoUso: { type: "string", editable: true },
+                MTR: { type: "string", editable: true },
+                TieneError: { type: "boolean", defaultValue: false, editable: true },
+                ItemCodeID: { type: "string", editable: false },
+                MTRID: { type: "string", editable: true },
+                RelFCID: { type: "string", editable: false },
+                RelBID: { type: "string", editable: false },
+                RelNUFCBID: { type: "string", editable: false },
+                Titulo: { type: "string", editable: false },
+                DescripcionIncidencia: { type: "string", editable: false },
+                TituloMTR: { type: "string", editable: true },
+                DescripcionIncidenciaMTR: { type: "string", editable: true },
+                ColadaOriginal: { type: "string", editable: false },
+                TieneComplementoRecepcion: { type: "string", editable: false },
+                CantidadPiezasMTR: { type: "string", editable: false }
+            }
+        }
+
+        function LoadGridQuantification() {
+            $("#grid").kendoGrid({
+                dataSource: {
+                    data: resultadoJson,
+                    autoSync: true,
+                    schema: {
+                        model: {
+                            fields: getFields(),
+                        }
+                    },
+                    pageSize: 10,
+                    serverPaging: false,
+                    serverFiltering: false,
+                    serverSorting: false,
+                    aggregate: [
+                                 { field: "Descripcion", aggregate: "count" },
+                                 { field: "Cantidad", aggregate: "sum" }
+                    ]
+                },
+                autoHeight: true,
+                sortable: true,
+                scrollable: true,
+                filterable: getKendoGridFilterableComplementoRecepcion($("#language").data("kendoDropDownList").value()),
+                pageable: {
+                    refresh: false,
+                    pageSizes: [10, 15, 20],
+                    info: false,
+                    input: false,
+                    numeric: true,
+                    buttonCount: 2
+                },
+                groupable: true,
+                selectable: true,
+                editable: {
+                    mode: "incell",
+                    confirmation: false
+                },
+                edit: function (e) {
+                    //if (e.model.TieneComplementoRecepcion=="Si") {
+                    //    this.closeCell();
+                    //};
+                    if ($("#Editar").css("display") == "block") {
+                        this.closeCell();
+                    };
+
+                    if ($("input[name=MM]").length > 0) {
+
+                        if ($("input[name=MM]").val() == "N/A") {
+                            var nombreColumna = e.container.find("input[name]").attr("name");
+                            if (nombreColumna == "MM") {
+                                this.closeCell();
+                                var uid = e.model.uid;
+                                setTimeout(function () {
+                                    $("#grid").data("kendoGrid").current($("[data-uid=" + uid + "] td:nth-child(11)"));
+                                }, 10);
+                            }
+                        }
+
+                        $("input[name=MM]").on("change", function () {
+                            var uid = e.model.uid;
+                            setTimeout(function () {
+                                $("#grid").data("kendoGrid").current($("[data-uid=" + uid + "] td:nth-child(11)"));
+                                //isOpen = false;
+                            }, 10);
+                        });
+                    }
+
+                    if ($("input[name=NumeroUnicoCliente]").length > 0) {
+                        $("input[name=NumeroUnicoCliente]").on("change", function () {
+                            var uid = e.model.uid;
+                            setTimeout(function () {
+                                $("#grid").data("kendoGrid").current($("[data-uid=" + uid + "] td:nth-child(3)"));
+                            }, 10);
+                        });
+                    }
+                },
+                dataBound: function (e) {
+                    quickHeadFilter($("#grid").data("kendoGrid"));
+                },
+                navigatable: true,
+                columns: [
+                    { field: "NumeroUnico", title: _dictionary.ComplementoRecepcion0022[$("#language").data("kendoDropDownList").value()], width: 150 },
+                    { field: "NumeroUnicoCliente", title: _dictionary.ComplementoRecepcion0023[$("#language").data("kendoDropDownList").value()], width: 200, editor: genEditor},
+                    { field: "ItemCode", title: _dictionary.ComplementoRecepcion0024[$("#language").data("kendoDropDownList").value()], width: 125 },
+                    { field: "Descripcion", title: _dictionary.ComplementoRecepcion0025[$("#language").data("kendoDropDownList").value()], width: 200, aggregates: ["count"], footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#" },
+                    { field: "Cedula", title: _dictionary.ComplementoRecepcion0026[$("#language").data("kendoDropDownList").value()], width: 120 },
+                    { field: "TipoAcero", title: _dictionary.ComplementoRecepcion0027[$("#language").data("kendoDropDownList").value()], width: 150 },
+                    { field: "D1", template:d1Format, title: _dictionary.ComplementoRecepcion0028[$("#language").data("kendoDropDownList").value()], width: 80 },
+                    { field: "D2", template:d2Format, title: _dictionary.ComplementoRecepcion0029[$("#language").data("kendoDropDownList").value()], width: 80 },
+                    { field: "Cantidad", title: _dictionary.ComplementoRecepcion0030[$("#language").data("kendoDropDownList").value()], aggregates: ["sum"], footerTemplate: "Total SUM: #=sum#", groupFooterTemplate: "SUM: #=sum#", width: 120 },
+                    { field: "MM", title: _dictionary.ComplementoRecepcion0031[$("#language").data("kendoDropDownList").value()], width: 80, attributes: { "class": "MM" }, editor: genEditor },
+                    { field: "Colada", title: _dictionary.ComplementoRecepcion0032[$("#language").data("kendoDropDownList").value()], width: 120 },
+                    { field: "EstatusFisico", title: _dictionary.ComplementoRecepcion0034[$("#language").data("kendoDropDownList").value()], editor: EstatusFisicoAutocomplete, width: 160 },
+                    { field: "EstatusDocumental", title: _dictionary.ComplementoRecepcion0035[$("#language").data("kendoDropDownList").value()], editor: EstatusDepartamentalAutocomplete, width: 200 },
+                    { field: "TipoUso", title: _dictionary.ComplementoRecepcion0036[$("#language").data("kendoDropDownList").value()], editor: TipoUsoAutocomplete, width: 145 },
+                    { field: "MTR", title: "MTR", editor: MTRComboBox, width: 120,attributes: { "class": "MTR" } },
+                    { command: { text: _dictionary.ComplementoRecepcion0082[$("#language").data("kendoDropDownList").value()], click: cancelarComplemento }, title: " ", width: "99px" },
+                    { field: "TieneError", title: _dictionary.ComplementoRecepcion0037[$("#language").data("kendoDropDownList").value()], hidden: true, width: 120 },
+                    { field: "ItemCodeID", title: _dictionary.ComplementoRecepcion0069[$("#language").data("kendoDropDownList").value()], width: 125, hidden: true },
+                    { field: "MTRID", title: "MTRID", width: 125, hidden: true },
+                    { field: "RelFCID", title: _dictionary.ComplementoRecepcion0070[$("#language").data("kendoDropDownList").value()], width: 125, hidden: true },
+                    { field: "RelBID", title: _dictionary.ComplementoRecepcion0071[$("#language").data("kendoDropDownList").value()], width: 125, hidden: true },
+                    { field: "RelNUFCBID", title: _dictionary.ComplementoRecepcion0072[$("#language").data("kendoDropDownList").value()], width: 125, hidden: true },
+                    { field: "Titulo", title: _dictionary.ComplementoRecepcion0075[$("#language").data("kendoDropDownList").value()], width: 125, hidden: true },
+                    { field: "DescripcionIncidencia", title: _dictionary.ComplementoRecepcion0076[$("#language").data("kendoDropDownList").value()], width: 125, hidden: true },
+                    { field: "ColadaOriginal", title: _dictionary.ComplementoRecepcion0032[$("#language").data("kendoDropDownList").value()], width: 120, hidden: true },
+                    { field: "NumeroUnicoID", title: _dictionary.ComplementoRecepcion0067[$("#language").data("kendoDropDownList").value()], width: 150, hidden: true },
+                    { field: "TieneComplementoRecepcion", title: _dictionary.ComplementoRecepcion0080[$("#language").data("kendoDropDownList").value()], width: 240, hidden: true },
+                    { field: "CantidadPiezasMTR", title: "CantidadPiezasMTR", width: 125, hidden: true },
+                    { field: "TituloMTR", title: _dictionary.ComplementoRecepcion0089[$("#language").data("kendoDropDownList").value()], width: 125, hidden: true },
+                    { field: "DescripcionIncidenciaMTR", title: _dictionary.ComplementoRecepcion0076[$("#language").data("kendoDropDownList").value()], width: 125, hidden: true },
+                ],
+            });
+            var grid = $("#grid").data("kendoGrid");
+
+            var dispositivo = navigator.userAgent.toLowerCase();
+            if (!dispositivo.match(/(iphone|ipod|ipad|android)/)) {
+                grid.table.bind("keypress", function (e) {
+                    keydown(e);
+                    if (e.which !== 0 && e.charCode !== 0 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                        //get currently navigated cell, this id follows user's navigation
+                        var activeCell = $("#grid_active_cell");
+
+                        //don't do anything if already editing cell        
+                        if (activeCell.hasClass("k-edit-cell")) return;
+
+                        grid.editCell(activeCell);
+                        var input = activeCell.find("input");
+
+                        //number datatype editor loses key press character when entering edit
+                        if (input.last().attr('data-type') === 'number') {
+                            input.val(String.fromCharCode(e.keyCode | e.charCode));
+                        } else {
+                            input.val("");
+                        }
+
+
+                    }
+                });
+            }
+            //Kendo "Enter" key input is captured through this binding
+            $("#grid table tbody").on("keydown", "tr", function (e) {
+                var code = (e.keyCode ? e.keyCode : e.which);
+                if (code == 13) { //If key is ENTER
+                    //console.log("--KendoEnter--");
+                    //find index of the td element
+                    var tdIndex = $(e.target).closest('td').index();
+                    //get the next row's cell
+                    var nextRow = $(e.target).closest('tr').next();
+                    var nextRowCell = $(nextRow).find('td:eq(' + tdIndex + ')');
+                    //Check if the next row is the last one and add one
+                    if (nextRowCell.length == 0) {
+                        var grids = $("#grid").data("kendoGrid");
+                        if (grids) {
+                            var dataSource = grid.dataSource;
+                            var total = dataSource.data().length;
+                            //dataSource.insert(total, {});
+                        }
+                        //find index of the td element
+                        tdIndex = $(e.target).closest('td').index();
+                        //get the next row's cell
+                        nextRow = $(e.target).closest('tr').next();
+                        nextRowCell = $(nextRow).find('td:eq(' + tdIndex + ')');
+                    }
+
+                    //focus the next cell on a different context
+                    setTimeout(function () {
+                        //console.log("--Changing Current--");
+                        var grid = $("#grid").data("kendoGrid");
+                        grid.current(nextRowCell);
+                    }, 0);
+                }
+            });
+
+            $("#grid").data("kendoGrid").thead.find("th input[data-filter]").on("click", function (e) {
+                $(this).focus();
+            });
+
+            var observer = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.attributeName === "class" && $(mutation.target).hasClass("k-state-focused")) {
+                        $(mutation.target.firstChild).trigger('focus');
+                        //$(mutation.target.firstChild).trigger('mouseenter');
+                    }
+                });
+            });
+            var config = { attributes: true, childList: true, subtree: true, characterData: true};
+
+            observer.observe(document.querySelector(".filter-row"), config);
+
+            $("#menu").kendoContextMenu({
+                target: "#grid",
+                filter: "td",
+                select: function (e) {
+                    var grid = $("#grid").data("kendoGrid");
+                    var select = grid.select();
+                    var data = grid.dataItem(select);
+                    rowselected = data;
+
+                    if (e.item.id == "NuevaColada") {
+                        $("#hdnItemCodeIDSeleccionado").val(rowselected.ItemCodeID);
+                        $("#hdnItemCodeSeleccionado").val(rowselected.ItemCode);
+                        VentanaModal(1);
+                        return;
+                    };
+
+                    if (e.item.id == "AgregarMTR") {
+                        VentanaModal(3);
+                        return;
+                    }
+
+                    LimpiarModalEdicionColadaEditarClick();
+                    $("#hdnItemCodeIDSeleccionado").val("");
+                    $("#hdnItemCodeSeleccionado").val("");
+                    if (e.item.id == "Incidencia") {
+                        window.open(_incidenciasURL + "?leng=" + $("#language").data("kendoDropDownList").value() + "&LevantarIncidencia=1&ReferenciaID=" + data.NumeroUnicoID + "&TipoIncidencia=9&Clasificacion=1");
+                        return;
+                    };
+
+
+                    $("#hdnItemCodeIDSeleccionado").val(rowselected.ItemCodeID);
+                    $("#hdnItemCodeSeleccionado").val(rowselected.ItemCode);
+                    $("#EdicionColada").data("kendoAutoComplete").value(rowselected.Colada);
+
+                    //if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+                    //    $("#Titulo").val("El número único " + rowselected.NumeroUnico + " cambio de colada " + rowselected.Colada + " a " + rowselected.Colada);
+                    //} else {
+                    //    $("#Titulo").val("The unique Number " + rowselected.NumeroUnico + " change " + rowselected.Colada + " to " + rowselected.Colada);
+                    //}
+                    VentanaEdicionColada(3);
+                    e.preventDefault();
+
+                }
+            });
+
+            $("#grid").on("mousedown", "tr[role='row']", function (e) {
+                $('#grid').data("kendoGrid").select(e.target.parentElement);
+                $("#grid thead .k-state-selected> .k-link").css({
+                    "color": "black"
+                });
+
+                if ((typeof returnOfSecurityCheck != 'undefined') && (typeof returnOfSecurityCheck["Colada"] != 'undefined') && (typeof returnOfSecurityCheck["Colada"]["create"] != 'undefined') && !returnOfSecurityCheck["Colada"]["create"]) {
+                    $("#NuevaColada").empty();
+                }
+
+                if ((typeof returnOfSecurityCheck != 'undefined') && (typeof returnOfSecurityCheck["Colada"] != 'undefined') && (typeof returnOfSecurityCheck["Colada"]["detail"] != 'undefined') && !returnOfSecurityCheck["Colada"]["detail"]) {
+                    $("#EditarColada").empty();
+                }
+            });
+        };
+
+        function genEditor(container,options){
+            $("<input class='k-input k-textbox' data-bind='"+options.field+"'>").attr("name",options.field).on("blur",function(){options.model.modified=true;}).appendTo(container);
+        }
+        function d1Format(dataitem){
+            return kendo.toString(dataitem.D1, "n4")
+        }
+        function d2Format(dataitem){
+            return kendo.toString(dataitem.D2, "n4")
+        }
+        function cancelarComplemento(e) {
+            e.preventDefault();
+            var dataItem = $("#grid").data("kendoGrid").dataItem($(e.currentTarget).closest("tr"));
+            var NumeroUnicoID = dataItem.NumeroUnicoID;
+            var ItemCodeID = dataItem.ItemCodeID;
+            var RelFCID = dataItem.RelFCID;
+            var RelBID = dataItem.RelBID;
+            var RelNUFCBID = dataItem.RelNUFCBID;
+            //loadingStart();
+            if (confirm(_dictionary.ComplementoRecepcion0083[$("#language").data("kendoDropDownList").value()])) {
+                $NumeroUnico.NumeroUnico.destroy({}, { numeroUnicoID: NumeroUnicoID, token: Cookies.get("token") }).done(function (data) {
+                    if (Error(data)) {
+                        cargarGridPackingList();
+                    }
+                    //loadingStop();
+                });
+            }
+
+
+        };
+        function ObtenerProyecto(id) {
+            $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox(id, result);
+            });
+        };
+
+        function ObtenerTipoUso() {
+            $TipoUso.TipoUso.read({ agregarOpcion: 0, paginaID: Cookies.get("navegacion"), token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox("TipoUso", result);
+            });
+        };
+
+        function LimpiarModalEdicionColadaEditarClick() {
+            $("#EdicionColada").data("kendoAutoComplete").value("");
+            $("#Titulo").val("");
+            $("#DescripcionIncidencia").val("");
+            $("#IncidenciaDiv").addClass("hidden");
+        };
+        function ObtenerDatosFolioCuantificacion() {
+            $ComplementarRecepcion.ComplementarRecepcion.read({ proyectoID: Proyecto.ProyectoID, token: Cookies.get("token") }).done(function (result) {
+                if (Error(result)) {
+                    ControlErroresObjetosComboBox("FolioCuantificacionID", result);
+                } else {
+                    limpiarfiltrosFolioCuantificacion();
+                };
+                //loadingStop();
+            });
+        };
+
+        function VentanaEdicionColada(id) {
+            var modalTitle = "";
+            var content = "";
+            var window = $("#windowColada");
+            var height = "";
+
+            cancelarvalidacionRequeridosModalEdicionColada();
+            $("#modalEdicionColada").show();
+
+            window.kendoWindow({
+                actions: false,
+                content: content,
+                modal: true,
+                title: modalTitle,
+                resizable: true,
+                actions: ["Close"],
+                visible: false,
+                width: "32.6%",
+                minWidth: 660,
+                height: "12%",
+                position: {
+                    top: "10%",
+                    left: "20%"
+                },
+                //open: onOpen,
+                //refresh: onRefresh
+            }).data("kendoWindow");
+
+
+            window.data("kendoWindow").title(modalTitle);
+            window.data("kendoWindow").center().open();
+        };
+        function VentanaModal(id) {
+
+            var modalTitle = "";
+            var content = "";
+            var window = $("#window")//.replaceWith("<div id='window'></div>");
+            var height = "";
+            var mostrarpopup = true;
+            var width = "70%";
+            switch (id) {
+                case 1:
+                    modalTitle = "Colada";
+                    if (!validarRequeridosFormaComplementoRecepcion()) {
+                        mostrarpopup = false;
+                        displayMessage("notificationslabel0031", "", '1');
+                    }
+                    content = "@Url.Action("Colada", "PopUps")";
+                    //width = "32.6%";
+                    height = "30%";
+                    break;
+                case 2:
+                    modalTitle = "Tipo de Uso";
+                    content = "@Url.Action("TipoUso", "PopUps")";
+                    //width = "32.6%";
+                    height = "170px";
+                    break;
+                case 3:
+                    modalTitle = "Añadir MTR";
+                    content = "@Url.Action("ListadoCatalogos", "Catalogos", new{ catalog = "12" })";//MTR
+                    height = "40%";
+                    //width = "70%";
+                    if (!validarRequeridosFormaComplementoRecepcion()) {
+                        mostrarpopup = false;
+                        displayMessage("notificationslabel0031", "", '1');
+                    };
+                    Cookies.set("navegacion", "47", { path: '/' });
+                    break;
+            };
+            if (mostrarpopup) {
+                window.kendoWindow({
+                    actions: false,
+                    content: content,
+                    modal: true,
+                    title: modalTitle,
+                    resizable: true,
+                    actions: ["Close"],
+                    visible: false,
+                    width: width,
+                    minWidth: 660,
+                    height: height,
+                    iframe: true,
+                    position: {
+                        top: "10%",
+                        left: "20%"
+                    },
+                    open: onOpen,
+                    close: AsignarPaginaActualCookie,
+                    refresh: onRefresh
+                }).data("kendoWindow");
+
+                //Se actualiza el tamaño
+                window.data("kendoWindow").title(modalTitle);
+                window.data("kendoWindow").center().open();
+                //window.data("kendoWindow").bind("open",function(){
+                //    id===3 ? window.closest(".k-widget.k-window").style("width","70%") : window.closest(".k-widget.k-window").style("width","32.6%")
+                //})
+            }
+        };
+
+        function VentanaModalMTR(id) {
+            var modalTitle = "";
+            var content = "";
+            var window = $("#windowMTR");
+            var height = "";
+
+            cancelarvalidacionRequeridosModalEdicionColada();
+            $("#modalMTR").show();
+
+            window.kendoWindow({
+                actions: false,
+                content: content,
+                modal: true,
+                title: modalTitle,
+                resizable: true,
+                actions: ["Close"],
+                visible: false,
+                width: "70%",
+                minWidth: 660,
+                height: "12%",
+                position: {
+                    top: "10%",
+                    left: "20%"
+                },
+                //open: onOpen,
+                //refresh: onRefresh
+            }).data("kendoWindow");
+
+
+            window.data("kendoWindow").title(modalTitle);
+            window.data("kendoWindow").center().open();
+        };
+
+        function DeshabilitarControlesDetalleBulto() {
+            $("#FolioAvisoEntradaID").data("kendoComboBox").enable(false);
+            $("#ProyectoID").data("kendoComboBox").enable(false);
+            $("#FolioCuantificacionID").data("kendoComboBox").enable(false);
+            $("#BultoID").attr("disabled", "disabled");
+            $("#PackingList").attr("disabled", "disabled");
+            $("#TipoPackingListID").data("kendoComboBox").enable(false);
+            $("#TipoUsoID").data("kendoComboBox").enable(false);
+        };
+
+
+
+        function ObtenerDatosDelFolioCuantificacion(cuantificacion) {
+            //loadingStart();
+            cargarGridPackingList();
+        }
+
+        function CargarLabelEstatus(status) {
+            ocultarStatus();
+            cargarTituloFolio();
+
+            if (status == "En Proceso de Recepción") {
+                $("#ComplementoRecepcion0042").show();
+            }
+
+            if (status == "Recepción Terminada") {
+                $("#ComplementoRecepcion0043").show();
+            }
+
+            if (status == "Terminado") {
+                $("#ComplementoRecepcion0052").show();
+            }
+
+            if (status == "Cerrado") {
+                $("#ComplementoRecepcion0053").show();
+            }
+
+
+        };
+
+        function changeValueColumnColada(value) {
+            var filters = $("#grid").data("kendoGrid").dataSource.filter();
+            var allData = $("#grid").data("kendoGrid").dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var result = query.filter(filters).data;
+            var datasource = result;
+
+            $(datasource).each(function () {
+                //if (this.get("TieneComplementoRecepcion") != "Si") {
+                if ($('input:checked').val() == "2") {
+                    if (!this.Colada || this.Colada == "Sin Colada PL") {
+                        this.Colada = value;
+                        this.modified = true;
+                    }
+                } else {
+                    this.Colada = value
+                    this.modified = true;
+                }
+                //}
+            });
+            $('#grid').data('kendoGrid').refresh();
+            $("#Colada").data("kendoAutoComplete").value("")
+        };
+
+        function changeValueColumnEstatusFisico(value) {
+            var filters = $("#grid").data("kendoGrid").dataSource.filter();
+            var allData = $("#grid").data("kendoGrid").dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var result = query.filter(filters).data;
+            var datasource = result;
+            var val = $('input:checked').val();
+            datasource.forEach(function(n){
+                if(val==="2"){
+                    if(n.EstatusFisico===""||n.EstatusFisico===null){
+                        n.EstatusFisico=value;
+                        n.modified=true;
+                    }
+                }else{
+                    n.EstatusFisico=value;
+                    n.modified=true;
+                }
+            })
+            //$(datasource).each(function () {
+            //    //if (this.get("TieneComplementoRecepcion") != "Si") {
+            //    if ($('input:checked').val() == "2") {
+            //        if (!this.get("EstatusFisico")) {
+            //            this.set("EstatusFisico", value);
+            //        }
+            //    } else {
+            //        this.set("EstatusFisico", value);
+            //    }
+            //    //}
+            //});
+            $('#grid').data('kendoGrid').refresh();
+            $("#EstatusFisico").data("kendoComboBox").value("");
+        };
+
+        function changeValueColumnEstatusDocumental(value) {
+            var filters = $("#grid").data("kendoGrid").dataSource.filter();
+            var allData = $("#grid").data("kendoGrid").dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var result = query.filter(filters).data;
+            var datasource = result;
+            var val = $('input:checked').val();
+
+            //$(datasource).each(function () {
+            //    //if (this.get("TieneComplementoRecepcion") != "Si") {
+            //    if ($('input:checked').val() == "2") {
+            //        if (!this.get("EstatusDocumental")) {
+            //            this.set("EstatusDocumental", value);
+            //        }
+            //    } else {
+            //        this.set("EstatusDocumental", value);
+            //    }
+            //    //}
+            //});
+            datasource.forEach(function(n){
+                if(val==="2"){
+                    if(n.EstatusDocumental===""||n.EstatusDocumental===null){
+                        n.EstatusDocumental=value;
+                        n.modified=true;
+                    }
+                }else{
+                    n.EstatusDocumental=value;
+                    n.modified=true;
+                }
+            })
+            $('#grid').data('kendoGrid').refresh();
+            $("#EstatusDocumental").data("kendoComboBox").value("");
+        };
+
+        function changeValueColumnTipoUso(value) {
+            if ($("#grid").data("kendoGrid")){
+                var filters = $("#grid").data("kendoGrid").dataSource.filter();
+                var allData = $("#grid").data("kendoGrid").dataSource.data();
+                var query = new kendo.data.Query(allData);
+                var result = query.filter(filters).data;
+                var datasource = result;
+                var val = $('input:checked').val();
+
+                //$(datasource).each(function () {
+                //    //if (this.get("TieneComplementoRecepcion") != "Si") {
+                //    if ($('input:checked').val() == "2") {
+                //        if (!this.get("TipoUso")) {
+                //            this.set("TipoUso", value);
+                //        }
+                //    } else {
+                //        this.set("TipoUso", value);
+                //    }
+                //    //};
+                //});
+                datasource.forEach(function(n){
+                    if(val==="2"){
+                        if(n.TipoUso==="" || n.TipoUso===null){
+                            n.TipoUso=value;
+                            n.modified=true;
+                        }
+                    }else{
+                        n.TipoUso=value;
+                        n.modified=true;
+                    }
+                })
+                $('#grid').data('kendoGrid').refresh();
+                $("#TipoUso").data("kendoComboBox").value("");
+            }
+        };
+
+
+        function changeValueColumnsAll() {
+            var filters = $("#grid").data("kendoGrid").dataSource.filter();
+            var allData = $("#grid").data("kendoGrid").dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var result = query.filter(filters).data;
+            var datasource = result;
+
+            $(datasource).each(function () {
+                this.set("EstatusFisico", $("#EstatusFisico").data("kendoComboBox").text());
+                this.set("EstatusDocumental", $("#EstatusDocumental").data("kendoComboBox").text());
+                this.set("TipoUso", $("#TipoUso").data("kendoComboBox").text());
+            });
+        }
+
+        function changeValueColumnsClear() {
+            var filters = $("#grid").data("kendoGrid").dataSource.filter();
+            var allData = $("#grid").data("kendoGrid").dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var result = query.filter(filters).data;
+            var datasource = result;
+
+            $(datasource).each(function () {
+                this.set("EstatusFisico", "");
+                this.set("EstatusDocumental", "");
+                this.set("TipoUso", "");
+
+            });
+        };
+
+        function limpiarfiltrosProyecto() {
+            $("#FolioCuantificacionID").data("kendoComboBox").dataSource.data([]);
+            $("#FolioCuantificacionID").data("kendoComboBox").value("");
+            if ($("#grid").data("kendoGrid"))
+            { 
+                $("#grid").data("kendoGrid").dataSource.data([]);
+            }
+            _folioCuantificacion = "-1";
+            Cuantificacion = {};
+            limpiarTituloFolio();
+        };
+
+        function LimpiarColada() {
+            $("#Colada").data("kendoAutoComplete").dataSource.data([]);
+        };
+
+        function ControlErroresObjetosComboBox(control, result) {
+            if (Error(result)) {
+                $("#" + control).data("kendoComboBox").dataSource.data(result);
+            } else {
+                $("#" + control).data("kendoComboBox").dataSource.data([]);
+            };
+        };
+
+        function limpiarfiltrosFolioCuantificacion() {
+            $("#grid").data("kendoGrid").dataSource.data([]);
+            limpiarTituloFolio();
+        }
+
+        function cargarTituloFolio() {
+            $("#divFolio").removeClass("hidden");
+        };
+
+        function limpiarTituloFolio() {
+            $("#divFolio").addClass("hidden");
+        }
+
+
+
+        function CicloTerminar(incompletos, ListadoCuantificacion, i, error) {
+            if (ListadoCuantificacion[i]) {
+                $ComplementarRecepcion.ComplementarRecepcion.update({}, { tipoGuardado: 2, complemento: JSON.stringify(ListadoCuantificacion[i]), token: Cookies.get("token") }).done(function (data) {
+                    error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
+                    if (ErrorBool(data)) {
+                        AccionesTerminaryNuevo(data);
+                    } else {
+                        cargarGridErrores(ListadoCuantificacion[i]);
+                    }
+                    i++;
+                    CicloTerminar(incompletos, ListadoCuantificacion, i, error);
+                    //ObtenerDatosDelFolioCuantificacion();
+                });
+            } else {
+                //loadingStop();
+                ordenamientoGrid();
+
+                if (error) {
+                    displayMessage("notificationslabel0050", error, '2');
+                    BotonAlta();
+                    CambiarEstatus("En Proceso de Recepción");
+                    //loadingStop();
+                    return;
+                }
+
+                if (incompletos) {
+                    displayMessage("notificationslabel0051", "", '2');
+                    BotonAlta();
+                    CambiarEstatus("En Proceso de Recepción");
+                    //loadingStop();
+                    return;
+                }
+
+                CambiarEstatus("Recepción Terminada");
+                AccionesTerminaryNuevo(null);
+            }
+        };
+
+        function CicloTerminaryNuevo(incompletos, ListadoCuantificacion, i, error) {
+            if (ListadoCuantificacion[i]) {
+                $ComplementarRecepcion.ComplementarRecepcion.update({}, { tipoGuardado: 2, complemento: JSON.stringify(ListadoCuantificacion[i]), token: Cookies.get("token") }).done(function (data) {
+                    error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
+                    if (ErrorBool(data)) {
+                        AccionesTerminaryNuevo(data);
+                    } else {
+                        cargarGridErrores(ListadoCuantificacion[i]);
+                    }
+                    i++;
+                    CicloTerminaryNuevo(incompletos, ListadoCuantificacion, i, error);
+                    //ObtenerDatosDelFolioCuantificacion();
+                });
+            } else {
+                //loadingStop();
+                ordenamientoGrid();
+
+                if (error) {
+                    displayMessage("notificationslabel0050", error, '2');
+                    BotonAlta();
+                    CambiarEstatus("En Proceso de Recepción");
+                    loadingStop();
+                    return;
+                }
+
+                if (incompletos) {
+                    displayMessage("notificationslabel0051", "", '2');
+                    BotonAlta();
+                    CambiarEstatus("En Proceso de Recepción");
+                    loadingStop();
+                    return;
+                }
+
+                CambiarEstatus("Recepción Terminada");
+                window.location.href = _ComplemementoUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
+                AccionesTerminaryNuevo(null);
+            }
+        };
+
+
+        function AccionesTerminaryNuevo(data) {
+            cargarGridcompletos(data);
+            ordenamientoGrid();
+            BotonAlta();
+        };
+
+        function ErrorInsertandoItems(data, error, Listado) {
+            /*
+			if (data.ReturnCode) {
+                if (data.ReturnCode != 200) {
+                    if (data.ReturnCode == 401) {
+                        removeUserSession();
+                        return error;
+                    } else {
+                        error += "," + Listado.ItemCode;
+                        return error;
+                    }
+                }
+            }
+			*/
+			if(data){
+				if(data.TieneError){
+					error += "," + Listado.ItemCode;
+				}
+			}else{
+				var test = 1;
+			}
+            return error;
+        };
+
+        function GuardarListadoCuantificacionParcial(ListadoCuantificacion, ListadoCuantificacionIncompletos, idGuardado) {
+            var i = 0, error = "";
+
+            $("#grid").data("kendoGrid").dataSource.data([]);
+            llenarGrid(null, ListadoCuantificacionIncompletos);
+
+            $ComplementarRecepcion.ComplementarRecepcion.update({}, { tipoGuardado: idGuardado, complemento: JSON.stringify(ListadoCuantificacion[i]), token: Cookies.get("token") }).done(function (data) {
+                error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
+                if (ErrorBool(data)) {
+                    AccionesAltaGuardadoParcial(data);
+                } else {
+                    cargarGridErrores(ListadoCuantificacion[i]);
+                };
+                i++;
+                cicloGuardadoParcial(ListadoCuantificacion, i, idGuardado, error);
+                ObtenerDatosDelFolioCuantificacion();
+            });
+
+        };
+
+        function cicloGuardadoParcial(ListadoCuantificacion, i, idGuardado, error) {
+            if (ListadoCuantificacion[i]) {
+                $ComplementarRecepcion.ComplementarRecepcion.update({}, { tipoGuardado: idGuardado, complemento: JSON.stringify(ListadoCuantificacion[i]), token: Cookies.get("token") }).done(function (data) {
+                    error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
+                    if (ErrorBool(data)) {
+                        AccionesAltaGuardadoParcial(data);
+                    } else {
+                        cargarGridErrores(ListadoCuantificacion[i]);
+                    };
+                    i++;
+                    cicloGuardadoParcial(ListadoCuantificacion, i, idGuardado, error);
+                    //ObtenerDatosDelFolioCuantificacion();
+                });
+            } else {
+                //loadingStop();
+                ordenamientoGrid();
+                if (error) {
+                    displayMessage("notificationslabel0051", error, '2');
+                    ordenamientoGrid();
+                    loadingStop();
+                    return;
+                }
+                AccionesAltaGuardadoParcial(null);
+                CambiarEstatus("En Proceso de Recepción");
+                AsignarPaginaActualCookie();
+                applySecurityPolicy(false);
+            };
+        };
+
+        function AsignarPaginaActualCookie() {
+            Cookies.set("navegacion", "20", { path: '/' });
+        }
+
+        function AccionesAltaGuardadoParcial(data) {
+            cargarGridcompletos(data);
+            ordenamientoGrid();
+            BotonAlta();
+            ocultarStatus();
+            cargarTituloFolio();
+            CargarLabelEstatus("En Proceso de Recepción");
+        };
+
+        function cargarGridcompletos(dataJson) {
+            if (dataJson) {
+                var item =
+                        {
+                            NumeroUnicoID: dataJson.NumeroUnicoID, NumeroUnico: dataJson.NumeroUnico, NumeroUnicoCliente: dataJson.NumeroUnicoCliente, ItemCode: dataJson.ItemCode, Descripcion: dataJson.Descripcion, Cedula: dataJson.Cedula, TipoAcero: dataJson.TipoAcero, D1: dataJson.D1, D2: dataJson.D2, Cantidad: dataJson.Cantidad, MM: dataJson.MM, Colada: dataJson.Colada, EstatusFisico: dataJson.EstatusFisico, EstatusDocumental: dataJson.EstatusDocumental, TipoUso: dataJson.TipoUso, TieneError: dataJson.TieneError, ItemCodeID: dataJson.ItemCodeID, RelFCID: dataJson.RelFCID, RelBID: dataJson.RelBID, RelNUFCBID: dataJson.RelNUFCBID, Titulo: dataJson.Titulo, DescripcionIncidencia: dataJson.DescripcionIncidencia, ColadaOriginal: dataJson.ColadaOriginal
+                        };
+                $("#grid").data("kendoGrid").dataSource.insert(item);
+            }
+        };
+        function cargarGridErrores(incompletos) {
+            if (incompletos) {
+                var item =
+                       { NumeroUnicoID: incompletos.NumeroUnicoID, ItemCode: incompletos.NumeroUnico, NumeroUnicoCliente: incompletos.NumeroUnicoCliente, ItemCode: incompletos.ItemCode, Descripcion: incompletos.Descripcion, Cedula: incompletos.Cedula, TipoAcero: incompletos.TipoAcero, D1: incompletos.D1, D2: incompletos.D2, Cantidad: incompletos.Cantidad, MM: incompletos.MM, Colada: incompletos.Colada, EstatusFisico: incompletos.EstatusFisico, EstatusDocumental: incompletos.EstatusDocumental, TipoUso: incompletos.TipoUso, TieneError: true, ItemCodeID: incompletos.ItemCodeID, RelFCID: incompletos.RelFCID, RelBID: incompletos.RelBID, RelNUFCBID: incompletos.RelNUFCBID, Titulo: incompletos.Titulo, DescripcionIncidencia: incompletos.DescripcionIncidencia, ColadaOriginal: incompletos.ColadaOriginal };
+                $("#grid").data("kendoGrid").dataSource.insert(item);
+            }
+        };
+
+        function llenarGrid(dataJson, incompletos) {
+            $("#grid").data("kendoGrid").dataSource.data([]);
+            if (dataJson) {
+                $.each(dataJson, function (key) {
+                    var item =
+                          { NumeroUnicoID: dataJson[key].NumeroUnicoID, NumeroUnico: dataJson[key].NumeroUnico, NumeroUnicoCliente: dataJson[key].NumeroUnicoCliente, ItemCode: dataJson[key].ItemCode, Descripcion: dataJson[key].Descripcion, Cedula: dataJson[key].Cedula, TipoAcero: dataJson[key].TipoAcero, D1: dataJson[key].D1, D2: dataJson[key].D2, Cantidad: dataJson[key].Cantidad, MM: dataJson[key].MM, Colada: dataJson[key].Colada, EstatusFisico: dataJson[key].EstatusFisico, EstatusDocumental: dataJson[key].EstatusDocumental, TipoUso: dataJson[key].TipoUso, TieneError: dataJson[key].TieneError, ItemCodeID: dataJson[key].ItemCodeID, RelFCID: dataJson[key].RelFCID, RelBID: dataJson[key].RelBID, RelNUFCBID: dataJson[key].RelNUFCBID, Titulo: dataJson[key].Titulo, DescripcionIncidencia: dataJson[key].DescripcionIncidencia, ColadaOriginal: dataJson[key].ColadaOriginal };
+                    $("#grid").data("kendoGrid").dataSource.insert(item);
+                });
+            };
+            if (incompletos) {
+                $.each(incompletos, function (key) {
+                    var item =
+                           { NumeroUnicoID: incompletos[key].NumeroUnicoID, NumeroUnico: incompletos[key].NumeroUnico, NumeroUnicoCliente: incompletos[key].NumeroUnicoCliente, ItemCode: incompletos[key].ItemCode, Descripcion: incompletos[key].Descripcion, Cedula: incompletos[key].Cedula, TipoAcero: incompletos[key].TipoAcero, D1: incompletos[key].D1, D2: incompletos[key].D2, Cantidad: incompletos[key].Cantidad, MM: incompletos[key].MM, Colada: incompletos[key].Colada, EstatusFisico: incompletos[key].EstatusFisico, EstatusDocumental: incompletos[key].EstatusDocumental, TipoUso: incompletos[key].TipoUso, TieneError: incompletos[key].TieneError, ItemCodeID: incompletos[key].ItemCodeID, RelFCID: incompletos[key].RelFCID, RelBID: incompletos[key].RelBID, RelNUFCBID: incompletos[key].RelNUFCBID, Titulo: incompletos[key].Titulo, DescripcionIncidencia: incompletos[key].DescripcionIncidencia, ColadaOriginal: incompletos[key].ColadaOriginal };
+                    $("#grid").data("kendoGrid").dataSource.insert(item);
+                });
+            }
+        };
+
+        function cargarGridPackingList() {
+            var cuantificacion = Cuantificacion.FolioCuantificacionID ? Cuantificacion.FolioCuantificacionID : "0";
+            $ComplementarRecepcion.ComplementarRecepcion.read({}, { folio: cuantificacion, token: Cookies.get("token") }).done(function (result) {
+                if (Error(result)) {
+                    CargarLabelEstatus(result[0]);
+                    if ($("#grid").data("kendoGrid")) {
+                        if (result.length) {
+                            for (i = 0; result[1].length > i; i++) {
+                                result[1][i].MM = result[1][i].MM == 0 ? "N/A" : result[1][i].MM;
+                            }
+                            $("#grid").data("kendoGrid").dataSource.data(result[1]);
+
+                        } else {
+                            $("#grid").data("kendoGrid").dataSource.data([]);
+                        };
+                    };
+                }
+                //loadingStop();
+            });
+        };
+
+        function EstatusFisicoAutocomplete(container, options) {
+            $('<input id="EstatusFisicoAutocomplete" data-text-field="Nombre" data-value-field="EstatFisicoID" data-bind="value:' + options.field + '"/>')
+                .appendTo(container)
+                .kendoComboBox({
+                    dataTextField: "Nombre",
+                    dataValueField: "EstatFisicoID",
+                    dataSource: [
+                       { EstatFisicoID: 1, Nombre: _dictionary.ComplementoRecepcion0054[$("#language").data("kendoDropDownList").value()] },
+                       { EstatFisicoID: 2, Nombre: _dictionary.ComplementoRecepcion0055[$("#language").data("kendoDropDownList").value()] },
+                       { EstatFisicoID: 3, Nombre: _dictionary.ComplementoRecepcion0056[$("#language").data("kendoDropDownList").value()] }
+                    ],
+                    filter: "contains",
+                    select: function (e) {
+
+                    },
+                    change: function (e) {
+                        var value = this.text();
+                        if (this.selectedIndex == -1) {
+                            messageindexKendoCombobox(this);
+                            this.value("");
+                            lastEditedFisicoCellIDS.EstatusFisico = "";
+                        } else {
+                            lastEditedFisicoCellIDS.EstatusFisico = value;
+                        };
+                        options.model.modified=true;
+                        $('#grid').data('kendoGrid').refresh();
+
+                        var uid = options.model.uid;
+                        setTimeout(function () {
+                            $("#grid").data("kendoGrid").current($("[data-uid=" + uid + "] td:nth-child(13)"));
+                        }, 10);
+                    }
+                });
+            lastEditedFisicoCellIDS = options.model;
+        };
+
+        function MTRComboBox(container, options) {
+            var dataItem =$("#grid").data("kendoGrid").dataItem(container.closest("tr"));
+            $('<input id="MTR" data-text-field="value" data-value-field="id" data-bind="value:' + options.field + '"/>')
+                .appendTo(container)
+                .kendoComboBox({
+                    dataTextField: "value",
+                    dataValueField: "id",
+                    filter: "contains",
+                    dataSource: {
+                        type: "json",
+                        transport: {
+                            read: $MTR + "ItemCodeID=" + dataItem.ItemCodeID + "&Colada=" + encodeURI(dataItem.Colada) + "&token=" + Cookies.get("token") + "&proyectoID=" + dataItem.ProyectoID
+                        },
+                        serverFiltering: true
+                    },
+                    select: function (e) {
+                        var selected = this.dataItem(e.item.index());
+                        MTRID = selected.id;
+                        console.log(selected.id);
+                        var filaseleccionada = $("#grid").data("kendoGrid").dataItem($('.k-grid').find("tr.k-state-selected"));
+                        console.log("fila");
+                        console.log(filaseleccionada);
+                        fila = filaseleccionada;
+                    },
+                    change: function (e) {
+                        var value = this.text();
+                        var dataItem = fila;
+                       
+                        
+                        console.log("dataitem");
+                        console.log(dataItem);
+
+                        if (this.selectedIndex == -1) {
+                            messageindexKendoCombobox(this);
+                            this.value("");
+                            lastEditedMTRCellID.MTR = "";
+                            options.model.set("MTRID", "");
+                        } else {
+                            console.log("MTR " + MTRID);
+                            options.model.set("MTRID", MTRID);
+                            if (dataItem.Cantidad > parseInt(dataItem.CantidadPiezasMTR))//Se genera incidencia
+                            {
+                                if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+                                    tituloIncidenciaMTR = "El número único " + dataItem.NumeroUnico + " tiene una cantidad mayor a la cantidad de piezas amparadas";
+                                } else {
+                                    tituloIncidenciaMTR = "The unique Number " + rowselected.NumeroUnico + " has a greater amount to the amount of covered parts";
+                                }
+                                $("#TituloMTR").val(tituloIncidenciaMTR);
+                                $("#DescripcionIncidenciaMTR").val(dataItem.DescripcionIncidenciaMTR);
+                                VentanaModalMTR(3);
+                            }
+                            lastEditedMTRCellID.MTR = value;
+                        };
+                        options.model.modified=true;
+                        $('#grid').data('kendoGrid').refresh();
+
+                        var uid = options.model.uid;
+                        setTimeout(function () {
+                            $("#grid").data("kendoGrid").current($("[data-uid=" + uid + "] td:visible:last"));
+                            $("#grid").data("kendoGrid").current($("[data-uid=" + uid + "] td.MTR"));
+                        }, 10);
+                    },
+
+                });
+            lastEditedMTRCellID = options.model;
+        };
+
+        function EstatusDepartamentalAutocomplete(container, options) {
+            $('<input id="EstatusDocumentalAutocomplete" data-text-field="Nombre" data-value-field="EstatusDocumentalID" data-bind="value:' + options.field + '"/>')
+                .appendTo(container)
+                .kendoComboBox({
+                    dataTextField: "Nombre",
+                    dataValueField: "EstatusDocumentalID",
+                    filter: "contains",
+                    dataSource: [
+                                    { EstatusDocumentalID: 1, Nombre: _dictionary.ComplementoRecepcion0057[$("#language").data("kendoDropDownList").value()] },
+                                    { EstatusDocumentalID: 2, Nombre: _dictionary.ComplementoRecepcion0058[$("#language").data("kendoDropDownList").value()] }
+                    ],
+                    select: function (e) {
+                    },
+                    change: function (e) {
+                        var value = this.text();
+                        if (this.selectedIndex == -1) {
+                            messageindexKendoCombobox(this);
+                            this.value("");
+                            lastEditedDepartamentalCellID.EstatusDocumental = "";
+                        } else {
+                            lastEditedDepartamentalCellID.EstatusDocumental = value;
+                        };
+                        options.model.modified=true;
+                        $('#grid').data('kendoGrid').refresh();
+
+                        var uid = options.model.uid;
+                        setTimeout(function () {
+                            $("#grid").data("kendoGrid").current($("[data-uid=" + uid + "] td:nth-child(14)"));
+                        }, 10);
+                    }
+                });
+            lastEditedDepartamentalCellID = options.model;
+        };
+
+        function ColadaAutocomplete(container, options) {
+            $('<input data-text-field="Nombre" data-value-field="ColadaID" data-bind="value:' + options.field + '"/>')
+                .appendTo(container)
+                .kendoComboBox({
+                    autoBind: false,
+                    dataSource: {
+                        type: "json",
+                        transport: {
+                            read: $URLColada + "itemcode=" + (container.parent().children()[22].firstChild ? container.parent().children()[22].firstChild.data : "") + "&token=" + Cookies.get("token") + "&paginaID=" + Cookies.get("navegacion") + "&idioma=" + $("#language").data("kendoDropDownList").value() + "&id=0&mostrarOpcion=0"
+                        },
+                        serverFiltering: true
+                    },
+                    select: function (e) {
+                    },
+                    change: function (e) {
+                        var dataItem = this.dataItem();
+                        if (dataItem.ColadaID == 0) {
+                            VentanaEdicionColada(3);
+                            e.preventDefault();
+                        }
+                        var value = this.text();
+                        lastEditedCellIDSColada.Colada = value;
+
+                        if (this.selectedIndex == -1) {
+                            messageindexKendoCombobox(this);
+                            lastEditedCellIDSColada.Colada = "";
+                        } else {
+                            lastEditedCellIDSColada.Colada = value;
+                        }
+                        options.model.modified=true;
+                        $('#grid').data('kendoGrid').refresh();
+                    },
+                    filter: "contains",
+                });
+
+            lastEditedCellIDSColada = options.model;
+        };
+
+
+        function TipoUsoAutocomplete(container, options) {
+            $('<input id="TipoUsoAutocomplete" data-text-field="Nombre" data-value-field="id" data-bind="value:' + options.field + '"/>')
+                .appendTo(container)
+                .kendoComboBox({
+                    autoBind: false,
+                    dataTextField: "Nombre",
+                    dataValueField: "id",
+                    dataSource: {
+                        type: "json",
+                        transport: {
+                            read: $UrlTipoUso + "agregarOpcion=1" + "&paginaID=" + Cookies.get("navegacion") + "&token=" + Cookies.get("token") + "&idioma=" + $("#language").data("kendoDropDownList").value()
+                        },
+                        serverPaging: true,
+                        serverFiltering: true
+                    },
+                    select: function (e) {
+                    },
+                    change: function (e) {
+                        var values = this.value();
+                        var dataItem = this.dataItem();
+
+                        if (values == 0) {
+                            this.value("");
+                            VentanaModal(2);
+                            e.preventDefault();
+                        }
+                        var value = this.text();
+                        if (this.selectedIndex == -1) {
+                            messageindexKendoCombobox(this);
+                            this.value("");
+                            lastEditedTipoUsoCellIDS.TipoUso = "";
+                        } else {
+                            lastEditedTipoUsoCellIDS.TipoUso = value;
+                        }
+                        options.model.modified=true;
+                        $('#grid').data('kendoGrid').refresh();
+
+                        var uid = options.model.uid;
+                        setTimeout(function () {
+                            $("#grid").data("kendoGrid").current($("[data-uid=" + uid + "] td:nth-child(15)"));
+                        }, 10);
+                    },
+                    filter: "contains",
+                });
+
+            lastEditedTipoUsoCellIDS = options.model;
+        };
+
+        //funciones para controlar los eventos
+        //13 enter
+        //17 control
+        //37 left arrow
+        //38 up arrow
+        //39 right arrow
+        //40 down arrow
+        function keydown(e) {
+
+            if (e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) {
+                var elementFocused = $(':focus');
+                var focused = $(':focus').attr("id");
+                var mapeo = "";
+                if (typeof (focused) === 'undefined') {
+                    focused = focusResp;
+                }
+                mapeo = mapeoNavegacion[focused][e.keyCode];
+            }
+
+            switch (e.keyCode) {
+                case ctrlKey:
+                    ctrlDown = true;
+                    break;
+                case 37: case 38: case 39: case 40:
+                    if (ctrlDown) {
+                        switch (mapeoTiposControles[mapeo]) {
+                            case 0:
+                                $("#" + mapeo).focus();
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                $("#" + mapeo).data("kendoComboBox").input.focus();
+                                focusResp = mapeo;
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                $(".k-grid-add").focus();
+                                focusResp = mapeo;
+                                break;
+                        }
+                    }
+                    break;
+            }
+            //if (e.keyCode == ctrlKey) ctrlDown = true;
+        }
+
+        function Incidencias() {
+            window.open(_incidenciasURL + "?leng=" + $("#language").data("kendoDropDownList").value());
+        };
+
+        function ActualizarCookie() {
+            Cookies.set("navegacion", $("#hdnNavegacion").val(), { path: '/' });
+        };
+
+        function GuardarColada() {
+            if (validarRequeridosFormaEdicionColada()) {
+                //$("#Titulo").val(rowselected.Titulo);
+                rowselected.Colada = $("#EdicionColada").data("kendoAutoComplete").value();
+                rowselected.DescripcionIncidencia = $("#DescripcionIncidencia").val();
+				rowselected.modified = true;
+                $('#grid').data('kendoGrid').refresh();
+                LimpiarModalEdicionColada();
+                cleanDisplayMessage();
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            }
+        };
+
+        function GuardarMTR() {
+            if (validarRequeridosFormaMTR()) {
+                var filters = $("#grid").data("kendoGrid").dataSource.filter();
+                var allData = $("#grid").data("kendoGrid").dataSource.data();
+                var query = new kendo.data.Query(allData);
+                var result = query.filter(filters).data;
+                var datasource = result;
+                console.log("datasource");
+                console.log(datasource);
+
+                var dataItem = $("#grid").data("kendoGrid").dataItem($("#grid").data("kendoGrid").current().closest("tr"));
+                console.log(dataItem);
+
+                $(datasource).each(function () {
+                    if (this.get("uid") == dataItem.uid) {
+                        this.set("TituloMTR", tituloIncidenciaMTR);
+                        this.set("DescripcionIncidenciaMTR", $("#DescripcionIncidenciaMTR").val());
+                    }
+                });
+                LimpiarModalMTR();
+                cleanDisplayMessage();
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            }
+        };
+
+        function CancelarColada() {
+            LimpiarModalEdicionColada();
+            cleanDisplayMessage();
+        };
+
+        function ErrorBool(data) {
+            /*
+			if (data.ReturnCode) {
+                if (data.ReturnCode != 200) {
+                    if (data.ReturnCode == 401) {
+                        removeUserSession();
+                        return true;
+                    } else {
+                        //displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+			*/
+			if(data){
+				return data.TieneError;
+			}
+			return false;
+        };
+
+        function Error(data) {
+            if (data) {
+                if (data.ReturnCode) {
+                    if (data.ReturnCode != 200) {
+                        if (data.ReturnCode == 401) {
+                            removeUserSession();
+                            return false;
+                        } else {
+                            displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                            return false;
+                        }
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        };
+
+        }
+
+        function GuardarParcial() {
+            //loadingStart();
+            var j = 0, z = 0;
+            var allData = $("#grid").data("kendoGrid").dataSource.data().filter(function(n){ return n.modified===true});
+            var query = new kendo.data.Query(allData);
+            var result = query.data;
+            var datasource = result;
+            var folioCuantificacionID = Cuantificacion.FolioCuantificacionID ? Cuantificacion.FolioCuantificacionID : "-1";
+
+            ListadoCuantificacionIncompletos = [];
+            ListadoCuantificacion = [];
+
+            for (var i = 0; i < datasource.length; i++) {
+                var NumeroUnicoID = datasource[i].NumeroUnicoID;
+                var NumeroUnico = datasource[i].NumeroUnico;
+                var NumeroUnicoCliente = datasource[i].NumeroUnicoCliente;
+                var ItemCode = datasource[i].ItemCode;
+                var Descripcion = datasource[i].Descripcion;
+                var Cedula = datasource[i].Cedula;
+                var TipoAcero = datasource[i].TipoAcero;
+                var D1 = datasource[i].D1;
+                var D2 = datasource[i].D2;
+                var Cantidad = datasource[i].Cantidad;
+                var MM = datasource[i].MM == "N/A" ? 0 : !datasource[i].MM ? 0 : datasource[i].MM;
+                var Colada = datasource[i].Colada;
+                var EstatusFisico = datasource[i].EstatusFisico;
+                var EstatusDocumental = datasource[i].EstatusDocumental;
+                var TipoUso = datasource[i].TipoUso;
+                var TieneError = datasource[i].TieneError;
+                var ItemCodeID = datasource[i].ItemCodeID;
+                var RelFCID = datasource[i].RelFCID;
+                var RelBID = datasource[i].RelBID;
+                var RelNUFCBID = datasource[i].RelNUFCBID;
+                var Titulo = datasource[i].Titulo;
+                var DescripcionIncidencia = datasource[i].DescripcionIncidencia;
+                var TituloMTR = datasource[i].TituloMTR;
+                var DescripcionIncidenciaMTR = datasource[i].DescripcionIncidenciaMTR;
+                var ProyectoID = Proyecto.ProyectoID;
+                var ColadaOriginal = datasource[i].ColadaOriginal;
+                var TieneComplementoRecepcion = datasource[i].TieneComplementoRecepcion;
+                var MTRID = datasource[i].MTRID;
+
+                //if (TieneComplementoRecepcion != "Si") {
+                if (!NumeroUnico) {
+                    datasource[i].TieneError = true;
+                    ListadoCuantificacionIncompletos[z] = {
+                        NumeroUnico: NumeroUnico, NumeroUnicoCliente: NumeroUnicoCliente, ItemCode: ItemCode,
+                        Descripcion: Descripcion, Cedula: Cedula, TipoAcero: TipoAcero, D1: D1, D2: D2,
+                        Cantidad: Cantidad, MM: MM, Colada: Colada, EstatusFisico: EstatusFisico,
+                        EstatusDocumental: EstatusDocumental, TipoUso: TipoUso, TieneError: true,
+                        ItemCodeID: ItemCodeID, RelFCID: RelFCID, RelBID: RelBID, RelNUFCBID: RelNUFCBID,
+                        Titulo: Titulo, DescripcionIncidencia: DescripcionIncidencia, TituloMTR: TituloMTR,
+                        DescripcionIncidenciaMTR: DescripcionIncidenciaMTR, NumeroUnicoID: NumeroUnicoID,
+                        ProyectoID: ProyectoID, ColadaOriginal: ColadaOriginal, MTRID: MTRID
+                    };
+                    z++;
+                } else { // informacion completa
+                    ListadoCuantificacion[j] = {
+                        NumeroUnico: NumeroUnico, NumeroUnicoCliente: NumeroUnicoCliente, ItemCode: ItemCode,
+                        Descripcion: Descripcion, Cedula: Cedula, TipoAcero: TipoAcero, D1: D1, D2: D2,
+                        Cantidad: Cantidad, MM: MM, Colada: Colada, EstatusFisico: EstatusFisico,
+                        EstatusDocumental: EstatusDocumental, TipoUso: TipoUso, TieneError: TieneError,
+                        ItemCodeID: ItemCodeID, RelFCID: RelFCID, RelBID: RelBID, RelNUFCBID: RelNUFCBID,
+                        Titulo: Titulo, DescripcionIncidencia: DescripcionIncidencia, TituloMTR: TituloMTR,
+                        DescripcionIncidenciaMTR: DescripcionIncidenciaMTR, NumeroUnicoID: NumeroUnicoID,
+                        ProyectoID: ProyectoID, ColadaOriginal: ColadaOriginal, MTRID: MTRID
+                    };
+                    j++;
+                }
+                //}
+            };
+
+            if (!ListadoCuantificacion.length && ListadoCuantificacionIncompletos.length) {
+                llenarGrid(null, ListadoCuantificacionIncompletos);
+                ordenamientoGrid();
+                //loadingStop();
+                displayMessage("notificationslabel0051", '', '1');
+                return;
+            }
+
+            if (!ListadoCuantificacion.length && !ListadoCuantificacionIncompletos.length) {
+                displayMessage("notificationslabel0053", '', '1');
+                //loadingStop();
+                return;
+            }
+
+            GuardarListadoCuantificacionParcial(ListadoCuantificacion, ListadoCuantificacionIncompletos, "1");
+        };
+
+
+        function Terminar() {
+            //loadingStart();
+
+            var j = 0, z = 0, cerrar = true, incompletos = false;
+            var allData = $("#grid").data("kendoGrid").dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var result = query.data;
+            var datasource = result;
+            var folioCuantificacionID = Cuantificacion.FolioCuantificacionID ? Cuantificacion.FolioCuantificacionID : "-1";
+
+            ListadoCuantificacionIncompletos = [];
+            ListadoCuantificacion = [];
+
+            for (var i = 0; i < datasource.length; i++) {
+                var NumeroUnicoID = datasource[i].NumeroUnicoID;
+                var NumeroUnico = datasource[i].NumeroUnico;
+                var NumeroUnicoCliente = datasource[i].NumeroUnicoCliente;
+                var ItemCode = datasource[i].ItemCode;
+                var Descripcion = datasource[i].Descripcion;
+                var Cedula = datasource[i].Cedula;
+                var TipoAcero = datasource[i].TipoAcero;
+                var D1 = datasource[i].D1;
+                var D2 = datasource[i].D2;
+                var Cantidad = datasource[i].Cantidad;
+                var MM = datasource[i].MM == "N/A" ? 0 : !datasource[i].MM ? 0 : datasource[i].MM;
+                var Colada = datasource[i].Colada;
+                var EstatusFisico = datasource[i].EstatusFisico;
+                var EstatusDocumental = datasource[i].EstatusDocumental;
+                var TipoUso = datasource[i].TipoUso;
+                var TieneError = datasource[i].TieneError;
+                var ItemCodeID = datasource[i].ItemCodeID;
+                var RelFCID = datasource[i].RelFCID;
+                var RelBID = datasource[i].RelBID;
+                var RelNUFCBID = datasource[i].RelNUFCBID;
+                var Titulo = datasource[i].Titulo;
+                var DescripcionIncidencia = datasource[i].DescripcionIncidencia;
+                var TituloMTR = datasource[i].TituloMTR;
+                var DescripcionIncidenciaMTR = datasource[i].DescripcionIncidenciaMTR;
+                var ProyectoID = Proyecto.ProyectoID;
+                var ColadaOriginal = datasource[i].ColadaOriginal;
+                var TieneComplementoRecepcion = datasource[i].TieneComplementoRecepcion;
+                var MTRID = datasource[i].MTRID;
+
+                //if (TieneComplementoRecepcion != "Si") {
+                if (!NumeroUnico || (!MM && MM < 0) || !EstatusFisico || !Colada || !EstatusDocumental || !TipoUso) {
+                    datasource[i].TieneError = true;
+                    ListadoCuantificacionIncompletos[z] = {
+                        NumeroUnico: NumeroUnico, NumeroUnicoCliente: NumeroUnicoCliente, ItemCode: ItemCode,
+                        Descripcion: Descripcion, Cedula: Cedula, TipoAcero: TipoAcero, D1: D1, D2: D2,
+                        Cantidad: Cantidad, MM: MM, Colada: Colada, EstatusFisico: EstatusFisico,
+                        EstatusDocumental: EstatusDocumental, TipoUso: TipoUso, TieneError: true,
+                        ItemCodeID: ItemCodeID, RelFCID: RelFCID, RelBID: RelBID, RelNUFCBID: RelNUFCBID,
+                        Titulo: Titulo, DescripcionIncidencia: DescripcionIncidencia, TituloMTR: TituloMTR,
+                        DescripcionIncidenciaMTR: DescripcionIncidenciaMTR, NumeroUnicoID: NumeroUnicoID,
+                        ProyectoID: ProyectoID, ColadaOriginal: ColadaOriginal, MTRID: MTRID
+                    };
+                    z++;
+                } else { // informacion completa
+                    ListadoCuantificacion[j] = {
+                        NumeroUnico: NumeroUnico, NumeroUnicoCliente: NumeroUnicoCliente, ItemCode: ItemCode,
+                        Descripcion: Descripcion, Cedula: Cedula, TipoAcero: TipoAcero, D1: D1, D2: D2,
+                        Cantidad: Cantidad, MM: MM, Colada: Colada, EstatusFisico: EstatusFisico,
+                        EstatusDocumental: EstatusDocumental, TipoUso: TipoUso, TieneError: TieneError,
+                        ItemCodeID: ItemCodeID, RelFCID: RelFCID, RelBID: RelBID, RelNUFCBID: RelNUFCBID,
+                        Titulo: Titulo, DescripcionIncidencia: DescripcionIncidencia, TituloMTR: TituloMTR,
+                        DescripcionIncidenciaMTR: DescripcionIncidenciaMTR, NumeroUnicoID: NumeroUnicoID,
+                        ProyectoID: ProyectoID, ColadaOriginal: ColadaOriginal, MTRID: MTRID
+                    };
+                    j++;
+                }
+                //}
+            };
+
+            if (!ListadoCuantificacion.length && ListadoCuantificacionIncompletos.length) {
+                llenarGrid(null, ListadoCuantificacionIncompletos);
+                ordenamientoGrid();
+                displayMessage("notificationslabel0051", '', '1');
+                //loadingStop();
+                return;
+            }
+
+            if (!ListadoCuantificacion.length && !ListadoCuantificacionIncompletos.length) {
+                displayMessage("notificationslabel0053", '', '1');
+                //loadingStop();
+                return;
+            }
+
+            if (ListadoCuantificacionIncompletos.length) {
+                incompletos = true;
+                cerrar = false;
+            }
+
+            var i = 0, error = "";
+            $("#grid").data("kendoGrid").dataSource.data([]);
+            llenarGrid(null, ListadoCuantificacionIncompletos);
+            $ComplementarRecepcion.ComplementarRecepcion.update({}, { tipoGuardado: "2", complemento: JSON.stringify(ListadoCuantificacion[i]), token: Cookies.get("token") }).done(function (data) {
+                error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
+                if (ErrorBool(data)) {//si no tiene error debe continuar
+                    AccionesTerminaryNuevo(data);
+                } else {
+                    cargarGridErrores(ListadoCuantificacion[i]);
+                };
+                i++;
+                CicloTerminar(incompletos, ListadoCuantificacion, i, error);
+                ObtenerDatosDelFolioCuantificacion();
+            });
+        };
+
+        function TerminaryNuevo() {
+            //loadingStart();
+
+            var j = 0, z = 0, cerrar = true, incompletos = false;
+            var allData = $("#grid").data("kendoGrid").dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var result = query.data;
+            var datasource = result;
+            var folioCuantificacionID = Cuantificacion.FolioCuantificacionID ? Cuantificacion.FolioCuantificacionID : "-1";
+
+            ListadoCuantificacionIncompletos = [];
+            ListadoCuantificacion = [];
+
+            for (var i = 0; i < datasource.length; i++) {
+                var NumeroUnicoID = datasource[i].NumeroUnicoID;
+                var NumeroUnico = datasource[i].NumeroUnico;
+                var NumeroUnicoCliente = datasource[i].NumeroUnicoCliente;
+                var ItemCode = datasource[i].ItemCode;
+                var Descripcion = datasource[i].Descripcion;
+                var Cedula = datasource[i].Cedula;
+                var TipoAcero = datasource[i].TipoAcero;
+                var D1 = datasource[i].D1;
+                var D2 = datasource[i].D2;
+                var Cantidad = datasource[i].Cantidad;
+                var MM = datasource[i].MM == "N/A" ? 0 : !datasource[i].MM ? 0 : datasource[i].MM;
+                var Colada = datasource[i].Colada;
+                var EstatusFisico = datasource[i].EstatusFisico;
+                var EstatusDocumental = datasource[i].EstatusDocumental;
+                var TipoUso = datasource[i].TipoUso;
+                var TieneError = datasource[i].TieneError;
+                var ItemCodeID = datasource[i].ItemCodeID;
+                var RelFCID = datasource[i].RelFCID;
+                var RelBID = datasource[i].RelBID;
+                var RelNUFCBID = datasource[i].RelNUFCBID;
+                var Titulo = datasource[i].Titulo;
+                var DescripcionIncidencia = datasource[i].DescripcionIncidencia;
+                var TituloMTR = datasource[i].TituloMTR;
+                var DecripcionIncidenciaMTR = datasource[i].DescripcionIncidenciaMTR;
+                var ProyectoID = Proyecto.ProyectoID;
+                var ColadaOriginal = datasource[i].ColadaOriginal;
+                var TieneComplementoRecepcion = datasource[i].TieneComplementoRecepcion;
+                var MTRID = datasource[i].MTRID;
+
+                //if (TieneComplementoRecepcion != "Si") {
+                if (!NumeroUnico || (!MM && MM < 0) || !EstatusFisico || !Colada || !EstatusDocumental || !TipoUso) {
+                    datasource[i].TieneError = true;
+                    ListadoCuantificacionIncompletos[z] = {
+                        NumeroUnico: NumeroUnico, NumeroUnicoCliente: NumeroUnicoCliente, ItemCode: ItemCode,
+                        Descripcion: Descripcion, Cedula: Cedula, TipoAcero: TipoAcero, D1: D1, D2: D2,
+                        Cantidad: Cantidad, MM: MM, Colada: Colada, EstatusFisico: EstatusFisico,
+                        EstatusDocumental: EstatusDocumental, TipoUso: TipoUso, TieneError: true,
+                        ItemCodeID: ItemCodeID, RelFCID: RelFCID, RelBID: RelBID, RelNUFCBID: RelNUFCBID,
+                        Titulo: Titulo, DescripcionIncidencia: DescripcionIncidencia, TituloMTR: TituloMTR,
+                        DescripcionIncidenciaMTR: DescripcionIncidenciaMTR, NumeroUnicoID: NumeroUnicoID,
+                        ProyectoID: ProyectoID, ColadaOriginal: ColadaOriginal, MTRID: MTRID
+                    };
+                    z++;
+                } else { // informacion completa
+                    ListadoCuantificacion[j] = {
+                        NumeroUnico: NumeroUnico, NumeroUnicoCliente: NumeroUnicoCliente, ItemCode: ItemCode,
+                        Descripcion: Descripcion, Cedula: Cedula, TipoAcero: TipoAcero, D1: D1, D2: D2,
+                        Cantidad: Cantidad, MM: MM, Colada: Colada, EstatusFisico: EstatusFisico,
+                        EstatusDocumental: EstatusDocumental, TipoUso: TipoUso, TieneError: TieneError,
+                        ItemCodeID: ItemCodeID, RelFCID: RelFCID, RelBID: RelBID, RelNUFCBID: RelNUFCBID,
+                        Titulo: Titulo, DescripcionIncidencia: DescripcionIncidencia, TituloMTR: TituloMTR,
+                        DescripcionIncidenciaMTR: DescripcionIncidenciaMTR, NumeroUnicoID: NumeroUnicoID,
+                        ProyectoID: ProyectoID, ColadaOriginal: ColadaOriginal, MTRID: MTRID
+                    };
+                    j++;
+                }
+                //};
+            };
+
+            if (!ListadoCuantificacion.length && ListadoCuantificacionIncompletos.length) {
+                llenarGrid(null, ListadoCuantificacionIncompletos);
+                ordenamientoGrid();
+                displayMessage("notificationslabel0051", '', '1');
+                //loadingStop();
+                return;
+            }
+
+            if (!ListadoCuantificacion.length && !ListadoCuantificacionIncompletos.length) {
+                displayMessage("notificationslabel0053", '', '1');
+                //loadingStop();
+                return;
+            }
+
+            if (ListadoCuantificacionIncompletos.length) {
+                incompletos = true;
+                cerrar = false;
+            }
+
+            var i = 0, error = "";
+            $("#grid").data("kendoGrid").dataSource.data([]);
+            llenarGrid(null, ListadoCuantificacionIncompletos);
+            $ComplementarRecepcion.ComplementarRecepcion.update({}, { tipoGuardado: "2", complemento: JSON.stringify(ListadoCuantificacion[i]), token: Cookies.get("token") }).done(function (data) {
+                error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
+                if (ErrorBool(data)) {//si no tiene error debe continuar
+                    AccionesTerminaryNuevo(data);
+                } else {
+                    cargarGridErrores(ListadoCuantificacion[i]);
+                };
+                i++;
+                CicloTerminaryNuevo(incompletos, ListadoCuantificacion, i, error);
+                ObtenerDatosDelFolioCuantificacion();
+            });
+        };
+
+        function ordenamientoGrid() {
+            var dsSort = [];
+            dsSort.push({ field: "TieneError", dir: "desc" });
+            $("#grid").data('kendoGrid').dataSource.sort(dsSort);
+            $('#grid').data('kendoGrid').refresh();
+
+            var grid = $("#grid").data("kendoGrid");
+            var gridData = grid.dataSource.view();
+
+            for (var i = 0; i < gridData.length; i++) {
+                if (gridData[i].TieneError == true) {
+                    grid.table.find("tr[data-uid='" + gridData[i].uid + "']").css("background-color", "#FFCCCC");
+                }
+            }
+        };
+
+    @section JavascriptDocumentReadyFunctions 
+    {
+        var dispositivo = navigator.userAgent.toLowerCase();
+        if (!dispositivo.match(/(iphone|ipod|ipad|android)/)) {
+            $(document).keydown(function (e) {
+                keydown(e);
+            }).keyup(function (e) {
+                if (e.keyCode == ctrlKey) ctrlDown = false;
+            });
+        };
+        
+        cargaInicial();
+
+        ////edicion de un folio cuantificacion
+        if (_edicion != "-1") {
+            cargaInicialEdicion();
+        };
+        $("#hdnNavegacion").val(Cookies.get("navegacion"));
+
+        $authorizationModel["Orden Almacenaje"] = $OrdenAlmacenajeModel;
+        $authorizationModel["Complemento Recepcion"] = $ComplementoRecepcionModel;
+        $authorizationModel["Tipo Uso"] = $TipoUsoModel;
+        $authorizationModel["Colada"] = $ColadaModel;
+    }
+
+    @section JavascriptDocumentReadyHomeCookie {
+        Cookies.set("home", true, { path: '/' });
+        Cookies.set("navegacion", "20", { path: '/' });
+    }
+</script>

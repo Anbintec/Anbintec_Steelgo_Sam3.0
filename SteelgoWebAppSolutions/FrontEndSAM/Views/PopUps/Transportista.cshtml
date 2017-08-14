@@ -1,0 +1,259 @@
+﻿ 
+@{
+    ViewBag.Title = "Transportista";
+}
+
+<div id="modalTransportista" class="form clearfix popup col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+            <div id="ContactoID_TransportistaDiv" class="form-group">
+                <label id="DetalleAvisoLlegada0012"></label>
+                <input id="ContactoID_Transportista" class="" />
+            </div>
+            <div id="Nombre_TransportistaDiv" class="form-group">
+                <label id="DetalleAvisoLlegada0013"></label>
+                <input id="Nombre_Transportista" class="general-input" />
+            </div>
+            <div id="Descripcion_TransportistaDiv" class="form-group">
+                <label id="DetalleAvisoLlegada0014"></label>
+                <input id="Descripcion_Transportista" class="general-input" />
+            </div>
+            <div id="Direccion_TransportistaDiv" class="form-group">
+                <label id="DetalleAvisoLlegada0015"></label>
+                <input id="Direccion_Transportista" class="general-input" />
+            </div>
+            <div id="Telefono_TransportistaDiv" class ="form-group">
+                <label id="DetalleAvisoLlegada0016"></label>
+                <input id="Telefono_Transportista" class="general-input" />
+            </div>
+            <div class="buttonSave">
+                <a id="GuardarTransportista" href="#" class="btn btn-primary">
+                    <span id="DetalleAvisoLlegada0019"></span>
+                </a>
+                <a id="CancelarTransportista" href="#" class="btn btn-primary">
+                    <span id="DetalleAvisoLlegada0076"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    @section JavascriptGlobalVariables {
+    var Contacto = {};
+    var $TransportistaModel = {
+        listContainer: {
+            create: "#GuardarTransportista",
+            list: "",
+            detail: "",
+            destroy: ""
+        },
+        properties: {
+            contacto: {
+                visible: "#ContactoID_TransportistaDiv",
+                editable: "#ContactoID_Transportista",
+                required: "#ContactoID_Transportista"
+            },
+            nombre: {
+                visible: "#Nombre_TransportistaDiv",
+                editable: "#Nombre_Transportista",
+                required: "#Nombre_Transportista"
+            },
+            descripcion: {
+                visible: "#Descripcion_TransportistaDiv",
+                editable: "#Descripcion_Transportista",
+                required: "#Descripcion_Transportista"
+            },
+            direccion: {
+                visible: "#Direccion_TransportistaDiv",
+                editable: "#Direccion_Transportista",
+                required: "#Direccion_Transportista"
+            },
+            telefono: {
+                visible: "#Telefono_TransportistaDiv",
+                editable: "#Telefono_Transportista",
+                required: "#Telefono_Transportista"
+            }
+        }
+    };
+    }
+
+    @section JavascriptGlobalFunctions {
+    function hideElementsTransportista() {
+        $(".sidebar").hide();
+        $(".logo").hide();
+        $(".search-bar").hide();
+        $(".notifications").hide();
+        $(".logged-user").hide();
+        $(".content-container").removeClass("topbar").addClass("printView");
+        $(".breadcrumb-container").hide();
+        $(".languageSelector").hide();
+        $(".pull-right").hide();
+        $("header").hide();
+        $(".content-frame").removeClass("content-frame");
+        $("body").css("background", "#FFFFFF");
+    };
+
+    function CargaInicial() {
+        hideElementsTransportista();
+
+        window.parent.$(".k-i-close").click(function (e) {
+            CancelarTransportista();
+        });
+
+        $("#GuardarTransportista").click(function (e) {
+            if (validarRequeridosModalTransportista()) {
+                GuardarTransportista();
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            };
+        });
+
+        $("#CancelarTransportista").click(function () {
+            CancelarTransportista();
+        });
+
+        $("#ContactoID_Transportista").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "ContactoID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarContacto(dataItem.ContactoID, dataItem.Nombre):CargarContacto("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Contacto = {};
+                    this.value("");
+                };
+            },
+            filter: "contains",
+        });
+        ObtenerContacto();
+    };
+
+    function CargarContacto(id, value) {
+        Contacto = {};
+        Contacto = { ContactoID: id, Nombre: value };
+    };
+
+
+    function ObtenerContacto() {
+        $Contacto.Contacto.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("ContactoID_Transportista", result);
+        });
+
+    };
+
+    function validarRequeridosModalTransportista() {
+        var bool = true;
+        $("#modalTransportista .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if (!$(this).val()) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                    $(this).closest("div").addClass("clearfix");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                    $(this).closest("div").removeClass("clearfix");
+                };
+            };
+        });
+        return bool;
+    };
+
+    function LimpiarModalTransportista() {
+        $("#ContactoID_Transportista").data("kendoComboBox").value("");
+        $("#Nombre_Transportista").val("");
+        $("#Descripcion_Transportista").val("");
+        $("#Direccion_Transportista").val("");
+        $("#Telefono_Transportista").val("");
+        Contacto = [];
+    };
+
+    function cerrarVentanaModal() {
+        window.parent.$("#window").data("kendoWindow").close();
+        cleanDisplayMessage();
+    };
+
+    function CancelarTransportista() {
+        LimpiarModalTransportista();
+        cerrarVentanaModal();
+        cancelarvalidacionRequeridosModalTransportista();
+    };
+
+    function cancelarvalidacionRequeridosModalTransportista() {
+        $("#modalTransportista .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                $(this).closest("div").find("label").removeClass("error");
+                $(this).closest("div").removeClass("clearfix");
+            };
+        });
+    };
+    
+    window.parent.$("#close").click(function (e) {
+        CancelarTransportista();
+        cerrarVentanaModal();
+    });
+
+
+    function GuardarTransportista() {
+
+        TransportistaModal = [];
+        TransportistaModal[0] = { ContactoID: "", Nombre: "", Descripcion: "", Direccion: "", Telefono: "" };
+        TransportistaModal[0].ContactoID = Contacto.ContactoID;
+        TransportistaModal[0].Nombre = $("#Nombre_Transportista").val();
+        TransportistaModal[0].Descripcion = $("#Descripcion_Transportista").val();
+        TransportistaModal[0].Direccion = $("#Direccion_Transportista").val();
+        TransportistaModal[0].Telefono = $("#Telefono_Transportista").val();
+
+        //console.log(TransportistaModal[0]);
+
+        $Transportista.Transportista.create(TransportistaModal[0], { token: Cookies.get("token") }).done(function (data) {
+            LimpiarModalTransportista();
+            if (Error(data)) {
+                window.parent.ObtenerTransportista();
+                cerrarVentanaModal();
+            };
+        });
+    };
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+    }
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Transportista"] = $TransportistaModel;
+    CargaInicial();
+    $("#language").data("kendoDropDownList").select(_languageOrder[window.parent.$("#language").data("kendoDropDownList").value()]);
+    $("#language").data("kendoDropDownList").trigger("change");
+    applySecurityPolicy(false);
+    }
+    @section JavascriptDocumentReadyHomeCookie {
+    //Cookies.set("home", true, { path: '/' });
+    //Cookies.set("navegacion", "30", { path: '/' });
+    }
+   
+</script>

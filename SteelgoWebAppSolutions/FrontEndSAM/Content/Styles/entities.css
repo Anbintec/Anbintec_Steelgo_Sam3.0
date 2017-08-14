@@ -1,0 +1,1912 @@
+﻿/**********************************************************************************
+    File name: entities.css
+    Description: CSS rules for bussiness related UI entities.
+
+    Index: 
+
+    01  $_login
+    02  $_header
+    03  $_search-bar
+    04  $_logged-user
+    05  $_notifications
+    06  $_sidebar
+    07  $_icons
+    08  $_content-container
+    09  $_breadcrumb
+    10  $_alert-container
+    11  $_filesTable
+    12  $_addedSection
+    13  $_modal
+    14  $_branchCut
+    15  $_formNav
+    15  $_departurePermit
+    16  $_folioGraphs
+    17  $_formatTag
+    18  $_menuMobile
+    19  $_quick-filters
+
+    Color Palette: Look at site.css
+
+**********************************************************************************/
+
+/**********************************************************************************
+ Class name:    $_login
+ Description:   Customize the login section.
+**********************************************************************************/
+.login {
+    position: fixed;
+    width: 510px;
+    height: 374px;
+    text-align: center;
+    margin: auto;
+    padding: 0 15px;
+    top: -71px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+    .login img {
+        margin-left: -13px;
+        margin-bottom: 47px;
+    }
+
+    .login form {
+    }
+
+        .login form div {
+            text-align: left;
+            border: 1px solid #CCCCCC;
+            border-top: none;
+            padding: 14px 24px 17px;
+            text-transform: uppercase;
+            font-size: 10px;
+            white-space: nowrap;
+        }
+
+            .login form div.form-title {
+                padding: 10px 13px 10px;
+                border: 1px solid #1C4070;
+                background-color: #1C4070;
+                color: #FFFFFF;
+                letter-spacing: 1px;
+                font-size: 13px;
+            }
+
+            .login form div label.loginLabel {
+                display: inline-block;
+                color: rgba(065, 065, 065, 0.7);
+                font-size: 10px;
+                letter-spacing: 1px;
+                font-weight: 900;
+                width: 80px;
+                margin-right: 41px;
+            }
+
+        .login form input[type="text"],
+        .login form input[type="password"] {
+            width: 70%;
+            color: #202020;
+            background-color: transparent;
+            font-size: 16px;
+            letter-spacing: 0.6px;
+            vertical-align: baseline;
+            outline: none;
+        }
+
+        .login form input[type="submit"] {
+            display: block;
+            width: 180px;
+            margin: 31px auto 10px;
+        }
+
+        .login form a span {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.1px;
+        }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_header
+ Description:   Customize header tag.
+**********************************************************************************/
+header a.logo {
+    background-image: url("/Content/images/SAMC_Logo.png");
+    background-size: auto;
+    padding: 12px 60px;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 7px;
+    left: 1px;
+}
+
+header .menu > div {
+    display: inline-block;
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_search-bar
+ Description:   Customize search-bar section in header.
+**********************************************************************************/
+.search-bar {
+    margin-right: 24px;
+    max-width: 260px;
+    width: 260px;
+    max-height: 32px;
+    height: 32px;
+    overflow: hidden;
+    float: left;
+}
+
+    .search-bar .input-group input,
+    .search-bar .input-group span {
+        max-height: 32px;
+        height: 32px;
+    }
+
+    .search-bar .input-group input {
+        border-color: #E1DDDC;
+        border-radius: 0;
+        border-right: none;
+        font-size: 11px;
+        padding: 6px 10px;
+        letter-spacing: 0.1px;
+        box-shadow: none;
+    }
+
+    .search-bar .input-group span button {
+        height: 32px;
+        width: 32px;
+        border-radius: 0;
+        border-color: #2A5178;
+        z-index: 2;
+    }
+
+        .search-bar .input-group span button.spyglass {
+            margin: 0;
+            background-image: url("/Content/images/SAMC_MenuIcon_01.png");
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_logged-user
+ Description:   Customize username section in header.
+**********************************************************************************/
+.logged-user {
+}
+
+    .logged-user .btn-group .dropdown-toggle {
+        padding: 4px 3px 4px 10px;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+        min-width: 111px;
+    }
+
+    .logged-user .btn-group.open .dropdown-toggle {
+        box-shadow: none;
+    }
+
+    .logged-user .btn-group a img {
+        position: relative;
+        top: -2px;
+    }
+
+    .logged-user .btn-group a span.name {
+        color: #1C4070;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.75px;
+    }
+
+    .logged-user .btn-group a span.caret {
+        color: #1C4070;
+        margin-bottom: 1px;
+    }
+
+    .logged-user .btn-group ul {
+        width: 100%;
+        text-align: center;
+        border-radius: 0;
+    }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_notifications
+ Description:   Customize notifications section in header.
+**********************************************************************************/
+.notifications {
+    margin-right: 16px;
+    position: relative;
+}
+
+    .notifications img {
+        position: relative;
+        top: -2px;
+    }
+
+    .notifications .count {
+        color: #FFFFFF;
+        background: #e60404 !important;
+        position: absolute;
+        top: -10px;
+        left: 46.6%;
+        padding: 0px 5px;
+        border: 2px solid #FFFFFF;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        line-height: 15px;
+        text-align: center;
+        font-size: 10px;
+        font-weight: 600;
+    }
+
+    .notifications .notification-menu {
+        border-radius: 3px;
+        top: 55px;
+        right: -202px;
+        left: inherit !important;
+        width: 420px;
+        max-height: 525px;
+        overflow: hidden;
+    }
+
+        .notifications .notification-menu .message-frame {
+            overflow-y: auto;
+            max-height: 475px;
+        }
+
+    .notifications .peak {
+        position: absolute;
+        top: 41px;
+        right: -1px;
+        z-index: 1001;
+    }
+
+    .notifications .notification-menu .notifications-header {
+        background-color: #F8F8F8;
+        border-bottom: 1px solid #CCCCCC;
+        text-align: center;
+        font-size: 14px;
+        padding: 9px 0;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        color: #000000;
+    }
+
+        .notifications .notification-menu .notifications-header .counterTag {
+            margin-left: 6px;
+        }
+
+        .notifications .notification-menu .notifications-header .message-header {
+            text-align: left;
+            text-transform: capitalize;
+            padding: 4.5px 20px 4.5px 18px;
+        }
+
+            .notifications .notification-menu .notifications-header .message-header .backIcon {
+                margin-right: 7px;
+                z-index: 3;
+                cursor: pointer;
+            }
+
+                .notifications .notification-menu .notifications-header .message-header .backIcon,
+                .notifications .notification-menu .notifications-header .message-header .backIcon + span {
+                    float: left;
+                }
+
+            .notifications .notification-menu .notifications-header .message-header .deleteMessage {
+                margin-left: 13px;
+                z-index: 3;
+            }
+
+    .notifications .notification-menu li {
+        padding: 16px 20px;
+        border-bottom: 1px solid #CCCCCC;
+        max-height: 97px;
+        font-size: 14px;
+    }
+
+        .notifications .notification-menu li:hover {
+            background-color: rgba(048, 094, 142, 0.2);
+        }
+
+        .notifications .notification-menu li.messageBody {
+            padding: 17px 17px 16px;
+            border-bottom: none;
+            max-height: none;
+        }
+
+            .notifications .notification-menu li.messageBody span,
+            .notifications .notification-menu li.messageBody a {
+                padding: 0;
+                white-space: normal;
+                border: none;
+                max-height: none;
+            }
+
+        .notifications .notification-menu li a .notification-container .sender-info {
+            padding-bottom: 12px;
+        }
+
+        .notifications .notification-menu li a .notification-container .senderName {
+            padding-left: 20px;
+            background-image: url("/Content/images/SC_newmessage_Icon.png");
+            background-size: auto;
+            background-position: left center;
+            background-repeat: no-repeat;
+        }
+
+        .notifications .notification-menu li a.read .notification-container .senderName {
+            background-image: url("/Content/images/SC_read_Icon.png");
+        }
+
+    .notifications .notification-menu .messageDate,
+    .notifications .notification-menu .deleteMessage {
+        float: right;
+    }
+
+    .notifications .notification-menu li a .notification-container .deleteMessage {
+        margin-left: 14px;
+        position: relative;
+        z-index: 5;
+    }
+
+    .notifications .notification-menu li a .notification-container .message-info {
+        white-space: normal;
+        color: #333333;
+    }
+
+    .notifications .notification-menu .notifications-footer {
+        text-align: center;
+        padding: 11px 10px;
+    }
+
+        .notifications .notification-menu .notifications-footer a {
+            width: 100%;
+            margin: 0;
+            border-radius: 3px;
+        }
+
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_sidebar
+ Description:   Customize header tag.
+**********************************************************************************/
+.sidebar {
+    background-color: #305E8E;
+    border-right: 1px solid #234568;
+    border-top: 1px solid #234568;
+    position: absolute;
+    min-height: 100%;
+    height: 100%;
+    display: block;
+    min-width: 12.5%;
+    width: 12.5%;
+    padding: 0;
+    overflow: visible;
+    z-index: 2;
+}
+
+    .sidebar.minified {
+        min-width: 58px;
+        width: 58px;
+        z-index: 10;
+    }
+
+    .sidebar .main-nav ul.main-menu {
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+
+    /*.sidebar .main-nav ul > li {
+        white-space: nowrap;
+    }*/
+
+    .sidebar .main-nav ul > li a {
+        background-color: #305E8E;
+        color: #FFFFFF;
+        font-size: 13px;
+        display: block;
+        height: auto;
+        position: relative;
+        padding: 18px 10px 18px 20px;
+        border-bottom: 1px solid #234568;
+        text-decoration: none;
+        list-style: none;
+        overflow: visible;
+    }
+
+    .sidebar .main-nav ul > li div.quicklinks {
+        background-color: #FFFFFF;
+        border: none;
+        border-bottom: 1px solid #CECECE;
+        color: #DF6600;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        padding: 18px 10px 17px 19px;
+    }
+
+    .sidebar .main-nav ul.main-menu > li.active a {
+        background-color: #1C4070;
+        border-color: #152F52;
+        font-weight: 600;
+        z-index: 2;
+    }
+
+    .sidebar .main-nav ul.main-menu > li.active .icn.arrow.down {
+        background-image: url("/Content/images/SAMC_MenuDropdownArrowB.png");
+    }
+
+    .sidebar .main-nav ul.main-menu > li .icn {
+        width: 18px;
+        height: 20px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: center;
+        vertical-align: bottom;
+    }
+
+        .sidebar .main-nav ul.main-menu > li .icn.right {
+            float: right;
+        }
+
+    .sidebar .main-nav ul.main-menu > li a > span {
+        margin-left: 5px;
+        letter-spacing: 0.2px;
+    }
+
+    .sidebar.minified .main-nav ul.main-menu > li span,
+    .sidebar.minified .main-nav ul.main-menu > li .icn.right {
+        display: none;
+    }
+
+    .sidebar ul.sub-menu.open, .sidebar ul.sub-menu2.open {
+        display: block !important;
+    }
+
+    .sidebar ul li span.active {
+        font-weight: 600 !important;
+    }
+
+    .sidebar .main-nav ul.main-menu li ul.sub-menu {
+        display: none;
+        border-bottom: 1px solid #152F52;
+        background: #1A375D; /* Old browsers */
+        background: -moz-linear-gradient(top, #1A375D 0%, #1D4579 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1A375D), color-stop(100%,#1D4579)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #1A375D 0%,#1D4579 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, #1A375D 0%,#1D4579 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, #1A375D 0%,#1D4579 100%); /* IE10+ */
+        background: linear-gradient(to bottom, #1A375D 0%,#1D4579 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1A375D', endColorstr='#1D4579',GradientType=0 ); /* IE6-8 */
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .sidebar .main-nav ul.main-menu li ul.sub-menu:empty,
+        .sidebar .main-nav ul.main-menu li ul.sub-menu li ul.sub-menu2:empty {
+            display: none!important;
+        }
+
+        .sidebar .main-nav ul.main-menu li ul.sub-menu > li {
+            padding: 11.5px 12px 11.5px;
+        }
+
+            .sidebar .main-nav ul.main-menu li ul.sub-menu > li.active {
+                background-color: #FFFFFF;
+            }
+
+                .sidebar .main-nav ul.main-menu li ul.sub-menu > li.active.expand {
+                    margin-right: -1px;
+                }
+
+            .sidebar .main-nav ul.main-menu li ul.sub-menu > li a {
+                background: none;
+                border: none;
+                padding: 0 0 0 15px;
+                height: auto;
+            }
+
+                .sidebar .main-nav ul.main-menu li ul.sub-menu > li a span {
+                    margin-left: 0;
+                    letter-spacing: 0.5px;
+                    font-weight: 100;
+                }
+
+            .sidebar .main-nav ul.main-menu li ul.sub-menu > li.active a span {
+                color: #152F52;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: 0.6px;
+            }
+
+        .sidebar .main-nav ul.main-menu li ul.sub-menu li ul.sub-menu2 {
+            z-index: 0;
+            display: none;
+            list-style: none;
+            position: absolute;
+            right: -100%;
+            top: 0;
+            background: #FFFFFF;
+            margin: 0;
+            padding: 23px 15px 0 23px;
+            height: 100%;
+            width: 100%;
+            border: 1px solid #CCCCCC;
+            border-left: 1px solid transparent;
+            border-top: 0;
+            -moz-box-shadow: 1px 1px 1px #CCCCCC; /* FF3.5+ */
+            -webkit-box-shadow: 1px 1px 1px #CCCCCC; /* Saf3.0+, Chrome */
+            box-shadow: 1px 1px 1px #CCCCCC; /* Opera 10.5, IE9, Chrome 10+ */
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+            .sidebar .main-nav ul.main-menu li ul.sub-menu li ul.sub-menu2 > li {
+                margin-bottom: 11px;
+            }
+
+                .sidebar .main-nav ul.main-menu li ul.sub-menu li ul.sub-menu2 > li:last-child {
+                    margin-bottom: 0;
+                }
+
+            .sidebar .main-nav ul.main-menu li ul.sub-menu li ul.sub-menu2 li span {
+                margin: 0;
+                letter-spacing: 0.3px;
+                font-size: 13px;
+            }
+
+    .sidebar .main-nav ul.main-menu li ul.sub-menu2 li ul.sub-menu3 {
+        list-style: none;
+        margin: 0;
+        padding: 12px 0;
+    }
+
+        .sidebar .main-nav ul.main-menu li ul.sub-menu2 li ul.sub-menu3:empty {
+            padding-top: 0;
+        }
+
+        .sidebar .main-nav ul.main-menu li ul.sub-menu2 li ul.sub-menu3 > li {
+            margin-bottom: 6px;
+        }
+
+            .sidebar .main-nav ul.main-menu li ul.sub-menu2 li ul.sub-menu3 > li:last-child {
+                margin-bottom: 0;
+            }
+
+            .sidebar .main-nav ul.main-menu li ul.sub-menu2 li ul.sub-menu3 > li a span {
+                margin: 0;
+                color: #305E8E;
+                font-weight: 100;
+                letter-spacing: 0px;
+            }
+
+    .sidebar .main-nav ul.main-menu li.shortcut {
+        margin-right: -1px;
+        border-right: 1px solid #B4B4B4;
+    }
+
+        .sidebar .main-nav ul.main-menu li.shortcut.open {
+            margin-right: 0;
+        }
+
+        .sidebar .main-nav ul.main-menu li.shortcut ul.sub-menu {
+            background: #FFFFFF;
+            display: block;
+            border: none;
+            padding: 0 0 15px;
+        }
+
+    .sidebar.minified .main-nav ul.main-menu li.shortcut ul.sub-menu {
+        display: none !important;
+    }
+
+    .sidebar .main-nav ul.main-menu li.shortcut ul.sub-menu > li {
+        padding: 11.5px 9px 0;
+        margin-bottom: -5px;
+    }
+
+        .sidebar .main-nav ul.main-menu li.shortcut ul.sub-menu > li a {
+            color: #305E8D;
+        }
+
+            .sidebar .main-nav ul.main-menu li.shortcut ul.sub-menu > li a > span {
+                letter-spacing: .3px;
+                font-weight: 600;
+            }
+
+    .sidebar .nav-footer {
+        background: #305E8E;
+        display: block;
+        padding: 21px 12px 21px 20px;
+    }
+
+        .sidebar .nav-footer .icn.right {
+            height: 39px;
+            width: 39px;
+            float: right;
+            position: relative;
+            top: -8px;
+            border: 1px solid #152F52;
+            background-repeat: no-repeat;
+            background-position: center;
+            -moz-box-shadow: 0px 0px 5px #152F52; /* FF3.5+ */
+            -webkit-box-shadow: 0px 0px 5px #152F52; /* Saf3.0+, Chrome */
+            box-shadow: 0px 0px 5px #152F52; /* Opera 10.5, IE9, Chrome 10+ */
+        }
+
+        .sidebar .nav-footer ul {
+            list-style: none;
+            margin: 0;
+            margin-top: 12px;
+            padding: 0;
+        }
+
+            .sidebar .nav-footer ul li a {
+                color: #FFFFFF;
+                font-size: 10px;
+                letter-spacing: .5px;
+            }
+
+    .sidebar.minified .nav-footer img,
+    .sidebar.minified .nav-footer ul {
+        display: none;
+    }
+
+    .sidebar.minified .nav-footer .icn.right {
+        top: -10px;
+        left: 3px;
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+    }
+/*********************************************************************************
+
+
+/**********************************************************************************
+ Class name:    $_icons
+ Description:   Call the icons for the sidebar.
+**********************************************************************************/
+.dashboard {
+    background-image: url("/Content/images/SAMC_DashboardIcon_01.png");
+}
+
+.transactions {
+    background-image: url("/Content/images/SAMC_DashboardIcon_02.png");
+}
+
+.catalog {
+    background-image: url("/Content/images/SAMC_DashboardIcon_03.png");
+}
+
+.report {
+    background-image: url("/Content/images/SAMC_DashboardIcon_04.png");
+}
+
+.documents {
+    background-image: url("/Content/images/SAMC_DashboardIcon_05.png");
+}
+
+.config {
+    background-image: url("/Content/images/SAMC_DashboardIcon_06.png");
+}
+
+.support {
+    background-image: url("/Content/images/SAMC_DashboardIcon_07.png");
+}
+
+.kpi {
+    background-image: url("/Content/images/SAMC_DashboardIcon_08.png");
+}
+
+.comm {
+    background-image: url("/Content/images/SAMC_DashboardIcon_09.png");
+}
+
+.links {
+    background-image: url("/Content/images/SAMC_DashboardIcon_10.png");
+    margin-right: 6px;
+}
+
+.gear {
+    background-image: url("/Content/images/SAMC_DashboardIcon_11.png");
+}
+
+.minify {
+    background-image: url("/Content/images/SAMC_DashboardIcon_12.png");
+}
+
+.Reporting {
+    background-image: url("/Content/images/SAMC_DashboardIcon_14.png");
+}
+
+.arrow {
+    background-image: url("/Content/images/SAMC_MenuDropdownArrowA.png");
+}
+
+.subOne {
+    position: absolute;
+    top: -14px;
+    left: 20px;
+    background-image: url("/Content/images/SAMC_DashboardMenu_Icon_20.png");
+}
+
+.subTwo {
+    position: absolute;
+    top: 30px;
+    left: -12.8px;
+    background-image: url("/Content/images/SAMC_DashboardMenu_Icon_21.png");
+}
+
+.add {
+    background-image: url("/Content/images/SAMC_Add.png");
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_content-container
+ Description:   Customize container for the main content.
+**********************************************************************************/
+.content-container {
+    background: #FFFFFF;
+    min-height: 100%;
+    height: auto;
+    max-width: 87.5%;
+    width: 87.5%;
+    float: right;
+}
+
+    .content-container.topbar {
+        border-top: 1px solid #BBBBBB;
+    }
+
+    .content-container.expanded {
+        max-width: 100%;
+        width: 100%;
+        /*margin-left: -58px;*/
+        padding-left: 73px;
+    }
+
+    .content-container.printView {
+        max-width: 100%;
+        width: 100%;
+        padding-left: 15px;
+        margin: 0;
+    }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_breadcrumb
+ Description:   Customize breadcrumbs section for the main content.
+**********************************************************************************/
+.breadcrumb {
+    background-color: #F1F1F1;
+    background-image: url("/Content/images/SAMC_HeaderBanner.jpg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: auto;
+    border-bottom: 1px solid #D0D0D0;
+    border-radius: 0;
+    height: auto;
+    max-height: 79px;
+    padding: 31px 30px;
+    margin-bottom: 25px;
+}
+
+    .breadcrumb li {
+        font-weight: 600;
+        letter-spacing: 0.4px;
+        color: #1A3F70;
+    }
+
+        .breadcrumb li.active a {
+            color: #333333;
+            font-weight: 100;
+        }
+
+    .breadcrumb > li + li:before {
+        padding: 0 4px;
+        color: #1A3F70;
+        content: ">";
+    }
+
+    .breadcrumb > li + li.active:before {
+        padding: 0 6px 0 4px;
+    }
+
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_alert-container
+ Description:   Customize warning/error message.
+**********************************************************************************/
+.alert-container {
+    display: none;
+}
+
+    .alert-container.active {
+        display: block;
+    }
+
+.message {
+    margin-left: 15px;
+    margin-bottom: 20px;
+    padding: 7px 0 7px 49px;
+    height: 34px;
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+    .message.success {
+        color: #305E8D;
+        background-image: url("/Content/images/SAMC_Error_Icon_B.png");
+    }
+
+    .message.warning {
+        color: #EC8B00;
+        background-image: url("/Content/images/SAMC_Error_Icon_C.png");
+    }
+
+    .message.error {
+        color: #EB4D50;
+        background-image: url("/Content/images/SAMC_Error_Icon_A.png");
+    }
+
+#window .message {
+    margin-left: 0;
+    margin-bottom: 10px;
+    height: 18px;
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_filesTable
+ Description:   Customize a file table section.
+**********************************************************************************/
+.filesTable {
+    border: 1px solid #CCCCCC;
+}
+
+    .filesTable thead {
+        background-color: #EEEEEE;
+    }
+
+        .filesTable thead td {
+            padding: 12px 15px 6px;
+        }
+
+            .filesTable thead td label {
+                font-size: 9.5px;
+            }
+
+    .filesTable tbody tr:nth-child(even) {
+        background-color: #F5F5F5;
+    }
+
+    .filesTable tbody tr:hover {
+        background-color: #FCEED9;
+    }
+
+    .filesTable td {
+        padding: 12px 14px 8px;
+        border-right: 1px solid #CCCCCC;
+        border-bottom: 1px solid #CCCCCC;
+        font-weight: 600;
+        font-size: 12.5px;
+    }
+
+        .filesTable td a .delete {
+            padding: 0 30px;
+            background-color: transparent;
+            background-image: url("/Content/images/SAMC_delete.png");
+            background-size: auto;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+            .filesTable td a .delete.disable {
+                background-image: url("/Content/images/Delete_Grey.png");
+            }
+
+    .filesTable input[type=checkbox] {
+        height: auto;
+        min-height: auto;
+        width: auto!important;
+    }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_addedSection
+ Description:   Customize section added to a page.
+**********************************************************************************/
+.addedSection {
+    margin: 3px -15px 32px;
+    padding-top: 31px;
+    padding-bottom: 5px;
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+    background-color: #F8F8F8;
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_modal
+ Description:   Customize site modals.
+**********************************************************************************/
+.k-window .k-window-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 2px 10px;
+}
+
+#window {
+    overflow: hidden;
+}
+
+    #window input.general-input {
+        box-sizing: border-box;
+        height: 40px;
+        min-height: 40px;
+        color: #1B3F70;
+        border: 1px solid #CCCCCC;
+        border-radius: 0;
+        font-size: 14px;
+        padding: 0 5px;
+    }
+
+        #window input.general-input:focus {
+            border-color: #4486CB;
+            -moz-box-shadow: 0px 0px 3px #4486CB; /* FF3.5+ */
+            -webkit-box-shadow: 0px 0px 3px #4486CB; /* Saf3.0+, Chrome */
+            box-shadow: 0px 0px 3px #4486CB; /* Opera 10.5, IE9, Chrome 10+ */
+        }
+
+    #window input[type="checkbox"] {
+        width: auto;
+        display: inline-block;
+        min-height: 13px;
+        height: auto;
+        position: relative;
+        top: 3px;
+        margin-left: 10px;
+    }
+
+    #window h2 label {
+        font-size: 13px;
+    }
+
+    #window .btn {
+        margin-top: 0;
+        //margin-bottom: 22px;
+        //width: 220px;
+        display: inline-block;
+        letter-spacing: 0.7px;
+        font-size: 15px;
+    }
+
+    #window > div {
+        padding: 9px 6px 0;
+    }
+
+    #window .buttonSave,
+    .popup .buttonSave {
+        text-align: center;
+    }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_divLinkAutorizar
+ Description:   Customize a specific link.
+**********************************************************************************/
+#divLinkAutorizar {
+    padding: 9px 0;
+    font-size: 16px;
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_branchCut
+ Description:   Customize a section divider page.
+**********************************************************************************/
+.branchCut {
+    margin: 17px 0px 21px;
+    border-top: 1px solid #CCCCCC;
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_formNav
+ Description:   Customize site form format.
+**********************************************************************************/
+.formNav {
+    margin: -5px 0px 33px;
+    padding: 0px 0 20px;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+    .formNav.filtersFields {
+        margin: 2px 0px 35px;
+        padding: 0px 0 15px;
+    }
+
+        .formNav.filtersFields .button-section {
+            margin-top: 23px;
+            padding-right: 7px;
+        }
+
+        .formNav.filtersFields .longButton {
+            max-width: 220px;
+        }
+
+        .formNav.filtersFields .extralongButton {
+            max-width: 282px;
+        }
+
+            .formNav.filtersFields .longButton .button-section,
+            .formNav.filtersFields .extralongButton .button-section {
+                padding-right: 0px;
+            }
+
+        .formNav.filtersFields .filter-section .row > div {
+            margin-bottom: 15px;
+        }
+
+    .formNav .btn, .formNav .btn-group {
+        margin-top: 0px;
+        margin-right: 16px;
+        box-shadow: 0px 2px 2px #CCCCCC;
+    }
+
+        .formNav .btn-group .btn {
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .formNav .btn-group .btn-yellow.dropdown-toggle {
+            border-left: 1px solid #C56E00;
+        }
+
+    .formNav .button-section {
+        display: inline-block;
+        margin-right: 24px;
+        padding-right: 15px;
+        border-right: 1px solid #DCDCDC;
+    }
+
+        .formNav .button-section.last-button {
+            border-right: none;
+            margin-right: 0;
+            padding-right: 0;
+        }
+
+        .formNav .button-section.left {
+            border-right: none;
+            border-left: 1px solid #DCDCDC;
+            margin-right: 0;
+            padding-right: 0;
+            padding-left: 15px;
+        }
+
+    .formNav .dropdown {
+        display: inline-block;
+    }
+
+    .formNav .save-group #Guardar {
+        min-width: 110px;
+        text-align: left;
+    }
+
+    .formNav .save-group #Editar,
+    .formNav .save-group #GenerarPaseSalida,
+    .formNav .save-group #ImprimirPaseSalida,
+    .formNav .save-group #GuardarICS {
+        border-radius: 3px;
+    }
+
+    .formNav .save-group.open button {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .formNav .save-group .dropdown-menu > li > a:hover,
+    .formNav .save-group .dropdown-menu > li > a:focus {
+        background-color: #FCEED9;
+    }
+
+    .formNav .action-group {
+        margin-right: 16px;
+    }
+
+        .formNav .action-group #Acciones {
+            min-width: 148px;
+            text-align: right;
+            margin-right: 0px;
+            padding-right: 13px;
+        }
+
+            .formNav .action-group #Acciones > span:first-child {
+                float: left;
+            }
+
+    .formNav .caretBlue {
+        display: inline-block;
+        background: none;
+        background-image: url("/Content/images/SAMC_DropdownArrow.png");
+        background-repeat: no-repeat;
+        background-position: 1px 1px;
+        background-size: 11px 6px;
+        vertical-align: middle;
+        height: 10px;
+        width: 12px;
+    }
+
+    .formNav .caretWhite {
+        display: inline-block;
+        background: none;
+        background-image: url("/Content/images/Dropdown_Arrow.png");
+        background-repeat: no-repeat;
+        background-position: center -1px;
+        background-size: auto;
+        vertical-align: middle;
+        height: 10px;
+        width: 12px;
+    }
+
+    .formNav .dropdown.open .caretBlue,
+    .formNav .btn-group.open .caretWhite {
+        -moz-transform: scaleY(-1);
+        -o-transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        filter: FlipV;
+        -ms-filter: "FlipV";
+    }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_departurePermit
+ Description:   Customize departure permit format.
+**********************************************************************************/
+/*@media print{@page {size: landscape; margin: 10px 1in 0}}*/
+
+.departurePermit {
+    max-width: 790px;
+    margin: auto 10px;
+}
+
+    .departurePermit .header {
+        text-align: center;
+        padding: 21px 0 15px;
+    }
+
+        .departurePermit .header .title {
+            display: block;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0px;
+            padding-left: 29px;
+            margin-bottom: 18px;
+        }
+
+        .departurePermit .header .projectName {
+            text-align: left;
+            padding-left: 63px;
+        }
+
+            .departurePermit .header .projectName * {
+                display: inline-block;
+                width: auto;
+                font-size: 11px;
+                letter-spacing: -0.2px;
+            }
+
+            .departurePermit .header .projectName input {
+                border: none;
+                border-bottom: 1px solid black;
+                margin: 0px 0px 0 -3px;
+                padding-bottom: 0px;
+                min-width: 79.5%;
+            }
+
+    .departurePermit img {
+        float: right;
+        margin-top: -16px;
+        margin-right: 6px;
+    }
+
+        .departurePermit img.logo {
+            height: auto;
+            width: 167px;
+        }
+
+    .departurePermit .departureTable,
+    .departurePermit .departureTable table {
+        width: 100%;
+        font-size: 12px;
+    }
+
+        .departurePermit .departureTable * {
+            font-weight: normal;
+            border: none;
+        }
+
+        .departurePermit .departureTable th,
+        .departurePermit .departureTable thead td {
+            background-color: #CCCCCC !important;
+            border: 1px solid #000;
+            border-right: none;
+            padding: 7px 0px 3px;
+            text-align: center;
+        }
+
+        .departurePermit .departureTable > thead th:first-child {
+            width: 14.5%;
+        }
+
+        .departurePermit .departureTable > thead th:nth-child(2) {
+            width: 45.3%;
+        }
+
+        .departurePermit .departureTable > thead th:last-child {
+            border-right: 1px solid #000;
+        }
+
+        .departurePermit .departureTable > tbody > tr:first-child {
+            padding: 9px 0;
+            height: 35px;
+        }
+
+        .departurePermit .departureTable > tbody > tr > td {
+            text-align: center;
+            border-left: 1px solid #000;
+            border-bottom: 1px solid #000;
+        }
+
+            .departurePermit .departureTable > tbody > tr > td:last-child {
+                border-right: 1px solid #000;
+            }
+
+        .departurePermit .departureTable table thead th {
+            border: 0;
+            border-bottom: 1px solid #000;
+            padding: 0;
+        }
+
+            .departurePermit .departureTable table thead th:nth-child(2),
+            .departurePermit .departureTable table tbody td:nth-child(2) {
+                border-left: 1px solid #000;
+            }
+
+        .departurePermit .departureTable table tbody td {
+            padding: 6px 0 3px 7px;
+            text-align: right;
+        }
+
+        .departurePermit .departureTable tbody td:last-of-type table tbody td {
+            text-align: left;
+        }
+
+        .departurePermit .departureTable table tbody td * {
+            width: auto;
+            display: inline-block;
+        }
+
+        .departurePermit .departureTable table tbody td span {
+            border-bottom: 1px solid #000;
+            float: right;
+            width: 44%;
+            margin-top: -2px;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+            .departurePermit .departureTable table tbody td span.incidenceNumber {
+                width: 64%;
+                text-align: left;
+                margin-top: 2px;
+            }
+
+                .departurePermit .departureTable table tbody td span.incidenceNumber:after {
+                    content: "* se anexa copia";
+                    position: relative;
+                    top: 19px;
+                    left: -54px;
+                }
+
+        .departurePermit .departureTable tbody td:last-child table {
+            margin-top: -16px;
+        }
+
+            .departurePermit .departureTable tbody td:last-child table tbody input {
+                margin-right: 8px;
+            }
+
+    .departurePermit .iconDoc {
+        max-width: 18%;
+        height: 18.5px;
+        background-repeat: no-repeat !important;
+        background-position: center 2px !important;
+    }
+
+    .departurePermit .true {
+        background-image: url("/Content/images/SAMC_Checkmark.png") !important;
+    }
+
+    .departurePermit .false {
+        background-image: url("/Content/images/SAMC_Delete.png") !important;
+    }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_folioGraphs
+ Description:   Customize canvas section on dashboard.
+**********************************************************************************/
+.folioGraphs canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+.folioGraphs .canvas-frame {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 17px 0 12px;
+    background-color: #FFFFFF;
+}
+
+.folioGraphs .form-group:nth-last-of-type(odd) .canvas-frame {
+    background-color: #F1F1F1;
+}
+
+.folioGraphs .percentData {
+    background-color: #FFFFFF;
+    border-left: 1px solid #CCCCCC;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    margin: -17px 0 -12px -15px;
+    padding: 57.77px 46px 9.77px;
+}
+
+    .folioGraphs .percentData > div {
+        font-size: 15px;
+        text-transform: uppercase;
+        color: #000000;
+        margin-bottom: 49px;
+    }
+
+    .folioGraphs .percentData .percentLabel {
+        padding: 6.5px 6.5px;
+        border-radius: 3px;
+        font-weight: 600;
+        color: #FFFFFF;
+    }
+
+    .folioGraphs .percentData #spanPorcentajeCompletos {
+        background-color: #305E8E;
+    }
+
+    .folioGraphs .percentData #spanPorcentajeSinAutorizacion {
+        background-color: #234568;
+    }
+
+    .folioGraphs .percentData #spanPorcentajeSinPermiso {
+        background-color: #225090;
+    }
+
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_formatTag
+ Description:   Customize product tags format for printing.
+**********************************************************************************/
+@media print {
+    .no-print {
+        display: none;
+    }
+}
+
+.formatTag .tags-container {
+    margin: 10px 20px;
+}
+
+    .formatTag .tags-container .tag-group {
+        margin: 0 0 20px 0;
+    }
+
+        .formatTag .tags-container .tag-group .inner-tag {
+            display: inline-block;
+            width: auto;
+            padding: 10px;
+        }
+
+    .formatTag .tags-container img {
+        margin-top: 10px;
+        /*width: 333px;*/
+        height: auto;
+    }
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_menuMobile
+ Description:   Customize mobile menu button.
+**********************************************************************************/
+.menuMobile {
+    position: relative;
+    top: 4px;
+    float: left;
+    background: #FFFFFF url("/Content/images/mobileMenu.png");
+    background-size: cover;
+    width: 25.5px;
+    height: 23px;
+}
+/**********************************************************************************/
+
+
+/**********************************************************************************
+ Class name:    $_quick-filters
+ Description:   Customize mobile menu button.
+**********************************************************************************/
+.quick-filters {
+    display: none;
+}
+
+    .quick-filters > div {
+        height: auto;
+        overflow: hidden;
+        max-height: 56px;
+        white-space: nowrap;
+    }
+/**********************************************************************************/
+
+/**********************************************************************************
+ Class name:    $_mutationSelectedRow
+ Description:   Gives to the current selected grid row a color when navigating
+**********************************************************************************/
+.mutationSelectedRow {
+    background-color: #FCEED9 !important;
+}
+/**********************************************************************************/
+
+/* Media Queries */
+
+/* xs viewport */
+@media screen and (max-width: 320px) {
+    /*$_notifications*/
+    .notifications .notification-menu {
+        right: -246px!important;
+        width: 320px!important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    /*$_login*/
+    .login {
+        position: relative;
+        width: 100%;
+        max-width: 510px;
+        top: 0%;
+    }
+
+        .login form div {
+            padding: 15px 12px 17px;
+        }
+
+            .login form div label.loginLabel {
+                margin-right: 4px;
+                font-size: 11px;
+                min-width: 95px;
+            }
+
+        .login form input {
+            width: 68% !important;
+        }
+
+        .login img {
+            margin: 0 0 20px 0;
+        }
+
+    /*$_header*/
+    header {
+        max-height: 110px;
+    }
+
+        header .menu {
+            text-align: right;
+        }
+
+    /*$_search-bar*/
+    .search-bar {
+        position: relative;
+        top: -16px;
+        margin: 0;
+        padding-left: 44%;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /*$_notifications*/
+    .notifications {
+        margin-right: 10px;
+    }
+
+        .notifications .notification-menu {
+            right: -243px;
+            width: 369px;
+        }
+
+            .notifications .notification-menu li {
+                height: auto;
+                max-height: none;
+            }
+
+    /*$_sidebar*/
+    .sidebar {
+        width: 100%;
+        display: none;
+    }
+
+        .sidebar.open {
+            display: block;
+        }
+
+        .sidebar .main-nav ul.main-menu li ul.sub-menu li ul.sub-menu2 {
+            position: relative;
+            right: 0;
+            box-shadow: none;
+            border: none;
+            padding-top: 8px;
+        }
+
+        .sidebar .main-nav ul.main-menu li ul.sub-menu2 li ul.sub-menu3 > li {
+            margin-bottom: 13px;
+        }
+
+    /*$_content-container*/
+    .content-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+        .content-container.expanded {
+            padding-left: 15px;
+        }
+
+    /*$_breadcrumb*/
+    .breadcrumb {
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        max-height: none;
+    }
+
+        .breadcrumb li {
+            font-size: 13px;
+        }
+
+    /*$_alert-container*/
+    .message {
+        margin-left: 0;
+        margin-bottom: 10px;
+        height: auto;
+    }
+
+    /*$_formNav*/
+    .formNav {
+        margin: 0px 0px 20px;
+        padding: 0px 0 5px;
+    }
+
+        .formNav .button-section,
+        .formNav.filtersFields .button-section {
+            margin: 0;
+            margin-bottom: 15px;
+            border: none;
+            padding: 0;
+        }
+
+            .formNav .button-section.last-button {
+                padding: 0 15px;
+            }
+
+        .formNav .btn, .formNav .btn-group {
+            margin-right: 20px;
+        }
+
+        .formNav.filtersFields .button-section,
+        .formNav.filtersFields .longButton,
+        .formNav.filtersFields .extralongButton {
+            width: 100%;
+            max-width: 100%;
+        }
+
+            .formNav.filtersFields .button-section button {
+                width: 100%;
+                text-align: left;
+                background-position: 97% center!important;
+                margin-right: 0;
+            }
+
+            .formNav.filtersFields .button-section.last-button a {
+                width: 100%;
+                margin: 0;
+            }
+
+    #formOrdenRecepcion .formNav .btn-group,
+    #formOrdenAlmacenaje .formNav .btn-group {
+        margin-bottom: 15px;
+        margin-right: 25%;
+    }
+
+    #frmImpresionDocumental .formNav {
+        padding-bottom: 15px;
+    }
+
+    /*$_modal*/
+    #window {
+        overflow: initial;
+    }
+
+        #window > div {
+            padding: 0;
+        }
+
+        #window .buttonSave,
+        .popup .buttonSave {
+            margin-bottom: 10px;
+        }
+
+    .popup {
+        overflow-y: initial;
+    }
+
+    /*$_filesTable*/
+    .filesTable td {
+        padding: 12px 6px 8px;
+        white-space: normal;
+        text-align: center;
+        max-width: 157px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .filesTable thead td {
+        width: 25%;
+        padding: 12px 15.5px 6px;
+        white-space: nowrap;
+    }
+
+    /*$_addedSection*/
+    .addedSection {
+        margin: 0px 0 15px;
+        padding-top: 15px;
+        padding-bottom: 0px;
+    }
+
+        .addedSection div.form-group > div,
+        .addedSection div > div.form-group {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+    /*$_branchCut*/
+    .branchCut {
+        margin: 12px 0 15px;
+    }
+}
+
+/* sm viewport */
+@media (min-width: 768px) and (max-width: 991px) {
+
+    /*$_search-bar*/
+    .search-bar {
+        max-width: 242px;
+    }
+
+    /*$_notifications*/
+    .notifications .count {
+        left: 50.5%;
+    }
+
+    /*$_addedSection*/
+    .addedSection {
+        margin-top: 15px;
+    }
+
+    /*$_formNav*/
+    .formNav.filtersFields .longButton .button-section,
+    .formNav.filtersFields .extralongButton .button-section {
+        margin-right: 0;
+    }
+
+    .formNav.filtersFields .longButton button,
+    .formNav.filtersFields .extralongButton button {
+        white-space: normal;
+        height: auto;
+        width: 100%;
+        margin: 0;
+    }
+
+    .formNav .button-section {
+        margin: 10px 0;
+    }
+
+    /*$_breadcrumb*/
+    .breadcrumb {
+        padding: 19px 30px;
+    }
+}
+
+/* tablet viewport*/
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    /*$_sidebar*/
+    .sidebar {
+        min-width: 23.5%;
+        width: 23.5%;
+    }
+
+        .sidebar .main-nav ul > li a {
+            padding: 12px 10px 12px 15px;
+        }
+
+        .sidebar.minified .main-nav ul > li a {
+            padding: 12px 10px 12px 10px;
+            text-align: center;
+        }
+
+        .sidebar .main-nav ul.main-menu li ul.sub-menu li ul.sub-menu2 {
+            padding-left: 14px;
+        }
+
+    /*$_content-container*/
+    .content-container {
+        max-width: 76.5%;
+        width: 76.5%;
+    }
+
+    /*$_formNav*/
+    .formNav .btn, .formNav .btn-group,
+    .formNav .action-group {
+        margin-right: 14px;
+    }
+
+    .formNav .button-section {
+        margin-right: 12px;
+        padding-right: 0;
+    }
+
+    .formNav.filtersFields .button-section {
+        border: none;
+    }
+
+    /*$_addedSection*/
+    .addedSection:last-of-type {
+        margin-bottom: 0;
+    }
+
+    /*$_modal*/
+    #window {
+        overflow: initial;
+    }
+
+        #window > div {
+            padding: 0;
+        }
+
+        #window .buttonSave,
+        .popup .buttonSave {
+            margin-bottom: 10px;
+        }
+
+    .popup {
+        overflow-y: initial;
+    }
+}
+
+/* md viewport */
+@media (min-width: 992px) and (max-width: 1024px) {
+}
+
+@media (max-width: 1200px) {
+
+    /*$_formNav*/
+
+    .formNav.filtersFields {
+        padding: 0px 0 15px;
+    }
+
+        .formNav.filtersFields .filter-section .row > div {
+            margin-bottom: 15px;
+        }
+}
+
+/* lg viewport */
+@media (min-width: 1025px) and (max-width: 1279px) {
+
+    /*$_sidebar*/
+    .sidebar {
+        min-width: 18%;
+        width: 18%;
+    }
+
+    /*$_content-container*/
+    .content-container {
+        max-width: 82%;
+        width: 82%;
+    }
+}
+
+@media (min-width: 1200px) {
+}
+
+@media (min-width: 1200px) and (max-width: 1540px) {
+
+    /*$_content-container*/
+    .form .row > div.filterForm .row > div {
+        width: 33.33%;
+    }
+
+    .form > .row .filterStretch,
+    .form > .row > div.filterBtns {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1280px) and (max-width: 1460px) {
+
+    /*$_sidebar*/
+    .sidebar {
+        min-width: 15%;
+        width: 15%;
+    }
+
+    /*$_content-container*/
+    .content-container {
+        max-width: 85%;
+        width: 85%;
+    }
+}
+
+@media (min-width: 1025px) {
+
+    /*$_formNav*/
+    .formNav.filtersFields .row > div.col-lg-1 {
+        min-width: 132px;
+    }
+
+    .formNav.filtersFields > .row > div.col-lg-2 {
+        max-width: 197px;
+    }
+}

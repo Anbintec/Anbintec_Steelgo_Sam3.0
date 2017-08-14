@@ -1,0 +1,631 @@
+﻿@{
+    ViewBag.Title = "Pre-Despacho";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="Predespacho0001"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("DashboardDespachoCorte", "DashboardDespachoCorte")"><span id="Predespacho0023"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("DashboardDespachoCorte", "DashboardDespachoCorte")"><span id="Despacho0025"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("PreDespacho", "PreDespacho")"><span id="Predespacho0002"></span></a>
+    </li>
+}
+
+<div id="formPreDespacho" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section editButtonSection">
+                            <div class="btn-group">
+                                <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow save-group"><span id="Predespacho0003"></span></button>
+                                <button id="Editar" type="button" class="btn btn-yellow editar"><span id="Predespacho0024"></span></button>
+
+                                <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle save-group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                               @* <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle save-group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caretWhite"></span>
+                                </button>*@
+                                <ul class="dropdown-menu creacion">
+                                    <li id="MenuTerminar" style="display: block;"><a id="TerminaryNuevo" href="#"><span id="Predespacho0026"></span></a></li>
+                                </ul>
+                            </div>
+                            <button id="nextStep" type="button" class="btn btn-blue"><span id="Predespacho0025"></span></button>
+                            <a id="Cancelar" href="#" class="btn btn-black"><span id="Predespacho0004"></span></a>
+                        </div>
+                        <div class="button-section">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="Predespacho0005"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="Acciones">
+                                    <li class="listado"><a id="RedirectListado" href="#"><span id="Predespacho0006"></span></a></li>
+                                    @*<li class="incidencia"><a id="IrIncidencia" href="#"><span id="Predespacho0007"></span></a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection disabled"></a>
+                    </div>
+                </div>
+            </div>
+            <div id="editBloq">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+                        <div class="row">
+                            @*<div id="ProyectoDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                <label id="Predespacho0008"></label>
+                                <input id="ProyectoID" />
+                            </div>*@
+                            <div id="SpoolDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                <label id="Predespacho0009"></label>
+                                <input id="SpoolID" />
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                <label id="Predespacho0010"></label>
+                                <div class="row">
+                                    <div id="todosDiv" class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                        <label id="Predespacho0011" class="centered"></label>
+                                        <input id="todos" class="" type="radio" name="radio" value="1">
+                                    </div>
+                                    <div id="vaciosDiv" class=" col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                        <label id="Predespacho0012" class="centered"></label>
+                                        <input id="vacios" class="" type="radio" name="radio" checked value="2" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row listado">
+                    <div class="addedSection clearfix">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div id="grid" class="gridWithInputsStorage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="ChecksAlmacenaje" value="1" />@*1 todos 2 sin localizacion*@
+    </div>
+    <ul id="menu" class="incidencia">
+    <li><span id="ListadoLlegadaMaterial0024"></span></li>
+</ul>
+</div>
+<script>
+
+    @section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "48", { path: '/' });
+    }
+
+     @section JavascriptGlobalVariables {
+    var resultadoJson, NumeroControl = {}, lastEditedCellID = "",
+        Proyecto = {}, x = 1, _PreDespachoID = "-1";
+    var toDelete=[];
+    var _spoolID = getUrlParameter("SpoolID", "-1"),
+        _proyectoID = getUrlParameter("ProyectoID", "-1"),
+        _NumeroControl = getUrlParameter("NumeroControl", "-1").replace(/%20/g, " ");
+
+    var _DashboardDespacho = "@Url.Action("DashboardDespachoCorte", "DashboardDespachoCorte")";
+    var _incidenciasURL = "@Url.Action("Incidencias", "Incidencias")";
+    var _PreDespachoURL = "@Url.Action("PreDespacho", "PreDespacho")";
+
+    var $PreDespachoModel = {
+        listContainer: {
+            create: ".save-group",
+            list: ".listado",
+            detail: ".editar",
+            destroy: ".k-grid-Cancelar",
+            createIncidence: ".incidencia"
+        },
+        properties: {
+            proyecto: {
+                visible: "#ProyectoDiv",
+                editable: "#ProyectoID",
+                required: "#ProyectoID"
+            },
+            spool: {
+                visible: "#SpoolDiv",
+                editable: "#SpoolID",
+                required: "#SpoolID"
+            },
+            todos: {
+                visible: "#todosDiv",
+                editable: "#todos",
+                required: "#todos"
+            },
+            vacios: {
+                visible: "#vaciosDiv",
+                editable: "#vacios",
+                required: "#vacios"
+            }
+        }
+    };
+    }
+
+    @section JavascriptGlobalFunctions {
+    function changeLanguageCall() {
+        var tmp = removeGrid($("#grid"));
+        CargarGridDespacho();
+        $("#grid").data("kendoGrid").dataSource.data(tmp);
+    };
+
+    function CargaInicial() {
+        $("#Editar").hide()
+        $("#nextStep").hide()
+        $("#Guardar").click(function () { Guardar(); });
+        $("#TerminaryNuevo").click(function () { Guardar(true); });
+        $("#Editar").click(function(){ Editar()})
+        $("#Cancelar").click(function () { Cancelar(); });
+        $("#RedirectListado").click(function () { RedirectListado(); });
+        $("#nextStep").on("click",function(e){
+            window.location.href="/Despacho/Despacho?leng="+$("#language").data("kendoDropDownList").value();
+        })
+        $("#IrIncidencia").click(function () { Incidencias(); });
+
+        //$("#ProyectoID").kendoComboBox({
+        //    dataTextField: "Nombre",
+        //    dataValueField: "ProyectoID",
+        //    select: function (e) {
+        //        var dataItem = this.dataItem(e.item.index());
+        //        CargarProyecto(dataItem.ProyectoID, dataItem.Nombre);
+        //    },
+        //    change: function (e) {
+        //        var value = this.value();
+        //        LimpiarCamposProyecto();
+        //        if (!value || this.selectedIndex == -1) {
+        //            Proyecto = {};
+        //            this.value("");
+        //        }
+        //        _PreDespachoID == "-1";
+        //    },
+        //    filter: "contains",
+        //});
+        //ObtenerProyecto();
+
+        $("#SpoolID").kendoAutoComplete({
+            dataTextField: "NumeroControl",
+            dataValueField: "NumeroControlID",
+            autoBind: false,
+            dataSource: {
+                type: "json",
+                minLength: 1,
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: function (op) {
+                            var val = "";
+                            var characterReg = /[`~!$%^&*()#_°¬|+=?;:'",.<>]/gi;
+                            if (op.filter) {
+                                val = op.filter.filters[0].value;
+                                val = val.replace(/-/g, '\\n');
+                            }
+                            if (characterReg.test(val)) {
+                                val = "";
+                            }
+                            return $UrlOrdenTrabajoSpool + "&Busqueda=" + val + "&token=" + Cookies.get("token");
+                        }
+                    },
+                },
+                requestEnd: function (e) {
+                    if (e.response.ReturnCode != undefined) {
+                        if (e.response != undefined && e.response.ReturnCode == 401) {
+                            removeUserSession();
+                        } else {
+                            displayMessage("notificationslabel0009", e.response.ReturnMessage[0], '2');
+                        }
+                    }
+                }
+            },
+            select: function (e) {
+                var dataItem = this.dataItem(e.item.index());
+                CargarNumeroControl(dataItem.NumeroControlID, dataItem.NumeroControl);
+            },
+            change: function (e) {
+                var value = this.value();
+                if (!value || !e.sender.current()) {
+                    messageindexKendoAutocomplete(this, e.sender.current());
+                    NumeroControl = {};
+                    this.value("");
+                }
+                _PreDespachoID == "-1";
+                ObtenerDatosGrid();
+            },
+            filter: "contains",
+        });
+
+        $('input:radio').click(function () {
+            if ($(this).val() === '1') {
+                $("#ChecksAlmacenaje").val(1);
+                FiltrarDatos();
+            } else if ($(this).val() === '2') {
+                $("#ChecksAlmacenaje").val(2);
+                FiltrarDatos();
+            }
+        });
+    };
+
+    function CargaInicialEdicion() {
+        ToEdit();
+        //$("#ProyectoID").data("kendoComboBox").value(_proyectoID);
+        $("#SpoolID").data("kendoAutoComplete").value(_spoolID);
+
+        CargarNumeroControl(_NumeroControl, _spoolID);
+       // CargarProyecto(_proyectoID, $("#ProyectoID").data("kendoComboBox").text());
+        ObtenerDatosGrid();
+    };
+
+    function ToEdit() {
+        $("#dropdown-toggle").hide();
+        $("#Guardar").hide()
+        $("#Editar").show()
+        $("#nextStep").show()
+        $("#editBloq").attr("style","pointer-events:none;")
+        $("#editBloq .row input").each(function(){this.disabled=true});
+    }
+
+    function Editar() {
+        $("#dropdown-toggle").show();
+        $("#Guardar").show()
+        $("#Editar").hide()
+        $("#editBloq").attr("style","")
+        $("#editBloq .row input").each(function(){this.disabled=false});
+    }
+
+    function CargarGridDespacho() {
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            NumeroControlID: { type: "string", editable: false },
+                            NumeroControl: { type: "string", editable: false },
+                            ItemCodeID: { type: "string", editable: false },
+                            ItemCode: { type: "string", editable: false },
+                            Descripcion: { type: "string", editable: false },
+                            //NumeroUnicoID: { type: "string", editable: false },
+                            NumeroUnico: { type: "string", editable: true},
+                            Etiqueta: { type: "string", editable: false},
+                            PreDespachoID: {type: "string", editable: false}
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            },
+            autoHeight: true,
+            sortable: true,
+            scrollable: false,
+            selectable: true,
+            editable: {
+                mode: "incell",
+                confirmation: false
+            },
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+                buttonCount: 2
+            },
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            columns: [
+                { field: "NumeroControl", title: _dictionary.Predespacho0013[$("#language").data("kendoDropDownList").value()] },
+                { field: "ItemCode", title: _dictionary.Predespacho0014[$("#language").data("kendoDropDownList").value()] },
+                { field: "Descripcion", title: _dictionary.Predespacho0015[$("#language").data("kendoDropDownList").value()] },
+                //{ field: "NumeroUnicoID", title: _dictionary.Predespacho0016[$("#language").data("kendoDropDownList").value()], editor: NumeroUnicoAutocomplete },
+                { field: "NumeroUnico", title: _dictionary.Predespacho0016[$("#language").data("kendoDropDownList").value()], editor: NumeroUnicoAutocomplete },
+                { field: "NumeroControlID", title: _dictionary.Predespacho0013[$("#language").data("kendoDropDownList").value()], hidden: true },
+                { field: "ItemCodeID", title: _dictionary.Predespacho0014[$("#language").data("kendoDropDownList").value()], hidden: true },
+                { field: "PreDespachoID", title: _dictionary.Predespacho0014[$("#language").data("kendoDropDownList").value()], hidden: true },
+                { field: "Etiqueta", title: _dictionary.Predespacho0014[$("#language").data("kendoDropDownList").value()], hidden: true },
+            ],
+            dataBound: function (e) {
+                //$(".k-grid input.k-textbox").prop('readonly', true);
+                $(".k-grid td .k-button").text('');
+                $(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
+                checkTH($("#grid").data("kendoGrid"));
+                quickHeadFilter(this);
+            }
+        });
+
+        $("#menu").kendoContextMenu({
+            target: "#grid",
+            filter: "td",
+            select: function (e) {
+                var grid = $("#grid").data("kendoGrid");
+                //console.log(grid.select());
+                var select = grid.select();
+                var data = grid.dataItem(select);
+
+                window.open(_incidenciasURL + "?leng=" + $("#language").data("kendoDropDownList").value() + "&LevantarIncidencia=1&ReferenciaID=" + data.ItemCodeID + "&TipoIncidencia=12&Clasificacion=1");
+            }
+        });
+
+        $("#grid").on("mousedown", "tr[role='row']", function (e) {
+            $('#grid').data("kendoGrid").select(e.target.parentElement);
+            $("#grid thead .k-state-selected> .k-link").css({
+                "color": "black"
+            });
+        });
+
+    };
+
+    //function CargarProyecto(id, value) {
+    //    Proyecto = {};
+    //    Proyecto = { ProyectoID: parseInt(id), Nombre: value };
+    //};
+
+    function CargarNumeroControl(id, value) {
+        NumeroControl = {};
+        NumeroControl = { NumeroControlID: id, NumeroControl: value };
+    };
+    function RedirectListado() {
+        window.location.href = _DashboardDespacho + "?leng=" + $("#language").data("kendoDropDownList").value();
+    };
+    function LimpiarDatos() {
+        $("#grid").data("kendoGrid").dataSource.data([]);
+    };
+
+    //function ObtenerProyecto() {
+    //    $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
+    //        ControlErroresObjetosComboBox("ProyectoID", result);
+    //    });
+    //};
+    function LimpiarCamposProyecto() {
+        NumeroControl = {};
+        $("#SpoolID").data("kendoAutoComplete").value("");
+        $("#grid").data("kendoGrid").dataSource.data([]);
+    };
+
+    function ObtenerDatosGrid() {
+        //loadingStart();
+        var numerocontrolID = NumeroControl.NumeroControlID ? NumeroControl.NumeroControlID : 0;
+
+        $PreDespacho.PreDespacho.read({ NumeroControl: numerocontrolID, token: Cookies.get("token") }).done(function (result) {
+            if (Error(result)) {
+                resultadoJson = result;
+                if ($("#grid").data("kendoGrid")) {
+                    if (resultadoJson.length > 0) {
+                        $("#grid").data("kendoGrid").dataSource.data(resultadoJson);
+                        $("#grid").data("kendoGrid").dataSource.page(1);
+                        $("input[type=radio]:checked").click();
+                    } else {
+                        $("#grid").data("kendoGrid").dataSource.data([]);
+                        $("#grid").data("kendoGrid").dataSource.page(0);
+                    };
+                };
+                AsignarPaginaActualCookie();
+                applySecurityPolicy(false);
+                FiltrarDatos();
+            }
+            //loadingStop();
+        });
+    };
+
+    function AsignarPaginaActualCookie() {
+        Cookies.set("navegacion", "48", { path: '/' });
+    };
+
+    function FiltrarDatos() {
+        var ChecksAlmacenaje = $("#ChecksAlmacenaje").val();
+        var ds = $("#grid").data("kendoGrid").dataSource;
+        var filters = [];
+
+        ds.filter({});
+
+        if (ChecksAlmacenaje == "2") {
+            var new_filter = { field: "NumeroUnico", operator: "eq", value: "" };
+            filters.push(new_filter);
+        }
+        if (NumeroControl.NumeroControlID) {
+            var new_filter = { field: "NumeroControl", operator: "Contains", value: NumeroControl.NumeroControl ? NumeroControl.NumeroControl : "" };
+            filters.push(new_filter);
+        };
+
+        ds.filter(filters);
+    };
+
+
+    function NumeroUnicoAutocomplete(container, options) {
+        var idTime=new Date().getTime();
+        $('<input data-text-field="value" data-value-field="id" data-bind="value:' + options.field + '" id="'+idTime+'"/>')
+                       .appendTo(container)
+                       .kendoComboBox({
+                           dataSource: {
+                               type: "GET",
+                               dataType:"json",
+                               transport: {
+                                   read: $UrlNumerosUnicosPreDespacho + "&numeroControl=" + container.parent().children()[0].innerText + "&itemcode=" + container.parent().children()[1].innerText + "&etiqueta=" + container.parent().children()[7].innerText + "&token=" + Cookies.get("token")
+                               }
+                           },
+                           open: function(e) {
+                               var ds = this.dataSource;
+                               var dsGrid = $("#grid").data("kendoGrid").dataSource;
+                               var lngth = dsGrid.data().length;
+                               var filters = [];
+
+                               ds.filter({});
+                               
+                               filters = FiltrarNumeroUnico(dsGrid, lngth);
+                               ds.filter(filters);
+                           },
+                           select: function (e) {
+                           },
+                           change: function (e) {
+                                var dataItem = this.dataItem();
+                                try{
+                                    lastEditedCellID.NumeroUnico = dataItem.value;
+                                    $('#grid').data('kendoGrid').refresh();
+                                }catch(e){
+                                    if(e instanceof TypeError && dataItem===undefined && this.value()===""){
+                                        toDelete.push(options.model.PreDespachoID)
+                                    }else{
+                                        displayMessage("notificationslabel0083", "Número Único", '1');
+                                        options.model.set("NumeroUnico",null);
+                                        //this.value("");
+                                        //options.model.NumeroUnico="";
+                                        //container.closest("div").data("kendoGrid").refresh();
+                                    }
+                               }
+                           },
+                           filter: "contains"
+                       });
+        $("#"+idTime).data("kendoComboBox").input.on("blur",function(e){
+            throw new Error("Something went badly wrong!"); 
+            e.stopPropagation();
+            e.preventDefault();
+            return false;
+        })
+        lastEditedCellID = options.model;
+    };
+
+    function validarRequeridosFormaDespacho() {
+        var bool = true;
+        $("#formPreDespacho .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if (!$(this).val()) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                };
+            };
+        });
+        return bool;
+    };
+
+    function Incidencias() {
+        var PreDespachoID = _PreDespachoID ? _PreDespachoID : "-1";
+        window.open(_incidenciasURL + "?leng=" + $("#language").data("kendoDropDownList").value() + "&LevantarIncidencia=1&ReferenciaID=" + PreDespachoID + "&TipoIncidencia=12&Clasificacion=1");
+    };
+
+    function Cancelar() {
+        window.location.href = _PreDespachoURL + "?leng=" + $("#language").data("kendoDropDownList").value();
+    };
+
+    function Guardar(nuevo) {
+        nuevo = typeof nuevo === "undefined" ? false : nuevo;
+        //loadingStart();
+        $("span.k-filter").trigger("click");
+        $("#todos").prop('checked', true);
+        $("form.k-filter-menu button[type='reset']").trigger("click");
+        if (validarRequeridosFormaDespacho()) {
+            var filters = $("#grid").data("kendoGrid").dataSource.filter();
+            var allData = $("#grid").data("kendoGrid").dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var result = query.filter(filters).data;
+            var datasource = result;
+            var Listado = { };
+            Listado.lista = ListadoAGuardar(datasource);
+
+            if (!datasource.length || Listado.lista.length==0 && toDelete.length===0) {
+                displayMessage("notificationslabel0067", "", '2');
+                //loadingStop();
+                return;
+            }else if(!datasource.length || Listado.lista.length==0 && toDelete.length>0){
+                $PreDespacho.PreDespacho.destroy({},{ids:JSON.stringify(toDelete),token: $.cookie("token")}).done(function(res){
+                    ObtenerDatosGrid();
+                    ToEdit();
+                    toDelete=[];
+                    return;
+                });//Deletes the clean ones
+            }else{
+                //console.log(Listado.lista);
+                $PreDespacho.PreDespacho.create(Listado, { token: $.cookie("token") }).done(function (result) {// no tengo controlador dummy
+                    if (Error(result)) {
+                        if(!nuevo){
+                            _PreDespachoID = result.ReturnMessage[1];
+                            ObtenerDatosGrid();
+                            ToEdit();
+                        }else{
+                            setTimeout(function(){
+                                window.location.reload()
+                            },200)
+                        }
+                        if(toDelete.length>0 && toDelete.filter(function(n){ return !$.isNumeric(n)}).length===0){
+                            $PreDespacho.PreDespacho.destroy({},{ids:JSON.stringify(toDelete),token: $.cookie("token")}).done(function(res){
+                                ObtenerDatosGrid();
+                                ToEdit();
+                                toDelete=[];
+                            });//Deletes the clean ones
+                        }
+                        displayMessage("notificationslabel0056", "", '0');
+                    }
+                    //loadingStop();
+                });
+            }
+        } else {
+            displayMessage("notificationslabel0031", "", '1');
+            //loadingStop();
+
+        }
+    };
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+    }
+
+    function ListadoAGuardar(datasource) {
+        var Listado = [], z = 0;
+        for (var i = 0; i < datasource.length; i++) {
+            var NumeroControl = datasource[i].NumeroControlID;
+            var ItemCode = datasource[i].ItemCodeID;
+            var NumeroUnico = datasource[i].NumeroUnico;
+            var Etiqueta = datasource[i].Etiqueta;
+            var PreDespachoID = datasource[i].PreDespachoID;
+            //var ProyectoID = $("#ProyectoID").data("kendoComboBox").value();
+
+            if (NumeroUnico) {
+                Listado[z] = { NumeroControl: NumeroControl, ItemCode: ItemCode, NumeroUnico: NumeroUnico, Etiqueta: Etiqueta, PreDespachoID: PreDespachoID };
+                z++;
+            }
+        };
+        return Listado;
+    };
+
+    function FiltrarNumeroUnico(dsGrid,lngth)
+    {
+        var filters=[];
+        for (var i = 0; i <= lngth - 1; i++) {
+            if (dsGrid.data()[i].NumeroUnico != "") {
+                if (dsGrid.data()[i].NumeroUnico != lastEditedCellID.NumeroUnico) {
+                    var new_filter = { field: "value", operator: "neq", value: dsGrid.data()[i].NumeroUnico };
+                    filters.push(new_filter);
+                }
+            }
+        }
+
+        return filters;
+    }
+ @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["PreDespacho"] = $PreDespachoModel;
+
+    CargaInicial();
+
+    if (_spoolID != "-1" /*&& _proyectoID != "-1"*/) {
+        CargaInicialEdicion();
+    }
+    }
+    
+</script>

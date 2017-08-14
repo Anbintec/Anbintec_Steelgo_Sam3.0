@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Imprimir Etiquetas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 formatTag">
+    <div class="row">
+        <div class="tags-container">
+            <div id="divEtiquetas"></div>
+            @*<a id="ImprimirEtiquetas" href="javascript:void(0);" class="btn btn-yellow no-print"><span id="FormatoEtiquetas0011"></span></a>*@
+        </div>
+    </div>
+</div>
+
+
+<script>
+    @section JavascriptGlobalVariables 
+    {
+    var _ordenRecepcionID = getUrlParameter("OrdenRecepcionID", "-1");
+    }
+
+    @section JavascriptGlobalFunctions 
+    {
+        function cargaInicial() {
+            //ocultar menu y sidebar
+            $(".pull-right").hide();
+            $(".sidebar").hide();
+            $(".breadcrumb-container").hide();
+
+            $NumeroUnico.NumeroUnico.read({}, { ordenRecepcionID: _ordenRecepcionID, token: Cookies.get("token") }).done(function (result) {
+                if (Error(result)) {
+                    $.each(result, function (key) {
+                        htmlstring = "<div class='tag-group'><div class='inner-tag'>";
+                        htmlstring += "<div><label id='FormatoEtiquetas0001'></label> " + result[key].NumeroUnico + "</div>";
+                        htmlstring += "<div><label id='FormatoEtiquetas0002'></label> " + result[key].Proyecto + "</div>";
+                        htmlstring += "<div><label id='FormatoEtiquetas0003'></label> " + result[key].ItemCode + "</div>";
+                        htmlstring += "<div><label id='FormatoEtiquetas0004'></label> " + result[key].Diametro1 + "</div>";
+                        htmlstring += "<div><label id='FormatoEtiquetas0005'></label> " + result[key].Diametro2 + "</div>";
+                        htmlstring += "<div><label id='FormatoEtiquetas0006'></label> " + result[key].Colada + "</div>";
+                        htmlstring += "<div><label id='FormatoEtiquetas0007'></label> " + result[key].Certificado + "</div>";
+                        htmlstring += "<div><label id='FormatoEtiquetas0008'></label> " + result[key].NumeroUnico + "</div>";
+                        htmlstring += "<div><label id='FormatoEtiquetas0009'></label> " + result[key].Cedula + "</div>";
+                        htmlstring += "<div><label id='FormatoEtiquetas0010'></label> " + result[key].Descripcion + "</div>";
+                        htmlstring += "<div><img id='barcode" + key + "'></div></div></div>";
+                        $("#divEtiquetas").append(htmlstring);
+                        $("#barcode" + key).JsBarcode(result[key].NumeroUnico);
+                    });
+
+                    $("label[id*='FormatoEtiquetas0001']").each(function (index) {
+                        $(this).text(_dictionary["FormatoEtiquetas0001"][$("#language").data("kendoDropDownList").value()]);
+                    });
+                    $("label[id*='FormatoEtiquetas0002']").each(function (index) {
+                        $(this).text(_dictionary["FormatoEtiquetas0002"][$("#language").data("kendoDropDownList").value()]);
+                    });
+                    $("label[id*='FormatoEtiquetas0003']").each(function (index) {
+                        $(this).text(_dictionary["FormatoEtiquetas0003"][$("#language").data("kendoDropDownList").value()]);
+                    });
+                    $("label[id*='FormatoEtiquetas0004']").each(function (index) {
+                        $(this).text(_dictionary["FormatoEtiquetas0004"][$("#language").data("kendoDropDownList").value()]);
+                    });
+                    $("label[id*='FormatoEtiquetas0005']").each(function (index) {
+                        $(this).text(_dictionary["FormatoEtiquetas0005"][$("#language").data("kendoDropDownList").value()]);
+                    });
+                    $("label[id*='FormatoEtiquetas0006']").each(function (index) {
+                        $(this).text(_dictionary["FormatoEtiquetas0006"][$("#language").data("kendoDropDownList").value()]);
+                    });
+                    $("label[id*='FormatoEtiquetas0007']").each(function (index) {
+                        $(this).text(_dictionary["FormatoEtiquetas0007"][$("#language").data("kendoDropDownList").value()]);
+                    });
+                    $("label[id*='FormatoEtiquetas0008']").each(function (index) {
+                        $(this).text(_dictionary["FormatoEtiquetas0008"][$("#language").data("kendoDropDownList").value()]);
+                    });
+                    $("label[id*='FormatoEtiquetas0009']").each(function (index) {
+                        $(this).text(_dictionary["FormatoEtiquetas0009"][$("#language").data("kendoDropDownList").value()]);
+                    });
+                    $("label[id*='FormatoEtiquetas0010']").each(function (index) {
+                        $(this).text(_dictionary["FormatoEtiquetas0010"][$("#language").data("kendoDropDownList").value()]);
+                    });
+                }
+            });
+
+        };
+
+        function Error(data) {
+            if (data.ReturnCode) {
+                if (data.ReturnCode != 200) {
+                    if (data.ReturnCode == 401) {
+                        removeUserSession();
+                        return false;
+                    } else {
+                        displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+    //ocultar menu y sidebar
+    $(".pull-right").hide();
+    $(".sidebar").hide();
+    $(".breadcrumb-container").hide();
+    $("header").hide();
+    $(".content-container").removeClass("topbar").addClass("printView");
+    $(".content-frame").removeClass("content-frame");
+    $("body").css("background", "#FFFFFF");
+   
+    cargaInicial();
+    
+    
+    }
+</script>

@@ -1,0 +1,794 @@
+﻿@{
+    ViewBag.Title = "Listado Llegada de Material";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="ListadoLlegadaMaterial0020"></span></a>
+    </li>
+    @*<li>
+        <a href="@Url.Action("DashboardLlegadaMaterial", "EntradaMaterial")"><span id="ListadoLlegadaMaterial0019"></span></a>
+    </li>*@
+    <li class="active">
+        <a href="@Url.Action("ListadoLlegadaMaterial", "EntradaMaterial")"><span id="ListadoLlegadaMaterial0021"></span></a>
+    </li>
+}
+
+<div class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav filtersFields clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <div class="button-section">
+                            <button id="Nuevo" type="button" class="btn btn-newArrival btn-yellow"><span id="ListadoLlegadaMaterial0001"></span></button>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 filter-section">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                                <label id="ListadoLlegadaMaterial0002"></label>
+                                <input id="PatioID" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                                <label id="ListadoLlegadaMaterial0003"></label>
+                                <input id="ClienteID" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                                <label id="ListadoLlegadaMaterial0004"></label>
+                                <input id="FechaInic" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                                <label id="ListadoLlegadaMaterial0005"></label>
+                                <input id="FechaFinal" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                                <label id="ListadoLlegadaMaterial0006"></label>
+                                <input id="PeriodoTiempo" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                <div class="button-section left">
+                                    <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection disabled"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 buttonBar">
+                        <a id="Mostrar" href="javascript:void(0);" class="btn btn-yellow"><span id="ListadoLlegadaMaterial0005"></span></a>
+                        <a id="Creacion" href="javascript:void(0);" class="btn btn-primary"></a>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row">
+                       <div class="btn-group tabList col-xs-12 col-sm-12 col-md-12 col-lg-12" role="group" arial-label="tabList">
+                            <button id="btnPorLlegar" class="btn btn-tabList btn-listLlegada"><span id="ListadoLlegadaMaterial0012"></span> <span id="spanPorLlegar"> 0 </span></button>
+                            <button id="btnPorDescargar" class="btn btn-tabList btn-listLlegada"><span id="ListadoLlegadaMaterial0013"></span> <span id="spanPorDescargar"> 0 </span></button>
+                            <button id="btnPorSalir" class="btn btn-tabList btn-listLlegada"><span id="ListadoLlegadaMaterial0014"></span> <span id="spanPorSalir"> 0 </span></button>
+
+                        </div>
+                    </div>
+                      <div class="row">
+                        <div id="filterContainer" class="quick-filters col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="clearfix">
+                                <input id="FolioConfiguracion" class="quickFilters general-input" />
+                                <input id="AvisoEntradaID" class="quickFilters general-input" />
+                                <input id="FechaCreacion" class="quickFilters general-input" />
+                                <input id="Patio" class="quickFilters general-input" />
+                                <input id="EstatusFolio" class="quickFilters general-input" />
+                                <input id="Cancel" class="quickFilters general-input" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="grid" class="entradaMaterial"></div>
+                </div>
+            </div>
+        </div>
+        <div id="window">
+            @*Content of the Window*@
+        </div>
+    </div>
+</div>
+<input id="hdAccionFiltrado" type="hidden" />
+<ul id="menu" class="incidencia">
+    <li><span id="ListadoLlegadaMaterial0024"></span></li>
+</ul>
+<script>
+
+     @section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "6", { path: '/' });
+    }
+
+    @section JavascriptGlobalVariables 
+    {
+    var tmpListado=null;
+    var Patio = {}, Cliente = {};
+    var FechaInic, FechaFinal, resultadoJson, PeriodoTiempo;
+    var folioLlegadaID = getUrlParameter("folioLlegadaID", "-1");
+    var folioEntradaID = getUrlParameter("folioEntradaID", "-1");
+    var _incidenciasURL = "@Url.Action("Incidencias", "Incidencias")";
+    //vars Dashboard
+    var DashBoardAccionListado = getUrlParameter("DashBoardAccionListado", "-1");
+    var DashPatioID = getUrlParameter("DashPatioID", "-1");
+    var DashClienteID = getUrlParameter("DashClienteID", "-1");
+    var DashFechaInicial = getUrlParameter("DashFechaInicial", "-1");
+    var DashFechaFinal = getUrlParameter("DashFechaFinal", "-1");
+    var DashPeriodo = getUrlParameter("DashPeriodo", "-1");
+
+    var $LlegadaMaterialModel = {
+        listContainer: {
+            create: "#Nuevo",
+            list: "#grid",
+            detail: ".detailLink",
+            destroy: ".k-grid-Cancelar",
+            createIncidence: ".incidencia"
+        },
+    };
+    }
+
+    @section JavascriptGlobalFunctions 
+    {
+        var date=new Date().toLocaleTimeString();
+        if(DashBoardAccionListado!=="-1"){
+            tmpListado={
+                "FolioLlegadaID":folioLlegadaID,
+                "FolioAvisoLlegadaID":folioEntradaID,
+                "PatioID":DashPatioID,
+                "ClienteID":DashClienteID,
+                "FechaInicial":DashFechaInicial +" "+ date,
+                "FechaFinal":DashFechaFinal +" "+ date,
+                "token":Cookies.get("token"),
+                "PorLlegar":DashBoardAccionListado==="1",
+                "PorDescargar":DashBoardAccionListado==="2",
+                "PorSalir":DashBoardAccionListado==="3"
+            }
+        }
+    function createPeriodoTiempo() {
+
+        $("#PeriodoTiempo").kendoComboBox({
+            dataTextField: "Periodo",
+            dataValueField: "PeriodoID",
+            dataSource: [
+                { "PeriodoID": "1", "Periodo": _dictionary.ListadoLlegadaMaterial0007[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "2", "Periodo": _dictionary.ListadoLlegadaMaterial0008[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "3", "Periodo": _dictionary.ListadoLlegadaMaterial0009[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "4", "Periodo": _dictionary.ListadoLlegadaMaterial0010[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "5", "Periodo": _dictionary.ListadoLlegadaMaterial0011[$("#language").data("kendoDropDownList").value()] }
+            ],
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarPeriodoTiempo(dataItem.PeriodoID):CargarPeriodoTiempo("");
+                var value = this.value();
+
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    PeriodoTiempo = [];
+                    this.value("");
+                }
+                ObtenerFechasporPeriodo(value);
+                Filtros();
+                CantidadesDelMenuDashboard();
+            },
+            filter: "contains",
+        });
+    }
+
+    function changeDatePickerDateFormat(datePickerOptions) {
+        FechaInic.setOptions(datePickerOptions);
+        FechaFinal.setOptions(datePickerOptions);
+    };
+
+    function changeLanguageCall() {
+        var tmp = removeGrid($("#grid"));
+        CargarGridLlegadaMaterial();
+        $("#grid").data("kendoGrid").dataSource.data(tmp);
+        createPeriodoTiempo();
+    };
+    function CargarGridLlegadaMaterial() {
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            FolioConfiguracion: { type: "string" },
+                            FolioAvisoEntradaID: { type: "string" },
+                            FechaCreación: { type: "date" },
+                            Patio: { type: "string" },
+                            EstatusFolio: { type: "string" },
+                        }
+                    }
+                },
+                pageSize: 20,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            },
+            autoHeight: true,
+            sortable: true,
+            scrollable: false,
+            selectable:true,
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+                buttonCount: 2
+            },
+            columns: [
+                { field: "FolioConfiguracion", title: _dictionary.ListadoLlegadaMaterial0015[$("#language").data("kendoDropDownList").value()], template: "<a class='detailLink' onclick=\"mostrarDetalle('#=FolioAvisoLlegadaID#')\">#:FolioConfiguracion#</a>", filterable: true },
+                { field: "FechaCreación", title: _dictionary.ListadoLlegadaMaterial0018[$("#language").data("kendoDropDownList").value()], filterable: true, format: "{0:dd/MM/yyyy}", template: "#= kendo.toString(kendo.parseDate(FechaCreación, 'MM/dd/yyyy'), 'dd/MM/yyyy') #" },
+                { field: "Patio", title: _dictionary.ListadoLlegadaMaterial0002[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "EstatusFolio", title: _dictionary.ListadoLlegadaMaterial0016[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { command: { text: _dictionary.ListadoLlegadaMaterial0017[$("#language").data("kendoDropDownList").value()], click: cancelarFolio }, title: " ", width: "99px" },
+                { field: "FolioAvisoEntradaID", title: _dictionary.ListadoLlegadaMaterial0015[$("#language").data("kendoDropDownList").value()], filterable: true, hidden: true },
+                { field: "FolioAvisoLlegadaID", title: _dictionary.ListadoLlegadaMaterial0015[$("#language").data("kendoDropDownList").value()], template: "<a class='detailLink' onclick='mostrarDetalle(#:FolioAvisoLlegadaID#)'>#:FolioAvisoLlegadaID#</a>", filterable: true, hidden:true},
+            ],
+            dataBound: function (e) {
+                //$(".k-grid input.k-textbox").prop('readonly', true);
+                //$(".k-grid td .k-button").text('');
+                //$(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
+                
+                //$("th[data-field='FolioConfiguracion']").append($("#FolioConfiguracion"));
+                //$("th[data-field='FolioAvisoLlegadaID']").append($("#AvisoEntradaID"));
+                //$("th[data-field='FechaCreación']").append($("#FechaCreacion"));
+                //$("th[data-field='Patio']").append($("#Patio"));
+                //$("th[data-field='EstatusFolio']").append($("#EstatusFolio"));
+
+                //$("#FolioConfiguracion").click(function (event) { event.stopPropagation(); });
+                //$("#AvisoEntradaID").click(function( event ) {event.stopPropagation();});
+                //$("#FechaCreacion").click(function( event ) {event.stopPropagation();});
+                //$("#Patio").click(function( event ) {event.stopPropagation();});
+                //$("#EstatusFolio").click(function( event ) {event.stopPropagation();});
+                checkTH($("#grid").data("kendoGrid"));
+                quickHeadFilter($("#grid").data("kendoGrid"));
+            }
+        });
+
+        $("#menu").kendoContextMenu({
+            target: "#grid",
+            filter: "td",
+            select: function (e) {
+                var grid = $("#grid").data("kendoGrid");
+                var select = grid.select();
+                var data = grid.dataItem(select);
+
+                window.open(_incidenciasURL + "?leng=" + $("#language").data("kendoDropDownList").value() + "&LevantarIncidencia=1&ReferenciaID=" + data.FolioAvisoEntradaID + "&TipoIncidencia=2&Clasificacion=1");
+            }
+        });
+
+        $("#grid").on("mousedown", "tr[role='row']", function (e) {
+            $('#grid').data("kendoGrid").select(e.target.parentElement);
+            $("#grid thead .k-state-selected> .k-link").css({
+                "color": "black"
+            });
+        });
+    };
+
+
+    function mostrarDetalle(folio) {
+        var esAlta = $("#hdAccionFiltrado").val() == "1" ? "1" : "-1";
+        var detalleIdeaUrl = "@Url.Action("DetalleLlegadaMaterial", "EntradaMaterial")";
+        if ((typeof returnOfSecurityCheck != 'undefined') && (typeof returnOfSecurityCheck["LLegada Material"] != 'undefined') && (typeof returnOfSecurityCheck["LLegada Material"]["detail"] != 'undefined') && returnOfSecurityCheck["LLegada Material"]["detail"]) {
+            if ($("#btnPorSalir").hasClass("active")) {
+                detalleIdeaUrl = "@Url.Action("PaseDeSalida", "EntradaMaterial")";
+                var url=detalleIdeaUrl + "?leng=" + $("#language").data("kendoDropDownList").value() + "&esAlta=" + esAlta + "&folioAvisoLlegadaID=" + folio;
+            } else {
+                var url = detalleIdeaUrl + "?leng=" + $("#language").data("kendoDropDownList").value() + "&folioAvisoLlegadaID=" + folio + "&esAlta=" + esAlta;
+            }
+            openFromList(event,url);
+        }
+    }
+
+    function cancelarFolio(e) {
+        e.preventDefault();
+        var dataItem = $("#grid").data("kendoGrid").dataItem($(e.currentTarget).closest("tr"));
+        var folioAvisoEntradaID = dataItem.FolioAvisoEntradaID;
+        if (confirm(_dictionary.ListadoLlegadaMaterial0022[$("#language").data("kendoDropDownList").value()])) {
+            $FiltrosListadoLlegadaMaterial.FolioAvisoEntrada.destroy({}, { folio: folioAvisoEntradaID, token: Cookies.get("token") }).done(function (data) {
+                Filtros();
+            });
+        }
+    };
+
+    function ObtenerAccionesListado(Listado) {
+        $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado), token: Cookies.get("token"), parametroBusqueda: "" }).done(function (result) {
+            Error(result);
+            $("#spanPorLlegar").html(result.SinEstaus ? result.SinEstaus : 0);
+            $("#spanPorDescargar").html(result.SinOrdenDescarga ? result.SinOrdenDescarga : 0);
+            $("#spanPorSalir").html(result.SinPaseSalida ? result.SinPaseSalida : 0);
+        });
+    };
+
+    function CargarPatio(id, value) {
+        Patio = {};
+        Patio = { PatioID: id, Nombre: value };
+    };
+
+    function CargarCliente(id, value) {
+        Cliente = {};
+        Cliente = { ClienteID: id };
+    };
+    
+    function CargarPeriodoTiempo(id) {
+        PeriodoTiempo = {};
+        PeriodoTiempo = { PeriodoTiempo: id };
+    };
+
+    function ObtenerPatio() {
+        $Patio.Patio.read({ esAvisoEntrada: 0, paginaID: Cookies.get("navegacion"), token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("PatioID", result);
+        });
+    };
+
+    function ObtenerCliente() {
+        $Cliente.Cliente.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("ClienteID", result);
+        });
+    };
+
+    function ArregloListado(accion) {
+        var Listado;
+        Listado = { FolioLlegadaID: "", FolioAvisoLlegadaID: "", PatioID: "", ClienteID: "", FechaInicial: "", FechaFinal: "", token: "", PorLlegar: "", PorDescargar: "", PorSalir: "" };
+
+        var d = new Date($("#FechaInic").data("kendoDatePicker").value());
+        var d1 = new Date($("#FechaFinal").data("kendoDatePicker").value());
+
+        if (d.getFullYear() == "1969") {
+            d = new Date();
+            d.setDate(d.getDate() - 30);
+        }
+        if (d1.getFullYear() == "1969") {
+            d1 = new Date();
+        }
+
+        Listado.FolioLlegadaID = folioLlegadaID ? folioLlegadaID : -1;
+        Listado.FolioAvisoLlegadaID = folioEntradaID ? folioEntradaID : -1;
+        Listado.PatioID = Patio.PatioID ? Patio.PatioID : -1;
+        Listado.FechaInicial = obtenerFormatoFecha(d);
+        Listado.FechaFinal = obtenerFormatoFecha(d1);
+        Listado.PorLlegar = accion == 1 ? true : false;
+        Listado.PorDescargar = accion == 2 ? true : false;
+        Listado.PorSalir = accion == 3 ? true : false;
+        Listado.ClienteID = Cliente.ClienteID ? Cliente.ClienteID : -1;
+        Listado.token = Cookies.get("token");
+        //console.log("listado");
+        //console.log(JSON.stringify(Listado));
+        return Listado;
+    };
+
+    function AccionesListado(accion) {
+        //loadingStart();
+        var Listado = tmpListado!== null ? tmpListado : ArregloListado(accion);
+        tmpListado!== null ? tmpListado=null : 0;
+
+        $("#hdAccionFiltrado").val(accion);
+        
+        $FiltrosListadoLlegadaMaterial.FolioAvisoEntrada.read({}, { data: JSON.stringify(Listado) }).done(function (data) {
+            if (Error(data)) {
+                resultadoJson = data;
+                if ($("#grid").data("kendoGrid")) {
+                    if (resultadoJson.length > 0) {
+                        $("#grid").data("kendoGrid").dataSource.data(resultadoJson);
+                        $("#grid").data("kendoGrid").dataSource.page(1);
+                    } else {
+                        $("#grid").data("kendoGrid").dataSource.data([]);
+                        $("#grid").data("kendoGrid").dataSource.page(0);
+                    };
+                    CantidadesDelMenuDashboard();
+                    AsignarPaginaActualCookie();
+                    applySecurityPolicy(false);
+                };
+            };
+
+            //loadingStop();
+        });
+    };
+    function AsignarPaginaActualCookie() {
+        Cookies.set("navegacion", "6", { path: '/' });
+    }
+    function Filtros() {
+        var Listado;
+        var accion = $("#hdAccionFiltrado").val() ? $("#hdAccionFiltrado").val() : 1;
+        AccionesListado(accion);
+    };
+
+    function CargarControlesFiltrado() {
+        var date, format;
+        if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+            format = "dd/MM/yyyy";
+        } else {
+            format = "MM/dd/yyyy";
+        };
+        var splitYear = DashFechaInicial.split("-")[0];
+        var splitMonth = DashFechaInicial.split("-")[1];
+        var splitDay = DashFechaInicial.split("-")[2];
+
+        var splitYear2 = DashFechaFinal.split("-")[0];
+        var splitMonth2 = DashFechaFinal.split("-")[1];
+        var splitDay2 = DashFechaFinal.split("-")[2];
+
+        var fechaInicial = new Date(splitYear, splitMonth - 1, splitDay);
+        var fechFinal = new Date(splitYear2, splitMonth2 - 1, splitDay2);
+
+        var fechaInicialkendo = kendo.parseDate(fechaInicial, format);
+        var fechaFinalkendo = kendo.parseDate(fechFinal, format);
+
+        $("#ClienteID").data("kendoComboBox").value(DashClienteID);
+        $("#PatioID").data("kendoComboBox").value(DashPatioID);
+        $("#FechaInic").data("kendoDatePicker").value(fechaInicialkendo);
+        $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
+        $("#PeriodoTiempo").data("kendoComboBox").value(DashPeriodo);
+
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+
+    function obtenerFormatoFecha(d) {
+        var curr_date = d.getDate();
+        var curr_month = d.getMonth() + 1; //Months are zero based
+        var curr_year = d.getFullYear();
+        var horaActual = new Date();
+
+        if (curr_year == "1969") {
+            return null;
+        } else {
+            return curr_year + "-" + curr_month + "-" + curr_date + " " + horaActual.getHours() + ":" + horaActual.getMinutes() + ":" + horaActual.getSeconds();
+        }
+    };
+
+    function tabActivo(dashBoardAccionListado) {
+        $(".btn-tabList").removeClass("active");
+        switch (dashBoardAccionListado) {
+            case "1":
+                $("#btnPorLlegar").addClass("active");
+                break;
+            case "2":
+                $("#btnPorDescargar").addClass("active");
+                break;
+            case "3":
+                $("#btnPorSalir").addClass("active");
+                break;
+            default:
+                $("#btnCreados").addClass("active");
+                break;
+        }
+    };
+
+
+    function CantidadesDelMenuDashboard() {
+        var accion = $("#hdAccionFiltrado").val() ? $("#hdAccionFiltrado").val() : 1;
+        var Listado;
+
+        Listado = { FolioLlegadaID: "", FolioAvisoLlegadaID: "", PatioID: "", ClienteID: "", FechaInicial: "", FechaFinal: "", token: "", PorLlegar: "", PorDescargar: "", PorSalir: "", TipoListado: "" };
+
+        var d = new Date($("#FechaInic").data("kendoDatePicker").value());
+        var d1 = new Date($("#FechaFinal").data("kendoDatePicker").value());
+
+        if (d.getFullYear() == "1969") {
+            d = new Date();
+            d.setDate(d.getDate() - 30);
+        }
+        if (d1.getFullYear() == "1969") {
+            d1 = new Date();
+        }
+
+        Listado.FolioLlegadaID = folioLlegadaID ? folioLlegadaID : -1;
+        Listado.FolioAvisoLlegadaID = folioEntradaID ? folioEntradaID : -1;
+        Listado.PatioID = Patio.PatioID ? Patio.PatioID : -1;
+        Listado.FechaInicial = obtenerFormatoFecha(d);
+        Listado.FechaFinal = obtenerFormatoFecha(d1);
+        Listado.PorLlegar = accion == 1 ? true : false;
+        Listado.PorDescargar = accion == 2 ? true : false;
+        Listado.PorSalir = accion == 3 ? true : false;
+        Listado.ClienteID = Cliente.ClienteID ? Cliente.ClienteID : -1;
+        Listado.token = Cookies.get("token");
+        Listado.TipoListado = 5;
+        //console.log("CantidadesDelMenuDashboard: " + JSON.stringify(Listado));
+
+        ObtenerAccionesListado(Listado);
+    };
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+
+
+    function ObtenerFechasporPeriodo(id) {
+        var fechaInicio = FechaFinal.value();
+        var fechaFin = FechaFinal.value();
+
+        if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+            format = "dd/MM/yyyy";
+        } else {
+            format = "MM/dd/yyyy";
+        }
+
+        if (!fechaInicio) {
+            var todayInicio = new Date();
+            var curr_dateInicio = todayInicio.getDate();
+            var curr_monthInicio = todayInicio.getMonth() + 1;
+            var curr_yearInicio = todayInicio.getFullYear();
+
+            var todayInicial = new Date(curr_yearInicio, curr_monthInicio - 1, curr_dateInicio);
+            fechaInicio = kendo.parseDate(todayInicial, format);
+        }
+
+        if (!fechaFin) {
+            var todayFinal = new Date();
+            var curr_dateFinal = todayFinal.getDate();
+            var curr_monthFinal = todayFinal.getMonth() + 1;
+            var curr_yearFinal = todayFinal.getFullYear();
+
+            var todayFinal = new Date(curr_yearFinal, curr_monthFinal - 1, curr_dateFinal);
+            fechaFin = kendo.parseDate(todayFinal, format);
+        }
+
+        
+
+        var curr_date = fechaFin.getDate();
+        var curr_month = fechaFin.getMonth() + 1;
+        var curr_year = fechaFin.getFullYear();
+
+        var fechaFinal = new Date(curr_year, curr_month - 1, curr_date);
+        var fechaFinalkendo = kendo.parseDate(fechaFinal, format);
+
+        switch (parseInt(id)) {
+            case 1: //Semana Actual
+                fechaInicio.setDate(fechaInicio.getDate() - 7);
+                break;
+            case 2: //Dos Semanas
+                fechaInicio.setDate(fechaInicio.getDate() - 14);
+                break;
+            case 3: //Mes
+                fechaInicio.setMonth(fechaInicio.getMonth() - 1);
+                break;
+            case 4: //Trimestre
+                fechaInicio.setMonth(fechaInicio.getMonth() - 3);
+                break;
+            case 5: //Año
+                fechaInicio.setFullYear(fechaInicio.getFullYear() - 1);
+                break;
+            default:
+                fechaInicio.setDate(fechaInicio.getDate() - 7);
+                break;
+        }
+
+        var curr_date0 = fechaInicio.getDate();
+        var curr_month0 = fechaInicio.getMonth() + 1;
+        var curr_year0 = fechaInicio.getFullYear();
+
+        var fechaInicial = new Date(curr_year0, curr_month0 - 1, curr_date0);
+
+        var fechaInicialkendo = kendo.parseDate(fechaInicial, format);
+
+        $("#FechaInic").data("kendoDatePicker").value(fechaInicialkendo);
+        $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
+    };
+    }
+
+    function ObtenerFechasporDefecto() {
+        var fechaFinal = new Date();
+        var fechainicio = new Date(fechaFinal.getTime() - (7 * 24 * 3600 * 1000));
+
+        if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+            format = "dd/MM/yyyy";
+        } else {
+            format = "MM/dd/yyyy";
+        };
+
+        var curr_date0 = fechainicio.getDate();
+        var curr_month0 = fechainicio.getMonth() + 1; //Months are zero based
+        var curr_year0 = fechainicio.getFullYear();
+
+
+        var curr_date = fechaFinal.getDate();
+        var curr_month = fechaFinal.getMonth() + 1; //Months are zero based
+        var curr_year = fechaFinal.getFullYear();
+
+
+        var fechaInicial = new Date(curr_year0, curr_month0 - 1, curr_date0);
+        var fechFinal = new Date(curr_year, curr_month - 1, curr_date);
+
+        var fechaInicialkendo = kendo.parseDate(fechaInicial, format);
+        var fechaFinalkendo = kendo.parseDate(fechFinal, format);
+
+        $("#FechaInic").data("kendoDatePicker").value(fechaInicialkendo);
+        $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
+    };
+
+    @section JavascriptDocumentReadyFunctions 
+    {
+    $authorizationModel["LLegada Material"] = $LlegadaMaterialModel;
+
+    $("#AvisoEntradaID").val("");
+    $("#FechaCreacion").val("");
+    $("#Patio").val("");
+    $("#EstatusFolio").val("");
+    $("#Cancel").val("");
+
+    $("#FolioConfiguracion").keyup(function () {
+        var ds = $("#grid").data("kendoGrid").dataSource;
+        ds.filter([
+            {
+                "field": "FolioConfiguracion",
+                "operator": "Contains",
+                "value": this.value
+            }
+        ]);
+        if (!$("#FolioConfiguracion").val().length) { $("#FolioConfiguracion").parent().children("a.k-state-active").removeClass("k-state-active"); }
+        $("#FolioConfiguracion").focus();
+    });
+
+    $("#AvisoEntradaID").keyup(function () {
+        var ds = $("#grid").data("kendoGrid").dataSource;
+        ds.filter([
+            {
+                "field": "FolioAvisoLlegadaID",
+                "operator": "Contains",
+                "value": this.value
+            }
+        ]);
+        if(!$("#AvisoEntradaID").val().length){ $("#AvisoEntradaID").parent().children("a.k-state-active").removeClass("k-state-active");}
+        $("#AvisoEntradaID").focus();
+    });
+
+    $("#FechaCreacion").keyup(function () {
+        var ds = $("#grid").data("kendoGrid").dataSource;
+        ds.filter([
+            {
+                "field": "FechaCreación",
+                "operator": "Contains",
+                "value": this.value
+            }
+        ]);
+        if(!$("#FechaCreacion").val().length){ $("#FechaCreacion").parent().children("a.k-state-active").removeClass("k-state-active");}
+        $("#FechaCreacion").focus();
+    });
+
+    $("#Patio").keyup(function () {
+        var ds = $("#grid").data("kendoGrid").dataSource;
+        ds.filter([
+            {
+                "field": "Patio",
+                "operator": "Contains",
+                "value": this.value
+            }
+        ]);
+        if(!$("#Patio").val().length){ $("#Patio").parent().children("a.k-state-active").removeClass("k-state-active");}
+        $("#Patio").focus();
+    });
+
+    $("#EstatusFolio").keyup(function () {
+        var ds = $("#grid").data("kendoGrid").dataSource;
+        ds.filter([
+            {
+                "field": "EstatusFolio",
+                "operator": "Contains",
+                "value": this.value
+            }
+        ]);
+        if(!$("#FechaAvisoLlegada").val().length){ $("#FechaAvisoLlegada").parent().children("a.k-state-active").removeClass("k-state-active");}
+        $("#FechaAvisoLlegada").focus();
+    });
+
+
+    $("#btnPorLlegar").click(function () { tabActivo("1"); AccionesListado(1); });
+    $("#btnPorDescargar").click(function () { tabActivo("2"); AccionesListado(2); });
+    $("#btnPorSalir").click(function () { tabActivo("3"); AccionesListado(3); });
+
+    $("#Nuevo").click(function (e) {
+        var detalleIdeaUrl = "@Url.Action("DetalleLlegadaMaterial", "EntradaMaterial")";
+        window.location.href = detalleIdeaUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
+    });
+
+    $("#ClienteID").kendoComboBox({
+        dataTextField: "Nombre",
+        dataValueField: "ClienteID",
+        select: function (e) {
+        },
+        change: function (e) {
+            var dataItem = this.dataItem();
+            dataItem!==undefined ? CargarCliente(dataItem.ClienteID, dataItem.Nombre):CargarCliente("", "");
+            var value = this.value();
+            if (!value || this.selectedIndex == -1) {
+                messageindexKendoCombobox(this);
+                Cliente = [];
+                this.value("");
+            }
+            Filtros();
+        },
+        filter: "contains",
+    });
+    ObtenerCliente();
+
+    $("#PatioID").kendoComboBox({
+        dataTextField: "Nombre",
+        dataValueField: "PatioID",
+        select: function (e) {
+        },
+        change: function (e) {
+            var dataItem = this.dataItem();
+            dataItem!==undefined ? CargarPatio(dataItem.PatioID, dataItem.Nombre):CargarPatio("", "");
+            var value = this.value();
+            if (!value || this.selectedIndex == -1) {
+                messageindexKendoCombobox(this);
+                Patio = {};
+                this.value("");
+            }
+            Filtros();
+        },
+        filter: "contains",
+    });
+    ObtenerPatio();
+
+
+    $("#PeriodoTiempo").kendoComboBox({});
+
+
+    FechaInic = new kendo.ui.DatePicker($("#FechaInic"));
+    FechaFinal = new kendo.ui.DatePicker($("#FechaFinal"));
+
+
+    $("#FechaInic").bind("change", function () {
+        if (!$("#FechaInic").data("kendoDatePicker").value() && this.value!=="") {
+            $("#FechaInic").css("color","#EB4D50");
+            displayMessage("notificationslabel0082","","2")
+        }else{
+            $("#FechaInic").attr("style","");
+            Filtros();
+        }
+    });
+
+    $("#FechaFinal").bind("change", function () {
+        if (!$("#FechaFinal").data("kendoDatePicker").value() && this.value!=="") {
+            $("#FechaFinal").css("color","#EB4D50");
+            displayMessage("notificationslabel0082","","2")
+        }else{
+            $("#FechaFinal").attr("style","");
+            Filtros();
+        }
+    });
+
+    if (DashBoardAccionListado != -1) {
+        tabActivo(DashBoardAccionListado);
+        CargarControlesFiltrado();
+        AccionesListado(DashBoardAccionListado);
+    } else {
+        ObtenerFechasporDefecto();
+        tabActivo("1");
+        Filtros();
+    };
+    }
+     
+</script>

@@ -1,0 +1,362 @@
+﻿@{
+    ViewBag.Title = "Plana";
+}
+
+ <div id="modalPlana"  class="form clearfix popup col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+               <div id="TipoVehiculo_PlanaDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0068"></label>
+                    <input id="TipoVehiculo_Plana" class="" />
+                </div>
+                @*<div id="CamionID_PlanaDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0032"></label>
+                    <input id="CamionID_Plana" class="" />
+                </div>*@
+                <div id="TransportistaDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0056"></label>
+                    <input id="Transportista" class="" />
+                </div>
+                @*<div id="ChoferDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0057"></label>
+                    <input id="Chofer" class="" />
+                </div>*@
+                <div id="Placas_PlanaDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0033"></label>
+                    <input id="Placas_Plana" class="general-input" />
+                </div>
+                <div id="Unidad_PlanaDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0069"></label>
+                    <input id="Unidad_Plana" class="general-input" />
+                </div>
+                <div id="Modelo_PlanaDiv" class="form-group">
+                    <label id="DetalleAvisoLlegada0070"></label>
+                    <input id="Modelo_Plana" class="general-input" />
+                </div>
+                <div class="buttonSave">
+                    <a id="GuardarPlana" href="#" class="btn btn-primary">
+                        <span id="DetalleAvisoLlegada0034"></span>
+                    </a>
+                    <a id="CancelarPlana" href="#" class="btn btn-primary">
+                        <span id="DetalleAvisoLlegada0080"></span>
+                    </a>
+                </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    @section JavascriptGlobalVariables {
+    var TipoVehiculoPlana = {}, Camion = {}, Transportista = {}, Chofer = {};
+    var $PlanaModel = {
+        listContainer: {
+            create: "#GuardarPlana",
+            list: "",
+            detail: "",
+            destroy: ""
+        },
+        properties: {
+            tipoVehiculo: {
+                visible: "#TipoVehiculo_PlanaDiv",
+                editable: "#TipoVehiculo_Plana",
+                required: "#TipoVehiculo_Plana"
+            },
+            camion: {
+                visible: "#CamionID_PlanaDiv",
+                editable: "#CamionID_Plana",
+                required: "#CamionID_Plana"
+            },
+            placas: {
+                visible: "#Placas_PlanaDiv",
+                editable: "#Placas_Plana",
+                required: "#Placas_Plana"
+            },
+            unidad: {
+                visible: "#Unidad_PlanaDiv",
+                editable: "#Unidad_Plana",
+                required: "#Unidad_Plana"
+            },
+            modelo: {
+                visible: "#Modelo_PlanaDiv",
+                editable: "#Modelo_Plana",
+                required: "#Modelo_Plana"
+            },
+            transportista: {
+                visible: "#TransportistaDiv",
+                editable: "#Transportista",
+                required: "#Transportista"
+            },
+            chofer: {
+                visible: "#ChoferDiv",
+                editable: "#Chofer",
+                required: "#Chofer"
+            }
+        }
+    };
+    }
+
+    @section JavascriptGlobalFunctions {
+    function CargaInicial() {
+        hideElementsPlana();
+
+        window.parent.$(".k-i-close").click(function (e) {
+            CancelarPlana();
+        });
+        $("#TipoVehiculo_Plana").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "TipoVehiculoID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarTipoVehiculoPlana(dataItem.TipoVehiculoID, dataItem.Nombre):CargarTipoVehiculoPlana("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    TipoVehiculoPlana = {};
+                    this.value("");
+                };
+            },
+            filter: "contains",
+        });
+        ObtenerTipoVehiculoPlana();
+
+        //$("#CamionID_Plana").kendoComboBox({
+        //    dataTextField: "Placas",
+        //    dataValueField: "VehiculoID",
+        //    select: function (e) {
+        //        var dataItem = this.dataItem(e.item.index());
+        //        CargarCamion(dataItem.VehiculoID, dataItem.Placas);
+        //    },
+        //    change: function (e) {
+        //        var value = this.value();
+        //        if (!value || this.selectedIndex == -1) {
+        //            Camion = {};
+        //            this.value("");
+        //        };
+        //    },
+        //    filter: "contains",
+        //});
+        //ObtenerCamion();
+
+        $("#Transportista").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "TransportistaID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarTransportista(dataItem.TransportistaID, dataItem.Nombre):CargarTransportista("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Transportista = {};
+                    this.value("");
+                };
+            },
+            filter: "contains",
+        });
+        ObtenerTransportista();
+
+        //$("#Chofer").kendoComboBox({
+        //    dataTextField: "Nombre",
+        //    dataValueField: "ChoferID",
+        //    select: function (e) {
+        //        var dataItem = this.dataItem(e.item.index());
+        //        CargarChofer(dataItem.ChoferID, dataItem.Nombre);
+
+        //    },
+        //    change: function (e) {
+        //        var value = this.value();
+        //        if (!value || this.selectedIndex == -1) {
+        //            Chofer = {};
+        //            this.value("");
+        //        };
+        //    },
+        //    filter: "contains",
+        //});
+        //ObtenerChofer();
+
+        $("#GuardarPlana").click(function (e) {
+            if (validarRequeridosModalPlana()) {
+                GuardarPlana();
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            };
+        });
+
+        $("#CancelarPlana").click(function () { CancelarPlana(); });
+
+        $("#TipoVehiculo_Plana").data("kendoComboBox").value(2);
+        $("#TipoVehiculo_Plana").data("kendoComboBox").enable(false);
+        CargarTipoVehiculoPlana(2, "Plana");
+    };
+
+    function CargarTipoVehiculoPlana(id, value) {
+        TipoVehiculoPlana = {};
+        TipoVehiculoPlana = { TipoVehiculoID: id, Nombre: value };
+    };
+
+    function CargarCamion(id, value) {
+        Camion = {};
+        Camion = { CamionID: id, Placas: value };
+    }; 
+    function CargarTransportista(id, value) {
+        Transportista = {};
+        Transportista = { TransportistaID: id, Nombre: value };
+    };
+
+    function CargarChofer(id, value) {
+        Chofer = {};
+        Chofer = { ChoferID: id, Nombre: value };
+    };
+    
+    function ObtenerTipoVehiculoPlana() {
+        $TipoVehiculo.TipoVehiculo.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("TipoVehiculo_Plana", result);
+        });
+    };
+    
+    function ObtenerCamion() {
+        $Camion.Tracto.read({ esAvisoEntrada: 0, token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("CamionID_Plana", result);
+        });
+    };
+    function ObtenerTransportista() {
+        $Transportista.Transportista.read({ esAvisoEntrada: 0, paginaID: Cookies.get("navegacion"), token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("Transportista", result);
+        });
+    };
+
+    function ObtenerChofer() {
+        $Chofer.Chofer.read({ esAvisoEntrada: 0, token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("Chofer", result);
+        });
+    };
+
+    function cerrarVentanaModal() {
+        window.parent.$("#window").data("kendoWindow").close();
+        cleanDisplayMessage();
+    };
+
+   
+    function hideElementsPlana() {
+        $(".sidebar").hide();
+        $(".logo").hide();
+        $(".search-bar").hide();
+        $(".notifications").hide();
+        $(".logged-user").hide();
+        $(".content-container").removeClass("topbar").addClass("printView");
+        $(".breadcrumb-container").hide();
+        $(".languageSelector").hide();
+        $(".pull-right").hide();
+        $("header").hide();
+        $(".content-frame").removeClass("content-frame");
+        $("body").css("background", "#FFFFFF");
+    };
+
+    function validarRequeridosModalPlana() {
+        var bool = true;
+        $("#modalPlana .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if (!$(this).val()) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                    $(this).closest("div").addClass("clearfix");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                    $(this).closest("div").removeClass("clearfix");
+                };
+            };
+        });
+        return bool;
+    };
+
+    function LimpiarModalPlana() {
+        //$("#CamionID_Plana").data("kendoComboBox").value("");
+        $("#Placas_Plana").val("");
+        $("#Unidad_Plana").val("");
+        $("#Modelo_Plana").val("");
+        //Camion = {};
+        TipoVehiculoPlana = {};
+    };
+
+    function cancelarvalidacionRequeridosModalPlana() {
+        $("#modalPlana .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                $(this).closest("div").find("label").removeClass("error");
+                $(this).closest("div").removeClass("clearfix");
+            };
+        });
+    };
+
+    function GuardarPlana() {
+        //var camionid = Camion.CamionID ? Camion.CamionID : "-1";
+        PlanaModal = {};
+        PlanaModal = { TipoVehiculoID: "", Placas: "", TarjetaCirculacion: "", PolizaSeguro: "", Unidad: "", Modelo: "", VehiculoID: "", ChoferID: "", TransPortistaID: "", TractoID: "" };
+
+        PlanaModal.TipoVehiculoID = $("#TipoVehiculo_Plana").val();
+        PlanaModal.Placas = $("#Placas_Plana").val();
+        PlanaModal.TarjetaCirculacion = "";
+        PlanaModal.PolizaSeguro = "";
+        PlanaModal.Unidad = $("#Unidad_Plana").val();
+        PlanaModal.Modelo = $("#Modelo_Plana").val();
+        PlanaModal.VehiculoID = "";
+        PlanaModal.ChoferID = 1//Chofer.ChoferID ? Chofer.ChoferID : "-1";
+        PlanaModal.TransPortistaID = Transportista.TransportistaID ? Transportista.TransportistaID : "-1";
+        PlanaModal.TractoID =1 //camionid;
+
+        $Plana.Plana.create(PlanaModal, { token: Cookies.get("token") }).done(function (data) {
+            LimpiarModalPlana();
+            if (Error(data)) {
+                window.parent.ObtenerPlanas();
+                cerrarVentanaModal();
+            }
+        });
+    };
+
+    function CancelarPlana() {
+        LimpiarModalPlana();
+        cerrarVentanaModal();
+        cancelarvalidacionRequeridosModalPlana();
+    };
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Plana"] = $PlanaModel;
+    CargaInicial();
+    $("#language").data("kendoDropDownList").select(_languageOrder[window.parent.$("#language").data("kendoDropDownList").value()]);
+    $("#language").data("kendoDropDownList").trigger("change");
+    applySecurityPolicy(false);
+    }
+    @section JavascriptDocumentReadyHomeCookie {
+    //Cookies.set("home", true, { path: '/' });
+    //Cookies.set("navegacion", "37", { path: '/' });
+    }
+</script>

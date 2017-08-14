@@ -1,0 +1,438 @@
+<html>
+<head>
+    <title>Service teST</title>
+    <!-- jQuery -->
+    <script src="jquery-2.1.4.js"></script>
+
+    <!-- jQuery rest -->
+    <script src="jquery.rest.js"></script>
+
+</head>
+<body>
+
+    <script>
+
+        //var tokenActual = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc3VhcmlvSUQiOjEsIk5vbWJyZVVzdWFyaW8iOiJzYW1BZG1pbiIsIkNvbnRyYXNlbmFIYXNoIjoic2FtYWRtaW4iLCJQZXJmaWxJRCI6MSwiQmxvcXVlYWRvUG9yQWRtaW5pc3RyYWNpb24iOmZhbHNlLCJBY3Rpdm8iOnRydWUsImV4cCI6MTQzNDA0MTM3MX0.p9tzPtHNim5VbIy4y5FhJh1X0JVIuSgMCdf2Jum2Oao";
+
+        //var dataReturned;
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+        //var projects = [1, 2, 3, 4];
+
+        //client.add('proyecto');
+
+        //client.proyecto.read({ username: "YWRtaW4", token: "RXN0ZUVzVW5Ub2tlbkdlbmVyYWRvRGVBbGd1bmFNYW5lcmE" }).done(function (data) {
+        //    console.log(data);
+        //});
+        //client.proyecto.create({ proys: projects }, { proys: projects, username: "YWRtaW4", token: "RXN0ZUVzVW5Ub2tlbkdlbmVyYWRvRGVBbGd1bmFNYW5lcmE" }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //client.add("Perfil");
+        //client.Perfil.read({ token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc3VhcmlvSUQiOjEsIk5vbWJyZVVzdWFyaW8iOiJzYW1BZG1pbiIsIkNvbnRyYXNlbmFIYXNoIjoic2FtYWRtaW4iLCJQZXJmaWxJRCI6MSwiQmxvcXVlYWRvUG9yQWRtaW5pc3RyYWNpb24iOmZhbHNlLCJBY3Rpdm8iOnRydWUsImV4cCI6MTQzMzg4OTE1N30.g8Z0YxMoUribLoRfRQ54f3FybaB-rbbI2povvU417L8", pageName: "Login" }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //var client = new $.RestClient('http://10.15.2.12:8080/backendsam/api/');
+        //client.add("Plana");
+        //client.Plana.read({ token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //client.Plana.create({ Placas: "XXX-00-01", CamionID: "1", Unidad: "125", Modelo: "2015" }, { token: tokenActual }).done(function (data) {
+        //    var json = JSON.stringify(data);
+        //    alert(json);
+        //    console.log(data);
+        //});
+
+        //client.Plana.update({ PlanaID: "3", CamionID: "2", Placas: "YXZ-11-22" }, { token: tokenActual }).done(function (data) {
+        //    var json = JSON.stringify(data);
+        //    alert(json);
+        //    console.log(data);
+        //});
+
+        //client.Plana.destroy({}, { PlanaID: "3", token: tokenActual }).done(function (data) {
+        //    var json = JSON.stringify(data);
+        //    alert(json);
+        //    console.log(data);
+        //});
+
+        //var tokenActual = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc3VhcmlvSUQiOjEsIk5vbWJyZVVzdWFyaW8iOiJzYW1BZG1pbiIsIkNvbnRyYXNlbmFIYXNoIjoic2FtYWRtaW4iLCJQZXJmaWxJRCI6MSwiQmxvcXVlYWRvUG9yQWRtaW5pc3RyYWNpb24iOmZhbHNlLCJBY3Rpdm8iOnRydWUsImV4cCI6MTQzNDQ3MzIzOX0.t1gD6UMiFoIFphTQWWLuArCiL0NKcVc3hIcJectZlWI";
+
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+
+        //client.add("Transportista");
+
+        //client.Transportista.read({ token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //var json = { "ContactoID": "12", "Nombre": "a", "Descripcion": "a", "Direccion": "a", "Telefono": "a" };
+        //var result = JSON.stringify(json);
+
+        //client.Transportista.create({ "ContactoID": "12", "Nombre": "a", "Descripcion": "a", "Direccion": "a", "Telefono": "a" }, { token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //client.Transportista.update({
+        //    ContatoID: "1",
+        //    Nombre: "Transportista de prueba Editado",
+        //    Descripcion: "Pruebas 02",
+        //    Direccion: "Av. Vasconcelos 124, Tampiquito, San Pedro Garza Garcia. Cp. 66240",
+        //    Telefono: "81922554"
+        //}, { token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //client.Transportista.destroy({}, { trasnportistaID: "", token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        ////var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+        //client.add("Proveedor");
+
+        //client.Proveedor.read({ token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //client.Proveedor.create({
+        //    ContactoID: "1",
+        //    Nombre: "Proveedor prueba 01",
+        //    Descripcion: "Proveedro de pruebas",
+        //    Direccion: "Av. Jose Vasconceslos 124",
+        //    Telefono: "81922554"
+        //}, { token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //client.Proveedor.update({
+        //    ContactoID: "1",
+        //    Nombre: "Proveedor prueba 01",
+        //    Descripcion: "Proveedro de pruebas Editado",
+        //    Direccion: "Av. Jose Vasconceslos 124 Editado",
+        //    Telefono: "81922554"
+        //}, { token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //client.Proveedor.delete({}, { trasnportistaID: "", token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+        //var tokenActual = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc3VhcmlvSUQiOjExMSwiTm9tYnJlVXN1YXJpbyI6ImZhYmlvbGEubW9yYW4iLCJDb250cmFzZW5hSGFzaCI6IlEyZENsV1FGTmpNcDV0OGZyVVJjSjVrR2xnWVg5UklkLzg1RE9pNWluMGR1WTk0Qm9YRksxMzU5TWVEL0QrQnEiLCJQZXJmaWxJRCI6NCwiQmxvcXVlYWRvUG9yQWRtaW5pc3RyYWNpb24iOmZhbHNlLCJBY3Rpdm8iOnRydWUsImV4cCI6MTQ1NTgyMzQyMX0.ihZwlqzzRsTENQ0U197kxsajDAjS8UvMC6RUzbGDISI";
+
+        //client.add("Patio");
+
+        //client.Patio.read({ esAvisoEntrada: 1, token: tokenActual, paginaID: 4 }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //client.Patio.create({
+        //    Nombre: "Patio Pruebas",
+        //    Propietario: "Sam 3.0",
+        //    Descripcion: "Registro de prueba"
+        //}, { token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //client.Patio.update({
+        //    Nombre: "Patio Pruebas Editado",
+        //    Propietario: "Sam 3.0 Editado",
+        //    Descripcion: "Registro de prueba Editado"
+        //}, { token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //client.Patio.destroy({}, { trasnportistaID: "", token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //$(document).ready(function () {
+
+        //var tokenActual = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc3VhcmlvSUQiOjEsIk5vbWJyZVVzdWFyaW8iOiJzYW1BZG1pbiIsIkNvbnRyYXNlbmFIYXNoIjoic2FtYWRtaW4iLCJQZXJmaWxJRCI6MSwiQmxvcXVlYWRvUG9yQWRtaW5pc3RyYWNpb24iOmZhbHNlLCJBY3Rpdm8iOnRydWUsImV4cCI6MTQzNDY2MzQzN30.ZU2E8v29beNG9OKmXH9t0x7eZlJeZQ5Sf3o7NX0SmCI";
+
+        //var json = { "FolioLlegadaID": "-1", "FolioAvisoLlegadaID": "1022", "Patio": [{ "PatioID": "1002", "Nombre": "" }], "Proyectos": [{ "ProyectoID": -1 }], "Proveedor": [{ "ProveedorID": "-1", "Nombre": "" }], "FechaInicial": "", "FechaFinal": "", "token": "123456" };
+
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+
+        //client.add("AvisoLlegada");
+
+        //var json = { "FolioLlegadaID": "-1", "FolioAvisoLlegadaID": "1", "Patio": [{ "PatioID": "1", "Nombre": "Plaza Real" }], "Proyectos": [{ "ProyectoID": 1 }], "Proveedor": [{ "ProveedorID": "1", "Nombre": "Femsa" }], "FechaInicial": "2015-6-15", "FechaFinal": "2015-6-19", "token": "123456" };
+
+        //client.AvisoLlegada.read({ data: JSON.stringify(json) }).done(function (data) { console.log(data) });
+
+        //client.AvisoLlegada.read({avisoLlegadaID: 1010, token: tokenActual}).done(function (data){
+        //    console.log(JSON.stringify(data));
+        //});
+
+        //client.AvisoLlegada.create(json, { token: tokenActual }).done(function (data) {
+        //    console.log(data);
+        //});
+
+        //client.AvisoLlegada.update(json, { token: tokenActual }).done(function (data) { console.log(data); });
+
+        //var json = {
+        //    "FolioLlegadaID": "-1",
+        //    "FolioAvisoLlegadaID": "-1",
+        //    "PatioID": "1",
+        //    "ClienteID": "",
+        //    "FechaInicial": "2015-5-1",
+        //    "FechaFinal": "2015-10-1",
+        //    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc3VhcmlvSUQiOjEsIk5vbWJyZVVzdWFyaW8iOiJzYW1BZG1pbiIsIkNvbnRyYXNlbmFIYXNoIjoic2FtYWRtaW4iLCJQZXJmaWxJRCI6MSwiQmxvcXVlYWRvUG9yQWRtaW5pc3RyYWNpb24iOmZhbHNlLCJBY3Rpdm8iOnRydWUsImV4cCI6MTQzNTc4NDI1NH0.2im1vI_SizhDny7u18ozIkfsTrfu5MGywf3x6Nflzog",
+        //    "Creados": true,
+        //    "SinPermiso": false,
+        //    "SinAutorizacion": false,
+        //    "Completos": false,
+        //    "TipoListado": 7,
+        //    "TipoMaterialID": 1,
+        //    "ItemCodeID": -1
+        //};
+
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+        //client.add("Listado");
+        //client.Listado.read({ data: JSON.stringify(json)}).done(function (data) { console.log(data) });
+
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+
+        //client.add("Cliente");
+
+        //client.Cliente.read({"token": '123456'}).done(function (data) { console.log(data); });
+
+        //client.add("PermisoAduana");
+        //client.PermisoAduana.read({ folio: 1029 }).done(function (data) { console.log(data) });
+        //client.PermisoAduana.create({}, { numeroPermiso: 130313, nombre: "DocumentoPrueba", extension: ".docx", folio: 8, documentoID: 0, token: tokenActual }).done(function (data) { console.log(data); });
+
+
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+
+        //client.add("FolioAvisoEntrada");
+        //var json = {"FolioLlegadaID":"1010","FolioAvisoLlegadaID":"-1","PatioID":"","ClienteID":"","FechaInicial":"2014-8-4","FechaFinal":"2015-8-4","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc3VhcmlvSUQiOjEsIk5vbWJyZVVzdWFyaW8iOiJzYW1BZG1pbiIsIkNvbnRyYXNlbmFIYXNoIjoic2FtYWRtaW4iLCJQZXJmaWxJRCI6MSwiQmxvcXVlYWRvUG9yQWRtaW5pc3RyYWNpb24iOmZhbHNlLCJBY3Rpdm8iOnRydWUsImV4cCI6MTQzODcyNjkzM30.gDGFqO-xLWKCvvDj6zwkCjQ-Ys0WBtWEzZaVo3gCFaI","PorLlegar":false,"PorDescargar":true,"PorSalir":false};
+
+        //client.FolioAvisoEntrada.read({folio: 1010, token: ""}).done(function (data) {console.log(data)});
+
+
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+
+        //client.add("TipoUso");
+        //client.TipoUso.read({ token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("FoliosCuantificacion");
+        //client.FoliosCuantificacion.read({ token: "" }).done(function (data) { console.log(data) });
+
+        //Obtener Folio Cuantificacion
+        //client.FoliosCuantificacion.read({ token: "", avisoEntrada: 15 }).done(function (data) { console.log(data) });
+
+        //client.add("ProyectosCuantificacion");
+        //client.ProyectosCuantificacion.read({ token: "", avisoLlegada: 1019 }).done(function (data) { console.log(data) });
+
+        //client.add("ObtenerDatosFolioAvisoEntrada");
+        //client.ObtenerDatosFolioAvisoEntrada.read({ token: "", avisoEntrada: 15, folioCuantificacion: 2 }).done(function (data) { console.log(data) });
+
+        //client.add("CargarGridCuantificacion");
+        //client.CargarGridCuantificacion.read({ token: "", avisoEntrada: 15, folioCuantificacion: 2/*, bultoID: 1*/ }).done(function (data) { console.log(data) });
+
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+
+        //var json = [{ "ID": 520 }, { "ID": 70 }, { "ID": 50 }, { "ID": 60 }, { "ID": 566 }];
+        //var token = "22sd5fs1g5sd3f1sa5df3sd21f";
+
+        //client.add("OrdenRecepcion");
+        //client.OrdenRecepcion.create({"enteros": json},{"token": token});
+
+        //client.add("Familia");
+        //client.Familia.read({ token: "" }).done(function (data) { console.log(data) });
+
+        //var ColadaModal = { FabricanteID: "", AceroID: "", ProyectoID: "", NumeroColada: "", NumeroCertificado: "", HoldCalidad: "" };
+        //ColadaModal.FabricanteID = 1;
+        //ColadaModal.AceroID = 1;
+        //ColadaModal.ProyectoID = 1;
+        //ColadaModal.NumeroColada = "1";
+        //ColadaModal.NumeroCertificado = "2";
+        //ColadaModal.HoldCalidad = true;
+
+        //client.add("Colada");
+        //client.Colada.create({}, { data: JSON.stringify(ColadaModal), token: "24154532" }).done(function (data) { console.log(data) });
+
+        //var ItemCode = { ProyectoID: "", TipoPackingList: "", ColadaID: "", ItemCode: "", Descripcion: "", FamiliaID: "" };
+        //ItemCode.ProyectoID = 1;
+        //ItemCode.TipoPackingList = 2;
+        //ItemCode.ColadaID = 1;
+        //ItemCode.ItemCode = "7894512";
+        //ItemCode.Descripcion = "Brida";
+        //ItemCode.FamiliaID = 1;
+
+        //client.add("ItemCode");
+        //client.ItemCode.read({ itemCodeID: "2", token: "" }).done(function (data) { console.log(data) });
+        //client.ItemCode.create({}, { data: JSON.stringify(ItemCode), token: "24154532" }).done(function (data) { console.log(data) });
+
+        //client.add("ItemCodeSteelgo");
+        //client.ItemCodeSteelgo.read({}, { itemID: 2, token: "" }).done(function (data) { console.log(data) });
+
+
+        //client.add("ValidarItemCodeNuCuantificacion");
+        //client.ValidarItemCodeNuCuantificacion.read({ folioAvisoLlegadaID: 2, folioCuantificacionID: 2, ItemCode: 2, BultoID: 1, token: "" }).done(function (data) { console.log(data) });
+
+        //client.ValidarItemCodeNuCuantificacion.destroy({},{ folioAvisoLlegadaID: 2, folioCuantificacionID: 2, BultoID: -1, ItemCode: 1, token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("CambiarEstatusCuantificacion");
+        //client.CambiarEstatusCuantificacion.update({}, { FolioCuantificacion: 2, AvisoEntrada: 15, bultoID: 1, token: "" }).done(function (data) { console.log(data) });
+
+
+        //var UpdateCuantificacion = { FolioAvisollegadaId: "", ProyectoID: "", FolioCuantificacionID: "", BultoID: "", PackingList: "", TipoPackingList: "", TipoUso: "" };
+        //UpdateCuantificacion.FolioAvisollegadaId = 14;
+        //UpdateCuantificacion.ProyectoID = 1;
+        //UpdateCuantificacion.FolioCuantificacionID = 3;
+        //UpdateCuantificacion.BultoID = null;
+        //UpdateCuantificacion.PackingList = "88888";
+        //UpdateCuantificacion.TipoPackingList = 2;
+        //UpdateCuantificacion.TipoUso = 1;
+
+        //client.add("GuardarFolioLlegadaCuantificacion");
+        //client.GuardarFolioLlegadaCuantificacion.update({}, { data: JSON.stringify(UpdateCuantificacion), token: "", idGuardado: 1 }).done(function (data) { console.log(data) });
+        //client.GuardarFolioLlegadaCuantificacion.create({},{ data: JSON.stringify(UpdateCuantificacion), token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("ListadoCuantificacion");
+        //client.ListadoCuantificacion.update({}, { cerrar: true, incompletos: true, FolioAvisollegadaId: 4058, FolioCuantificacionID: 18, cuantificacion: '[{ "ItemCode" : "16", "ItemCodeCodigo" : "AJF18486", "ItemCodeSteelgoCodigo" : "C-0003" ,"BultoID":"","Descripcion":"ICS3","D1":6,"D2":3,"ItemCodeSteelgo" : "3", "FamiliaMaterial" : "Familia acero 1", "Cedula":"cedula 3", "TipoAcero" : "Familia Prueba 2" , "Colada":"Coldada Default","Cantidad":150,"MM":18,"Detallar":"No", "Peso": "12", "TipoMaterial" : "1", "TieneNU":false,"TieneError":false}]', token: "", idGuardado: 3 }).done(function (data) { console.log(data) });
+
+        //client.add("NumeroUnico");
+        //client.NumeroUnico.read({}, { "ordenrecepcionID": 6, "Token": "154654df3sd4f36sd54f6s54f" });
+
+        //client.add("Colada");
+        //client.Colada.read({}, { "itemCodeID": "2", "token": "", "id" : 1 }).done(function (data) { console.log(data) });
+
+        /*
+        var orden = { ProyectoID: "", FolioCuantificacionID: "", ItemCodeID: "", NumeroUnico: "" };
+        orden.ProyectoID = "";
+        orden.FolioCuantificacionID = "";
+        orden.ItemCodeID = "";
+        orden.NumeroUnico = "";*/
+
+        //Listado = { ItemCodeID: 6, TipoListado: "21", token: "" };
+
+        //client.add("Listado");
+        //client.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (data) { console.log(data) });
+
+        //var OrdenAlmacenaje = { ID: "", Folios: "", NumerosUnicos: "" };
+        //OrdenAlmacenaje.listaFoliosCuantificacion = 130;
+        //OrdenAlmacenaje.listaItemCodes = 34;
+        //OrdenAlmacenaje.listaNumerosUnicos = 1050;
+
+        //client.add("GenerarOrdenAlmacenaje");
+        //client.GenerarOrdenAlmacenaje.create({}, { OrdenAlmacenaje: OrdenAlmacenaje, token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("ListadoCuantificacion");
+        //client.ListadoCuantificacion.update({}, { cerrar: true, incompletos: true, FolioAvisollegadaId: 4058, FolioCuantificacionID: 18, cuantificacion: '[{ "ItemCode" : "16", "ItemCodeCodigo" : "AJF18486", "ItemCodeSteelgoCodigo" : "C-0003" ,"BultoID":"","Descripcion":"ICS3","D1":6,"D2":3,"ItemCodeSteelgo" : "3", "FamiliaMaterial" : "Familia acero 1", "Cedula":"cedula 3", "TipoAcero" : "Familia Prueba 2" , "Colada":"Coldada Default","Cantidad":150,"MM":18,"Detallar":"No", "Peso": "12", "TipoMaterial" : "1", "TieneNU":false,"TieneError":false}]', token: "", idGuardado: 3 }).done(function (data) { console.log(data) });
+
+
+        //client.add("FoliosCuantificacion");
+        //client.FoliosCuantificacion.destroy({}, {
+        //    folioCuantificacion: 131,
+        //    data: '[{ "ItemCode" : "", "ItemCode" : "AJF18486", "ItemCodeSteelgo" : "" ,"BultoID":"","Descripcion":"ICS3","D1":6,"D2":3,"ItemCodeSteelgo" : "3", "FamiliaMaterial" : "Familia acero 1", "Cedula":"cedula 3", "TipoAcero" : "Familia Prueba 2" , "Colada":"Coldada Default","Cantidad":150,"MM":18,"Detallar":"No", "Peso": "12", "TipoMaterial" : "1", "TieneNU":false,"TieneError":false},{ "ItemCode" : "", "ItemCode" : "PRB-002", "ItemCodeSteelgo" : "" ,"BultoID":"","Descripcion":"ICS3","D1":6,"D2":3,"ItemCodeSteelgo" : "3", "FamiliaMaterial" : "Familia acero 1", "Cedula":"cedula 3", "TipoAcero" : "Familia Prueba 2" , "Colada":"Coldada Default","Cantidad":150,"MM":18,"Detallar":"No", "Peso": "12", "TipoMaterial" : "1", "TieneNU":false,"TieneError":false}]',
+        //    token: ""
+        //}).done(function (data) { console.log(data) });
+
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+        //client.add("ComplementarRecepcion");
+        //client.ComplementarRecepcion.read({}, { "folio": 1010, "token": "" }).done(function (data) { console.log(data) });
+     
+
+        //var UpdateCuantificacion = { FolioAvisollegadaId: "", ProyectoID: "", FolioCuantificacionID: "", BultoID: "", PackingList: "", TipoPackingList: "", TipoUso: "" };
+        //UpdateCuantificacion.FolioAvisollegadaId = 14;
+        //UpdateCuantificacion.ProyectoID = 1;
+        //UpdateCuantificacion.FolioCuantificacionID = 3;
+        //UpdateCuantificacion.BultoID = null;
+        //UpdateCuantificacion.PackingList = "88888";
+        //UpdateCuantificacion.TipoPackingList = 2;
+        //UpdateCuantificacion.TipoUso = 1;
+
+        //var listado = { PatioID: "", ProyectoID: "",FolioCuantificacionID : "", FolioPackingListID: "", TipoListado : "", token: "" }
+        //listado.PatioID = "-1";
+        //listado.ProyectoID = "-1";
+        //listado.FolioCuantificacionID = "-1";
+        //listado.FolioPackingListID = "-1";
+        //listado.TipoListado = "22";
+        //listado.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc3VhcmlvSUQiOjEsIk5vbWJyZVVzdWFyaW8iOiJzYW1BZG1pbiIsIkNvbnRyYXNlbmFIYXNoIjoic2FtYWRtaW4iLCJQZXJmaWxJRCI6MSwiQmxvcXVlYWRvUG9yQWRtaW5pc3RyYWNpb24iOmZhbHNlLCJBY3Rpdm8iOnRydWUsImV4cCI6MTQ0MjUyNDg3NH0.kJPjhgYf04vNPLpFb9o8ao4VUdhxQ6SmuOvaPwfvQ7Y";
+
+        //client.add("Listado");
+        //client.Listado.read({}, { data: JSON.stringify(listado) }).done(function (data) { console.log(data) });
+        //client.add("ListadoMateriales");
+        //client.ListadoMateriales.read({}, { FolioCuantificacion: 1037, token: "" }).done(function (data) { console.log(data) });
+
+        //client.ListadoMateriales.read({}, { NumeroUnicoID: 2465, TipoGrid: 1, token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("DetalleNumeroUnico");
+        //client.DetalleNumeroUnico.read({}, { NumeroUnicoID: 1501, token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("ListadoMaterialesPorItemCode");
+        //client.ListadoMaterialesPorItemCode.read({}, { proyectoID: "1", token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("Despacho");
+        ////client.AdministracionCatalogos.read({}, { token: "" }).done(function (data) { console.log(data) });
+        //client.Despacho.read({}, { "ordenTrabajoSpoolID": 31769, "token": "131313211331" }).done(function (data) { console.log(data) });
+
+        //client.add("OrdenTrabajoSpool");
+        //client.OrdenTrabajoSpool.read({}, { "proyectoID": 17, "busqueda": "x6", "token": "121331" }).done(function (data) { console.log(data) });
+
+
+        //var listado = { Nombre: "", Propietario: "", Descripcion: "", RequierePermisoAduana: "" }
+        ////listado.PatioID = "2";
+        //listado.Nombre = "Sam 3";
+        //listado.Propietario = "Patio de Sam 3";
+        //listado.Descripcion = "Patio de Sam 3";
+        //listado.RequierePermisoAduana = "true";
+
+        //client.add("AdministracionCatalogos");
+        //client.AdministracionCatalogos.create({}, { data: JSON.stringify(listado), catalogoID: "1", token: "" }).done(function (data) { console.log(data) });
+
+        //var listado = [{ CedulaID: "", Diametro: "8", CedulaA: "", CedulaB: "", CedulaC: "", CedulaIn: "", CedulaMM: "", Espesor: "33.0000" },
+        //    { CedulaID: "", Diametro: "2", CedulaA: "", CedulaB: "", CedulaC: "31#", CedulaIn: "15", CedulaMM: "", Espesor: "33.0000" }];
+       
+        //var listado = { CedulaID: "", Diametro: "", CedulaA: "150", CedulaB: "", CedulaC: "", CedulaIn: "", CedulaMM: "", Espesor: "" };
+         
+        //console.log(JSON.stringify(listado));
+
+        //client.add("CatalogoICSteelgo");
+        //client.CatalogoICSteelgo.read({}, { data: JSON.stringify(listado), token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("Cedulas");
+        //client.Cedulas.read({}, { catalogoID: "11", token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("AsociacionICS");
+        //client.AsociacionICS.read({}, { data: JSON.stringify(listado), token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("AdministracionCatalogos");
+        //client.AdministracionCatalogos.create({}, { data: JSON.stringify(listado), catalogoID: "11", token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("NotificacionDeficit");
+        //client.NotificacionDeficit.read({}, { ordenTrabajoID: 2291, itemCodeID: 21545, token: "" }).done(function (data) { console.log(data) });
+
+        //client.add("RevisionDeficit");
+        //client.RevisionDeficit.read({}, { ordenTrabajo: 4411, token: "" }).done(function (data) { console.log(data) });
+
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+        //client.add("Despacho");
+        //client.Despacho.read({}, { "materialSpoolID": 509340, "token": "123456789" }).done(
+        //    function (data) { console.log(data) }
+        //    );
+
+        //client.add("PreDespacho");
+        //client.PreDespacho.read({}, { spoolID: 21562, token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc3VhcmlvSUQiOjEsIk5vbWJyZVVzdWFyaW8iOiJzYW1BZG1pbiIsIkNvbnRyYXNlbmFIYXNoIjoic2FtYWRtaW4iLCJQZXJmaWxJRCI6MSwiQmxvcXVlYWRvUG9yQWRtaW5pc3RyYWNpb24iOmZhbHNlLCJBY3Rpdm8iOnRydWUsImV4cCI6MTQ0NTYxMzE3Nn0.lwrTZEJ6mt5O-k9JDJzUlraR60dQWDOXJQoNcR2QQYk" }).done(function (data) { console.log(data) });
+
+        //var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+        //client.add("Reporte");
+        //client.Reporte.read({}, { folio: 3, token: "123456" }).done(function (data) { console.log(data) });
+
+        var client = new $.RestClient('http://localhost:60960/backendsam/api/');
+
+        var listado = { "Diametro1": "2", "Diametro1ID": "1", "EspesorMM": "", "EspesorIn": "" }
+        //var listado = { "Diametro1": "24", "Diametro1ID": "1", "EspesorMM": "", "EspesorIn": "0.5000" }
+        //listado.OrdenRecepcionID = "1004";
+        //listado.TipoListado = "32";
+
+        client.add("ItemCode");
+        client.ItemCode.read({}, { itemCodeID: 10, proyectoId: 3, token: "3216354698765463131" }).done(function (data) { console.log(data) });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,669 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard - Aviso Llegada";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="DashboardAvisoLlegada0001"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("DashboardAvisoLlegada", "AvisoLlegada")"><span id="DashboardAvisoLlegada0011"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("DashboardAvisoLlegada", "AvisoLlegada")"><span id="DashboardAvisoLlegada0002"></span></a>
+    </li>
+}
+
+<div class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav filtersFields clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-1">
+                        <div class="button-section">
+                            <button id="Nuevo" type="button" class="btn btn-yellow"><span id="DashboardAvisoLlegada0003"></span></button>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10 filter-section">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                                <label id="DashboardAvisoLlegada0005"></label>
+                                <input id="PatioID" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                                <label id="DashboardAvisoLlegada0004"></label>
+                                <input id="ClienteID" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                                <label id="DashboardAvisoLlegada0006"></label>
+                                <input id="FechaInicial" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                                <label id="DashboardAvisoLlegada0007"></label>
+                                <input id="FechaFinal" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                                <label id="DashboardLlegadaMaterial0015"></label>
+                                <input id="PeriodoTiempo" class="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="btn-group col-xs-12 col-sm-12 col-md-12 col-lg-12" role="group" arial-label="tabs">
+                    <button id="btnCreados" class="btn btn-tab">
+                        <label id="ListadoAvisoLlegada0022"></label>
+                        <span id="spanCreados"></span>
+                    </button>
+                    <button id="btnSinPermiso" class="btn btn-tab">
+                        <label id="ListadoAvisoLlegada0023"></label>
+                        <span id="spanSinPermiso"></span>
+                    </button>
+                    <button id="btnSinAutorizacion" class="btn btn-tab active">
+                        <label id="ListadoAvisoLlegada0024"></label>
+                        <span id="spanSinAutorizacion"></span>
+                    </button>
+                    <button id="btnCompletos" class="btn btn-tab">
+                        <label id="ListadoAvisoLlegada0025"></label>
+                        <span id="spanCompletos"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 folioGraphs hidden">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="canvas-frame">
+                                <canvas id="ChartBar" width="538" height="243"></canvas>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="canvas-frame">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <canvas id="ChartPie" width="259" height="243"></canvas>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <div class="percentData">
+                                            <div>
+                                                <span id="spanPorcentajeCompletos" class="percentLabel"></span>
+                                                <span id="DashboardAvisoLlegada0008"></span>
+                                            </div>
+                                            <div>
+                                                <span id="spanPorcentajeSinAutorizacion" class="percentLabel"></span>
+                                                <span id="DashboardAvisoLlegada0009"></span>
+                                            </div>
+                                            <div>
+                                                <span id="spanPorcentajeSinPermiso" class="percentLabel"></span>
+                                                <span id="DashboardAvisoLlegada0010"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    @section JavascriptDocumentReadyHomeCookie {
+        Cookies.set("home", true, { path: '/' });
+        Cookies.set("navegacion", "9", { path: '/' });
+    }
+    @section JavascriptGlobalVariables {
+        var Patio = {}, Cliente = {};
+        var FechaInicial, FechaFinal, PeriodoTiempo, myBarChart, myPieChart;
+        var $AvisoLLegadaModel = {
+            listContainer: {
+                create: "#Nuevo",
+                list: ".btn-group",
+                detail: ".graphContainer",
+                destroy: ""
+            },
+            properties: {
+            }
+        };
+    }
+
+    @section JavascriptGlobalFunctions {
+
+    function changeLanguageCall() {
+        createPeriodoTiempo();
+    }
+    function createPeriodoTiempo() {
+        $("#PeriodoTiempo").kendoComboBox({
+            dataTextField: "Periodo",
+            dataValueField: "PeriodoID",
+            dataSource: [
+                { "PeriodoID": "1", "Periodo": _dictionary.DashboardLlegadaMaterial0016[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "2", "Periodo": _dictionary.DashboardLlegadaMaterial0017[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "3", "Periodo": _dictionary.DashboardLlegadaMaterial0018[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "4", "Periodo": _dictionary.DashboardLlegadaMaterial0019[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "5", "Periodo": _dictionary.DashboardLlegadaMaterial0020[$("#language").data("kendoDropDownList").value()] }
+            ],
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarPeriodoTiempo(dataItem.PeriodoID) : CargarPeriodoTiempo("");
+                var value = this.value();
+
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    PeriodoTiempo = [];
+                    this.value("");
+                }
+                ObtenerFechasporPeriodo(value);
+
+                CantidadesDelMenuDashboard();
+            },
+            filter: "contains",
+        });
+    }
+
+        function changeDatePickerDateFormat(datePickerOptions) {
+            FechaInicial.setOptions(datePickerOptions);
+            FechaFinal.setOptions(datePickerOptions);
+        };
+
+        function ObtenerAccionesListado(Listado) {
+            $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+                Error(result);
+                
+                $("#spanCreados").html(result.Creados ? result.Creados : 0);
+                $("#spanSinPermiso").html(result.SinPermiso ? result.SinPermiso : 0);
+                $("#spanSinAutorizacion").html(result.SinAutorizacion ? result.SinAutorizacion : 0);
+                $("#spanCompletos").html(result.Completos ? result.Completos : 0);
+
+                $("#spanPorcentajeCompletos").html(result.PorcentajeCompletos ? result.PorcentajeCompletos : 0 + "%");
+                $("#spanPorcentajeSinAutorizacion").html(result.ProcentajeSinAutorizacion ? result.ProcentajeSinAutorizacion : 0 + "%");
+                $("#spanPorcentajeSinPermiso").html(result.PorcentajeSinPermiso ? result.PorcentajeSinPermiso : 0 + "%");
+
+                actualizarGraficaDeBarras(result);
+                actualizarGraficaDePastel(result);
+               
+            });
+        };
+
+        function actualizarGraficaDePastel(result) {
+            myPieChart.segments[0].value = result.PorcentajeCompletos ? result.PorcentajeCompletos : -1;
+            myPieChart.segments[1].value = result.PorcentajeSinPermiso ? result.PorcentajeSinPermiso : 0;
+            myPieChart.segments[2].value = result.ProcentajeSinAutorizacion ? result.ProcentajeSinAutorizacion : 0;
+            myPieChart.update();
+        };
+
+        function limpiarGraficaDePastel() {
+            myPieChart.segments[0].value = -1;
+            myPieChart.segments[1].value = 0;
+            myPieChart.segments[2].value = 0;
+            myPieChart.update();
+        };
+
+        function actualizarGraficaDeBarras(result) {
+            myBarChart.datasets[0].bars[0].value = result.Creados ? result.Creados : 0;
+            myBarChart.datasets[0].bars[1].value = result.SinPermiso ? result.SinPermiso : 0;
+            myBarChart.datasets[0].bars[2].value = result.SinAutorizacion ? result.SinAutorizacion : 0;
+            myBarChart.datasets[0].bars[3].value = result.Completos ? result.Completos : 0;
+            myBarChart.update();
+        };
+
+        function limpiarGraficaDeBarras() {
+            myBarChart.datasets[0].bars[0].value = 0;
+            myBarChart.datasets[0].bars[1].value = 0;
+            myBarChart.datasets[0].bars[2].value = 0;
+            myBarChart.datasets[0].bars[3].value = 0;
+            myBarChart.update();
+        };
+
+        function AccionesListado(accion) {
+            var PatioID = Patio.PatioID ? Patio.PatioID : "";
+            var ClienteID = Cliente.ClienteID ? Cliente.ClienteID : "";
+            var PeriodoID = PeriodoTiempo ? PeriodoTiempo.PeriodoTiempo : "";
+
+            var d = new Date($("#FechaInicial").data("kendoDatePicker").value());
+            var d1 = new Date($("#FechaFinal").data("kendoDatePicker").value());
+
+            if (d.getFullYear() == "1969") {
+                d = new Date();
+                d.setDate(d.getDate() - 30);
+            }
+            if (d1.getFullYear() == "1969") {
+                d1 = new Date();
+            }
+
+            var fechainicial = obtenerFormatoFechaSinHoras(d);
+            var fechafinal = obtenerFormatoFechaSinHoras(d1);
+
+            var url = "@Url.Action("ListadoAvisoLlegada", "AvisoLlegada")";
+            window.location.href = url + "?leng=" + $("#language").data("kendoDropDownList").value() + "&DashBoardAccionListado=" + accion + "&DashPatioID=" + PatioID + "&DashClienteID=" + ClienteID + "&DashFechaInicial=" + fechainicial + "&DashFechaFinal=" + fechafinal + "&DashPeriodo=" + PeriodoID;
+
+        };
+
+        function CargarPatio(id, value) {
+            Patio = {};
+            Patio = { PatioID: id, Nombre: value };
+        };
+
+        function CargarCliente(id, value) {
+            Cliente = {};
+            Cliente = { ClienteID: id, Nombre: value };
+        };
+
+        function CargarPeriodoTiempo(id) {
+            PeriodoTiempo = {};
+            PeriodoTiempo = { PeriodoTiempo: id };
+        }
+
+        function ObtenerPatio() {
+            $Patio.Patio.read({ esAvisoEntrada: 0, paginaID: Cookies.get("navegacion"), token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox("PatioID", result);
+            });
+        };
+
+        function ObtenerCliente() {
+            $Cliente.Cliente.read({ token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox("ClienteID", result);
+            });
+        };
+
+        function ObtenerFechasporDefecto() {
+            var fechaFinal = new Date();
+            var fechainicio = new Date(fechaFinal.getTime() - (7 * 24 * 3600 * 1000));
+
+            if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+                format = "dd/MM/yyyy";
+            } else {
+                format = "MM/dd/yyyy";
+            };
+
+            var curr_date0 = fechainicio.getDate();
+            var curr_month0 = fechainicio.getMonth() + 1; //Months are zero based
+            var curr_year0 = fechainicio.getFullYear();
+
+
+            var curr_date = fechaFinal.getDate();
+            var curr_month = fechaFinal.getMonth() + 1; //Months are zero based
+            var curr_year = fechaFinal.getFullYear();
+
+
+            var fechaInicial = new Date(curr_year0, curr_month0 - 1, curr_date0);
+            var fechFinal = new Date(curr_year, curr_month - 1, curr_date);
+
+            var fechaInicialkendo = kendo.parseDate(fechaInicial, format);
+            var fechaFinalkendo = kendo.parseDate(fechFinal, format);
+
+            $("#FechaInicial").data("kendoDatePicker").value(fechaInicialkendo);
+            $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
+        };
+
+        function ObtenerFechasporPeriodo(id) {
+            var fechaInicio = FechaFinal.value();
+            var fechaFin = FechaFinal.value();
+
+            if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+                format = "dd/MM/yyyy";
+            } else {
+                format = "MM/dd/yyyy";
+            }
+
+            if (!fechaInicio)
+            {
+                var todayInicio = new Date();
+                var curr_dateInicio = todayInicio.getDate();
+                var curr_monthInicio = todayInicio.getMonth() + 1;
+                var curr_yearInicio = todayInicio.getFullYear();
+
+                var todayInicial = new Date(curr_yearInicio, curr_monthInicio - 1, curr_dateInicio);
+                fechaInicio = kendo.parseDate(todayInicial, format);
+            }
+
+            if (!fechaFin)
+            {
+                var todayFinal = new Date();
+                var curr_dateFinal = todayFinal.getDate();
+                var curr_monthFinal = todayFinal.getMonth() + 1;
+                var curr_yearFinal = todayFinal.getFullYear();
+
+                var todayFinal = new Date(curr_yearFinal, curr_monthFinal - 1, curr_dateFinal);
+                fechaFin = kendo.parseDate(todayFinal, format);
+            }
+
+            
+
+            var curr_date = fechaFin.getDate();
+            var curr_month = fechaFin.getMonth() + 1;
+            var curr_year = fechaFin.getFullYear();
+
+            var fechaFinal = new Date(curr_year, curr_month - 1, curr_date);
+            var fechaFinalkendo = kendo.parseDate(fechaFinal, format);
+
+            switch (parseInt(id)) {
+                case 1: //Semana Actual
+                    fechaInicio.setDate(fechaInicio.getDate() - 7);
+                    break;
+                case 2: //Dos Semanas
+                    fechaInicio.setDate(fechaInicio.getDate() - 14);
+                    break;
+                case 3: //Mes
+                    fechaInicio.setMonth(fechaInicio.getMonth() - 1);
+                    break;
+                case 4: //Trimestre
+                    fechaInicio.setMonth(fechaInicio.getMonth() - 3);
+                    break;
+                case 5: //Año
+                    fechaInicio.setFullYear(fechaInicio.getFullYear() - 1);
+                    break;
+                default:
+                    fechaInicio.setDate(fechaInicio.getDate() - 7);
+                    break;
+            }
+
+            var curr_date0 = fechaInicio.getDate();
+            var curr_month0 = fechaInicio.getMonth() + 1;
+            var curr_year0 = fechaInicio.getFullYear();
+
+            var fechaInicial = new Date(curr_year0, curr_month0 - 1, curr_date0);
+
+            var fechaInicialkendo = kendo.parseDate(fechaInicial, format);
+
+            $("#FechaInicial").data("kendoDatePicker").value(fechaInicialkendo);
+            $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
+        }
+
+        function Error(data) {
+            if (data.ReturnCode) {
+                if (data.ReturnCode!=200){
+                    if (data.ReturnCode == 401) {
+                        removeUserSession();
+                    } else {
+                        displayMessage("notificationslabel0009", data.ReturnMessage, '2');
+                        return;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        };
+
+        function CantidadesDelMenuDashboard() {
+            var Listado;
+            Listado = {  PatioID: "", ClienteID: "", FechaInicial: "", FechaFinal: "", token: "", TipoListado: "" };
+
+            //if (!$("#FechaInicial").data("kendoDatePicker").value()) {
+            //    displayMessage("notificationslabel0082", "", '1');
+            //    return;
+            //};
+
+            //if (!$("#FechaFinal").data("kendoDatePicker").value()) {
+            //    displayMessage("notificationslabel0082", "", '1');
+            //    return;
+            //};
+
+            var d = new Date($("#FechaInicial").data("kendoDatePicker").value());
+            var d1 = new Date($("#FechaFinal").data("kendoDatePicker").value());
+
+            if (d.getFullYear() == "1969") {
+                d = new Date();
+                d.setDate(d.getDate() - 30);
+            }
+            if (d1.getFullYear() == "1969") {
+                d1 = new Date();
+            }
+
+            Listado.PatioID = $("#PatioID").data("kendoComboBox").value();
+            Listado.FechaInicial = obtenerFormatoFechaConHora(d);
+            Listado.FechaFinal = obtenerFormatoFechaConHora(d1);
+            Listado.ClienteID = $("#ClienteID").data("kendoComboBox").value();
+            Listado.token = Cookies.get("token");
+            Listado.TipoListado = 4;
+            //console.log("CantidadesDelMenuDashboard: " + JSON.stringify(Listado));
+
+            ObtenerAccionesListado(Listado);
+        };
+
+        function obtenerFormatoFechaSinHoras(d) {
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+
+            if (curr_year == "1969") {
+                return "";
+            } else {
+                return curr_year + "-" + curr_month + "-" + curr_date;
+            }
+        };
+
+        function obtenerFormatoFechaConHora(d) {
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+            
+            var horaActual = new Date();
+
+            if (curr_year == "1969") {
+                return null;
+            } else {
+                return curr_year + "-" + curr_month + "-" + curr_date + " " + horaActual.getHours() + ":" + horaActual.getMinutes() + ":" + horaActual.getSeconds();
+            }
+        };
+
+        function chartBar() {// con la funcion de las cantidadesdashboard llenar la data
+            var ctx = document.getElementById("ChartBar").getContext("2d");
+            var data = {
+                labels: ["Creados", "Sin Permiso", "Sin Autorizacion", "Completos"],
+                datasets: [
+                    {
+                        fillColor: "#305E8E",
+                        strokeColor: "#305E8E",
+                        highlightFill: "#234568",
+                        highlightStroke: "#234568",
+                        data: [0, 0, 0, 0]
+                    }
+                ]
+            };
+
+            myBarChart = new Chart(ctx).Bar(data, {
+                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+                scaleBeginAtZero: true,
+
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines: true,
+
+                //String - Colour of the grid lines
+                scaleGridLineColor: "#F1F1F1",
+
+                //Number - Width of the grid lines
+                scaleGridLineWidth: 1,
+
+                //Boolean - Whether to show horizontal lines (except X axis)
+                scaleShowHorizontalLines: true,
+
+                //Boolean - Whether to show vertical lines (except Y axis)
+                scaleShowVerticalLines: false,
+
+                //Boolean - If there is a stroke on each bar
+                barShowStroke: false,
+
+                //Number - Pixel width of the bar stroke
+                barStrokeWidth: 2,
+
+                //Number - Spacing between each of the X value sets
+                barValueSpacing: 5,
+
+                //Number - Spacing between data sets within X values
+                barDatasetSpacing: 1,
+
+                //String - A legend template
+                legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+            });
+        };
+
+        function chartPie() {
+            var ctx = document.getElementById("ChartPie").getContext("2d");
+            var data = [
+                        {
+                            value: -1,
+                            color: "#305E8E",
+                            highlight: "rgba(48, 94, 142, 0.9)",
+                            label: "Completos"
+                        },
+                        {
+                            value: 0,
+                            color: "#234568",
+                            highlight: "rgba(35, 69, 104, 0.9)",
+                            label: "Sin Autorizacion"
+                        },
+                        {
+                            value: 0,
+                            color: "#225090",
+                            highlight: "rgba(34, 80, 144, 0.9)",
+                            label: "Sin Permiso"
+                        }
+                      ];
+
+            myPieChart = new Chart(ctx).Pie(data, {
+                //Boolean - Whether we should show a stroke on each segment
+                segmentShowStroke: false,
+
+                //String - The colour of each segment stroke
+                segmentStrokeColor: "#F1F1F1",
+
+                //Number - The width of each segment stroke
+                segmentStrokeWidth: 0,
+
+                //Number - The percentage of the chart that we cut out of the middle
+                percentageInnerCutout: 0, // This is 0 for Pie charts
+
+                //Number - Amount of animation steps
+                animationSteps: 100,
+
+                //String - Animation easing effect
+                animationEasing: "easeOutBounce",
+
+                //Boolean - Whether we animate the rotation of the Doughnut
+                animateRotate: true,
+
+                //Boolean - Whether we animate scaling the Doughnut from the centre
+                animateScale: false,
+
+                //String - A legend template
+                legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+
+            });
+        };
+
+        function ControlErroresObjetosComboBox(control, result) {
+            if (Error(result)) {
+                $("#" + control).data("kendoComboBox").dataSource.data(result);
+            } else {
+                $("#" + control).data("kendoComboBox").dataSource.data([]);
+            };
+        };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+
+    $authorizationModel["Aviso Entrada"] = $AvisoLLegadaModel;
+
+        //carga inicial graficas en cero
+        chartBar();
+        chartPie();
+
+        $("#Nuevo").click(function () {
+            var url = "@Url.Action("DetalleAvisoLlegada", "AvisoLlegada")";
+            window.open(url + "?leng=" + $("#language").data("kendoDropDownList").value());
+        });
+
+        //Botones Dashboard
+        $("#btnCreados").click(function () { AccionesListado(1); });
+        $("#btnSinPermiso").click(function () { AccionesListado(2); });
+        $("#btnSinAutorizacion").click(function () { AccionesListado(3); });
+        $("#btnCompletos").click(function () { AccionesListado(4); });
+
+
+        $("#PatioID").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "PatioID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarPatio(dataItem.PatioID, dataItem.Nombre) : CargarPatio("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Patio = [];
+                    this.value("");
+                }
+                CantidadesDelMenuDashboard();
+               
+            },
+            filter: "contains",
+        });
+        ObtenerPatio();
+
+        $("#ClienteID").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "ClienteID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarCliente(dataItem.ClienteID, dataItem.Nombre) : CargarCliente("", "");
+                var value = this.value();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Cliente = [];
+                    this.value("");
+                }
+
+                CantidadesDelMenuDashboard();
+                
+            },
+            filter: "contains",
+        });
+        ObtenerCliente();
+
+        $("#PeriodoTiempo").kendoComboBox({});
+
+        FechaInicial = new kendo.ui.DatePicker($("#FechaInicial"));
+        FechaFinal = new kendo.ui.DatePicker($("#FechaFinal"));
+
+        $("#FechaInicial").bind("change", function () {
+            if (!$("#FechaInicial").data("kendoDatePicker").value() && this.value!=="") {
+                $("#FechaInicial").css("color","#EB4D50");
+                displayMessage("notificationslabel0082","","2")
+            }else{
+                $("#FechaInicial").attr("style","");
+                CantidadesDelMenuDashboard();
+            }
+        });
+
+        $("#FechaFinal").bind("change", function () {
+            if (!$("#FechaFinal").data("kendoDatePicker").value() && this.value!=="") {
+                $("#FechaFinal").css("color","#EB4D50");
+                displayMessage("notificationslabel0082","","2")
+            }else{
+                $("#FechaFinal").attr("style","");
+                CantidadesDelMenuDashboard();
+            }
+        });
+
+        ObtenerFechasporDefecto();
+        CantidadesDelMenuDashboard();
+    }
+</script>

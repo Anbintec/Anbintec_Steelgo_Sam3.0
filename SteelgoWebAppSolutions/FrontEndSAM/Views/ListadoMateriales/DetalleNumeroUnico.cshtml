@@ -1,0 +1,417 @@
+﻿@{
+    ViewBag.Title = "Listado Materiales Packing List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="DetalleNumeroUnico0001"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("ListadoMateriales", "ListadoMateriales")"><span id="DetalleNumeroUnico0033"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("DetalleNumeroUnico", "ListadoMateriales")"><span id="DetalleNumeroUnico0034"></span></a>
+    </li>
+}
+
+
+<div id="formaDetalleNumeroUnico" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav filtersFields clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 filter-section">
+                        <div class="row">
+                            <div  id="numerounicoDiv" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0002"></label>
+                                <input id="numerounico" class="general-input" disabled />
+                            </div>
+                            <div id="d1Div" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0003"></label>
+                                <input id="d1" class="general-input" disabled />
+                            </div>
+                            <div id="d2Div" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0004"></label>
+                                <input id="d2" class="general-input" disabled />
+                            </div>
+                            <div id="cedulaDiv" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0005"></label>
+                                <input id="cedula" class="general-input" disabled />
+                            </div>
+                            <div id="totalrecibidoDiv" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0006"></label>
+                                <input id="totalrecibido" class="general-input" disabled />
+                            </div>
+                            <div id="totaldañadoDiv" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0007"></label>
+                                <input id="totaldañado" class="general-input" disabled />
+                            </div>
+                            <div id="itemcodeDiv" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0008"></label>
+                                <input id="itemcode" class="general-input" disabled />
+                            </div>
+                            <div id="profile1Div" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0009"></label>
+                                <input id="profile1" class="general-input" disabled />
+                            </div>
+                            <div id="profile2Div" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0010"></label>
+                                <input id="profile2" class="general-input" disabled />
+                            </div>
+                            <div id="totalentradasDiv" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0011"></label>
+                                <input id="totalentradas" class="general-input" disabled />
+                            </div>
+                            <div id="totalsalidasDiv" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0031"></label>
+                                <input id="totalsalidas" class="general-input" disabled />
+                            </div>
+                            <div id="saldoactualDiv" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DetalleNumeroUnico0012"></label>
+                                <input id="saldoactual" class="general-input" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 listado">
+                    <div id="gridSegmentos"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="addedSection clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 listado">
+                            <div id="gridMovimientosInventario"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="CerrarDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a id="Cerrar" href="#" class="btn btn-primary"><span id="DetalleNumeroUnico0032"></span></a>
+        </div>
+    </div>
+</div>
+<script>
+    @section JavascriptGlobalVariables 
+    {
+    var _NumeroUnico= getUrlParameter("NumeroUnico", "-1");
+    var _listadoMateriales = "@Url.Action("ListadoMateriales", "ListadoMateriales")";
+
+
+
+    var $DetalleNumeroUnicoModel = {
+        listContainer: {
+            create: "",
+            list: ".listado",
+            detail: "",
+            destroy: ""
+        },
+        properties: {
+            numerounico: {
+                visible: "#numerounicoDiv",
+                editable: "#numerounico",
+                required: "#numerounico"
+            },
+            diametro1: {
+                visible: "#d1Div",
+                editable: "#d1",
+                required: "#d1"
+            },
+            diametro2: {
+                visible: "#d2Div",
+                editable: "#d2",
+                required: "#d2"
+            },
+            cedula: {
+                visible: "#cedulaDiv",
+                editable: "#cedula",
+                required: "#cedula"
+            },
+            totalrecibido: {
+                visible: "#totalrecibidoDiv",
+                editable: "#totalrecibido",
+                required: "#totalrecibido"
+            },
+            totaldanado: {
+                visible: "#totaldañadoDiv",
+                editable: "#totaldañado",
+                required: "#totaldañado"
+            },
+            itemcode: {
+                visible: "#itemcodeDiv",
+                editable: "#itemcode",
+                required: "#itemcode"
+            },
+            profile1: {
+                visible: "#profile1Div",
+                editable: "#profile1",
+                required: "#profile1"
+            },
+            profile2: {
+                visible: "#profile2Div",
+                editable: "#profile2",
+                required: "#profile2"
+            },
+            totalentradas: {
+                visible: "#totalentradasDiv",
+                editable: "#totalentradas",
+                required: "#totalentradas"
+            },
+            totalsalidas: {
+                visible: "#totalsalidasDiv",
+                editable: "#totalsalidas",
+                required: "#totalsalidas"
+            },
+            saldoactual: {
+                visible: "#saldoactualDiv",
+                editable: "#saldoactual",
+                required: "#saldoactual"
+            }
+        }
+    };
+    }
+    @section JavascriptGlobalFunctions 
+    {
+        function changeLanguageCall() {
+            var tmpS = removeGrid($("#gridSegmentos"));
+            var tmpM = removeGrid($("#gridMovimientosInventario"));
+            CargarGridSegmentos();
+            CargarGridMovimientosInventario();
+            $("#gridSegmentos").data("kendoGrid").dataSource.data(tmpS);
+            $("#gridMovimientosInventario").data("kendoGrid").dataSource.data(tmpM);
+        };
+
+    function CargarGridSegmentos() {
+        $("#gridSegmentos").kendoGrid({
+            dataSource: {
+                schema: {
+                    model: {
+                        fields: {
+                            Segmento: { type: "string" },
+                            Rack: { type: "string" },
+                            TotalRecibido: { type: "string" },
+                            TotalDañado: { type: "string" },
+                            TotalEntradas: { type: "string" },
+                            TotalSalidas: { type: "string" },
+                            SalidasTemporales: { type: "string" },
+                            SaldoActual: { type: "string" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            },
+            autoHeight: true,
+            sortable: true,
+            scrollable: false,
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+            },
+            columns: [
+                { field: "Segmento", title: _dictionary.DetalleNumeroUnico0013[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "Rack", title: _dictionary.DetalleNumeroUnico0014[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "TotalRecibido", title: _dictionary.DetalleNumeroUnico0015[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "TotalDañado", title: _dictionary.DetalleNumeroUnico0016[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "TotalEntradas", title: _dictionary.DetalleNumeroUnico0017[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "TotalSalidas", title: _dictionary.DetalleNumeroUnico0018[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "SalidasTemporales", title: _dictionary.DetalleNumeroUnico0019[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "SaldoActual", title: _dictionary.DetalleNumeroUnico0020[$("#language").data("kendoDropDownList").value()], filterable: true },
+            ],
+            dataBound: function (e) {
+                //$(".k-grid input.k-textbox").prop('readonly', true);
+                $(".k-grid td .k-button").text('');
+                $(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
+                checkTH($("#gridSegmentos").data("kendoGrid"))
+                quickHeadFilter($("#gridSegmentos").data("kendoGrid"));
+            }
+        });
+    };
+
+    function CargaInicial() {
+        ObtenerDetalleNumeroUnico();
+        ObtenerMovimientos();
+        ObtenerSegmentos();
+        $("#Cerrar").click(function () {
+            window.location.href = _listadoMateriales + "?leng=" + $("#language").data("kendoDropDownList").value();
+        });
+    }
+    function CargarGridMovimientosInventario() {
+        $("#gridMovimientosInventario").kendoGrid({
+            dataSource: {
+                schema: {
+                    model: {
+                        fields: {
+                            Fecha: { type: "date" },
+                            Movimiento: { type: "string" },
+                            Segmento: { type: "string" },
+                            Entrada: { type: "string" },
+                            Salida: { type: "string" },
+                            SaldoActual: { type: "string" },
+                            Referencia: { type: "string" }
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            },
+            autoHeight: true,
+            sortable: true,
+            scrollable: false,
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+            },
+            columns: addTo([
+                { field: "Fecha", title: _dictionary.ListaMateriales0007[$("#language").data("kendoDropDownList").value()], filterable: true, format: "{0:dd/MM/yyyy}", },
+                { field: "Movimiento", title: _dictionary.ListaMateriales0008[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "Segmento", title: _dictionary.ListaMateriales0009[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "Entrada", title: _dictionary.ListaMateriales0010[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "Salida", title: _dictionary.ListaMateriales0011[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "SaldoActual", title: _dictionary.ListaMateriales0012[$("#language").data("kendoDropDownList").value()], filterable: true },
+                { field: "Referencia", title: _dictionary.ListaMateriales0013[$("#language").data("kendoDropDownList").value()], filterable: true },
+            ],null),
+            dataBound: function (e) {
+                //$(".k-grid input.k-textbox").prop('readonly', true);
+                $(".k-grid td .k-button").text('');
+                $(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
+                checkTH($("#gridMovimientosInventario").data("kendoGrid"))
+                quickHeadFilter($("#gridMovimientosInventario").data("kendoGrid"));
+            }
+        });
+    }
+    function ObtenerDetalleNumeroUnico() {
+        //loadingStart();
+        $DetalleNumeroUnico.DetalleNumeroUnico.read({}, { NumeroUnicoID: _NumeroUnico, token: Cookies.get("token") }).done(function (result) {
+            if(Error(result)) {
+                $("#numerounico").val(result.NumeroUnico);
+                $("#d1").val(result.D1);
+                $("#d2").val(result.D2);
+                $("#cedula").val(result.Cedula);
+                $("#totalrecibido").val(result.TotalRecibido);
+                $("#totaldañado").val(result.TotalDanado);
+                $("#itemcode").val(result.ItemCode);
+                $("#profile1").val(result.Profile1);
+                $("#profile2").val(result.Profile2);
+                $("#totalentradas").val(result.TotalEntradas);
+                $("#totalsalidas").val(result.TotalSalidas);
+                $("#saldoactual").val(result.SaldoActual);
+
+                //if ($("#gridSegmentos").data("kendoGrid")) {
+                //    if (result.Segmentos.length > 0) {
+                //        $("#gridSegmentos").data("kendoGrid").dataSource.data(result.Segmentos);
+                //        $("#gridSegmentos").data("kendoGrid").dataSource.page(1);
+                //    } else {
+                //        $("#gridSegmentos").data("kendoGrid").dataSource.data([]);
+                //        $("#gridSegmentos").data("kendoGrid").dataSource.page(0);
+                //    };
+                //};
+
+                //if ($("#gridMovimientosInventario").data("kendoGrid")) {
+                //    if (result.Movimientos.length > 0) {
+                //        $("#gridMovimientosInventario").data("kendoGrid").dataSource.data(result.Movimientos);
+                //        $("#gridMovimientosInventario").data("kendoGrid").dataSource.page(1);
+                //    } else {
+                //        $("#gridMovimientosInventario").data("kendoGrid").dataSource.data([]);
+                //        $("#gridMovimientosInventario").data("kendoGrid").dataSource.page(0);
+                //    };
+                //};
+                //AsignarPaginaActualCookie();
+                //applySecurityPolicy(false);
+            };
+            //loadingStop();
+        });
+    };
+    function AsignarPaginaActualCookie() {
+        Cookies.set("navegacion", "23", { path: '/' });
+    }
+    function ObtenerMovimientos() {
+        //loadingStart();
+        $DetalleNumeroUnico.DetalleNumeroUnico.read({}, { NumeroUnicoID: _NumeroUnico, TipoGrid: "1", token: Cookies.get("token") }).done(function (result) {
+            if(Error(result)) {
+                if ($("#gridMovimientosInventario").data("kendoGrid")) {
+                    if (result.length > 0) {
+                        $("#gridMovimientosInventario").data("kendoGrid").dataSource.data(result);
+                        $("#gridMovimientosInventario").data("kendoGrid").dataSource.page(1);
+                    } else {
+                        $("#gridMovimientosInventario").data("kendoGrid").dataSource.data([]);
+                        $("#gridMovimientosInventario").data("kendoGrid").dataSource.page(0);
+                    };
+                };
+                AsignarPaginaActualCookie();
+                applySecurityPolicy(false);
+            }
+            //loadingStop();
+        });
+    };
+
+    function ObtenerSegmentos() {
+        //loadingStart();
+        $DetalleNumeroUnico.DetalleNumeroUnico.read({}, { NumeroUnicoID: _NumeroUnico, TipoGrid: "2", token: Cookies.get("token") }).done(function (result) {
+            if (Error(result)) {
+                if ($("#gridSegmentos").data("kendoGrid")) {
+                    if (result.length > 0) {
+                        $("#gridSegmentos").data("kendoGrid").dataSource.data(result);
+                        $("#gridSegmentos").data("kendoGrid").dataSource.page(1);
+                    } else {
+                        $("#gridSegmentos").data("kendoGrid").dataSource.data([]);
+                        $("#gridSegmentos").data("kendoGrid").dataSource.page(0);
+                    };
+                };
+                AsignarPaginaActualCookie();
+                applySecurityPolicy(false);
+            }
+            //loadingStop();
+        });
+    };
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+
+    }
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Detalle Numero Unico"] = $DetalleNumeroUnicoModel;
+    CargaInicial();
+    
+    
+    }
+
+    @section JavascriptDocumentReadyHomeCookie 
+    {
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "23", { path: '/' });
+    }
+
+</script>

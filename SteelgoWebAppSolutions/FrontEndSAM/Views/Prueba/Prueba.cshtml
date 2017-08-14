@@ -1,0 +1,461 @@
+﻿
+			<div id="Filtros">
+				<label id="testlabel001">Proyecto:</label>
+					<input type="text" id="Proyectos_Nombre_001">
+				<label id="testlabel002">Packing List:</label>
+					<input type="text" id="PackingLists_Consecutivo_001">
+			</div>
+			</br></br>
+			<div id="Planchados">
+				<table>
+					<tr>
+						<td><label id="testlabel001">C&eacute;dula:</label></td>
+						<td><label id="testlabel003">Tipo de Acero:</label></td>
+						<td><label id="testlabel004">Diametro Interior:</label></td>
+						<td><label id="testlabel005">Diametro Exterior:</label></td>
+					</tr>
+					<tr>
+						<td><input type="text" id="PackingListsItemCodes_Cedula_001"></td>
+						<td><input type="text" id="PackingListsItemCodes_TipoAcero_001"></td>
+						<td><input type="text" id="PackingListsItemCodes_Diametro1_001"></td>
+						<td><input type="text" id="PackingListsItemCodes_Diametro2_001"></td>
+					</tr>
+				</table>
+			</div>
+
+		<div id="grid"></div>
+		
+		<script>
+			//global variables
+			var lastEditedCellID = ""; 
+			var ctrlDown = false;
+			var ctrlKey = 17, vKey = 86, cKey = 67;
+			var focusResp = "Proyectos_Nombre_001";
+			var gridDataSource;
+			
+			//Function to overwritte all elements on a given columns
+			function plancharColumna(posicion, contenido){
+				var dataSource = gridDataSource;
+				var filteredDataSource = new kendo.data.DataSource({
+					data: dataSource.data(),
+					filter: dataSource.filter()
+				});
+
+				filteredDataSource.read();
+				var data = filteredDataSource.view();
+				for (var i = 0; i < data.length; i++) {
+					var registro = data[i];
+					registro.set(posicion, contenido);
+				}
+			}
+			
+			//Functions to control the key events of the document
+			//13 enter
+			//17 control
+			//37 left arrow
+			//38 up arrow
+			//39 right arrow
+			//40 down arrow
+			function keydown(e){
+				
+				if(e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40){
+					var elementFocused = $(':focus');
+					var focused = $(':focus').attr("id");
+					var mapeo = "";
+					if(typeof(focused) === 'undefined'){
+						focused = focusResp;
+					}
+					mapeo = mapeoNavegacion[focused][e.keyCode];
+				}
+							
+				switch(e.keyCode){
+					case ctrlKey: 
+						ctrlDown = true; 
+					break;
+					case 13: 
+						var aPlanchar = mapeoPlanchados[focused];
+						if(typeof(focused) !== 'undefined'){
+							plancharColumna(aPlanchar,$("#"+focused).val());
+							$("#"+focused).val("");
+						}
+					break;
+					case 37: case 38: case 39: case 40: 
+						if(ctrlDown){
+							switch(mapeoTiposControles[mapeo]){
+								case 0: 
+									$("#"+mapeo).focus();
+								break;
+								case 1: 
+								break;
+								case 2: 
+									$("#"+mapeo).data("kendoComboBox").input.focus();
+									focusResp = mapeo;
+								break;
+								case 3: 
+								break;
+								case 4:
+									$(".k-grid-add").focus();
+									focusResp = mapeo;
+								break;
+							}
+						}
+					break;
+				}
+				//if (e.keyCode == ctrlKey) ctrlDown = true;
+			}
+			
+			$(document).keydown(function(e)
+			{
+				keydown(e);
+			}).keyup(function(e)
+			{
+				if (e.keyCode == ctrlKey) ctrlDown = false;
+				////console.log("Ctrl ? " + ctrlDown);
+			});
+			
+			//Mappeo de Controles y sus flechas
+			var mapeoNavegacion = 	{
+										"Proyectos_Nombre_001" : 				{37:"Proyectos_Nombre_001", 38:"Proyectos_Nombre_001", 39:"PackingLists_Consecutivo_001", 40:"PackingListsItemCodes_Cedula_001"},
+										"PackingLists_Consecutivo_001" : 		{37:"Proyectos_Nombre_001", 38:"PackingLists_Consecutivo_001", 39:"PackingLists_Consecutivo_001", 40:"PackingListsItemCodes_Diametro1_001"},
+										"PackingListsItemCodes_Cedula_001" : 	{37:"PackingListsItemCodes_Cedula_001", 38:"Proyectos_Nombre_001", 39:"PackingListsItemCodes_TipoAcero_001", 40:"grid"},
+										"PackingListsItemCodes_TipoAcero_001" : {37:"PackingListsItemCodes_Cedula_001", 38:"Proyectos_Nombre_001", 39:"PackingListsItemCodes_Diametro1_001", 40:"grid"},
+										"PackingListsItemCodes_Diametro1_001" : {37:"PackingListsItemCodes_TipoAcero_001", 38:"PackingLists_Consecutivo_001", 39:"PackingListsItemCodes_Diametro2_001", 40:"grid"},
+										"PackingListsItemCodes_Diametro2_001" : {37:"PackingListsItemCodes_Diametro1_001", 38:"PackingLists_Consecutivo_001", 39:"PackingListsItemCodes_Diametro2_001", 40:"grid"},
+										"grid" : 								{37:"grid", 38:"PackingListsItemCodes_Cedula_001", 39:"grid", 40:"grid"},
+										"" : {37:"", 38:"", 39:"", 40:""}
+									};
+			//Mappeo de tipos de Controles
+			//--   Tipos 0 -> Elemento HTML
+			//--   Tipos 1 -> Elemento KendoAutocomplete
+			//--   Tipos 2 -> Elemento KendoComboBox
+			//--   Tipos 3 -> Elemento KendoDropDownList
+			//--   Tipos 4 -> Elemento KendoGrid
+			var mapeoTiposControles =	{
+											"Proyectos_Nombre_001" : 				2,
+											"PackingLists_Consecutivo_001" : 		2,
+											"PackingListsItemCodes_Cedula_001" : 	0,
+											"PackingListsItemCodes_TipoAcero_001" : 0,
+											"PackingListsItemCodes_Diametro1_001" : 0,
+											"PackingListsItemCodes_Diametro2_001" : 0,
+											"grid" : 								4
+										};
+			
+			var mapeoPlanchados = 	{
+										"PackingListsItemCodes_Cedula_001" : 	"cedula",
+										"PackingListsItemCodes_TipoAcero_001" : "tipoAcero",
+										"PackingListsItemCodes_Diametro1_001" : "diametro1",
+										"PackingListsItemCodes_Diametro2_001" : "diametro2"
+									};
+		
+			//Filtros
+			var proyectosJson = [ 
+									{ idPROY:0, nombrePROY:"Proy1" }, 
+									{ idPROY:1, nombrePROY:"Proy2" } 
+								];
+								
+			var packingListsJson = 	[ 
+										{ idPAK:0, idPROY:0, folPAK:"12-1" }, 
+										{ idPAK:1, idPROY:0, folPAK:"12-2" }, 
+										{ idPAK:0, idPROY:1, folPAK:"13-1" }, 
+										{ idPAK:1, idPROY:1, folPAK:"13-2" } 
+									];
+			
+			//Autocompletes
+			var itemCodesJson = [ 
+									{ idIC:0, folIC:"AAAC95792700W"}, 
+									{ idIC:1, folIC:"AAAC95792700X"},
+									{ idIC:2, folIC:"AAAC95792700Y"},
+									{ idIC:3, folIC:"AAAC95792700Z"}
+								];
+			
+			var cedulasJson =	[
+									{ idCED: 0, nomCED:"STD" },
+									{ idCED: 1, nomCED:"RTD" },
+									{ idCED: 2, nomCED:"BTD" }
+								];
+			
+			var tipoAceroJson =	[
+									{ idTAC: 0, nomTAC:"CS" },
+									{ idTAC: 1, nomTAC:"SSXX" },
+									{ idTAC: 2, nomTAC:"SSYY" }
+								];
+			
+			var itemCodesDetail = 	{
+										"AAAC95792700W" : { descIC:"Brida de Cuello Lartgo", familiaIC:"Brida", cedulaIC: "STD", tipoAceroIC: "CS", diametro1IC:15, diametro2IC:0 },
+										"AAAC95792700X" : { descIC:"Sockolet", familiaIC:"Sockolet", cedulaIC: "", tipoAceroIC: "", diametro1IC:0, diametro2IC:9 },
+										"AAAC95792700Y" : { descIC:"Codo 45", familiaIC:"Codo", cedulaIC: "", tipoAceroIC: "", diametro1IC:0, diametro2IC:0 },
+										"AAAC95792700Z" : { descIC:"Codo 90", familiaIC:"Codo", cedulaIC: "", tipoAceroIC: "", diametro1IC:0, diametro2IC:0 }
+									};
+			
+			var dataJson = [];
+			
+			$(document).ready(function () {
+			
+				//Función para abrir el pivot
+				$("#grid").on("click", ".k-grid-Custom", function(e){
+					e.preventDefault();
+					var cookieContent = kendo.stringify( $("#grid").data("kendoGrid").dataSource.view() );
+					//console.log(cookieContent);
+					$.removeCookie("pivotCokie");
+					$.cookie("pivotCokie", cookieContent);
+					window.open("pivot.html");
+					return false;
+				});
+				
+				//Prototype modified to obtain only the data filtered
+				kendo.data.DataSource.prototype.dataFiltered = function () {
+					// Gets the filter from the dataSource
+					var filters = this.filter();
+
+					// Gets the full set of data from the data source
+					var allData = this.data();
+
+					// Applies the filter to the data
+					var query = new kendo.data.Query(allData);
+
+					// Returns the filtered data
+					return query.filter(filters).data;
+				}
+				
+				gridDataSource = new kendo.data.DataSource({
+					data: dataJson,
+                    autoSync: true,
+                    schema: {
+						model: {
+							fields: {
+								itemCode: { editable: true},
+                                descripcion: { editable: false, nullable: true },
+								familia: { editable: false, nullable: true },
+                                cedula: { editable: true },
+								tipoAcero: { editable: true },
+								diametro1: { editable: true, type: "number" },
+								diametro2: { editable: true, type: "number" },
+								cantidad: { editable: true, type: "number" },
+								tieneNU: { editable: false, type: "boolean", defaultValue:false }
+                            }
+                        }
+                    },
+					serverFiltering: false,
+					serverSorting: false,
+					aggregate: [ { field: "familia", aggregate: "count" },
+                                 { field: "cedula", aggregate: "count" },
+                                 { field: "tipoAcero", aggregate: "count" },
+                                 { field: "diametro1", aggregate: "count" },
+								 { field: "diametro2", aggregate: "count" },
+                                 { field: "cantidad", aggregate: "sum" }]
+                });
+				
+				//AutoComplete Proyectos
+                $("#Proyectos_Nombre_001").kendoComboBox({
+                    dataSource: { data: proyectosJson},
+					dataTextField: "nombrePROY",
+					dataValueField: "idPROY",
+                    filter: "contains",
+                    placeholder: "Selecciona Proyecto...",
+                    separator: ", "
+                });
+					
+				//AutoComplete PackingLists
+                $("#PackingLists_Consecutivo_001").kendoComboBox({
+                    dataSource: { data: packingListsJson},
+					cascadeFrom: "Proyectos_Nombre_001",
+					dataTextField: "folPAK",
+					dataValueField: "idPAK",
+                    filter: "contains",
+                    placeholder: "Selecciona Packing List...",
+                    separator: ", "
+                });
+					
+				var grid = $("#grid").kendoGrid({
+					dataSource: gridDataSource,
+					cascadeFrom: "PackingLists_Consecutivo_001",
+					filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+					sortable: true,
+					pageable: false,
+					navigatable: true,
+					groupable: true,
+					editable: "incell",
+					toolbar: [
+						"create", 
+						"save" 
+						//,{ text: "Custom"}
+					],
+					//selectable: "multiple cell",
+					allowCopy: true,
+					change: function(){
+						//console.log("kendo grid change");
+					},
+					columns: [
+						{
+							field: "itemCode",
+							title: "Item Code",
+							editor: itemCodeAutocomplete,
+							filterable: true
+						},
+						{
+							field: "descripcion",
+							title: "Descripci&oacute;n",
+							filterable: false
+						},
+						{
+							field: "familia",
+							title: "Familia",
+							aggregates: ["count"], footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#",
+							filterable: true
+						},
+						{
+							field: "cedula",
+							title: "C&eacute;dula",
+							aggregates: ["count"], footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#",
+							editor: cedulaAutocomplete,
+							filterable: true
+						},
+						{
+							field: "tipoAcero",
+							title: "Tipo de Acero",
+							editor: tipoAceroAutocomplete,
+							filterable: true
+						},
+						{
+							field: "diametro1",
+							title: "Diametro Interior",
+							filterable: true
+						},
+						{
+							field: "diametro2",
+							title: "Diametro Exterior",
+							filterable: true
+						},
+						{
+							field: "cantidad",
+							title: "Cantidad",
+							aggregates: ["sum"], footerTemplate: "Total SUM: #=sum#", groupFooterTemplate: "SUM: #=sum#",
+							filterable: true
+						},
+						{
+							field: "tieneNU",
+							title: "N&uacute;meros &Uacute;nicos?",
+							filterable: true
+						},
+					]
+				}).data("kendoGrid");
+				
+				function onChange(e) {
+					var grid = this;
+					//console.log("Grid Change Event" + grid);
+					var model = grid.dataItem(grid.select());
+					//console.log("Grid Change Event" + model);
+				}
+
+				function itemCodeAutocomplete(container, options) {
+					$('<input required data-text-field="folIC" data-value-field="idIC" data-bind="value:' + options.field + '"/>')
+                        .appendTo(container)
+                        .kendoAutoComplete({
+                            autoBind: false,
+							dataTextField: "folIC",
+							dataValueField: "idIC",
+                            dataSource: {
+                                data: itemCodesJson
+                            },
+							change: function(e){
+								itemCodesDetail[lastEditedCellID.itemCode]
+								
+								lastEditedCellID.descripcion = itemCodesDetail[lastEditedCellID.itemCode]["descIC"];
+								lastEditedCellID.familia = itemCodesDetail[lastEditedCellID.itemCode]["familiaIC"];
+								lastEditedCellID.cedula = itemCodesDetail[lastEditedCellID.itemCode]["cedulaIC"];
+								lastEditedCellID.tipoAcero = itemCodesDetail[lastEditedCellID.itemCode]["tipoAceroIC"];
+								lastEditedCellID.diametro1 = itemCodesDetail[lastEditedCellID.itemCode]["diametro1IC"];
+								lastEditedCellID.diametro2 = itemCodesDetail[lastEditedCellID.itemCode]["diametro2IC"];
+								
+								var test = grid.tbody.find("tr[data-uid='" + lastEditedCellID +"']")[0];
+								grid.refresh();
+							}
+                    });
+					lastEditedCellID = options.model;
+					//SAVE
+					
+                }
+				
+				function cedulaAutocomplete(container, options) {
+                    $('<input required data-text-field="nomCED" data-value-field="idCED" data-bind="value:' + options.field + '"/>')
+                        .appendTo(container)
+                        .kendoAutoComplete({
+                            autoBind: false,
+                            dataSource: {
+                                data: cedulasJson
+                            }
+                        });
+                }
+				
+				function tipoAceroAutocomplete(container, options) {
+                    $('<input required data-text-field="nomTAC" data-value-field="idTAC" data-bind="value:' + options.field + '"/>')
+                        .appendTo(container)
+                        .kendoAutoComplete({
+                            autoBind: false,
+                            dataSource: {
+                                data: tipoAceroJson
+                            }
+                        });
+                }
+
+				//var grid = $("#grid").data("kendoGrid");
+				grid.table.bind("keypress", function (e) {
+					keydown(e);
+					if (e.which !== 0 && e.charCode !== 0 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+						//get currently navigated cell, this id follows user's navigation
+						var activeCell = $("#grid_active_cell");
+						
+						//don't do anything if already editing cell        
+						if (activeCell.hasClass("k-edit-cell")) return;
+						
+						grid.editCell(activeCell);
+						var input = activeCell.find("input");
+
+						//number datatype editor loses key press character when entering edit
+						if (input.last().attr('data-type')==='number') {
+							input.val(String.fromCharCode(e.keyCode | e.charCode));
+						} else {
+							input.val("");
+						}
+						
+						
+					}
+				});
+				
+				//Kendo "Enter" key input is captured through this binding
+				$("#grid table").on("keydown", "tr", function (e) {
+					var code = (e.keyCode ? e.keyCode : e.which);
+					if (code == 13) { //If key is ENTER
+						//console.log("--KendoEnter--");
+						//find index of the td element
+						var tdIndex = $(e.target).closest('td').index();
+						//get the next row's cell
+						var nextRow = $(e.target).closest('tr').next();
+						var nextRowCell = $(nextRow).find('td:eq(' + tdIndex + ')');
+						//Check if the next row is the last one and add one
+						if(nextRowCell.length == 0){
+							var grids = $("#grid").data("kendoGrid");
+							if (grids) {
+								var dataSource = grid.dataSource;
+								var total = dataSource.data().length;
+								dataSource.insert(total, {});
+							}
+							//find index of the td element
+							tdIndex = $(e.target).closest('td').index();
+							//get the next row's cell
+							nextRow = $(e.target).closest('tr').next();
+							nextRowCell = $(nextRow).find('td:eq(' + tdIndex + ')');
+						}
+						
+						//focus the next cell on a different context
+						setTimeout(function () {
+							//console.log("--Changing Current--");
+							var grid = $("#grid").data("kendoGrid");
+							grid.current(nextRowCell);
+						}, 0);
+					}
+				});
+				
+				$("#Proyectos_Nombre_001").data("kendoComboBox").input.focus();
+			});
+		</script>

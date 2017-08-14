@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.Title = "Chofer";
+}
+
+
+<div id="modalChofer" class="form clearfix popup col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+            <div id="Nombre_ChoferDiv" class="form-group">
+                <label id="DetalleAvisoLlegada0030"></label>
+                <input id="Nombre_Chofer" class="general-input" />
+            </div>
+            <div class="buttonSave">
+                <a id="GuardarChofer" href="#" class="btn btn-primary">
+                    <span id="DetalleAvisoLlegada0031"></span>
+                </a>
+                <a id="CancelarChofer" href="#" class="btn btn-primary">
+                    <span id="DetalleAvisoLlegada0079"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    @section JavascriptGlobalVariables {
+    var $ChoferModel = {
+        listContainer: {
+            create: "#GuardarChofer",
+            list: "",
+            detail: "",
+            destroy: ""
+        },
+        properties: {
+            nombre: {
+                visible: "#Nombre_ChoferDiv",
+                editable: "#Nombre_Chofer",
+                required: "#Nombre_Chofer"
+            }
+        }
+    };
+    }
+    
+    @section JavascriptGlobalFunctions {
+    function CargaInicial() {
+        hideElementsChofer();
+
+        window.parent.$(".k-i-close").click(function (e) {
+            CancelarChofer();
+        });
+        $("#GuardarChofer").click(function (e) {
+            if (validarRequeridosModalChofer()) {
+                GuardarChofer();
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+            };
+        });
+        $("#CancelarChofer").click(function (e) { CancelarChofer(); });
+    };
+    function hideElementsChofer() {
+        $(".sidebar").hide();
+        $(".logo").hide();
+        $(".search-bar").hide();
+        $(".notifications").hide();
+        $(".logged-user").hide();
+        $(".content-container").removeClass("topbar").addClass("printView");
+        $(".breadcrumb-container").hide();
+        $(".languageSelector").hide();
+        $(".pull-right").hide();
+        $("header").hide();
+        $(".content-frame").removeClass("content-frame");
+        $("body").css("background", "#FFFFFF");
+    };
+    function validarRequeridosModalChofer() {
+        var bool = true;
+        $("#modalChofer .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if (!$(this).val()) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                    $(this).closest("div").addClass("clearfix");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                    $(this).closest("div").removeClass("clearfix");
+                };
+            };
+        });
+        return bool;
+    };
+
+    function LimpiarModalChofer() {
+        $("#Nombre_Chofer").val("");
+    };
+
+    function cerrarVentanaModal() {
+        window.parent.$("#window").data("kendoWindow").close();
+        cleanDisplayMessage();
+    };
+
+    function cancelarvalidacionRequeridosModalChofer() {
+        $("#modalChofer .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                $(this).closest("div").find("label").removeClass("error");
+                $(this).closest("div").removeClass("clearfix");
+            };
+        });
+    };
+
+    function CancelarChofer() {
+        LimpiarModalChofer();
+        cerrarVentanaModal();
+        cancelarvalidacionRequeridosModalChofer();
+    };
+
+   
+
+    function GuardarChofer() {
+        var ParentTransportistaid = window.parent.Transportista;
+        var TransportistaID = ParentTransportistaid.length > 0 ? ParentTransportistaid[0].TransportistaID : "-1";
+
+        ChoferModal = [];
+        ChoferModal[0] = { TransportistaID: TransportistaID, Nombre: "" };
+        ChoferModal[0].Nombre = $("#Nombre_Chofer").val();
+
+        $Chofer.Chofer.create(ChoferModal[0], { token: Cookies.get("token") }).done(function (data) {
+            LimpiarModalChofer();
+            if (Error(data)) {
+                cerrarVentanaModal();
+                window.parent.ObtenerChofer(TransportistaID);
+            }
+        });
+    };
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Chofer"] = $ChoferModel;
+    CargaInicial();
+    $("#language").data("kendoDropDownList").select(_languageOrder[window.parent.$("#language").data("kendoDropDownList").value()]);
+    $("#language").data("kendoDropDownList").trigger("change");
+    applySecurityPolicy(false);
+    }
+
+    @section JavascriptDocumentReadyHomeCookie {
+    //Cookies.set("home", true, { path: '/' });
+    //Cookies.set("navegacion", "32", { path: '/' });
+    }
+</script>

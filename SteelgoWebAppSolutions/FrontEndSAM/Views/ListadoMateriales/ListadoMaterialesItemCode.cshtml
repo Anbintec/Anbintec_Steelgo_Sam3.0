@@ -1,0 +1,1018 @@
+﻿@{
+    ViewBag.Title = "Listado Materiales por Item Code";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="ListadoMaterialesItemCode0018"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("ListadoMaterialesItemCode", "ListadoMateriales")"><span id="ListadoMaterialesItemCode0017"></span></a>
+    </li>
+}
+
+<div id="formaListadoMaterialesItemCode" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav filtersFields clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 filter-section">
+                        <div class="row">
+                            <div id="PatioDiv" class="col-xs-12 col-sm-6 col-md-5 col-lg-3">
+                                <label id="ListadoMaterialesItemCode0001"></label>
+                                <input id="PatioID" class="" />
+                            </div>
+                            <div id="ProyectoDiv" class="col-xs-12 col-sm-6 col-md-5 col-lg-3">
+                                <label id="ListadoMaterialesItemCode0002"></label>
+                                <input id="ProyectoID" class="" />
+                            </div>
+                            <div id="MostrarDiv" class="button-section last-button col-xs-12 col-sm-6 col-md-2 col-lg-1">
+                                <a id="Mostrar" href="#" class="btn btn-primary"><span id="ListadoMaterialesItemCode0003"></span></a>
+                            </div>
+                            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                <div class="button-section left">
+                                    <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection disabled"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 listado">
+                    <div class="row">
+                        <div id="filterContainer" class="quick-filters col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="clearfix" id="filtrorapidoscroll">
+                                <input id="ItemCode" class="quickFilters general-input" />
+                                <input id="Descripcion" class="quickFilters general-input" />
+                                <input id="Diametro1" class="quickFilters general-input" />
+                                <input id="Diametro2" class="quickFilters general-input" />
+                                <input id="TipoMaterial" class="quickFilters general-input" />
+                                <input id="TotalIngenieria" class="quickFilters general-input" />
+                                <input id="TotalRecibido" class="quickFilters general-input" />
+                                <input id="OtrasEntradas" class="quickFilters general-input" />
+                                <input id="TotalCondicionado" class="quickFilters general-input" />
+                                <input id="TotalRechazado" class="quickFilters general-input" />
+                                <input id="TotalDanado" class="quickFilters general-input" />
+                                <input id="RecibidoNeto" class="quickFilters general-input" />
+                                <input id="EntradasDesdeICEquivalente" class="quickFilters general-input" />
+                                <input id="SalidasTemporales" class="quickFilters general-input" />
+                                <input id="TotalOtrasSalidas" class="quickFilters general-input" />
+                                <input id="TotalMermas" class="quickFilters general-input" />
+                                <input id="TotalOrdenTrabajo" class="quickFilters general-input" />
+                                <input id="DespachadoPorCortarICEquiv" class="quickFilters general-input" />
+                                <input id="CotadoParaICEquiv" class="quickFilters general-input" />
+                                <input id="TotalDespachadoPorCortar" class="quickFilters general-input" />
+                                <input id="TotalCortado" class="quickFilters general-input" />
+                                <input id="DespachadoDesdeICEquivalente" class="quickFilters general-input" />
+                                <input id="DespachadoAProduccion" class="quickFilters general-input" />
+                                <input id="SalidaParaICEquivalente" class="quickFilters general-input" />
+                                <input id="TotalPorDespachar" class="quickFilters general-input" />
+                                <input id="TotalFisicoEnAlmacen" class="quickFilters general-input" />
+                                <input id="AsignadoParaICEquivalente" class="quickFilters general-input" />
+                                <input id="TotalCongelado" class="quickFilters general-input" />
+                                <input id="InventarioDisponibleCruce" class="quickFilters general-input" />
+                                <input id="DisponibleICEquivalente" class="quickFilters general-input" />
+                                <input id="TotalDisponibleCruce" class="quickFilters general-input" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    @section JavascriptDocumentReadyHomeCookie {
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "22", { path: '/' });
+    }
+
+    @section JavascriptGlobalVariables {
+        paramPatioID=getUrlParameter("PatioID","");
+        paramProyectoID=getUrlParameter("ProyectoID","").split("+").join(" ");
+        paramICID="";
+    var Patio = {}, Proyecto = {}, resultadoJson;
+
+    var $ListadoMaterialesItemCodeModel = {
+        listContainer: {
+            create: "",
+            list: ".listado",
+            detail: ".detailLink",
+            destroy: ".k-grid-Cancelar"
+        },
+        properties: {
+            patio: {
+                visible: "#PatioDiv",
+                editable: "#PatioID",
+                required: "#PatioID"
+            },
+            proyecto: {
+                visible: "#ProyectoDiv",
+                editable: "#ProyectoID",
+                required: "#ProyectoID"
+            },
+            mostrar: {
+                visible: "#MostrarDiv",
+                editable: "#Mostrar",
+                required: "#Mostrar"
+            }
+
+
+        }
+    };
+    }
+
+    @section JavascriptGlobalFunctions {
+
+    //Es la carga inicial del grid para el multilenguaje
+    //Funcion: changeLanguageCall
+    //Parametros: N/A
+    //Return:     N/A
+        function changeLanguageCall() {
+            var tmp = removeGrid($("#grid"));
+            CargarGridItemCode();
+            $("#grid").data("kendoGrid").dataSource.data(tmp);
+        }
+
+    //Es la carga inicial de los controles
+    //Funcion: cargaInicial
+    //Parametros: N/A
+    //Return:     N/A
+    function cargaInicial() {
+        $("#ItemCode").val("");
+        $("#Descripcion").val("");
+        $("#Diametro1").val("");
+        $("#Diametro2").val("");
+        $("#TipoMaterial").val("");
+        $("#TotalIngenieria").val("");
+        $("#TotalRecibido").val("");
+        $("#OtrasEntradas").val("");
+        $("#TotalCondicionado").val("");
+        $("#TotalRechazado").val("");
+        $("#TotalDanado").val("");
+        $("#RecibidoNeto").val("");
+        $("#EntradasDesdeICEquivalente").val("");
+        $("#SalidasTemporales").val("");
+        $("#TotalOtrasSalidas").val("");
+        $("#TotalMermas").val("");
+        $("#TotalOrdenTrabajo").val("");
+        $("#DespachadoPorCortarICEquiv").val("");
+        $("#CotadoParaICEquiv").val("");
+        $("#TotalDespachadoPorCortar").val("");
+        $("#TotalCortado").val("");
+        $("#DespachadoDesdeICEquivalente").val("");
+        $("#DespachadoAProduccion").val("");
+        $("#SalidaParaICEquivalente").val("");
+        $("#TotalPorDespachar").val("");
+        $("#TotalFisicoEnAlmacen").val("");
+        $("#AsignadoParaICEquivalente").val("");
+        $("#TotalCongelado").val("");
+        $("#InventarioDisponibleCruce").val("");
+        $("#DisponibleICEquivalente").val("");
+        $("#TotalDisponibleCruce").val("");
+
+        $("#ItemCode").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "ItemCode",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#ItemCode").val().length){ $("#ItemCode").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#ItemCode").focus();
+        });
+
+        $("#Descripcion").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "Descripcion",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#Descripcion").val().length){ $("#Descripcion").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#Descripcion").focus();
+        });
+
+        $("#Diametro1").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "D1",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#Diametro1").val().length){ $("#Diametro1").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#Diametro1").focus();
+        });
+
+        $("#Diametro2").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "D2",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#Diametro2").val().length){ $("#Diametro2").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#Diametro2").focus();
+        });
+
+        $("#TipoMaterial").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TipoMaterial",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TipoMaterial").val().length){ $("#TipoMaterial").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TipoMaterial").focus();
+        });
+
+        $("#TotalIngenieria").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalIngenieria",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalIngenieria").val().length){ $("#TotalIngenieria").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalIngenieria").focus();
+        });
+
+        $("#TotalRecibido").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalRecibido",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalRecibido").val().length){ $("#TotalRecibido").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalRecibido").focus();
+        });
+
+        $("#OtrasEntradas").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "OtrasEntradas",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#OtrasEntradas").val().length){ $("#OtrasEntradas").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#OtrasEntradas").focus();
+        });
+
+        $("#TotalCondicionado").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalCondicionada",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalCondicionado").val().length){ $("#TotalCondicionado").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalCondicionado").focus();
+        });
+
+        $("#TotalRechazado").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalRechazado",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalRechazado").val().length){ $("#TotalRechazado").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalRechazado").focus();
+        });
+
+        $("#TotalDanado").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalDanado",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalDanado").val().length){ $("#TotalDanado").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalDanado").focus();
+        });
+
+        $("#RecibidoNeto").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalRecibidoNeto",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#RecibidoNeto").val().length){ $("#RecibidoNeto").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#RecibidoNeto").focus();
+        });
+
+        $("#EntradasDesdeICEquivalente").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "EntradasDesdeICEquivalente",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#EntradasDesdeICEquivalente").val().length){ $("#EntradasDesdeICEquivalente").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#EntradasDesdeICEquivalente").focus();
+        });
+
+        $("#SalidasTemporales").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "SalidasTemporales",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#SalidasTemporales").val().length){ $("#SalidasTemporales").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#SalidasTemporales").focus();
+        });
+
+        $("#TotalOtrasSalidas").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalOtrasSalidas",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalOtrasSalidas").val().length){ $("#TotalOtrasSalidas").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalOtrasSalidas").focus();
+        });
+
+        $("#TotalMermas").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalMermas",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalMermas").val().length){ $("#TotalMermas").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalMermas").focus();
+        });
+
+        $("#TotalOrdenTrabajo").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalOrdenTrabajo",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalOrdenTrabajo").val().length){ $("#TotalOrdenTrabajo").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalOrdenTrabajo").focus();
+        });
+
+        $("#DespachadoPorCortarICEquiv").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "DespachadoPorCortarParaICEquivalente",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#DespachadoPorCortarICEquiv").val().length){ $("#DespachadoPorCortarICEquiv").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#DespachadoPorCortarICEquiv").focus();
+        });
+
+        $("#CotadoParaICEquiv").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "CortadoParaICEquivalente",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#CotadoParaICEquiv").val().length){ $("#CotadoParaICEquiv").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#CotadoParaICEquiv").focus();
+        });
+
+        $("#TotalDespachadoPorCortar").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalDespachadoPorCortar",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalDespachadoPorCortar").val().length){ $("#TotalDespachadoPorCortar").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalDespachadoPorCortar").focus();
+        });
+
+        $("#TotalCortado").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalCortado",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalCortado").val().length){ $("#TotalCortado").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalCortado").focus();
+        });
+
+        $("#DespachadoDesdeICEquivalente").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "DespachadoDesdeICEquivalente",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#DespachadoDesdeICEquivalente").val().length){ $("#DespachadoDesdeICEquivalente").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#DespachadoDesdeICEquivalente").focus();
+        });
+
+        $("#DespachadoAProduccion").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "DespachadoAProduccion",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#DespachadoAProduccion").val().length){ $("#DespachadoAProduccion").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#DespachadoAProduccion").focus();
+        });
+
+        $("#SalidaParaICEquivalente").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "SalidaParaICEquivalente",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#SalidaParaICEquivalente").val().length){ $("#SalidaParaICEquivalente").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#SalidaParaICEquivalente").focus();
+        });
+
+        $("#TotalPorDespachar").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalPorDespachar",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalPorDespachar").val().length){ $("#TotalPorDespachar").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalPorDespachar").focus();
+        });
+
+        $("#TotalFisicoEnAlmacen").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalFisicoEnAlmacen",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalFisicoEnAlmacen").val().length){ $("#TotalFisicoEnAlmacen").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalFisicoEnAlmacen").focus();
+        });
+
+        $("#AsignadoParaICEquivalente").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "AsignadoParaICEquivalente",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#AsignadoParaICEquivalente").val().length){ $("#AsignadoParaICEquivalente").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#AsignadoParaICEquivalente").focus();
+        });
+
+        $("#TotalCongelado").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalCongelado",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalCongelado").val().length){ $("#TotalCongelado").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalCongelado").focus();
+        });
+
+        $("#InventarioDisponibleCruce").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "InventarioDisponibleCruce",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#InventarioDisponibleCruce").val().length){ $("#InventarioDisponibleCruce").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#InventarioDisponibleCruce").focus();
+        });
+
+        $("#DisponibleICEquivalente").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "DisponibleICEquivalente",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#DisponibleICEquivalente").val().length){ $("#DisponibleICEquivalente").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#DisponibleICEquivalente").focus();
+        });
+
+        $("#TotalDisponibleCruce").keyup(function () {
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            ds.filter([
+                {
+                    "field": "TotalDisponibleParaCruce",
+                    "operator": "Contains",
+                    "value": this.value
+                }
+            ]);
+			if(!$("#TotalDisponibleCruce").val().length){ $("#TotalDisponibleCruce").parent().children("a.k-state-active").removeClass("k-state-active");}
+            $("#TotalDisponibleCruce").focus();
+        });
+
+
+        $("#Mostrar").click(function () { 
+            $("#grid").data("kendoGrid").dataSource.filter([]);
+            Filtros();
+        });
+
+        $("#PatioID").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "PatioID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarPatio(dataItem.PatioID, dataItem.Nombre):CargarPatio("", "");
+                var value = this.value();
+                try{
+                    LimpiarCamposPatio();
+                }catch(e){}
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Patio = {};
+                    this.value("");
+                } else {
+                    ObtenerLosProyectos();
+                }
+            },
+            dataBound:function(e){
+                if(paramPatioID!==""){
+                    $("#PatioID").data("kendoComboBox").select(function(dataItem) {
+                        if(dataItem.PatioID === paramPatioID){
+                            paramPatioID="";
+                            $("#PatioID").val(dataItem.PatioID);
+                            CargarPatio(dataItem.PatioID,dataItem.Nombre);
+                            return dataItem;
+                        }
+                    });
+                    ObtenerLosProyectos();
+                }
+            },
+            filter: "contains",
+        });
+        ObtenerPatio();
+
+        $("#ProyectoID").kendoComboBox({
+            dataTextField: "Nombre",
+            dataValueField: "ProyectoID",
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarProyecto(dataItem.ProyectoID, dataItem.Nombre):CargarProyecto("", "");
+                var value = this.value();
+                LimpiarCamposProyecto();
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    Proyecto = {};
+                    this.value("");
+                }
+            },
+            dataBound:function(e){
+                if(paramProyectoID!==""){
+                    $("#ProyectoID").data("kendoComboBox").select(function(dataItem) {
+                        if(dataItem.Nombre === paramProyectoID){
+                            paramProyectoID="";
+                            $("#ProyectoID").val(dataItem.ProyectoID);
+                            CargarProyecto(dataItem.ProyectoID,dataItem.Nombre);
+                            Filtros();
+                            return dataItem;
+                        }
+                    });
+                }
+                checkIfOne(this);
+            },
+            filter: "contains",
+        });
+
+    };
+
+    function LimpiarCamposPatio() {
+        Proyecto = {};
+        $("#ProyectoID").data("kendoComboBox").value("");
+        $("#ProyectoID").data("kendoComboBox").dataSource.data([]);
+        $("#grid").data("kendoGrid").dataSource.data([]);
+        $("#grid").data("kendoGrid").dataSource.page(0);
+    };
+    function LimpiarCamposProyecto() {
+        $("#grid").data("kendoGrid").dataSource.data([]);
+        $("#grid").data("kendoGrid").dataSource.page(0);
+    };
+    function ObtenerLosProyectos() {
+        var Listado = ArregloListado();
+        Listado.TipoListado = 23;
+
+        $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+            ControlErroresObjetosComboBox("ProyectoID", result);
+        });
+    };
+
+
+
+    //Es la carga del grid donde especifican las propiedades y columnas
+    //Funcion: CargarGridNumeroUnico
+    //Parametros: N/A
+    //Return:     N/A
+    function CargarGridItemCode() {
+        $("#grid").kendoGrid({
+            dataSource: {
+                schema: {
+                    model: {
+                        fields: {
+                            ItemCode: { type: "string" },
+                            Descripcion: { type: "string" },
+                            D1: { type: "number" },
+                            D2: { type: "number" },
+                            TipoMaterial: { type: "string" },
+                            TotalIngenieria: { type: "number", },
+                            TotalRecibido: { type: "number" },
+                            OtrasEntradas: { type: "string" },
+                            TotalCondicionada: { type: "number" },
+                            TotalRechazado: { type: "number" },
+                            TotalDanado: { type: "number" },
+                            TotalRecibidoNeto: { type: "number" },
+                            EntradasDesdeICEquivalente: { type: "string" },
+                            SalidasTemporales: { type: "string" },
+                            TotalOtrasSalidas: { type: "number" },
+                            TotalMermas: { type: "number" },
+                            TotalOrdenTrabajo: { type: "number" },
+                            DespachadoPorCortarParaICEquivalente: { type: "string" },
+                            CortadoParaICEquivalente: { type: "string" },
+                            TotalDespachadoPorCortar: { type: "number" },
+                            TotalCortado: { type: "number" },
+                            DespachadoDesdeICEquivalente: { type: "string" },
+                            DespachadoAProduccion: { type: "string" },
+                            SalidaParaICEquivalente: { type: "string" },
+                            TotalPorDespachar: { type: "number" },
+                            TotalFisicoEnAlmacen: { type: "number" },
+                            AsignadoParaICEquivalente: { type: "string" },
+                            TotalCongelado: { type: "number" },
+                            InventarioDisponibleCruce: { type: "string" },
+                            DisponibleICEquivalente: { type: "string" },
+                            TotalDisponibleParaCruce: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 20,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            },
+            autoHeight: true,
+            autoBind: true,
+            sortable: true,
+            scrollable: false,
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+                buttonCount: 2
+            },
+            scrollable: true,
+            columns:[
+                { field: "ItemCode", title: _dictionary.ListadoMaterialesItemCode0004[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+                { field: "Descripcion", title: _dictionary.ListadoMaterialesItemCode0005[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "D1", title: _dictionary.ListadoMaterialesItemCode0006[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+                { field: "D2", title: _dictionary.ListadoMaterialesItemCode0007[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+                { field: "TipoMaterial", title: _dictionary.ListadoMaterialesItemCode0008[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+                { field: "TotalIngenieria", title: _dictionary.ListadoMaterialesItemCode0019[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "TotalRecibido", title: _dictionary.ListadoMaterialesItemCode0009[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "OtrasEntradas", title: _dictionary.ListadoMaterialesItemCode0010[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "TotalCondicionada", title: _dictionary.ListadoMaterialesItemCode0011[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "TotalRechazado", title: _dictionary.ListadoMaterialesItemCode0012[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "TotalDanado", title: _dictionary.ListadoMaterialesItemCode0020[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "TotalRecibidoNeto", title: _dictionary.ListadoMaterialesItemCode0013[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "EntradasDesdeICEquivalente", title: _dictionary.ListadoMaterialesItemCode0014[$("#language").data("kendoDropDownList").value()], filterable: true, width: "300px" },
+                { field: "SalidasTemporales", title: _dictionary.ListadoMaterialesItemCode0015[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "TotalOtrasSalidas", title: _dictionary.ListadoMaterialesItemCode0016[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "TotalMermas", title: _dictionary.ListadoMaterialesItemCode0022[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "TotalOrdenTrabajo", title: _dictionary.ListadoMaterialesItemCode0023[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "DespachadoPorCortarParaICEquivalente", title: _dictionary.ListadoMaterialesItemCode0024[$("#language").data("kendoDropDownList").value()], filterable: true, width: "350px" },
+                { field: "CortadoParaICEquivalente", title: _dictionary.ListadoMaterialesItemCode0025[$("#language").data("kendoDropDownList").value()], filterable: true, width: "300px" },
+                { field: "TotalDespachadoPorCortar", title: _dictionary.ListadoMaterialesItemCode0026[$("#language").data("kendoDropDownList").value()], filterable: true, width: "300px" },
+                { field: "TotalCortado", title: _dictionary.ListadoMaterialesItemCode0027[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "DespachadoDesdeICEquivalente", title: _dictionary.ListadoMaterialesItemCode0028[$("#language").data("kendoDropDownList").value()], filterable: true, width: "300px" },
+                { field: "DespachadoAProduccion", title: _dictionary.ListadoMaterialesItemCode0029[$("#language").data("kendoDropDownList").value()], filterable: true, width: "250px" },
+                { field: "SalidaParaICEquivalente", title: _dictionary.ListadoMaterialesItemCode0030[$("#language").data("kendoDropDownList").value()], filterable: true, width: "250px" },
+                { field: "TotalPorDespachar", title: _dictionary.ListadoMaterialesItemCode0031[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "TotalFisicoEnAlmacen", title: _dictionary.ListadoMaterialesItemCode0032[$("#language").data("kendoDropDownList").value()], filterable: true, width: "250px" },
+                { field: "AsignadoParaICEquivalente", title: _dictionary.ListadoMaterialesItemCode0033[$("#language").data("kendoDropDownList").value()], filterable: true, width: "255px" },
+                { field: "TotalCongelado", title: _dictionary.ListadoMaterialesItemCode0034[$("#language").data("kendoDropDownList").value()], filterable: true, width: "200px" },
+                { field: "InventarioDisponibleCruce", title: _dictionary.ListadoMaterialesItemCode0035[$("#language").data("kendoDropDownList").value()], filterable: true, width: "250px" },
+                { field: "DisponibleICEquivalente", title: _dictionary.ListadoMaterialesItemCode0036[$("#language").data("kendoDropDownList").value()], filterable: true, width: "250px" },
+                { field: "TotalDisponibleParaCruce", title: _dictionary.ListadoMaterialesItemCode0037[$("#language").data("kendoDropDownList").value()], filterable: true, width: "250px" },
+            ],
+            dataBound: function (e) {
+                //$(".k-grid input.k-textbox").prop('readonly', true);
+                //$(".k-grid td .k-button").text('');
+                //$(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
+				
+				//$("th[data-field='ItemCode']").append($("#ItemCode"));
+                //$("th[data-field='Descripcion']").append($("#Descripcion"));
+                //$("th[data-field='D1']").append($("#Diametro1"));
+                //$("th[data-field='D2']").append($("#Diametro2"));
+                //$("th[data-field='TipoMaterial']").append($("#TipoMaterial"));
+                //$("th[data-field='TotalIngenieria']").append($("#TotalIngenieria"));
+                //$("th[data-field='TotalRecibido']").append($("#TotalRecibido"));
+				//$("th[data-field='OtrasEntradas']").append($("#OtrasEntradas"));
+                //$("th[data-field='TotalCondicionada']").append($("#TotalCondicionado"));
+                //$("th[data-field='TotalRechazado']").append($("#TotalRechazado"));
+                //$("th[data-field='TotalDanado']").append($("#TotalDanado"));
+                //$("th[data-field='TotalRecibidoNeto']").append($("#RecibidoNeto"));
+                //$("th[data-field='EntradasDesdeICEquivalente']").append($("#EntradasDesdeICEquivalente"));
+                //$("th[data-field='SalidasTemporales']").append($("#SalidasTemporales"));
+				//$("th[data-field='TotalOtrasSalidas']").append($("#TotalOtrasSalidas"));
+                //$("th[data-field='TotalMermas']").append($("#TotalMermas"));
+                //$("th[data-field='TotalOrdenTrabajo']").append($("#TotalOrdenTrabajo"));
+                //$("th[data-field='DespachadoPorCortarParaICEquivalente']").append($("#DespachadoPorCortarICEquiv"));
+                //$("th[data-field='CortadoParaICEquivalente']").append($("#CotadoParaICEquiv"));
+                //$("th[data-field='TotalDespachadoPorCortar']").append($("#TotalDespachadoPorCortar"));
+                //$("th[data-field='TotalCortado']").append($("#TotalCortado"));
+				//$("th[data-field='DespachadoDesdeICEquivalente']").append($("#DespachadoDesdeICEquivalente"));
+                //$("th[data-field='DespachadoAProduccion']").append($("#DespachadoAProduccion"));
+                //$("th[data-field='SalidaParaICEquivalente']").append($("#SalidaParaICEquivalente"));
+                //$("th[data-field='TotalPorDespachar']").append($("#TotalPorDespachar"));
+                //$("th[data-field='TotalFisicoEnAlmacen']").append($("#TotalFisicoEnAlmacen"));
+                //$("th[data-field='AsignadoParaICEquivalente']").append($("#AsignadoParaICEquivalente"));
+                //$("th[data-field='TotalCongelado']").append($("#TotalCongelado"));
+				//$("th[data-field='InventarioDisponibleCruce']").append($("#InventarioDisponibleCruce"));
+				//$("th[data-field='DisponibleICEquivalente']").append($("#DisponibleICEquivalente"));
+				//$("th[data-field='TotalDisponibleParaCruce']").append($("#TotalDisponibleCruce"));
+
+                //$("#ItemCode").click(function( event ) {event.stopPropagation();});
+                //$("#Descripcion").click(function( event ) {event.stopPropagation();});
+                //$("#Diametro1").click(function( event ) {event.stopPropagation();});
+                //$("#Diametro2").click(function( event ) {event.stopPropagation();});
+                //$("#TipoMaterial").click(function( event ) {event.stopPropagation();});
+                //$("#TotalIngenieria").click(function( event ) {event.stopPropagation();});
+                //$("#TotalRecibido").click(function( event ) {event.stopPropagation();});
+				//$("#OtrasEntradas").click(function( event ) {event.stopPropagation();});
+                //$("#TotalCondicionado").click(function( event ) {event.stopPropagation();});
+                //$("#TotalRechazado").click(function( event ) {event.stopPropagation();});
+                //$("#TotalDanado").click(function( event ) {event.stopPropagation();});
+                //$("#RecibidoNeto").click(function( event ) {event.stopPropagation();});
+                //$("#EntradasDesdeICEquivalente").click(function( event ) {event.stopPropagation();});
+                //$("#SalidasTemporales").click(function( event ) {event.stopPropagation();});
+				//$("#TotalOtrasSalidas").click(function( event ) {event.stopPropagation();});
+                //$("#TotalMermas").click(function( event ) {event.stopPropagation();});
+                //$("#TotalOrdenTrabajo").click(function( event ) {event.stopPropagation();});
+                //$("#DespachadoPorCortarICEquiv").click(function( event ) {event.stopPropagation();});
+                //$("#CotadoParaICEquiv").click(function( event ) {event.stopPropagation();});
+                //$("#TotalDespachadoPorCortar").click(function( event ) {event.stopPropagation();});
+                //$("#TotalCortado").click(function( event ) {event.stopPropagation();});
+				//$("#DespachadoDesdeICEquivalente").click(function( event ) {event.stopPropagation();});
+                //$("#DespachadoAProduccion").click(function( event ) {event.stopPropagation();});
+                //$("#SalidaParaICEquivalente").click(function( event ) {event.stopPropagation();});
+                //$("#TotalPorDespachar").click(function( event ) {event.stopPropagation();});
+                //$("#TotalFisicoEnAlmacen").click(function( event ) {event.stopPropagation();});
+                //$("#AsignadoParaICEquivalente").click(function( event ) {event.stopPropagation();});
+                //$("#TotalCongelado").click(function( event ) {event.stopPropagation();});
+				//$("#InventarioDisponibleCruce").click(function( event ) {event.stopPropagation();});
+                //$("#DisponibleICEquivalente").click(function( event ) {event.stopPropagation();});
+                //$("#TotalDisponibleCruce").click(function( event ) {event.stopPropagation();});
+                quickHeadFilter($("#grid").data("kendoGrid"));
+            }
+        });
+
+        $(".k-grid-content").scroll(function () {
+            $("#filtrorapidoscroll").scrollLeft($(".k-grid-content").scrollLeft());
+        });
+        $("#filtrorapidoscroll").scroll(function () {
+            $(".k-grid-content").scrollLeft($("#filtrorapidoscroll").scrollLeft());
+        });
+    }
+
+
+
+    //Se carga el Patio
+    //Funcion: CargarPatio
+    //Parametros: id,value
+    //Return:     N/A
+    function CargarPatio(id, value) {
+        Patio = {};
+        Patio = { PatioID: id, Nombre: value };
+    };
+
+    function CargarProyecto(id, value) {
+        Proyecto = {};
+        Proyecto = { ProyectoID: id, Nombre: value };
+    };
+
+
+    //Se realiza una peticion para obtenr los patios y cargar el combo con los valores
+    //Funcion: ObtenerPatio
+    //Parametros: N/A
+    //Return:     N/A
+    function ObtenerPatio() {
+        var Listado = ArregloListado();
+        Listado.TipoListado = 22;
+
+        $folioEntradaMaterial.Listado.read({ data: JSON.stringify(Listado) }).done(function (result) {
+            ControlErroresObjetosComboBox("PatioID", result);
+        });
+    };
+
+    function ObtenerProyecto() {
+        $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
+            ControlErroresObjetosComboBox("ProyectoID", result);
+        });
+    };
+
+    //Se forma un objeto con todos los filtros e indicando cual tab fue seleccionado
+    // creados, sin permiso, sin autorizacion,completos
+    //Funcion: ObtenerCliente
+    //Parametros: accion
+    //Return:    Listado
+    function ArregloListado() {
+        var Listado = { PatioID: "", ProyectoID: "", FolioCuantificacionID: "", FolioPackingListID: "" };
+
+        Listado.PatioID = Patio.PatioID ? Patio.PatioID : -1;
+        Listado.ProyectoID = Proyecto.ProyectoID ? Proyecto.ProyectoID : -1;
+        Listado.token = Cookies.get("token");
+
+        return Listado;
+    };
+
+    //Se realiza una peticion para obtener los datos y llenar el grid dependiendo de la accion que se realizo
+    // creados, sin permiso, sin autorizacion,completos
+    //Funcion: AccionesListado
+    //Parametros: accion
+    //Return:    N/A
+    function AccionesListado() {
+        //loadingStart();
+        var Listado = ArregloListado();
+
+        $ListadoMaterialesPorItemCode.ListadoMaterialesPorItemCode.read({}, { proyectoID: Listado.ProyectoID, token: Listado.token }).done(function (data) {
+            if (Error(data)) {
+                resultadoJson = data;
+                if (!resultadoJson.length) {
+                    displayMessage("notificationslabel0055", "", '1');
+                    //loadingStop();
+                    return;
+                };
+
+                if ($("#grid").data("kendoGrid")) {
+                    if (resultadoJson.length > 0) {
+                        $("#grid").data("kendoGrid").dataSource.data(resultadoJson);
+                        $("#grid").data("kendoGrid").dataSource.page(1);
+                    } else {
+                        $("#grid").data("kendoGrid").dataSource.data([]);
+                        $("#grid").data("kendoGrid").dataSource.page(0);
+                    };
+                    AsignarPaginaActualCookie();
+                    applySecurityPolicy(false);
+                };
+            };
+            //loadingStop();
+            try{
+                var tmp={};
+                window.location.href.split("?")[1].split("&").forEach(function(n){tmp[n.split("=")[0]]=n.split("=")[1]});
+                if(tmp.IC!==undefined && tmp.IC!=="" && tmp.IC!==null){
+                    paramICID=getUrlParameter("IC","");
+                    $("#grid").data("kendoGrid").dataSource.filter({ field: "ItemCodeID", operator: "eq", value: parseInt(paramICID) })
+                }
+            }catch(e){}
+        });
+    };
+
+    function AsignarPaginaActualCookie() {
+        Cookies.set("navegacion", "22", { path: '/' });
+    }
+    //Se envia la accion a la funcion de acconeslistado donde se forma el objeto con todos los filtros
+    //Funcion: Filtros
+    //Parametros: N/A
+    //Return:    N/A
+    function Filtros() {
+        if (validarRequeridosFormaListadoMateriales()) {
+            AccionesListado();
+        } else {
+            displayMessage("notificationslabel0031", "", '1');
+        }
+    };
+
+    function validarRequeridosFormaListadoMateriales() {
+        var bool = true;
+        $("#formaListadoMaterialesItemCode .security_required").each(function (i, elem) {
+            if (elem.tagName.toLowerCase() != 'label') {
+                if (!$(this).val()) {
+                    bool = false;
+                    $(this).closest("div").find("label").addClass("error");
+                } else {
+                    $(this).closest("div").find("label").removeClass("error");
+                };
+            };
+        });
+        return bool;
+    };
+
+    function Error(data) {
+        if (data.ReturnCode) {
+            if (data.ReturnCode != 200) {
+                if (data.ReturnCode == 401) {
+                    removeUserSession();
+                    return false;
+                } else {
+                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+
+
+    function ControlErroresObjetosComboBox(control, result) {
+        if (Error(result)) {
+            $("#" + control).data("kendoComboBox").dataSource.data(result);
+        } else {
+            $("#" + control).data("kendoComboBox").dataSource.data([]);
+        };
+    };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Listado Materiales Item Code"] = $ListadoMaterialesItemCodeModel;
+    cargaInicial();
+    //applySecurity();
+    }
+
+</script>
+

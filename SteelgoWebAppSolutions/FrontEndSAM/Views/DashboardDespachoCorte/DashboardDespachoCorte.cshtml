@@ -1,0 +1,2297 @@
+﻿@{
+    ViewBag.Title = "Dashboard - Despacho y Corte";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="DashboardDespachoCorte0001"></span></a>
+    </li>
+    <li class="">
+        <a href="@Url.Action("DashboardDespachoCorte", "DashboardDespachoCorte")"><span id="DashboardDespachoCorte0091"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("DashboardDespachoCorte", "DashboardDespachoCorte")"><span id="DashboardDespachoCorte0029"></span></a>
+    </li>
+}
+
+<div id="DespachoCorte" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav filtersFields clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 col-md-2 col-lg-1 longButton">
+                        <div class="button-section">
+                            <button id="Nuevo" type="button" class="btn btn-yellow btn-newReception btn-Despachar"><span id="DashboardDespachoCorte0002"></span></button>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-9 col-md-10 col-lg-9 filter-section">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DashboardDespachoCorte0003"></label>
+                                <input id="ClienteID" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DashboardDespachoCorte0004"></label>
+                                <input id="ProyectoID" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DashboardDespachoCorte0005"></label>
+                                <input id="FolioAvisoEntradaID" class="" />
+                            </div>
+                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DashboardDespachoCorte0006"></label>
+                                <input id="PackingList" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DashboardDespachoCorte0007"></label>
+                                <input id="FechaInicial" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DashboardDespachoCorte0008"></label>
+                                <input id="FechaFinal" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DashboardDespachoCorte0009"></label>
+                                <input id="PeriodoTiempo" class="" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <label id="DashboardDespachoCorte0047"></label>
+                                <input id="UnidadMedida" class="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <label id="DashboardDespachoCorte0011"></label>
+            <div class="row">
+                <div class="btn-group form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" role="group" arial-label="tabs">
+                    <button id="btnOrdenesTrabajoAccesorios" class="btn btn-tab Accesorios">
+                        <label id="DashboardDespachoCorte0012"></label>
+                        <span id="spanOrdenesTrabajoAccesorios"></span>
+                    </button>
+                    <button id="btnOrdenesTrabajoActivasAccesorios" class="btn btn-tab Accesorios">
+                        <label id="DashboardDespachoCorte0013"></label>
+                        <span id="spanOrdenesTrabajoActivasAccesorios"></span>
+                    </button>
+                    <button id="btnPreDespacharAccesorios" class="btn btn-tab Accesorios">
+                        <label id="DashboardDespachoCorte0014"></label>
+                        <span id="spanPreDespacharAccesorios"></span>
+                    </button>
+                    <button id="btnDespacharAccesorios" class="btn btn-tab Accesorios">
+                        <label id="DashboardDespachoCorte0015"></label>
+                        <span id="spanDespacharAccesorios"></span>
+                    </button>
+                    <button id="btnEntregarAccesorios" class="btn btn-tab Accesorios">
+                        <label id="DashboardDespachoCorte0016"></label>
+                        <span id="spanEntregarAccesorios"></span>
+                    </button>
+                    <button id="btnTravelerPendienteAccesorios" class="btn btn-tab Accesorios">
+                        <label id="DashboardDespachoCorte0017"></label>
+                        <span id="spanTravelerPendienteAccesorios"></span>
+                    </button>
+                    @*<button id="btnDespachoAccesorios" class="btn btn-tab Accesorios">
+                        <label id="DashboardDespachoCorte0018"></label>
+                        <span id="spanDespachoAccesorios"></span>
+                    </button>*@
+                    @*<button id="btnCorteAccesorios" class="btn btn-tab Accesorios">
+                        <label id="DashboardDespachoCorte0019"></label>
+                        <span id="spanCorteAccesorios"></span>
+                    </button>*@
+                </div>
+            </div>
+            <div id="divAccesorios" class="hidden grid">
+                <div id="gridAccesorios"></div>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <label id="DashboardDespachoCorte0020"></label>
+            <div class="row">
+                <div class="btn-group form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" role="group" arial-label="tabs">
+                    <button id="btnOrdenesTrabajoTubos" class="btn btn-tab Tubos">
+                        <label id="DashboardDespachoCorte0021"></label>
+                        <span id="spanOrdenesTrabajoTubos"></span>
+                    </button>
+                    <button id="btnOrdenesTrabajoActivasTubos" class="btn btn-tab Tubos">
+                        <label id="DashboardDespachoCorte0022"></label>
+                        <span id="spanOrdenesTrabajoActivasTubos"></span>
+                    </button>
+                    <button id="btnPreDespacharTubos" class="btn btn-tab Tubos">
+                        <label id="DashboardDespachoCorte0023"></label>
+                        <span id="spanPreDespacharTubos"></span>
+                    </button>
+                    <button id="btnDespacharTubos" class="btn btn-tab Tubos">
+                        <label id="DashboardDespachoCorte0024"></label>
+                        <span id="spanDespacharTubos"></span>
+                    </button>
+                    <button id="btnEntregarTubos" class="btn btn-tab Tubos">
+                        <label id="DashboardDespachoCorte0025"></label>
+                        <span id="spanEntregarTubos"></span>
+                    </button>
+                    <button id="btnTravelerPendienteTubos" class="btn btn-tab Tubos">
+                        <label id="DashboardDespachoCorte0026"></label>
+                        <span id="spanTravelerPendienteTubos"></span>
+                    </button>
+                    @*<button id="btnDespachoTubos" class="btn btn-tab Tubos">
+                        <label id="DashboardDespachoCorte0027"></label>
+                        <span id="spanDespachoTubos"></span>
+                    </button>*@
+                    @*<button id="btnCorteTubos" class="btn btn-tab Tubos">
+                        <label id="DashboardDespachoCorte0028"></label>
+                        <span id="spanCorteTubos"></span>
+                    </button>*@
+                </div>
+            </div>
+            <div id="divTubos" class="hidden grid">
+                <div id="gridTubos" ></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*<div>
+    <ul id="menuAccesorios" >
+        <li id="LevantarIncidenciaFolioAvisoEntradaAccesorios"><span id="DashboardRecepcionAlmacenaje0047"></span></li>
+        <li id="LevantarIncidenciaPackingListAccesorios"><span id="DashboardRecepcionAlmacenaje0048"></span></li>
+        <li id="LevantarIncidenciaOrdenRecepcionAccesorios"><span id="DashboardRecepcionAlmacenaje0051"></span></li>
+        <li id="LevantarIncidenciaNumeroUnicoAccesorios"><span id="DashboardRecepcionAlmacenaje0054"></span></li>
+    </ul>
+
+    <ul id="menuTubos" >
+        <li id="LevantarIncidenciaFolioAvisoEntradaTubos"><span id="DashboardRecepcionAlmacenaje0055"></span></li>
+        <li id="LevantarIncidenciaPackingListTubos"><span id="DashboardRecepcionAlmacenaje0056"></span></li>
+        <li id="LevantarIncidenciaOrdenRecepcionTubos"><span id="DashboardRecepcionAlmacenaje0057"></span></li>
+        <li id="LevantarIncidenciaNumeroUnicoTubos"><span id="DashboardRecepcionAlmacenaje0058"></span></li>
+    </ul>
+</div>*@
+
+<input id="hdAccionFiltradoTubos" type="hidden" />
+<input id="hdAccionFiltradoAccesorios" type="hidden" />
+<script>
+    @section JavascriptDocumentReadyHomeCookie {
+        Cookies.set("home", true, { path: '/' });
+        Cookies.set("navegacion", "28", { path: '/' });
+    }
+    @section JavascriptGlobalVariables {
+    var Proyecto = {}, Cliente = {}, FolioAvisoEntrada = {}, PackingList = {};
+    var FechaInicial, FechaFinal, PeriodoTiempo = {}, resultadoJson, UnidadMedida = {};
+    var _despachoUrl = "@Url.Action("Despacho", "Despacho")";
+    var _activarBotonDashBoard = getUrlParameter("ActivarBotonDashBoard", "-1");
+
+    var $DashBoardDespachoCorteModel = {
+        listContainer: {
+            create: ".button-section",
+            list: ".grid",
+            detail: ".detailLink",
+            destroy: "",
+            createIncidence: ""
+        },
+        properties: {
+        }
+    };
+    var accesoriosCall = false;
+    }
+
+    @section JavascriptGlobalFunctions {
+    function changeLanguageCall() {
+        var tmpT = removeGrid($("#gridTubos"));
+        var tmpA = removeGrid($("#gridAccesorios"));
+
+        if (getUrlParameter("ActivarBotonDashBoard", "-1") == "-1")
+        {
+            CargarGridTubos();
+            CargarGridAccesorios();
+        }
+        CrearPeriodoTiempo();
+
+        if (getUrlParameter("ActivarBotonDashBoard", "-1") == "-1")
+        {
+            $("#gridTubos").data("kendoGrid").dataSource.data(tmpT);
+            $("#gridAccesorios").data("kendoGrid").dataSource.data(tmpA);
+            Filtros();
+        }
+
+    };
+        function changeDatePickerDateFormat(datePickerOptions) {
+            FechaInicial.setOptions(datePickerOptions);
+            FechaFinal.setOptions(datePickerOptions);
+        };
+
+        function CargaInicial() {
+            $("#Nuevo").click(function () {
+                var url = "@Url.Action("Despacho", "Despacho")";
+                window.location.href = url + "?leng=" + $("#language").data("kendoDropDownList").value();
+            });
+
+                //Botones Dashboard
+                //Accesorios
+            $("#btnOrdenesTrabajoAccesorios").click(function () {
+                if( $("#UnidadMedida").data("kendoComboBox").value() === 4)
+                {
+                    tabActivoAccesorios("1");
+                }
+                else
+                {
+                    MostrarGrid(2); 
+                    tabActivoAccesorios("1"); 
+                    AccionesListado("1", 2, 1);
+                }
+            });
+
+            $("#btnOrdenesTrabajoActivasAccesorios").click(function () {
+                if($("#UnidadMedida").data("kendoComboBox").value() === 4)
+                {
+                    tabActivoAccesorios("2");
+                }
+                else
+                {
+                    MostrarGrid(2);
+                    tabActivoAccesorios("2");
+                    AccionesListado("2", 2, 1);
+                }
+            });
+
+            $("#btnPreDespacharAccesorios").click(function () {
+                if($("#UnidadMedida").data("kendoComboBox").value() == 4)
+                {
+                    tabActivoAccesorios("3");
+                }
+                else
+                {
+                    MostrarGrid(2);
+                    tabActivoAccesorios("3");
+                    AccionesListado("3", 2, 1);
+                }
+            });
+
+            $("#btnDespacharAccesorios").click(function () {
+                if($("#UnidadMedida").data("kendoComboBox").value() == 4)
+                {
+                    tabActivoAccesorios("4");
+                }
+                else
+                {
+                    MostrarGrid(2);
+                    tabActivoAccesorios("4");
+                    AccionesListado("4", 2, 1);
+                }
+            });
+
+            $("#btnEntregarAccesorios").click(function () {
+                if( $("#UnidadMedida").data("kendoComboBox").value() == 4)
+                {
+                    tabActivoAccesorios("5");
+                }
+                else
+                {
+                    MostrarGrid(2);
+                    tabActivoAccesorios("5");
+                    AccionesListado("5", 2, 1);
+                }
+            });
+
+            $("#btnTravelerPendienteAccesorios").click(function () {
+                if($("#UnidadMedida").data("kendoComboBox").value() != 2)
+                {
+                    tabActivoAccesorios("6");
+                }
+                else
+                {
+                    MostrarGrid(2);
+                    tabActivoAccesorios("6");
+                    AccionesListado("6", 2, 1);
+                }
+            });
+
+                //$("#btnDespachoAccesorios").click(function () { MostrarGrid(2); tabActivoAccesorios("7"); AccionesListado("7", 2); });
+                //$("#btnCorteAccesorios").click(function () { MostrarGrid(2); tabActivoAccesorios("8"); AccionesListado("8", 2); });
+            //Tubos
+            $("#btnOrdenesTrabajoTubos").click(function () {
+                //if ($("#UnidadMedida").data("kendoComboBox").value() != 2) {
+                //    tabActivoTubos("1");
+                //}
+                //else {
+                    MostrarGrid(1); tabActivoTubos("1"); AccionesListado("1", 1, 1);
+                //}
+               
+            });
+
+            $("#btnOrdenesTrabajoActivasTubos").click(function () {
+                //if ($("#UnidadMedida").data("kendoComboBox").value() != 2) {
+                //    tabActivoTubos("2");
+                //}
+                //else
+                //{
+                    MostrarGrid(1); tabActivoTubos("2"); AccionesListado("2", 1, 1);
+                //}
+               
+            });
+
+            $("#btnPreDespacharTubos").click(function () { MostrarGrid(1); tabActivoTubos("3"); AccionesListado("3", 1, 1); });
+            $("#btnDespacharTubos").click(function () { MostrarGrid(1); tabActivoTubos("4"); AccionesListado("4", 1, 1); });
+            $("#btnEntregarTubos").click(function () { MostrarGrid(1); tabActivoTubos("5"); AccionesListado("5", 1, 1); });
+
+            $("#btnTravelerPendienteTubos").click(function () {
+                if ($("#UnidadMedida").data("kendoComboBox").value() != 2) {
+                    tabActivoTubos("6");
+                }
+                else {
+                    MostrarGrid(1); tabActivoTubos("6"); AccionesListado("6", 1, 1);
+                }
+            });
+            //$("#btnDespachoTubos").click(function () { MostrarGrid(1); tabActivoTubos("7"); AccionesListado("7", 1); });
+            //$("#btnCorteTubos").click(function () { MostrarGrid(1); tabActivoTubos("8"); AccionesListado("8", 1); });
+            
+
+            $("#ProyectoID").kendoComboBox({
+                dataTextField: "Nombre",
+                dataValueField: "ProyectoID",
+                select: function (e) {
+                },
+                change: function (e) {
+                    var dataItem = this.dataItem();
+                    dataItem!==undefined ? CargarProyecto(dataItem.ProyectoID, dataItem.Nombre):CargarProyecto("", "");
+                    var value = this.value();
+                    if (!value || this.selectedIndex == -1) {
+                        messageindexKendoCombobox(this);
+                        Proyecto = {};
+                        this.value("");
+                    }
+                    Filtros();
+                },
+                filter: "contains",
+            });
+            ObtenerProyecto();
+
+            $("#ClienteID").kendoComboBox({
+                dataTextField: "Nombre",
+                dataValueField: "ClienteID",
+                select: function (e) {
+                },
+                change: function (e) {
+                    var dataItem = this.dataItem();
+                    dataItem!==undefined ? CargarCliente(dataItem.ClienteID, dataItem.Nombre):CargarCliente("", "");
+                    var value = this.value();
+                    if (!value || this.selectedIndex == -1) {
+                        messageindexKendoCombobox(this);
+                        Cliente = {};
+                        this.value("");
+                        CargarProyecto("", "")
+                        $("#ProyectoID").data("kendoComboBox").dataSource.filter({});
+                        $("#ProyectoID").data("kendoComboBox").value("");
+                    } else {
+                        FiltrarProyectosXCliente();
+                    }
+                    Filtros();
+                },
+                filter: "contains",
+            });
+            ObtenerCliente();
+
+            $("#FolioAvisoEntradaID").kendoComboBox({
+                dataTextField: "value",
+                dataValueField: "id",
+                select: function (e) {
+                },
+                change: function (e) {
+                    var dataItem = this.dataItem();
+                    dataItem!==undefined ? CargarFolioAvisoEntrada(dataItem.id, dataItem.value):CargarFolioAvisoEntrada("", "");
+                    var value = this.value();
+                    if (!value || this.selectedIndex == -1) {
+                        messageindexKendoCombobox(this);
+                        FolioAvisoEntrada = {};
+                        this.value("");
+                    }
+                    Filtros();
+                },
+                filter: "contains",
+            });
+            ObtenerFoliosAvisoLlegada();
+
+            $("#UnidadMedida").kendoComboBox({
+                dataTextField: "UnidadMedida",
+                dataValueField: "UnidadMedidaID",
+                dataSource: [
+                    { "UnidadMedidaID": "1", "UnidadMedida": _dictionary.DashboardDespachoCorte0049[$("#language").data("kendoDropDownList").value()] },
+                    { "UnidadMedidaID": "2", "UnidadMedida": _dictionary.DashboardDespachoCorte0048[$("#language").data("kendoDropDownList").value()] },
+                    { "UnidadMedidaID": "3", "UnidadMedida": _dictionary.DashboardDespachoCorte0050[$("#language").data("kendoDropDownList").value()] },
+                    { "UnidadMedidaID": "4", "UnidadMedida": _dictionary.DashboardDespachoCorte0051[$("#language").data("kendoDropDownList").value()] },
+                ],
+                select: function (e) {
+                },
+                change: function (e) {
+                    var dataItem = this.dataItem();
+                    dataItem!==undefined ? CargarUnidadMedida(dataItem.UnidadMedidaID):CargarUnidadMedida("");
+                    var value = this.value();
+
+                    if (!value || this.selectedIndex == -1) {
+                        messageindexKendoCombobox(this);
+                        UnidadMedida = {};
+                        this.value("");
+                    } 
+                    Filtros();
+                    
+                    
+                },
+                filter: "contains",
+            });
+            $("#UnidadMedida").data("kendoComboBox").value(2);
+
+            $("#PackingList").kendoComboBox({
+                dataTextField: "value",
+                dataValueField: "id",
+                select: function (e) {
+                },
+                change: function (e) {
+                    var dataItem = this.dataItem();
+                    dataItem!==undefined ? CargarPackingList(dataItem.id):CargarPackingList("");
+                    var value = this.value();
+                    if (!value || this.selectedIndex == -1) {
+                        messageindexKendoCombobox(this);
+                        PackingList = {};
+                        this.value("");
+                    }
+                    Filtros();
+                },
+                filter: "contains",
+            });
+            ObtenerPackingList();
+
+            FechaInicial = new kendo.ui.DatePicker($("#FechaInicial"));
+            FechaFinal = new kendo.ui.DatePicker($("#FechaFinal"));
+
+            $("#FechaInicial").bind("change", function () {
+                if (!$("#FechaInicial").data("kendoDatePicker").value() && this.value!=="") {
+                    $("#FechaInicial").css("color","#EB4D50");
+                    displayMessage("notificationslabel0082","","2")
+                }else{
+                    $("#FechaInicial").attr("style","");
+                    Filtros();
+                }
+            });
+
+            $("#FechaFinal").bind("change", function () {
+                if (!$("#FechaFinal").data("kendoDatePicker").value() && this.value!=="") {
+                    $("#FechaFinal").css("color","#EB4D50");
+                    displayMessage("notificationslabel0082","","2")
+                }else{
+                    $("#FechaFinal").attr("style","");
+                    Filtros();
+                }
+            });
+
+            ObtenerFechasporDefecto();
+            CantidadesDelMenuDashboardTubos();
+            ActivarBotonDashboard();
+        };
+
+    function FiltrarProyectosXCliente() {
+        
+        var filters = [];
+        filters.push({
+            field: "ClienteID",
+            operator: "eq",
+            value: parseInt(Cliente.ClienteID)
+        });
+        $("#ProyectoID").data("kendoComboBox").dataSource.filter(filters);
+        $("#ProyectoID").data("kendoComboBox").value("");
+        CargarProyecto("", "")
+    }
+
+    function ActivarBotonDashboard() {
+        if (_activarBotonDashBoard != "-1") {
+            switch (_activarBotonDashBoard) {
+                case "1":
+                    $("#btnOrdenesTrabajoAccesorios").trigger("click");
+                    $("#btnOrdenesTrabajoTubos").trigger("click");
+                    break;
+                case "2":
+                    $("#btnOrdenesTrabajoActivasAccesorios").trigger("click");
+                    $("#btnOrdenesTrabajoActivasTubos").trigger("click");
+                    break;
+                case "3":
+                    $("#btnPreDespacharAccesorios").trigger("click");
+                    $("#btnPreDespacharTubos").trigger("click");
+                    break;
+                case "4":
+                    $("#btnDespacharAccesorios").trigger("click");
+                    $("#btnDespacharTubos").trigger("click");
+                    break;
+                case "5":
+                    $("#btnEntregarAccesorios").trigger("click");
+                    $("#btnEntregarTubos").trigger("click");
+                    break;
+                case "6":
+                    $("#btnTravelerPendienteAccesorios").trigger("click");
+                    $("#btnTravelerPendienteTubos").trigger("click");
+                    break;
+            }
+        }
+    }
+    function CargarGridTubos(dataSource, columnas, detailInit) {
+        if($("#gridTubos").data("kendoGrid"))
+            $("#gridTubos").empty(); // destroy the Grid
+        $("#gridTubos").kendoGrid({
+            dataSource: dataSource,
+            autoHeight: true,
+            sortable: true,
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            detailInit: detailInit,
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+            },
+            columns: columnas,
+            dataBound: function (e) {
+                //$(".k-grid input.k-textbox").prop('readonly', true);
+                $(".k-grid td .k-button").text('');
+                $(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
+                checkTH($("#gridTubos").data("kendoGrid"));
+                quickHeadFilter($("#gridTubos").data("kendoGrid"));
+            }
+        });
+       
+        $("#gridTubos").data("kendoGrid").refresh();
+    };
+    function CargarGridAccesorios(datasource, columnas, detailInit) {
+        if ($("#gridAccesorios").data("kendoGrid"))
+            $("#gridAccesorios").empty(); // destroy the Grid
+        $("#gridAccesorios").kendoGrid({
+            dataSource: datasource,
+            autoHeight: true,
+            sortable: true,
+            scrollable: false,
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            detailInit: detailInit,
+            pageable: {
+                refresh: false,
+                pageSizes: [10, 15, 20],
+                info: false,
+                input: false,
+                numeric: true,
+            },
+            columns: columnas,
+            dataBound: function (e) {
+                //$(".k-grid input.k-textbox").prop('readonly', true);
+                $(".k-grid td .k-button").text('');
+                $(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
+                checkTH($("#gridAccesorios").data("kendoGrid"));
+                quickHeadFilter($("#gridAccesorios").data("kendoGrid"));
+            }
+        });
+        $("#gridAccesorios").data("kendoGrid").refresh();
+    };
+    
+    function CrearPeriodoTiempo() {
+        $("#PeriodoTiempo").kendoComboBox({
+            dataTextField: "Periodo",
+            dataValueField: "PeriodoID",
+            dataSource: [
+                { "PeriodoID": "1", "Periodo": _dictionary.DashboardDespachoCorte0033[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "2", "Periodo": _dictionary.DashboardDespachoCorte0034[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "3", "Periodo": _dictionary.DashboardDespachoCorte0035[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "4", "Periodo": _dictionary.DashboardDespachoCorte0036[$("#language").data("kendoDropDownList").value()] },
+                { "PeriodoID": "5", "Periodo": _dictionary.DashboardDespachoCorte0037[$("#language").data("kendoDropDownList").value()] }
+            ],
+            select: function (e) {
+            },
+            change: function (e) {
+                var dataItem = this.dataItem();
+                dataItem!==undefined ? CargarPeriodoTiempo(dataItem.PeriodoID):CargarPeriodoTiempo("");
+                var value = this.value();
+
+                if (!value || this.selectedIndex == -1) {
+                    messageindexKendoCombobox(this);
+                    PeriodoTiempo = {};
+                    this.value("");
+                }
+                ObtenerFechasporPeriodo(value);
+                Filtros();
+            },
+            filter: "contains",
+            value: ""
+        });
+    };
+    function CrearUnidadMedida() {
+        //$("#UnidadMedida").kendoComboBox({
+        //    dataTextField: "UnidadMedida",
+        //    dataValueField: "UnidadMedidaID",
+        //    dataSource: [
+        //        { "UnidadMedidaID": "1", "UnidadMedida": _dictionary.DashboardDespachoCorte0049[$("#language").data("kendoDropDownList").value()] },
+        //        { "UnidadMedidaID": "2", "UnidadMedida": _dictionary.DashboardDespachoCorte0048[$("#language").data("kendoDropDownList").value()] },
+        //        { "UnidadMedidaID": "3", "UnidadMedida": _dictionary.DashboardDespachoCorte0050[$("#language").data("kendoDropDownList").value()] },
+        //        { "UnidadMedidaID": "4", "UnidadMedida": _dictionary.DashboardDespachoCorte0051[$("#language").data("kendoDropDownList").value()] },
+        //    ],
+        //    select: function (e) {
+        //        var dataItem = this.dataItem(e.item.index());
+        //        CargarUnidadMedida(dataItem.UnidadMedidaID);
+        //    },
+        //    change: function (e) {
+        //        var value = this.value();
+
+        //        if (!value || this.selectedIndex == -1) {
+        //            messageindexKendoCombobox(this);
+        //            UnidadMedida = {};
+        //            this.value("");
+        //        }
+        //        Filtros();
+        //    },
+        //    filter: "contains",
+        //});
+        //default
+        $("#UnidadMedida").data("kendoComboBox").value(2);
+    };
+    function ObtenerAccionesListadoTubos(Listado) {
+        if(!accesoriosCall){
+            $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+                Error(result);
+                $("#spanPreDespacharTubos").html(result.PreDespacho ? result.PreDespacho : 0);
+                $("#spanDespacharTubos").html(result.PorDespachar ? result.PorDespachar : 0);
+                $("#spanEntregarTubos").html(result.PorEntregar ? result.PorEntregar : 0);
+
+                //if($("#UnidadMedida").data("kendoComboBox").value() != 2)
+                //{
+                //    $("#spanTravelerPendienteTubos").html("N/A");
+                //    $("#spanOrdenesTrabajoTubos").html("N/A");
+                //    $("#spanOrdenesTrabajoActivasTubos").html("N/A");
+                //}
+                //else
+                //{
+                    $("#spanTravelerPendienteTubos").html(result.TrevelerPendiente ? result.TrevelerPendiente : 0);
+                    $("#spanOrdenesTrabajoTubos").html(result.CantidadODT ? result.CantidadODT : 0);
+                    $("#spanOrdenesTrabajoActivasTubos").html(result.CantidadODTActiva ? result.CantidadODTActiva : 0);
+                //}
+                $("#spanDespachoTubos").html(result.Despacho ? result.Despacho : 0);
+                $("#spanCorteTubos").html(result.Corte ? result.Corte : 0);
+                CantidadesDelMenuDashboardAccesorios();
+
+            });
+        }else{
+            setTimeout(function(){ObtenerAccionesListadoTubos(Listado)},200);
+        }
+    };
+
+    function ObtenerAccionesListadoAccesorios(Listado) {
+        if (Listado.UnidadDeMedida == 4)
+        {
+            $("#spanOrdenesTrabajoAccesorios").html("N/A");
+            $("#spanOrdenesTrabajoActivasAccesorios").html("N/A");
+            $("#spanPreDespacharAccesorios").html("N/A");
+            $("#spanDespacharAccesorios").html("N/A");
+            $("#spanEntregarAccesorios").html("N/A");
+            $("#spanTravelerPendienteAccesorios").html("N/A");
+            $("#spanDespachoAccesorios").html("N/A");
+            $("#spanCorteAccesorios").html("N/A");
+        }
+        else
+        {
+            accesoriosCall=true;
+        $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+            Error(result);
+               
+                  
+                $("#spanPreDespacharAccesorios").html(result.PreDespacho ? result.PreDespacho : 0);
+                $("#spanDespacharAccesorios").html(result.PorDespachar ? result.PorDespachar : 0);
+                $("#spanEntregarAccesorios").html(result.PorEntregar ? result.PorEntregar : 0);
+
+                //if ($("#UnidadMedida").data("kendoComboBox").value() != 2) {
+                //    $("#spanTravelerPendienteAccesorios").html("N/A");
+                //    $("#spanOrdenesTrabajoAccesorios").html("N/A");
+                //    $("#spanOrdenesTrabajoActivasAccesorios").html("N/A");
+                //}
+                //else {
+                    $("#spanTravelerPendienteAccesorios").html(result.TrevelerPendiente ? result.TrevelerPendiente : 0);
+                    $("#spanOrdenesTrabajoAccesorios").html(result.CantidadODT ? result.CantidadODT : 0);
+                    $("#spanOrdenesTrabajoActivasAccesorios").html(result.CantidadODTActiva ? result.CantidadODTActiva : 0);
+                //}
+
+                //$("#spanTravelerPendienteAccesorios").html(result.TrevelerPendiente ? result.TrevelerPendiente : 0);
+                $("#spanDespachoAccesorios").html(result.Despacho ? result.Despacho : 0);
+                $("#spanCorteAccesorios").html(result.Corte ? result.Corte : 0);
+                accesoriosCall=false;
+        });
+            }
+    };
+        function Filtros() {
+            var Listado;
+            var accionTubos = $("#hdAccionFiltradoTubos").val() ? $("#hdAccionFiltradoTubos").val() : "1";
+            var accionAccesorios = $("#hdAccionFiltradoAccesorios").val() ? $("#hdAccionFiltradoAccesorios").val() : "1";
+
+            if (!$("#UnidadMedida").data("kendoComboBox").value()) {
+                displayMessage("notificationslabel0101", "", '2');
+                return;
+            }
+
+            AccionesListado(accionTubos,1,0);
+            AccionesListado(accionAccesorios,2,0);
+        };
+
+        function ArregloListado(tipolistado, tipomaterial) {
+            var Listado;
+            Listado = { ProyectoID: "", ClienteID: "", FolioAvisoLlegadaID: "", PackingListID: "", TipoMaterialID: "", FechaInicial: "", FechaFinal: "", token: "", TipoListado: "", UnidadDeMedida: "" };
+
+            var d = new Date($("#FechaInicial").data("kendoDatePicker").value());
+            var d1 = new Date($("#FechaFinal").data("kendoDatePicker").value());
+
+            if (d.getFullYear() == "1969") {
+                d = new Date();
+                d.setDate(d.getDate() - 30);
+            }
+            if (d1.getFullYear() == "1969") {
+                d1 = new Date();
+            }
+
+            Listado.ProyectoID = $("#ProyectoID").data("kendoComboBox").value();
+            Listado.ClienteID = $("#ClienteID").data("kendoComboBox").value();
+            Listado.FolioAvisoLlegadaID = FolioAvisoEntrada.FolioAvisoEntradaID ? FolioAvisoEntrada.FolioAvisoEntradaID : "";
+            Listado.PackingListID = PackingList.PackingListID ? PackingList.PackingListID : "";
+            Listado.TipoMaterialID = tipomaterial;
+            Listado.FechaInicial = obtenerFormatoFechaConHora(d);
+            Listado.FechaFinal = obtenerFormatoFechaConHora(d1);
+            Listado.UnidadDeMedida = $("#UnidadMedida").data("kendoComboBox").value();
+            Listado.token = Cookies.get("token");
+            Listado.TipoListado = tipolistado;
+
+            return Listado;
+        };
+
+        function CargaDatosGridTubos() {
+            if ($("#gridTubos").data("kendoGrid")) {
+                if (resultadoJson)
+                {
+                    if (resultadoJson.length > 0) {
+                        $("#gridTubos").data("kendoGrid").dataSource.data(resultadoJson);
+                        $("#gridTubos").data("kendoGrid").dataSource.page(1);
+                    } else {
+                        $("#gridTubos").data("kendoGrid").dataSource.data([]);
+                        $("#gridTubos").data("kendoGrid").dataSource.page(0);
+                    };
+                    AsignarPaginaActualCookie();
+                    applySecurityPolicy(false);
+                }
+            };
+        };
+
+        function AsignarPaginaActualCookie() {
+            Cookies.set("navegacion", "28", { path: '/' });
+        }
+
+        function CargaDatosGridAccesorios() {
+            if ($("#gridAccesorios").data("kendoGrid")) {
+                if (resultadoJson.length > 0) {
+                    $("#gridAccesorios").data("kendoGrid").dataSource.data(resultadoJson);
+                    $("#gridAccesorios").data("kendoGrid").dataSource.page(1);
+                } else {
+                    $("#gridAccesorios").data("kendoGrid").dataSource.data([]);
+                    $("#gridAccesorios").data("kendoGrid").dataSource.page(0);
+                };
+                AsignarPaginaActualCookie();
+                applySecurityPolicy(false);
+            };
+        };
+
+        function DefinicionModeloOrdenesTrabajo() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            SpoolID: { type: "string" },
+                            Spool: { type: "string" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasOrdenesTrabajo() {
+            var columnas =
+            [
+                { field: "SpoolID", title: _dictionary.DashboardDespachoCorte0030[$("#language").data("kendoDropDownList").value()], filterable: true, template: "<a class='detailLink' onclick=\"MostrarDetalleOrdenesTrabajo(this)\">#:SpoolID#</a>" },
+                { field: "Spool", title: _dictionary.DashboardDespachoCorte0031[$("#language").data("kendoDropDownList").value()], filterable: true },
+            ];
+            return columnas;
+        };
+
+        function MostrarDetalleOrdenesTrabajo(link) {
+            var dataItem=$(link).closest("div[id^=grid]").data("kendoGrid").dataItem($(link).closest("tr"))
+            var detalleIdeaUrl = "@Url.Action("PreDespacho", "PreDespacho")";
+            var url = detalleIdeaUrl + "?leng=" + $("#language").data("kendoDropDownList").value() + "&SpoolID=" + dataItem.SpoolID+"&NumeroControl="+dataItem.NumeroControlID;
+            openFromList(event,url)
+        };
+
+        function OrdenesTrabajo(tipomaterial, esBoton) {
+            var Listado = ArregloListado("25", tipomaterial);
+
+            $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+                //if (Error(result)) {
+                    resultadoJson = result;
+                    var dataSource = DefinicionModeloOrdenesTrabajo();
+                    var columnas = DefinicionColumnasOrdenesTrabajo();
+
+                    if (tipomaterial == 1) {
+                        CargarGridTubos(dataSource, columnas, "");
+                        if(!esBoton){
+                            CantidadesDelMenuDashboardTubos();
+                        }
+                        CargaDatosGridTubos();
+                        $("#hdAccionFiltradoTubos").val("1");
+                    } else {
+                        CargarGridAccesorios(dataSource, columnas, "");
+                        if(!esBoton){
+                            CantidadesDelMenuDashboardAccesorios();
+                        }
+                        CargaDatosGridAccesorios();
+                        $("#hdAccionFiltradoAccesorios").val("1");
+                    };
+                    
+                    
+                //};
+                //////loadingStop();
+            });
+        };
+
+        function DefinicionModeloOrdenesTrabajoActivas() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            SpoolID: { type: "string" },
+                            Spool: { type: "string" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+        function DefinicionColumnasOrdenesTrabajoActivas() {
+            var columnas =
+           [
+               { field: "SpoolID", title: _dictionary.DashboardDespachoCorte0030[$("#language").data("kendoDropDownList").value()], filterable: true, template: "<a class='detailLink' onclick=\"MostrarDetalleOrdenesTrabajoActivas('#:SpoolID#')\">#:SpoolID#</a>" },
+               { field: "Spool", title: _dictionary.DashboardDespachoCorte0031[$("#language").data("kendoDropDownList").value()], filterable: true },
+           ];
+            return columnas;
+        };
+
+        function MostrarDetalleOrdenesTrabajoActivas(spoolID) {
+            var detalleIdeaUrl = "@Url.Action("PreDespacho", "PreDespacho")";
+            var url = detalleIdeaUrl + "?leng=" + $("#language").data("kendoDropDownList").value() + "&SpoolID=" + spoolID;
+            openFromList(event,url)
+        };
+
+        function OrdenesTrabajoActivas(tipomaterial, esBoton) {
+            var Listado = ArregloListado("25", tipomaterial);
+
+            $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+                //if (Error(result)) {
+                    resultadoJson = result;
+                    var dataSource = DefinicionModeloOrdenesTrabajoActivas();
+                    var columnas = DefinicionColumnasOrdenesTrabajoActivas();
+
+                    if (tipomaterial == 1) {
+                        CargarGridTubos(dataSource, columnas, "");
+                        if(!esBoton){
+                            CantidadesDelMenuDashboardTubos();
+                        }
+                        CargaDatosGridTubos();
+                        $("#hdAccionFiltradoTubos").val("2");
+                    } else {
+                        CargarGridAccesorios(dataSource, columnas, "");
+                        if(!esBoton){
+                            CantidadesDelMenuDashboardAccesorios();
+                        }
+                        CargaDatosGridAccesorios();
+                        $("#hdAccionFiltradoAccesorios").val("2");
+                    };
+
+                   
+                //};
+                //////loadingStop();
+            });
+
+        };
+
+        
+        function DefinicionModeloPreDespacharSpool() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            ID: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadPredespachada: { type: "number" },
+                            CantidadPorPredespachar  : { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasPreDespacharSpool() {
+            var columnas =
+           [
+               { field: "ID", title: _dictionary.DashboardDespachoCorte0055[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0056[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadPredespachada", title: _dictionary.DashboardDespachoCorte0057[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadPorPredespachar", title: _dictionary.DashboardDespachoCorte0058[$("#language").data("kendoDropDownList").value()], filterable: true }
+
+           ];
+            return columnas;
+        };
+
+        function DefinicionModeloPreDespacharNumerosUnicos() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "string" },
+                            D2: { type: "string" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadPredespachada: { type: "number" },
+                            CantidadPorPredespachar : { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasPreDespacharNumerosUnicos() {
+            var columnas =
+           [
+               { field: "IC", title: _dictionary.DashboardDespachoCorte0059[$("#language").data("kendoDropDownList").value()], filterable: true, width:"100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0060[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0061[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0062[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0063[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0064[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPredespachada", title: _dictionary.DashboardDespachoCorte0065[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorPredespachar", title: _dictionary.DashboardDespachoCorte0066[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+
+
+        function DefinicionModeloPreDespacharToneladas() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "string" },
+                            D2: { type: "string" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadPredespachada: { type: "number" },
+                            CantidadPorPredespachar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasPreDespacharToneladas() {
+            var columnas =
+           [
+               { field: "IC", title: _dictionary.DashboardDespachoCorte0059[$("#language").data("kendoDropDownList").value()], filterable: true, width: "100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0060[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0061[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0062[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0063[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0064[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPredespachada", title: _dictionary.DashboardDespachoCorte0065[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorPredespachar", title: _dictionary.DashboardDespachoCorte0066[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+        function DefinicionModeloPreDespacharMilimetros() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "string" },
+                            D2: { type: "string" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadPredespachada: { type: "number" },
+                            CantidadPorPredespachar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasPreDespacharMilimetros() {
+            var columnas =
+           [
+               { field: "IC", title: _dictionary.DashboardDespachoCorte0059[$("#language").data("kendoDropDownList").value()], filterable: true, width: "100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0060[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0061[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0062[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0063[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0064[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPredespachada", title: _dictionary.DashboardDespachoCorte0065[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorPredespachar", title: _dictionary.DashboardDespachoCorte0066[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+
+        function PreDespachar(tipomaterial, esBoton) {
+            var Listado = ArregloListado("28", tipomaterial);
+
+            $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+                //if (Error(result)) {
+                     resultadoJson = result;
+                    var dataSource = "";
+                    var columnas = "";
+
+                    switch ($("#UnidadMedida").data("kendoComboBox").text()) {
+                        case "Spool":
+                            dataSource = DefinicionModeloPreDespacharSpool();
+                            columnas = DefinicionColumnasPreDespacharSpool();
+                            break;
+                        case "Pieza":
+                            dataSource = DefinicionModeloPreDespacharNumerosUnicos();
+                            columnas = DefinicionColumnasPreDespacharNumerosUnicos();
+                            break;
+                        case "Toneladas":
+                            dataSource = DefinicionModeloPreDespacharToneladas();
+                            columnas = DefinicionColumnasPreDespacharToneladas();
+                            break;
+                        case "Milímetros":
+                            dataSource = DefinicionModeloPreDespacharMilimetros();
+                            columnas = DefinicionColumnasPreDespacharMilimetros();
+                            break;
+                        default:
+                            dataSource = DefinicionModeloPreDespacharSpool();
+                            columnas = DefinicionColumnasPreDespacharSpool();
+                            break;
+                    };
+
+                    if (tipomaterial == 1) {
+                        CargarGridTubos(dataSource, columnas, "");
+                        if(!esBoton){
+                            CantidadesDelMenuDashboardTubos();
+                        }
+                        CargaDatosGridTubos();
+                        $("#hdAccionFiltradoTubos").val("3");
+                    } else {
+                        CargarGridAccesorios(dataSource, columnas, "");
+                        if(!esBoton){
+                            CantidadesDelMenuDashboardAccesorios();
+                        }
+                        CargaDatosGridAccesorios();
+                        $("#hdAccionFiltradoAccesorios").val("3");
+                    };
+                //};
+                ////loadingStop();
+            });
+
+        };
+
+        function DefinicionModeloEntregarSpool() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            ID: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadEntregada: { type: "number" },
+                            CantidadPorEntregar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasEntregarSpool() {
+            var columnas =
+           [
+               { field: "ID", title: _dictionary.DashboardDespachoCorte0079[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0080[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadEntregada", title: _dictionary.DashboardDespachoCorte0081[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadPorEntregar", title: _dictionary.DashboardDespachoCorte0082[$("#language").data("kendoDropDownList").value()], filterable: true }
+
+           ];
+            return columnas;
+        };
+
+        function DefinicionModeloEntregarNumerosUnicos() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "number" },
+                            D2: { type: "number" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadEntregada: { type: "number" },
+                            CantidadPorEntregar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasEntregarNumerosUnicos() {
+            var columnas =
+           [
+               { field: "IC", title: _dictionary.DashboardDespachoCorte0083[$("#language").data("kendoDropDownList").value()], filterable: true, width: "100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0084[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0085[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0086[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0087[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0088[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadEntregada", title: _dictionary.DashboardDespachoCorte0089[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorEntregar", title: _dictionary.DashboardDespachoCorte0090[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+
+
+        function DefinicionModeloEntregarToneladas() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "string" },
+                            D2: { type: "string" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadEntregada: { type: "number" },
+                            CantidadPorEntregar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasEntregarToneladas() {
+            var columnas =
+           [
+               { field: "IC", title: _dictionary.DashboardDespachoCorte0083[$("#language").data("kendoDropDownList").value()], filterable: true, width: "100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0084[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0085[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0086[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0087[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0088[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadEntregada", title: _dictionary.DashboardDespachoCorte0089[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorEntregar", title: _dictionary.DashboardDespachoCorte0090[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+        function DefinicionModeloEntregarMilimetros() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "number" },
+                            D2: { type: "number" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadEntregada: { type: "number" },
+                            CantidadPorEntregar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasEntregarMilimetros() {
+            var columnas =
+           [
+               { field: "IC", title: _dictionary.DashboardDespachoCorte0083[$("#language").data("kendoDropDownList").value()], filterable: true, width: "100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0084[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0085[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0086[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0087[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0088[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadEntregada", title: _dictionary.DashboardDespachoCorte0089[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorEntregar", title: _dictionary.DashboardDespachoCorte0090[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+
+
+        function Entregar(tipomaterial, esBoton) {
+            var Listado = ArregloListado("30", tipomaterial);
+
+            $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+                //if (Error(result)) {
+                    resultadoJson = result;
+                    var dataSource = "";
+                    var columnas = "";
+
+                    switch ($("#UnidadMedida").data("kendoComboBox").text()) {
+                        case "Spool":
+                            dataSource = DefinicionModeloEntregarSpool();
+                            columnas = DefinicionColumnasEntregarSpool();
+                            break;
+                        case "Pieza":
+                            dataSource = DefinicionModeloEntregarNumerosUnicos();
+                            columnas = DefinicionColumnasEntregarNumerosUnicos();
+                            break;
+                        case "Toneladas":
+                            dataSource = DefinicionModeloEntregarToneladas();
+                            columnas = DefinicionColumnasEntregarToneladas();
+                            break;
+                        case "Milímetros":
+                            dataSource = DefinicionModeloEntregarMilimetros();
+                            columnas = DefinicionColumnasEntregarMilimetros();
+                            break;
+                        default:
+                            dataSource = DefinicionModeloEntregarSpool();
+                            columnas = DefinicionColumnasEntregarSpool();
+                            break;
+                    };
+
+                    if (tipomaterial == 1) {
+                        CargarGridTubos(dataSource, columnas, "");
+                        if(!esBoton){
+                            CantidadesDelMenuDashboardTubos();
+                        }
+                        CargaDatosGridTubos();
+                        $("#hdAccionFiltradoTubos").val("5");
+                    } else {
+                        CargarGridAccesorios(dataSource, columnas, "");
+                        if(!esBoton){
+                            CantidadesDelMenuDashboardAccesorios();
+                        }
+                        CargaDatosGridAccesorios();
+                        $("#hdAccionFiltradoAccesorios").val("5");
+                    };
+                //};
+                ////loadingStop();
+            });
+        };
+
+        function DefinicionModeloDespacho() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            SpoolID: { type: "string" },
+                            Spool: { type: "string" },
+                            CantidadMateriales: { type: "number" },
+                            CantidadDespachados: { type: "number" },
+                            FaltantesPorDespachar: { type: "string" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasDespacho() {
+            var columnas =
+           [
+               { field: "SpoolID", title: _dictionary.DashboardDespachoCorte0030[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "Spool", title: _dictionary.DashboardDespachoCorte0031[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadMateriales", title: _dictionary.DashboardDespachoCorte0038[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadDespachados", title: _dictionary.DashboardDespachoCorte0039[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "FaltantesPorDespachar", title: _dictionary.DashboardDespachoCorte0040[$("#language").data("kendoDropDownList").value()], filterable: true, template: "<a class='detailLink' onclick='MostrarDetalleDespachar(#:SpoolID#,#:ProyectoID#)'>#:SpoolID#</a>" },
+               { field: "ProyectoID", title: _dictionary.DashboardDespachoCorte0030[$("#language").data("kendoDropDownList").value()], filterable: true, hidden:true },
+           ];
+            return columnas;
+        };
+
+        function detailInit(e) {
+            if(e.data.Detalle.length > 0) {
+                $("<div/>").appendTo(e.detailCell).kendoGrid({
+                    dataSource: {
+                        data: e.data.Detalle,
+                        schema: {
+                            model: {
+                                fields: {
+                                    Etiqueta: { type: "string" },
+                                    ItemCode: { type: "string" },
+                                    Descripcion: { type: "string" },
+                                    Cantidad: { type: "number" },
+                                    TieneDespacho: { type: "string" },
+                                }
+                            }
+                        }
+                    },
+                    autoBind: true,
+                    scrollable: false,
+                    sortable: false,
+                    columns: addTo([
+                        { field: "Etiqueta", title: _dictionary.DashboardDespachoCorte0041[$("#language").data("kendoDropDownList").value()] },
+                        { field: "ItemCode", title: _dictionary.DashboardDespachoCorte0052[$("#language").data("kendoDropDownList").value()] },
+                        { field: "Descripcion", title: _dictionary.DashboardDespachoCorte0053[$("#language").data("kendoDropDownList").value()] },
+                        { field: "Cantidad", title: _dictionary.DashboardDespachoCorte0054[$("#language").data("kendoDropDownList").value()] },
+                        { field: "TieneDespacho", title: _dictionary.DashboardDespachoCorte0042[$("#language").data("kendoDropDownList").value()] },
+                    ],null)
+                });
+            }
+        }
+
+        function Despacho(tipomaterial) {
+            var Listado = ArregloListado("15", tipomaterial);
+
+            $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+                //if (Error(result)) {
+                    resultadoJson = result;
+                    var dataSource = DefinicionModeloDespacho();
+                    var columnas = DefinicionColumnasDespacho();
+
+                    if (tipomaterial == 1) {
+                        CargarGridTubos(dataSource, columnas, detailInit);
+                        CantidadesDelMenuDashboardTubos();
+                        CargaDatosGridTubos();
+                        $("#hdAccionFiltradoTubos").val("7");
+                    } else {
+                        CargarGridAccesorios(dataSource, columnas, detailInit);
+                        CantidadesDelMenuDashboardAccesorios();
+                        CargaDatosGridAccesorios();
+                        $("#hdAccionFiltradoAccesorios").val("7");
+                    };
+                //};
+                ////loadingStop();
+            });
+        };
+
+        function DefinicionModeloIncidenciasAbiertas() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            NumeroUnico: { type: "string" },
+                            CantidadIncidenciasAbiertas: { type: "string" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasIncidenciasAbiertas() {
+            var columnas =
+           [
+               { field: "NumeroUnico", title: _dictionary.DashboardRecepcionAlmacenaje0045[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadIncidenciasAbiertas", title: _dictionary.DashboardRecepcionAlmacenaje0046[$("#language").data("kendoDropDownList").value()], filterable: true },
+               //{ command: { text: _dictionary.DashboardRecepcionAlmacenaje0032[$("#language").data("kendoDropDownList").value()], click: cancelarIncidenciasAbiertas }, title: " ", width: "99px" }
+           ];
+            return columnas;
+        };
+
+        function cancelarIncidenciasAbiertas() {
+
+        };
+        function Corte(tipomaterial) {
+            var Listado = ArregloListado("16", tipomaterial);
+
+            $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+                //if (Error(result)) {
+                    resultadoJson = result;
+                    var dataSource = DefinicionModeloIncidenciasAbiertas();
+                    var columnas = DefinicionColumnasIncidenciasAbiertas();
+
+                    if (tipomaterial == 1) {
+                        CargarGridTubos(dataSource, columnas,"");
+                        CantidadesDelMenuDashboardTubos();
+                        CargaDatosGridTubos();
+                        $("#hdAccionFiltradoTubos").val("8");
+                    } else {
+                        CargarGridAccesorios(dataSource, columnas,"");
+                        CantidadesDelMenuDashboardAccesorios();
+                        CargaDatosGridAccesorios();
+                        $("#hdAccionFiltradoAccesorios").val("8");
+                    };
+                //};
+                ////loadingStop();
+            });
+        };
+
+        function DefinicionModeloPorDespacharSpool() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            ID: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadDespachada: { type: "number" },
+                            CantidadPorDespachar : { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasPorDespacharSpool() {
+            var columnas =
+           [
+               { field: "ID", title: _dictionary.DashboardDespachoCorte0067[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0068[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadDespachada", title: _dictionary.DashboardDespachoCorte0069[$("#language").data("kendoDropDownList").value()], filterable: true },
+               { field: "CantidadPorDespachar", title: _dictionary.DashboardDespachoCorte0070[$("#language").data("kendoDropDownList").value()], filterable: true }
+
+           ];
+            return columnas;
+        };
+
+        function DefinicionModeloPorDespacharNumerosUnicos() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "string" },
+                            D2: { type: "string" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadDespachada: { type: "number" },
+                            CantidadPorDespachar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasPorDespacharNumerosUnicos() {
+            var columnas =
+           [
+               { field: "IC", title: _dictionary.DashboardDespachoCorte0071[$("#language").data("kendoDropDownList").value()], filterable: true, width: "100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0072[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0073[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0074[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0075[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0076[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadDespachada", title: _dictionary.DashboardDespachoCorte0077[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorDespachar", title: _dictionary.DashboardDespachoCorte0078[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+
+
+        function DefinicionModeloPorDespacharToneladas() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "number" },
+                            D2: { type: "number" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadPredespachada: { type: "number" },
+                            CantidadPorPredespachar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasPorDespacharToneladas() {
+            var columnas =
+           [
+               { field: "IC", title: _dictionary.DashboardDespachoCorte0071[$("#language").data("kendoDropDownList").value()], filterable: true, width: "100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0072[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0073[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0074[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0075[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0076[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadDespachada", title: _dictionary.DashboardDespachoCorte0077[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorDespachar", title: _dictionary.DashboardDespachoCorte0078[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+        function DefinicionModeloPorDespacharMilimetros() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "number" },
+                            D2: { type: "number" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadPredespachada: { type: "number" },
+                            CantidadPorPredespachar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasPorDespacharMilimetros() {
+            var columnas =
+           [
+              { field: "IC", title: _dictionary.DashboardDespachoCorte0071[$("#language").data("kendoDropDownList").value()], filterable: true, width: "100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0072[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0073[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0074[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0075[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0076[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadDespachada", title: _dictionary.DashboardDespachoCorte0077[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorDespachar", title: _dictionary.DashboardDespachoCorte0078[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+
+        function PorDespachar(tipomaterial, esBoton) {
+            var Listado = ArregloListado("29", tipomaterial);
+            $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+                //if (Error(result)) {
+                resultadoJson = result;
+                    var dataSource = "";
+                    var columnas = "";
+                   
+                    switch ($("#UnidadMedida").data("kendoComboBox").text()) {
+                        case "Spool":
+                           
+                            dataSource = DefinicionModeloPorDespacharSpool();
+                            columnas = DefinicionColumnasPorDespacharSpool();
+                            break;
+                        case "Pieza":
+                            dataSource = DefinicionModeloPorDespacharNumerosUnicos();
+                            columnas = DefinicionColumnasPorDespacharNumerosUnicos();
+                            break;
+                        case "Toneladas":
+                            dataSource = DefinicionModeloPorDespacharToneladas();
+                            columnas = DefinicionColumnasPorDespacharToneladas();
+                            break;
+                        case "Milímetros":
+                            dataSource = DefinicionModeloPorDespacharMilimetros();
+                            columnas = DefinicionColumnasPorDespacharMilimetros();
+                            break;
+                        default:
+                            dataSource = DefinicionModeloPorDespacharSpool();
+                            columnas = DefinicionColumnasPorDespacharSpool();
+                            break;
+                    };
+                  
+
+                    if (tipomaterial == 1) {
+                        CargarGridTubos(dataSource, columnas, "");
+                        if(!esBoton){
+                            CantidadesDelMenuDashboardTubos();
+                        }
+                        CargaDatosGridTubos();
+                        $("#hdAccionFiltradoTubos").val("4");
+                    } else {
+                        CargarGridAccesorios(dataSource, columnas, "");
+                        if(!esBoton){
+                            CantidadesDelMenuDashboardAccesorios();
+                        }
+                        CargaDatosGridAccesorios();
+                        $("#hdAccionFiltradoAccesorios").val("4");
+                    };
+                //};
+                ////loadingStop();
+            });
+        };
+
+    //////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+        function DefinicionModeloTravelerPendienteSpool() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            SpoolID: { type: "string" },
+                            Spool: { type: "string" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasTravelerPendienteSpool() {
+            var columnas =
+           [
+               { field: "SpoolID", title: _dictionary.DashboardDespachoCorte0030[$("#language").data("kendoDropDownList").value()], filterable: true, template: "<a class='detailLink' onclick=\"MostrarDetalleOrdenesTrabajo('#:SpoolID#')\">#:SpoolID#</a>" },
+               { field: "Spool", title: _dictionary.DashboardDespachoCorte0031[$("#language").data("kendoDropDownList").value()], filterable: true },
+           ];
+            return columnas;
+        };
+
+        function DefinicionModeloTravelerPendienteNumerosUnicos() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "number" },
+                            D2: { type: "number" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadEntregada: { type: "number" },
+                            CantidadPorEntregar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasTravelerPendienteNumerosUnicos() {
+            var columnas =
+           [
+               { field: "IC", title: _dictionary.DashboardDespachoCorte0083[$("#language").data("kendoDropDownList").value()], filterable: true, width: "100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0084[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0085[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0086[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0087[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0088[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadEntregada", title: _dictionary.DashboardDespachoCorte0089[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorEntregar", title: _dictionary.DashboardDespachoCorte0090[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+
+
+        function DefinicionModeloTravelerPendienteToneladas() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "string" },
+                            D2: { type: "string" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadEntregada: { type: "number" },
+                            CantidadPorEntregar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasTravelerPendienteToneladas() {
+            var columnas =
+           [
+               { field: "IC", title: _dictionary.DashboardDespachoCorte0083[$("#language").data("kendoDropDownList").value()], filterable: true, width: "100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0084[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0085[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0086[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0087[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0088[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadEntregada", title: _dictionary.DashboardDespachoCorte0089[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorEntregar", title: _dictionary.DashboardDespachoCorte0090[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+        function DefinicionModeloTravelerPendienteMilimetros() {
+            var dataSource = new kendo.data.DataSource({
+                data: resultadoJson,
+                schema: {
+                    model: {
+                        fields: {
+                            IC: { type: "string" },
+                            DescripcionIC: { type: "string" },
+                            D1: { type: "number" },
+                            D2: { type: "number" },
+                            Cedula: { type: "string" },
+                            CantidadTotal: { type: "number" },
+                            CantidadEntregada: { type: "number" },
+                            CantidadPorEntregar: { type: "number" },
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false
+            });
+            return dataSource;
+        };
+
+        function DefinicionColumnasTravelerPendienteMilimetros() {
+            var columnas =
+           [
+               { field: "IC", title: _dictionary.DashboardDespachoCorte0083[$("#language").data("kendoDropDownList").value()], filterable: true, width: "100px" },
+               { field: "DescripcionIC", title: _dictionary.DashboardDespachoCorte0084[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "D1", title: _dictionary.DashboardDespachoCorte0085[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "D2", title: _dictionary.DashboardDespachoCorte0086[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "Cedula", title: _dictionary.DashboardDespachoCorte0087[$("#language").data("kendoDropDownList").value()], filterable: true, width: "80px" },
+               { field: "CantidadTotal", title: _dictionary.DashboardDespachoCorte0088[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadEntregada", title: _dictionary.DashboardDespachoCorte0089[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" },
+               { field: "CantidadPorEntregar", title: _dictionary.DashboardDespachoCorte0090[$("#language").data("kendoDropDownList").value()], filterable: true, width: "150px" }
+
+           ];
+            return columnas;
+        };
+
+        function TravelerPendiente(tipomaterial, esBoton) {
+           
+                var Listado = ArregloListado("31", tipomaterial);
+
+                $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
+                    //if (Error(result)) {
+                    resultadoJson = result;
+                    var dataSource = "";
+                    var columnas = "";
+
+                    switch ($("#UnidadMedida").data("kendoComboBox").text()) {
+                        case "Spool":
+                            dataSource = DefinicionModeloTravelerPendienteSpool();
+                            columnas = DefinicionColumnasTravelerPendienteSpool();
+                            break;
+                        case "Pieza":
+                            dataSource = DefinicionModeloTravelerPendienteSpool();
+                            columnas = DefinicionColumnasTravelerPendienteSpool();
+                            break;
+                        case "Toneladas":
+                            dataSource = DefinicionModeloTravelerPendienteSpool();
+                            columnas = DefinicionColumnasTravelerPendienteSpool();
+                            break;
+                        case "Milímetros":
+                            dataSource = DefinicionModeloTravelerPendienteSpool();
+                            columnas = DefinicionColumnasTravelerPendienteSpool();
+                            break;
+                        default:
+                            dataSource = DefinicionModeloTravelerPendienteSpool();
+                            columnas = DefinicionColumnasTravelerPendienteSpool();
+                            break;
+                    };
+
+                    if (tipomaterial == 1) {
+                        CargarGridTubos(dataSource, columnas, "");
+                        if (!esBoton) {
+                            CantidadesDelMenuDashboardTubos();
+                        }
+                        CargaDatosGridTubos();
+                        $("#hdAccionFiltradoTubos").val("5");
+                    } else {
+                        CargarGridAccesorios(dataSource, columnas, "");
+                        if (!esBoton) {
+                            CantidadesDelMenuDashboardAccesorios();
+                        }
+                        CargaDatosGridAccesorios();
+                        $("#hdAccionFiltradoAccesorios").val("5");
+                    };
+                    //};
+                    loadingStop();
+                });
+        };
+
+        function MostrarGrid(tipomaterial) {
+            if (tipomaterial == 1) {
+                $("#divTubos").removeClass("hidden");
+            } else {
+                $("#divAccesorios").removeClass("hidden");
+            };
+        };
+        
+        function AccionesListado(accion,tipomaterial,esBoton) {
+            ////loadingStart();
+
+            switch (accion) {
+                case "1":
+                    OrdenesTrabajo(tipomaterial, esBoton);
+                    break;
+                case "2":
+                    OrdenesTrabajoActivas(tipomaterial, esBoton);
+                    break;
+                case "3":
+                    //alert("pendiente");
+                    //////loadingStop();
+                    PreDespachar(tipomaterial, esBoton);
+                    break;
+                case "4":
+                    //alert("pendiente");
+                    //////loadingStop();
+                    PorDespachar(tipomaterial, esBoton);
+                    break;
+                case "5":
+                    //alert("pendiente");
+                    //////loadingStop();
+                    Entregar(tipomaterial, esBoton);
+                    break;
+                case "6":
+                    TravelerPendiente(tipomaterial, esBoton);
+                    break;
+                case "7":
+                    alert("pendiente");
+                    ////loadingStop();
+                    if (tipomaterial == 1) {
+                        $("#gridTubos").data("kendoGrid").dataSource.data([]);
+                    } else {
+                        $("#gridAccesorios").data("kendoGrid").dataSource.data([]);
+                    }
+                    //Despacho(tipomaterial);
+                    break;
+                //case "8":
+                //    Corte(tipomaterial);
+                //    break;
+            }
+        };
+
+        function tabActivoTubos(AccionListado) {
+            $(".btn-tab.Tubos").removeClass("active");
+            switch (AccionListado) {
+                case "1":
+                    $("#btnOrdenesTrabajoTubos").addClass("active");
+                    break;
+                case "2":
+                    $("#btnOrdenesTrabajoActivasTubos").addClass("active");
+                    break;
+                case "3":
+                    $("#btnPreDespacharTubos").addClass("active");
+                    break;
+                case "4":
+                    $("#btnDespacharTubos").addClass("active");
+                    break;
+                case "5":
+                    $("#btnEntregarTubos").addClass("active");
+                    break;
+                case "6":
+                    $("#btnTravelerPendienteTubos").addClass("active");
+                    break;
+                case "7":
+                    $("#btnDespachoTubos").addClass("active");
+                    break;
+                case "8":
+                    $("#btnCorteTubos").addClass("active");
+                    break;
+                default:
+                    $("#btnOrdenesTrabajoTubos").addClass("active");
+                    break;
+            };
+        };
+
+        function tabActivoAccesorios(AccionListado) {
+            $(".btn-tab.Accesorios").removeClass("active");
+            switch (AccionListado) {
+                case "1":
+                    $("#btnOrdenesTrabajoAccesorios").addClass("active");
+                    break;
+                case "2":
+                    $("#btnOrdenesTrabajoActivasAccesorios").addClass("active");
+                    break;
+                case "3":
+                    $("#btnPreDespacharAccesorios").addClass("active");
+                    break;
+                case "4":
+                    $("#btnDespacharAccesorios").addClass("active");
+                    break;
+                case "5":
+                    $("#btnEntregarAccesorios").addClass("active");
+                    break;
+                case "6":
+                    $("#btnTravelerPendienteAccesorios").addClass("active");
+                    break;
+                case "7":
+                    $("#btnDespachoAccesorios").addClass("active");
+                    break;
+                case "8":
+                    $("#btnCorteAccesorios").addClass("active");
+                    break;
+                default:
+                    $("#btnOrdenesTrabajoAccesorios").addClass("active");
+                    break;
+            };
+        };
+
+        function CargarCliente(id, value) {
+            Cliente = {};
+            Cliente = { ClienteID: id, Nombre: value };
+        };
+
+        function CargarProyecto(id, value) {
+            Proyecto = {};
+            Proyecto = { ProyectoID: id, Nombre: value };
+        };
+
+        function CargarFolioAvisoEntrada(id, value) {
+            FolioAvisoEntrada = {};
+            FolioAvisoEntrada = { FolioAvisoEntradaID: id, FolioLlegadaMaterial: value };
+        };
+
+        function CargarPackingList(id) {
+            PackingList = {};
+            PackingList = { PackingListID: id };
+        };
+        
+        function ObtenerCliente() {
+            $Cliente.Cliente.read({ token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox("ClienteID", result);
+            });
+        };
+
+        function CargarPeriodoTiempo(id) {
+            PeriodoTiempo = {};
+            PeriodoTiempo = { PeriodoTiempo: id };
+        };
+
+        function CargarUnidadMedida(id) {
+            UnidadMedida = {};
+            UnidadMedida = { UnidadMedidaID: id };
+        };
+        function ObtenerProyecto() {
+            $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox("ProyectoID", result);
+            });
+        };
+
+        function ObtenerFoliosAvisoLlegada() {
+            var busquedaJson;
+            busquedaJson = { tipoListado: 1, token: Cookies.get("token"), parametroBusqueda: "" };
+            $folioEntradaMaterial.Listado.read({}, {data: JSON.stringify(busquedaJson)}).done(function (result) {
+                ControlErroresObjetosComboBox("FolioAvisoEntradaID", result);
+            });
+        };
+        function ObtenerPackingList() {
+            $folioEntradaMaterial.Listado.read({ tipoListado: 18, token: Cookies.get("token"), parametroBusqueda: "" }).done(function (result) {
+                ControlErroresObjetosComboBox("PackingList", result);
+            });
+        };
+
+        function ObtenerFechasporPeriodo(id) {
+            var fechaInicio = FechaFinal.value();
+            var fechaFin = FechaFinal.value();
+
+            if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+                format = "dd/MM/yyyy";
+            } else {
+                format = "MM/dd/yyyy";
+            }
+
+            if (!fechaInicio) {
+                var todayInicio = new Date();
+                var curr_dateInicio = todayInicio.getDate();
+                var curr_monthInicio = todayInicio.getMonth() + 1;
+                var curr_yearInicio = todayInicio.getFullYear();
+
+                var todayInicial = new Date(curr_yearInicio, curr_monthInicio - 1, curr_dateInicio);
+                fechaInicio = kendo.parseDate(todayInicial, format);
+            }
+
+            if (!fechaFin) {
+                var todayFinal = new Date();
+                var curr_dateFinal = todayFinal.getDate();
+                var curr_monthFinal = todayFinal.getMonth() + 1;
+                var curr_yearFinal = todayFinal.getFullYear();
+
+                var todayFinal = new Date(curr_yearFinal, curr_monthFinal - 1, curr_dateFinal);
+                fechaFin = kendo.parseDate(todayFinal, format);
+            }
+
+            
+
+            var curr_date = fechaFin.getDate();
+            var curr_month = fechaFin.getMonth() + 1;
+            var curr_year = fechaFin.getFullYear();
+
+            var fechaFinal = new Date(curr_year, curr_month - 1, curr_date);
+            var fechaFinalkendo = kendo.parseDate(fechaFinal, format);
+
+            switch (parseInt(id)) {
+                case 1: //Semana Actual
+                    fechaInicio.setDate(fechaInicio.getDate() - 7);
+                    break;
+                case 2: //Dos Semanas
+                    fechaInicio.setDate(fechaInicio.getDate() - 14);
+                    break;
+                case 3: //Mes
+                    fechaInicio.setMonth(fechaInicio.getMonth() - 1);
+                    break;
+                case 4: //Trimestre
+                    fechaInicio.setMonth(fechaInicio.getMonth() - 3);
+                    break;
+                case 5: //Año
+                    fechaInicio.setFullYear(fechaInicio.getFullYear() - 1);
+                    break;
+                default:
+                    fechaInicio.setDate(fechaInicio.getDate() - 7);
+                    break;
+            }
+
+            var curr_date0 = fechaInicio.getDate();
+            var curr_month0 = fechaInicio.getMonth() + 1;
+            var curr_year0 = fechaInicio.getFullYear();
+
+            var fechaInicial = new Date(curr_year0, curr_month0 - 1, curr_date0);
+
+            var fechaInicialkendo = kendo.parseDate(fechaInicial, format);
+
+            $("#FechaInicial").data("kendoDatePicker").value(fechaInicialkendo);
+            $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
+        };
+
+        function ObtenerFechasporDefecto() {
+            var fechaFinal = new Date();
+            var fechainicio = new Date(fechaFinal.getTime() - (7 * 24 * 3600 * 1000));
+
+            if ($("#language").data("kendoDropDownList").value() == "es-MX") {
+                format = "dd/MM/yyyy";
+            } else {
+                format = "MM/dd/yyyy";
+            };
+
+            var curr_date0 = fechainicio.getDate();
+            var curr_month0 = fechainicio.getMonth() + 1; //Months are zero based
+            var curr_year0 = fechainicio.getFullYear();
+
+
+            var curr_date = fechaFinal.getDate();
+            var curr_month = fechaFinal.getMonth() + 1; //Months are zero based
+            var curr_year = fechaFinal.getFullYear();
+
+
+            var fechaInicial = new Date(curr_year0, curr_month0 - 1, curr_date0);
+            var fechFinal = new Date(curr_year, curr_month - 1, curr_date);
+
+            var fechaInicialkendo = kendo.parseDate(fechaInicial, format);
+            var fechaFinalkendo = kendo.parseDate(fechFinal, format);
+
+            $("#FechaInicial").data("kendoDatePicker").value(fechaInicialkendo);
+            $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
+        };
+
+        function Error(data) {
+            if (data.ReturnCode) {
+                if (data.ReturnCode!=200){
+                    if (data.ReturnCode == 401) {
+                        removeUserSession();
+                        return false;
+                    } else {
+                        displayMessage("notificationslabel0009", data.ReturnMessage, '2');
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        };
+        function CantidadesDelMenuDashboardTubos() {
+            var Listado;
+            Listado = { ProyectoID: "", ClienteID: "", FolioAvisoLlegadaID: "", PackingListID: "", TipoMaterialID: "", FechaInicial: "", FechaFinal: "", token: "", TipoListado: "", UnidadDeMedida: "" };
+
+            var d = new Date($("#FechaInicial").data("kendoDatePicker").value());
+            var d1 = new Date($("#FechaFinal").data("kendoDatePicker").value());
+
+            if (d.getFullYear() == "1969") {
+                d = new Date();
+                d.setDate(d.getDate() - 30);
+            }
+            if (d1.getFullYear() == "1969") {
+                d1 = new Date();
+            }
+
+            Listado.ProyectoID = $("#ProyectoID").data("kendoComboBox").value();
+            Listado.ClienteID = $("#ClienteID").data("kendoComboBox").value();
+            Listado.FolioAvisoLlegadaID = FolioAvisoEntrada.FolioAvisoEntradaID ? FolioAvisoEntrada.FolioAvisoEntradaID : "";
+            Listado.PackingListID = PackingList.PackingListID ? PackingList.PackingListID : "";
+            Listado.TipoMaterialID = 1;
+            Listado.FechaInicial = obtenerFormatoFechaConHora(d);
+            Listado.FechaFinal = obtenerFormatoFechaConHora(d1);
+            Listado.token = Cookies.get("token");
+            Listado.TipoListado = 26;
+            Listado.UnidadDeMedida = $("#UnidadMedida").data("kendoComboBox").value();
+
+            ObtenerAccionesListadoTubos(Listado);
+        };
+        function CantidadesDelMenuDashboardAccesorios() {
+            var Listado;
+            Listado = { ProyectoID: "", ClienteID: "", FolioAvisoLlegadaID: "", PackingListID: "", TipoMaterialID: "", FechaInicial: "", FechaFinal: "", token: "", TipoListado: "", UnidadMedida: "" };
+
+            var d = new Date($("#FechaInicial").data("kendoDatePicker").value());
+            var d1 = new Date($("#FechaFinal").data("kendoDatePicker").value());
+
+            if (d.getFullYear() == "1969") {
+                d = new Date();
+                d.setDate(d.getDate() - 30);
+            }
+            if (d1.getFullYear() == "1969") {
+                d1 = new Date();
+            }
+
+            Listado.ProyectoID = $("#ProyectoID").data("kendoComboBox").value();
+            Listado.ClienteID = $("#ClienteID").data("kendoComboBox").value();
+            Listado.FolioAvisoLlegadaID = FolioAvisoEntrada.FolioAvisoEntradaID ? FolioAvisoEntrada.FolioAvisoEntradaID : "";
+            Listado.PackingListID = PackingList.PackingListID ? PackingList.PackingListID : "";;
+            Listado.TipoMaterialID = 2;
+            Listado.FechaInicial = obtenerFormatoFechaConHora(d);
+            Listado.FechaFinal = obtenerFormatoFechaConHora(d1);
+            Listado.token = Cookies.get("token");
+            Listado.TipoListado = 26;
+            Listado.UnidadDeMedida = $("#UnidadMedida").data("kendoComboBox").value();
+            ObtenerAccionesListadoAccesorios(Listado);
+        };
+
+        
+        function obtenerFormatoFechaSinHoras(d) {
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+
+            return curr_year + "-" + curr_month + "-" + curr_date;
+        };
+
+        function obtenerFormatoFechaConHora(d) {
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+            
+            var horaActual = new Date();
+
+            if (curr_year == "1969") {
+                return null;
+            } else {
+                return curr_year + "-" + curr_month + "-" + curr_date + " " + horaActual.getHours() + ":" + horaActual.getMinutes() + ":" + horaActual.getSeconds();
+            }
+        };
+
+
+        function ControlErroresObjetosComboBox(control, result) {
+            if (Error(result)) {
+                $("#" + control).data("kendoComboBox").dataSource.data(result);
+            } else {
+                $("#" + control).data("kendoComboBox").dataSource.data([]);
+            };
+        };
+    }
+
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["DashboardDespachoCorte"] = $DashBoardDespachoCorteModel;
+    CargaInicial();
+
+        
+    }
+</script>
