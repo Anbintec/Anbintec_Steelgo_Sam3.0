@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Sam3.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Sam3.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Sam3_Acero">
           <Key>
             <PropertyRef Name="AceroID" />
@@ -101,8 +101,8 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Sam2ClienteID" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'steelgo-sam3.dbo.Sam3_ColaCreacionNumerosUnicos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steelgo-sam3.dbo.Sam3_ColaCreacionNumerosUnicos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Sam3_ColaCreacionNumerosUnicos">
           <Key>
             <PropertyRef Name="ID" />
@@ -1083,6 +1083,7 @@ warning 6002: The table/view 'steelgo-sam3.dbo.Sam3_ColaCreacionNumerosUnicos' d
           <Property Name="EstatusDocumental" Type="varchar" MaxLength="100" />
           <Property Name="TipoUsoID" Type="int" />
           <Property Name="MTRID" Type="int" />
+          <Property Name="RackID" Type="int" />
         </EntityType>
         <EntityType Name="Sam3_NumeroUnicoCorte">
           <Key>
@@ -1441,6 +1442,17 @@ warning 6002: The table/view 'steelgo-sam3.dbo.Sam3_ColaCreacionNumerosUnicos' d
           <Property Name="UsuarioModificacion" Type="int" />
           <Property Name="ConsecutivoOrdeRecepcion" Type="int" Nullable="false" />
           <Property Name="ConsecutivoOrdenAlmacenaje" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sam3_Rack">
+          <Key>
+            <PropertyRef Name="RackID" />
+          </Key>
+          <Property Name="RackID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatioID" Type="int" />
+          <Property Name="Rack" Type="varchar" MaxLength="255" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="UsuarioModificacion" Type="int" />
+          <Property Name="fechaModificacion" Type="datetime" />
         </EntityType>
         <EntityType Name="Sam3_Recepcion">
           <Key>
@@ -1852,8 +1864,8 @@ warning 6002: The table/view 'steelgo-sam3.dbo.Sam3_ColaCreacionNumerosUnicos' d
           <Property Name="Rel_ItemCode_Diametro_ID" Type="int" />
           <Property Name="Cantidad" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'steelgo-sam3.dbo.Sam3_Rel_Perfil_Entidad_Pagina' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steelgo-sam3.dbo.Sam3_Rel_Perfil_Entidad_Pagina' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Sam3_Rel_Perfil_Entidad_Pagina">
           <Key>
             <PropertyRef Name="PerfilID" />
@@ -2154,8 +2166,8 @@ warning 6002: The table/view 'steelgo-sam3.dbo.Sam3_Rel_Perfil_Entidad_Pagina' d
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdentificadorCliente" Type="nvarchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'steelgo-sam3.dbo.sam3_sysgo_mrr_franklin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steelgo-sam3.dbo.sam3_sysgo_mrr_franklin' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="sam3_sysgo_mrr_franklin">
           <Key>
             <PropertyRef Name="TMRR_BJOB_JOBNUMBER" />
@@ -2208,8 +2220,8 @@ warning 6002: The table/view 'steelgo-sam3.dbo.sam3_sysgo_mrr_franklin' does not
           <Property Name="SHORT_DESCRIPTION" Type="nvarchar" MaxLength="350" />
           <Property Name="SCN_NUMBER" Type="nvarchar" MaxLength="350" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'steelgo-sam3.dbo.sam3_sysgo_mrr_pacial' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steelgo-sam3.dbo.sam3_sysgo_mrr_pacial' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="sam3_sysgo_mrr_pacial">
           <Key>
             <PropertyRef Name="IdentificadorCliente" />
@@ -2231,8 +2243,8 @@ warning 6002: The table/view 'steelgo-sam3.dbo.sam3_sysgo_mrr_pacial' does not h
           <Property Name="UsuarioModificacion" Type="int" />
           <Property Name="FechaModificacion" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'steelgo-sam3.dbo.sam3_temp_RelIncidenciaItemCode' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steelgo-sam3.dbo.sam3_temp_RelIncidenciaItemCode' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="sam3_temp_RelIncidenciaItemCode">
           <Key>
             <PropertyRef Name="Rel_Incidencia_ItemCode_ID" />
@@ -2460,8 +2472,8 @@ warning 6002: The table/view 'steelgo-sam3.dbo.sam3_temp_RelIncidenciaItemCode' 
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'steelgo-sam3.dbo.VW_AvisoEntrada' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steelgo-sam3.dbo.VW_AvisoEntrada' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VW_AvisoEntrada">
           <Key>
             <PropertyRef Name="FolioAvisoEntradaID" />
@@ -2476,8 +2488,8 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_AvisoEntrada' does not have a 
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="Patio" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'steelgo-sam3.dbo.VW_FolioCuantificacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steelgo-sam3.dbo.VW_FolioCuantificacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VW_FolioCuantificacion">
           <Key>
             <PropertyRef Name="FolioCuantificacionID" />
@@ -2495,8 +2507,8 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_FolioCuantificacion' does not 
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="Patio" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'steelgo-sam3.dbo.VW_ItemCode_ICS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steelgo-sam3.dbo.VW_ItemCode_ICS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VW_ItemCode_ICS">
           <Key>
             <PropertyRef Name="Proyecto" />
@@ -2529,8 +2541,8 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_ItemCode_ICS' does not have a 
           <Property Name="ItemcodeId" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'steelgo-sam3.dbo.VW_ItemCodes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steelgo-sam3.dbo.VW_ItemCodes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VW_ItemCodes">
           <Key>
             <PropertyRef Name="ItemCodeID" />
@@ -2555,8 +2567,8 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_ItemCodes' does not have a pri
           <Property Name="Cliente" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'steelgo-sam3.dbo.VW_NumerosUnicos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steelgo-sam3.dbo.VW_NumerosUnicos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VW_NumerosUnicos">
           <Key>
             <PropertyRef Name="NumeroUnicoID" />
@@ -2584,8 +2596,8 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_NumerosUnicos' does not have a
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Patio" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'steelgo-sam3.dbo.VW_ResumenNU' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steelgo-sam3.dbo.VW_ResumenNU' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VW_ResumenNU">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -5554,6 +5566,7 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_ResumenNU' does not have a pri
           <EntitySet Name="Sam3_Proyecto" EntityType="Self.Sam3_Proyecto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sam3_ProyectoConfiguracion" EntityType="Self.Sam3_ProyectoConfiguracion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sam3_ProyectoConsecutivo" EntityType="Self.Sam3_ProyectoConsecutivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sam3_Rack" EntityType="Self.Sam3_Rack" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sam3_Recepcion" EntityType="Self.Sam3_Recepcion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sam3_Rel_Bulto_ItemCode" EntityType="Self.Sam3_Rel_Bulto_ItemCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sam3_Rel_Catalogos_Documento" EntityType="Self.Sam3_Rel_Catalogos_Documento" Schema="dbo" store:Type="Tables" />
@@ -6713,8 +6726,7 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_ResumenNU' does not have a pri
             <End Role="Sam3_Usuario" EntitySet="Sam3_Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Sam3" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -7946,6 +7958,7 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_ResumenNU' does not have a pri
           <Property Name="EstatusDocumental" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="TipoUsoID" Type="Int32" />
           <Property Name="MTRID" Type="Int32" />
+          <Property Name="RackID" Type="Int32" />
           <NavigationProperty Name="Sam3_Colada" Relationship="Self.FK_NumeroUnico_Colada" FromRole="Sam3_NumeroUnico" ToRole="Sam3_Colada" />
           <NavigationProperty Name="Sam3_Despacho" Relationship="Self.FK__Sam3_Desp__Numer__66B53B20" FromRole="Sam3_NumeroUnico" ToRole="Sam3_Despacho" />
           <NavigationProperty Name="Sam3_Fabricante" Relationship="Self.FK_NumeroUnico_Fabricante" FromRole="Sam3_NumeroUnico" ToRole="Sam3_Fabricante" />
@@ -13572,39 +13585,39 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_ResumenNU' does not have a pri
             <Parameter Name="item" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="mrrFranklin" ReturnType="Collection(Sam3.mrrFranklin_Result)">
-            <Parameter Name="embarques" Mode="In" Type="String" />
+          <Parameter Name="embarques" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="mrrFranklin_respaldo" ReturnType="Collection(Sam3.mrrFranklin_respaldo_Result)">
-            <Parameter Name="embarques" Mode="In" Type="String" />
+          <Parameter Name="embarques" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Sam3_GetErrorInfo" ReturnType="Collection(Sam3.Sam3_GetErrorInfo_Result)" />
           <FunctionImport Name="Sam3_ObtenerFormatoEtiquetas" ReturnType="Collection(Sam3.Sam3_ObtenerFormatoEtiquetas_Result)">
-            <Parameter Name="OrdenRecepcionID" Mode="In" Type="Int32" />
+          <Parameter Name="OrdenRecepcionID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sam3_ObtenerFormatoIncidencias" ReturnType="Collection(Sam3.Sam3_ObtenerFormatoIncidencias_Result)">
             <Parameter Name="FolioAvisoLlegadaID" Mode="In" Type="Int32" />
             <Parameter Name="cadena" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Sam3_ObtenerFormatoPaseSalida">
-            <Parameter Name="FolioAvisoLlegadaID" Mode="In" Type="Int32" />
+          <Parameter Name="FolioAvisoLlegadaID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sam3_ObtenerIncidencia" ReturnType="Collection(Sam3.Sam3_ObtenerIncidencia_Result)">
-            <Parameter Name="incidenciaID" Mode="In" Type="Int32" />
+          <Parameter Name="incidenciaID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sam3_PickingTicket_Accesorios" ReturnType="Collection(Sam3.Sam3_PickingTicket_Accesorios_Result)">
-            <Parameter Name="OrdenTrabajoSpoolID" Mode="In" Type="Int32" />
+          <Parameter Name="OrdenTrabajoSpoolID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sam3_PickingTicket_Tubos" ReturnType="Collection(Sam3.Sam3_PickingTicket_Tubos_Result)">
-            <Parameter Name="OrdenTrabajoSpoolID" Mode="In" Type="Int32" />
+          <Parameter Name="OrdenTrabajoSpoolID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sam3_RPT_EncabezadoReporteIncidencias" ReturnType="Collection(Sam3.Sam3_RPT_EncabezadoReporteIncidencias_Result)">
-            <Parameter Name="incidenciaID" Mode="In" Type="Int32" />
+          <Parameter Name="incidenciaID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sam3_RPT_EtiquetasDeMaterial" ReturnType="Collection(Sam3.Sam3_RPT_EtiquetasDeMaterial_Result)">
-            <Parameter Name="ordenRecepcionID" Mode="In" Type="Int32" />
+          <Parameter Name="ordenRecepcionID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sam3_RPT_ListaImagenesIncidencia" ReturnType="Collection(Sam3.Sam3_RPT_ListaImagenesIncidencia_Result)">
-            <Parameter Name="incidenciaID" Mode="In" Type="Int32" />
+          <Parameter Name="incidenciaID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sam3_RPT_OrdenAlmacenaje" ReturnType="Collection(Sam3.Sam3_RPT_OrdenAlmacenaje_Result)">
             <Parameter Name="ordenAlmacenajeID" Mode="In" Type="Int32" />
@@ -13640,6 +13653,7 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_ResumenNU' does not have a pri
             <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
             <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="Sam3_Rack" EntityType="Sam3.Sam3_Rack" />
         </EntityContainer>
         <ComplexType Name="mrrFranklin_Result">
           <Property Type="DateTime" Name="TMRR_DATE" Nullable="true" Precision="23" />
@@ -13853,6 +13867,17 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_ResumenNU' does not have a pri
           <Property Type="Int32" Name="ErrorLine" Nullable="true" />
           <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
         </ComplexType>
+        <EntityType Name="Sam3_Rack">
+          <Key>
+            <PropertyRef Name="RackID" />
+          </Key>
+          <Property Name="RackID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatioID" Type="Int32" />
+          <Property Name="Rack" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="UsuarioModificacion" Type="Int32" />
+          <Property Name="fechaModificacion" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14988,6 +15013,7 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_ResumenNU' does not have a pri
                 <ScalarProperty Name="EstatusDocumental" ColumnName="EstatusDocumental" />
                 <ScalarProperty Name="TipoUsoID" ColumnName="TipoUsoID" />
                 <ScalarProperty Name="MTRID" ColumnName="MTRID" />
+                <ScalarProperty Name="RackID" ColumnName="RackID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -16863,6 +16889,18 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_ResumenNU' does not have a pri
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sam3_SP_ObtenerFoliosParaListado" FunctionName="Sam3.Store.Sam3_SP_ObtenerFoliosParaListado" />
+          <EntitySetMapping Name="Sam3_Rack">
+            <EntityTypeMapping TypeName="Sam3.Sam3_Rack">
+              <MappingFragment StoreEntitySet="Sam3_Rack">
+                <ScalarProperty Name="fechaModificacion" ColumnName="fechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Rack" ColumnName="Rack" />
+                <ScalarProperty Name="PatioID" ColumnName="PatioID" />
+                <ScalarProperty Name="RackID" ColumnName="RackID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -16880,7 +16918,7 @@ warning 6002: The table/view 'steelgo-sam3.dbo.VW_ResumenNU' does not have a pri
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

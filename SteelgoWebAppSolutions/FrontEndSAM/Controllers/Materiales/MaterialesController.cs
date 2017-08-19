@@ -17,5 +17,10 @@ namespace FrontEndSAM.Controllers.Materiales
         {
             return View();
         }
+
+        public ActionResult UbicacionNumeroUnico()
+        {
+            return View();
+        }
     }
 }

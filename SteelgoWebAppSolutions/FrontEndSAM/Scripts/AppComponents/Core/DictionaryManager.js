@@ -7062,5 +7062,11 @@ _dictionary = {
     "KendoDeleteTxt0003": {
         "es-MX": "Eliminar",
         "en-US": "Delete"
-    },
+	},
+	"UbicacionNumeroUnico": {
+		"es-MX": "Ubicación Número único",
+		"en-US": "Location unique number"
+	},
+
+	
 };

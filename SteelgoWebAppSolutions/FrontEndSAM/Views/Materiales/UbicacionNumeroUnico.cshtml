@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "UbicacionNumeroUnico";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="Cuantificacion0001"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("DashboardRecepcionAlmacenaje", "DashboardRecepcionAlmacenaje")"><span id="Cuantificacion0095"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("DashboardRecepcionAlmacenaje", "DashboardRecepcionAlmacenaje")"><span id="Cuantificacion0084"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("Ubicacionnumerounico", "Materiales")"><span id="">Ubicacion Numero Unico</span></a>
+    </li>
+}
+
+<div id="formUbicacionNumeroUnico" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+           
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section editButtonSection">
+                            <div class="btn-group save-group">
+                                <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow creacion"><span id="Cuantificacion0003"></span></button>
+                                <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle creacion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caretWhite"></span>
+                                </button>
+                                <ul class="dropdown-menu creacion">
+                                    <li><a href="#" id="GuardarNuevo"><span id="DetalleAvisoLlegada0062"></span></a></li>
+                                   
+                                </ul>
+
+                            </div>
+                            <a id="Cancelar" href="#" class="btn btn-black"><span id="Cuantificacion0010"></span></a>
+                        </div>
+                      
+                        <div class="button-section">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="Cuantificacion0042"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                               
+                            </div>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection disabled"></a>
+                    </div>
+                </div>
+            </div>
+            <div id="FieldSetView">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+                        <div class="row">
+                            <div id="ProyectoDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                <label id="">Proyecto</label>
+                                <input id="inputProyecto" />
+                            </div>
+                            <div id="RangoNuDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                <label id="">Buscar Rango numero unico</label>
+                                <input id="inputRangoNumeroUnico" class="general-input" />
+                            </div>
+
+                            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+                                <label id=" ">&nbsp; </label>
+                                <button id="btnAgregar" class="btn btn-primary"><span id="">Agregar</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="addedSection clearfix">
+                        <div id="RackDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <label id="">Seleccionar Rack a asignar</label>
+                            <input id="inputRack" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div id="grid"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+           
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/AppComponents/Materiales/UbicacionNumeroUnico/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Materiales/UbicacionNumeroUnico/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Materiales/UbicacionNumeroUnico/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Materiales/UbicacionNumeroUnico/Captura.js"> </script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Materiales/UbicacionNumeroUnico/Seguridad.js"></script>
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["UbicacionNumeroUnico"] = $UbicacionNumeroUnicoModel;
+    }
+</script>
+
+

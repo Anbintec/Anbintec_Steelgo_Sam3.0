@@ -158,7 +158,7 @@ var $Espesor = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $ValidarCedulas = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $ComplementoRecepcionAlt = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $PickingTicket = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
-
+var $UbicacionNumeroUnico = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 
 /****************************/
 /*    Document Ready        */
@@ -271,3 +271,4 @@ $Espesor.add("Espesor");
 $ValidarCedulas.add("ValidarCedulas");
 $ComplementoRecepcionAlt.add("Listado");
 $PickingTicket.add("PickingTicket");
+$UbicacionNumeroUnico.add("UbicacionNumeroUnico");

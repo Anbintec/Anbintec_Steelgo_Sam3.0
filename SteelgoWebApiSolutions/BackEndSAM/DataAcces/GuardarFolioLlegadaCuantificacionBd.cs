@@ -90,13 +90,15 @@ namespace BackEndSAM.DataAcces
                         }
                         
                         List<Sam3_ItemCode> itemCodes;
-                        List<Sam3_NumeroUnico> numerosUnicos;
+                        
+                        List<Sam3_NumeroUnico> numerosUnicosTemp;
                         if (folioCuantificacion.Sam3_Rel_FolioCuantificacion_ItemCode.Count > 0) // actualizar tipo de uso en itemCodes
                         {
                             itemCodes = (from rfi in folioCuantificacion.Sam3_Rel_FolioCuantificacion_ItemCode
                                                              join rid in ctx.Sam3_Rel_ItemCode_Diametro on rfi.Rel_ItemCode_Diametro_ID equals rid.Rel_ItemCode_Diametro_ID
                                                              join it in ctx.Sam3_ItemCode on rid.ItemCodeID equals it.ItemCodeID
-                                                             where rid.Activo && it.Activo
+                                                             join nu in ctx.Sam3_NumeroUnico on it.ItemCodeID equals nu.ItemCodeID.GetValueOrDefault()
+                                         where rid.Activo && it.Activo && nu.Activo
                                                              select it).AsParallel().Distinct().ToList();
 
                             //Agrego todos los itemCodes que esten en los bultos relacionados con el folio de cuantificacion
@@ -110,14 +112,17 @@ namespace BackEndSAM.DataAcces
 
                             itemCodes.ForEach(x => x.TipoUsoID = datosCuantificacion.TipoUso);
 
-                            //Actualizar todos los numeros unicos que esten relacionados con los ItemCodes
-                            //numerosUnicos = (from it in itemCodes
-                            //                 join nu in ctx.Sam3_NumeroUnico on it.ItemCodeID equals nu.ItemCodeID
-                            //                 where it.Activo && nu.Activo
-                            //                 select nu).AsParallel().Distinct().ToList();
-
-                            //numerosUnicos.ForEach(x => x.TipoUsoID = datosCuantificacion.TipoUso);
-
+                            ////Actualizar todos los numeros unicos que esten relacionados con los ItemCodes
+                            numerosUnicosTemp = (from it in itemCodes
+                                                 join nu in ctx.Sam3_NumeroUnico on it.ItemCodeID equals nu.ItemCodeID.GetValueOrDefault()
+                                                 where it.Activo && nu.Activo
+                                                 select nu).ToList();
+                            if (numerosUnicosTemp.Count > 0)
+                            {
+                                List<Sam3_NumeroUnico> numerosUnicos;
+                                numerosUnicos = numerosUnicosTemp;
+                                numerosUnicos.ForEach(x => x.TipoUsoID = datosCuantificacion.TipoUso);
+                            }
                         }
 
                         ctx.SaveChanges();
