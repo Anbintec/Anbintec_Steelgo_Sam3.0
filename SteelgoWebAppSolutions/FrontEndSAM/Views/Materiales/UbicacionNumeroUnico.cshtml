@@ -18,6 +18,18 @@
         <a href="@Url.Action("Ubicacionnumerounico", "Materiales")"><span id="">Ubicacion Numero Unico</span></a>
     </li>
 }
+<style>
+    #grid > .k-grid-header > div > table,
+    #grid > .k-grid-content > table {
+        width: 100% !important;
+    }
+    .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary 
+    {
+        color: #fff;
+        background-color: #444444;
+        border-color: #081017;
+    }
+</style>
 
 <div id="formUbicacionNumeroUnico" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div class="row">
@@ -75,17 +87,42 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="addedSection clearfix">
-                        <div id="RackDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="addedSection clearfix">                        
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="width:auto; padding-bottom: 15px;">
+                            <div class="btn-group " data-toggle="buttons" role="group">
+                                <label>&nbsp;</label>
+                                <div class="btn btn-primary" id="styleUno">
+                                    <input type="radio" name="Mostrar" value="Uno" /><span id="">Opción 1</span>
+                                </div>
+                                <div class="btn btn-primary" id="styleDos">
+                                    <input type="radio" name="Mostrar" value="Dos" /><span id="">Opcion 2 </span>
+                                </div>
+                            </div>
+                        </div>                         
+                        <div id="MostrarUno" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <label id="">Seleccionar Rack a asignar</label>
                             <input id="inputRack" />
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <div id="grid"></div>
+                        </div>                                                 
+                        <div id="MostrarDos" style="margin: 0 auto; display: none;" >
+                            <div id="RackDiv" class="col-xs-12 col-sm-12 col-md-2 col-lg-1">
+                                <label id="">Ubicación</label>
+                                <input id="inputRackUbicacion" />
                             </div>
-                        </div>
-                    </div>
+                            <div id="RackDiv" class="form-group col-xs-6 col-sm-3 col-md-2 col-lg-1">
+                                <label id="">Pasillo</label>
+                                <input id="inputRackPasillo" />
+                            </div>
+                            <div id="RackDiv" class="form-group col-xs-6 col-sm-3 col-md-2 col-lg-1">
+                                <label id="">Nivel</label>
+                                <input id="inputRackNivel" />
+                            </div>
+                        </div>                        
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                @*<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">*@
+                                    <div id="grid"></div>
+                                @*</div>*@
+                            </div>                                                
+                    </div>                    
                 </div>
 
             </div>
