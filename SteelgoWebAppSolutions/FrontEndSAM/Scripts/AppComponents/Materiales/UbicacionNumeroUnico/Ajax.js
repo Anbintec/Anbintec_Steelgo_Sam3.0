@@ -6,8 +6,32 @@
 
 function AjaxCargarRacks(proyectoID) {
 	$UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), proyectoID: proyectoID }).done(function (result) {
-		ControlErroresObjetosComboBox("inputRack", result);
+	    ControlErroresObjetosComboBox("inputRack", result);	            
 	});
+}
+
+function AjaxCargarUbicacionRack(proyectoID) {
+    $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), ProyectoID: proyectoID, Relleno: true }).done(function (result) {
+        ControlErroresObjetosComboBox("inputRackUbicacion", result);
+    });
+}
+
+function AjaxCargarPasilloRack(ubicacion) {
+    $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion }).done(function (result) {
+        ControlErroresObjetosComboBox("inputRackPasillo", result);
+    });
+}
+
+function AjaxCargarNivelRack(ubicacion, pasillo) {
+    $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion, Pasillo: pasillo }).done(function (result) {
+        ControlErroresObjetosComboBox("inputRackNivel", result);
+    });
+}
+function GetValores(result) {
+    var listaUbicacion = { Ubicacion: "" };
+    for (var i = 0; i < result.length; i++) {
+        listaUbicacion.Ubicacion
+    }
 }
 
 function AjaxObtenerNumeroUnicoConRack(proyectoID, arrayNumeroUnico) {
@@ -81,24 +105,30 @@ function AjaxGuardar(proyectoID, data, ranckID,esGuardaryNuevo) {
 
 
 	$UbicacionNumeroUnico.UbicacionNumeroUnico.create(Captura[0], { token: Cookies.get("token"), proyectoID: proyectoID, rackID: ranckID }).done(function (data) {
-		if (Error(data)) {
-		
-			
+		if (Error(data)) {					
 			displayMessage("", "Informacion guardada con exito", '0');
 			if (esGuardaryNuevo)
 			{
-				$("#inputProyecto").data("kendoComboBox").value("");
-				$("#inputRangoNumeroUnico").val("");
-				$("#inputRack").data("kendoComboBox").value("");
-				$("#grid").data("kendoGrid").dataSource.data([]);
+			    if ($('input:radio[name=Mostrar]:checked').val() == "Uno") {
+			        $("#inputProyecto").data("kendoComboBox").value("");
+			        $("#inputRangoNumeroUnico").val("");
+			        $("#inputRack").data("kendoComboBox").text("");
+			        $("#grid").data("kendoGrid").dataSource.data([]);
+			    } else {
+			        $("#inputProyecto").data("kendoComboBox").value("");
+			        $("#inputRangoNumeroUnico").val("");
+			        $("#inputRackUbicacion").data("kendoComboBox").text("");
+			        $("#inputRackPasillo").data("kendoComboBox").text("");
+			        $("#inputRackNivel").data("kendoComboBox").text("");
+			        $("#grid").data("kendoGrid").dataSource.data([]);
+			    }				
 			}
 			else
 			{
 				opcionHabilitarView(true);
 				$("#grid").data("kendoGrid").dataSource.data([]);
 				$("#grid").data("kendoGrid").dataSource.data(data[0]);
-			}
-			
+			}			
 		}
 	});
 }

@@ -2,7 +2,8 @@
 	SuscribirEventos();
 	AjaxObtenerProyectos();
 	LoadGrid();
-
+	$('input:radio[name=Mostrar]:nth(0)').prop("checked", true);
+	$("#styleUno").addClass("active");
 };
 
 function agregarNU()
@@ -48,7 +49,7 @@ function agregarNU()
 
 				}
 			}
-			console.log(arrayNumerosUnicos);
+			//console.log(arrayNumerosUnicos);
 
 			//for (var i = 0; i < $("#grid").data("kendoGrid").dataSource._data.length; i++) {
 			//	arrayNumerosUnicos.push($("#grid").data("kendoGrid").dataSource._data[i].Consecutivo);

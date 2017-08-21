@@ -447,6 +447,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\kendo\2014.2.716\images\kendoui.woff" />
@@ -480,6 +481,11 @@
     <Content Include="Scripts\AppComponents\Core\UtilitiesManager.js" />
     <Content Include="Scripts\AppComponents\LlegadaMaterial\Dashboard.js" />
     <Content Include="Scripts\AppComponents\LlegadaMaterial\ListadoEspecifico.js" />
+    <Content Include="Scripts\AppComponents\Materiales\UbicacionNumeroUnico\Ajax.js" />
+    <Content Include="Scripts\AppComponents\Materiales\UbicacionNumeroUnico\Captura.js" />
+    <Content Include="Scripts\AppComponents\Materiales\UbicacionNumeroUnico\Handlers.js" />
+    <Content Include="Scripts\AppComponents\Materiales\UbicacionNumeroUnico\Render.js" />
+    <Content Include="Scripts\AppComponents\Materiales\UbicacionNumeroUnico\Seguridad.js" />
     <Content Include="Scripts\AppComponents\RecepcionMaterial\Dashboard.js" />
     <Content Include="Scripts\AppComponents\RecepcionMaterial\ListadoEspecifico.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1197,6 +1203,7 @@
     <Content Include="Views\Spool\ListadoSpoolGranel.cshtml" />
     <Content Include="Views\Spool\SpoolGranel.cshtml" />
     <Content Include="Views\Reportes\ObtenerReportes.cshtml" />
+    <Content Include="Views\Materiales\UbicacionNumeroUnico.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

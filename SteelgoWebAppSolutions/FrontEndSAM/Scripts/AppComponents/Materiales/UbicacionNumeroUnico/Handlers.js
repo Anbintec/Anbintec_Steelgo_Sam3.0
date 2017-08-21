@@ -1,6 +1,10 @@
 ﻿function SuscribirEventos() {
-	suscribirEventoProyecto();
-	suscribirEventoRacks();
+    suscribirEventoProyecto();
+    SuscribirEventoRack();
+    SuscribirEventoMostrar();
+	SuscribirEventoRackUbicacion();
+	SuscribirEventoRackPasillo();
+	SuscribirEventoRackPiso();
 	suscribirEventoGuardar();
 	sucribirEventoAgregar();
 	suscribirEventoRangoNU();
@@ -17,6 +21,22 @@ function suscribirEventoRangoNU()
 	});
 
 }
+function SuscribirEventoMostrar() {
+    $("input:radio[name=Mostrar]").change(function () {
+        $("#inputProyecto").data("kendoComboBox").value("");
+        if ($('input:radio[name=Mostrar]:checked').val() == "Uno") {
+            $("#MostrarUno").css("display", "block");
+            $("#MostrarDos").css("display", "none");
+            $("#inputRackUbicacion").data("kendoComboBox").text("");
+            $("#inputRackPasillo").data("kendoComboBox").text("");
+            $("#inputRackNivel").data("kendoComboBox").text("");            
+        } else {
+            $("#inputRack").data("kendoComboBox").value("");
+            $("#MostrarUno").css("display", "none");
+            $("#MostrarDos").css("display", "block");
+        }
+    });
+}
 function sucribirEventoAgregar() {
 	$("#btnAgregar").click(function () {
 		agregarNU();
@@ -25,17 +45,35 @@ function sucribirEventoAgregar() {
 
 function suscribirEventoGuardar() {
 	$("#Guardar").click(function () {
-		if ($('#Cuantificacion0003').text() == "Guardar") {
-			var proyectoID = $("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select());
-			var rackID = $("#inputRack").data("kendoComboBox").dataItem($("#inputRack").data("kendoComboBox").select());
-			if (rackID != undefined && rackID.RanckID != 0) {
-				if ($("#grid").data("kendoGrid").dataSource._data.length > 0)
-					AjaxGuardar(proyectoID.ProyectoID, $("#grid").data("kendoGrid").dataSource._data, rackID.RackID,false);
-				else
-					displayMessage("", "Favor de agregar numeros unicos.", '1');
-			}
-			else
-				displayMessage("", "Necesitas seleccionar un  ranck", '1');
+	    if ($('#Cuantificacion0003').text() == "Guardar") {
+	        if ($('input:radio[name=Mostrar]:checked').val() == "Uno") {
+	            var Proyecto = $("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select());
+	            var Rack = $("#inputRack").data("kendoComboBox").dataItem($("#inputRack").data("kendoComboBox").select());
+	            if (Proyecto != null && Proyecto != undefined) {
+	                if (Rack != null) {
+	                    AjaxGuardar(Proyecto.ProyectoID, $("#grid").data("kendoGrid").dataSource._data, Rack.RackID, false);
+	                } else {
+	                    displayMessage("", "Necesitas seleccionar un  rack", '1');
+	                }
+	            } else {
+	                displayMessage("", "Seleccione un Proyecto", "1");
+	            }
+	        } else {
+	            var proyectoID = $("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select());
+	            var ubicacion = $("#inputRackUbicacion").data("kendoComboBox").text();
+	            var pasillo = $("#inputRackPasillo").data("kendoComboBox").text();
+	            var nivel = $("#inputRackNivel").data("kendoComboBox").text();
+	            var rackID = $("#inputRackNivel").data("kendoComboBox").value();
+	            if (ubicacion != "" && pasillo != "" && nivel != "") {
+	                if ($("#grid").data("kendoGrid").dataSource._data.length > 0) {
+	                    AjaxGuardar(proyectoID.ProyectoID, $("#grid").data("kendoGrid").dataSource._data, rackID, false);
+	                } else {
+	                    displayMessage("", "Favor de agregar números únicos.", '1');
+	                }
+	            } else {
+	                displayMessage("", "Necesitas seleccionar un  rack", '1');
+	            }
+	        }		    
 		}
 		else {
 			opcionHabilitarView(false);
@@ -45,18 +83,39 @@ function suscribirEventoGuardar() {
 	});
 
 	$("#GuardarNuevo").click(function () {
-		
-			var proyectoID = $("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select());
-			var rackID = $("#inputRack").data("kendoComboBox").dataItem($("#inputRack").data("kendoComboBox").select());
-			if (rackID != undefined && rackID.RanckID != 0) {
-				if ($("#grid").data("kendoGrid").dataSource._data.length > 0)
-					AjaxGuardar(proyectoID.ProyectoID, $("#grid").data("kendoGrid").dataSource._data, rackID.RackID,true);
-				else
-					displayMessage("", "Favor de agregar numeros unicos.", '1');
-			}
-			else
-				displayMessage("", "Necesitas seleccionar un  ranck", '1');
-
+	    if ($('#Cuantificacion0003').text() == "Guardar") {
+	        if ($('input:radio[name=Mostrar]:checked').val() == "Uno") {
+	            var Proyecto = $("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select());
+	            var Rack = $("#inputRack").data("kendoComboBox").dataItem($("#inputRack").data("kendoComboBox").select());
+	            if (Proyecto != null) {
+	                if (Rack != null) {
+	                    AjaxGuardar(Proyecto.ProyectoID, $("#grid").data("kendoGrid").dataSource._data, Rack.RackID, true);
+	                } else {
+	                    displayMessage("", "Necesitas seleccionar un  rack", '1');
+	                }
+	            } else {
+	                displayMessage("", "Seleccione un Proyecto", "1");
+	            }
+	        } else {
+	            var proyectoID = $("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select());
+	            var ubicacion = $("#inputRackUbicacion").data("kendoComboBox").text();
+	            var pasillo = $("#inputRackPasillo").data("kendoComboBox").text();
+	            var nivel = $("#inputRackNivel").data("kendoComboBox").text();
+	            var rackID = $("#inputRackNivel").data("kendoComboBox").value();
+	            if (ubicacion != "" && pasillo != "" && nivel != "") {
+	                if ($("#grid").data("kendoGrid").dataSource._data.length > 0) {
+	                    AjaxGuardar(proyectoID.ProyectoID, $("#grid").data("kendoGrid").dataSource._data, rackID, true);
+	                } else {
+	                    displayMessage("", "Favor de agregar números únicos.", '1');
+	                }
+	            } else {
+	                displayMessage("", "Necesitas seleccionar un  rack", '1');
+	            }
+	        }
+	    }
+	    else {
+	        opcionHabilitarView(false);
+	    }
 	});
 }
 
@@ -72,13 +131,23 @@ function suscribirEventoProyecto() {
 		index: 3,
 		change: function (e) {
 			var dataItem = this.dataItem(e.sender.selectedIndex);
+			if ($("input:radio[name=Mostrar]:checked").val() == "Uno") { //Rack Completo
+			    $("#inputRack").data("kendoComboBox").value("");
+			    AjaxCargarRacks(dataItem.ProyectoID);
+			} else {
+			    $("#inputRangoNumeroUnico").val("");
+			    $("#inputRackUbicacion").data("kendoComboBox").text("");
+			    $("#inputRackPasillo").data("kendoComboBox").text("");
+			    $("#inputRackNivel").data("kendoComboBox").text("");
+			    $("#inputRackUbicacion").data("kendoComboBox").value("");
+			    $("#inputRackPasillo").data("kendoComboBox").value("");
+			    $("#inputRackNivel").data("kendoComboBox").value("");
 
-			$("#inputRangoNumeroUnico").val("");
-			$("#inputRack").data("kendoComboBox").value("");
-			$("#grid").data("kendoGrid").dataSource.data([]);
-			if (dataItem != undefined && dataItem.ProyectoID != 0 && dataItem.Nombre != "") {
-				AjaxCargarRacks(dataItem.ProyectoID);
-			}
+			    $("#grid").data("kendoGrid").dataSource.data([]);
+			    if (dataItem != undefined && dataItem.ProyectoID != 0 && dataItem.Nombre != "") {			        
+			        AjaxCargarUbicacionRack(dataItem.ProyectoID);
+			    }
+			}			
 		}
 	});
 
@@ -89,26 +158,70 @@ function suscribirEventoProyecto() {
 	});
 }
 
-
-function suscribirEventoRacks() {
-	$("#inputRack").kendoComboBox({
-		dataTextField: "Nombre",
-		dataValueField: "RackID",
-		suggest: true,
-		delay: 10,
-		filter: "contains",
-		index: 3,
-		change: function (e) {
-
-		}
-	});
-
-	$('#inputRack').closest('.k-widget').keydown(function (e) {
-		if (e.keyCode == 13) {
-		}
-	});
+function SuscribirEventoRack() {
+    $("#inputRack").kendoComboBox({
+        dataTextField: "Nombre",
+        dataValueField: "RackID",
+        suggest: true,
+        delay: 10,
+        filter: "contains",
+        index: 3,
+        change: function (e) {}
+    });
 }
 
+function SuscribirEventoRackUbicacion() {
+    $("#inputRackUbicacion").kendoComboBox({
+        dataTextField: "Ubicacion",
+        dataValueField: "RackID",
+        suggest: true,
+        delay: 10,
+        filter: "contains",
+        index: 3,
+        change: function (e) {
+            $("#inputRackPasillo").data("kendoComboBox").text("");
+            $("#inputRackNivel").data("kendoComboBox").text("");
+            var dataItem = this.dataItem(e.sender.selectedIndex);                                    
+            if (dataItem != undefined) {                
+                AjaxCargarPasilloRack(dataItem.Ubicacion);
+            }
+        }
+    });
+}
+
+function SuscribirEventoRackPasillo() {
+    $("#inputRackPasillo").kendoComboBox({
+        dataTextField: "Pasillo",
+        dataValueField: "RackID",
+        suggest: true,
+        delay: 10,
+        filter: "contains",
+        index: 3,
+        change: function (e) {
+            $("#inputRackNivel").data("kendoComboBox").text("");
+            var dataItem = this.dataItem(e.sender.selectedIndex);
+            var Ubicacion = $("#inputRackUbicacion").data("kendoComboBox").text();
+            if (Ubicacion != undefined) {
+                if (dataItem != undefined) {
+                    AjaxCargarNivelRack(Ubicacion, dataItem.Pasillo);
+                }
+            }            
+        }
+    });
+}
+
+function SuscribirEventoRackPiso() {
+    $("#inputRackNivel").kendoComboBox({
+        dataTextField: "Nivel",
+        dataValueField: "RackID",
+        suggest: true,
+        delay: 10,
+        filter: "contains",
+        index: 3,
+        change: function (e) {
+        }
+    });
+}
 
 function opcionHabilitarView(valor) {
 
@@ -116,7 +229,9 @@ function opcionHabilitarView(valor) {
 		$('#FieldSetView').find('*').attr('disabled', true);
 		$("#inputProyecto").data("kendoComboBox").enable(false);
 		$('#RangoNuDiv').find('*').attr('disabled', true);
-		$("#inputRack").data("kendoComboBox").enable(false);
+		$("#inputRackUbicacion").data("kendoComboBox").enable(false);
+		$("#inputRackPasillo").data("kendoComboBox").enable(false);
+		$("#inputRackNivel").data("kendoComboBox").enable(false);
 		$("#Cuantificacion0003").text("Editar");
 
 
@@ -125,7 +240,9 @@ function opcionHabilitarView(valor) {
 		$('#FieldSetView').find('*').attr('disabled', false);
 		$("#inputProyecto").data("kendoComboBox").enable(true);
 		$('#RangoNuDiv').find('*').attr('disabled', false);
-		$("#inputRack").data("kendoComboBox").enable(true);
+		$("#inputRackUbicacion").data("kendoComboBox").enable(true);
+		$("#inputRackPasillo").data("kendoComboBox").enable(true);
+		$("#inputRackNivel").data("kendoComboBox").enable(true);
 		$("#Cuantificacion0003").text("Guardar");
 
 

@@ -36,6 +36,66 @@ namespace BackEndSAM.Controllers.Materiales.UbicacionNumeroUnico
                 return result;
             }
         }
+        [HttpGet]
+        public object GetUbicacionRack(string token, int ProyectoID, bool Relleno)
+        {
+            string payload = "";
+            string newToken = "";
+            bool tokenValido = ManageTokens.Instance.ValidateToken(token, out payload, out newToken);
+            if (tokenValido && Relleno)
+            {
+                return UbicacionNumeroUnicoBd.Instance.ObtenerUbicacionRack(ProyectoID);
+            }
+            else
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(payload);
+                result.ReturnCode = 401;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = false;
+                return result;
+            }
+        }
+        [HttpGet]
+        public object GetPasilloRack(string token, string Ubicacion)
+        {
+            string payload = "";
+            string newToken = "";
+            bool tokenValido = ManageTokens.Instance.ValidateToken(token, out payload, out newToken);
+            if (tokenValido)
+            {
+                return UbicacionNumeroUnicoBd.Instance.ObtenerPasilloRack(Ubicacion);
+            }
+            else
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(payload);
+                result.ReturnCode = 401;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = false;
+                return result;
+            }
+        }
+        [HttpGet]
+        public object GetNiverRack(string token, string Ubicacion, string Pasillo)
+        {
+            string payload = "";
+            string newToken = "";
+            bool tokenValido = ManageTokens.Instance.ValidateToken(token, out payload, out newToken);
+            if (tokenValido)
+            {
+                return UbicacionNumeroUnicoBd.Instance.ObtenerNivelRack(Ubicacion, Pasillo);
+            }
+            else
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(payload);
+                result.ReturnCode = 401;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = false;
+                return result;
+            }
+        }
 
         public object Post(Captura ListaCaptura, string token, string proyectoID, int rackID)
         {

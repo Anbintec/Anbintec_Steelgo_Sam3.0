@@ -2,6 +2,7 @@
 using DatabaseManager.Sam3;
 using SecurityManager.Api.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -45,8 +46,6 @@ namespace BackEndSAM.DataAcces.Materiales.UbicacionNumeroUnico
             {
                 using (SamContext ctx = new SamContext())
                 {
-
-
                     List<Rack> listaRacks = (from r in ctx.Sam3_Proyecto
                                              join c in ctx.Sam3_Rack on r.PatioID equals c.PatioID
                                              where r.Activo && c.Activo == true && r.ProyectoID == proyectoID
@@ -55,7 +54,107 @@ namespace BackEndSAM.DataAcces.Materiales.UbicacionNumeroUnico
                                                  Nombre = c.Rack,
                                                  RackID = c.RackID
                                              }).AsParallel().ToList();
-                    return listaRacks;
+                    return listaRacks;                                       
+                }
+            }
+            catch (Exception ex)
+            {
+                //-----------------Agregar mensaje al Log -----------------------------------------------
+                LoggerBd.Instance.EscribirLog(ex);
+                //-----------------Agregar mensaje al Log -----------------------------------------------
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
+
+        public object ObtenerUbicacionRack(int ProyectoID)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {                    
+                    List<RackUbicacion> ListaUbicacion = (
+                        from P in ctx.Sam3_Proyecto
+                        join R in ctx.Sam3_Rack on P.PatioID equals R.PatioID
+                        where P.Activo && R.Activo == true && P.ProyectoID == ProyectoID                       
+                        group R by R.Ubicacion into data
+                        select new RackUbicacion
+                        {                            
+                            Ubicacion = data.Key
+                        }
+                    ).AsParallel().ToList();
+                    return ListaUbicacion;
+                }
+            }
+            catch (Exception ex)
+            {
+                //-----------------Agregar mensaje al Log -----------------------------------------------
+                LoggerBd.Instance.EscribirLog(ex);
+                //-----------------Agregar mensaje al Log -----------------------------------------------
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
+
+        public object ObtenerPasilloRack(string Ubicacion)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {
+                    List<RackPasillo> ListaPasillo = (
+                        from R in ctx.Sam3_Rack
+                        where R.Activo == true && R.Ubicacion == Ubicacion
+                        group R by R.Pasillo into data
+                        select new RackPasillo
+                        {
+                            Pasillo = data.Key
+                        }
+                    ).AsParallel().ToList();
+                    return ListaPasillo;
+                }
+            }
+            catch (Exception ex)
+            {
+                //-----------------Agregar mensaje al Log -----------------------------------------------
+                LoggerBd.Instance.EscribirLog(ex);
+                //-----------------Agregar mensaje al Log -----------------------------------------------
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
+
+        public object ObtenerNivelRack(string Ubicacion, string Pasillo)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {                    
+                    List<RackNivel> ListaNivel = (
+                        from R in ctx.Sam3_Rack
+                        where R.Activo == true && (R.Ubicacion == Ubicacion && R.Pasillo == Pasillo)
+                        select new RackNivel
+                        {                            
+                            RackID = R.RackID,
+                            Nivel = R.Nivel
+                        }
+                    ).AsParallel().ToList();
+                    return ListaNivel;
                 }
             }
             catch (Exception ex)
