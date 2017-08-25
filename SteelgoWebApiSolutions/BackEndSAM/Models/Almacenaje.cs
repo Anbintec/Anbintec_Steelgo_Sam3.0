@@ -11,20 +11,22 @@ namespace BackEndSAM.Models
         public List<ListadoAlmacenaje> ListadoAlmacenaje { get; set; }
     }
 
-    public class ListadoAlmacenaje 
+    public class ListadoAlmacenaje
     {
         public string ItemCodeID { get; set; }
         public string NumeroUnicoID { get; set; }
         public string NumeroUnico { get; set; }
+        public int? RackID { get; set; }
         public string Rack { get; set; }
     }
 
-    public class ListaNumerosUnicos {
+    public class ListaNumerosUnicos
+    {
         public string NumeroUnicoID { get; set; }
         public string Rack { get; set; }
     }
 
-    public class Items 
+    public class Items
     {
         public string OrdenAlmacenajeID { get; set; }
         public List<ListaNumerosUnicos> NumerosUnicos { get; set; }

@@ -18,6 +18,19 @@
     </li>
 }
 
+<style>
+    #grid > .k-grid-header > div > table,
+    #grid > .k-grid-content > table {
+        width: 100% !important;
+    }
+
+    .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+        color: #fff;
+        background-color: #444444;
+        border-color: #081017;
+    }
+</style>
+
 <div id="formaAlmacenaje" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -29,8 +42,8 @@
                                 <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow save-group"><span id="Almacenaje0003"></span></button>
                                 <button id="Editar" onclick="javascript:void(0);" type="button" class="btn btn-yellow editar" style="display: none"><span id="Almacenaje0004"></span></button>
                                 @*<button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="caretWhite"></span>
-                                </button>*@
+                                        <span class="caretWhite"></span>
+                                    </button>*@
                             </div>
                             <a id="Cancelar" class="btn btn-black"><span id="Almacenaje0005"></span></a>
                         </div>
@@ -78,19 +91,46 @@
                                 <div id="Diametro2Div" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
                                     <label id="Almacenaje0014"></label>
                                     <input id="Diametro2" class="general-input" disabled />
-                                </div>                                
+                                </div>
                             </div>
 
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="addedSection clearfix">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11" id="toLock">
-                        <div id="RackDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="width:auto; padding-bottom: 15px;">
+                            <div class="btn-group " data-toggle="buttons" role="group">
+                                <label>&nbsp;</label>
+                                <div class="btn btn-primary" id="styleUno">
+                                    <input type="radio" name="Mostrar" value="Uno" /><span id="">Opción 1</span>
+                                </div>
+                                <div class="btn btn-primary" id="styleDos">
+                                    <input type="radio" name="Mostrar" value="Dos" /><span id="">Opcion 2 </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="MostrarUno" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <label id="Almacenaje0015"></label>
-                            <input id="Rack" class="general-input" />
+                            <input id="Rack" />
+                        </div>
+                        <div id="MostrarDos" style="margin: 0 auto; display: none;">
+                            <div id="" class="col-xs-12 col-sm-12 col-md-2 col-lg-1">
+                                <label id="">Ubicación</label>
+                                <input id="inputRackUbicacion" />
+                            </div>
+                            <div id="" class="form-group col-xs-6 col-sm-3 col-md-2 col-lg-1">
+                                <label id="">Pasillo</label>
+                                <input id="inputRackPasillo" />
+                            </div>
+                            <div id="" class="form-group col-xs-6 col-sm-3 col-md-2 col-lg-1">
+                                <label id="">Nivel</label>
+                                <input id="inputRackNivel" />
+                            </div>
                         </div>
                         <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <div class="row">
@@ -114,11 +154,12 @@
             </div>
         </div>
 
-        <input type="hidden" id="ChecksAlmacenaje" value="1" />@*1 todos 2 sin localizacion*@ 
+        <input type="hidden" id="ChecksAlmacenaje" value="1" />@*1 todos 2 sin localizacion*@
     </div>
 
     <ul id="menu" class="incidencia">
-        <li><span id="Almacenaje0023"></span>
+        <li>
+            <span id="Almacenaje0023"></span>
         </li>
     </ul>
 
@@ -126,16 +167,16 @@
 
 <script>
     @section JavascriptDocumentReadyHomeCookie {
-        Cookies.set("home", true, { path: '/' });
-        Cookies.set("navegacion", "24", { path: '/' });
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "24", { path: '/' });
     }
 
     @section JavascriptGlobalVariables {
     var Proyecto = {}, OrdenAlmacenaje = {},
         ItemCode = {}, NumeroUnico = {},
         resultadoJson = "";
-    var params={};
-    window.location.search!=="" ? window.location.href.split("?")[1].split("&").forEach(function(n){params[n.split("=")[0]]=n.split("=")[1]}) : params=null;
+    var params = {};
+    window.location.search !== "" ? window.location.href.split("?")[1].split("&").forEach(function (n) { params[n.split("=")[0]] = n.split("=")[1] }) : params = null;
     var _almacenaje = "@Url.Action("Almacenaje", "Almacenaje")";
     var _incidenciasURL = "@Url.Action("Incidencias", "Incidencias")";
 
@@ -198,475 +239,670 @@
     }
 
     @section JavascriptGlobalFunctions {
-    function changeLanguageCall() {
-        var tmp = removeGrid($("#grid"));
-        CargarGridAlmacenaje();
-        $("#grid").data("kendoGrid").dataSource.data(tmp);
-    };
-
-    function CargaInicial() {
-        $("#Guardar").click(function () { Guardar(); });
-        $("#Cancelar").click(function () { Cancelar(); });
-        $("#IrIncidencia").click(function () { Incidencias(); });
-
-        $("#ProyectoID").kendoComboBox({
-            dataTextField: "Nombre",
-            dataValueField: "ProyectoID",
-            select: function (e) {
-            },
-            change: function (e) {
-                var dataItem = this.dataItem();
-                dataItem!==undefined ? CargarProyecto(dataItem.ProyectoID, dataItem.Nombre):CargarProyecto("", "");
-                var value = this.value();
-                LimpiarCamposProyecto();
-                if (!value || this.selectedIndex == -1) {
-                    messageindexKendoCombobox(this);
-                    Proyecto = {};
-                    this.value("");
-                } else {
-                    ObtenerOrdenesAlmacenaje();
-                };
-            },
-            filter: "contains",
-            dataBound: function(e){checkIfOne(this);},
-        });
-        ObtenerProyecto();
-
-        $("#OrdenAlmacenaje").kendoComboBox({
-            dataTextField: "value",
-            dataValueField: "id",
-            select: function (e) {
-            },
-            change: function (e) {
-                var dataItem = this.dataItem();
-                dataItem!==undefined ? CargarOrdenAlmacenaje(dataItem.id, dataItem.value):CargarOrdenAlmacenaje("", "");
-                var value = this.value();
-                LimpiarCamposOrdenAlmacenaje();
-
-                if (!value || this.selectedIndex == -1) {
-                    messageindexKendoCombobox(this);
-                    OrdenAlmacenaje = {};
-                    this.value("");
-                } else {
-                    ObtenerItemCodes();
-                };
-                FiltrarDatos();
-            },
-            dataBound: function(e){checkIfOne(this);},
-            filter: "contains",
-        });
-
-        $("#ItemCode").kendoComboBox({
-            dataTextField: "value",
-            dataValueField: "id",
-            select: function (e) {
-            },
-            change: function (e) {
-                var dataItem = this.dataItem();
-                dataItem!==undefined ? CargarItemCode(dataItem.id, dataItem.value):CargarItemCode("", "");
-                var value = this.value();
-                LimpiarCamposItemCode();
-                if (!value || this.selectedIndex == -1) {
-                    messageindexKendoCombobox(this);
-                    ItemCode = {};
-                    this.value("");
-                } else {
-                    ObtenerDiametros();
-                    ObtenerNumerosUnicos();
-                };
-                FiltrarDatos();
-            },
-            dataBound: function(e){checkIfOne(this);},
-            filter: "contains",
-        });
-
-        $("#NumeroUnico").kendoComboBox({
-            dataTextField: "NumeroUnico",
-            dataValueField: "NumeroUnicoID",
-            select: function (e) {
-            },
-            change: function (e) {
-                var dataItem = this.dataItem();
-                dataItem!==undefined ? CargarNumeroUnico(dataItem.NumeroUnicoID, dataItem.NumeroUnico):CargarNumeroUnico("", "");
-                var value = this.value();
-                if (!value || this.selectedIndex == -1) {
-                    messageindexKendoCombobox(this);
-                    NumeroUnico = {};
-                    this.value("");
-                }
-                FiltrarDatos();
-            },
-            filter: "contains",
-            dataBound: function(e){checkIfOne(this);},
-        });
-
-        $("#Rack").keydown(function (e) {
-            if (e.keyCode == 13) {
-                PlancharRack(this.value);
-                $("#Rack").val("");
-            }
-        });
-
-        $('input:radio').click(function () {
-            if ($(this).val() === '1') {
-                $("#ChecksAlmacenaje").val(1);
-                FiltrarDatos();
-            } else if ($(this).val() === '2') {
-                $("#ChecksAlmacenaje").val(2);
-                FiltrarDatos();
-            }
-        });
-
-    };
-
-    function CargarProyecto(id, value) {
-        Proyecto = {};
-        Proyecto = { ProyectoID: id, Nombre: value };
-    };
-
-    function CargarOrdenAlmacenaje(id, value) {
-        OrdenAlmacenaje = {};
-        OrdenAlmacenaje = { OrdenAlmacenajeID: id, Nombre: value };
-    };
-    function CargarItemCode(id, value) {
-        ItemCode = {};
-        ItemCode = { ItemCodeID: id, Nombre: value };
-    };
-    function CargarNumeroUnico(id, value) {
-        NumeroUnico = {};
-        NumeroUnico = { NumeroUnicoID: id, Nombre: value };
-    };
-
-    function ObtenerProyecto() {
-        $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
-            ControlErroresObjetosComboBox("ProyectoID", result);
-            fromParam($("#ProyectoID").data("kendoComboBox"),"ProyectoID",params!==null && params.ProyectoID!==null ? params.ProyectoID : null);
-        });
-    };
-
-    function ObtenerOrdenesAlmacenaje() {//Se Obtienen los numeros unicos y los item codes
-        //loadingStart();
-        $Almacenaje.Almacenaje.read({ ProyectoID: Proyecto.ProyectoID, token: Cookies.get("token") }).done(function (result) {
-            if (Error(result)) {
-                ControlErroresObjetosComboBox("OrdenAlmacenaje", result);
-                fromParam($("#OrdenAlmacenaje").data("kendoComboBox"),"id",params!==null && params.OrdenAlmacenajeID!==null ? params.OrdenAlmacenajeID : null);
-            }
-            //loadingStop();
-        });
-
-    };
+        var itemsRacks=null;
 
 
-    function ObtenerItemCodes() {//Se Obtienen los numeros unicos y los item codes
-        //loadingStart();
-        $Almacenaje.Almacenaje.read({ proyectoID: Proyecto.ProyectoID, ordenalmacenajeID: OrdenAlmacenaje.OrdenAlmacenajeID, token: Cookies.get("token") }).done(function (result) {
-            if (Error(result)) {
-                ControlErroresObjetosComboBox("ItemCode", result.ListadoItemCode);
-                resultadoJson = result.ListadoAlmacenaje;
-                if ($("#grid").data("kendoGrid")) {
-                    if (resultadoJson.length > 0) {
-                        $("#grid").data("kendoGrid").dataSource.data(resultadoJson);
-                        $("#grid").data("kendoGrid").dataSource.page(1);
+        function changeLanguageCall() {
+
+            var tmp = removeGrid($("#grid"));
+            CargarGridAlmacenaje();
+            $("#grid").data("kendoGrid").dataSource.data(tmp);
+            $('input:radio[name=Mostrar]:nth(0)').prop("checked", true);
+            $("#styleUno").addClass("active");
+        };
+
+
+        function CargaInicial() {
+            $("#Guardar").click(function () { Guardar(); });
+            $("#Cancelar").click(function () { Cancelar(); });
+            $("#IrIncidencia").click(function () { Incidencias(); });
+
+            $("#ProyectoID").kendoComboBox({
+                dataTextField: "Nombre",
+                dataValueField: "ProyectoID",
+                select: function (e) {
+                },
+                change: function (e) {
+                    var dataItem = this.dataItem();
+                    dataItem !== undefined ? CargarProyecto(dataItem.ProyectoID, dataItem.Nombre) : CargarProyecto("", "");
+                    var value = this.value();
+                    LimpiarCamposProyecto();
+                    if (!value || this.selectedIndex == -1) {
+                        messageindexKendoCombobox(this);
+                        Proyecto = {};
+                        this.value("");
                     } else {
-                        $("#grid").data("kendoGrid").dataSource.data([]);
-                        $("#grid").data("kendoGrid").dataSource.page(0);
+                        ObtenerOrdenesAlmacenaje();
                     };
-                };
-                AsignarPaginaActualCookie();
-                applySecurityPolicy(false);
-            }
-            //loadingStop();
-        });
 
-    };
-    function AsignarPaginaActualCookie() {
-        Cookies.set("navegacion", "24", { path: '/' });
-    }
-      
-    function ObtenerDiametros() {
-        //loadingStart();
-        $Almacenaje.Almacenaje.read({
-           itemCodeid: ItemCode.ItemCodeID, token: Cookies.get("token")
-        }).done(function (result) {
-            if (Error(result)) {
-                $("#Diametro1").val(result.Diametro1);
-                $("#Diametro2").val(result.Diametro2);
-            }
-            //loadingStop();
-        });
-    };
-    function ObtenerNumerosUnicos() {
-        //loadingStart();
-        $Almacenaje.Almacenaje.read({
-            ProyectoID: Proyecto.ProyectoID, ordenalmacenajeID: OrdenAlmacenaje.OrdenAlmacenajeID,
-            itemCodeid: ItemCode.ItemCodeID, token: Cookies.get("token")
-        }).done(function (result) {
-            if (Error(result)) {
-                ControlErroresObjetosComboBox("NumeroUnico", result);
-            }
-            //loadingStop();
-        });
-    };
-
-    function LimpiarCamposProyecto() {
-        OrdenAlmacenaje = {};
-        ItemCode = {};
-        NumeroUnico = {};
-        $("#OrdenAlmacenaje").data("kendoComboBox").value("");
-        $("#ItemCode").data("kendoComboBox").value("");
-        $("#NumeroUnico").data("kendoComboBox").value("");
-        $("#Diametro1").val("");
-        $("#Diametro2").val("");
-        $("#Rack").val("");
-        $("#NumeroUnico").data("kendoComboBox").dataSource.data([]);
-        $("#ItemCode").data("kendoComboBox").dataSource.data([]);
-        $("#OrdenAlmacenaje").data("kendoComboBox").dataSource.data([]);
-        if ($("#grid").data("kendoGrid")){
-            $("#grid").data("kendoGrid").dataSource.data([]);
-            $("#grid").data("kendoGrid").dataSource.page(0);
-        }
-    };
-
-    function LimpiarCamposOrdenAlmacenaje() {
-        ItemCode = {};
-        NumeroUnico = {};
-        $("#ItemCode").data("kendoComboBox").value("");
-        $("#NumeroUnico").data("kendoComboBox").value("");
-        $("#Diametro1").val("");
-        $("#Diametro2").val("");
-        $("#Rack").val("");
-        $("#NumeroUnico").data("kendoComboBox").dataSource.data([]);
-        $("#ItemCode").data("kendoComboBox").dataSource.data([]);
-        if ($("#grid").data("kendoGrid")) {
-            $("#grid").data("kendoGrid").dataSource.data([]);
-            $("#grid").data("kendoGrid").dataSource.page(0);
-        }
-    };
-
-    function LimpiarCamposItemCode() {
-        NumeroUnico = {};
-        $("#NumeroUnico").data("kendoComboBox").value("");
-        $("#NumeroUnico").data("kendoComboBox").dataSource.data([]);
-        $("#Diametro1").val("");
-        $("#Diametro2").val("");
-        $("#Rack").val("");
-    };
+                    if (dataItem != undefined) {
+                        if(itemsRacks==null)
+                            AjaxCargarRacksSinAsignarCombobox(dataItem.ProyectoID);
 
 
-    function FiltrarDatos() {
-        var ChecksAlmacenaje = $("#ChecksAlmacenaje").val();
-        var ds = $("#grid").data("kendoGrid").dataSource;
-        var filters = [];
+                        if ($("input:radio[name=Mostrar]:checked").val() == "Uno") { //Rack Completo
+                            $("#Rack").data("kendoComboBox").value("");
+                            AjaxCargarRacks(dataItem.ProyectoID);
 
-        ds.filter({});
+                        } else {
+                            $("#inputRangoNumeroUnico").val("");
+                            $("#inputRackUbicacion").data("kendoComboBox").dataSource.data([]);
+                            $("#inputRackPasillo").data("kendoComboBox").dataSource.data([]);
+                            $("#inputRackNivel").data("kendoComboBox").dataSource.data([]);
+                            $("#inputRackUbicacion").data("kendoComboBox").value("");
+                            $("#inputRackPasillo").data("kendoComboBox").value("");
+                            $("#inputRackNivel").data("kendoComboBox").value("");
 
-        if (ChecksAlmacenaje == "2") {
-            var new_filter = { field: "Rack", operator: "eq", value: "" };
-            filters.push(new_filter);
-        }
-
-        if (ItemCode.ItemCodeID) {
-            var new_filter = { field: "ItemCodeID", operator: "Contains", value: ItemCode.ItemCodeID ? ItemCode.ItemCodeID : "" };
-            filters.push(new_filter);
-        };
-
-        if (NumeroUnico.NumeroUnicoID) {
-            var new_filter = { field: "NumeroUnicoID", operator: "Contains", value: NumeroUnico.NumeroUnicoID ? NumeroUnico.NumeroUnicoID : "" };
-            filters.push(new_filter);
-        };
-
-        ds.filter(filters);
-    };
-
-
-    function PlancharRack(value) {
-        var filters = $("#grid").data("kendoGrid").dataSource.filter();
-        var allData = $("#grid").data("kendoGrid").dataSource.data();
-        var query = new kendo.data.Query(allData);
-        var result = query.filter(filters).data;
-        var datasource = result;
-
-        $(datasource).each(function () {
-            this.set("Rack", value);
-        });
-    };
-
-    function CargarGridAlmacenaje() {
-        $("#grid").kendoGrid({
-            dataSource: {
-                data: resultadoJson,
-                schema: {
-                    model: {
-                        id:"NumeroUnicoID",
-                        fields: {
-                            ItemCodeID: { type: "string", editable: false },
-                            NumeroUnicoID: { type: "string", editable: false },
-                            NumeroUnico: { type: "string", editable: false },
-                            Rack: { type: "string", editable: true }
+                            $("#grid").data("kendoGrid").dataSource.data([]);
+                            if (dataItem != undefined && dataItem.ProyectoID != 0 && dataItem.Nombre != "") {
+                                AjaxCargarUbicacionRack(dataItem.ProyectoID);
+                            }
                         }
                     }
+
                 },
-                pageSize: 10,
-                serverPaging: false,
-                serverFiltering: false,
-                serverSorting: false
-            },
-            autoHeight: true,
-            sortable: true,
-            scrollable: false,
-            selectable: true,
-            editable: {
-                mode: "incell",
-                confirmation: false
-            },
-            pageable: {
-                refresh: false,
-                pageSizes: [10, 15, 20],
-                info: false,
-                input: false,
-                numeric: true,
-                buttonCount: 2
-            },
-            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
-            columns: [
-                { field: "NumeroUnico", title: _dictionary.Almacenaje0018[$("#language").data("kendoDropDownList").value()]},
-                { field: "Rack", title: _dictionary.Almacenaje0019[$("#language").data("kendoDropDownList").value()] },
-            ],
-            dataBound: function (e) {
-                checkTH($("#grid").data("kendoGrid"));
-                quickHeadFilter($("#grid").data("kendoGrid"));
-                if(!$("#Rack").is(":focus") && this.dataSource.data().filter(function(e){ return e.Rack!==""}).length>0){
-                    toEdit()
-                }else{
-                    toSave()
-                };
-            },
-            edit:function(e){
-                $("#Editar").is(":visible") ? this.closeCell() : 0;
-            }
-        });
-
-        $("#menu").kendoContextMenu({
-            target: "#grid",
-            filter: "td",
-            select: function (e) {
-                var grid = $("#grid").data("kendoGrid");
-                var select = grid.select();
-                var data = grid.dataItem(select);
-
-                window.open(_incidenciasURL + "?leng=" + $("#language").data("kendoDropDownList").value() + "&LevantarIncidencia=1&ReferenciaID=" + data.NumeroUnicoID + "&TipoIncidencia=9&Clasificacion=1");
-            }
-        });
-
-        $("#grid").on("mousedown", "tr[role='row']", function (e) {
-            $('#grid').data("kendoGrid").select(e.target.parentElement);
-            $("#grid thead .k-state-selected> .k-link").css({
-                "color": "black"
+                filter: "contains",
+                dataBound: function (e) { checkIfOne(this); },
             });
-        });
-    };
+            ObtenerProyecto();
 
-    function toEdit(){
-        $("#Guardar").hide();
-        $("#Editar").show();
-        $("#toLock input").addClass("disabled")
-        $("#toLock input").attr("disabled",true)
-    }
+            $("#OrdenAlmacenaje").kendoComboBox({
+                dataTextField: "value",
+                dataValueField: "id",
+                select: function (e) {
+                },
+                change: function (e) {
+                    var dataItem = this.dataItem();
+                    dataItem !== undefined ? CargarOrdenAlmacenaje(dataItem.id, dataItem.value) : CargarOrdenAlmacenaje("", "");
+                    var value = this.value();
+                    LimpiarCamposOrdenAlmacenaje();
 
-    function toSave(){
-        $("#Editar").hide();
-        $("#Guardar").show();
-        $("#toLock input").removeClass("disabled")
-        $("#toLock input").attr("disabled",false)
-    }
+                    if (!value || this.selectedIndex == -1) {
+                        messageindexKendoCombobox(this);
+                        OrdenAlmacenaje = {};
+                        this.value("");
+                    } else {
+                        ObtenerItemCodes();
+                    };
+                    FiltrarDatos();
+                },
+                dataBound: function (e) { checkIfOne(this); },
+                filter: "contains",
+            });
 
-    $("#Editar").on("click",toSave)
-       
-    function ControlErroresObjetosComboBox(control, result) {
-        if (Error(result)) {
-            $("#" + control).data("kendoComboBox").dataSource.data(result);
-        } else {
-            $("#" + control).data("kendoComboBox").dataSource.data([]);
+            $("#ItemCode").kendoComboBox({
+                dataTextField: "value",
+                dataValueField: "id",
+                select: function (e) {
+                },
+                change: function (e) {
+                    var dataItem = this.dataItem();
+                    dataItem !== undefined ? CargarItemCode(dataItem.id, dataItem.value) : CargarItemCode("", "");
+                    var value = this.value();
+                    LimpiarCamposItemCode();
+                    if (!value || this.selectedIndex == -1) {
+                        messageindexKendoCombobox(this);
+                        ItemCode = {};
+                        this.value("");
+                    } else {
+                        ObtenerDiametros();
+                        ObtenerNumerosUnicos();
+                    };
+                    FiltrarDatos();
+                },
+                dataBound: function (e) { checkIfOne(this); },
+                filter: "contains",
+            });
+
+            $("#NumeroUnico").kendoComboBox({
+                dataTextField: "NumeroUnico",
+                dataValueField: "NumeroUnicoID",
+                select: function (e) {
+                },
+                change: function (e) {
+                    var dataItem = this.dataItem();
+                    dataItem !== undefined ? CargarNumeroUnico(dataItem.NumeroUnicoID, dataItem.NumeroUnico) : CargarNumeroUnico("", "");
+                    var value = this.value();
+                    if (!value || this.selectedIndex == -1) {
+                        messageindexKendoCombobox(this);
+                        NumeroUnico = {};
+                        this.value("");
+                    }
+                    FiltrarDatos();
+                },
+                filter: "contains",
+                dataBound: function (e) { checkIfOne(this); },
+            });
+
+
+
+
+            $('input:radio').click(function () {
+                if ($(this).val() === '1') {
+                    $("#ChecksAlmacenaje").val(1);
+                    FiltrarDatos();
+                } else if ($(this).val() === '2') {
+                    $("#ChecksAlmacenaje").val(2);
+                    FiltrarDatos();
+                }
+            });
+
+            SuscribirEventoMostrar();
+            SuscribirEventoRackUbicacion();
+            SuscribirEventoRackPasillo();
+            SuscribirEventoRackPiso();
+            SuscribirEventoRack();
         };
-    };
 
-    function validarRequeridosFormaAlmacenaje() {
-        var bool = true;
-        $("#formaAlmacenaje .security_required").each(function (i, elem) {
-            if (elem.tagName.toLowerCase() != 'label') {
-                if (!$(this).val()) {
-                    bool = false;
-                    $(this).closest("div").find("label").addClass("error");
+
+        function SuscribirEventoRack() {
+            $("#Rack").kendoComboBox({
+                dataTextField: "Nombre",
+                dataValueField: "RackID",
+                suggest: true,
+                delay: 10,
+                filter: "contains",
+                index: 3,
+                change: function (e) { }
+            });
+
+            $('#Rack').closest('.k-widget').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    var rackID = $("#Rack").data("kendoComboBox").dataItem($("#Rack").data("kendoComboBox").select());
+
+                    console.log("valor del rack");
+                    console.log(rackID.RackID);
+                    if (rackID != undefined && rackID.RackID > 0)
+                    {
+                        PlancharRack(rackID.RackID, rackID.Nombre);
+                        $("#Rack").val("");
+                    }
+                }
+            });
+        }
+
+        function SuscribirEventoMostrar() {
+            $("input:radio[name=Mostrar]").change(function () {
+                if ($('input:radio[name=Mostrar]:checked').val() == "Uno") {
+                    $("#MostrarUno").css("display", "block");
+                    $("#MostrarDos").css("display", "none");
+                    $("#inputRackUbicacion").data("kendoComboBox").text("");
+                    $("#inputRackPasillo").data("kendoComboBox").text("");
+                    $("#inputRackNivel").data("kendoComboBox").text("");
                 } else {
-                    $(this).closest("div").find("label").removeClass("error");
-                };
-            };
-        });
-        return bool;
-    };
+                    $("#Rack").data("kendoComboBox").value("");
+                    $("#MostrarUno").css("display", "none");
+                    $("#MostrarDos").css("display", "block");
+                }
 
-    function Guardar() {
-        //loadingStart();
-        if (validarRequeridosFormaAlmacenaje()) {
-            var datasource = $("#grid").data("kendoGrid").dataSource.data();
-            var Listado = { OrdenAlmacenajeID: "", Items: "" };
-            Listado.OrdenAlmacenajeID = OrdenAlmacenaje.OrdenAlmacenajeID;
-            Listado.NumerosUnicos = ListadoAGuardar(datasource);
+                var proyectoID = $("#ProyectoID").data("kendoComboBox").dataItem($("#ProyectoID").data("kendoComboBox").select());
+                if (proyectoID != undefined) {
+                    if ($("input:radio[name=Mostrar]:checked").val() == "Uno") { //Rack Completo
+                        $("#Rack").data("kendoComboBox").value("");
+                        AjaxCargarRacks(proyectoID.ProyectoID);
+                    } else {
+                        $("#inputRangoNumeroUnico").val("");
+                        $("#inputRackUbicacion").data("kendoComboBox").dataSource.data([]);
+                        $("#inputRackPasillo").data("kendoComboBox").dataSource.data([]);
+                        $("#inputRackNivel").data("kendoComboBox").dataSource.data([]);
+                        $("#inputRackUbicacion").data("kendoComboBox").value("");
+                        $("#inputRackPasillo").data("kendoComboBox").value("");
+                        $("#inputRackNivel").data("kendoComboBox").value("");
 
-            $Almacenaje.Almacenaje.update(Listado, { token: $.cookie("token") }).done(function (result) {
-                Error(result);
-                displayMessage("notificationslabel0056", "", '0');
-                toEdit();
+
+                        if (proyectoID != undefined && proyectoID.ProyectoID != 0 && proyectoID.Nombre != "") {
+                            AjaxCargarUbicacionRack(proyectoID.ProyectoID);
+                        }
+                    }
+                }
+            });
+        }
+
+        function SuscribirEventoRackUbicacion() {
+            $("#inputRackUbicacion").kendoComboBox({
+                dataTextField: "Ubicacion",
+                dataValueField: "RackID",
+                suggest: true,
+                delay: 10,
+                filter: "contains",
+                index: 3,
+                change: function (e) {
+                    $("#inputRackPasillo").data("kendoComboBox").text("");
+                    $("#inputRackNivel").data("kendoComboBox").text("");
+                    var dataItem = this.dataItem(e.sender.selectedIndex);
+                    if (dataItem != undefined) {
+                        AjaxCargarPasilloRack(dataItem.Ubicacion);
+                    }
+                }
+            });
+        }
+
+        function SuscribirEventoRackPasillo() {
+            $("#inputRackPasillo").kendoComboBox({
+                dataTextField: "Pasillo",
+                dataValueField: "RackID",
+                suggest: true,
+                delay: 10,
+                filter: "contains",
+                index: 3,
+                change: function (e) {
+                    $("#inputRackNivel").data("kendoComboBox").text("");
+                    var dataItem = this.dataItem(e.sender.selectedIndex);
+                    var Ubicacion = $("#inputRackUbicacion").data("kendoComboBox").text();
+                    if (Ubicacion != undefined) {
+                        if (dataItem != undefined) {
+                            AjaxCargarNivelRack(Ubicacion, dataItem.Pasillo);
+                        }
+                    }
+                }
+            });
+        }
+
+        function SuscribirEventoRackPiso() {
+            $("#inputRackNivel").kendoComboBox({
+                dataTextField: "Nivel",
+                dataValueField: "RackID",
+                suggest: true,
+                delay: 10,
+                filter: "contains",
+                index: 3,
+                change: function (e) {
+                }
+            });
+
+            $('#inputRackNivel').closest('.k-widget').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    var objeto = $("#inputRackNivel").data("kendoComboBox").dataItem($("#inputRackNivel").data("kendoComboBox").select());
+                    console.log(objeto);
+                    console.log("valor del nivel");
+                    console.log(objeto.RackID);
+                    if (objeto != undefined && objeto.RackID > 0) {
+                        var nombreElemento = "";
+
+                        for (var i = 0; i < itemsRacks.length; i++) {
+                            if (itemsRacks[i].RackID == objeto.RackID)
+                            {
+                                nombreElemento = itemsRacks[i].Nombre;
+                                break;
+                            }
+
+                        }
+                        if (nombreElemento != "")
+                        {
+                            PlancharRack(objeto.RackID, nombreElemento);
+                            $("#inputRackNivel").val("");
+                        }
+
+                    }
+                }
+            });
+        }
+        function CargarProyecto(id, value) {
+            Proyecto = {};
+            Proyecto = { ProyectoID: id, Nombre: value };
+        };
+
+        function CargarOrdenAlmacenaje(id, value) {
+            OrdenAlmacenaje = {};
+            OrdenAlmacenaje = { OrdenAlmacenajeID: id, Nombre: value };
+        };
+        function CargarItemCode(id, value) {
+            ItemCode = {};
+            ItemCode = { ItemCodeID: id, Nombre: value };
+        };
+        function CargarNumeroUnico(id, value) {
+            NumeroUnico = {};
+            NumeroUnico = { NumeroUnicoID: id, Nombre: value };
+        };
+
+        function ObtenerProyecto() {
+            $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
+                ControlErroresObjetosComboBox("ProyectoID", result);
+                fromParam($("#ProyectoID").data("kendoComboBox"), "ProyectoID", params !== null && params.ProyectoID !== null ? params.ProyectoID : null);
+            });
+        };
+
+        function ObtenerOrdenesAlmacenaje() {//Se Obtienen los numeros unicos y los item codes
+            //loadingStart();
+            $Almacenaje.Almacenaje.read({ ProyectoID: Proyecto.ProyectoID, token: Cookies.get("token") }).done(function (result) {
+                if (Error(result)) {
+                    ControlErroresObjetosComboBox("OrdenAlmacenaje", result);
+                    fromParam($("#OrdenAlmacenaje").data("kendoComboBox"), "id", params !== null && params.OrdenAlmacenajeID !== null ? params.OrdenAlmacenajeID : null);
+                }
                 //loadingStop();
             });
-        } else {
-            displayMessage("notificationslabel0031", "", '1');
-            //loadingStop();
+
+        };
+
+
+        function ObtenerItemCodes() {//Se Obtienen los numeros unicos y los item codes
+            //loadingStart();
+            $Almacenaje.Almacenaje.read({ proyectoID: Proyecto.ProyectoID, ordenalmacenajeID: OrdenAlmacenaje.OrdenAlmacenajeID, token: Cookies.get("token") }).done(function (result) {
+                if (Error(result)) {
+                    ControlErroresObjetosComboBox("ItemCode", result.ListadoItemCode);
+                    resultadoJson = result.ListadoAlmacenaje;
+                    if ($("#grid").data("kendoGrid")) {
+                        if (resultadoJson.length > 0) {
+                            $("#grid").data("kendoGrid").dataSource.data(resultadoJson);
+                            $("#grid").data("kendoGrid").dataSource.page(1);
+                        } else {
+                            $("#grid").data("kendoGrid").dataSource.data([]);
+                            $("#grid").data("kendoGrid").dataSource.page(0);
+                        };
+                    };
+                    AsignarPaginaActualCookie();
+                    applySecurityPolicy(false);
+                }
+                //loadingStop();
+            });
+
+        };
+        function AsignarPaginaActualCookie() {
+            Cookies.set("navegacion", "24", { path: '/' });
         }
-    };
 
-    function Cancelar() {
-        window.location.href = _almacenaje + "?leng=" + $("#language").data("kendoDropDownList").value();
-    };
+        function ObtenerDiametros() {
+            //loadingStart();
+            $Almacenaje.Almacenaje.read({
+                itemCodeid: ItemCode.ItemCodeID, token: Cookies.get("token")
+            }).done(function (result) {
+                if (Error(result)) {
+                    $("#Diametro1").val(result.Diametro1);
+                    $("#Diametro2").val(result.Diametro2);
+                }
+                //loadingStop();
+            });
+        };
+        function ObtenerNumerosUnicos() {
+            //loadingStart();
+            $Almacenaje.Almacenaje.read({
+                ProyectoID: Proyecto.ProyectoID, ordenalmacenajeID: OrdenAlmacenaje.OrdenAlmacenajeID,
+                itemCodeid: ItemCode.ItemCodeID, token: Cookies.get("token")
+            }).done(function (result) {
+                if (Error(result)) {
+                    ControlErroresObjetosComboBox("NumeroUnico", result);
+                }
+                //loadingStop();
+            });
+        };
 
-    function Incidencias() {
-        var OrdenAlmacenajeID = OrdenAlmacenaje.OrdenAlmacenajeID ? OrdenAlmacenaje.OrdenAlmacenajeID : "-1";
-        window.open(_incidenciasURL + "?leng=" + $("#language").data("kendoDropDownList").value() + "&LevantarIncidencia=1&ReferenciaID=" + OrdenAlmacenajeID + "&TipoIncidencia=8&Clasificacion=1");
-    };
+        function LimpiarCamposProyecto() {
+            OrdenAlmacenaje = {};
+            ItemCode = {};
+            NumeroUnico = {};
+            $("#OrdenAlmacenaje").data("kendoComboBox").value("");
+            $("#ItemCode").data("kendoComboBox").value("");
+            $("#NumeroUnico").data("kendoComboBox").value("");
+            $("#Diametro1").val("");
+            $("#Diametro2").val("");
+            $("#Rack").val("");
+            $("#NumeroUnico").data("kendoComboBox").dataSource.data([]);
+            $("#ItemCode").data("kendoComboBox").dataSource.data([]);
+            $("#OrdenAlmacenaje").data("kendoComboBox").dataSource.data([]);
+            if ($("#grid").data("kendoGrid")) {
+                $("#grid").data("kendoGrid").dataSource.data([]);
+                $("#grid").data("kendoGrid").dataSource.page(0);
+            }
+        };
 
-    function Error(data) {
-        if (data.ReturnCode) {
-            if (data.ReturnCode != 200) {
-                if (data.ReturnCode == 401) {
-                    removeUserSession();
-                    return false;
+        function LimpiarCamposOrdenAlmacenaje() {
+            ItemCode = {};
+            NumeroUnico = {};
+            $("#ItemCode").data("kendoComboBox").value("");
+            $("#NumeroUnico").data("kendoComboBox").value("");
+            $("#Diametro1").val("");
+            $("#Diametro2").val("");
+            $("#Rack").val("");
+            $("#NumeroUnico").data("kendoComboBox").dataSource.data([]);
+            $("#ItemCode").data("kendoComboBox").dataSource.data([]);
+            if ($("#grid").data("kendoGrid")) {
+                $("#grid").data("kendoGrid").dataSource.data([]);
+                $("#grid").data("kendoGrid").dataSource.page(0);
+            }
+        };
+
+        function LimpiarCamposItemCode() {
+            NumeroUnico = {};
+            $("#NumeroUnico").data("kendoComboBox").value("");
+            $("#NumeroUnico").data("kendoComboBox").dataSource.data([]);
+            $("#Diametro1").val("");
+            $("#Diametro2").val("");
+            $("#Rack").val("");
+        };
+
+
+        function FiltrarDatos() {
+            var ChecksAlmacenaje = $("#ChecksAlmacenaje").val();
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            var filters = [];
+
+            ds.filter({});
+
+            if (ChecksAlmacenaje == "2") {
+                var new_filter = { field: "Rack", operator: "eq", value: "" };
+                filters.push(new_filter);
+            }
+
+            if (ItemCode.ItemCodeID) {
+                var new_filter = { field: "ItemCodeID", operator: "Contains", value: ItemCode.ItemCodeID ? ItemCode.ItemCodeID : "" };
+                filters.push(new_filter);
+            };
+
+            if (NumeroUnico.NumeroUnicoID) {
+                var new_filter = { field: "NumeroUnicoID", operator: "Contains", value: NumeroUnico.NumeroUnicoID ? NumeroUnico.NumeroUnicoID : "" };
+                filters.push(new_filter);
+            };
+
+            ds.filter(filters);
+        };
+
+
+
+
+        function CargarGridAlmacenaje() {
+            $("#grid").kendoGrid({
+                dataSource: {
+                    data: resultadoJson,
+                    schema: {
+                        model: {
+                            id: "NumeroUnicoID",
+                            fields: {
+                                ItemCodeID: { type: "string", editable: false },
+                                NumeroUnicoID: { type: "string", editable: false },
+                                NumeroUnico: { type: "string", editable: false },
+                                RackID: { type: "number", editable: false},
+                                Rack: { type: "string", editable: true }
+                            }
+                        }
+                    },
+                    pageSize: 10,
+                    serverPaging: false,
+                    serverFiltering: false,
+                    serverSorting: false
+                },
+                autoHeight: true,
+                sortable: true,
+                scrollable: false,
+                selectable: true,
+                editable: {
+                    mode: "incell",
+                    confirmation: false
+                },
+                pageable: {
+                    refresh: false,
+                    pageSizes: [10, 15, 20],
+                    info: false,
+                    input: false,
+                    numeric: true,
+                    buttonCount: 2
+                },
+                filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+                columns: [
+                    { field: "NumeroUnico", title: _dictionary.Almacenaje0018[$("#language").data("kendoDropDownList").value()] },
+                    { field: "Rack", title: _dictionary.Almacenaje0019[$("#language").data("kendoDropDownList").value()] , editor: RenderRack},
+                ],
+                dataBound: function (e) {
+                    checkTH($("#grid").data("kendoGrid"));
+                    quickHeadFilter($("#grid").data("kendoGrid"));
+                    //if (!$("#Rack").is(":focus") && this.dataSource.data().filter(function (e) { return e.Rack !== "" }).length > 0) {
+                    //    toEdit()
+                    //} else {
+                    //    toSave()
+                    //};
+                },
+                edit: function (e) {
+                    $("#Editar").is(":visible") ? this.closeCell() : 0;
+                }
+            });
+
+            $("#menu").kendoContextMenu({
+                target: "#grid",
+                filter: "td",
+                select: function (e) {
+                    var grid = $("#grid").data("kendoGrid");
+                    var select = grid.select();
+                    var data = grid.dataItem(select);
+
+                    window.open(_incidenciasURL + "?leng=" + $("#language").data("kendoDropDownList").value() + "&LevantarIncidencia=1&ReferenciaID=" + data.NumeroUnicoID + "&TipoIncidencia=9&Clasificacion=1");
+                }
+            });
+
+            $("#grid").on("mousedown", "tr[role='row']", function (e) {
+                $('#grid').data("kendoGrid").select(e.target.parentElement);
+                $("#grid thead .k-state-selected> .k-link").css({
+                    "color": "black"
+                });
+            });
+        };
+
+        function RenderRack(container, options) {
+            var date = new Date().getTime();
+            console.log(itemsRacks);
+            $('<input data-text-field="Nombre" data-value-field="RackID" data-bind="value:' + options.field + '" id="' + date + '"/>')
+                .appendTo(container)
+                .kendoComboBox({
+                    autoBind: false,
+                    dataSource: itemsRacks,
+                    change: function (e) {
+                        var dataItem = this.dataItem();
+                        if (dataItem != undefined) {
+                            options.model.Rack = dataItem.Nombre;
+                            options.model.RackID = dataItem.RackID;
+
+                        }
+                        else {
+                            options.model.Rack = "";
+                            options.model.RackID = undefined;
+                        }
+
+                        $("#grid").data("kendoGrid").refresh();
+                    }
+                });
+
+        }
+        function toEdit() {
+            $("#Guardar").hide();
+            $("#Editar").show();
+            $("#toLock input").addClass("disabled")
+            $("#toLock input").attr("disabled", true)
+        }
+
+        function toSave() {
+            $("#Editar").hide();
+            $("#Guardar").show();
+            $("#toLock input").removeClass("disabled")
+            $("#toLock input").attr("disabled", false)
+        }
+
+        $("#Editar").on("click", toSave)
+
+        function ControlErroresObjetosComboBox(control, result) {
+            if (Error(result)) {
+                $("#" + control).data("kendoComboBox").dataSource.data(result);
+            } else {
+                $("#" + control).data("kendoComboBox").dataSource.data([]);
+            };
+        };
+
+        function validarRequeridosFormaAlmacenaje() {
+            var bool = true;
+            $("#formaAlmacenaje .security_required").each(function (i, elem) {
+                if (elem.tagName.toLowerCase() != 'label') {
+                    if (!$(this).val()) {
+                        bool = false;
+                        $(this).closest("div").find("label").addClass("error");
+                    } else {
+                        $(this).closest("div").find("label").removeClass("error");
+                    };
+                };
+            });
+            return bool;
+        };
+
+        function Guardar() {
+            //loadingStart();
+            if (validarRequeridosFormaAlmacenaje()) {
+                var datasource = $("#grid").data("kendoGrid").dataSource.data();
+                var Listado = { OrdenAlmacenajeID: "", Items: "" };
+                Listado.OrdenAlmacenajeID = OrdenAlmacenaje.OrdenAlmacenajeID;
+                Listado.NumerosUnicos = ListadoAGuardar(datasource);
+
+                $Almacenaje.Almacenaje.update(Listado, { token: $.cookie("token") }).done(function (result) {
+                    Error(result);
+                    displayMessage("notificationslabel0056", "", '0');
+                    toEdit();
+                    //loadingStop();
+                });
+            } else {
+                displayMessage("notificationslabel0031", "", '1');
+                //loadingStop();
+            }
+        };
+
+        function Cancelar() {
+            window.location.href = _almacenaje + "?leng=" + $("#language").data("kendoDropDownList").value();
+        };
+
+        function Incidencias() {
+            var OrdenAlmacenajeID = OrdenAlmacenaje.OrdenAlmacenajeID ? OrdenAlmacenaje.OrdenAlmacenajeID : "-1";
+            window.open(_incidenciasURL + "?leng=" + $("#language").data("kendoDropDownList").value() + "&LevantarIncidencia=1&ReferenciaID=" + OrdenAlmacenajeID + "&TipoIncidencia=8&Clasificacion=1");
+        };
+
+        function Error(data) {
+            if (data.ReturnCode) {
+                if (data.ReturnCode != 200) {
+                    if (data.ReturnCode == 401) {
+                        removeUserSession();
+                        return false;
+                    } else {
+                        displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                        return false;
+                    }
                 } else {
-                    displayMessage("notificationslabel0008", data.ReturnMessage, '2');
-                    return false;
+                    return true;
                 }
             } else {
                 return true;
             }
-        } else {
-            return true;
-        }
-    };
+        };
     }
 
     function ListadoAGuardar(datasource) {
         var Listado = {};
+        //console.log("se guarda y este es el source");
+        //console.log(datasource);
         for (var i = 0; i < datasource.length; i++) {
             var NumeroUnico = datasource[i].NumeroUnicoID;
-            var Rack = datasource[i].Rack;
+            var Rack = datasource[i].RackID;
 
             Listado[i] = { NumeroUnicoID: NumeroUnico, Rack: Rack };
         };
         return Listado;
     };
-    
-    function fromParam(widget,paramname,param){
-        if(param!==null){
-            widget.select(function(dataItem) {
+
+    function fromParam(widget, paramname, param) {
+        if (param !== null) {
+            widget.select(function (dataItem) {
                 return dataItem[paramname] === param;
             });
             widget.trigger("change");
@@ -674,8 +910,54 @@
     }
 
     @section JavascriptDocumentReadyFunctions {
-        $authorizationModel["Almacenaje"] = $AlmacenajeModel;
-        CargaInicial();
+    $authorizationModel["Almacenaje"] = $AlmacenajeModel;
+    CargaInicial();
     }
 
+    function AjaxCargarRacks(proyectoID) {
+        $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), proyectoID: proyectoID }).done(function (result) {
+            ControlErroresObjetosComboBox("Rack", result);
+        });
+    }
+
+    function AjaxCargarRacksSinAsignarCombobox(proyectoID) {
+        $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), proyectoID: proyectoID }).done(function (result) {
+            itemsRacks=result;
+        });
+    }
+
+
+
+    function AjaxCargarUbicacionRack(proyectoID) {
+        $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), ProyectoID: proyectoID, Relleno: true }).done(function (result) {
+            ControlErroresObjetosComboBox("inputRackUbicacion", result);
+        });
+    }
+
+    function AjaxCargarPasilloRack(ubicacion) {
+        $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion }).done(function (result) {
+            ControlErroresObjetosComboBox("inputRackPasillo", result);
+        });
+    }
+
+    function AjaxCargarNivelRack(ubicacion, pasillo) {
+        $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion, Pasillo: pasillo }).done(function (result) {
+            ControlErroresObjetosComboBox("inputRackNivel", result);
+        });
+    }
+
+    function PlancharRack(value,nombre) {
+        var filters = $("#grid").data("kendoGrid").dataSource.filter();
+        var allData = $("#grid").data("kendoGrid").dataSource.data();
+        var query = new kendo.data.Query(allData);
+        var result = query.filter(filters).data;
+        var datasource = result;
+        //console.log(datasource);
+        for (var i = 0; i < datasource.length; i++) {
+            datasource[i].RackID = value;
+            datasource[i].Rack = nombre;
+        };
+        $("#grid").data("kendoGrid").dataSource.sync();
+
+    };
 </script>

@@ -142,26 +142,62 @@ namespace BackEndSAM.DataAcces
 
                     List<Sam3_Rel_OrdenAlmacenaje_NumeroUnico> agruparNumerosUnicos = lstRelONU.GroupBy(x => x.NumeroUnicoID).Select(x => x.First()).OrderBy(x => x.NumeroUnicoID).AsParallel().ToList();
 
-                    List<ListaCombos> lstItemCode = (from lstRel in lstRelONU
-                                                     join nu in ctx.Sam3_NumeroUnico on lstRel.NumeroUnicoID equals nu.NumeroUnicoID
+
+                    List<ListaCombos> lstItemCode = (from oa in ctx.Sam3_OrdenAlmacenaje
+                                                     join roa in ctx.Sam3_Rel_OrdenAlmacenaje_NumeroUnico on oa.OrdenAlmacenajeID equals roa.OrdenAlmacenajeID
+                                                     join nu in ctx.Sam3_NumeroUnico on roa.NumeroUnicoID equals nu.NumeroUnicoID
+                                                     join p in ctx.Sam3_Proyecto on nu.ProyectoID equals p.ProyectoID
+                                                     join pa in ctx.Sam3_Patio on p.PatioID equals pa.PatioID
                                                      join ic in ctx.Sam3_ItemCode on nu.ItemCodeID equals ic.ItemCodeID
+                                                     where oa.Activo && roa.Activo && nu.Activo && p.Activo && pa.Activo
+                                                     && oa.Folio == folio
+                                                     && proyectos.Contains(p.ProyectoID)
+                                                     && patios.Contains(pa.PatioID)
+                                                     && p.ProyectoID == ProyectoID
+                                                     && (nu.EstatusDocumental != null && nu.EstatusFisico != null)
                                                      select new ListaCombos
                                                      {
                                                          id = ic.ItemCodeID.ToString(),
                                                          value = ic.Codigo
                                                      }).AsParallel().ToList();
 
+
+
                     List<ListaCombos> agruparItemCodes = lstItemCode.GroupBy(x => x.id).Select(x => x.First()).OrderBy(x => x.id).AsParallel().ToList();
 
-                    List<ListadoAlmacenaje> ListadoAlmacenaje = (from roa in agruparNumerosUnicos
+                    List<ListadoAlmacenaje> ListadoAlmacenaje = (from oa in ctx.Sam3_OrdenAlmacenaje
+                                                                 join roa in ctx.Sam3_Rel_OrdenAlmacenaje_NumeroUnico on oa.OrdenAlmacenajeID equals roa.OrdenAlmacenajeID
                                                                  join nu in ctx.Sam3_NumeroUnico on roa.NumeroUnicoID equals nu.NumeroUnicoID
+                                                                 join p in ctx.Sam3_Proyecto on nu.ProyectoID equals p.ProyectoID
+                                                                 join pa in ctx.Sam3_Patio on p.PatioID equals pa.PatioID
+                                                                 join ic in ctx.Sam3_ItemCode on nu.ItemCodeID equals ic.ItemCodeID
+                                                                 join rack in ctx.Sam3_Rack on nu.RackID equals rack.RackID into gj
+                                                                 from x in gj.DefaultIfEmpty()//para hacer un left join.
+                                                                 where oa.Activo && roa.Activo && nu.Activo && p.Activo && pa.Activo
+                                                                 && oa.Folio == folio
+                                                                 && proyectos.Contains(p.ProyectoID)
+                                                                 && patios.Contains(pa.PatioID)
+                                                                 && p.ProyectoID == ProyectoID
+                                                                 && (nu.EstatusDocumental != null && nu.EstatusFisico != null)
                                                                  select new ListadoAlmacenaje
                                                                  {
                                                                      ItemCodeID = nu.ItemCodeID.ToString(),
                                                                      NumeroUnicoID = roa.NumeroUnicoID.ToString(),
                                                                      NumeroUnico = nu.Prefijo + "-" + nu.Consecutivo,
-                                                                     Rack = nu.Rack == null ? string.Empty : nu.Rack
+                                                                     RackID = nu.RackID,
+                                                                     Rack = x.Rack == null ? string.Empty : x.Rack
                                                                  }).AsParallel().ToList();
+
+                    //List<ListadoAlmacenaje> ListadoAlmacenaje = (from roa in agruparNumerosUnicos
+                    //                                             join nu in ctx.Sam3_NumeroUnico on roa.NumeroUnicoID equals nu.NumeroUnicoID
+                    //                                             where nu.ProyectoID==ProyectoID
+                    //                                             select new ListadoAlmacenaje
+                    //                                             {
+                    //                                                 ItemCodeID = nu.ItemCodeID.ToString(),
+                    //                                                 NumeroUnicoID = roa.NumeroUnicoID.ToString(),
+                    //                                                 NumeroUnico = nu.Prefijo + "-" + nu.Consecutivo,
+                    //                                                 Rack = nu.Rack == null ? string.Empty : nu.Rack
+                    //                                             }).AsParallel().ToList();
 
 
 
@@ -213,7 +249,7 @@ namespace BackEndSAM.DataAcces
                     List<NumerosUnicos> registros = new List<NumerosUnicos>();
 
                     registros = (from nu in ctx.Sam3_NumeroUnico
-                                 join relnu  in ctx.Sam3_Rel_NumeroUnico_RelFC_RelB on nu.NumeroUnicoID equals relnu.NumeroUnicoID
+                                 join relnu in ctx.Sam3_Rel_NumeroUnico_RelFC_RelB on nu.NumeroUnicoID equals relnu.NumeroUnicoID
                                  join oa in ctx.Sam3_OrdenAlmacenaje on relnu.OrdenAlmacenajeID equals oa.OrdenAlmacenajeID
                                  where nu.Activo && relnu.Activo && oa.Activo
                                  && nu.ItemCodeID == itemCodeID
@@ -296,17 +332,19 @@ namespace BackEndSAM.DataAcces
             }
         }
 
-        public string getRack(List<ListaNumerosUnicos> ids, int id) {
-            var rack = "";
+        public int? getRack(List<ListaNumerosUnicos> ids, int id)
+        {
+            int? rack = 0;
             foreach (var i in ids)
             {
-                if (i.NumeroUnicoID.Equals(id.ToString())) {
-                    rack = i.Rack;
+                if (i.NumeroUnicoID.Equals(id.ToString()))
+                {
+                    rack = i.Rack == null ? 0 : int.Parse(i.Rack);
                     break;
                 }
             }
 
-            return rack;
+            return rack == 0 ? null : rack;
         }
 
         public object GenerarAlmacenaje(Items listados, Sam3_Usuario usuario)
@@ -316,7 +354,7 @@ namespace BackEndSAM.DataAcces
                 List<ListaNumerosUnicos> ids = listados.NumerosUnicos.GroupBy(x => x.NumeroUnicoID).Select(x => x.First()).OrderBy(x => x.NumeroUnicoID).AsParallel().ToList();
                 List<int> nuids = new List<int>();
 
-                foreach(var i in ids)
+                foreach (var i in ids)
                 {
                     nuids.Add(Convert.ToInt32(i.NumeroUnicoID));
                 }
@@ -332,7 +370,7 @@ namespace BackEndSAM.DataAcces
                                                        && nuids.Contains(nu.NumeroUnicoID)
                                                        select nu).AsParallel().ToList();
 
-                        list.ForEach(x => x.Rack = getRack(ids, x.NumeroUnicoID));
+                        list.ForEach(x => x.RackID = getRack(ids, x.NumeroUnicoID));
 
                         ctx.SaveChanges();
                         ctx_tran.Commit();
