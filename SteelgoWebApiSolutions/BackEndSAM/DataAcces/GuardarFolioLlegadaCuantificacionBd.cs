@@ -41,6 +41,7 @@ namespace BackEndSAM.DataAcces
             }
         }
 
+
         /// <summary>
         /// Actualizar un folio cuantificacion existente
         /// </summary>
@@ -88,21 +89,19 @@ namespace BackEndSAM.DataAcces
                         {
                             folioCuantificacion.TipoMaterialID = datosCuantificacion.TipoPackingList;
                         }
-                        
+
                         List<Sam3_ItemCode> itemCodes;
-                        
-                        List<Sam3_NumeroUnico> numerosUnicosTemp;
+                        List<Sam3_NumeroUnico> numerosUnicos;
                         if (folioCuantificacion.Sam3_Rel_FolioCuantificacion_ItemCode.Count > 0) // actualizar tipo de uso en itemCodes
                         {
-                            itemCodes = (from rfi in folioCuantificacion.Sam3_Rel_FolioCuantificacion_ItemCode
-                                                             join rid in ctx.Sam3_Rel_ItemCode_Diametro on rfi.Rel_ItemCode_Diametro_ID equals rid.Rel_ItemCode_Diametro_ID
-                                                             join it in ctx.Sam3_ItemCode on rid.ItemCodeID equals it.ItemCodeID
-                                                             join nu in ctx.Sam3_NumeroUnico on it.ItemCodeID equals nu.ItemCodeID.GetValueOrDefault()
-                                         where rid.Activo && it.Activo && nu.Activo
-                                                             select it).AsParallel().Distinct().ToList();
+                            itemCodes = (from rfi in ctx.Sam3_Rel_FolioCuantificacion_ItemCode
+                                         join rid in ctx.Sam3_Rel_ItemCode_Diametro on rfi.Rel_ItemCode_Diametro_ID equals rid.Rel_ItemCode_Diametro_ID
+                                         join it in ctx.Sam3_ItemCode on rid.ItemCodeID equals it.ItemCodeID
+                                         where rid.Activo && it.Activo && rfi.FolioCuantificacionID== folioCuantificacion.FolioCuantificacionID
+                                         select it).AsParallel().Distinct().ToList();
 
                             //Agrego todos los itemCodes que esten en los bultos relacionados con el folio de cuantificacion
-                            itemCodes.AddRange((from b in ctx.Sam3_Bulto 
+                            itemCodes.AddRange((from b in ctx.Sam3_Bulto
                                                 join rbi in ctx.Sam3_Rel_Bulto_ItemCode on b.BultoID equals rbi.BultoID
                                                 join rid in ctx.Sam3_Rel_ItemCode_Diametro on rbi.Rel_ItemCode_Diametro_ID equals rid.Rel_ItemCode_Diametro_ID
                                                 join it in ctx.Sam3_ItemCode on rid.ItemCodeID equals it.ItemCodeID
@@ -112,17 +111,17 @@ namespace BackEndSAM.DataAcces
 
                             itemCodes.ForEach(x => x.TipoUsoID = datosCuantificacion.TipoUso);
 
-                            ////Actualizar todos los numeros unicos que esten relacionados con los ItemCodes
-                            numerosUnicosTemp = (from it in itemCodes
-                                                 join nu in ctx.Sam3_NumeroUnico on it.ItemCodeID equals nu.ItemCodeID.GetValueOrDefault()
-                                                 where it.Activo && nu.Activo
-                                                 select nu).ToList();
-                            if (numerosUnicosTemp.Count > 0)
-                            {
-                                List<Sam3_NumeroUnico> numerosUnicos;
-                                numerosUnicos = numerosUnicosTemp;
-                                numerosUnicos.ForEach(x => x.TipoUsoID = datosCuantificacion.TipoUso);
-                            }
+                            //Actualizar todos los numeros unicos que esten relacionados con los ItemCodes
+                            numerosUnicos = (from rfi in folioCuantificacion.Sam3_Rel_FolioCuantificacion_ItemCode
+                                             join rid in ctx.Sam3_Rel_ItemCode_Diametro on rfi.Rel_ItemCode_Diametro_ID equals rid.Rel_ItemCode_Diametro_ID
+                                             join it in ctx.Sam3_ItemCode on rid.ItemCodeID equals it.ItemCodeID
+                                             join nu in ctx.Sam3_NumeroUnico on it.ItemCodeID equals nu.ItemCodeID
+                                             where rid.Activo && it.Activo
+                                             select nu).AsParallel().Distinct().ToList();
+                          
+
+                            numerosUnicos.ForEach(x => x.TipoUsoID = datosCuantificacion.TipoUso);
+
                         }
 
                         ctx.SaveChanges();
@@ -303,6 +302,8 @@ namespace BackEndSAM.DataAcces
                 return result;
             }
         }
+
+
 
         /// <summary>
         /// Guardar un folio Cuantificacion Nuevo
