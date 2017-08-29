@@ -160,6 +160,9 @@ var $ComplementoRecepcionAlt = new $.RestClient($BackEndSAMUri + '/backendsam/ap
 var $PickingTicket = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $UbicacionNumeroUnico = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 
+//INICIA MATERIALES
+var $PlanchadoMaterial = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
 /****************************/
 /*    Document Ready        */
 /****************************/
@@ -272,3 +275,7 @@ $ValidarCedulas.add("ValidarCedulas");
 $ComplementoRecepcionAlt.add("Listado");
 $PickingTicket.add("PickingTicket");
 $UbicacionNumeroUnico.add("UbicacionNumeroUnico");
+
+
+//INICIA MATERIALES
+$PlanchadoMaterial.add("PlanchadoMaterial");
