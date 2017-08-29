@@ -22,5 +22,9 @@ namespace FrontEndSAM.Controllers.Materiales
         {
             return View();
         }
+        public ActionResult PlanchadoMaterial()
+        {
+            return View();
+        }
     }
 }

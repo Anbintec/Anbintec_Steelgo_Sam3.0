@@ -1,0 +1,4 @@
+﻿function changeLanguageCall() {
+    SuscribirEventos();
+    AjaxObtenerProyectos();    
+};

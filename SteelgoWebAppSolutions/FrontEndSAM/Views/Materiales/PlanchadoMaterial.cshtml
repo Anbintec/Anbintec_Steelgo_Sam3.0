@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewBag.Title = "Planchados Materiales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="menuLabel1058"></span></a>
+    </li>    
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="labelMenuPlanchado"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("PlanchadoMaterial", "Materiales")"><span id="labelTitlePlanchadoMaterial"></span></a>
+    </li>
+}
+<style>
+  
+</style>
+
+<div id="formUbicacionNumeroUnico" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section editButtonSection">
+                            @*<div class="btn-group save-group">
+                                <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow creacion"><span id="Cuantificacion0003"></span></button>
+                                <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle creacion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caretWhite"></span>
+                                </button>
+                                <ul class="dropdown-menu creacion">
+                                    <li><a href="#" id="GuardarNuevo"><span id="DetalleAvisoLlegada0062"></span></a></li>
+                                </ul>
+                            </div>*@
+                            <input type="file" name="File Upload" id="files" class="hidden" accept=".csv" />
+                            <a id="Cancelar" href="#" class="btn btn-black"><span id="Cuantificacion0010"></span></a>
+                        </div>
+                        <div class="button-section">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="Almacenaje0006"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="Acciones">
+                                    <li><a href="#" id="btnCargaCsv"><span>CargarCSV</span></a></li>                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection disabled"></a>
+                    </div>
+                </div>
+            </div>
+            <div id="FieldSetView">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+                        <div class="row">
+                            <div id="ProyectoDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                <label id="" class="security_required">Proyecto</label>
+                                <input id="inputProyecto" />
+                            </div>                            
+                            <div id="" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                <label id="">Archivo</label>
+                                <label id="lblArchivo"></label>
+                            </div>                                                        
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4 table" style="display: inline-block;">                          
+                        <span class="FontSpan">
+                            NumeroColada
+                            <br />&nbsp;&nbsp;
+                            <input type="checkbox" id="checkColada" />
+                        </span>                        
+                        <span class="FontSpan" >
+                            Numero MTR
+                            <br />&nbsp;&nbsp;
+                            <input type="checkbox" id="checkMTR" />
+                        </span>                        
+                        <span class="FontSpan">
+                            Inventario
+                            <br />&nbsp;&nbsp;
+                            <input type="checkbox" id="checkInventario" />
+                        </span>                                                                     
+                        <span class="FontSpan">
+                            Estatus Fisico
+                            <br />&nbsp;&nbsp;
+                            <input type="checkbox" id="checkEstatusFisico" />
+                        </span>                        
+                        <span class="FontSpan">
+                            Estatus Documental
+                            <br />&nbsp;&nbsp;
+                            <input type="checkbox" id="checkEstatusDoc" />
+                        </span>              
+                        <span class="FontSpan">
+                            Fabricante
+                            <br />&nbsp;&nbsp;
+                            <input type="checkbox" id="checkFabricante" />
+                        </span>   
+                        <span class="FontSpan">
+                            Numero Unico Cliente
+                            <br />&nbsp;&nbsp;
+                            <input type="checkbox" id="checkNumUnicoCliente" />
+                        </span>
+                        <span class="FontSpan">
+                            Rack
+                            <br />&nbsp;&nbsp;
+                            <input type="checkbox" id="checkRack" />
+                        </span>          
+                    </div>                      
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center centered">
+                        <label id="">&nbsp; </label>
+                        <button id="btnPlanchar" class="btn btn-primary"><span id="">Planchar Campos</span></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="out"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .FontSpan{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+    }
+</style>
+
+<script type="text/javascript" src="~/Scripts/AppComponents/Materiales/Planchado/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Materiales/Planchado/Handler.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Materiales/Planchado/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Materiales/Planchado/Captura.js"> </script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Materiales/Planchado/Seguridad.js"></script>
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+    //$authorizationModel["UbicacionNumeroUnico"] = $UbicacionNumeroUnicoModel;
+    }
+</script>
+
+

@@ -4642,6 +4642,28 @@ _dictionary = {
         "es-MX": "Item Code Steelgo",
         "en-US": "Item Code Steelgo"
     },
+	//LABELS PLANCHADO DE MATERIALES
+    "labelMenuPlanchado": {
+        "es-MX": "Planchados",
+        "en-US": "Planchados"
+    },
+    "labelCargaCSVMAT": {
+        "es-MX": "Cargar CSV",
+        "en-US": "Load CSV"
+    },
+    "labelDescargaCSVMAT": {
+        "es-MX": "Plantilla CSV",
+        "en-US": "CSV Template"
+    },
+    "menuPlanchadoMaterial": {
+        "es-MX": "Planchado Materiales",
+        "en-US": "Materials ironing "
+    },
+    "labelTitlePlanchadoMaterial": {
+        "es-MX": "Planchado Materiales",
+        "en-US": "Materials ironing "
+    },
+    //FIN PLANCHADO MATERIALES
     // Detalle Numero Unico
     "DetalleNumeroUnico0001": {
         "es-MX": "Listados",
