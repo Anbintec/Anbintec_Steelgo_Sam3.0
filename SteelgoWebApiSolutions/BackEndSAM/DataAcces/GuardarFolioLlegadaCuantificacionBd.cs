@@ -109,14 +109,12 @@ namespace BackEndSAM.DataAcces
                                                 && b.Activo && rbi.Activo && rid.Activo && it.Activo
                                                 select it).AsParallel().Distinct().ToList());
 
-                            itemCodes.ForEach(x => x.TipoUsoID = datosCuantificacion.TipoUso);
-
                             //Actualizar todos los numeros unicos que esten relacionados con los ItemCodes
-                            numerosUnicos = (from rfi in folioCuantificacion.Sam3_Rel_FolioCuantificacion_ItemCode
+                            numerosUnicos = (from rfi in ctx.Sam3_Rel_FolioCuantificacion_ItemCode
                                              join rid in ctx.Sam3_Rel_ItemCode_Diametro on rfi.Rel_ItemCode_Diametro_ID equals rid.Rel_ItemCode_Diametro_ID
                                              join it in ctx.Sam3_ItemCode on rid.ItemCodeID equals it.ItemCodeID
                                              join nu in ctx.Sam3_NumeroUnico on it.ItemCodeID equals nu.ItemCodeID
-                                             where rid.Activo && it.Activo
+                                             where rid.Activo && it.Activo && rfi.FolioCuantificacionID == folioCuantificacion.FolioCuantificacionID
                                              select nu).AsParallel().Distinct().ToList();
                           
 

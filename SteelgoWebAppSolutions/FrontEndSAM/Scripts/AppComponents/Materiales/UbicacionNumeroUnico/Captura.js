@@ -210,12 +210,13 @@ function LoadGrid() {
 			{ field: "Consecutivo", title: "Número Único", /*filterable: true,*/ width: "150px", filterable: getGridFilterableCellNumberMaftec() },
 			{ field: "ItemCode", title: _dictionary.Cuantificacion0028[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "150px" },
 			{ field: "DescipcionItemCode", title: _dictionary.Cuantificacion0029[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "150px" },
-			{ field: "D1", title: _dictionary.Cuantificacion0030[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "80px" },
-			{ field: "D2", title: _dictionary.Cuantificacion0031[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "80px" },
-			{ field: "Rack", title: "Rack Actual", width: "80px", filterable: getGridFilterableCellMaftec() },
+			{ field: "D1", title: _dictionary.Cuantificacion0030[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "150px" },
+			{ field: "D2", title: _dictionary.Cuantificacion0031[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "150px" },
+			{ field: "Rack", title: "Rack Actual", filterable: getGridFilterableCellMaftec(), width: "200px" },
 			{ command: { text: _dictionary.Cuantificacion0043[$("#language").data("kendoDropDownList").value()], click: CancelarInformacionItem }, title: "Eliminar", width: "99px" }
 		],
-		height: 411
+		height: 411,
+        width:100
 	});
 }
 

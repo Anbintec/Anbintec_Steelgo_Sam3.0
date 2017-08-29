@@ -105,44 +105,52 @@
                             <div class="btn-group " data-toggle="buttons" role="group">
                                 <label>&nbsp;</label>
                                 <div class="btn btn-primary" id="styleUno">
-                                    <input type="radio" name="Mostrar" value="Uno" /><span id="">Opción 1</span>
+                                    <input type="radio" name="Mostrar" value="Uno" /><span id="">Código</span>
                                 </div>
                                 <div class="btn btn-primary" id="styleDos">
-                                    <input type="radio" name="Mostrar" value="Dos" /><span id="">Opcion 2 </span>
+                                    <input type="radio" name="Mostrar" value="Dos" /><span id="">Ubicación</span>
                                 </div>
                             </div>
                         </div>
 
-
-                        <div id="MostrarUno" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <label id="Almacenaje0015"></label>
-                            <input id="Rack" />
+                        <div id="MostrarUno" style="margin: 0 auto;">
+                            <div id="" class="col-xs-12 col-sm-12 col-md-2 col-lg-1">
+                                <label id="Almacenaje0015"></label>
+                                <input id="Rack" />
+                            </div>
                         </div>
                         <div id="MostrarDos" style="margin: 0 auto; display: none;">
                             <div id="" class="col-xs-12 col-sm-12 col-md-2 col-lg-1">
                                 <label id="">Ubicación</label>
                                 <input id="inputRackUbicacion" />
                             </div>
-                            <div id="" class="form-group col-xs-6 col-sm-3 col-md-2 col-lg-1">
+                            <div id="" class="col-xs-12 col-sm-12 col-md-2 col-lg-1">
                                 <label id="">Pasillo</label>
                                 <input id="inputRackPasillo" />
                             </div>
-                            <div id="" class="form-group col-xs-6 col-sm-3 col-md-2 col-lg-1">
+                            <div id="" class="col-xs-12 col-sm-12 col-md-2 col-lg-1">
                                 <label id="">Nivel</label>
                                 <input id="inputRackNivel" />
+
                             </div>
+                            
                         </div>
-                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"  style="width:auto; padding-bottom: 15px;">
                             <div class="row">
                                 <div id="todosDiv" class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                                     <label id="Almacenaje0016" class="centered"></label>
                                     <input id="todos" class="" type="radio" name="radio" checked value="1">
                                 </div>
-                                <div id="SinLocalizacionDiv" class="col-xs-6 col-sm-9 col-md-9 col-lg-9">
+                                <div id="SinLocalizacionDiv" class="col-xs-6 col-sm-9 col-md-9 col-lg-6">
                                     <label id="Almacenaje0017" class="centered"></label>
                                     <input id="SinLocalizacion" class="" type="radio" name="radio" value="2" />
                                 </div>
+                                <div id="" class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+                                    <label id="">&nbsp;</label>
+                                    <button id="btnAplicar" class="btn btn-primary"><span id="">Aplicar</span></button>
+                                </div>
                             </div>
+                           
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -392,6 +400,7 @@
             SuscribirEventoRackPasillo();
             SuscribirEventoRackPiso();
             SuscribirEventoRack();
+            SuscribirBotonAplicar();
         };
 
 
@@ -960,4 +969,34 @@
         $("#grid").data("kendoGrid").dataSource.sync();
 
     };
+
+    function SuscribirBotonAplicar() {
+        $("#btnAplicar").click(function () {
+            if ($('input:radio[name=Mostrar]:checked').val() == "Uno") {
+                var rackID = $("#Rack").data("kendoComboBox").dataItem($("#Rack").data("kendoComboBox").select());
+                if (rackID != undefined && rackID.RackID > 0) {
+                    PlancharRack(rackID.RackID, rackID.Nombre);
+                    $("#Rack").val("");
+                }
+            } else {
+                var objeto = $("#inputRackNivel").data("kendoComboBox").dataItem($("#inputRackNivel").data("kendoComboBox").select());
+                if (objeto != undefined && objeto.RackID > 0) {
+                    var nombreElemento = "";
+
+                    for (var i = 0; i < itemsRacks.length; i++) {
+                        if (itemsRacks[i].RackID == objeto.RackID) {
+                            nombreElemento = itemsRacks[i].Nombre;
+                            break;
+                        }
+
+                    }
+                    if (nombreElemento != "") {
+                        PlancharRack(objeto.RackID, nombreElemento);
+                        $("#inputRackNivel").val("");
+                    }
+                }
+            }
+        });
+
+    }
 </script>
