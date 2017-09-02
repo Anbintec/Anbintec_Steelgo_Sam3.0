@@ -94,11 +94,11 @@
                             <label id="LlegadaMaterial0035"></label>
                             <input id="ProveedorID" class="" />
                         </div>
-                        <div id="OrdenDeCompraDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <div id="OrdenDeCompraDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3" style="display:none">
                             <label id="LlegadaMaterial0033"></label>
                             <input id="OrdenDeCompra" class="general-input" />
                         </div>
-                        <div id="FacturaDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <div id="FacturaDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3" style="display:none">
                             <label id="LlegadaMaterial0034"></label>
                             <input id="Factura" class="general-input" />
                         </div>
@@ -110,6 +110,11 @@
                             <label id="LlegadaMaterial0001"></label>
                             <input id="PatioID" />
                         </div>
+                        <div id="CompraSteelgoDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <label id="">Compra Steelgo</label>
+                            <input type="checkbox"  name="chkCompraSteelgo"/>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -1081,7 +1086,7 @@
 
         function GuardarLlegadaMaterial(bool) {
             //Arreglo Llegada Material
-            FolioLlegada = { FolioAvisollegadaId: "", ClienteId: "", Proyectos: "", ProveedorID: "", OrdenCompra: "", IdentificadorCliente: "", Factura: "", Estatus: "", PatioID: "", Archivos: "", ComboEstatus: "" };
+            FolioLlegada = { FolioAvisollegadaId: "", ClienteId: "", Proyectos: "", ProveedorID: "", OrdenCompra: "", IdentificadorCliente: "", Factura: "", Estatus: "", PatioID: "", Archivos: "", ComboEstatus: "",CompraSteelgo:"" };
             Documentos = [];
             ProyectoIDs = [];
 
@@ -1115,7 +1120,7 @@
             FolioLlegada.PatioID = Patio.PatioID;
             FolioLlegada.Archivos = Documentos;
             FolioLlegada.ComboEstatus = Estatus.Nombre;
-
+            FolioLlegada.CompraSteelgo = $('input[name="chkCompraSteelgo"]:checked')[0].checked;
             //console.log(JSON.stringify(FolioLlegada));
 
             //loadingStart();

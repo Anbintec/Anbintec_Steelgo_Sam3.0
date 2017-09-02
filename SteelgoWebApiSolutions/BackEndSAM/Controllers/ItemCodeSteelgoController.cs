@@ -18,6 +18,8 @@ namespace BackEndSAM.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ItemCodeSteelgoController : ApiController
     {
+        private static List<string> listItemcodes = new List<string>();
+
         public object Get(string token)
         {
             string payload = "";
@@ -201,6 +203,36 @@ namespace BackEndSAM.Controllers
                 result.IsAuthenicated = false;
                 return result;
             }
+        }
+
+        public object Get( string token, int proyectoID, string cadena)
+        {
+            string payload = "";
+            string newToken = "";
+            bool tokenValido = ManageTokens.Instance.ValidateToken(token, out payload, out newToken);
+
+            if (tokenValido)
+            {
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                Sam3_Usuario usuario = ser.Deserialize<Sam3_Usuario>(payload);
+                listItemcodes.Add(cadena);
+                return "";
+            }
+            else
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(payload);
+                result.ReturnCode = 401;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = false;
+                return result;
+            }
+        }
+
+        public object Get(int q, int w)
+        {
+            listItemcodes = new List<string>();
+            return "";
         }
     }
 }

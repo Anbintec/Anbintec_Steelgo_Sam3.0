@@ -3385,38 +3385,7 @@
             lastEditedCellIDSColada = options.model;
         };
 
-        function ObtenerItemCodeSteelgo(dataJson, key, error) {
-            if (dataJson[key]) {
-                $ItemCodeSteelgo.ItemCodeSteelgo.read({}, { itemID: dataJson[key].ItemCode, itemsteelgo: "", d1: dataJson[key].D1, d2: dataJson[key].D2, mm: dataJson[key].MM, token: Cookies.get("token"), proyectoID: $("#ProyectoID").data("kendoComboBox").value() }).done(function (data) {
-                    itemCodesJsonSteelgo = data;
-                    if (data) {
-                        error = ErrorInsertandoItems(data, error, dataJson[key]);
-                        if (ErrorBool(data)) {
-                            var item =
-                                                   { ItemCode: data.ItemCode, Descripcion: itemCodesJsonSteelgo.Descripcion, D1: itemCodesJsonSteelgo.Diametro1, D2: itemCodesJsonSteelgo.Diametro2, ItemCodeSteelgo: itemCodesJsonSteelgo.ItemCodeSteelgo, Familia: itemCodesJsonSteelgo.FamiliaAcero, Cedula: itemCodesJsonSteelgo.Cedula, TipoAcero: itemCodesJsonSteelgo.TipoAcero, Colada: itemCodesJsonSteelgo.ColadaNombre, Cantidad: dataJson[key].Cantidad, MM: itemCodesJsonSteelgo.MM, Detallar: "No", TieneNU: "No", TieneError: false, BultoID: "", RelFCId: "", RelBID: "", ItemCodeID: itemCodesJsonSteelgo.ItemCodeID, ItemCodeSteelgoID: itemCodesJsonSteelgo.ItemCodeSteelgoID, ItemCodeOrigenID: itemCodesJsonSteelgo.ItemCodeOrigenID, TipoMaterial: itemCodesJsonSteelgo.TipoPackingList, TextoTipoMaterial: itemCodesJsonSteelgo.TextoTipoPackingList };
-                            $("#grid").data("kendoGrid").dataSource.insert(item);
-                        } else {
-                            cargarGridErrores(dataJson[key]);
-                        }
-                    } else {
-                        error += "," + dataJson[key].ItemCode;
-                        cargarGridErrores(dataJson[key]);
-                    };
-
-                    key++;
-                    ObtenerItemCodeSteelgo(dataJson, key, error);
-                });
-            } else {
-                //loadingStop();
-                ordenamientoGrid();
-                if (error) {
-                    displayMessage("notificationslabel0047", error, '2');
-                    return;
-                } else {
-                    ValidarTipoPackingList();
-                }
-            };
-        };
+   
 
 
         function CancelarPadre() { };
@@ -3449,6 +3418,7 @@
                             //$.each(dataJson, function (key) {
                             var i = 0, error = "";
                             //loadingStart();
+                            //alert(dataJson);
                             ObtenerItemCodeSteelgo(dataJson, i, error);
                             //var item =
                             //       { ItemCode: dataJson[key].ItemCode, Descripcion: dataJson[key].Descripcion, D1: dataJson[key].D1, D2: dataJson[key].D2, ItemCodeSteelgo: dataJson[key].ItemCodeSteelgo, Familia: dataJson[key].Familia, Cedula: dataJson[key].Cedula, TipoAcero: dataJson[key].TipoAcero, Colada: dataJson[key].Colada, Cantidad: dataJson[key].Cantidad, MM: dataJson[key].MM, Detallar: "No", TieneNU: "No", TieneError: false };
@@ -3652,7 +3622,96 @@
             };
         });
     };
+    function ObtenerItemCodeSteelgo(dataJson, key, error) {
 
+        var cadenaObjetosMasivos = "";
+        var batch = 0;
+        var z = 0;
+        var array = [];
+        var datosRestantes;
+        var arrayBarch = [];
+        var cantidadRegistros = 100;
+        var cantidadBatch = dataJson.length < cantidadRegistros ? 1 : (dataJson.length % cantidadRegistros != 0 ? (dataJson.length / cantidadRegistros) + 1 : dataJson.length / cantidadRegistros);
+
+        var filasRecorridas = 0;
+
+        var lines = dataJson;
+        console.log("cantidad");
+        console.log(dataJson.length);
+
+        for (var i = 0; i < cantidadBatch-1; i++) {
+            array = [];
+            z = 0;
+
+            var fin = (i + 1) < cantidadBatch ? cantidadRegistros : (dataJson.length % cantidadRegistros);
+            console.log("fin"+ fin);
+
+            for (var j = 0; j < fin ; j++) {
+                if (batch < cantidadRegistros) {
+                    if (lines[filasRecorridas]!=undefined)
+                    {
+                        array[z] = { ItemCode: lines[filasRecorridas].ItemCode, D1: Number(lines[filasRecorridas].D1), D2: Number(lines[filasRecorridas].D2), Cantidad: Number(lines[filasRecorridas].Cantidad), MM: Number(lines[filasRecorridas].MM), Detallar: "No", TieneNU: "No", TieneError: false };
+                        z++;
+                    }
+                }
+                filasRecorridas++;
+            }
+
+            arrayBarch[i] = array;
+        }
+
+        //cadenaObjetosMasivos += JSON.stringify(records);
+
+        console.log("xd");
+        console.log(arrayBarch);
+
+
+        for (var i = 0; i < arrayBarch.length; i++) {
+            for (var j = 0; j < arrayBarch[i].length; j++) {
+                $ItemCodeSteelgo.ItemCodeSteelgo.read({}, { token: Cookies.get("token"), proyectoID: $("#ProyectoID").data("kendoComboBox").value(), cadena: JSON.stringify(arrayBarch[i][j]) }).done(function (data) {
+
+
+
+                });
+            }
+        }
+
+        $ItemCodeSteelgo.ItemCodeSteelgo.read({ q: 1, w: 1 }).done(function (data) {
+            alert(i);
+        });
+
+
+        //if (dataJson[key]) {
+        //    $ItemCodeSteelgo.ItemCodeSteelgo.read({}, { itemID: dataJson[key].ItemCode, itemsteelgo: "", d1: dataJson[key].D1, d2: dataJson[key].D2, mm: dataJson[key].MM, token: Cookies.get("token"), proyectoID: $("#ProyectoID").data("kendoComboBox").value() }).done(function (data) {
+        //        itemCodesJsonSteelgo = data;
+        //        if (data) {
+        //            error = ErrorInsertandoItems(data, error, dataJson[key]);
+        //            if (ErrorBool(data)) {
+        //                var item =
+        //                                       { ItemCode: data.ItemCode, Descripcion: itemCodesJsonSteelgo.Descripcion, D1: itemCodesJsonSteelgo.Diametro1, D2: itemCodesJsonSteelgo.Diametro2, ItemCodeSteelgo: itemCodesJsonSteelgo.ItemCodeSteelgo, Familia: itemCodesJsonSteelgo.FamiliaAcero, Cedula: itemCodesJsonSteelgo.Cedula, TipoAcero: itemCodesJsonSteelgo.TipoAcero, Colada: itemCodesJsonSteelgo.ColadaNombre, Cantidad: dataJson[key].Cantidad, MM: itemCodesJsonSteelgo.MM, Detallar: "No", TieneNU: "No", TieneError: false, BultoID: "", RelFCId: "", RelBID: "", ItemCodeID: itemCodesJsonSteelgo.ItemCodeID, ItemCodeSteelgoID: itemCodesJsonSteelgo.ItemCodeSteelgoID, ItemCodeOrigenID: itemCodesJsonSteelgo.ItemCodeOrigenID, TipoMaterial: itemCodesJsonSteelgo.TipoPackingList, TextoTipoMaterial: itemCodesJsonSteelgo.TextoTipoPackingList };
+        //                $("#grid").data("kendoGrid").dataSource.insert(item);
+        //            } else {
+        //                cargarGridErrores(dataJson[key]);
+        //            }
+        //        } else {
+        //            error += "," + dataJson[key].ItemCode;
+        //            cargarGridErrores(dataJson[key]);
+        //        };
+
+        //        key++;
+        //        ObtenerItemCodeSteelgo(dataJson, key, error);
+        //    });
+        //} else {
+        //    //loadingStop();
+        //    ordenamientoGrid();
+        //    if (error) {
+        //        displayMessage("notificationslabel0047", error, '2');
+        //        return;
+        //    } else {
+        //        ValidarTipoPackingList();
+        //    }
+        //};
+    };
     function OndataBound(e) {
         $(".k-button.k-button-icontext.k-grid-add").off("click")
         $(".k-button.k-button-icontext.k-grid-add").on("click", function () {

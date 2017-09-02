@@ -20,7 +20,7 @@ namespace BackEndSAM.Models
         public string Estatus { get; set; }
         public List<int> Proyectos { get; set; }
         public string ComboEstatus { get; set; }
-
+        public bool CompraSteelgo { get; set; }
         public FolioAvisoEntradaJson()
         {
             Proyectos = new List<int>();
