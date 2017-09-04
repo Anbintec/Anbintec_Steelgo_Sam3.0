@@ -205,7 +205,7 @@ namespace BackEndSAM.Controllers
             }
         }
 
-        public object Get( string token, int proyectoID, string cadena)
+        public object Get(BackEndSAM.Models.Captura elementos , string token, int proyectoID, string cadena)
         {
             string payload = "";
             string newToken = "";

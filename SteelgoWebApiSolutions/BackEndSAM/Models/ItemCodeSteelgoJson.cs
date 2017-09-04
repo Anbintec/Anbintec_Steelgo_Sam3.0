@@ -57,4 +57,14 @@ namespace BackEndSAM.Models
         public string TieneD2 { get; set; }
         public Boolean Asociado { get; set; }
     }
+
+    public class Captura
+    {
+        public List<Elementos> Detalles { get; set; }
+    }
+    public class Elementos
+    {
+        public string cadena { get; set; }
+    }
 }
+

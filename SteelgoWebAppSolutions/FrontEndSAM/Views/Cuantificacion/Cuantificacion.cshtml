@@ -3636,29 +3636,29 @@
         var filasRecorridas = 0;
 
         var lines = dataJson;
-        console.log("cantidad");
-        console.log(dataJson.length);
+        //console.log("cantidad");
+        //console.log(dataJson.length);
 
-        for (var i = 0; i < cantidadBatch-1; i++) {
-            array = [];
-            z = 0;
+        //for (var i = 0; i < cantidadBatch-1; i++) {
+        //    array = [];
+        //    z = 0;
 
-            var fin = (i + 1) < cantidadBatch ? cantidadRegistros : (dataJson.length % cantidadRegistros);
-            console.log("fin"+ fin);
+        //    var fin = (i + 1) < cantidadBatch ? cantidadRegistros : (dataJson.length % cantidadRegistros);
+        //    console.log("fin"+ fin);
 
-            for (var j = 0; j < fin ; j++) {
-                if (batch < cantidadRegistros) {
-                    if (lines[filasRecorridas]!=undefined)
-                    {
-                        array[z] = { ItemCode: lines[filasRecorridas].ItemCode, D1: Number(lines[filasRecorridas].D1), D2: Number(lines[filasRecorridas].D2), Cantidad: Number(lines[filasRecorridas].Cantidad), MM: Number(lines[filasRecorridas].MM), Detallar: "No", TieneNU: "No", TieneError: false };
-                        z++;
-                    }
-                }
-                filasRecorridas++;
-            }
+        //    for (var j = 0; j < fin ; j++) {
+        //        if (batch < cantidadRegistros) {
+        //            if (lines[filasRecorridas]!=undefined)
+        //            {
+        //                array[z] = { ItemCode: lines[filasRecorridas].ItemCode, D1: Number(lines[filasRecorridas].D1), D2: Number(lines[filasRecorridas].D2), Cantidad: Number(lines[filasRecorridas].Cantidad), MM: Number(lines[filasRecorridas].MM), Detallar: "No", TieneNU: "No", TieneError: false };
+        //                z++;
+        //            }
+        //        }
+        //        filasRecorridas++;
+        //    }
 
-            arrayBarch[i] = array;
-        }
+        //    arrayBarch[i] = array;
+        //}
 
         //cadenaObjetosMasivos += JSON.stringify(records);
 
@@ -3666,19 +3666,39 @@
         console.log(arrayBarch);
 
 
-        for (var i = 0; i < arrayBarch.length; i++) {
-            for (var j = 0; j < arrayBarch[i].length; j++) {
-                $ItemCodeSteelgo.ItemCodeSteelgo.read({}, { token: Cookies.get("token"), proyectoID: $("#ProyectoID").data("kendoComboBox").value(), cadena: JSON.stringify(arrayBarch[i][j]) }).done(function (data) {
+        //for (var i = 0; i < arrayBarch.length; i++) {
+        //    for (var j = 0; j < arrayBarch[i].length; j++) {
+        //        $ItemCodeSteelgo.ItemCodeSteelgo.read({}, { token: Cookies.get("token"), proyectoID: $("#ProyectoID").data("kendoComboBox").value(), cadena: JSON.stringify(arrayBarch[i][j]) }).done(function (data) {
 
 
 
-                });
-            }
+        //        });
+        //    }
+        //}
+
+        Captura = [];
+        Captura[0] = { Detalles: "" };
+
+        ListaDetalle = [];
+
+
+        for (var i = 0; i < dataJson.length; i++) {
+            ListaDetalle[i] = { cadena: "" };
+            ListaDetalle[i].cadena = JSON.stringify({ ItemCode: lines[i].ItemCode, D1: Number(lines[i].D1), D2: Number(lines[i].D2), Cantidad: Number(lines[i].Cantidad), MM: Number(lines[i].MM), Detallar: "No", TieneNU: "No", TieneError: false });
         }
 
-        $ItemCodeSteelgo.ItemCodeSteelgo.read({ q: 1, w: 1 }).done(function (data) {
-            alert(i);
+        Captura[0].Detalles = ListaDetalle;
+        console.log("ListaDetalle");
+        console.log(ListaDetalle);
+        $ItemCodeSteelgo.ItemCodeSteelgo.read(Captura[0], { token: Cookies.get("token"), proyectoID: $("#ProyectoID").data("kendoComboBox").value(), cadena: "" }).done(function (data) {
+
+
+
         });
+
+        //$ItemCodeSteelgo.ItemCodeSteelgo.read({ q: 1, w: 1 }).done(function (data) {
+        //    alert(i);
+        //});
 
 
         //if (dataJson[key]) {
