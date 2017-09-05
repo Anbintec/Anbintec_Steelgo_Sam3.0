@@ -205,7 +205,7 @@ namespace BackEndSAM.Controllers
             }
         }
 
-        public object Get(BackEndSAM.Models.Captura elementos , string token, int proyectoID, string cadena)
+        public object Post(BackEndSAM.Models.Captura elementos , string token, int proyectoID)
         {
             string payload = "";
             string newToken = "";
@@ -215,8 +215,25 @@ namespace BackEndSAM.Controllers
             {
                 JavaScriptSerializer ser = new JavaScriptSerializer();
                 Sam3_Usuario usuario = ser.Deserialize<Sam3_Usuario>(payload);
-                listItemcodes.Add(cadena);
-                return "";
+
+                List<ItemCodeCliente> listItemCodeCliente = new List<ItemCodeCliente>();
+
+                for (int i = 0; i < elementos.Detalles.Count; i++)
+                {
+                    listItemCodeCliente.Add(ser.Deserialize<ItemCodeCliente>(elementos.Detalles[i].cadena));
+                }
+
+                List<ItemCodeClienteRetorno> listItemCodeJson = new List<ItemCodeClienteRetorno>();
+
+                for (int i = 0; i < listItemCodeCliente.Count; i++)
+                {
+                    ItemCodeClienteRetorno item = (ItemCodeClienteRetorno)ItemCodeSteelgoBd.Instance.ObtenerDetalleRelacionitemCodeSteelgo(listItemCodeCliente[i].ItemCode, listItemCodeCliente[i].D1, listItemCodeCliente[i].D2, listItemCodeCliente[i].MM, usuario, proyectoID);
+                    if(item.Descripcion!="" && item.Descripcion != null)
+                        listItemCodeJson.Add(item);
+                }
+
+               
+                return listItemCodeJson;
             }
             else
             {
@@ -229,10 +246,6 @@ namespace BackEndSAM.Controllers
             }
         }
 
-        public object Get(int q, int w)
-        {
-            listItemcodes = new List<string>();
-            return "";
-        }
+      
     }
 }

@@ -3,8 +3,6 @@
     ViewBag.Title = "Cuantificación";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 @section breadcrumb {
     <li>
         <a href="@Url.Action("landing", "Home")"><span id="Cuantificacion0001"></span></a>
@@ -19,7 +17,6 @@
         <a href="@Url.Action("Cuantificacion", "Cuantificacion")"><span id="Cuantificacion0002"></span></a>
     </li>
 }
-
 <div id="formCuantificacion" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -49,7 +46,6 @@
                                     <li id="MenuCerrar"><a id="GuardaryCerrar" href="#"><span id="Cuantificacion0009"></span></a></li>
                                     <li id="guardarBulto"><a id="GuardaryTerminar" href="#"><span id="Cuantificacion0075"></span></a></li>
                                 </ul>
-
                             </div>
                             <a id="Cancelar" href="#" class="btn btn-black"><span id="Cuantificacion0010"></span></a>
                         </div>
@@ -104,7 +100,6 @@
                             <label id="Cuantificacion0018"></label>
                             <input id="TipoUsoID" />
                         </div>
-
                         <div id="OrdenDeCompraDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <label id="Cuantificacion0102"></label>
                             <input id="OrdenDeCompra" class="general-input" />
@@ -113,7 +108,6 @@
                             <label id="Cuantificacion0103"></label>
                             <input id="Factura" class="general-input" />
                         </div>
-
                         <div id="massiveUploadDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <label id="Cuantificacion0019"></label>
                             <div class="row">
@@ -168,7 +162,6 @@
                 </div>
             </div>
         </div>
-
         <ul id="menu">
             <li id="NuevoItemCode"><span id="Cuantificacion0089"></span></li>
             <li id="Detallar"><span id="Cuantificacion0087"></span></li>
@@ -177,10 +170,8 @@
             <li id="AgregarITCS"><span id="Cuantificacion0099"></span></li>
         </ul>
 
-
     </div>
 </div>
-
 <div id="window">
 </div>
 <input id="hdnNavegacion" type="hidden" value="" />
@@ -3385,7 +3376,7 @@
             lastEditedCellIDSColada = options.model;
         };
 
-   
+
 
 
         function CancelarPadre() { };
@@ -3636,45 +3627,7 @@
         var filasRecorridas = 0;
 
         var lines = dataJson;
-        //console.log("cantidad");
-        //console.log(dataJson.length);
 
-        //for (var i = 0; i < cantidadBatch-1; i++) {
-        //    array = [];
-        //    z = 0;
-
-        //    var fin = (i + 1) < cantidadBatch ? cantidadRegistros : (dataJson.length % cantidadRegistros);
-        //    console.log("fin"+ fin);
-
-        //    for (var j = 0; j < fin ; j++) {
-        //        if (batch < cantidadRegistros) {
-        //            if (lines[filasRecorridas]!=undefined)
-        //            {
-        //                array[z] = { ItemCode: lines[filasRecorridas].ItemCode, D1: Number(lines[filasRecorridas].D1), D2: Number(lines[filasRecorridas].D2), Cantidad: Number(lines[filasRecorridas].Cantidad), MM: Number(lines[filasRecorridas].MM), Detallar: "No", TieneNU: "No", TieneError: false };
-        //                z++;
-        //            }
-        //        }
-        //        filasRecorridas++;
-        //    }
-
-        //    arrayBarch[i] = array;
-        //}
-
-        //cadenaObjetosMasivos += JSON.stringify(records);
-
-        console.log("xd");
-        console.log(arrayBarch);
-
-
-        //for (var i = 0; i < arrayBarch.length; i++) {
-        //    for (var j = 0; j < arrayBarch[i].length; j++) {
-        //        $ItemCodeSteelgo.ItemCodeSteelgo.read({}, { token: Cookies.get("token"), proyectoID: $("#ProyectoID").data("kendoComboBox").value(), cadena: JSON.stringify(arrayBarch[i][j]) }).done(function (data) {
-
-
-
-        //        });
-        //    }
-        //}
 
         Captura = [];
         Captura[0] = { Detalles: "" };
@@ -3684,21 +3637,46 @@
 
         for (var i = 0; i < dataJson.length; i++) {
             ListaDetalle[i] = { cadena: "" };
-            ListaDetalle[i].cadena = JSON.stringify({ ItemCode: lines[i].ItemCode, D1: Number(lines[i].D1), D2: Number(lines[i].D2), Cantidad: Number(lines[i].Cantidad), MM: Number(lines[i].MM), Detallar: "No", TieneNU: "No", TieneError: false });
+            ListaDetalle[i].cadena = JSON.stringify({ ItemCode: lines[i].ItemCode, D1: Number(lines[i].D1), D2: Number(lines[i].D2), MM: Number(lines[i].MM) });
         }
 
         Captura[0].Detalles = ListaDetalle;
-        console.log("ListaDetalle");
-        console.log(ListaDetalle);
-        $ItemCodeSteelgo.ItemCodeSteelgo.read(Captura[0], { token: Cookies.get("token"), proyectoID: $("#ProyectoID").data("kendoComboBox").value(), cadena: "" }).done(function (data) {
+
+        var ds
+        $ItemCodeSteelgo.ItemCodeSteelgo.create(Captura[0], { token: Cookies.get("token"), proyectoID: $("#ProyectoID").data("kendoComboBox").value(), cadena: "" }).done(function (data) {
 
 
-
+            var ds = $("#grid").data("kendoGrid").dataSource;
+            console.log("regreso la info");
+                for (var i = 0; i < data.length; i++) {
+                    ds.add(data[i]);
+                }
+    alert("termino");
+                 //console.log(ds);
+                 //console.log($("#grid").data("kendoGrid"));
+                 //$("#grid").data("kendoGrid").setDataSource(new kendo.data.DataSource({
+                 //    change: function (e) {
+                 //        //console.log(e);
+                 //    },
+                 //    data: e,
+                 //    autoSync: true,
+                 //    schema: {
+                 //        model: {
+                 //            id: "ItemCodeID",
+                 //            fields: getFields(),
+                 //        }
+                 //    },
+                 //    serverPaging: false,
+                 //    serverFiltering: false,
+                 //    serverSorting: false,
+                 //    aggregate: [
+                 //                 { field: "Descripcion", aggregate: "count" },
+                 //                 { field: "Cantidad", aggregate: "sum" }
+                 //    ]
+                 //}));
         });
 
-        //$ItemCodeSteelgo.ItemCodeSteelgo.read({ q: 1, w: 1 }).done(function (data) {
-        //    alert(i);
-        //});
+
 
 
         //if (dataJson[key]) {

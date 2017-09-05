@@ -66,5 +66,72 @@ namespace BackEndSAM.Models
     {
         public string cadena { get; set; }
     }
+
+    public class ItemCodeCliente
+    {
+        public string ItemCode { get; set; }
+        public string D1 { get; set; }
+        public string D2 { get; set; }
+        public int MM { get; set; }
+    }
+
+
+    public class ItemCodeClienteRetorno
+    {
+        public string ItemCode { get; set; }
+        public string Descripcion { get; set; }
+        public decimal D1 { get; set; }
+        public decimal D2 { get; set; }
+        public string ItemCodeSteelgo { get; set; }
+        public string Familia { get; set; }
+        public string Cedula { get; set; }
+        public string TipoAcero { get; set; }
+        public string Colada { get; set; }
+        public int? Cantidad { get; set; }
+        public int MM { get; set; }
+        public string Detallar { get; set; }
+        public string TieneNU { get; set; }
+        public bool TieneError { get; set; }
+        public string BultoID { get; set; }
+        public string RelFCId { get; set; }
+        public string RelBID { get; set; }
+        public int ItemCodeID { get; set; }
+        public string ItemCodeSteelgoID { get; set; }
+        public int ItemCodeOrigenID { get; set; }
+        public int TipoMaterial { get; set; }
+        public string TextoTipoMaterial { get; set; }
+        
+
+        //ItemCode: data.ItemCode,
+        //    Descripcion: itemCodesJsonSteelgo.Descripcion, 
+        //    D1: itemCodesJsonSteelgo.Diametro1, 
+        //    D2: itemCodesJsonSteelgo.Diametro2, 
+        //    ItemCodeSteelgo: itemCodesJsonSteelgo.ItemCodeSteelgo, 
+        //    Familia: itemCodesJsonSteelgo.FamiliaAcero,
+        //    Cedula: itemCodesJsonSteelgo.Cedula,
+        //    TipoAcero: itemCodesJsonSteelgo.TipoAcero, 
+        //    Colada: itemCodesJsonSteelgo.ColadaNombre, 
+        //    Cantidad: dataJson[key].Cantidad, 
+        //    MM: itemCodesJsonSteelgo.MM, 
+        //    Detallar: "No", 
+        //    TieneNU: "No", 
+        //    TieneError: false, 
+        //    BultoID: "",
+        //    RelFCId: "", 
+        //    RelBID: "", 
+        //    ItemCodeID: itemCodesJsonSteelgo.ItemCodeID,
+        //    ItemCodeSteelgoID: itemCodesJsonSteelgo.ItemCodeSteelgoID,
+        //    ItemCodeOrigenID: itemCodesJsonSteelgo.ItemCodeOrigenID,
+        //    TipoMaterial: itemCodesJsonSteelgo.TipoPackingList, 
+        //    TextoTipoMaterial: itemCodesJsonSteelgo.TextoTipoPackingList
+    }
+
+    public class ElementoValidoItemcode
+    {
+        public int ItemCodeID { get; set; }
+        public int D1 { get; set; }
+        public int D2 { get; set; }
+        public int MM { get; set; }
+    }
 }
 

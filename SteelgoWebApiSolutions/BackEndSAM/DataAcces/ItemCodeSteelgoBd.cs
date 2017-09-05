@@ -265,9 +265,9 @@ namespace BackEndSAM.DataAcces
                                         where d.Activo && d.Valor == diametro2
                                         select d.DiametroID).AsParallel().SingleOrDefault();
 
-                    ItemCodeJson detalle = new ItemCodeJson();
+                    ItemCodeClienteRetorno detalle = new ItemCodeClienteRetorno();
 
-                    detalle = (from r in ctx.Sam3_ItemCode
+                    detalle = item!=null ? ((from r in ctx.Sam3_ItemCode
                                join rid in ctx.Sam3_Rel_ItemCode_Diametro on r.ItemCodeID equals rid.ItemCodeID
                                join riit in ctx.Sam3_Rel_ItemCode_ItemCodeSteelgo on rid.Rel_ItemCode_Diametro_ID equals riit.Rel_ItemCode_Diametro_ID
                                join rids in ctx.Sam3_Rel_ItemCodeSteelgo_Diametro on riit.Rel_ItemCodeSteelgo_Diametro_ID equals rids.Rel_ItemCodeSteelgo_Diametro_ID
@@ -276,19 +276,15 @@ namespace BackEndSAM.DataAcces
                                join d2 in ctx.Sam3_Diametro on rid.Diametro2ID equals d2.DiametroID
                                where r.Activo && riit.Activo && ics.Activo && rid.Activo && d1.Activo && d2.Activo
                                && r.ItemCodeID == item.ItemCodeID && d1.DiametroID == diametro1IID && d2.DiametroID == diametro2ID
-                               select new ItemCodeJson
+                               select new ItemCodeClienteRetorno
                                {
-                                   ItemCodeID = rid.Rel_ItemCode_Diametro_ID,
                                    ItemCode = r.Codigo,
-                                   //ColadaNombre = (from c in ctx.Sam3_Colada where c.ColadaID == r.ColadaID && c.Activo select c.NumeroColada).FirstOrDefault(),
-                                   Cantidad = r.Cantidad,
-                                   MM = mm,
                                    Descripcion = r.DescripcionEspanol,
-                                   Diametro1 = d1.Valor,
-                                   Diametro2 = d2.Valor,
-                                   FamiliaAcero = (from f in ctx.Sam3_FamiliaAcero where f.FamiliaAceroID == ics.FamiliaAceroID && f.Activo select f.Nombre).FirstOrDefault(),
-                                   ItemCodeSteelgoID = rids.Rel_ItemCodeSteelgo_Diametro_ID.ToString(),
+                                   D1 = d1.Valor,
+                                   D2 = d2.Valor,
                                    ItemCodeSteelgo = ics.Codigo,
+                                   Familia = (from f in ctx.Sam3_FamiliaAcero where f.FamiliaAceroID == ics.FamiliaAceroID && f.Activo select f.Nombre).FirstOrDefault(),
+
                                    TipoAcero = (from rics in ctx.Sam3_Rel_ItemCode_ItemCodeSteelgo
                                                 join rdis in ctx.Sam3_Rel_ItemCodeSteelgo_Diametro on rics.Rel_ItemCodeSteelgo_Diametro_ID equals rids.Rel_ItemCodeSteelgo_Diametro_ID
                                                 join itcs in ctx.Sam3_ItemCodeSteelgo on rdis.ItemCodeSteelgoID equals ics.ItemCodeSteelgoID
@@ -297,13 +293,26 @@ namespace BackEndSAM.DataAcces
                                                 where rics.Activo && itcs.Activo
                                                 && rics.Rel_ItemCode_ItemCodeSteelgo == riit.Rel_ItemCode_ItemCodeSteelgo
                                                 select fm.Nombre).FirstOrDefault(),
-                                   //ColadaID = r.ColadaID
+                                   Colada="",
+                                   Cantidad = r.Cantidad,
+                                   MM = mm,
+                                   Detallar= "No",
+                                   TieneNU= "No",
+                                   TieneError= false,
+                                   BultoID= "",
+                                   RelFCId= "",
+                                   RelBID= "",
+                                   ItemCodeID = rid.Rel_ItemCode_Diametro_ID,
+                                   ItemCodeSteelgoID = rids.Rel_ItemCodeSteelgo_Diametro_ID.ToString(),
                                    ItemCodeOrigenID = r.ItemCodeID,
-                                   TipoPackingList = r.TipoMaterialID,
-                                   TextoTipoPackingList=(from tm in ctx.Sam3_TipoMaterial
-                                                             where tm.TipoMaterialID==r.TipoMaterialID
-                                                             select tm.Nombre).FirstOrDefault()
-                               }).AsParallel().SingleOrDefault();
+                                   TipoMaterial=  r.TipoMaterialID,
+                                   TextoTipoMaterial= (from tm in ctx.Sam3_TipoMaterial
+                                                       where tm.TipoMaterialID == r.TipoMaterialID
+                                                       select tm.Nombre).FirstOrDefault()
+                                   //ColadaNombre = (from c in ctx.Sam3_Colada where c.ColadaID == r.ColadaID && c.Activo select c.NumeroColada).FirstOrDefault(),
+
+                                   //ColadaID = r.ColadaID
+                               }).AsParallel().SingleOrDefault()) : null;
 
                     if (detalle != null)
                     {
@@ -344,31 +353,33 @@ namespace BackEndSAM.DataAcces
                         return detalle;
                     }
                     else {
-                        detalle = (from r in ctx.Sam3_ItemCode
-                                   join rid in ctx.Sam3_Rel_ItemCode_Diametro on r.ItemCodeID equals rid.ItemCodeID
-                                   join d1 in ctx.Sam3_Diametro on rid.Diametro1ID equals d1.DiametroID
-                                   join d2 in ctx.Sam3_Diametro on rid.Diametro2ID equals d2.DiametroID
-                                   where r.Activo && rid.Activo
-                                     && r.ItemCodeID == item.ItemCodeID 
-                                     && d1.DiametroID == diametro1IID 
-                                     && d2.DiametroID == diametro2ID 
-                                   select new ItemCodeJson
-                                   {
-                                       ItemCodeID = rid.Rel_ItemCode_Diametro_ID,
-                                       ItemCode = r.Codigo + "(" + d1.Valor + ", " + d2.Valor + ")",
-                                       Diametro1 = d1.Valor,
-                                       Diametro2 = d2.Valor,
-                                       //ColadaNombre = (from c in ctx.Sam3_Colada where c.ColadaID == r.ColadaID && c.Activo select c.NumeroColada).FirstOrDefault(),
-                                       Cantidad = r.Cantidad,
-                                       MM = mm,
-                                       Descripcion = r.DescripcionEspanol,
-                                       ItemCodeOrigenID = r.ItemCodeID,
-                                       TipoPackingList = r.TipoMaterialID,
-                                       TextoTipoPackingList=(from tm in ctx.Sam3_TipoMaterial
-                                                             where tm.TipoMaterialID==r.TipoMaterialID
-                                                             select tm.Nombre).FirstOrDefault()
-                                   }).AsParallel().SingleOrDefault();
-                        return detalle;
+
+                        ItemCodeJson json = new ItemCodeJson();
+                        //detalle = (from r in ctx.Sam3_ItemCode
+                        //           join rid in ctx.Sam3_Rel_ItemCode_Diametro on r.ItemCodeID equals rid.ItemCodeID
+                        //           join d1 in ctx.Sam3_Diametro on rid.Diametro1ID equals d1.DiametroID
+                        //           join d2 in ctx.Sam3_Diametro on rid.Diametro2ID equals d2.DiametroID
+                        //           where r.Activo && rid.Activo
+                        //             && r.ItemCodeID == item.ItemCodeID 
+                        //             && d1.DiametroID == diametro1IID 
+                        //             && d2.DiametroID == diametro2ID 
+                        //           select new ItemCodeJson
+                        //           {
+                        //               ItemCodeID = rid.Rel_ItemCode_Diametro_ID,
+                        //               ItemCode = r.Codigo + "(" + d1.Valor + ", " + d2.Valor + ")",
+                        //               Diametro1 = d1.Valor,
+                        //               Diametro2 = d2.Valor,
+                        //               //ColadaNombre = (from c in ctx.Sam3_Colada where c.ColadaID == r.ColadaID && c.Activo select c.NumeroColada).FirstOrDefault(),
+                        //               Cantidad = r.Cantidad,
+                        //               MM = mm,
+                        //               Descripcion = r.DescripcionEspanol,
+                        //               ItemCodeOrigenID = r.ItemCodeID,
+                        //               TipoPackingList = r.TipoMaterialID,
+                        //               TextoTipoPackingList=(from tm in ctx.Sam3_TipoMaterial
+                        //                                     where tm.TipoMaterialID==r.TipoMaterialID
+                        //                                     select tm.Nombre).FirstOrDefault()
+                        //           }).AsParallel().SingleOrDefault();
+                        return json;
                     }
                     
                 }
