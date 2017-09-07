@@ -12,6 +12,8 @@ using CommonTools.Libraries.Strings.Security;
 using DatabaseManager.Sam3;
 using SecurityManager.Api.Models;
 using SecurityManager.TokenHandler;
+using System.Text;
+
 namespace BackEndSAM.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
@@ -85,7 +87,7 @@ namespace BackEndSAM.Controllers
             }
         }
 
-        public object Put(string tipoGuardado, string complemento, string token)
+        public object Put(BackEndSAM.Models.Captura elementos ,string tipoGuardado, string token)
         {
             string payload = "";
             string newToken = "";
@@ -94,8 +96,34 @@ namespace BackEndSAM.Controllers
             {
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 Sam3_Usuario usuario = serializer.Deserialize<Sam3_Usuario>(payload);
-                ItemCodeComplemento comp = serializer.Deserialize<ItemCodeComplemento>(complemento);
-                return ComplementoRecepcionBd.Instance.GuardarComplemento(Convert.ToInt32(tipoGuardado), comp, usuario);
+                StringBuilder stringbiuilderErrores = new StringBuilder();
+
+                List<ItemCodeComplemento> list = new List<ItemCodeComplemento>();
+
+                for (int i = 0; i < elementos.Detalles.Count; i++)
+                {
+                    list.Add(serializer.Deserialize<ItemCodeComplemento>(elementos.Detalles[i].cadena));
+                }
+
+                List<ItemCodeComplemento> listElementos = new List<ItemCodeComplemento>();
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    ItemCodeComplemento item = (ItemCodeComplemento)ComplementoRecepcionBd.Instance.GuardarComplemento(Convert.ToInt32(tipoGuardado), list[i], usuario);
+                    if (item.TieneError)
+                        stringbiuilderErrores.Append("," + item.ItemCode);
+                    listElementos.Add(item);
+                }
+
+
+                List<object> listaDetalleRegreso = new List<object>();
+                listaDetalleRegreso.Add(stringbiuilderErrores.ToString());
+                listaDetalleRegreso.Add(listElementos);
+
+
+
+
+                return listaDetalleRegreso;
             }
             else
             {

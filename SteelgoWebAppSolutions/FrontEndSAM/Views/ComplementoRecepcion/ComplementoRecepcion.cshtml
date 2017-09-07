@@ -2202,25 +2202,7 @@
             return error;
         };
 
-        function GuardarListadoCuantificacionParcial(ListadoCuantificacion, ListadoCuantificacionIncompletos, idGuardado) {
-            var i = 0, error = "";
-
-            $("#grid").data("kendoGrid").dataSource.data([]);
-            llenarGrid(null, ListadoCuantificacionIncompletos);
-
-            $ComplementarRecepcion.ComplementarRecepcion.update({}, { tipoGuardado: idGuardado, complemento: JSON.stringify(ListadoCuantificacion[i]), token: Cookies.get("token") }).done(function (data) {
-                error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
-                if (ErrorBool(data)) {
-                    AccionesAltaGuardadoParcial(data);
-                } else {
-                    cargarGridErrores(ListadoCuantificacion[i]);
-                };
-                i++;
-                cicloGuardadoParcial(ListadoCuantificacion, i, idGuardado, error);
-                ObtenerDatosDelFolioCuantificacion();
-            });
-
-        };
+        
 
         function cicloGuardadoParcial(ListadoCuantificacion, i, idGuardado, error) {
             if (ListadoCuantificacion[i]) {
@@ -2704,7 +2686,7 @@
 
             ListadoCuantificacionIncompletos = [];
             ListadoCuantificacion = [];
-
+           
             for (var i = 0; i < datasource.length; i++) {
                 var NumeroUnicoID = datasource[i].NumeroUnicoID;
                 var NumeroUnico = datasource[i].NumeroUnico;
@@ -2770,16 +2752,33 @@
                 ordenamientoGrid();
                 //loadingStop();
                 displayMessage("notificationslabel0051", '', '1');
+                alert("entra aqui joder");
                 return;
             }
+
+            
 
             if (!ListadoCuantificacion.length && !ListadoCuantificacionIncompletos.length) {
                 displayMessage("notificationslabel0053", '', '1');
                 //loadingStop();
+
+                alert("entra aqui joder joder!!");
                 return;
             }
 
-            GuardarListadoCuantificacionParcial(ListadoCuantificacion, ListadoCuantificacionIncompletos, "1");
+            Captura = [];
+            Captura[0] = { Detalles: "" };
+
+            ListaDetalle = [];
+
+            for (var i = 0; i < ListadoCuantificacion.length; i++) {
+                ListaDetalle[i] = { cadena: "" };
+                ListaDetalle[i].cadena = JSON.stringify(ListadoCuantificacion[i]);
+            }
+
+            Captura[0].Detalles = ListaDetalle;
+           
+            GuardarListadoCuantificacionParcial(Captura[0], ListadoCuantificacionIncompletos, "1");
         };
 
 
@@ -3014,6 +3013,76 @@
                 }
             }
         };
+        var inicio = new Date();
+        function GuardarListadoCuantificacionParcial(ListadoCuantificacion, ListadoCuantificacionIncompletos, idGuardado) {
+            var i = 0, error = "";
+
+            $("#grid").data("kendoGrid").dataSource.data([]);
+            llenarGrid(null, ListadoCuantificacionIncompletos);
+
+            $ComplementarRecepcion.ComplementarRecepcion.update(ListadoCuantificacion, { tipoGuardado: idGuardado, token: Cookies.get("token") }).done(function (data) {
+                var fin = new Date();
+                console.log("Obtiene la informacion en..")
+                console.log(restarHoras(inicio, fin));
+
+                var inicioInserta = new Date();
+
+                BotonAlta();
+                ocultarStatus();
+
+                error = data[0];
+                for (var i = 0; i < data[1]; i++) {
+                    cargarGridErrores(data[1][i]);
+                }
+
+                ordenamientoGrid();
+                if (error) {
+                    displayMessage("notificationslabel0051", error, '2');
+                    ordenamientoGrid();
+                    loadingStop();
+                    return;
+                }
+
+                //cicloGuardadoParcial(ListadoCuantificacion, i, idGuardado, error);
+                ObtenerDatosDelFolioCuantificacion();
+
+                cargarTituloFolio();
+                CargarLabelEstatus("En Proceso de Recepción");
+
+                CambiarEstatus("En Proceso de Recepción");
+                AsignarPaginaActualCookie();
+                applySecurityPolicy(false);
+
+                var finInserta = new Date();
+                console.log("Termino insertar la informacion en grid")
+                console.log(restarHoras(inicioInserta, finInserta));
+            });
+
+        };
+        function restarHoras(inicio, fin) {
+
+            var fechaInicio = inicio;
+
+            var fechaFin = fin;
+
+            var dif = fechaFin - fechaInicio; // diferencia en milisegundos
+
+            var difSeg = Math.floor(dif / 1000); //diferencia en segundos
+
+            var segundos = difSeg % 60; //segundos
+
+            var difMin = Math.floor(difSeg / 60); //diferencia en minutos
+
+            var minutos = difMin % 60; //minutos
+
+            var difHs = Math.floor(difMin / 60); //diferencia en horas
+
+            var horas = difHs % 24; //horas
+
+            return horas + ":" + minutos + ":" + segundos; //armo el tiempo de diferencia
+
+        }
+
 
     @section JavascriptDocumentReadyFunctions 
     {

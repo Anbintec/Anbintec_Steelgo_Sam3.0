@@ -1120,7 +1120,7 @@
             FolioLlegada.PatioID = Patio.PatioID;
             FolioLlegada.Archivos = Documentos;
             FolioLlegada.ComboEstatus = Estatus.Nombre;
-            FolioLlegada.CompraSteelgo = $('input[name="chkCompraSteelgo"]:checked')[0].checked;
+            FolioLlegada.CompraSteelgo =$('input[name="chkCompraSteelgo"]:checked')[0]==undefined?false: $('input[name="chkCompraSteelgo"]:checked')[0].checked;
             //console.log(JSON.stringify(FolioLlegada));
 
             //loadingStart();
