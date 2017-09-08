@@ -1027,3 +1027,13 @@
 /* lg viewport */
 @media (min-width: 1025px) {
 }
+
+
+
+.k-grid tr.kRowError{
+    background-color:#ffcccc ;
+}
+
+.k-grid tr.kRowErrorNU{
+    background-color:#FFFF99;
+}

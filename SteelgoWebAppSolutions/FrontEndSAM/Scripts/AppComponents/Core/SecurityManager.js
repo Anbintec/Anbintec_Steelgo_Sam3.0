@@ -389,6 +389,7 @@ function createUserSession(username, password) {
             Cookies.set("user", username, { path: '/' });
             Cookies.set("nameUserLogged", data.ReturnMessage[0], { path: '/' });
             Cookies.set("token", data.ReturnMessage[1], { path: '/' });
+            Cookies.set("PerfilID", data.PerfilID, { path: '/' });
             //RedirectToLanding
             document.location.href = $homeURI;
         } else {

@@ -93,3 +93,49 @@ function displayError(message, messageComplement, type) {
         cleanDisplayMessage();
     }, alertTimeOut);
 }
+
+function displayNotify(message, extraMessage, type) {
+    var messageNotify = "";
+
+    if (message.length > 0) {
+        messageNotify = _dictionary[message][$("#language").data("kendoDropDownList").value()];
+    }
+    messageNotify = messageNotify + extraMessage;
+    var options = {
+
+        text: messageNotify,
+        styling: 'brighttheme', // brighttheme, bootstrap3, jqueryui
+        hide: true,
+        buttons: {
+            closer: false,
+            sticker: false
+        },
+        animate: {
+            animate: true,
+            in_class: 'slideInDown',
+            out_class: 'slideOutUp'
+        },
+        delay: 5000,
+    };
+
+    switch (type) {
+        case '2':
+            options.type = "error";
+            options.styling = "bootstrap3";
+            options.title = _dictionary.ErrorTitle[$("#language").data("kendoDropDownList").value()];
+            break;
+        case '1':
+            options.title = _dictionary.WarningTitle[$("#language").data("kendoDropDownList").value()];
+            break;
+        case '0':
+            options.type = "success";
+            options.title = _dictionary.SuccessTitle[$("#language").data("kendoDropDownList").value()];
+            break;
+
+    }
+    var notice = new PNotify(options);
+    notice.get().click(function () {
+        notice.remove();
+    });
+
+}

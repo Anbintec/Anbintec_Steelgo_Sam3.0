@@ -1143,3 +1143,61 @@ body.loading {
     body.loading .modal {
         display: block;
     }
+
+
+    
+.MTrabajoAdicionalMas {
+    color: #FF0000;
+}
+
+.MTrabajoAdicionalMenos {
+    color: #0000FF;
+}
+
+.Bginput .k-multiselect-wrap {
+    color: #000000;
+    background: none;
+    min-height: 30px;
+    height: 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 4px;
+    height: 60px;
+}
+
+.botonSizeGeneral {
+    min-width: 87px;
+}
+
+
+.btn-tab.btn-Requisicion {
+    width: 14.28%;
+}
+
+  .btn.btn-tabList.btn-listRequisicion {
+        width: 14%;
+    }
+
+  .btn.btn-tabList.btn-listEmbarque {
+        width: 24.4%;
+    }
+
+
+@media (min-width: 994px)  and (max-width: 1199px) {
+
+    .radio-responsive {
+        border: 0px!important;
+        margin: 0px!important;
+        width: auto!important;
+    }
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+    .radio-responsive {
+        border: 1em!important;
+        margin: 1em!important;
+    }
+}

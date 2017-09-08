@@ -34,6 +34,7 @@
     @Scripts.Render("~/Scripts/Chart.js")
 
     <!-- App Scripts CORE -->
+    @Scripts.Render("~/Scripts/General/Filtros/Filtros.js")
     @Scripts.Render("~/Scripts/AppComponents/Core/AlertsManager.js")
     @Scripts.Render("~/Scripts/AppComponents/Core/ApiManager.js")
     @Scripts.Render("~/Scripts/AppComponents/Core/ContextMenuManager.js")
@@ -47,10 +48,28 @@
 
     @RenderSection("HtmlHead", required: false)
 
+    <!-- App Scripts General Validate -->
+    @Scripts.Render("~/Scripts/General/Filtros/Filtros.js")
+    @Scripts.Render("~/Scripts/General/Validate/Grid.js")
+    @Scripts.Render("~/Scripts/General/DescargaArchivos/Archivos.js")
+
+    <!--App Scripts widgets-->
+    @Scripts.Render("~/Scripts/Widgets/Notify/src/pnotify.js")
+    @Styles.Render("~/Scripts/Widgets/Notify/src/pnotify.css")
+    @Styles.Render("~/Scripts/Widgets/Notify/src/pnotify.brighttheme.css")
+
+    @RenderSection("HtmlHead", required: false)
+    <script type="text/x-kendo-template" id="windowTemplate">
+        <button class="confirm_yes btn btn-blu" id="yesButton">Yes</button>
+        <button class="confirm_yes btn btn-blu" id="noButton"> No</button>
+    </script>
+
 </head>
 <body>
     <header class="clearfix">
         <div class="content-wrapper clearfix">
+            <div id="ventanaConfirm"></div>
+            <div id="ventanaConfirmCaptura"></div>
             <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
                 <a class="logo" href="#" tabindex="9999"></a>
             </div>

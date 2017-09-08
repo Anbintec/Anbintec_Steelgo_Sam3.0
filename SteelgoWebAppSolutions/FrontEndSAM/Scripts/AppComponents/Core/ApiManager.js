@@ -163,6 +163,18 @@ var $UbicacionNumeroUnico = new $.RestClient($BackEndSAMUri + '/backendsam/api/'
 //INICIA MATERIALES
 var $PlanchadoMaterial = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 
+
+//INICIA ORDEN DE COMPRA
+
+var $Dynasol = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $PackingList = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $DynasolCamion = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $RecepcionOC = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $CompraPagoOC = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $CobroOC = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $PagoOC = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $CreacionOC = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
 /****************************/
 /*    Document Ready        */
 /****************************/
@@ -279,3 +291,14 @@ $UbicacionNumeroUnico.add("UbicacionNumeroUnico");
 
 //INICIA MATERIALES
 $PlanchadoMaterial.add("PlanchadoMaterial");
+
+//INICIA ORDENES DE COMPRA
+
+$Dynasol.add("Dynasol");
+$PackingList.add("PackingList");
+$DynasolCamion.add("Camion");
+$RecepcionOC.add("RecepcionOC");
+$CompraPagoOC.add("CompraPagoOC");
+$CobroOC.add("CobroOC");
+$PagoOC.add("PagoOC");
+$CreacionOC.add("CreacionOC");

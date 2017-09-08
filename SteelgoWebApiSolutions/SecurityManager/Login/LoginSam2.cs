@@ -61,7 +61,7 @@ namespace SecurityManager.Login
                     MembershipProvider proveedor = Membership.Provider;
                     MembershipUser usuarioRegistrado;
 
-                    if (usuario != "samAdmin" && usuario != "samListados" && usuario != "samCreacion")
+                    if (usuario != "samAdmin" && usuario != "samListados" && usuario != "samCreacion" && usuario != "Cecilia" && usuario != "Gerez" && usuario != "Steelgo") //modificado para agregar usuarios de ordenes de compra (Cecilia, Gerez, Steelgo)
                     {
                         if (proveedor.ValidateUser(usuario, password))
                         {
@@ -105,7 +105,7 @@ namespace SecurityManager.Login
                             transaction.ReturnMessage.Add(token);
                             transaction.ReturnCode = 200;
                             transaction.ReturnStatus = true;
-
+                            transaction.PerfilID = usuarioSam3.PerfilID;
                             #region registro
                             usr = new Sam3_Usuario
                             {
@@ -151,6 +151,8 @@ namespace SecurityManager.Login
                             transaction.ReturnMessage.Add(token);
                             transaction.ReturnCode = 200;
                             transaction.ReturnStatus = true;
+                            transaction.PerfilID = usuarioSam3.PerfilID;
+
                         }
                         else
                         {

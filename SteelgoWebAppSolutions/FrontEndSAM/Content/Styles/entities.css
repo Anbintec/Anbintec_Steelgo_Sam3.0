@@ -951,6 +951,15 @@ header .menu > div {
     border-bottom: 1px solid #CCCCCC;
     background-color: #F8F8F8;
 }
+.addedSectionInLineWithoutColor {
+    margin: 20px 0;
+    margin-top:0px;
+}
+
+.addedSectionInLineCatalogos {
+    padding-top: 10px!important;
+    margin-top: 0px!important;
+}
 /**********************************************************************************/
 
 
