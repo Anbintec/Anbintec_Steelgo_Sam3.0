@@ -2093,85 +2093,6 @@
         }
 
 
-
-        function CicloTerminar(incompletos, ListadoCuantificacion, i, error) {
-            if (ListadoCuantificacion[i]) {
-                $ComplementarRecepcion.ComplementarRecepcion.update({}, { tipoGuardado: 2, complemento: JSON.stringify(ListadoCuantificacion[i]), token: Cookies.get("token") }).done(function (data) {
-                    error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
-                    if (ErrorBool(data)) {
-                        AccionesTerminaryNuevo(data);
-                    } else {
-                        cargarGridErrores(ListadoCuantificacion[i]);
-                    }
-                    i++;
-                    CicloTerminar(incompletos, ListadoCuantificacion, i, error);
-                    //ObtenerDatosDelFolioCuantificacion();
-                });
-            } else {
-                //loadingStop();
-                ordenamientoGrid();
-
-                if (error) {
-                    displayMessage("notificationslabel0050", error, '2');
-                    BotonAlta();
-                    CambiarEstatus("En Proceso de Recepción");
-                    //loadingStop();
-                    return;
-                }
-
-                if (incompletos) {
-                    displayMessage("notificationslabel0051", "", '2');
-                    BotonAlta();
-                    CambiarEstatus("En Proceso de Recepción");
-                    //loadingStop();
-                    return;
-                }
-
-                CambiarEstatus("Recepción Terminada");
-                AccionesTerminaryNuevo(null);
-            }
-        };
-
-        function CicloTerminaryNuevo(incompletos, ListadoCuantificacion, i, error) {
-            if (ListadoCuantificacion[i]) {
-                $ComplementarRecepcion.ComplementarRecepcion.update({}, { tipoGuardado: 2, complemento: JSON.stringify(ListadoCuantificacion[i]), token: Cookies.get("token") }).done(function (data) {
-                    error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
-                    if (ErrorBool(data)) {
-                        AccionesTerminaryNuevo(data);
-                    } else {
-                        cargarGridErrores(ListadoCuantificacion[i]);
-                    }
-                    i++;
-                    CicloTerminaryNuevo(incompletos, ListadoCuantificacion, i, error);
-                    //ObtenerDatosDelFolioCuantificacion();
-                });
-            } else {
-                //loadingStop();
-                ordenamientoGrid();
-
-                if (error) {
-                    displayMessage("notificationslabel0050", error, '2');
-                    BotonAlta();
-                    CambiarEstatus("En Proceso de Recepción");
-                    loadingStop();
-                    return;
-                }
-
-                if (incompletos) {
-                    displayMessage("notificationslabel0051", "", '2');
-                    BotonAlta();
-                    CambiarEstatus("En Proceso de Recepción");
-                    loadingStop();
-                    return;
-                }
-
-                CambiarEstatus("Recepción Terminada");
-                window.location.href = _ComplemementoUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
-                AccionesTerminaryNuevo(null);
-            }
-        };
-
-
         function AccionesTerminaryNuevo(data) {
             cargarGridcompletos(data);
             ordenamientoGrid();
@@ -2877,16 +2798,56 @@
             var i = 0, error = "";
             $("#grid").data("kendoGrid").dataSource.data([]);
             llenarGrid(null, ListadoCuantificacionIncompletos);
-            $ComplementarRecepcion.ComplementarRecepcion.update({}, { tipoGuardado: "2", complemento: JSON.stringify(ListadoCuantificacion[i]), token: Cookies.get("token") }).done(function (data) {
-                error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
-                if (ErrorBool(data)) {//si no tiene error debe continuar
-                    AccionesTerminaryNuevo(data);
-                } else {
-                    cargarGridErrores(ListadoCuantificacion[i]);
-                };
-                i++;
-                CicloTerminar(incompletos, ListadoCuantificacion, i, error);
+
+            Captura = [];
+            Captura[0] = { Detalles: "" };
+
+            ListaDetalle = [];
+
+            for (var i = 0; i < ListadoCuantificacion.length; i++) {
+                ListaDetalle[i] = { cadena: "" };
+                ListaDetalle[i].cadena = JSON.stringify(ListadoCuantificacion[i]);
+            }
+
+            Captura[0].Detalles = ListaDetalle;
+
+            $ComplementarRecepcion.ComplementarRecepcion.update(Captura[0], { tipoGuardado: "2", token: Cookies.get("token") }).done(function (data) {
+                
+                error = data[0];
+                for (var i = 0; i < data[1].length; i++) {
+                    if (ErrorBool(data[1][i]))
+                        cargarGridcompletos(data[1][i]);
+                    else
+                        cargarGridErrores(data[1][i]);
+                }
+
+                ordenamientoGrid();
+
+                if (error) {
+                    displayMessage("notificationslabel0050", error, '2');
+                    BotonAlta();
+                    CambiarEstatus("En Proceso de Recepción");
+                    //loadingStop();
+                    return;
+                }
+
+                if (incompletos) {
+                    displayMessage("notificationslabel0051", "", '2');
+                    BotonAlta();
+                    CambiarEstatus("En Proceso de Recepción");
+                    //loadingStop();
+                    return;
+                }
+
+                CambiarEstatus("Recepción Terminada");
+                AccionesTerminaryNuevo(null);
+
                 ObtenerDatosDelFolioCuantificacion();
+
+                //
+               
+                BotonAlta();
+
             });
         };
 
@@ -2985,16 +2946,55 @@
             var i = 0, error = "";
             $("#grid").data("kendoGrid").dataSource.data([]);
             llenarGrid(null, ListadoCuantificacionIncompletos);
-            $ComplementarRecepcion.ComplementarRecepcion.update({}, { tipoGuardado: "2", complemento: JSON.stringify(ListadoCuantificacion[i]), token: Cookies.get("token") }).done(function (data) {
-                error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
-                if (ErrorBool(data)) {//si no tiene error debe continuar
-                    AccionesTerminaryNuevo(data);
-                } else {
-                    cargarGridErrores(ListadoCuantificacion[i]);
-                };
-                i++;
-                CicloTerminaryNuevo(incompletos, ListadoCuantificacion, i, error);
+
+
+
+            Captura = [];
+            Captura[0] = { Detalles: "" };
+
+            ListaDetalle = [];
+
+            for (var i = 0; i < ListadoCuantificacion.length; i++) {
+                ListaDetalle[i] = { cadena: "" };
+                ListaDetalle[i].cadena = JSON.stringify(ListadoCuantificacion[i]);
+            }
+
+            Captura[0].Detalles = ListaDetalle;
+
+            $ComplementarRecepcion.ComplementarRecepcion.update(Captura[0], { tipoGuardado: "2", token: Cookies.get("token") }).done(function (data) {
+               
+                error = [0]
+                for (var i = 0; i < data[1].length; i++) {
+                    if (ErrorBool(data[1][i]))
+                        cargarGridcompletos(data[1][i]);
+                    else
+                        cargarGridErrores(data[1][i]);
+                }
+
+                ordenamientoGrid();
+
+                if (error) {
+                    displayMessage("notificationslabel0050", error, '2');
+                    BotonAlta();
+                    CambiarEstatus("En Proceso de Recepción");
+                    loadingStop();
+                    return;
+                }
+
+                if (incompletos) {
+                    displayMessage("notificationslabel0051", "", '2');
+                    BotonAlta();
+                    CambiarEstatus("En Proceso de Recepción");
+                    loadingStop();
+                    return;
+                }
+
+                CambiarEstatus("Recepción Terminada");
+                window.location.href = _ComplemementoUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
+                AccionesTerminaryNuevo(null);
                 ObtenerDatosDelFolioCuantificacion();
+                //AccionesTerminaryNuevo
+                BotonAlta();
             });
         };
 
@@ -3031,8 +3031,11 @@
                 ocultarStatus();
 
                 error = data[0];
-                for (var i = 0; i < data[1]; i++) {
-                    cargarGridErrores(data[1][i]);
+                for (var i = 0; i < data[1].length; i++) {
+                    if (ErrorBool(data[1][i]))
+                        cargarGridcompletos(data[1][i]);
+                    else
+                        cargarGridErrores(data[1][i]);
                 }
 
                 ordenamientoGrid();
