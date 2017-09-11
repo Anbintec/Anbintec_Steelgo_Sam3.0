@@ -33,6 +33,7 @@ namespace BackEndSAM.Models
         public string ValorReferencia { get; set; }
         public string NombreIncidencia { get; set; }
         public string FolioOriginalID { get; set; }
+        public int IncidenciaInterna { get; set; }
     }
 
     public class IncicidenciaEnPaseSalida

@@ -109,6 +109,18 @@
                                                         <label id="Incidencias0036"></label>
                                                         <input id="Registro" class="" />
                                                     </div>
+                                                    <div id="IncidenciaInternaDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-1">
+                                                        <input id="" class="" type="radio"  name="EsInterna" value="1"/>
+                                                    </div>
+                                                    <div id="IncidenciaInternaLabelDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-1">
+                                                        <label>Interna</label><br />
+                                                    </div>
+                                                    <div id="IncidenciaClienteDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-1">
+                                                        <input id="" class="" type="radio" name="EsInterna" value="0" />
+                                                    </div>
+                                                    <div id="IncidenciaClienteLabelDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-1">
+                                                        <label>Cliente</label>
+                                                    </div>
                                                     <div id="VersionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
                                                         <label id="Incidencias0005"></label>
                                                         <input id="Version" class="general-input" disabled />
@@ -2050,7 +2062,7 @@
                 Titulo: "", Descripcion: "", Respuesta: "", MotivoCancelacion: "",
                 DetalleResolucion: "", RegistradoPor: "", FechaRegistro: "",
                 ResueltoPor: "", FechaResolucion: "", RespondidoPor: "",
-                FechaRespuesta: "", Nuevo: "", ReferenciaID: "", Estatus: ""
+                FechaRespuesta: "", Nuevo: "", ReferenciaID: "", Estatus: "", IncidenciaInterna: ""
             };
 
             var d = new Date($("#FechaRegistro").data("kendoDatePicker").value());
@@ -2078,7 +2090,8 @@
             Listado.ReferenciaID = Registro.RegistroID;
             Listado.Nuevo = false;
             Listado.Estatus = $("#hdEstatus").val();
-            Listado.FolioOriginalID=_folioOriginalID;
+            Listado.FolioOriginalID = _folioOriginalID;
+            Listado.IncidenciaInterna = $('input:radio[name=EsInterna]:checked').val();
             return Listado;
         };
 
@@ -2430,10 +2443,16 @@
             Guardar();
         };
         function Guardar() {
+            
             if ($("#FechaRegistro").data("kendoDatePicker").value() === null) {
                 displayMessage("notificationslabel0082", "", "2");
                 return 0;
             }
+            if ($('input:radio[name=EsInterna]:checked').val() === undefined) {
+                displayMessage("", "Selecciona si la indicencia es interna o cliente", "2");
+                return 0;
+            }
+            
             //loadingStart();
             switch (tabSelected) {
 
