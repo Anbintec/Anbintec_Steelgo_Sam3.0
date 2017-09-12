@@ -17,13 +17,13 @@ function AjaxCargarUbicacionRack(proyectoID) {
 }
 
 function AjaxCargarPasilloRack(ubicacion) {
-    $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion }).done(function (result) {
+    $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion, ProyectoID: $("#inputProyecto").data("kendoComboBox").value(), Fill: "relleno" }).done(function (result) {
         ControlErroresObjetosComboBox("inputRackPasillo", result);
     });
 }
 
 function AjaxCargarNivelRack(ubicacion, pasillo) {
-    $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion, Pasillo: pasillo }).done(function (result) {
+    $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion, Pasillo: pasillo, ProyectoID: $("#inputProyecto").data("kendoComboBox").value() }).done(function (result) {
         ControlErroresObjetosComboBox("inputRackNivel", result);
     });
 }

@@ -57,14 +57,14 @@ namespace BackEndSAM.Controllers.Materiales.UbicacionNumeroUnico
             }
         }
         [HttpGet]
-        public object GetPasilloRack(string token, string Ubicacion)
+        public object GetPasilloRack(string token, string Ubicacion, int ProyectoID, string Fill)
         {
             string payload = "";
             string newToken = "";
             bool tokenValido = ManageTokens.Instance.ValidateToken(token, out payload, out newToken);
             if (tokenValido)
             {
-                return UbicacionNumeroUnicoBd.Instance.ObtenerPasilloRack(Ubicacion);
+                return UbicacionNumeroUnicoBd.Instance.ObtenerPasilloRack(Ubicacion, ProyectoID);
             }
             else
             {
@@ -77,14 +77,14 @@ namespace BackEndSAM.Controllers.Materiales.UbicacionNumeroUnico
             }
         }
         [HttpGet]
-        public object GetNiverRack(string token, string Ubicacion, string Pasillo)
+        public object GetNiverRack(string token, string Ubicacion, string Pasillo, int ProyectoID)
         {
             string payload = "";
             string newToken = "";
             bool tokenValido = ManageTokens.Instance.ValidateToken(token, out payload, out newToken);
             if (tokenValido)
             {
-                return UbicacionNumeroUnicoBd.Instance.ObtenerNivelRack(Ubicacion, Pasillo);
+                return UbicacionNumeroUnicoBd.Instance.ObtenerNivelRack(Ubicacion, Pasillo, ProyectoID);
             }
             else
             {

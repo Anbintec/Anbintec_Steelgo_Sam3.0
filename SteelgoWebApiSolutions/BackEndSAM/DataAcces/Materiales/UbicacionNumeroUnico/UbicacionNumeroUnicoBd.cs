@@ -106,15 +106,18 @@ namespace BackEndSAM.DataAcces.Materiales.UbicacionNumeroUnico
             }
         }
 
-        public object ObtenerPasilloRack(string Ubicacion)
+        public object ObtenerPasilloRack(string Ubicacion, int ProyectoID)
         {
             try
             {
                 using (SamContext ctx = new SamContext())
-                {
+                {                    
                     List<RackPasillo> ListaPasillo = (
+                        //from R in ctx.Sam3_Rack                        
+                        //where R.Activo == true && R.Ubicacion == Ubicacion
                         from R in ctx.Sam3_Rack
-                        where R.Activo == true && R.Ubicacion == Ubicacion
+                        join P in ctx.Sam3_Proyecto on R.PatioID equals P.PatioID
+                        where (R.Activo == true && P.Activo == true) && R.Ubicacion == Ubicacion && P.ProyectoID == ProyectoID
                         group R by R.Pasillo into data
                         select new RackPasillo
                         {
@@ -139,7 +142,7 @@ namespace BackEndSAM.DataAcces.Materiales.UbicacionNumeroUnico
             }
         }
 
-        public object ObtenerNivelRack(string Ubicacion, string Pasillo)
+        public object ObtenerNivelRack(string Ubicacion, string Pasillo, int ProyectoID)
         {
             try
             {
@@ -147,7 +150,8 @@ namespace BackEndSAM.DataAcces.Materiales.UbicacionNumeroUnico
                 {                    
                     List<RackNivel> ListaNivel = (
                         from R in ctx.Sam3_Rack
-                        where R.Activo == true && (R.Ubicacion == Ubicacion && R.Pasillo == Pasillo)
+                        join P in ctx.Sam3_Proyecto on R.PatioID equals P.PatioID
+                        where (R.Activo == true && P.Activo == true) && (R.Ubicacion == Ubicacion && R.Pasillo == Pasillo && P.ProyectoID == ProyectoID)
                         select new RackNivel
                         {                            
                             RackID = R.RackID,
