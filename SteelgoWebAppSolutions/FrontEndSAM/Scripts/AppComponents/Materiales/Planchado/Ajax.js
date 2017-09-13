@@ -14,12 +14,18 @@ function AjaxPlancharCampos(data) {
         $PlanchadoMaterial.PlanchadoMaterial.create(Captura[0], { token: Cookies.get("token"), ProyectoID: proyecto }).done(function (data) {
             if (Error(data)) {
                 download(data, "ResultadoPlanchadoMateriales.csv", "text/csv");                                
-                displayMessage("", "Por favor revisar el resultado del planchado", "0");                
+                displayMessage("", "Por favor revisar el resultado del planchado", "0");
+                RestablecerCampos();
             }
         });
     }
 }
 
+function RestablecerCampos() {    
+    $("#inputProyecto").data("kendoComboBox").value("");
+    $("input[type=checkbox]").prop("checked", false);
+    $("#lblArchivo").html("");
+}
 
 
 function ControlErroresObjetosComboBox(control, result) {
