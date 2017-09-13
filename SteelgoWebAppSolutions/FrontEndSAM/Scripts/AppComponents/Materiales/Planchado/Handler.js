@@ -203,8 +203,18 @@ function SuscribirEventoPlancharCampos() {
                             } else {
                                 data[n].TotalRecibido = arregloDatos[n].TotalRecibido;
                             }
-                            data[n].FisicoCondicionado = arregloDatos[n].FisicoCondicionado;
-                            data[n].FisicoDanado = arregloDatos[n].FisicoDanado;
+                            if (arregloDatos[n].FisicoCondicionado.toString().indexOf(coma) !== -1) {
+                                data[n].FisicoCondicionado = arregloDatos[n].FisicoCondicionado = arregloDatos[n].FisicoCondicionado.toString().replace(coma, "");
+                            } else {
+                                data[n].FisicoCondicionado = arregloDatos[n].FisicoCondicionado;
+                            }                            
+
+                            if (arregloDatos[n].FisicoDanado.toString().indexOf(coma) !== -1) {
+                                data[n].FisicoDanado = arregloDatos[n].FisicoDanado = arregloDatos[n].FisicoDanado.toString().replace(coma, "");
+                            } else {
+                                data[n].FisicoDanado = arregloDatos[n].FisicoDanado;
+                            }
+                            
                             if (arregloDatos[n].FisicoAprobado.toString().indexOf(coma) !== -1) {
                                 data[n].FisicoAprobado = arregloDatos[n].FisicoAprobado = arregloDatos[n].FisicoAprobado.toString().replace(coma, "");
                             } else {
