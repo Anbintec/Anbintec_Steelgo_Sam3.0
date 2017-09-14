@@ -49,7 +49,7 @@ namespace BackEndSAM.Controllers
             }
         }
 
-        public object Post(int incidenciaID, string descripcion, string estatusDocumento, string token)
+        public object Post(int incidenciaID, string descripcion,string descripcionIngles, string estatusDocumento, string token)
         {
             try
             {
@@ -111,7 +111,8 @@ namespace BackEndSAM.Controllers
                                 UserId = usuario.UsuarioID,
                                 TipoArchivoID = 0,
                                 Extencion = extencion,
-                                Descripcion = descripcion
+                                Descripcion = descripcion,
+                                DescripcionIngles = descripcionIngles
                             });
 
                             postedFile.SaveAs(path);

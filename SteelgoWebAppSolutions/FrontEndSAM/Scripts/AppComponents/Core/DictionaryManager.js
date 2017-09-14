@@ -13517,5 +13517,75 @@ _dictionary = {
 	},
     //Finaliza Modulo Montaje
 
+    // Modulo Incidencias
+	"IncidenciasCliente": {
+	    "es-MX": "Cliente",
+	    "en-US": "Client"
+	},
+	"IncidenciasInterna": {
+	    "es-MX": "Interna",
+	    "en-US": "Inside"
+	},
+	"IncidenciasTituloIngles": {
+	    "es-MX": "Titulo Inglés",
+	    "en-US": "English Title"
+	},
+	"IncidenciasDescripcionIngles": {
+	    "es-MX": "Descripción Inglés",
+	    "en-US": "English Description"
+	},
+	"IncidenciasDescripcionIngles2": {
+	    "es-MX": "Descripción Inglés",
+	    "en-US": "English Description"
+	},
+	"IncidenciasDescripcionIngles3": {
+	    "es-MX": "Descripción Inglés",
+	    "en-US": "English Description"
+	},
+	"IncidenciasDescripcionIngles4": {
+	    "es-MX": "Descripción Inglés",
+	    "en-US": "English Description"
+	},
+	"IncidenciasDescripcionIngles5": {
+	    "es-MX": "Descripción Inglés",
+	    "en-US": "English Description"
+	},
+	"IncidenciasDescripcionIngles6": {
+	    "es-MX": "Descripción Inglés",
+	    "en-US": "English Description"
+	},
+	"IncidenciasRespuestaIngles": {
+	    "es-MX": "Respuesta Inglés",
+	    "en-US": "English Answer"
+	},
+	"IncidenciasCancelarIngles": {
+	    "es-MX": "Motivo Cancelación",
+	    "en-US": "Cancellation Reason"
+	},
+	"IncidenciasResolucionIngles": {
+	    "es-MX": "Detalle Resolución Inglés",
+	    "en-US": "English Detail Resolution"
+	},
+	"IncidenciasColumnDescripcionIngles": {
+	    "es-MX": "Descripción Ingles",
+	    "en-US": "English Description"
+	},
+	"IncidenciasColumnDescripcionIngles2": {
+	    "es-MX": "Descripción Ingles",
+	    "en-US": "English Description"
+	},
+	"IncidenciasColumnDescripcionIngles3": {
+	    "es-MX": "Descripción Ingles",
+	    "en-US": "English Description"
+	},
+	"IncidenciasColumnDescripcionIngles4": {
+	    "es-MX": "Descripción Ingles",
+	    "en-US": "English Description"
+	},
+	"IncidenciasMensajeErrorTipoIncidencia": {
+	    "es-MX": "Selecciona si la indicencia es interna o cliente",
+	    "en-US": "Select if the incident is internal or client"
+	},
+    //Finaliza Modulo Incidencias
 
 };
