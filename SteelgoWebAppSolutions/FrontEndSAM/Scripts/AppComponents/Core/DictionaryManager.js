@@ -13559,8 +13559,8 @@ _dictionary = {
 	    "en-US": "English Answer"
 	},
 	"IncidenciasCancelarIngles": {
-	    "es-MX": "Motivo Cancelación",
-	    "en-US": "Cancellation Reason"
+	    "es-MX": "Motivo Cancelación Inglés",
+	    "en-US": "English Cancellation Reason"
 	},
 	"IncidenciasResolucionIngles": {
 	    "es-MX": "Detalle Resolución Inglés",
@@ -13585,6 +13585,18 @@ _dictionary = {
 	"IncidenciasMensajeErrorTipoIncidencia": {
 	    "es-MX": "Selecciona si la indicencia es interna o cliente",
 	    "en-US": "Select if the incident is internal or client"
+	},
+	"IncidenciasMensajeConfirmacionTextoTraducidoIng": {
+	    "es-MX": "Desea sustituir el contenido  en inglés por: ",
+	    "en-US": "Want to replace the content in english to: "
+	},
+	"IncidenciasMensajeConfirmacionTextoTraducidoEsp": {
+	    "es-MX": "Desea sustituir el contenido en español por: ",
+	    "en-US": "Want to replace the content in spanish to: "
+	},
+	"IncidenciasButtonSustituir": {
+	    "es-MX": "Sustituir",
+	    "en-US": "Replace"
 	},
     //Finaliza Modulo Incidencias
 

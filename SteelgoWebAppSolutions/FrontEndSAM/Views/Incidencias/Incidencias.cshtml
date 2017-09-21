@@ -119,25 +119,46 @@
                                                     <div id="IncidenciaClienteLabelDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-1">
                                                         <label id="IncidenciasCliente"></label>
                                                     </div>
-                                                    <div id="VersionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                    <div id="VersionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-11">
                                                         <label id="Incidencias0005"></label>
                                                         <input id="Version" class="general-input" disabled />
                                                     </div>
-                                                    <div id="TituloDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                    
+                                                    <div id="TituloDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-11">
                                                         <label id="Incidencias0006"></label>
                                                         <input id="Titulo" class="general-input" maxlength="100" />
                                                     </div>
-                                                    <div id="TituloInglesDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12 hidden">
+                                                    <div id="divTraducionTItulo" class="form-group col-xs-12 col-sm-6 col-md-1 col-lg-1 hidden">
+                                                        <label id=""> &nbsp;</label>
+                                                        <button id="TraduceTituloES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>
+                                                        @*<button id="TraduceTituloEN" class="btn-success btn-sm"><img src="/Content/images/flags/es-MX.png" /></button>*@
+                                                    </div>
+                                                    <div id="TituloInglesDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-11 hidden">
                                                         <label id="IncidenciasTituloIngles"></label>
                                                         <input id="TituloIngles" class="general-input" maxlength="100" />
                                                     </div>
-                                                    <div id="DescripcionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                    <div id="divTraducionTItulo1" class="form-group col-xs-12 col-sm-6 col-md-1 col-lg-1 hidden">
+                                                        <label id=""> &nbsp;</label>
+                                                        @*<button id="TraduceTituloES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>*@
+                                                        <button id="TraduceTituloEN" class="btn-success btn-sm"><img src="/Content/images/flags/es-MX.png" /></button>
+                                                    </div>
+                                                    <div id="DescripcionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-11">
                                                         <label id="Incidencias0007"></label>
                                                         <textarea id="Descripcion" rows="4" cols="50" maxlength="1500"></textarea>
                                                     </div>
-                                                    <div id="DescripcionInglesDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12 hidden">
+                                                    <div id="divTraducionDescripcion" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-1 hidden">
+                                                        <label id=""> &nbsp;</label>
+                                                        <button id="TraduceDescripcionES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>
+                                                        @*<button id="TraduceDescripcionEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>*@
+                                                    </div>
+                                                    <div id="DescripcionInglesDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-11 hidden">
                                                         <label id="IncidenciasDescripcionIngles"></label>
                                                         <textarea id="DescripcionIngles" rows="4" cols="50" maxlength="1500"></textarea>
+                                                    </div>
+                                                    <div id="divTraducionDescripcion1" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-1 hidden">
+                                                        <label id=""> &nbsp;</label>
+                                                        @*<button id="TraduceDescripcionES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>*@
+                                                        <button id="TraduceDescripcionEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>
                                                     </div>
                                                     <div id="RegistradoPorDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                         <label id="Incidencias0014"></label>
@@ -150,14 +171,25 @@
                                                     @* Archivos //////////////////// *@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                         <div class="row">
-                                                            <div class="addedSection clearfix">
-                                                                <div id="DescripcionArchivoIncidenciaDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                            <div  class="addedSection clearfix">
+                                                                
+                                                                <div id="DescripcionArchivoIncidenciaDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-5">
                                                                     <label id="Incidencias0021"></label>
                                                                     <input id="DescripcionArchivoIncidencia" class="general-input" maxlength="1500" />
                                                                 </div>
-                                                                <div id="DescripcionArchivoIncidenciaInglesDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6 hidden">
+                                                                <div id="divTraducionDescripcionArchivoIndicencia" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1 hidden">
+                                                                    <label id=""> &nbsp;</label>
+                                                                    <button id="TraduceDescripcionArchivoIncidenciaES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>
+                                                                    @*<button id="TraduceDescripcionArchivoIncidenciaEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>*@
+                                                                </div>
+                                                                <div id="DescripcionArchivoIncidenciaInglesDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-5 hidden">
                                                                     <label id="IncidenciasDescripcionIngles3"></label>
                                                                     <input id="DescripcionArchivoIncidenciaIngles" class="general-input" maxlength="1500" />
+                                                                </div>
+                                                                <div id="divTraducionDescripcionArchivoIndicencia1" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1 hidden">
+                                                                    <label id=""> &nbsp;</label>
+                                                                    @*<button id="TraduceDescripcionArchivoIncidenciaES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>*@
+                                                                    <button id="TraduceDescripcionArchivoIncidenciaEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>
                                                                 </div>
                                                                 <div id="AdjuntarArchivosIncidenciaDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                                     <label id="Incidencias0020"></label>
@@ -204,25 +236,47 @@
                                                         <label id="Incidencias0017"></label>
                                                         <input id="FechaResolucion" class="" />
                                                     </div>
-                                                    <div id="DetalleResolucionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                    
+                                                    <div id="DetalleResolucionDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-11">
                                                         <label id="Incidencias0013"></label>
                                                         <textarea id="DetalleResolucion" rows="4" cols="50" re></textarea>
                                                     </div>
-                                                    <div id="DetalleResolucionInglesDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                    <div id="divTraducionDetalleResolucion" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1 ">
+                                                        <label>&nbsp;</label>
+                                                        <button id="TraduceDetalleResolucionES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>
+                                                        @*<button id="TraduceDetalleResolucionEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>*@
+                                                    </div>
+                                                    <div id="DetalleResolucionInglesDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-11 ">
                                                         <label id="IncidenciasResolucionIngles"></label>
                                                         <textarea id="DetalleResolucionIngles" rows="4" cols="50" re></textarea>
+                                                    </div>
+                                                    <div id="divTraducionDetalleResolucion1" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1 ">
+                                                        <label>&nbsp;</label>
+                                                        @*<button id="TraduceDetalleResolucionES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>*@
+                                                        <button id="TraduceDetalleResolucionEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>
                                                     </div>
                                                     @* Archivos ///////////////////////////////////// *@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                         <div class="row">
-                                                            <div class="addedSection clearfix">
-                                                                <div id="DescripcionArchivoResolverDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                            <div  class="addedSection clearfix">
+                                                                
+                                                                <div id="DescripcionArchivoResolverDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-5">
                                                                     <label id="Incidencias0046"></label>
                                                                     <input id="DescripcionArchivoResolver" class="general-input" />
                                                                 </div>
-                                                                <div id="DescripcionArchivoResolverInglesDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                                <div id="divTraducionDescripcionArchivoResolver" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1 ">
+                                                                    <label>&nbsp;</label>
+                                                                    <button id="TraduceDescripcionArchivoResolverES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>
+                                                                    @*<button id="TraduceDescripcionArchivoResolverEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>*@
+                                                                </div>
+                                                                <div id="DescripcionArchivoResolverInglesDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-5 ">
                                                                     <label id="IncidenciasDescripcionIngles6"></label>
                                                                     <input id="DescripcionArchivoResolverIngles" class="general-input" />
+                                                                </div>
+                                                                <div id="divTraducionDescripcionArchivoResolver1" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1 ">
+                                                                    <label>&nbsp;</label>
+                                                                    @*<button id="TraduceDescripcionArchivoResolverES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>*@
+                                                                    <button id="TraduceDescripcionArchivoResolverEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>
                                                                 </div>
                                                                 <div id="AdjuntarArchivosResolverDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                                     <label id="Incidencias0045"></label>
@@ -260,13 +314,24 @@
                                             </div>
                                             <div id="respondida">
                                                 <div class="row">
-                                                    <div id="RespuestaDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                    
+                                                    <div id="RespuestaDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-11">
                                                         <label id="Incidencias0008"></label>
                                                         <textarea id="Respuesta" rows="4" cols="50" re></textarea>
                                                     </div>
-                                                    <div id="RespuestaInglesDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                    <div id="divTraducionRespuesta" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                                        <label>&nbsp;</label>
+                                                        <button id="TraduceRespuestaES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>
+                                                        @*<button id="TraduceRespuestaEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>*@
+                                                    </div>
+                                                    <div id="RespuestaInglesDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-11">
                                                         <label id="IncidenciasRespuestaIngles"></label>
                                                         <textarea id="RespuestaIngles" rows="4" cols="50" re></textarea>
+                                                    </div>
+                                                    <div id="divTraducionRespuesta1" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                                        <label>&nbsp;</label>
+                                                        @*<button id="TraduceRespuestaES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>*@
+                                                        <button id="TraduceRespuestaEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>
                                                     </div>
                                                     <div id="RespondidoPorDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                         <label id="Incidencias0018"></label>
@@ -279,14 +344,25 @@
                                                     @* Archivos ///////////////////////////////////// *@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                         <div class="row">
-                                                            <div class="addedSection clearfix">
-                                                                <div id="DescripcionArchivoResponderDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                            <div  class="addedSection clearfix">
+                                                               
+                                                                <div id="DescripcionArchivoResponderDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-5">
                                                                     <label id="Incidencias0051"></label>
                                                                     <input id="DescripcionArchivoResponder" class="general-input" />
                                                                 </div>
-                                                                <div id="DescripcionArchivoResponderInglesDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                                <div id="divTraducionDescripcionArchivoResponder" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                                                    <label>&nbsp;</label>
+                                                                    <button id="TraduceDescripcionArchivoResponderES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>
+                                                                    @*<button id="TraduceDescripcionArchivoResponderEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>*@
+                                                                </div>
+                                                                <div id="DescripcionArchivoResponderInglesDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-5">
                                                                     <label id="IncidenciasDescripcionIngles4"></label>
                                                                     <input id="DescripcionArchivoResponderIngles" class="general-input" />
+                                                                </div>
+                                                                <div id="divTraducionDescripcionArchivoResponder1" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                                                    <label>&nbsp;</label>
+                                                                    @*<button id="TraduceDescripcionArchivoResponderES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>*@
+                                                                    <button id="TraduceDescripcionArchivoResponderEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>
                                                                 </div>
                                                                 <div id="AdjuntarArchivosResponderDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                                     <label id="Incidencias0050"></label>
@@ -324,25 +400,47 @@
                                             </div>
                                             <div id="cancelar">
                                                 <div class="row">
-                                                    <div id="MotivoCancelacionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                    
+                                                    <div id="MotivoCancelacionDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-11">
                                                         <label id="Incidencias0012"></label>
                                                         <textarea id="MotivoCancelacion" rows="4" cols="50" re></textarea>
                                                     </div>
-                                                    <div id="MotivoCancelacionInglesDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                                                    <div id="divTraducionMotivoCancelacion" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                                        <label>&nbsp;</label>
+                                                        <button id="TraduceMotivoCancelacionES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>
+                                                        @*<button id="TraduceMotivoCancelacionEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>*@
+                                                    </div>
+                                                    <div id="MotivoCancelacionInglesDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-11">
                                                         <label id="IncidenciasCancelarIngles"></label>
                                                         <textarea id="MotivoCancelacionIngles" rows="4" cols="50" re></textarea>
+                                                    </div>
+                                                    <div id="divTraducionMotivoCancelacion1" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                                        <label>&nbsp;</label>
+                                                        @*<button id="TraduceMotivoCancelacionES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>*@
+                                                        <button id="TraduceMotivoCancelacionEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>
                                                     </div>
                                                     @* Archivos ///////////////////////////////////// *@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                         <div class="row">
-                                                            <div class="addedSection clearfix">
-                                                                <div id="DescripcionArchivoCancelarDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                            <div  class="addedSection clearfix">
+                                                                
+                                                                <div id="DescripcionArchivoCancelarDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-5">
                                                                     <label id="Incidencias0056"></label>
                                                                     <input id="DescripcionArchivoCancelar" class="general-input" />
                                                                 </div>
-                                                                <div id="DescripcionArchivoCancelarInglesDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                                <div id="divTraducionDescripcionArchivoCancelar" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                                                    <label>&nbsp;</label>
+                                                                    <button id="TraduceDescripcionArchivoCancelarES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>
+                                                                    @*<button id="TraduceDescripcionArchivoCancelarEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>*@
+                                                                </div>
+                                                                <div id="DescripcionArchivoCancelarInglesDiv" class="form-group col-xs-12 col-sm-5 col-md-5 col-lg-5">
                                                                     <label id="IncidenciasDescripcionIngles5"></label>
                                                                     <input id="DescripcionArchivoCancelarIngles" class="general-input" />
+                                                                </div>
+                                                                <div id="divTraducionDescripcionArchivoCancelar1" class="form-group col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                                                    <label>&nbsp;</label>
+                                                                    @*<button id="TraduceDescripcionArchivoCancelarES" class="btn-danger btn-sm"><img src="~/Content/images/flags/en-US.png" /></button>*@
+                                                                    <button id="TraduceDescripcionArchivoCancelarEN" class="btn-success btn-sm"><img src="~/Content/images/flags/es-MX.png" /></button>
                                                                 </div>
                                                                 <div id="AdjuntarArchivosCancelarDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                                     <label id="Incidencias0055"></label>
@@ -404,6 +502,7 @@
 
 
     @section JavascriptGlobalVariables {
+    
     var Clasificacion = {}, TipoIncidencia = {},
         FechaRegistro, FechaResolucion,
         FechaRespuesta, Registro = {},
@@ -2185,6 +2284,17 @@
                     $("#DescripcionArchivoIncidencia").removeAttr("disabled");
                     $("#DescripcionArchivoIncidenciaIngles").removeAttr("disabled");
                     $("#AdjuntarArchivosIncidencia").data("kendoUpload").enable(true);
+
+
+
+                    $("#TraduceTituloES").removeAttr("disabled");
+                    $("#TraduceTituloEN").removeAttr("disabled");
+                    $("#TraduceDescripcionES").removeAttr("disabled");
+                    $("#TraduceDescripcionEN").removeAttr("disabled");
+                    $("#TraduceDescripcionArchivoIncidenciaES").removeAttr("disabled");
+                    $("#TraduceDescripcionArchivoIncidenciaEN").removeAttr("disabled");
+
+
                     HabilitarObtenerDocumentosIncidencias();
                     break;
                 case "Resolver":
@@ -2196,6 +2306,14 @@
                     $("#DescripcionArchivoResolver").removeAttr("disabled");
                     $("#DescripcionArchivoResolverIngles").removeAttr("disabled");
                     $("#AdjuntarArchivosResolver").data("kendoUpload").enable(true);
+
+                    $("#TraduceTituloES").removeAttr("disabled");
+                    $("#TraduceTituloEN").removeAttr("disabled");
+                    $("#TraduceDescripcionES").removeAttr("disabled");
+                    $("#TraduceDescripcionEN").removeAttr("disabled");
+                    $("#TraduceDescripcionArchivoIncidenciaES").removeAttr("disabled");
+                    $("#TraduceDescripcionArchivoIncidenciaEN").removeAttr("disabled");
+
                     HabilitarObtenerDocumentosResolver();
                     break;
                 case "Responder":
@@ -2207,6 +2325,12 @@
                     $("#DescripcionArchivoResponder").removeAttr("disabled");
                     $("#DescripcionArchivoResponderIngles").removeAttr("disabled");
                     $("#AdjuntarArchivosResponder").data("kendoUpload").enable(true);
+
+                    $("#TraduceRespuestaES").removeAttr("disabled");
+                    $("#TraduceRespuestaEN").removeAttr("disabled");
+                    $("#TraduceDescripcionArchivoResponderES").removeAttr("disabled");
+                    $("#TraduceDescripcionArchivoResponderEN").removeAttr("disabled");
+
                     HabilitarObtenerDocumentosResponder();
                     break;
                 case "Cancelar":
@@ -2216,6 +2340,12 @@
                     $("#DescripcionArchivoCancelar").removeAttr("disabled");
                     $("#DescripcionArchivoCancelarIngles").removeAttr("disabled");
                     $("#AdjuntarArchivosCancelar").data("kendoUpload").enable(true);
+
+                    $("#TraduceMotivoCancelacionES").removeAttr("disabled");
+                    $("#TraduceMotivoCancelacionEN").removeAttr("disabled");
+                    $("#TraduceDescripcionArchivoCancelarES").removeAttr("disabled");
+                    $("#TraduceDescripcionArchivoCancelarEN").removeAttr("disabled");
+
                     HabilitarObtenerDocumentosCancelar();
                     break;
             }
@@ -2266,6 +2396,14 @@
                 $("#DescripcionArchivoIncidencia").attr("disabled", "disabled");
                 $("#DescripcionArchivoIncidenciaIngles").attr("disabled", "disabled");
                 $("#RegistradoPor").data("kendoComboBox").enable(false);
+
+                $("#TraduceTituloES").attr("disabled", "disabled");
+                $("#TraduceTituloEN").attr("disabled", "disabled");
+                $("#TraduceDescripcionES").attr("disabled", "disabled");
+                $("#TraduceDescripcionEN").attr("disabled", "disabled");
+                $("#TraduceDescripcionArchivoIncidenciaES").attr("disabled", "disabled");
+                $("#TraduceDescripcionArchivoIncidenciaEN").attr("disabled", "disabled");
+
                 break;
 
             case "Resolver":
@@ -2276,6 +2414,12 @@
                 $("#DescripcionArchivoResolver").attr("disabled", "disabled");
                 $("#DescripcionArchivoResolverIngles").attr("disabled", "disabled");
                 $("#ResueltoPor").data("kendoComboBox").enable(false);
+
+                $("#TraduceDetalleResolucionES").attr("disabled", "disabled");
+                $("#TraduceDetalleResolucionEN").attr("disabled", "disabled");
+                $("#TraduceDescripcionArchivoResolverES").attr("disabled", "disabled");
+                $("#TraduceDescripcionArchivoResolverEN").attr("disabled", "disabled");
+
                 break;
 
             case "Responder":
@@ -2286,6 +2430,13 @@
                 $("#DescripcionArchivoResponder").attr("disabled", "disabled");
                 $("#DescripcionArchivoResponderIngles").attr("disabled", "disabled");
                 $("#RespondidoPor").data("kendoComboBox").enable(false);
+
+
+                $("#TraduceRespuestaES").attr("disabled", "disabled");
+                $("#TraduceRespuestaEN").attr("disabled", "disabled");
+                $("#TraduceDescripcionArchivoResponderES").attr("disabled", "disabled");
+                $("#TraduceDescripcionArchivoResponderEN").attr("disabled", "disabled");
+
                 break;
 
             case "Cancelar":
@@ -2294,6 +2445,11 @@
                 $("#AdjuntarArchivosCancelar").data("kendoUpload").enable(false);
                 $("#DescripcionArchivoCancelar").attr("disabled", "disabled");
                 $("#DescripcionArchivoCancelarIngles").attr("disabled", "disabled");
+
+                $("#TraduceMotivoCancelacionES").attr("disabled", "disabled");
+                $("#TraduceMotivoCancelacionEN").attr("disabled", "disabled");
+                $("#TraduceDescripcionArchivoCancelarES").attr("disabled", "disabled");
+                $("#TraduceDescripcionArchivoCancelarEN").attr("disabled", "disabled");
                 break;
         }
     };
@@ -2318,6 +2474,14 @@
         $("#DescripcionArchivoIncidencia").attr("disabled", "disabled");
         $("#DescripcionArchivoIncidenciaIngles").attr("disabled", "disabled");
         $("#RegistradoPor").data("kendoComboBox").enable(false);
+        $("#TraduceTituloES").attr("disabled", "disabled");
+        $("#TraduceTituloEN").attr("disabled", "disabled");
+        $("#TraduceDescripcionES").attr("disabled", "disabled");
+        $("#TraduceDescripcionEN").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoIncidenciaES").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoIncidenciaEN").attr("disabled", "disabled");
+
+
 
         $("#DetalleResolucion").attr("disabled", "disabled");
         $("#DetalleResolucionIngles").attr("disabled", "disabled");
@@ -2326,6 +2490,10 @@
         $("#DescripcionArchivoResolver").attr("disabled", "disabled");
         $("#DescripcionArchivoResolverIngles").attr("disabled", "disabled");
         $("#ResueltoPor").data("kendoComboBox").enable(false);
+        $("#TraduceDetalleResolucionES").attr("disabled", "disabled");
+        $("#TraduceDetalleResolucionEN").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoResolverES").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoResolverEN").attr("disabled", "disabled");
 
         $("#Respuesta").attr("disabled", "disabled");
         $("#RespuestaIngles").attr("disabled", "disabled");
@@ -2334,12 +2502,20 @@
         $("#DescripcionArchivoResponder").attr("disabled", "disabled");
         $("#DescripcionArchivoResponderIngles").attr("disabled", "disabled");
         $("#RespondidoPor").data("kendoComboBox").enable(false);
+        $("#TraduceRespuestaES").attr("disabled", "disabled");
+        $("#TraduceRespuestaEN").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoResponderES").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoResponderEN").attr("disabled", "disabled");
 
         $("#MotivoCancelacion").attr("disabled", "disabled");
         $("#MotivoCancelacionIngles").attr("disabled", "disabled");
         $("#AdjuntarArchivosCancelar").data("kendoUpload").enable(false);
         $("#DescripcionArchivoCancelar").attr("disabled", "disabled");
         $("#DescripcionArchivoCancelarIngles").attr("disabled", "disabled");
+        $("#TraduceMotivoCancelacionES").attr("disabled", "disabled");
+        $("#TraduceMotivoCancelacionEN").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoCancelarES").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoCancelarEN").attr("disabled", "disabled");
     }
 
     function DeshabilitarAlCancelar() {
@@ -2382,6 +2558,26 @@
         $("#RegistradoPor").data("kendoComboBox").enable(false);
         $("#ResueltoPor").data("kendoComboBox").enable(false);
         $("#RespondidoPor").data("kendoComboBox").enable(false);
+
+
+        $("#TraduceTituloES").attr("disabled", "disabled");
+        $("#TraduceTituloEN").attr("disabled", "disabled");
+        $("#TraduceDescripcionES").attr("disabled", "disabled");
+        $("#TraduceDescripcionEN").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoIncidenciaES").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoIncidenciaEN").attr("disabled", "disabled");
+        $("#TraduceDetalleResolucionES").attr("disabled", "disabled");
+        $("#TraduceDetalleResolucionEN").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoResolverES").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoResolverEN").attr("disabled", "disabled");
+        $("#TraduceRespuestaES").attr("disabled", "disabled");
+        $("#TraduceRespuestaEN").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoResponderES").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoResponderEN").attr("disabled", "disabled");
+        $("#TraduceMotivoCancelacionES").attr("disabled", "disabled");
+        $("#TraduceMotivoCancelacionEN").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoCancelarES").attr("disabled", "disabled");
+        $("#TraduceDescripcionArchivoCancelarEN").attr("disabled", "disabled");
 
         DesahabilitarObtenerDocumentosIncidencias();
         DesahabilitarObtenerDocumentosResponder();
@@ -2550,6 +2746,12 @@
 
         $("#Descripcion").removeAttr("disabled");
         $("#DescripcionIngles").removeAttr("disabled");
+
+        $("#TraduceTituloES").removeAttr("disabled");
+        $("#TraduceTituloEN").removeAttr("disabled");
+        $("#TraduceDescripcionES").removeAttr("disabled");
+        $("#TraduceDescripcionEN").removeAttr("disabled");
+
         Guardar();
     };
     function Guardar() {
@@ -2908,21 +3110,47 @@
 
                         case "Incidencia":
                             $("#TituloInglesDiv").removeClass("hidden");
+                            $("#divTraducionTItulo").removeClass("hidden");
+                            $("#divTraducionTItulo1").removeClass("hidden");
+                            
                             $("#DescripcionInglesDiv").removeClass("hidden");
+                            $("#divTraducionDescripcion").removeClass("hidden");
+                            $("#divTraducionDescripcion1").removeClass("hidden");
+                            
                             $("#DescripcionArchivoIncidenciaInglesDiv").removeClass("hidden");
+                            $("#divTraducionDescripcionArchivoIndicencia").removeClass("hidden");
+                            $("#divTraducionDescripcionArchivoIndicencia1").removeClass("hidden");
+                            
                             break;
                         case "Resolver":
                             $("#DetalleResolucionInglesDiv").removeClass("hidden");
+                            $("#divTraducionDetalleResolucion").removeClass("hidden");
+                            $("#divTraducionDetalleResolucion1").removeClass("hidden");
+                            
                             $("#DescripcionArchivoResolverInglesDiv").removeClass("hidden");
+                            $("#divTraducionDescripcionArchivoResulver").removeClass("hidden");
+                            $("#divTraducionDescripcionArchivoResulver1").removeClass("hidden");
+                            
                             break;
                         case "Responder":
                             $("#RespuestaInglesDiv").removeClass("hidden");
+                            $("#divTraducionRespuesta").removeClass("hidden");
+                            $("#divTraducionRespuesta1").removeClass("hidden");
+                            
                             $("#DescripcionArchivoResponderInglesDiv").removeClass("hidden");
+                            $("#divTraducionDescripcionArchivoResponder").removeClass("hidden");
+                            $("#divTraducionDescripcionArchivoResponder1").removeClass("hidden");
+                            
                             break;
                         case "Cancelar":
                             $("#MotivoCancelacionInglesDiv").removeClass("hidden");
+                            $("#divTraducionMotivoCancelacion").removeClass("hidden");
+                            $("#divTraducionMotivoCancelacion1").removeClass("hidden");
+                            
                             $("#DescripcionArchivoCancelarInglesDiv").removeClass("hidden");
-
+                            $("#divTraducionDescripcionArchivoCancelar").removeClass("hidden");
+                            $("#divTraducionDescripcionArchivoCancelar1").removeClass("hidden");
+                            
                             break;
                     }
 
@@ -2953,7 +3181,49 @@
             $("#MotivoCancelacionInglesDiv").addClass("hidden");
         if (!$("#DescripcionArchivoCancelarInglesDiv").hasClass("hidden"))
             $("#DescripcionArchivoCancelarInglesDiv").addClass("hidden");
+
+
+        if (!$("#divTraducionTItulo").hasClass("hidden"))
+            $("#divTraducionTItulo").addClass("hidden");
+        if (!$("#divTraducionDescripcion").hasClass("hidden"))
+            $("#divTraducionDescripcion").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoIndicencia").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoIndicencia").addClass("hidden");
+        if (!$("#divTraducionDetalleResolucion").hasClass("hidden"))
+            $("#divTraducionDetalleResolucion").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoResulver").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoResulver").addClass("hidden");
+        if (!$("#divTraducionRespuesta").hasClass("hidden"))
+            $("#divTraducionRespuesta").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoResponder").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoResponder").addClass("hidden");
+        if (!$("#divTraducionMotivoCancelacion").hasClass("hidden"))
+            $("#divTraducionMotivoCancelacion").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoCancelar").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoCancelar").addClass("hidden");
+
+        if (!$("#divTraducionTItulo1").hasClass("hidden"))
+            $("#divTraducionTItulo1").addClass("hidden");
+        if (!$("#divTraducionDescripcion1").hasClass("hidden"))
+            $("#divTraducionDescripcion1").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoIndicencia1").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoIndicencia1").addClass("hidden");
+        if (!$("#divTraducionDetalleResolucion1").hasClass("hidden"))
+            $("#divTraducionDetalleResolucion1").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoResulver1").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoResulver1").addClass("hidden");
+        if (!$("#divTraducionRespuesta1").hasClass("hidden"))
+            $("#divTraducionRespuesta1").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoResponder1").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoResponder1").addClass("hidden");
+        if (!$("#divTraducionMotivoCancelacion1").hasClass("hidden"))
+            $("#divTraducionMotivoCancelacion1").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoCancelar1").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoCancelar1").addClass("hidden");
+        
+
         ObtenerRequiereIncidenciaBilingue(TipoIncidenciaID, RegistroID);
+        
     }
     }
 
@@ -3014,6 +3284,782 @@
             }
         }, 2000);
     }
+
+
+// TRADUCCION DE INCIDENCIA CON TRANSLATE 
+
+    $("#TraduceTituloES").click(function (e) {
+        //var traslatedText = translateTextAPI("en", "es", $("#Titulo").val());
+        //$("#TituloIngles").val(traslatedText);
+
+        if ($("#Titulo").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "es";
+            _urlTraslateAPI += "&target=" + "en";
+            _urlTraslateAPI += "&q=" + escape($("#Titulo").val());
+            
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoIng[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#TituloIngles").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceTituloEN").click(function (e) {
+
+        if ($("#TituloIngles").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "en";
+            _urlTraslateAPI += "&target=" + "es";
+            _urlTraslateAPI += "&q=" + escape($("#TituloIngles").val());
+            
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoEsp[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#Titulo").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceDescripcionES").click(function (e) {
+
+        if ($("#Descripcion").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "es";
+            _urlTraslateAPI += "&target=" + "en";
+            _urlTraslateAPI += "&q=" + escape($("#Descripcion").val());
+            
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoIng[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#DescripcionIngles").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceDescripcionEN").click(function (e) {
+
+        if ($("#DescripcionIngles").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "en";
+            _urlTraslateAPI += "&target=" + "es";
+            _urlTraslateAPI += "&q=" + escape($("#DescripcionIngles").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoEsp[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#Descripcion").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceDescripcionArchivoIncidenciaES").click(function (e) {
+
+        if ($("#DescripcionArchivoIncidencia").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "es";
+            _urlTraslateAPI += "&target=" + "en";
+            _urlTraslateAPI += "&q=" + escape($("#DescripcionArchivoIncidencia").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoIng[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#DescripcionArchivoIncidenciaIngles").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceDescripcionArchivoIncidenciaEN").click(function (e) {
+
+        if ($("#DescripcionArchivoIncidenciaIngles").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "en";
+            _urlTraslateAPI += "&target=" + "es";
+            _urlTraslateAPI += "&q=" + escape($("#DescripcionArchivoIncidenciaIngles").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoEsp[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#DescripcionArchivoIncidencia").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    // TRADUCCION DE RESOLUCION INCIDENCIA CON TRANSLATE 
+
+    $("#TraduceDetalleResolucionES").click(function (e) {
+
+        if ($("#DetalleResolucion").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "es";
+            _urlTraslateAPI += "&target=" + "en";
+            _urlTraslateAPI += "&q=" + escape($("#DetalleResolucion").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoIng[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#DetalleResolucionIngles").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceDetalleResolucionEN").click(function (e) {
+
+        if ($("#DetalleResolucionIngles").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "en";
+            _urlTraslateAPI += "&target=" + "es";
+            _urlTraslateAPI += "&q=" + escape($("#DetalleResolucionIngles").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoEsp[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#DetalleResolucion").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceDescripcionArchivoResolverES").click(function (e) {
+
+        if ($("#DescripcionArchivoResolver").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "es";
+            _urlTraslateAPI += "&target=" + "en";
+            _urlTraslateAPI += "&q=" + escape($("#DescripcionArchivoResolver").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoIng[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#DescripcionArchivoResolverIngles").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceDescripcionArchivoResolverEN").click(function (e) {
+
+        if ($("#DescripcionArchivoResolverIngles").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "en";
+            _urlTraslateAPI += "&target=" + "es";
+            _urlTraslateAPI += "&q=" + escape($("#DescripcionArchivoResolverIngles").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoEsp[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#DescripcionArchivoResolver").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+
+    // TRADUCCION DE RESPUESTA INCIDENCIA CON TRANSLATE 
+
+    $("#TraduceRespuestaES").click(function (e) {
+
+        if ($("#Respuesta").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "es";
+            _urlTraslateAPI += "&target=" + "en";
+            _urlTraslateAPI += "&q=" + escape($("#Respuesta").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoIng[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#RespuestaIngles").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceRespuestaEN").click(function (e) {
+
+        if ($("#RespuestaIngles").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "en";
+            _urlTraslateAPI += "&target=" + "es";
+            _urlTraslateAPI += "&q=" + escape($("#RespuestaIngles").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoEsp[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#Respuesta").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceDescripcionArchivoResponderES").click(function (e) {
+
+        if ($("#DescripcionArchivoResponder").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "es";
+            _urlTraslateAPI += "&target=" + "en";
+            _urlTraslateAPI += "&q=" + escape($("#DescripcionArchivoResponder").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoIng[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#DescripcionArchivoResponderIngles").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceDescripcionArchivoResponderEN").click(function (e) {
+
+        if ($("#DescripcionArchivoResponderIngles").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "en";
+            _urlTraslateAPI += "&target=" + "es";
+            _urlTraslateAPI += "&q=" + escape($("#DescripcionArchivoResponderIngles").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoEsp[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#DescripcionArchivoResponder").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+
+    // TRADUCCION DE CANCELACION INCIDENCIA CON TRANSLATE 
+
+    $("#TraduceMotivoCancelacionES").click(function (e) {
+
+        if ($("#MotivoCancelacion").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "es";
+            _urlTraslateAPI += "&target=" + "en";
+            _urlTraslateAPI += "&q=" + escape($("#MotivoCancelacion").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoIng[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#MotivoCancelacionIngles").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceMotivoCancelacionEN").click(function (e) {
+
+        if ($("#MotivoCancelacionIngles").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "en";
+            _urlTraslateAPI += "&target=" + "es";
+            _urlTraslateAPI += "&q=" + escape($("#MotivoCancelacionIngles").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoEsp[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#MotivoCancelacion").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceDescripcionArchivoCancelarES").click(function (e) {
+
+        if ($("#DescripcionArchivoCancelar").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "es";
+            _urlTraslateAPI += "&target=" + "en";
+            _urlTraslateAPI += "&q=" + escape($("#DescripcionArchivoCancelar").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoIng[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#DescripcionArchivoCancelarIngles").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+
+    $("#TraduceDescripcionArchivoCancelarEN").click(function (e) {
+
+        if ($("#DescripcionArchivoCancelarIngles").val() != "") {
+            var _urlTraslateAPI = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDagWUPN1-bZlZqW9jfTshrvDTuUbOFYik";
+            _urlTraslateAPI += "&source=" + "en";
+            _urlTraslateAPI += "&target=" + "es";
+            _urlTraslateAPI += "&q=" + escape($("#DescripcionArchivoCancelarIngles").val());
+            $.post(_urlTraslateAPI, function (data, status) {
+
+                windowTemplate = kendo.template($("#windowTemplate").html());
+
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.CapturaAvanceIntAcabadoMensajeErrorGuardado[$("#language").data("kendoDropDownList").value()],
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "auto",
+                    height: "auto",
+                    actions: [],
+                    modal: true,
+                    animation: {
+                        close: false,
+                        open: false
+                    }
+                }).data("kendoWindow");
+
+                ventanaConfirm.content(_dictionary.IncidenciasMensajeConfirmacionTextoTraducidoEsp[$("#language").data("kendoDropDownList").value()] + data.data.translations[0].translatedText +
+                    "</br><center><button class='btn btn-blue' id='yesButton'>" + _dictionary.IncidenciasButtonSustituir[$("#language").data("kendoDropDownList").value()] + "</button><button class='btn btn-blue' id='noButton'> No</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function () {
+                    $("#DescripcionArchivoCancelar").val(data.data.translations[0].translatedText);
+                    ventanaConfirm.close();
+                });
+                $("#noButton").click(function () {
+                    ventanaConfirm.close();
+                });
+            });
+        }
+
+    });
+    
+    
     }
 
 </script>
+
+
