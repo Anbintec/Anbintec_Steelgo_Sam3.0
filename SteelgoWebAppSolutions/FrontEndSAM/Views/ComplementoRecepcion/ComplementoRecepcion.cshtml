@@ -1686,7 +1686,9 @@
             var RelNUFCBID = dataItem.RelNUFCBID;
             //loadingStart();
             if (confirm(_dictionary.ComplementoRecepcion0083[$("#language").data("kendoDropDownList").value()])) {
+                //alert("entra a eleiminar");
                 $NumeroUnico.NumeroUnico.destroy({}, { numeroUnicoID: NumeroUnicoID, token: Cookies.get("token") }).done(function (data) {
+                    //alert("entra a eleiminar 2");
                     if (Error(data)) {
                         cargarGridPackingList();
                     }
@@ -2607,7 +2609,7 @@
 
             ListadoCuantificacionIncompletos = [];
             ListadoCuantificacion = [];
-           
+            //alert(datasource.length);
             for (var i = 0; i < datasource.length; i++) {
                 var NumeroUnicoID = datasource[i].NumeroUnicoID;
                 var NumeroUnico = datasource[i].NumeroUnico;
@@ -2667,6 +2669,7 @@
                 }
                 //}
             };
+            
 
             if (!ListadoCuantificacion.length && ListadoCuantificacionIncompletos.length) {
                 llenarGrid(null, ListadoCuantificacionIncompletos);
@@ -2677,7 +2680,8 @@
                 return;
             }
 
-            
+            //alert(!ListadoCuantificacion.length);
+            //alert(!ListadoCuantificacionIncompletos.length);
 
             if (!ListadoCuantificacion.length && !ListadoCuantificacionIncompletos.length) {
                 displayMessage("notificationslabel0053", '', '1');

@@ -681,7 +681,7 @@ namespace BackEndSAM.DataAcces
                     List<ListaCombos> listado = (from fc in ctx.Sam3_FolioCuantificacion
                                                  join rfc in ctx.Sam3_Rel_FolioCuantificacion_ItemCode on fc.FolioCuantificacionID equals rfc.FolioCuantificacionID
                                                  join rnufc in ctx.Sam3_Rel_NumeroUnico_RelFC_RelB on rfc.Rel_FolioCuantificacion_ItemCode_ID equals rnufc.Rel_FolioCuantificacion_ItemCode_ID
-                                                 where fc.Activo && rfc.Activo && rnufc.Activo
+                                                 where fc.Activo && rfc.Activo && rnufc.Activo //&& rnufc.Rel_NumeroUnico_RelFC_RelB_ID== 9938
                                                  && fc.ProyectoID == proyectoID
                                                  select new ListaCombos
                                                  {

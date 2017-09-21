@@ -2205,8 +2205,8 @@ namespace BackEndSAM.DataAcces
                         }
                     }
 
-
-                    return folios;
+                    
+                    return folios.OrderBy(x => x.id).ToList(); ;
 
                 }
             }

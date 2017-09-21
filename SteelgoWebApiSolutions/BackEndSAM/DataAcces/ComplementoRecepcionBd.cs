@@ -54,7 +54,7 @@ namespace BackEndSAM.DataAcces
                                       join rel in ctx.Sam3_Rel_NumeroUnico_RelFC_RelB on rfi.Rel_FolioCuantificacion_ItemCode_ID equals rel.Rel_FolioCuantificacion_ItemCode_ID
                                       join nu in ctx.Sam3_NumeroUnico on rel.NumeroUnicoID equals nu.NumeroUnicoID
                                       join it in ctx.Sam3_ItemCode on nu.ItemCodeID equals it.ItemCodeID
-                                      where fc.Activo && rfi.Activo && it.Activo && nu.Activo && rel.Activo
+                                      where fc.Activo && rfi.Activo && it.Activo && nu.Activo && rel.Activo //&& nu.NumeroUnicoID == 10945
                                       && fc.FolioCuantificacionID == folioCuantificacionID
                                       select new ItemCodeComplemento
                                       {

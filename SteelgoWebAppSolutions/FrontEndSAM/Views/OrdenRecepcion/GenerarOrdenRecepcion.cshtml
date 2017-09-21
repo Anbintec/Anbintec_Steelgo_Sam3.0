@@ -174,7 +174,8 @@
                     messageindexKendoCombobox(this);
                     Proyecto = {};
                     this.value("");
-                } else {
+                } else if (dataItem.Nombre!="") {
+                   
                     ObtenerFoliosAvisoEntrada();
                     CargarDatosGrid();
                 }
@@ -816,7 +817,7 @@
     if (_folioAvisoEntradaID != "-1" && _proyectoID != "-1") {
         CargaInicialEdicion();
     }
-    CargarDatosGrid();
+    //CargarDatosGrid();
     }
 
     @section JavascriptDocumentReadyHomeCookie {

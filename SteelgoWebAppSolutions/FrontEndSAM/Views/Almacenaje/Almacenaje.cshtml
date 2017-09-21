@@ -284,7 +284,7 @@
                     };
 
                     if (dataItem != undefined) {
-                        if(itemsRacks==null)
+                        //if(itemsRacks==null)
                             AjaxCargarRacksSinAsignarCombobox(dataItem.ProyectoID);
 
 
@@ -944,25 +944,27 @@
     }
 
     function AjaxCargarPasilloRack(ubicacion) {
-        $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion }).done(function (result) {
+        $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion, ProyectoID: $("#ProyectoID").data("kendoComboBox").value(), Fill: "relleno" }).done(function (result) {
             ControlErroresObjetosComboBox("inputRackPasillo", result);
         });
     }
 
     function AjaxCargarNivelRack(ubicacion, pasillo) {
-        $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion, Pasillo: pasillo }).done(function (result) {
+        $UbicacionNumeroUnico.UbicacionNumeroUnico.read({ token: Cookies.get("token"), Ubicacion: ubicacion, Pasillo: pasillo, ProyectoID: $("#ProyectoID").data("kendoComboBox").value() }).done(function (result) {
             ControlErroresObjetosComboBox("inputRackNivel", result);
         });
     }
 
-    function PlancharRack(value,nombre) {
+    function PlancharRack(value, nombre) {
+       
         var filters = $("#grid").data("kendoGrid").dataSource.filter();
         var allData = $("#grid").data("kendoGrid").dataSource.data();
         var query = new kendo.data.Query(allData);
         var result = query.filter(filters).data;
         var datasource = result;
-        //console.log(datasource);
+        console.log(datasource);
         for (var i = 0; i < datasource.length; i++) {
+           
             datasource[i].RackID = value;
             datasource[i].Rack = nombre;
         };
@@ -974,27 +976,32 @@
         $("#btnAplicar").click(function () {
             if ($('input:radio[name=Mostrar]:checked').val() == "Uno") {
                 var rackID = $("#Rack").data("kendoComboBox").dataItem($("#Rack").data("kendoComboBox").select());
+                console.log("entra codigo");
                 if (rackID != undefined && rackID.RackID > 0) {
                     PlancharRack(rackID.RackID, rackID.Nombre);
                     $("#Rack").val("");
                 }
             } else {
                 var objeto = $("#inputRackNivel").data("kendoComboBox").dataItem($("#inputRackNivel").data("kendoComboBox").select());
+               
                 if (objeto != undefined && objeto.RackID > 0) {
                     var nombreElemento = "";
-
+                    
                     for (var i = 0; i < itemsRacks.length; i++) {
                         if (itemsRacks[i].RackID == objeto.RackID) {
                             nombreElemento = itemsRacks[i].Nombre;
+                          
                             break;
                         }
 
                     }
+                
                     if (nombreElemento != "") {
                         PlancharRack(objeto.RackID, nombreElemento);
                         $("#inputRackNivel").val("");
                     }
                 }
+              
             }
         });
 
