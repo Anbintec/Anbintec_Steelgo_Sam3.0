@@ -15,7 +15,7 @@ namespace BackEndSAM.Models
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
         public string Respuesta { get; set; }
-        public string MotivoCancelacion { get; set; }
+        public string MotivoCancelacion { get; set; }   
         public string DetalleResolucion { get; set; }
         public string RegistradoPor { get; set; }
         public string FechaRegistro { get; set; }
@@ -34,11 +34,23 @@ namespace BackEndSAM.Models
         public string NombreIncidencia { get; set; }
         public string FolioOriginalID { get; set; }
         public int IncidenciaInterna { get; set; }
+        public string TituloIngles { get; set; }
+        public string DescripcionIngles { get; set; }
+        public string RespuestaIngles { get; set; }
+        public string MotivoCancelacionIngles { get; set; }
+        public string DetalleResolucionIngles { get; set; }
+        public int registroID { get; set; }
     }
 
     public class IncicidenciaEnPaseSalida
     {
         public string IncidenciaID { get; set; }
         public string Descripcion { get; set; }
+    }
+
+    public class ProyectoIncidencia
+    {
+        public int ProyectoID { get; set; }
+        public bool? IncidenciaBilingue { get; set; }
     }
 }

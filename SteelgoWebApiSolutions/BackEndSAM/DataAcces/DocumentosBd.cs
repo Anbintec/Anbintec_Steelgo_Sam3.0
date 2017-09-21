@@ -913,6 +913,7 @@ namespace BackEndSAM.DataAcces
                         nuevoDoc.Url = d.Path;
                         nuevoDoc.UsuarioModificacion = d.UserId;
                         nuevoDoc.Descripcion = d.Descripcion;
+                        nuevoDoc.DescripcionIngles = d.DescripcionIngles == null ? "": d.DescripcionIngles;
                         nuevoDoc.EstatusIncidencia = tipoDocumento;
 
                         ctx.Sam3_Rel_Incidencia_Documento.Add(nuevoDoc);
@@ -966,7 +967,8 @@ namespace BackEndSAM.DataAcces
                                                             Extencion = rid.Extencion,
                                                             Url = rid.Url,
                                                             TipoArchivo = string.Empty,
-                                                            Descripcion=rid.Descripcion
+                                                            Descripcion=rid.Descripcion,
+                                                            DescripcionIngles = rid.DescripcionIngles == null ? "": rid.DescripcionIngles
                                                         }).AsParallel().ToList();
                     return documentos;
                 }
