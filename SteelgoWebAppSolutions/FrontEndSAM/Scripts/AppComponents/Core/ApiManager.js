@@ -175,6 +175,95 @@ var $CobroOC = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $PagoOC = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $CreacionOC = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 
+
+//Steelgo - Maftec
+var $Dashboard = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Cuadrante = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Zona = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Patios = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Periodo = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Cedula = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Acero = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $TipoJunta = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
+//Fabricación
+var $Armado = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Defectos = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Obrero = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $InspeccionDimensional = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $InspeccionVisualDimensional = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $CapturasRapidas = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Soldadura = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
+/*General OK*/
+var $OK = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
+//ServiciosTecnicos
+var $CamposPredeterminados = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
+var $Proyectos = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $ServiciosTecnicosGeneral = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $RequisicionPND = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $EntregaPlacasGraficas = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $EditarRequisicion = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $ValidacionRT = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $OKPND = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $FechasSpool = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $OkDocumental = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
+//Condiciones Climatologicas
+var $CondicionesClimatologicas = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
+//Pintura
+var $PinturaGeneral = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $SistemaPintura = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $CargaCarro = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $CapturaAvance = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $SistemaPinturaAplicable = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $ListadoSistemaPintura = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $AvanceCuadrante = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $AdminComponentes = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $AdminReductores = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $RevisionPintura = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $DescargarCarro = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $PruebasPorLote = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $OkPintura = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
+//Embarque
+var $Etiquetado = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $CargaPlana = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $EmbarqueGeneral = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Proveedores = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Encintado = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Empaquetado = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $PreparacionEmbarque = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $RevisionEmbarque = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $ListadoEmbarque = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $AsignacionEnvio = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
+//Ingeneria
+var $BuscaSpool = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
+//Planeacion Y Control
+var $EmisionOT = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Ciclos = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
+
+
+//#region Catalogos
+var $TrabajoAdicional = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $TipoTrabajoAdicional = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $TipoObrero = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Obrero = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $ObreroUbicacion = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Defectos = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $ListadoCamposPredeterminados = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Taller = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Pruebas = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $Secuencias = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+//#endregion
+
+
 /****************************/
 /*    Document Ready        */
 /****************************/

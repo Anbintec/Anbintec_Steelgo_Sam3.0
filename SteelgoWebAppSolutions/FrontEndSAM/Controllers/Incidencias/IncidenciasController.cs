@@ -19,5 +19,10 @@ namespace FrontEndSAM.Controllers.Incidencias
         {
             return View();
         }
+
+        public ActionResult ListadoIncidenciasBilingues()
+        {
+            return View();
+        }
     }
 }
