@@ -1,8 +1,280 @@
 ﻿
-@{
-    ViewBag.Title = "Soldadura";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="lblFabricacion"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("Soldadura", "Produccion")"><span id="lblSoldaduraBreadcrum"></span></a>
+    </li>
 }
+<div id="FormCapturaSoldadura" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection ">
+                    <div class="btn-group save-group ">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar"></span></button>
+                        <button id="Editar" onclick="javascript:void(0);" type="button" class="btn btn-yellow" style="display:none"><span id="botonEdtar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar"><span id="botonGuardar2"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
 
-<h2>Soldadura</h2>
+                </div>
+                <div id="SoldaduraInspeccionDivSuperior" class="button-section">
+                    <a id="SoldaduraInspeccionSuperior" href="@Url.Action("InspeccionVisualDimensional", "inspeccion")" class="btn btn-primary"><span id="soldaduraInspeccionVisualSup"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+    @*Controles Superior*@
+    <div class="row addedSectionInLineWithoutColor" id="FieldSetView">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 altoControl">
+            <div class="btn-group " data-toggle="buttons" role="group">
+                <label>&nbsp;</label>
+                <div class="btn btn-primary" id="styleReporte">
+                    <input type="radio" name="TipoAgregado" style=" width:auto;" value="Reporte" /><span id="lblSpool"></span>
+                </div>
+                <div class="btn btn-primary" id="styleListado">
+                    <input type="radio" name="TipoAgregado" style=" width:auto;" value="Listado" /><span id="lblJunta"> </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 altoControl" id="CapturaArmadoHeaderSpoolIDDiv">
+            <label id="lblSpoolID"></label>
+            <input style="width:40%" id="InputOrdenTrabajo" class="item-select general-input" />-<input id="InputID" placeholder="ID" style="width:40%;" />
+        </div>
+        <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 altoControl" id="JuntaDiv">
+            <label id="lblJunta1"></label>
+            <input id="Junta" class="" />
+        </div>
 
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 altoControl" id="MuestraDiv">
+            <label id="lblMostrar"></label>
+            <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="Sin Capturar" /><span id="lblSinCaptura"></span>
+            <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="Todos" /><span id="lblTodos"> </span>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-1 col-lg-1">
+            <label id="">&nbsp;</label>
+            <button type="button" id="ButtonAgregar" class="btn btn-blue"><span id="botonAgregar"></span></button>
+        </div>
+    </div>
+    @*GRID*@
+    <div class=" row addedSectionInLine">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 altoControl">
+            <label id="lblFechaSoldadura"></label>
+            <input id="FechaSoldadura" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 altoControl">
+            <label id="lblTaller">Taller</label>
+            <input id="inputTaller" class="" />
+        </div>
+        @*<div class="col-sm-3 col-md-2 col-lg-2">
+                <label id="CapturaSoldaduraHeaderWPS">WPS</label>
+                <input id="inputWPS" class="" />
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-2">
+                <label id="CapturaSoldaduraHeaderPQR">PQR</label>
+                <input id="inputPQR" class="" />
+            </div>*@
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 altoControl" id="planchadoZone">
+            <label id="lblPlanchar"></label>
+            <input type="radio" name="LLena" class="radio-responsive" style=" width:auto;" value="Todos" /><span id="lblTodos1"></span>
+            <input type="radio" name="LLena" class="radio-responsive" style=" width:auto;" value="Vacios" /><span id="lblVacios"></span>
+
+
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-1 col-lg-1">
+            <label id="">&nbsp;</label>
+            <button type="button" id="ButtonAplicar" class="btn btn-blue"><span id="botonPlanchar"></span></button>
+        </div>
+        <div id="ContenedorGrid" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="grid" data-role="grid" class="k-grid k-widget">
+            </div>
+        </div>
+        <input id="hdAccionFiltrado" type="hidden" />
+    </div>
+
+    @*GRID POPUP*@
+    <div id="windowGrid" style="display: none; z-index:inherit;">
+        <div class="col-sm-11 col-md-11 col-lg-11">
+            <div class="row">
+                <div class="form-group">
+                    <div id="ContenedorGridPopUp">
+                        <div id="gridPopUp" data-role="grid" class="k-grid k-widget">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-sm-12 col-md-12 col-lg-12" style="padding-right:0px;">
+                <div class="col-sm-2 col-md-2 col-lg-2">
+
+                </div>
+                <div class="col-sm-3 col-d-3 col-lg-3">
+                    <label id="">&nbsp;</label>
+                    <a class="btn btn-primary " href="#" id="GuardarTrabajosAdicionales">
+                        <span id="textoGuardar2"></span>
+                    </a>
+                </div>
+                <div class="col-sm-3 col-d-3 col-lg-3">
+                    <label id="">&nbsp;</label>
+                    <a class="btn btn-primary " href="#" id="CancelarTrabajosAdicionales">
+                        <span id="textoCancelar2"></span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @*Menu Inferior*@
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection ">
+                    <div class="btn-group save-group ">
+                        <button id="GuardarPie" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar1"></span></button>
+                        <button id="Editar" onclick="javascript:void(0);" type="button" class="btn btn-yellow" style="display:none"><span id="botonEdtar2"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardarPie"><span id="botonGuardar3"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevoPie"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+
+                </div>
+                <div id="SoldaduraInspeccionDivPie" class="button-section">
+                    <a id="SoldaduraInspeccionPie" href="@Url.Action("InspeccionVisualDimensional", "inspeccion")" class="btn btn-primary"><span id="soldaduraInspeccionVisualInf"></span></a>
+                </div>
+
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="windowGridSoldadorRaiz" style="display: none; z-index:inherit;">
+        <div id="formaObrero" class="col-sm-12 col-md-12 col-lg-11">
+
+            <div class="row">
+                <div class=" col-sm-12 col-md-12 col-lg-12" style="display:none;">
+
+                    <input type="radio" name="CertificadoRaiz" class="radio-responsive" style=" width:auto;" value="Certificado" /><span id="">Certificado</span>
+                    <input type="radio" name="CertificadoRaiz" class="radio-responsive" style=" width:auto;" value="NoCertificado" /><span id="">No certificado</span>
+                </div>
+                <div class="form-group  col-sm-12 col-md-12 col-lg-12" id="containerMultiSelect" style="min-height: 100px;">
+                    <div id="contenedorMultiselect">
+                        <div id="inputSoldadoresRaiz" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="row col-sm-12 col-md-12 col-lg-12" style="padding-right:0px;">
+                <div class="col-sm-2 col-md-2 col-lg-2">
+
+                </div>
+                <div class="col-sm-3 col-d-3 col-lg-3">
+                    <label id="">&nbsp;</label>
+                    <a class="btn btn-primary " href="#" id="GuardarSoldadoresRaiz">
+                        <span id="textoGuardar"></span>
+                    </a>
+                </div>
+                <div class="col-sm-3 col-d-3 col-lg-3">
+                    <label id="">&nbsp;</label>
+                    <a class="btn btn-primary " href="#" id="CancelarSoldadoresRaiz">
+                        <span id="textoCancelar"></span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="windowMultiselectSoldadorRelleno" style="display: none; z-index:inherit;">
+        <div id="formaObrero" class="col-sm-12 col-md-12 col-lg-11">
+
+            <div class="row">
+                <div class=" col-sm-12 col-md-12 col-lg-12" style="display:none;">
+
+                    <input type="radio" name="CertificadoRelleno" class="radio-responsive" style=" width:auto;" value="Certificado" /><span id="">Certificado</span>
+                    <input type="radio" name="CertificadoRelleno" class="radio-responsive" style=" width:auto;" value="NoCertificado" /><span id="">No certificado</span>
+                </div>
+                <div class="form-group  col-sm-12 col-md-12 col-lg-12" id="containerMultiSelect" style="min-height: 100px;">
+                    <div id="contenedorMultiselectRelleno">
+                        <div id="inputSoldadoresRelleno" />
+                    </div>
+                </div>
+            </div>
+            <div class="row col-sm-12 col-md-12 col-lg-12" style="padding-right:0px;">
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                </div>
+                <div class="col-sm-3 col-d-3 col-lg-3">
+                    <label id="">&nbsp;</label>
+                    <a class="btn btn-primary " href="#" id="GuardarSoldadoresRelleno">
+                        <span id="textoGuardar1"></span>
+                    </a>
+                </div>
+                <div class="col-sm-3 col-d-3 col-lg-3">
+                    <a class="btn btn-primary " href="#" id="CancelarSoldadoresRelleno">
+                        <span id="textoCancelar1"></span>
+                    </a>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .k-multiselect-wrap {
+        height: 50px;
+    }
+</style>
+
+
+<script src="~/Scripts/AppComponents/Fabricacion/Soldadura/Seguridad.js"></script>
+<script src="~/Scripts/AppComponents/Fabricacion/Soldadura/Ajax.js"></script>
+<script src="~/Scripts/AppComponents/Fabricacion/Soldadura/Handlers.js"></script>
+<script src="~/Scripts/AppComponents/Fabricacion/Soldadura/Render.js"></script>
+<script src="~/Scripts/AppComponents/Fabricacion/Soldadura/Captura.js"></script>
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Soldadura"] = $SoldaduraModel;
+    }
+</script>

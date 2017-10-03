@@ -1,8 +1,216 @@
-﻿
-@{
-    ViewBag.Title = "NuevoSoldadorCertificacion";
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>NuevoSoldadorCertificacion</h2>
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="lblSoldaduraBreadcrum"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("SoldadorCertificacion", "ConfiguracionSoldadura")"><span id="SoldadorCertificacionBreadcrumb"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("NuevoSoldadorCertificacion", "ConfiguracionSoldadura")"><span id="lblNuevoSoldadorCertificacionBreadCrum"></span></a>
+    </li>
+}
 
+<div class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar"></span></button>
+                        <button id="Editar" onclick="javascript:void(0);" type="button" class="btn btn-yellow" style="display:none"><span id="botonEdtar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar" class="accionGuardar"><span id="botonGuardar2"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo" class="accionGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+                <div id="ArmadoSoldaduraDivSuperior" class="button-section">
+                    <a id="ArmadoSoldaduraSuperior" href="@Url.Action("Soldadura", "Fabricacion")" class="btn btn-primary"><span id="botonSoldaduraSup"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+
+    @*FORMULARIO SoldadorCertificacion*@
+    <div class="row" id="FieldSetView">
+        <div id="CamposRequeridosPQR" class="col-sm-12 col-md-12 col-lg-11" style=" z-index:1 !important;">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCSoldadorDiv">
+                    <label id="lblSoldador"> </label>
+                    <input type="text" id="inputSoldador" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCNombreWPSDiv">
+                    <label id="lblWPS"></label>
+                    <input id="inputNombreWPS" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-2" id="ProcesoRaizDiv">
+                    <label id="lblProcesoSoldaduraRaiz"></label>
+                    <label id="ProcesoRaiz"></label>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-2" id="ProcesoRellenoDiv">
+                    <label id="lblProcesoSoldaduraRelleno"></label>
+                    <label id="ProcesoRelleno"></label>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" id="SCTipoPruebaDiv">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCProcesoSoldaduraDiv">
+                    <label id="lblProcesoSoldadura"></label>
+                    <input type="text" id="inputProcesoSol" />
+                    <input type="hidden" id="HddNuevoSoldadorCertificacionID" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-2" id="SCFechaInicioDiV">
+                    <label id="lblDesde"></label>
+                    <input id="inputFechaInicioCertificado" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-2" id="SCFechaFinDiV">
+                    <label id="lblHasta"></label>
+                    <input id="inputFechaFinCertificado" />
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" id="SCTipoPruebaDiv">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCTipoPruebaDiv">
+                    <label id="lblTipoPrueba"></label>
+                    <input id="inputTipoPrueba" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCCedulaDiv">
+                    <label id="lblCedulaTubo"></label>
+                    <input id="inputCedulaTuboPQR" />
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" id="SCTipoPruebaDiv">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCEspesorMinimoDiv">
+                    <label id="lblEspesorMinimo"></label>
+                    <input id="inputEspesorMinimo" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCEspesorMaximoDiv">
+                    <label id="lblEspesorMaximo"></label>
+                    <input id="inputEspesorMaximo" />
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" id="SCTipoPruebaDiv">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCPasosSoldaduraDiv">
+                    <label id="lblNumeroPasos"></label>
+                    <input id="inputPasosSoldadura" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCPosicionDiv">
+                    <label id="lblPosicion"></label>
+                    <input id="inputPosicionPQR" />
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" id="SCTipoPruebaDiv">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCDiametroCalificadoDiv">
+                    <label id="lblDiametroCalificado"></label>
+                    <input id="inputDiametroCalificado" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCDiametroMinimoDiv">
+                    <label id="SoldadorCertificacionDiametroMinimo"></label>
+                    <input id="inputDiametroMinimo" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" id="SCTipoPruebaDiv">
+                    <label id="">&nbsp;</label>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" id="SCTipoPruebaDiv">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12" style="display: block">
+                    <label>&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12" style="display: block">
+                    <label>&nbsp;</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Menu Inferior*@
+
+    <div class="row">
+        <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="GuardarPie" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar1"></span></button>
+                        <button id="Editar" onclick="javascript:void(0);" type="button" class="btn btn-yellow" style="display:none"><span id="CapturaGuardarMenuPie"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardarPie" class="accionGuardar"><span id="botonGuardar3"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevoPie" class="accionGuardarYNuevo"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar1" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="ArmadoSoldaduraDivSuperior" class="button-section">
+                    <a id="ArmadoSoldaduraSuperior" href="@Url.Action("Soldadura", "Fabricacion")" class="btn btn-primary"><span id="botonSoldaduraInf"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/SoldadorCertificacion/NuevoSoldadorCertificacion/Ajax.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/SoldadorCertificacion/NuevoSoldadorCertificacion/Handlers.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/SoldadorCertificacion/NuevoSoldadorCertificacion/Captura.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/SoldadorCertificacion/NuevoSoldadorCertificacion/Seguridad.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/SoldadorCertificacion/NuevoSoldadorCertificacion/Render.js"></script>
+
+<script type="text/javascript">
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Edita SoldadortCertificacion"] = $SoldadorCertificacionSaveModel;
+    }
+</script>

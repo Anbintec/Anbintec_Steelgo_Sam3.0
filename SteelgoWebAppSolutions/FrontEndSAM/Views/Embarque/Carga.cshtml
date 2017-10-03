@@ -1,8 +1,346 @@
-﻿
-@{
-    ViewBag.Title = "Carga";
+﻿@{
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="lblEmbarque"></span></a>
+    </li>
+    <li class="active">
+        <a href=@Url.Action("Carga", "Embarque")><span id="EmbarqueCargaPlanaBreadcrumb"></span></a>
+    </li>
+}
 
-<h2>Carga</h2>
 
+<div id="FormEmbarqueCargas" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <input type="hidden" value=@ViewBag.EmbarquePlanaID id="inputHiddenEmbarquePlanaID" />
+                    <div class="btn-group save-group">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar" class="accionGuardar"><span id="BtnGuardarCerrarEmabarqueSup"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+                <div id="PreparacionEmbarqueDivSup" class="button-section">
+                    <a id="PreparacionEmbarqueSup" href=@Url.Action("EmbarqueCarro", "Embarque") class="btn btn-primary"><span id="EmbarquePreparacionSup"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones">
+                            <li>@*<a href="#" id="btnEmbarqueCerrarPlana" class="btnCerrarPlana"><span id="EmbarqueCargaBotonCerrarPlana">Cerrar plana</span></a>*@</li>
+
+                        </ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+    @*Controles Superior*@
+    <div class="row addedSectionInLineWithoutColor">
+        <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 altoControl" id="divProyecto">
+            <label id="lblProyecto"></label>
+            <input id="inputProyecto" />
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 altoControl" id="divProveedor">
+            <label id="EmbarqueCargaProveedor"></label>
+            <input id="inputProveedor" />
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 altoControl" id="divPlana">
+            <label id="EmbarqueCargaPLaca"></label>
+            <input id="inputEmbarqueCargaPLacaPlana" />
+        </div>
+        @*<div class="col-xs-12 col-sm-2 col-md-1 col-lg-1 FieldSetView">
+                <br />
+                <button class="btn btn-blue" id="btnMostrar"><span id="botonMostrar"></span></button>
+            </div>*@
+        <div class="col-xs-12 col-sm-4 col-md-1 col-lg-1 altoControl">
+            <label id="lblCerrar"></label>
+            <input id="inputCerrar" type="checkbox">
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 altoControl">
+            <label id="EmbarqueCargaTotalPiezas"></label>
+            <label id="lblEmbarqueCargaTotalPiezas"></label>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 altoControl">
+            <label id="EmbarqueCargaToneladasCargadas"></label>
+            <label id="lblEmbarqueCargaToneladasCargadas"></label>
+        </div>
+        @*<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 altoControl">
+                    <hr />
+            </div>*@
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <div class="btn-group " role="group">
+                <label id="EmbarqueCargaSelecciona"></label>
+                <label id="styleReporte">
+                    <input type="radio" name="EmbarqueCargaTipoSeleccion" class="radioEmbarqueCargaTipoSeleccion" style="width:auto;" value="Spool" /><span id="EmbarqueCargaOpcionSpool">Spool</span>
+                </label>
+                <label id="styleListado">
+                    <input type="radio" name="EmbarqueCargaTipoSeleccion" class="radioEmbarqueCargaTipoSeleccion" style="width:auto;" value="Paquete" /><span id="EmbarqueCargaOpcionPaquete"> Paquete</span>
+                </label>
+                <label id="styleListado">
+                    <input type="radio" name="EmbarqueCargaTipoSeleccion" class="radioEmbarqueCargaTipoSeleccion" style="width:auto;" value="Codigo" /><span id="EmbarqueCargaOpcionCodigo">Codigo </span>
+                </label>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" id="divSpool">
+            <label id="lblSpoolID"></label>
+            <input style="width:40%" id="InputOrdenTrabajo" class="item-select general-input" />-<input id="InputID" placeholder="ID" style="width:40%;" />
+        </div>
+        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" id="divPaquete" style="display:none;">
+            <label id="EmbarqueCargaPaquete"></label>
+            <input id="inputPaquete" />
+        </div>
+        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" id="divCodigo" style="display:none;">
+            <label id="EmbarqueCargaCodigo"></label>
+            <input id="inputCodigo" class="item-select general-input" />
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-1">
+            <label id="">&nbsp;</label>
+            <button type="button" id="btnAgregar" class="btn btn-blue"><span id="EmbarqueCargaAgregar"></span></button>
+        </div>
+    </div>
+    @*GRID*@
+    <div class="row addedSectionInLine">
+        <div class="col-sm-8 col-md-8 col-lg-8">
+
+        </div>
+        <div id="ContenedorGrid" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="grid" data-role="grid" class="k-grid k-widget">
+            </div>
+        </div>
+        <input id="hdAccionFiltrado" type="hidden" />
+    </div>
+    @*NUEVO PROVEEDOR POPUP*@
+    <div id="divNuevoProveedor" style="display: none; z-index:inherit;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-10 col-md-10 col-lg-10" id="divNombreNuevoProveedor">
+                    <label id="lblProveedor1"></label>
+                    <input id="inputNombreNuevoProveedor" class="general-input form-control" />
+                </div>
+            </div>
+            <div class="form-group row"></div>
+            <div class="row">
+                <center>
+                    <button type="button" id="GuardarNuevoProveedor" class="btn btn-blue confirm_yes">
+                        <span id="botonGuardar1"></span>
+                    </button>
+                    <button type="button" id="CancelarNuevoProveedor" class="btn btn-blue confirm_yes">
+                        <span id="botonCerrar"></span>
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+
+    @*NUEVA PLANA POPUP*@
+    <div id="divNuevoPlana" style="display: none; z-index:inherit;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-sm-10 col-md-10 col-lg-10" id="divNombreNuevaPlana">
+                        <label id="lblPlaca"></label>
+                        <input id="inputNombreNuevaPlana" class="general-input form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row"></div>
+            <div class="row">
+                <center>
+                    <button type="button" id="GuardarNuevaPlana" class="btn btn-blue confirm_yes">
+                        <span id="botonGuardar5"></span>
+                    </button>
+                    <button type="button" id="CancelarNuevaPlana" class="btn btn-blue confirm_yes">
+                        <span id="botonCerrar1"></span>
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+    @*DESCARGA DE SPOOL*@
+    <div id="ventanaPopup" style="display: none; z-index:inherit;">
+        <div class="container-fluid">
+            <div class="form-group">
+                <center>
+                    <span id="EmbarqueCargaMsjDescargaSpool"></span>
+                </center>
+                <input type="hidden" id="rowGridDescargaSpool" />
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                    <label id="lblZonaDescargaSpool"></label>
+                    <input id="inputZonaPopup" />
+                </div>
+                <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                    <label id="lblCuadranteDescargaSpool"></label>
+                    <input id="inputCuadrantePopup" />
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            </div>
+            <div class="row">
+                <center>
+                    <button type="button" id="btnDescargar" class="btn btn-blue confirm_yes">
+                        <span id="botonDescarga1"></span>
+                    </button>
+                    <button type="button" id="btnCerrarPopup" class="btn btn-blue confirm_yes">
+                        <span id="botonCerrar2"></span>
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+    @*DESCARGA DE PAQUETE*@
+    <div id="divDescargaPaquete" style="display: none; z-index:inherit;">
+        <div class="container-fluid">
+            <div class="form-group">
+                <center>
+                    <span id="EmbarqueCargaMsjDescargaPaquete"></span>
+                </center>
+                <input type="hidden" id="rowGridDescargaPaquete" />
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                    <label id="lblZonaPaquete"></label>
+                    <input id="inputZonaPaquete" />
+                </div>
+                <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                    <label id="lblCuadrantePaquete"></label>
+                    <input id="inputCuadrantePaquete" />
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            </div>
+            <div class="row">
+                <center>
+                    <button type="button" id="btnDescargarPaquete" class="btn btn-blue confirm_yes">
+                        <span id="botonDescarga2"></span>
+                    </button>
+                    <button type="button" id="btnCerrarPopupPaquete" class="btn btn-blue confirm_yes">
+                        <span id="botonCerrar3"></span>
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+    @*PAQUETE VACIO*@
+    <div id="windowPackageEmpty" style="display:none">
+        <div class="container-fluid" style="margin:0px">
+            <div class="form-group">
+                @*<center>*@
+                <span id="EmbarqueEmpaquetadoMsjDescargaEliminaPaquete"></span>
+                <input type="hidden" id="detallePaquete" />
+                <input type="hidden" id="CuadrantePaquete" />
+                @*</center>*@
+            </div>
+            <div class="form-group row" id="divDescargarPaquete">
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                    <label id="lblZonaDescargaPaquete"></label>
+                    <input id="inputZonaPaqueteDescarga" />
+                </div>
+                <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                    <label id="lblCuadranteDescargaPaquete"></label>
+                    <input id="inputCuadrantePaqueteDescarga" />
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            </div>
+            <div class="row">
+                <center>
+                    <a class="btn btn-primary confirm_yes" href="#/" id="btnDescargarPaqueteVacio">
+                        <span id="botonDescargar"></span>
+                    </a>
+                    <a class="btn btn-primary confirm_yes" href="#/" id="btnEliminarPaqueteVacio">
+                        <span id="botonEliminarPaquetePopup"></span>
+                    </a>
+                </center>
+            </div>
+        </div>
+    </div>
+    @*ELIMINA PAQUETE*@
+    <div id="windowDeletePackage" style="display:none">
+        <div class="container-fluid" style="margin:0px">
+            <div class="form-group">
+                @*<center>*@
+                <span id="EmbarqueCargaMsjEliminaPaquete"></span>
+                <input type="hidden" id="rowGridEliminaPaquete" />
+                @*</center>*@
+            </div>
+            <div class="row">
+                <center>
+                    <a class="btn btn-primary confirm_yes" href="#/" id="btnElimina">
+                        <span id="botonSi"></span>
+                    </a>
+                    <a class="btn btn-primary confirm_yes" href="#/" id="btnCancela">
+                        <span id="botonNo"></span>
+                    </a>
+                </center>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="GuardarPie" onclick="javascript:void(0);" type="button" class="btn btn-yellow  accionGuardar"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar1" class="accionGuardar"><span id="BtnGuardarCerrarEmabarqueInf"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="PreparacionEmbarqueDivInf" class="button-section">
+                    <a id="PreparacionEmbarqueInf" href=@Url.Action("EmbarqueCarro", "Embarque") class="btn btn-primary"><span id="EmbarquePreparacionInf"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones">
+                            <li>@*<a href="#" id="btnEmbarqueCerrarPlana" class="btnCerrarPlana"><span id="EmbarqueCargaBotonCerrarPlana">Cerrar plana</span></a>*@</li>
+                        </ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Cargas/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Cargas/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Cargas/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Cargas/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Cargas/Seguridad.js"></script>
+
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Carga Plana"] = $CargaPlanaModel;
+    }
+</script>

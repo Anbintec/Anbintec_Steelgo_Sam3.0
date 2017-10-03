@@ -1,8 +1,107 @@
-﻿
-@{
-    ViewBag.Title = "ListadoEmbarquesCerrados";
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="lblEmbarque"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("ListadoEmbarquesCerrados", "Embarque")"><span id="lblListadoEmbarquesCerrados"></span></a>
+    </li>
+}
+<div id="FormVisualDimensional" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#/" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
 
-<h2>ListadoEmbarquesCerrados</h2>
+        </div>
+    </div>
+    @*Linea de captura*@
+    <div class="row addedSectionInLineWithoutColor">
+        <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 altoControl" id="divProyecto">
+            <label id="lblProyecto"></label>
+            <input id="InputProyecto" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divPeriodo">
+            <label id="lblPeriodo"></label>
+            <input id="InputPeriodo" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divFechaInicio">
+            <label id="lblFechaInicio"></label>
+            <input id="InputFechaInicio" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divFechaFin">
+            <label id="lblFechaFin"></label>
+            <input id="InputFechaFin" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+            <label id="">&nbsp;</label>
+            <button class="btn btn-blue" id="btnMostrar"><span id="botonMostrar"></span></button>
+        </div>
+    </div>
+    @*GRID*@
+    <div id="FieldSetView">
+        <div class="row clearfix">
+            <div id="containerDiv">
+                <div class="row addedSectionInLine">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div id="ContenedorGrid">
+                            <div id="grid" data-role="grid" class="k-grid k-widget" style="margin-top: 0px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input id="hdAccionFiltrado" type="hidden" />
+    </div>
+    @*Menu Inferior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#/" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/ListadoEmbarqueCerrados/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/ListadoEmbarqueCerrados/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/ListadoEmbarqueCerrados/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/ListadoEmbarqueCerrados/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/ListadoEmbarqueCerrados/Seguridad.js"></script>
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Listado Embarque Cerrados"] = $ListadoEmbarqueCerradosModel;
+    }
+</script>

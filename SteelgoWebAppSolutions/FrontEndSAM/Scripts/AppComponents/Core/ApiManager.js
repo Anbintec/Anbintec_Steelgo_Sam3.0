@@ -189,7 +189,7 @@ var $TipoJunta = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 //Fabricación
 var $Armado = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $Defectos = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
-var $Obrero = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+//var $Obrero = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $InspeccionDimensional = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $InspeccionVisualDimensional = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $CapturasRapidas = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
@@ -210,6 +210,7 @@ var $ValidacionRT = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $OKPND = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $FechasSpool = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $OkDocumental = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+
 
 //Condiciones Climatologicas
 var $CondicionesClimatologicas = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
@@ -256,11 +257,17 @@ var $TipoTrabajoAdicional = new $.RestClient($BackEndSAMUri + '/backendsam/api/'
 var $TipoObrero = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $Obrero = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $ObreroUbicacion = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
-var $Defectos = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+//var $Defectos = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $ListadoCamposPredeterminados = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $Taller = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $Pruebas = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $Secuencias = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $AsignarRequisicion = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $ImpresionPruebas = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $ReporteRT = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $PQR = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $WPS = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $SoldadorCertificacion = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 //#endregion
 
 
@@ -276,10 +283,17 @@ function apiManagerToBeExecutedOnDocumentReady() {
 /****************************/
 /*    Global Functions      */
 /****************************/
-
+$Proveedores.add('Proveedores');
+$CargaPlana.add('CargaPlana');
+$EmbarqueGeneral.add('EmbarqueGeneral');
 $BackEndSAM.add('DummyListadoAvisoLlegada');
 $BackEndSAM.add('perfil');
 $SecurityManager.add('authentication');
+$Defectos.add("Defectos");
+$Obrero.add("Obrero");
+$InspeccionDimensional.add("InspeccionDimensional");
+$InspeccionVisualDimensional.add("VisualDimensional");
+$CapturasRapidas.add("CapturasRapidas");
 
 //Detalle Aviso Llegada
 $Plana.add("Plana");
@@ -376,6 +390,83 @@ $ValidarCedulas.add("ValidarCedulas");
 $ComplementoRecepcionAlt.add("Listado");
 $PickingTicket.add("PickingTicket");
 $UbicacionNumeroUnico.add("UbicacionNumeroUnico");
+
+
+//Maftec Consulting
+$Dashboard.add("Dashboard");
+$Cuadrante.add('Cuadrante');
+$Zona.add('Zona');
+$Patios.add('Patios');
+$Periodo.add('Periodo');
+$Cedula.add('Cedula');
+$Acero.add('Acero');
+$TipoJunta.add('TipoJunta');
+
+//Fabricación
+$Armado.add("Armado");
+$Soldadura.add("Soldadura");
+
+// ServiciosTecnicos
+$CamposPredeterminados.add("CamposPredeterminados");
+$AsignarRequisicion.add("AsignarRequisicion");
+$Proyectos.add("Proyectos");
+$ServiciosTecnicosGeneral.add("ServiciosTecnicosGeneral");
+$RequisicionPND.add("RequisicionPND");
+$EntregaPlacasGraficas.add("EntregaPlacasGraficas");
+$EditarRequisicion.add("EditarRequisicion");
+$ValidacionRT.add("ValidacionRT");
+$ReporteRT.add("ReporteRT");
+$OKPND.add("OKPND");
+$OkDocumental.add("OkDocumental");
+
+//CondicionesClimatologicas
+$CondicionesClimatologicas.add("CondicionesClimatologicas");
+
+//Pintura
+$PinturaGeneral.add("PinturaGeneral");
+$SistemaPintura.add("SistemaPintura");
+$CargaCarro.add("CargaCarro");
+$CapturaAvance.add('CapturaAvance');
+$SistemaPinturaAplicable.add("SistemaPinturaAplicable");
+$ListadoSistemaPintura.add("ListadoSistemaPintura");
+$AvanceCuadrante.add("AvanceCuadrante");
+$AdminComponentes.add("AdminComponentes");
+$AdminReductores.add("AdminReductores");
+$RevisionPintura.add("RevisionPintura");
+$DescargarCarro.add("DescargarCarro");
+$PruebasPorLote.add("PruebasPorLote");
+$OkPintura.add("OKPintura");
+//Embarque
+$Etiquetado.add("Etiquetado");
+$Encintado.add('Encintado');
+$Empaquetado.add('Empaquetado');
+$PreparacionEmbarque.add('PreparacionEmbarque');
+$RevisionEmbarque.add('RevisionEmbarque');
+$ListadoEmbarque.add('ListadoEmbarque');
+$AsignacionEnvio.add("AsignacionEnvio");
+
+//Ingeneria
+$BuscaSpool.add('BuscaSpool');
+
+//Soldadura
+$PQR.add("PQR");
+$WPS.add("WPS");
+$SoldadorCertificacion.add("SoldadorCertificacion");
+
+//Planeacion Y Control
+$EmisionOT.add('EmisionOT');
+$Ciclos.add('Ciclos');
+
+//Catalogos
+$Taller.add("Taller");
+$Secuencias.add("Secuencias");
+
+/*General OK*/
+$OK.add("OK");
+
+$FechasSpool.add("FechasSpool");
+$ComplementoRecepcionAlt.add("Listado");
+$ImpresionPruebas.add("ImpresionPruebas");
 
 
 //INICIA MATERIALES

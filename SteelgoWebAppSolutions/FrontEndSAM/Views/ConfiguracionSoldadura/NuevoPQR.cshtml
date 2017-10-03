@@ -1,8 +1,262 @@
-﻿
-@{
-    ViewBag.Title = "NuevoPQR";
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>NuevoPQR</h2>
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="ConfiguracionSoldaduraBreadcrumb"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("PQR", "ConfiguracionSoldadura")"><span id="PQRBreadcrumb"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("NuevoPQR", "ConfiguracionSoldadura")"><span id="NuevoPQRBreadcrumb"></span></a>
+    </li>
+}
 
+<div class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-11 col-sm-12 col-md-12 col-lg-11">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar" class="accionGuardar"><span id="botonGuardar2"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+                <div id="ArmadoSoldaduraDivSuperior" class="button-section">
+                    <a id="ArmadoSoldaduraSuperior" href="@Url.Action("PQR","ConfiguracionSoldadura")" class="btn btn-primary"><span id="botonPQRSup"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+    @*FORMULARIO PQR*@
+    <div class="row" id="FieldSetView">
+        <div id="CamposRequeridosPQR" class="col-sm-12 col-md-12 col-lg-11" style=" z-index:1 !important;">
+            <div class="row">
+                <div class="row">
+                    <div class=" col-sm-6 col-md-6 col-lg-4" style="display: none">
+                        <input id="IdPQR" value="0" />
+                    </div>
+                </div>
+                <div class="alert-container">
+                    <div class="message">
+                        Mensaje de éxito/error/advertencia
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <input type="hidden" id="PQRID" value="0" />
+                <div class=" col-sm-6 col-md-6 col-lg-4" id="PQRNombreDiv">
+                    <label id="lblNombre"> </label>
+                    <input type="text" id="NombreId" class="form-control general-input" />
+                </div>
+                <div class=" col-sm-6 col-md-6 col-lg-4" id="PQRCodigoDiv">
+                    <label id="lblCodigo"></label>
+                    <input id="CodigoID" class="" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-sm-6 col-md-6 col-lg-2" id="PQRPreheatDiv">
+                    <label id="lblPREHEAT"></label>
+                    <input type="checkbox" id="chkPreheat" data-bind="checked: optionCheck" />
+                </div>
+                <div class=" col-sm-6 col-md-6 col-lg-2" id="PQRPWHTDiv">
+                    <label id="lblPWHT"></label>
+                    <input type="checkbox" id="chkPwht" data-bind="checked: optionCheckPWHT" />
+                </div>
+                <div class=" col-sm-6 col-md-6 col-lg-2" id="PQRCVNDiv">
+                    <label id="lblCVN"></label>
+                    <input type="checkbox" id="chkCVN" data-bind="checked: optionCheckCVN" />
+                </div>
+                <div class=" col-sm-6 col-md-6 col-lg-2" id="PQRFNDiv">
+                    <label id="lblFN"></label>
+                    <input type="checkbox" id="chkFN" data-bind="checked: optionCheckFN" />
+                </div>
+                <div class=" col-sm-6 col-md-6 col-lg-2" id="PQRMacroTestDiv">
+                    <label id="lblMacroTest"></label>
+                    <input type="checkbox" id="chkMacroTest" data-bind="checked: optionCheckMacroTest" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-4" id="TipoJuntaDiV">
+                    <label id="DimensionalVisualHeaderTipoJunta"></label>
+                    <input id="TipoJunta" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" id="TipoPruebaDiV">
+                    <label id="lblTipoPrueba"></label>
+                    <input id="TipoPrueba" />
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-4" id="PQREspesorRaizDiV">
+                    <label id="lblEspesorRaiz"></label>
+                    <input id="EspesorRaiz" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" id="PQREspesoRellenorDiV">
+                    <label id="lblEspesorRelleno"></label>
+                    <input id="EspesorRelleno" />
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-4" id="PQRProcesoSoldaduraRaizDiv">
+                    <label id="lblProcesoSoldaduraRaiz"></label>
+                    <input id="ProcesoSoldaduraRaizID" />
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" id="PQRProcesoSoldaduraRellenoDiv">
+                    <label id="lblProcesoSoldaduraRelleno"></label>
+                    <input id="ProcesoSoldaduraRellenoID" class="" />
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-sm-6 col-md-6 col-lg-4" id="PQRGrupoPMaterialBase1Div">
+                    <label id="lblGrupoPMaterialBase1"></label>
+                    <input id="GrupoPMaterialBase1ID" class="" />
+                </div>
+                <div class=" col-sm-6 col-md-6 col-lg-4" id="PQRGrupoPMaterialBase2Div">
+                    <label id="lblGrupoPMaterialBase2"></label>
+                    <input id="GrupoPMaterialBase2ID" class="" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-sm-6 col-md-6 col-lg-4" id="PQRAporteDiv">
+                    <label id="lblAporte"></label>
+                    <input id="AporteID" class="form-control general-input" />
+                </div>
+                <div class=" col-sm-6 col-md-6 col-lg-4" id="PQRAporteRellenoDiv">
+                    <label id="lblAporteRelleno"></label>
+                    <input id="AporteRellenoID" class="form-control general-input" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-sm-6 col-md-6 col-lg-4" id="PQRGrupoFDiv">
+                    <label id="lblGrupoF"></label>
+                    <input id="GrupoFID" class="form-control general-input" />
+                </div>
+                <div class=" col-sm-6 col-md-6 col-lg-4" id="PQRGrupoFRellenoDiv">
+                    <label id="lblGrupoFRelleno"></label>
+                    <input id="GrupoFRellenoID" class="form-control general-input" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class=" col-sm-6 col-md-6 col-lg-4" id="PQRMezclaDiv">
+                    <label id="lblMezcla"></label>
+                    <input id="MezclaID" class="form-control general-input" />
+                </div>
+                <div class=" col-sm-6 col-md-6 col-lg-4" id="PQRRespaldoDiv">
+                    <label id="lblRespaldo"></label>
+                    <input id="RespaldoID" class="form-control general-input" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Menu Inferior*@
+    <div class="row">
+        <div class="col-xs-11 col-sm-12 col-md-12 col-lg-11">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar1" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar1" class="accionGuardar"><span id="botonGuardar4"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar1" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="ArmadoSoldaduraDivSuperior" class="button-section">
+                    <a id="ArmadoSoldaduraSuperior" href="@Url.Action("PQR","ConfiguracionSoldadura")" class="btn btn-primary"><span id="botonPQRInf"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/PQR/NuevoPQR/Ajax.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/PQR/NuevoPQR/Handlers.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/PQR/NuevoPQR/Captura.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/PQR/NuevoPQR/Seguridad.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/PQR/NuevoPQR/Render.js"></script>
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Edita PQR"] = $NuevoPQRModel;
+    }
+</script>

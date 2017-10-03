@@ -1,8 +1,249 @@
-﻿
-@{
-    ViewBag.Title = "AsignacionEnvio";
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="lblEmbarque"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("AsignacionEnvio", "Embarque")"><span id="titleAsignacionEnvio"></span></a>
+    </li>
+}
+<div id="FormEmbarqueEmbarque" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <input type="hidden" value=@ViewBag.EmbarquePlanaID id="inputHiddenEmbarquePlanaID" />
+                    <div class="btn-group save-group">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar" class="accionGuardar"><span id="botonGuardar2"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+                <div id="ListadoEmbarqueDivSup" class="button-section">
+                    <a id="ListadoEmbarqueSup" href=@Url.Action("EmbarqueCarro", "Embarque") class="btn btn-primary"><span id="EmbarquePreparacionSup"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones">
+                            <li>
+                                <a href="#/" id="btnELiminarEmbarque" class="btnCerrarPlana">
+                                    <span id="botonEliminarEmbarque"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
 
-<h2>AsignacionEnvio</h2>
+    @*Controles Superior*@
+    <div class="row addedSectionInLineWithoutColor" style="padding-top: 20px; padding-bottom: 20px;">
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="ProyectoDiv">
+            <label id="lblProyecto" class="security_required"></label>
+            <input id="Proyecto" />
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="ProveedorDiv">
+            <label id="lblProveedor"></label>
+            <input id="Proveedor" />
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="TractoDiv">
+            <label id="lblTracto"></label>
+            <input id="Tracto" />
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="ChoferDiv">
+            <label id="lblChofer"></label>
+            <input id="Chofer" />
+        </div>
+    </div>
+    <div class="row addedSectionInLineWithoutColor" style="padding-top: 20px; padding-bottom: 20px;">
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="EmbarqueDiv">
+            <label id="lblPreparacion" class="security_required"></label>
+            <input id="Embarque" />
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="ProveedorEnvioDiv">
+            <label id="lblProveedorEnvio" class="security_required"></label>
+            <input id="ProveedorEnvio" />
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="TractoEnvioDiv">
+            <label id="lblTractoEnvio" class="security_required"></label>
+            <input id="TractoEnvio" />
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 " id="ChoferEnvioDiv">
+            <label id="lblChoferEnvio" class="security_required"></label>
+            <input id="ChoferEnvio" />
+        </div>
+    </div>
+    <br />
 
+    @*NUEVO PROVEEDOR POPUP*@
+    <div id="divNuevoProveedorEnvio" style="display: none;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-1 col-sm-10 col-md-10 col-lg-10 form" id="divNombreNuevoProveedorEnvio">
+                    <label id="lblProveedor1"></label>
+                    <input id="inputNombreNuevoProveedorEnvio" class="general-input form-control" />
+                </div>
+            </div>
+            <div class="form-group row"></div>
+            <div class="row">
+                <center>
+                    <button type="button" id="GuardarNuevoProveedorEnvio" class="btn btn-blue confirm_yes">
+                        <span id="botonGuardar1"></span>
+                    </button>
+                    <button type="button" id="CancelarNuevoProveedorEnvio" class="btn btn-blue confirm_yes">
+                        <span id="botonCerrar"></span>
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+
+    @*NUEVO TRACTO POPUP*@
+    <div id="divNuevoTractoEnvio" style="display: none; z-index:inherit;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-10 col-md-10 col-lg-10 form" id="divNombreNuevoTractoEnvio">
+                    <label id="lblTracto1"></label>
+                    <input id="inputNombreNuevoTractoEnvio" class="general-input form-control" />
+                </div>
+            </div>
+            <div class="form-group row"></div>
+            <div class="row">
+                <center>
+                    <button type="button" id="GuardarNuevoTractoEnvio" class="btn btn-blue confirm_yes">
+                        <span id="botonGuardar5"></span>
+                    </button>
+                    <button type="button" id="CancelarNuevoTractoEnvio" class="btn btn-blue confirm_yes">
+                        <span id="botonCerrar1"></span>
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+
+    @*NUEVO CHOFER POPUP*@
+    <div id="divNuevoChoferEnvio" style="display: none; z-index:inherit;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-10 col-md-10 col-lg-10 form" id="divNombreNuevoChoferEnvio">
+                    <label id="lblChofer1"></label>
+                    <input id="inputNombreNuevoChoferEnvio" class="general-input form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <center>
+                    <button type="button" id="GuardarNuevoChoferEnvio" class="btn btn-blue confirm_yes">
+                        <span id="botonGuardar6"></span>
+                    </button>
+                    <button type="button" id="CancelarNuevoChoferEnvio" class="btn btn-blue confirm_yes">
+                        <span id="botonCerrar2"></span>
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+
+    @*NUEVO EMBARQUE POPUP*@
+    <div id="divNuevoEmbarque" style="display: none; z-index:inherit;">
+        <div class="container-fluid">
+            <div class="row content-container">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 form">
+                    <label id="EmbarquePreparacionNumEmbarqueSteelgo"></label>
+                    <input id="inputNombreEmbarque" class="item-select general-input" style="width: 94%;min-height:38px" />
+                    <input type="hidden" id="InputTipoGuardado" />
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 form">
+                    <label id="EmbarquePreparacionNumEmbarqueCliente"></label>
+                    <input id="inputNombreEmbarqueCliente" class="item-select general-input" style="width: 94%;min-height:38px" />
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 form">
+                    <label id="lblFecha"></label>
+                    <input id="inputFechaEmbarque" />
+                </div>
+            </div>
+            <div class="form-group row"></div>
+            <div class="row content-container">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 form">
+                    <center>
+                        <button type="button" id="GuardarNuevoEmbarque" class="btn btn-blue confirm_yes">
+                            <span id="botonGuardar6">Guardar</span>
+                        </button>
+                        <button type="button" id="CancelarNuevoEmbarque" class="btn btn-blue confirm_yes">
+                            <span id="botonCerrar3"></span>
+                        </button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Menu Inferior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar1" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar1"><span id="botonGuardar4"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="ListadoEmbarqueDivInf" class="button-section">
+                    <a id="ListadoEmbarqueSup" href=@Url.Action("EmbarqueCarro", "Embarque") class="btn btn-primary"><span id="EmbarquePreparacionInf"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones">
+                            <li>
+                                <a href="#/" id="btnELiminarEmbarque1" class="btnCerrarPlana">
+                                    <span id="botonEliminarEmbarque1"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/AsignacionEnvio/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/AsignacionEnvio/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/AsignacionEnvio/Captura.js"></script>
+@*<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/AsignacionEnvio/Seguridad.js"></script>*@
+
+
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+        //$authorizationModel["Embarque"] = $EmbarqueModel;
+    }
+</script>

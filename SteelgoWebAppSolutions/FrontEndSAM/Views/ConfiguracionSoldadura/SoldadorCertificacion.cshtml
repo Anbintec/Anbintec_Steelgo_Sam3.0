@@ -1,8 +1,126 @@
-﻿
-@{
-    ViewBag.Title = "SoldadorCertificacion";
+﻿@{
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>SoldadorCertificacion</h2>
 
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="ConfiguracionSoldaduraBreadcrumb"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("SoldadorCertificacion", "ConfiguracionSoldadura")"><span id="SoldadorCertificacionBreadcrumb"></span></a>
+    </li>
+}
+
+<div class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar" class="accionGuardar"><span id="botonGuardar2"></span></a></li>
+
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+                <div id="ArmadoSoldaduraDivSuperior" class="button-section">
+                    <a id="ArmadoSoldaduraSuperior" href="@Url.Action("Soldadura","Fabricacion")" class="btn btn-primary"><span id="botonSoldaduraSup"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+    @*Controles Superior*@
+
+
+    @*GRID*@
+    <div id="FieldSetView">
+        <div class="row addedSectionInLine addedSectionInLineCatalogos">
+            <div class="button-section col-sm-11 col-md-11 col-lg-11">
+                <label>&nbsp;</label>
+            </div>
+            <div class="button-section col-sm-1 col-md-1 col-lg-1" id="buttonNuevoSoldador">
+                <a id="AgregarSC" href="@Url.Action("NuevoSoldadorCertificacion","ConfiguracionSoldadura")" type="button" class="btn btn-newArrival btn-yellow"><span id="botonNuevo"></span></a>
+            </div>
+
+            <div id="ContenedorGrid" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="grid" data-role="grid" class="k-grid k-widget">
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <label>&nbsp;</label>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <label>&nbsp;</label>
+            </div>
+        </div>
+    </div>
+
+
+    @*Menu Inferior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection ">
+                    <div class="btn-group save-group">
+                        <button id="Guardar1" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar1" class="accionGuardar"><span id="botonGuardar4"></span></a></li>
+
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+
+                </div>
+                <div id="ArmadoSoldaduraDivInferior" class="button-section">
+                    <a id="ArmadoSoldaduraInferior" href="@Url.Action("Soldadura","Fabricacion")" class="btn btn-primary"><span id="botonSoldaduraInf"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/SoldadorCertificacion/Handlers.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/SoldadorCertificacion/Ajax.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/SoldadorCertificacion/Render.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/SoldadorCertificacion/Captura.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/SoldadorCertificacion/Seguridad.js"></script>
+
+<script type="text/javascript">
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["ListadSoldadorCertificacion"] = $SoldadorCertificacionModel;
+    }
+</script>

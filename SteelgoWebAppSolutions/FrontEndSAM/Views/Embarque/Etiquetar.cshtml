@@ -1,8 +1,177 @@
 ﻿
+
 @{
-    ViewBag.Title = "Etiquetar";
+    ViewBag.Title = "Etiquetado";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="lblCalidad"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("Etiquetar", "Embarque")"><span id="lblEtiquetado"></span></a>
+    </li>
+}
+<div id="FormEmbarqueMarcado" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar"><span id="botonGuardar2" class="accionGuardar"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo" class="accionGuardar"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+                <div id="EmbarqueEncintadoDivSup" class="button-section">
+                    <a id="EmbarqueEncintadoSup" href="@Url.Action("Encintar", "Embarque")" class="btn btn-primary"><span id="lblEncintado"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones">
+                            @*<li><a href="#" id="ImprimirEtiqueta"><span id="lblImprimirEtiqueta"></span></a></li>*@
+                            @*<li><a href="#" id="ImprimirTravel"><span id="lblImprimirTravelerMasivo"></span></a></li>*@
+                        </ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+    @*Controles Superior*@
+    <div class="row addedSectionInLineWithoutColor" id="FieldSetView">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+            <div id="tipoVista" class="btn-group altoControl" data-toggle="buttons" role="group">
+                <label id="lblTipoBusqueda"></label>
+                <div class="btn btn-primary" id="styleZona">
+                    <input type="radio" name="TipoBusqueda" style="width:auto;" value="Zona" /><span id="lblZona"></span>
+                </div>
+                <div class="btn btn-primary" id="styleSpool">
+                    <input type="radio" name="TipoBusqueda" style="width:auto;" value="Spool" /><span id="lblSpoolID"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl" id="ZonaDiv" style="display:block;">
+            <label id=""><span id="lblZona1"></span></label>
+            <input id="inputZona" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl" id="CuadranteDiv" style="display:block;">
+            <label id=""><span id="lblCuadrante"></span></label>
+            <input id="inputCuadrante" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl" id="SpoolIDDiv" style="display:none;">
+            <label id=""><span id="lblSpoolIDContiene"></span></label>
+            <input id="SpoolIDCOntiene" class="general-input" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl">
+            <label id="lblMostrar"></label>
+            <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="SinCaptura" /><span id="lblSinCaptura"></span>
+            <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="Todos" /><span id="lblTodos"> </span>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+            <label id="">&nbsp;</label>
+            <button type="button" id="btnMostrar" class="btn btn-blue"><span id="botonMostrar"></span></button>
+        </div>
 
-<h2>Etiquetar</h2>
+    </div>
+    @*GRID*@
 
+    <div class="row addedSectionInLine ">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row" id="FieldSetView2">
+                <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 " id="divCuadrante">
+                    <label id="lblCuadrante1"></label>
+                    <input id="inputCuadrantePlanchado" />
+                </div>
+                <div class="col-sm-2 col-md-2 col-lg-2" id="divEtiquetado">
+                    <label id="lblEtiquetado1"></label>
+                    <input type="radio" id="SelectTodosSi" name="SelectTodos" style="width:auto;" value="Si" /><span id="lblSi"></span><br />
+                    <input type="radio" id="SelectTodosNo" name="SelectTodos" style="width:auto;" value="No" /><span id="lblNo"></span><br />
+                    <input type="radio" id="SelectTodosNinguno" name="SelectTodos" style="width:auto;" value="Ninguno" /><span id="lblNinguno"></span>
+                </div>
+                <div class="btn-group col-xs-12 col-sm-6 col-md-2 col-lg-2" role="group" id="LlenaCapturaAvanceIntAcabadoDiv">
+                    <label id="lblPlanchar"></label>
+                    <input type="radio" id="LlenaTodos" name="LLena" style="width:auto;" value="Todos" /><span id="lblTodos1"></span>
+                    <input type="radio" id="LlenaVacios" name="LLena" style="width:auto;" value="Vacios" /><span id="lblVacios"></span>
+
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <button type="button" id="ButtonPlanchar" class="btn btn-blue"><span id="botonPlanchar"></span></button>
+                </div>
+            </div>
+            <div class="row" id="FieldSetView3">
+            </div>
+            <div class="row">
+                <div id="ContenedorGrid" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="grid" data-role="grid" class="k-grid k-widget"></div>
+                </div>
+            </div>
+        </div>
+        <input id="hdAccionFiltrado" type="hidden" />
+    </div>
+
+    <div id="window"></div>
+
+
+    @*Menu Inferior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="GuardarPie" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar1"><span id="botonGuardar4" class="accionGuardar"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1" class="accionGuardar"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="EmbarqueEncintadoDivSup" class="button-section">
+                    <a id="EmbarqueEncintadoSup" href="@Url.Action("Encintar", "Embarque")" class="btn btn-primary"><span id="lblEncintado1"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones">
+                            @*<li><a id="ImprimirEtiqueta2"><span id="lblImprimirEtiqueta1"></span></a></li>
+                                <li><a id="ImprimirTravel2" href="#"><span id="lblImprimirTravelerMasivo1"></span></a></li>*@
+                        </ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Etiquetado/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Etiquetado/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Etiquetado/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Etiquetado/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Etiquetado/Seguridad.js"></script>
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+        $authorizationModel["Etiquetado"] = $EtiquetadoModel;
+    }
+</script>

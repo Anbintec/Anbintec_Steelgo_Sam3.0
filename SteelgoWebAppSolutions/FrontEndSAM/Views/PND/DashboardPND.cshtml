@@ -1,8 +1,120 @@
-﻿
-@{
-    ViewBag.Title = "DashboardPND";
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="DashboardDespachoCorte0001"></span></a>
+    </li>
+    <li class="">
+        <a href="#"><span id="ServiciosTecnicosBreadcrumb"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("DashboardPND", "PND")"><span id="ServiciosTecnicosDashboardPNDBreadcrumb"></span></a>
+    </li>
+}
 
-<h2>DashboardPND</h2>
+<div id="formDashboardPND" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divProyecto">
+            <label id="lblProyecto"></label>
+            <input id="inputProyecto" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divTipoPrueba">
+            <label id="lblPrueba"></label>
+            <input id="inputTipoPrueba" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divProveedor" style="display:none">
+            <label id="lblProveedor"></label>
+            <input id="inputProveedor" />
+        </div>
 
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divPeriodo">
+            <label id="lblPeriodo"></label>
+            <input id="InputPeriodo" />
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" style="display:none">
+            <label id="">&nbsp;</label>
+            <a class=" btn btn-blue href="#" id="botonBuscar">
+                <span id="botonBuscar"></span>
+            </a>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divFechaInicio">
+            <label id="lblFechaInicio"></label>
+            <input id="inputFechaInicio" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divFechaFin">
+            <label id="lblFechaFin"></label>
+            <input id="inputFechaFin" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <label id="lblMuestra"></label>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-3 col-md-6 col-lg-3" id="divMuestra">
+                    <input type="radio" name="Muestra" style="width:auto;" value="requisicion" />
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="divMuestra">
+                    <span id="lblPorRequisicion"></span>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3" id="divMuestra">
+                    <input type="radio" name="Muestra" style="width:auto;" value="elemento" checked="checked" />
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <span id="lblPorElemento"> </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+        <div id="tabEstatus" class="btn-group form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" role="group" arial-label="tabs">
+        </div>
+    </div>
+
+    @*GRID*@
+    <div class="row addedSectionInLine" style="display:none;" id="contenidoDashboard">
+        <div id="divStatusRequisiciones" class="btn-group form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" style="z-index:999; position:absolute; padding-bottom:10px;" role="group" arial-label="tabs"></div>
+        <br>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <div id="ContenedorGrid" style="display:none;">
+                <div id="grid" data-role="grid" class="k-grid k-widget">
+                </div>
+                <input id="hdAccionFiltrado" type="hidden" />
+            </div>
+
+        </div>
+    </div>
+    @*GRIDPOPUP*@
+    @*GRID POPUP*@
+    <div id="windowGrid" style="display: none; z-index:inherit;">
+
+        <div class="row col-sm-12 col-md-12 col-lg-12" style="width: 100%; padding-right:20px;">
+            <div class="form-group">
+                <div id="ContenedorGridPopUp">
+                    <div id="gridPopUp" data-role="grid" class="k-grid k-widget">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-5 col-md-5 col-lg-5"></div>
+            <a class=" btn btn-primary col-sm-1 col-md-1 col-lg-1" href="#" id="CerrarDetalleJunta">
+                <span id="botonCerrar"></span>
+            </a>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/DashboardPND/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/DashboardPND/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/DashboardPND/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/DashboardPND/Seguridad.js"></script>

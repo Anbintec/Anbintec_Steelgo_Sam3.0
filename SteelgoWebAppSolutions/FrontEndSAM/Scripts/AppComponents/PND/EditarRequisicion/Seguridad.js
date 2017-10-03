@@ -1,5 +1,5 @@
 ﻿Cookies.set("home", true, { path: '/' });
-Cookies.set("navegacion", "53", { path: '/' });
+Cookies.set("navegacion", "55", { path: '/' });
 
 var $EditarRequisicionModel = {
     listContainer: {

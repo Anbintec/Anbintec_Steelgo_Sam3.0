@@ -1,8 +1,211 @@
-﻿
-@{
-    ViewBag.Title = "CrearWPS";
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CrearWPS</h2>
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="lblSoldaduraBreadcrum"></span></a>
+    </li>
+    <li>
+        <a href="@Url.Action("WPS", "ConfiguracionSoldadura")"><label id="WPSBreadcrumb"></label></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("CrearWPS", "ConfiguracionSoldadura")"><span id="NuevoWPSBreadcrumb"></span></a>
+    </li>
+}
 
+<div class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar" class="accionGuardar"><span id="botonGuardar2"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+                <div id="ArmadoSoldaduraDivSuperior" class="button-section">
+                    <a id="ArmadoSoldaduraSuperior" href="@Url.Action("WPS","ConfiguracionSoldadura")" class="btn btn-primary"><span id="botonWPSSup"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+    @*FORMULARIO WPS*@
+    <div class="row" id="FieldSetView">
+        <div id="CamposRequeridosPQR" class="col-sm-12 col-md-12 col-lg-11" style=" z-index:1 !important;">
+            <div class="row">
+                <input id="WPSID" type="hidden" value="0" />
+                <div id="DivNombreWPS" class="col-xs-12 col-sm-12 col-md-6 col-lg-3 form-group">
+                    <label id="lblNombre"></label>
+                    <input id="NomnreWPS" class="form-control general-input" />
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 form-group">
+                    <label id="lblEspesorMinimo"></label>
+                    <label id="EspesorMinimoWPS">0</label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 form-group">
+                    <label id="lblEspesorMaximo"></label>
+                    <label id="EspesorMaximoWPS">0</label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 form-group">
+                    <label id="lblEspesorRaiz2"></label>
+                    <label id="EspesorRaiz">0</label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 form-group">
+                    <label id="lblEspesorRelleno2"></label>
+                    <label id="EspesorRelleno">0</label>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+                    <label id="lblCVNCalculo"></label>
+                    <input type="checkbox" id="QuitarCVN" data-bind="checked: optionCheck" disabled="disabled" />
+                </div>
+
+            </div>
+            <div class="row">
+                <fieldset id="fieldSetRaiz">
+                    <legend style="padding-left:10px;" id="legendRaiz"><label id="WPSLabelRaiz"></label></legend>
+                    <div id="DivNombrePQRRaiz" class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                        <label id="lblPQR"></label>
+                        <input id="PQRRaizNombre" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <label id="lblGrupoP"></label>
+                        <input id="grupoPRaiz" readonly="readonly" class="general-input" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <label id="lblEspesorRaiz"></label>
+                        <label id="RaizEspesorRaiz">0</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <label id="lblEspesorRelleno"></label>
+                        <label id="RaizEspesorRelleno">0</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+                        <label id="lblPREHEAT"></label>
+                        <input type="checkbox" id="PREHEATRaiz" data-bind="checked: optionCheck" readonly="readonly" onclick="javascript: return false;" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+                        <label id="lblPWHT"></label>
+                        <input type="checkbox" id="PWHRaiz" data-bind="checked: optionCheck" readonly="readonly" onclick="javascript: return false;" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+                        <label id="lblCVN"></label>
+                        <input type="checkbox" id="CVNRaiz" data-bind="checked: optionCheck" readonly="readonly" onclick="javascript: return false;" />
+                    </div>
+                </fieldset>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label id="">&nbsp;</label>
+                </div>
+            </div>
+            <div class="row">
+                <fieldset id="fieldSetRelleno">
+                    <legend style="padding-left:10px;"><label id="WPSLabelRelleno"></label></legend>
+
+                    <div id="DivNombrePQRRelleno" class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                        <label id="lblPQR1"></label>
+                        <input id="PQRRellenoNombre" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <label id="lblGrupoP1"></label>
+                        <input id="grupoPRelleno" readonly="readonly" class="general-input" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <label id="lblEspesorRaiz1"></label>
+                        <label id="RellenoEspesorRaiz">0</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <label id="lblEspesorRelleno1"></label>
+                        <label id="RellenoEspesorRelleno">0</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+                        <label id="lblPREHEAT1"></label>
+                        <input type="checkbox" id="PREHEATRelleno" data-bind="checked: optionCheck" readonly="readonly" onclick="javascript: return false;" />
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+                        <label id="lblPWHT1"></label>
+                        <input type="checkbox" id="PWHRelleno" data-bind="checked: optionCheck" readonly="readonly" onclick="javascript: return false;" />
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+                        <label id="lblCVN1"></label>
+                        <input type="checkbox" id="CVNRelleno" data-bind="checked: optionCheck" readonly="readonly" onclick="javascript: return false;" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label id="">&nbsp;</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label id="">&nbsp;</label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    @*Menu Inferior*@
+    <div class="row">
+        <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar1" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar1" class="accionGuardar"><span id="botonGuardar4"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar1" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="ArmadoSoldaduraDivSuperior" class="button-section">
+                    <a id="ArmadoSoldaduraSuperior" href="@Url.Action("WPS","ConfiguracionSoldadura")" class="btn btn-primary"><span id="botonWPSInf"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/WPS/CrearWPS/Ajax.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/WPS/CrearWPS/Handlers.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/WPS/CrearWPS/Captura.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/WPS/CrearWPS/Seguridad.js"></script>
+<script src="~/Scripts/AppComponents/ConfiguracionSoldadura/WPS/CrearWPS/Render.js"></script>
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Edita WPS"] = $WPSSaveModel;
+    }
+</script>

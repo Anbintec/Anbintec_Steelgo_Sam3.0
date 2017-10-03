@@ -1,8 +1,133 @@
 ﻿
-@{
-    ViewBag.Title = "ImpresionPruebas";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="ServiciosTecnicosBreadcrumb"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("ImpresionPruebas", "PND")"><span id="lblImpresionPruebas"></span></a>
+    </li>
 }
+<div id="FormImpresionPruebas" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar"><span id="botonGuardar2"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection Imprimir"></a>
+            </div>
+        </div>
+        <br />
+        <div id="FieldSetView" class="row addedSectionInLineWithoutColor">
 
-<h2>ImpresionPruebas</h2>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 altoControl" id="divProyecto">
+                <label id="lblProyecto">  </label>
+                <input id="inputProyecto" class="" />
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl" id="divPrueba">
+                <label id="lblPrueba"></label>
+                <input id="inputPrueba" class="" />
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl" id="divProveedor">
+                <label id="lblProveedor"></label>
+                <input id="inputProveedor" class="" />
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl" id="divRequisicion">
+                <label id="lblRequisicion"></label>
+                <input id="inputRequisicion" class="" />
+            </div>
 
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 altoControl">
+                <label id="lblMostrar"></label>
+                <input type="radio" name="Muestra" class="radio-responsive" style=" width:auto;" value="Sin Capturar" />&nbsp;<span id="lblSinCaptura"></span>&nbsp;
+                <input type="radio" name="Muestra" class="radio-responsive" style=" width:auto;" value="Todos" />&nbsp;<span id="lblTodos"> </span>
+            </div>
+
+        </div>
+        <div class="row addedSectionInLine">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                    <label id="lblSeleccionarTodos"></label>
+                    <input id="seleccionarTodos" type="checkbox" />
+                </div>
+                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+
+                    <button type="button" id="ButtonPlanchar" class="btn btn-blue botonSizeGeneral"><span id="botonPlanchar"></span></button>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="ContenedorGrid" class="row">
+                        <div id="grid" data-role="grid" class="k-grid k-widget">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input id="hdAccionFiltrado" type="hidden" />
+        </div>
+        <div id="window">
+        </div>
+        <div class="row addedSectionInLineWithoutColor">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="formNav clearfix">
+                    <div class="button-section editButtonSection">
+                        <div class="btn-group save-group">
+                            <button id="GuardarPie" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar3"></span></button>
+                            <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caretWhite"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" id="btnGuardar1"><span id="botonGuardar4"></span></a></li>
+                                <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
+                            </ul>
+                        </div>
+                        <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                    </div>
+                    <div class="button-section actionButtonSection">
+                        <div class="dropdown action-group">
+                            <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                <span id="botonAcciones2"></span>
+                                <span class="caretBlue"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                        </div>
+                    </div>
+                    <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection Imprimir"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/ImpresionPruebas/Ajax.js"> </script>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/ImpresionPruebas/Handlers.js"> </script>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/ImpresionPruebas/Render.js"> </script>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/ImpresionPruebas/Captura.js"> </script>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/ImpresionPruebas/Seguridad.js"> </script>
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Impresion Pruebas"] = $ImpresionResultadosModel;
+    }
+</script>

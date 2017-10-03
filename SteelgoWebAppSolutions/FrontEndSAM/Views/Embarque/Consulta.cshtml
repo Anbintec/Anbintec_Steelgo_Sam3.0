@@ -1,8 +1,144 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Consulta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio">Inicio</span></a>
+    </li>
+    <li>
+        <a href="#"><span id="lblEmbarque">Consulta</span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("Consulta", "Embarque")"><span id="">Estatus del Spool</span></a>
+    </li>
+}
 
-<h2>Consulta</h2>
+<div id="FormEmbarqueConsulta" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section editButtonSection">
+                            <div class="btn-group save-group">
+                                <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar2"></span></button>
+                                <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle botonDeplegaMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caretWhite"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" id="btnGuardar" class="accionGuardar"><span id="botonGuardar"></span></a></li>
+                                    <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                                </ul>
+                            </div>
 
+                            <a id="btnCancelar" class="btn btn-black btnCancelar"><span id="botonCancelar"></span></a>
+                        </div>
+                        <div id="CapturaAvanceIntAcabadoDivSuperior" class="button-section">
+                            <a id="CapturaAvanceIntAcabadoSuperior" href="@Url.Action("Encintar", "Embarque")" class="btn btn-primary"><span id="lbEtiquetarSup">Etiquetado</span></a>
+                        </div>
+                        <div class="button-section actionButtonSection">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="botonAcciones1"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                            </div>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row addedSectionInLineWithoutColor">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="tipoVista" class="btn-group " data-toggle="buttons" role="group">
+                <label>TIpo de búsqueda</label>
+                <div class="btn btn-primary">
+                    <input type="radio" name="TipoBusqueda" style="width:auto;" value="ZonaCuadrante" /><span>Zona</span>
+                </div>
+                <div class="btn btn-primary">
+                    <input type="radio" name="TipoBusqueda" style="width:auto;" value="Spool" /><span>Spool</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12 " id="">
+            <label id=""><span id="">&nbsp;</span></label>
+
+        </div>
+
+
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl" id="AreaDiv" style="display:block;">
+            <label id=""><span id="EmbarqueConsultaArea">Zona</span></label>
+            <input id="Area" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl" id="CuadranteDiv" style="display:block;">
+            <label id=""><span id="EmbarqueConsultaCuadrante">Cuadrante</span></label>
+            <input id="Cuadrante" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl" id="" style="display:none;">
+            <label id=""><span id="EmbarqueConsultaArea">Spool ID Contiene</span></label>
+            <input id="SpoolIDCOntiene" class=" general-input" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2">
+            <label id="">&nbsp;</label>
+            <button type="button" id="btnAgregar" class="btn btn-blue"><span id="lblMostrar"></span></button>
+        </div>
+    </div>
+    <div class="row addedSectionInLine">
+        <div id="ContenedorGrid" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="grid" data-role="grid" class="k-grid k-widget">
+            </div>
+        </div>
+    </div>
+    <input id="hdAccionFiltrado" type="hidden" />
+    @*Menu Inferior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="GuardarPie" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle botonDeplegaMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar4" class="accionGuardar"><span id="botonGuardar4"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo2"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+
+                    <a id="btnCancelar" class="btn btn-black btnCancelar"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="CapturaAvanceIntAcabadoDivInferior" class="button-section">
+                    <a id="CapturaAvanceIntAcabadoInferior" href="@Url.Action("", "Pintura")" class="btn btn-primary"><span id="lbEtiquetarInf">Etiquetar</span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue" id="lblAccion002"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Consulta/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Consulta/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Consulta/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Consulta/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Consulta/Seguridad.js"></script>
+<script>
+    @section JavascriptDocumentReadyFunctions {
+    //$authorizationModel["Consulta"] = $ConsultaModel;
+    }
+</script>

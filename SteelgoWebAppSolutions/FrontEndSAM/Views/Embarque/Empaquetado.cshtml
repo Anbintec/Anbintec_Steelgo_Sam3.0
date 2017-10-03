@@ -4,5 +4,262 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Empaquetado</h2>
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="lblEmbarque"></span></a>
+    </li>
+    <li class="active">
+        <a href=@Url.Action("Empaquetado","Embarque")><span id="lblEmpaquetado"></span></a>
+    </li>
+}
 
+
+<div id="FormEmbarqueCargas" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar" class="accionGuardar"><span id="botonGuardar2"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+                <div id="CargaPlanaDivSup" class="button-section">
+                    <a id="CargaPlanaSup" class="btn btn-primary" href="@Url.Action("Carga", "Embarque")"><span id="EmbarqueCargaPlanaSup"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones">
+                            <li><a href="#" id="btnEliminarPaquete"><span id="botonEliminarPaquete"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+    @*Controles Superior*@
+    <div class="row addedSectionInLineWithoutColor" id="FieldSetView">
+
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl" id="divProyecto">
+            <label id="lblProyecto"></label>
+            <input id="InputProyecto" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divPaquete">
+            <label id="lblPaquete"></label>
+            <input id="InputPaquete" />
+        </div>
+        @*<div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+                <label id="">&nbsp;</label>
+                <button type="button" id="btnMostrar" class="btn btn-blue"><span id="botonMostrar"></span></button>
+            </div>*@
+        <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1 altoControl">
+            <label id="lblCerrar"></label>
+            <input id="InputCerrar" type="checkbox">
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl">
+            <label id="EmbarqueEmpaquetadoTotalPiezas"></label>
+            <label id="TotalPiezas"></label>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 altoControl">
+            <label id="EmbarqueEmpaquetadoToneladasCargadas"></label>
+            <label id="TotalToneladas"></label>
+        </div>
+    </div>
+    <div class="row addedSectionInLineWithoutColor" id="FieldSetView2">
+        <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+            <div class="btn-group " role="group">
+                <label id="lblTipoCarga"></label>
+                <label id="styleReporte">
+                    <input type="radio" name="TipoCarga" style="width:auto;" value="Spool" /><span id="EmbarqueEmpaquetadoOpcionSpool"></span>
+                </label>
+                <label id="styleListado">
+                    <input type="radio" name="TipoCarga" style="width:auto;" value="Codigo" /><span id="EmbarqueEmpaquetadoOpcionCodigo"></span>
+                </label>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divSpool">
+            <label id="lblSpoolID"></label>
+            <input style="width:40%" id="InputOrdenTrabajo" class="item-select general-input" />-<input id="InputID" placeholder="ID" style="width:40%;" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divCodigo" style="display:none;">
+            <label id="lblCodigo"></label>
+            <input id="inputCodigo" class="item-select general-input" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+            <label id="">&nbsp;</label>
+            <button type="button" id="btnAgregar" class="btn btn-blue"><span id="botonAgregar"></span></button>
+
+        </div>
+    </div>
+    @*GRID*@
+    <div class="row addedSectionInLine">
+        <div id="ContenedorGrid" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="grid" data-role="grid" class="k-grid k-widget"></div>
+        </div>
+    </div>
+    @*Menu Inferior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar1" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar1"><span id="botonGuardar4"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="CargaPlanaDivInf" class="button-section">
+                    <a id="CargaPlanaInf" class="btn btn-primary" href="@Url.Action("Carga", "Embarque")"><span id="EmbarqueCargaPlanaInf"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones">
+                            <li><a href="#" id="btnEliminarPaquete1"><span id="botonEliminarPaquete1"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="windowSave" style="display:none;">
+    <div class="container-fluid">
+        <div class="row content-container">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 form">
+                <label id="lblNombre"></label>
+                <input type="text" id="InputNombre" class="item-select general-input" style="width: 94%;min-height:38px" />
+                <input type="hidden" id="InputTipoGuardado" />
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 form">
+                <label id="lblFecha"></label>
+                <input type="text" id="InputFechaPaquete" />
+            </div>
+        </div>
+        <div class="form-group row"></div>
+        <div class="row  content-container">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 form">
+                <label id="lblZonaPaquete"></label>
+                <input id="InputZonaPaquete" />
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 form">
+                <label id="lblCuadrantePaquete"></label>
+                <input id="InputCuadrantePaquete" />
+            </div>
+        </div>
+        <div class="form-group row"></div>
+        <div class="row content-container">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 form">
+                <center>
+                    <button type="button" id="btnGuardarPopUp" class="btn btn-blue confirm_yes">
+                        <span id="botonGuardar1"></span>
+                    </button>
+                    <button type="button" id="btnCerrarPopUpSave" class="btn btn-blue confirm_yes">
+                        <span id="botonCerrar1"></span>
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="windowDownload" style="display:none">
+    <div class="container-fluid" style="margin:0px">
+        <div class="form-group">
+            <center>
+                <span id="EmbarqueEmpaquetadoMsjDescargaSpool"></span>
+                <input type="hidden" id="InputUidRow" />
+            </center>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                <label id="lblZonaDescargaSpool"></label>
+                <input id="InputZonaDescarga">
+            </div>
+            <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                <label id="lblCuadranteDescargaSpool"></label>
+                <input id="InputCuadranteDescarga" />
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+        </div>
+        <div class="row">
+            <center>
+                <a class="btn btn-primary confirm_yes" href="#/" id="btnDescargar">
+                    <span id="botonDescarga1"></span>
+                </a>
+                <a class="btn btn-primary confirm_yes" href="#/" id="btnCerrarPopup">
+                    <span id="botonCerrar"></span>
+                </a>
+            </center>
+        </div>
+    </div>
+</div>
+<div id="windowPackageEmpty" style="display:none">
+    <div class="container-fluid" style="margin:0px">
+        <div class="form-group">
+            @*<center>*@
+            <span id="EmbarqueEmpaquetadoMsjDescargaEliminaPaquete"></span>
+            @*</center>*@
+        </div>
+        <div class="form-group row" id="divDescargarPaquete">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                <label id="lblZonaDescargaPaquete"></label>
+                <input id="inputZonaPaqueteDescarga" />
+            </div>
+            <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                <label id="lblCuadranteDescargaPaquete"></label>
+                <input id="inputCuadrantePaqueteDescarga" />
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+        </div>
+        <div class="row">
+            <center>
+                <a class="btn btn-primary confirm_yes" href="#/" id="btnDescargarPaquete">
+                    <span id="botonDescargar"></span>
+                </a>
+                <a class="btn btn-primary confirm_yes" href="#/" id="btnEliminarPaqueteVacio">
+                    <span id="botonEliminarPaquetePopup"></span>
+                </a>
+            </center>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Empaquetado/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Empaquetado/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Empaquetado/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Empaquetado/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/Empaquetado/Seguridad.js"></script>
+
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["Empaquetado"] = $EmpaquetadoModel;
+    }
+</script>

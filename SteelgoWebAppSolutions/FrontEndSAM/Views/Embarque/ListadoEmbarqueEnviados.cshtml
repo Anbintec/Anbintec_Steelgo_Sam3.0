@@ -1,8 +1,64 @@
 ﻿
 @{
-    ViewBag.Title = "ListadoEmbarqueEnviados";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="lblEmbarque"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("ListadoEmbarque", "Embarque")"><span id="EmbarqueListadoEnviadosBreadcrumb"></span></a>
+    </li>
+}
+<div id="FormListadoEmbarqueEnviados" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Linea de Captura*@
+    <div class="row addedSectionInLineWithoutColor" id="FieldSetView">
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 altoControl" id="divProyecto">
+            <label id="lblProyecto"></label>
+            <input id="InputProyecto" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divPeriodo">
+            <label id="lblPeriodo"></label>
+            <input id="InputPeriodo" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divFechaInicio">
+            <label id="lblFechaInicio"></label>
+            <input id="InputFechaInicio" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divFechaFin">
+            <label id="lblFechaFin"></label>
+            <input id="InputFechaFin" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+            <label id="">&nbsp;</label>
+            <button type="button" id="btnMostrar" class="btn btn-blue"><span id="botonMostrar"></span></button>
+        </div>
+    </div>
+    <div id="FieldSetView">
+        <div class="row clearfix">
+            <div id="containerDiv">
+                <div class="row addedSectionInLine">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div id="ContenedorGrid">
+                            <div id="grid" data-role="grid" class="k-grid k-widget" style="margin-top: 0px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input id="hdAccionFiltrado" type="hidden" />
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/ListadoEmbarqueEnviados/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/ListadoEmbarqueEnviados/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/ListadoEmbarqueEnviados/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/ListadoEmbarqueEnviados/Seguridad.js"></script>
 
-<h2>ListadoEmbarqueEnviados</h2>
-
+<script>
+    @section JavascriptDocumentReadyFunctions {
+        $authorizationModel["Listado Embarque Enviados"] = $ListadoEmbarqueEnviadosModel;
+    }
+</script>

@@ -1,8 +1,107 @@
-﻿
-@{
-    ViewBag.Title = "DashBoardEmbarque";
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>DashBoardEmbarque</h2>
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="DashboardDespachoCorte0001"></span></a>
+    </li>
+    <li class="">
+        <a href="#"><span id="lblEmbarque"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("DashboardEmbarque", "Embarque")"><span id="EmbarqueDashboardBreadcrumb"></span></a>
+    </li>
+}
 
+
+<div id="formDashboardEmbarque" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav filtersFields clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2" id="divProyecto">
+                        <label id="lblProyecto"></label>
+                        <input id="InputProyecto" />
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" id="divPeriodo">
+                        <label id="lblPeriodo"></label>
+                        <input id="InputPeriodo" />
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2" id="divFechaInicio">
+                        <label id="lblFechaInicio"></label>
+                        <input id="InputFechaInicio" />
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2" id="divFechaFin">
+                        <label id="lblFechaFin"></label>
+                        <input id="InputFechaFin" />
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-2 col-lg-1">
+                        <label id="lblMostrar"></label>
+                        <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="PorSpool" checked /><span id="lblPorElemento"></span><br />
+                        <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="PorM2" /><span id="lblPorM2"></span><br />
+                        <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="PorToneladas" /><span id="lblPorTonelada"></span>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-1 col-lg-1">
+                        <label id="">&nbsp;</label>
+                        <button type="button" id="btnMostrar" class="btn btn-blue"><span id="botonMostrar"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 listado">
+            <div class="row">
+                <div class="btn-group col-xs-12 col-sm-12 col-md-12 col-lg-12" role="group" id="tabButtonMenuEmbarque" arial-label="tabs">
+                    <button id="buttonPorCargar" class="btn btn-tab tbmenuEmb" data-bind="btnPorCargar">
+                        <label id="EmbarqueDashboardBotonPorCargar"></label>
+                        <span id="spanCreados">0</span>
+                    </button>
+                    <button id="butttonPorEmbarcar" class="btn btn-tab tbmenuEmb" data-bind="btnPorEmbarcar">
+                        <label id="EmbarqueDashboardBotonPorEmbarcar"></label>
+                        <span id="spanSinPermiso">0</span>
+                    </button>
+                    <button id="buttonPorEnviar" class="btn btn-tab tbmenuEmb" data-bind="btnPorEnviar">
+                        <label id="EmbarqueDashboardBotonPorEnviar"></label>
+                        <span id="spanSinAutorizacion">0</span>
+                    </button>
+                    <button id="buttonValidar" class="btn btn-tab tbmenuEmb" data-bind="btnPorValidar">
+                        <label id="EmbarqueDashboardBotonPorValidar"></label>
+                        <span id="spanCompletos">0</span>
+                    </button>
+                </div>
+            </div>
+            <div class="row addedSectionInLine" id="tabGrid" style="display:none;">
+                <div class="btn-group col-xs-12 col-sm-12 col-md-12 col-lg-12" id="divTabEmbarque">
+                    <button class="tabListEmb btn btn-tabList" id="btnPorCargar">
+                        <span id="EmbarqueDashboardOpcionPorCargar"></span>
+                        <span id="spanPorCargar">0</span>
+                    </button>
+                    <button class="tabListEmb btn btn-tabList" id="btnPorEmbarcar">
+                        <span id="EmbarqueDashboardOpcionPorEmbarcar"></span>
+                        <span id="spanPorEmbarcar">0</span>
+                    </button>
+                    <button class="tabListEmb btn btn-tabList" id="btnPorEnviar">
+                        <span id="EmbarqueDashboardOpcionPorEnviar"></span>
+                        <span id="spanPorEnviar">0</span>
+                    </button>
+                    <button class="tabListEmb btn btn-tabList" id="btnPorValidar">
+                        <span id="EmbarqueDashboardOpcionPorValidar"></span>
+                        <span id="spanPorValidar">0</span>
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="ContenedorGrid">
+                        <div id="grid" data-role="grid" class="k-grid k-widget" style="margin-top:0"></div>
+                        <div id="gridCarga" data-role="grid" class="k-grid k-widget" style="margin-top:0"></div>
+                        <input id="hdAccionFiltrado" type="hidden" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/DashboardEmbarque/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/DashboardEmbarque/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/DashboardEmbarque/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Embarque/DashboardEmbarque/Seguridad.js"></script>

@@ -1,8 +1,210 @@
-﻿
-@{
-    ViewBag.Title = "EntregaPlacasGraficas";
+﻿@{
+    ViewBag.Title = "Entrega de Resultados";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing","Home" )"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="ServiciosTecnicosBreadcrumb"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("EntregaPlacasGraficas","PND" )"><span id="ServiciosTecnicosEntregaPGBreadcrumb"></span></a>
+    </li>
+}
+<div id="FormEntregaRequisicion" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar"><span id="botonGuardar2"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+                <div id="EntregaResultadosValidarResultadosDivSup" class="button-section">
+                    <a id="EntregaResultadosValidarResultadosSup" class="btn btn-primary"><span id="ServiciosTecnicosValidarResultadosSup"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+    @*Filtros de Búsqueda*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="divProyecto">
+            <label id="lblProyecto"></label>
+            <input id="inputProyecto" />
+        </div>
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="diTipoPrueba">
+            <label id="lblPrueba"></label>
+            <input id="inputTipoPrueba" />
+        </div>
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="divProveedor">
+            <label id="lblProveedor"></label>
+            <input id="inputProveedor" />
+        </div>
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="divRequisicion">
+            <label id="lblRequisicion"></label>
+            <input id="inputRequisicion" />
+        </div>
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <label id="lblMostrar"></label>
+            <input type="radio" name="Muestra" style="width:auto;" value="SinCaptura" /><span id="lblSinCaptura"></span>
+            <input type="radio" name="Muestra" style="width:auto;" value="Todos" /><span id="lblTodos"> </span>
+        </div>
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <label id="">&nbsp;</label>
+            <button type="button" id="ButtonBuscar" class="btn btn-blue botonSizeGeneral"><span id="botonBuscar"></span></button>
+        </div>
+    </div>
+    @*GRID*@
+    <div class="row addedSectionInLine">
+        @*<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="divDocumentoRecibido">
+                <label id="lblRecibido"></label>
+                <input id="inputDocumentoRecibido" />
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="divCondicionFisica">
+                <label id="lblCondicionesPlacasOGraficas"></label>
+                <input id="inputCondicionesFisicas" />
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="divDefectos" style="display:none">
+                <label id="lblDefectos"></label>
+                <input id="inputDefectos"/>
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                <label id="lblPlanchar"></label>
+                <input type="radio" name="Planchar" style="width:auto;" value="Vacios" /><span id="lblVacio"></span>
+                <input type="radio" name="Planchar" style="width:auto;" value="Todos" /><span id="lblTodos1"> </span>
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                <label id="">&nbsp;</label>
+                <button type="button" id="ButtonPlanchar" class="btn btn-blue botonSizeGeneral"><span id="botonPlanchar"></span></button>
+            </div>*@
+        <div id="ContenedorGrid" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="grid" data-role="grid" class="k-grid k-widget"></div>
+        </div>
+    </div>
+    @*Menu Inferior*@
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar1" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar1"><span id="botonGuardar4"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="EntregaResultadosValidarResultadosDivInf" class="button-section">
+                    <a id="EntregaResultadosValidarResultadosInf" class="btn btn-primary"><span id="ServiciosTecnicosValidarResultadosInf"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2>EntregaPlacasGraficas</h2>
+
+
+@*cecilia*@
+<div id="windowGridCecilia" style="display: none; z-index:inherit;">
+
+
+    <div class="form-group">
+        <div id="ContenedorGridPopUpCecilia">
+            <div id="gridPopUpCecilia" data-role="grid" class="k-grid k-widget">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-2 col-md-2 col-lg-2">
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <a class="btn btn-blue" href="#" id="GuardarPlacasCecilia"><span id="">Agregar</span></a>
+
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <a class="btn btn-blue" href="#" id="CancelarPlacasCecilia"><span id="">Cancelar</span></a>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+        </div>
+    </div>
+</div>
+
+@*Danadas*@
+<div id="windowGridDanadas" style="display: none; z-index:inherit;">
+
+
+    <div class="form-group">
+        <div id="ContenedorGridPopUpDanadas">
+            <div id="gridPopUpDanadas" data-role="grid" class="k-grid k-widget">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-2 col-md-2 col-lg-2">
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <a class="btn btn-blue" href="#" id="GuardarPlacasDanadas"><span id="">Agregar</span></a>
+
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <a class="btn btn-blue" href="#" id="CancelarPlacasDanadas"><span id="">Cancelar</span></a>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/EntregaPlacasGraficas/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/EntregaPlacasGraficas/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/EntregaPlacasGraficas/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/EntregaPlacasGraficas/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/PND/EntregaPlacasGraficas/Seguridad.js"></script>
+
+<script>
+    @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["EntregaPlacasGraficas"] = $EntregaPlacasGraficasModel;
+    }
+</script>
+
+
 
