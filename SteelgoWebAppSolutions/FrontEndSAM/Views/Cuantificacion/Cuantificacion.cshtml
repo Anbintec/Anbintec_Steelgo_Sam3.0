@@ -1142,7 +1142,15 @@
             //dataBound: OndataBound,
             dataBound: function (e) {
                 quickHeadFilter($("#grid").data("kendoGrid"));
-                
+
+                var datasource = $("#grid").data("kendoGrid").dataSource.data();
+
+                $(datasource).each(function () {
+                    if (this.get("TipoMaterial") == "2") {//Accesorio
+                        this.set("MM", "N/A");
+                        this.set("DimensionPromedio", "N/A");
+                    }
+                });
 
                 //var ds = $("#grid").data("kendoGrid");
                 //var gridData = ds.dataSource.view();
@@ -1292,91 +1300,91 @@
         };
 
 
-        ////Kendo "Enter" key input is captured through this binding
-        //$("#grid table tbody").on("keydown", "tr", function (e) {
-        //    var code = (e.keyCode ? e.keyCode : e.which);
-        //    if (code == 13) { //If key is ENTER
-        //        //console.log("--KendoEnter--");
-        //        //find index of the td element
-        //        var tdIndex = $(e.target).closest('td').index();
-        //        //get the next row's cell
-        //        var nextRow = $(e.target).closest('tr').next();
-        //        var nextRowCell = $(nextRow).find('td:eq(' + tdIndex + ')');
-        //        //Check if the next row is the last one and add one
-        //        //if (nextRowCell.length == 0) {
-        //        var grids = $("#grid").data("kendoGrid");
-        //        _deboEntrarAlEditor = false;
-        //        if (grids) {
-        //            var dataSource = grids.dataSource;
-        //            var total = dataSource.data().length;
-        //            //dataSource.insert(total, {});
-        //            if (!isOpen && !recentlyAdded) {
-        //                if (tdIndex == 0 || tdIndex == 4 || tdIndex == 8 || tdIndex == 9 || tdIndex == 10) {
-        //                    if (!recentlyAdded && !$(e.target).is("td")) {
-        //                        grids.addRow();
-        //                        recentlyAdded = true;
-        //                        alInicio();
-        //                        //console.log("111" + $(e.target).is("input") + "-" + $(e.target).is("td"));
-        //                    } else {
-        //                        //console.log("222" + $(e.target).is("input") + "-" + $(e.target).is("td"));
-        //                        _deboEntrarAlEditor = true;
-        //                        setTimeout(function () {
-        //                            $(e.target).trigger("click");
-        //                            $(e.target).find("input").trigger("click");
-        //                            $(e.target).find("input").focus();
-        //                            //grids.editCell($(e.target));
-        //                        }, 0);
-        //                    }
-        //                } else {
-        //                    grids.addRow();
-        //                    recentlyAdded = true;
-        //                    alInicio();
-        //                   // console.log("333" + $(e.target).is("input") + "-" + $(e.target).is("td"));
-        //                }
-        //            } else if (recentlyAdded) {
-        //                alInicio();
-        //               // console.log("444" + $(e.target).is("input") + "-" + $(e.target).is("td"));
-        //            }
-        //            else {
-        //                isOpen = false;
-        //                //_deboEntrarAlEditor = true;
-        //               // console.log("555" + $(e.target).is("input") + "-" + $(e.target).is("td"));
-        //            }
-        //        }
-        //        if (!_deboEntrarAlEditor && isMM == false) {
-        //            //find index of the td element
-        //            tdIndex = $(e.target).closest('td').index();
-        //            nextRow = $(e.target).closest('tr').next();
-        //            nextRowCell = $(nextRow).find('td:eq(' + tdIndex + ')');
-        //            setTimeout(function () {
-        //                //console.log("--Changing Current--");
-        //                var grid = $("#grid").data("kendoGrid");
-        //                //grid.current(nextRowCell);
-        //                $("#grid tr[data-uid] td:first").trigger("click");
-        //                $("#grid tr[data-uid] input:first").focus();
-        //            }, 0);
-        //        }
-        //        //}else{
-        //        //    $("#grid").data("kendoGrid").current(nextRowCell);
-        //        //}
-        //    }
-        //});
+        //Kendo "Enter" key input is captured through this binding
+        $("#grid table tbody").on("keydown", "tr", function (e) {
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 13) { //If key is ENTER
+                //console.log("--KendoEnter--");
+                //find index of the td element
+                var tdIndex = $(e.target).closest('td').index();
+                //get the next row's cell
+                var nextRow = $(e.target).closest('tr').next();
+                var nextRowCell = $(nextRow).find('td:eq(' + tdIndex + ')');
+                //Check if the next row is the last one and add one
+                //if (nextRowCell.length == 0) {
+                var grids = $("#grid").data("kendoGrid");
+                _deboEntrarAlEditor = false;
+                if (grids) {
+                    var dataSource = grids.dataSource;
+                    var total = dataSource.data().length;
+                    //dataSource.insert(total, {});
+                    if (!isOpen && !recentlyAdded) {
+                        if (tdIndex == 0 || tdIndex == 4 || tdIndex == 8 || tdIndex == 9 || tdIndex == 10) {
+                            if (!recentlyAdded && !$(e.target).is("td")) {
+                                grids.addRow();
+                                recentlyAdded = true;
+                                alInicio();
+                                //console.log("111" + $(e.target).is("input") + "-" + $(e.target).is("td"));
+                            } else {
+                                //console.log("222" + $(e.target).is("input") + "-" + $(e.target).is("td"));
+                                _deboEntrarAlEditor = true;
+                                setTimeout(function () {
+                                    $(e.target).trigger("click");
+                                    $(e.target).find("input").trigger("click");
+                                    $(e.target).find("input").focus();
+                                    //grids.editCell($(e.target));
+                                }, 0);
+                            }
+                        } else {
+                            grids.addRow();
+                            recentlyAdded = true;
+                            alInicio();
+                            // console.log("333" + $(e.target).is("input") + "-" + $(e.target).is("td"));
+                        }
+                    } else if (recentlyAdded) {
+                        alInicio();
+                        // console.log("444" + $(e.target).is("input") + "-" + $(e.target).is("td"));
+                    }
+                    else {
+                        isOpen = false;
+                        //_deboEntrarAlEditor = true;
+                        // console.log("555" + $(e.target).is("input") + "-" + $(e.target).is("td"));
+                    }
+                }
+                if (!_deboEntrarAlEditor && isMM == false) {
+                    //find index of the td element
+                    tdIndex = $(e.target).closest('td').index();
+                    nextRow = $(e.target).closest('tr').next();
+                    nextRowCell = $(nextRow).find('td:eq(' + tdIndex + ')');
+                    setTimeout(function () {
+                        //console.log("--Changing Current--");
+                        var grid = $("#grid").data("kendoGrid");
+                        //grid.current(nextRowCell);
+                        $("#grid tr[data-uid] td:first").trigger("click");
+                        $("#grid tr[data-uid] input:first").focus();
+                    }, 0);
+                }
+                //}else{
+                //    $("#grid").data("kendoGrid").current(nextRowCell);
+                //}
+            }
+        });
 
-        //$("#grid").data("kendoGrid").thead.find("th input[data-filter]").on("click", function (e) {
-        //    $(this).focus();
-        //});
+        $("#grid").data("kendoGrid").thead.find("th input[data-filter]").on("click", function (e) {
+            $(this).focus();
+        });
 
-        //var observer = new MutationObserver(function (mutations) {
-        //    mutations.forEach(function (mutation) {
-        //        if (mutation.attributeName === "class" && $(mutation.target).hasClass("k-state-focused")) {
-        //            $(mutation.target.firstChild).trigger('focus');
-        //            //$(mutation.target.firstChild).trigger('mouseenter');
-        //        }
-        //    });
-        //});
-        //var config = { attributes: true, childList: true, subtree: true, characterData: true };
+        var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                if (mutation.attributeName === "class" && $(mutation.target).hasClass("k-state-focused")) {
+                    $(mutation.target.firstChild).trigger('focus');
+                    //$(mutation.target.firstChild).trigger('mouseenter');
+                }
+            });
+        });
+        var config = { attributes: true, childList: true, subtree: true, characterData: true };
 
-        //observer.observe(document.querySelector(".filter-row"), config);
+        observer.observe(document.querySelector(".filter-row"), config);
 
 
         CrearMenuContextual();
@@ -2278,21 +2286,16 @@
                     Captura[0].Detalles = ListaDetalle;
 
                     $ListadoCuantificacion.ListadoCuantificacion.create(Captura[0], { ProyectoID: $("#ProyectoID").data("kendoComboBox").value(), cerrar: cerrar, incompletos: incompletos, FolioAvisollegadaId: folioAvisoEntradaID, FolioCuantificacionID: _folioCuantificacion, token: Cookies.get("token"), idGuardado: 4 }).done(function (data) {
-                        //error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
-                        //if (ErrorBool(data)) {
-                        //    AccionesGuardaryTerminar(data);
-                        //} else {
-                        //    cargarGridErrores(ListadoCuantificacion[i]);
-                        //}
-                        //i++;
-                        //CicloGuardaryTerminar(cerrar, incompletos, folioAvisoEntradaID, ListadoCuantificacion, i, error);
+
                         error = data[0];
+
                         for (var i = 0; i < data[1].length; i++) {
-                            if (ErrorBool(data[1][i]))
-                                cargarGridcompletos(data[1][i]);
-                            else
-                                cargarGridErrores(data[1][i]);
+                            if (!ErrorBool(data[1][i]))
+                                data[1][i].TieneError = true;
                         }
+
+                        $("#grid").data("kendoGrid").dataSource.data(data[1]);
+
                         ordenamientoGrid();
                         if (error) {
                             displayMessage("notificationslabel0081", error, '2');
@@ -2347,11 +2350,12 @@
 
                         error = data[0];
                         for (var i = 0; i < data[1].length; i++) {
-                            if (ErrorBool(data[1][i]))
-                                cargarGridcompletos(data[1][i]);
-                            else
-                                cargarGridErrores(data[1][i]);
+                            if (!ErrorBool(data[1][i]))
+                                data[1][i].TieneError = true;
                         }
+
+                        $("#grid").data("kendoGrid").dataSource.data(data[1]);
+
                         ordenamientoGrid();
                         if (error) {
                             displayMessage("notificationslabel0081", error, '2');
@@ -2516,12 +2520,14 @@
                 $ListadoCuantificacion.ListadoCuantificacion.create(Captura[0], { ProyectoID: $("#ProyectoID").data("kendoComboBox").value(), cerrar: cerrar, incompletos: incompletos, FolioAvisollegadaId: folioAvisoEntradaID, FolioCuantificacionID: _folioCuantificacion, token: Cookies.get("token"), idGuardado: 1 }).done(function (data) {
                     //error = ErrorInsertandoItems(data, error, ListadoCuantificacion[i]);
                     error = data[0];
+
+
                     for (var i = 0; i < data[1].length; i++) {
-                        if (ErrorBool(data[1][i]))
-                            cargarGridcompletos(data[1][i]);
-                        else
-                            cargarGridErrores(data[1][i]);
+                        if (!ErrorBool(data[1][i]))
+                            data[1][i].TieneError = true;
                     }
+
+                    $("#grid").data("kendoGrid").dataSource.data(data[1]);
 
                     ordenamientoGrid();
                     if (error) {
@@ -2578,12 +2584,14 @@
 
                 $ListadoCuantificacion.ListadoCuantificacion.create(Captura[0], { ProyectoID: $("#ProyectoID").data("kendoComboBox").value(), cerrar: cerrar, incompletos: incompletos, FolioAvisollegadaId: folioAvisoEntradaID, FolioCuantificacionID: _folioCuantificacion, token: Cookies.get("token"), idGuardado: 1 }).done(function (data) {
                     error = data[0];
+
+
                     for (var i = 0; i < data[1].length; i++) {
-                        if (ErrorBool(data[1][i]))
-                            cargarGridcompletos(data[1][i]);
-                        else
-                            cargarGridErrores(data[1][i]);
+                        if (!ErrorBool(data[1][i]))
+                            data[1][i].TieneError = true;
                     }
+
+                    $("#grid").data("kendoGrid").dataSource.data(data[1]);
 
                     ordenamientoGrid();
                     if (error) {
@@ -2748,12 +2756,14 @@
                 $ListadoCuantificacion.ListadoCuantificacion.create(Captura[0], { ProyectoID: $("#ProyectoID").data("kendoComboBox").value(), cerrar: cerrar, incompletos: incompletos, FolioAvisollegadaId: folioAvisoEntradaID, FolioCuantificacionID: _folioCuantificacion, token: Cookies.get("token"), idGuardado: 2 }).done(function (data) {
                     error = data[0];
 
+
+
                     for (var i = 0; i < data[1].length; i++) {
-                        if (ErrorBool(data[1][i]))
-                            cargarGridcompletos(data[1][i]);
-                        else
-                            cargarGridErrores(data[1][i]);
+                        if (!ErrorBool(data[1][i]))
+                            data[1][i].TieneError = true;
                     }
+
+                    $("#grid").data("kendoGrid").dataSource.data(data[1]);
 
                     ordenamientoGrid();
 
@@ -2812,12 +2822,13 @@
                 $ListadoCuantificacion.ListadoCuantificacion.create(Captura[0], { ProyectoID: $("#ProyectoID").data("kendoComboBox").value(), cerrar: cerrar, incompletos: incompletos, FolioAvisollegadaId: folioAvisoEntradaID, FolioCuantificacionID: _folioCuantificacion, token: Cookies.get("token"), idGuardado: 2 }).done(function (data) {
                     error = data[0];
 
+
                     for (var i = 0; i < data[1].length; i++) {
-                        if (ErrorBool(data[1][i]))
-                            cargarGridcompletos(data[1][i]);
-                        else
-                            cargarGridErrores(data[1][i]);
+                        if (!ErrorBool(data[1][i]))
+                            data[1][i].TieneError = true;
                     }
+
+                    $("#grid").data("kendoGrid").dataSource.data(data[1]);
 
                     ordenamientoGrid();
 
@@ -2980,10 +2991,12 @@
 
     function GuardarListadoCuantificacionParcial(ArrayCuantificacion, cerrar, incompletos, folioAvisoEntradaID, ListadoCuantificacion, ListadoCuantificacionIncompletos, guardarynuevo, idGuardado) {
         var i = 0, error = "";
-        console.log("utiliza la guardado");
+        var inicioGuardado = new Date();
+        console.log("se inicia el guardado " + inicioGuardado);
         $GuardarFolioLlegadaCuantificacion.GuardarFolioLlegadaCuantificacion.create({}, { data: JSON.stringify(ArrayCuantificacion), token: Cookies.get("token") }).done(function (data) {
             _folioCuantificacion = data.FolioCuantificacionID;
             _folioConfiguracionCuantificacion = data.FolioConfiguracionCuantificacionID;
+
             if (Error(data)) {
                 $("#grid").data("kendoGrid").dataSource.data([]);
                 llenarGrid(null, ListadoCuantificacionIncompletos);
@@ -3002,16 +3015,17 @@
                 Captura[0].Detalles = ListaDetalle;
 
                 $ListadoCuantificacion.ListadoCuantificacion.create(Captura[0], { ProyectoID: $("#ProyectoID").data("kendoComboBox").value(), cerrar: cerrar, incompletos: incompletos, FolioAvisollegadaId: folioAvisoEntradaID, FolioCuantificacionID: _folioCuantificacion, token: Cookies.get("token"), idGuardado: idGuardado }).done(function (data) {
-                    console.log(data[1]);
+                    //console.log(data[1]);
+                    console.log("se Guardo todos los elementos " + new Date());
                     error = data[0];
 
                     for (var i = 0; i < data[1].length; i++) {
-                        if (ErrorBool(data[1][i]))
-                            cargarGridcompletos(data[1][i]);
-                        else
-                            cargarGridErrores(data[1][i]);
+                        if (!ErrorBool(data[1][i]))
+                            data[1][i].TieneError = true;
                     }
 
+                    $("#grid").data("kendoGrid").dataSource.data(data[1]);
+                    console.log("se termina de insertar en grid " + new Date());
 
                     ordenamientoGrid();
                     if (error) {
@@ -3029,7 +3043,7 @@
                     }
 
 
-
+                    console.log("inicia botones" + new Date());
                     BotonAlta();
                     ocultarStatus();
                     cargarTituloFolio();
@@ -3038,6 +3052,11 @@
                     $("#FolioCuantificacionID").data("kendoComboBox").value(_folioCuantificacion);
                     CargarFolioCuantificacion(_folioCuantificacion);
                     ObtenerDatosDelFolioAvisoLlegada();
+
+                    var finGuardado = new Date();
+                    console.log("se termino de guardar a las  " + new Date());
+
+                    restarHoras(inicioGuardado, inicioGuardado);
                 });
             } else {
                 //loadingStop();
@@ -3077,12 +3096,14 @@
 
 
 
+
+
                     for (var i = 0; i < data[1].length; i++) {
-                        if (ErrorBool(data[1][i]))
-                            cargarGridcompletos(data[1][i]);
-                        else
-                            cargarGridErrores(data[1][i]);
+                        if (!ErrorBool(data[1][i]))
+                            data[1][i].TieneError = true;
                     }
+
+                    $("#grid").data("kendoGrid").dataSource.data(data[1]);
 
                     ordenamientoGrid();
                     if (error) {
@@ -3164,6 +3185,7 @@
 
             var item =
                    { ItemCode: dataJson.ItemCode, BultoID: dataJson.BultoID, Descripcion: dataJson.Descripcion, D1: dataJson.D1, D2: dataJson.D2, ItemCodeSteelgo: dataJson.ItemCodeSteelgo, Familia: dataJson.Familia, Cedula: dataJson.Cedula, TipoAcero: dataJson.TipoAcero, Colada: dataJson.Colada, Cantidad: dataJson.Cantidad, MM: dataJson.MM, DimensionPromedio: dataJson.DimensionPromedio, Detallar: dataJson.Detallar, TieneNU: dataJson.TieneNU, TieneError: dataJson.TieneError, RelFCId: dataJson.RelFCId, RelBID: dataJson.RelBID, ItemCodeID: dataJson.ItemCodeID, ItemCodeSteelgoID: dataJson.ItemCodeSteelgoID, ItemCodeOrigenID: dataJson.ItemCodeOrigenID, TipoMaterial: dataJson.TipoMaterial, TextoTipoMaterial: dataJson.TextoTipoMaterial };
+
             $("#grid").data("kendoGrid").dataSource.insert(item);
 
         }
@@ -3889,6 +3911,17 @@
         //alert("termino de validar promedio");
     };
 
+    function ErrorItems(data, error) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].TieneError)
+            {
+                error += "," + data[i].ItemCode;
+            }
+        }
+        return error;
+    };
+
+
     function ObtenerItemCodeSteelgo(dataJson, key, error) {
 
         var cadenaObjetosMasivos = "";
@@ -3913,31 +3946,37 @@
 
         for (var i = 0; i < dataJson.length; i++) {
             ListaDetalle[i] = { cadena: "" };
-            ListaDetalle[i].cadena = JSON.stringify({ ItemCode: lines[i].ItemCode, D1: Number(lines[i].D1), D2: Number(lines[i].D2), MM: Number(lines[i].MM) });
+            ListaDetalle[i].cadena = JSON.stringify({ ItemCode: lines[i].ItemCode, D1: Number(lines[i].D1), D2: Number(lines[i].D2), MM: Number(lines[i].MM), Cantidad: Number(lines[i].Cantidad) });
         }
 
         Captura[0].Detalles = ListaDetalle;
 
         var ds
         var inicio = new Date();
-        $ItemCodeSteelgo.ItemCodeSteelgo.create(Captura[0], { token: Cookies.get("token"), proyectoID: $("#ProyectoID").data("kendoComboBox").value(), cadena: "" }).done(function (data) {
+        $ItemCodeSteelgo.ItemCodeSteelgo.create(Captura[0], { token: Cookies.get("token"), proyectoID: $("#ProyectoID").data("kendoComboBox").value() }).done(function (data) {
             var fin = new Date();
-            console.log("Obtiene la informacion en..")
-            console.log(restarHoras(inicio, fin));
-
             var inicioInserta = new Date();
             suspendRefresh = true;
-
+           
             for (var i = 0; i < data.length; i++) {
-
                 $("#grid").data("kendoGrid").dataSource.insert(data[i]);
             }
             var finInserta = new Date();
-            console.log("Termino insertar la informacion en grid")
-            console.log(restarHoras(inicioInserta, finInserta));
             suspendRefresh = false;
 
-            $("#grid").data("kendoGrid").refresh();
+            error = ErrorItems(data, error);
+
+           // $("#grid").data("kendoGrid").refresh();
+
+            ordenamientoGrid();
+
+            if (error) {
+                displayMessage("notificationslabel0047", error, '2');
+                return;
+            } else {
+                ValidarTipoPackingList();
+            }
+            
         });
 
 

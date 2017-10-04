@@ -66,7 +66,7 @@ namespace BackEndSAM.Controllers
             }
         }
 
-        public object Get(string itemID, string itemsteelgo, string d1, string d2, int mm, string token,int proyectoID)
+        public object Get(string itemID, string itemsteelgo, string d1, string d2, int mm, string token,int proyectoID,int Cantidad)
         {
             string payload = "";
             string newToken = "";
@@ -76,7 +76,7 @@ namespace BackEndSAM.Controllers
             {
                 JavaScriptSerializer ser = new JavaScriptSerializer();
                 Sam3_Usuario usuario = ser.Deserialize<Sam3_Usuario>(payload);
-                return ItemCodeSteelgoBd.Instance.ObtenerDetalleRelacionitemCodeSteelgo(itemID, d1, d2,mm, usuario,proyectoID);
+                return ItemCodeSteelgoBd.Instance.ObtenerDetalleRelacionitemCodeSteelgo(itemID, d1, d2,mm, usuario,proyectoID, Cantidad);
             }
             else
             {
@@ -227,8 +227,8 @@ namespace BackEndSAM.Controllers
 
                 for (int i = 0; i < listItemCodeCliente.Count; i++)
                 {
-                    ItemCodeClienteRetorno item = (ItemCodeClienteRetorno)ItemCodeSteelgoBd.Instance.ObtenerDetalleRelacionitemCodeSteelgo(listItemCodeCliente[i].ItemCode, listItemCodeCliente[i].D1, listItemCodeCliente[i].D2, listItemCodeCliente[i].MM, usuario, proyectoID);
-                    if(item.Descripcion!="" && item.Descripcion != null)
+                    ItemCodeClienteRetorno item = (ItemCodeClienteRetorno)ItemCodeSteelgoBd.Instance.ObtenerDetalleRelacionitemCodeSteelgo(listItemCodeCliente[i].ItemCode, listItemCodeCliente[i].D1, listItemCodeCliente[i].D2, listItemCodeCliente[i].MM, usuario, proyectoID, listItemCodeCliente[i].Cantidad);
+                    //if(item.Descripcion!="" && item.Descripcion != null)
                         listItemCodeJson.Add(item);
                 }
 

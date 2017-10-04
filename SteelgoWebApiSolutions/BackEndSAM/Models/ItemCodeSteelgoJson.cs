@@ -73,6 +73,7 @@ namespace BackEndSAM.Models
         public string D1 { get; set; }
         public string D2 { get; set; }
         public int MM { get; set; }
+        public int Cantidad { get; set; }
     }
 
 
@@ -95,12 +96,12 @@ namespace BackEndSAM.Models
         public string BultoID { get; set; }
         public string RelFCId { get; set; }
         public string RelBID { get; set; }
-        public int ItemCodeID { get; set; }
+        public int? ItemCodeID { get; set; }
         public string ItemCodeSteelgoID { get; set; }
-        public int ItemCodeOrigenID { get; set; }
-        public int TipoMaterial { get; set; }
+        public int? ItemCodeOrigenID { get; set; }
+        public int? TipoMaterial { get; set; }
         public string TextoTipoMaterial { get; set; }
-        
+
 
         //ItemCode: data.ItemCode,
         //    Descripcion: itemCodesJsonSteelgo.Descripcion, 

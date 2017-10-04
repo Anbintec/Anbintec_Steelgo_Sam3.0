@@ -566,12 +566,22 @@ namespace BackEndSAM.DataAcces
                                 Sam3_ItemCode actualizaItem = ctx.Sam3_ItemCode
                                             .Where(x => x.ItemCodeID == itemCodeJson.ItemCodeID && x.Activo).SingleOrDefault();
 
+                               
+
                                 string[] elementos = itemCodeJson.NumeroUnico.Split('-').ToArray();
                                 int temp = Convert.ToInt32(elementos[1]);
                                 string prefijo = elementos[0];
 
                                 actualizaNU = ctx.Sam3_NumeroUnico
                                     .Where(x => x.NumeroUnicoID.ToString() == itemCodeJson.NumeroUnicoID).SingleOrDefault();
+
+                                Sam3_NumeroUnicoInventario sam3_numeroUnicoInventario = (from a in ctx.Sam3_NumeroUnicoInventario
+                                                                                         where a.NumeroUnicoID == actualizaNU.NumeroUnicoID && a.Activo
+                                                                                         select a).SingleOrDefault();
+
+                                List<Sam3_NumeroUnicoSegmento> lista_Sam3NumeroUnicoSegmento = (from a in ctx.Sam3_NumeroUnicoSegmento
+                                                                                           where a.NumeroUnicoID == actualizaNU.NumeroUnicoID && a.Activo
+                                                                                           select a).ToList();
 
                                 int coladaID = (from c in ctx.Sam3_Colada
                                                 where c.NumeroColada == itemCodeJson.Colada
@@ -654,21 +664,21 @@ namespace BackEndSAM.DataAcces
                                             string estatus = "C";
                                             if (itemCodeJson.EstatusFisico == "Aprobado" && itemCodeJson.EstatusDocumental == "Aprobado")
                                             {
-                                                dañado = false;
                                                 aprobado = true;
+                                                dañado = false;
                                                 estatus = "A";
                                             }
 
                                             if (itemCodeJson.EstatusFisico == "Aprobado" && itemCodeJson.EstatusDocumental == "Rechazado")
                                             {
-                                                dañado = false;
                                                 aprobado = false;
+                                                dañado = false;
                                                 estatus = "C";
                                             }
                                             if (itemCodeJson.EstatusFisico == "Aprobado" && itemCodeJson.EstatusDocumental == "")
                                             {
-                                                dañado = false;
                                                 aprobado = false;
+                                                dañado = false;
                                                 estatus = "C";
                                             }
 
@@ -737,6 +747,8 @@ namespace BackEndSAM.DataAcces
                                             ctx2.SaveChanges();
                                             #endregion
 
+                                            
+
                                             #region Actualizar MM
                                             //Actuaalizar MM
                                             int milimetros = itemCodeJson.MM != null && itemCodeJson.MM != "" ? Convert.ToInt32(itemCodeJson.MM) : 0;
@@ -750,6 +762,7 @@ namespace BackEndSAM.DataAcces
                                             //si los milimetros son mayores a 0 y si son diferentes del inventario recibido en cuantificacion
                                             if (milimetros > 0 && milimetros != cantidadRecibida)
                                             {
+                                                
                                                 int? tempDespachados = ctx.Sam3_Despacho.Where(x => x.NumeroUnicoID == actualizaNU.NumeroUnicoID && x.Activo && !x.Cancelado)
                                                     .Select(x => x.DespachoID).Count() > 0 ?
                                                     ctx.Sam3_Despacho.Where(x => x.NumeroUnicoID == actualizaNU.NumeroUnicoID && x.Activo && !x.Cancelado)
@@ -757,7 +770,7 @@ namespace BackEndSAM.DataAcces
 
                                                 cantidadDespachada = tempDespachados != null ? tempDespachados.Value : 0;
 
-                                                if (actualizaNU.Sam3_NumeroUnicoInventario.InventarioCongelado > 0) // si el numerounico tiene congelado
+                                                if (sam3_numeroUnicoInventario.InventarioCongelado > 0) // si el numerounico tiene congelado
                                                 {
                                                     throw new Exception("El Número Único ya cuenta con congelados, no se puede actualizar el inventario por este medio");
                                                 }
@@ -775,24 +788,26 @@ namespace BackEndSAM.DataAcces
                                                 disponibleCruce = buenEstado - congelado;
 
                                                 #region actualizar Sam3
-                                                actualizaNU.Sam3_NumeroUnicoInventario.CantidadRecibida = milimetros;
+                                                
+
+                                                sam3_numeroUnicoInventario.CantidadRecibida = milimetros;
                                                 if (dañado)
                                                 {
-                                                    actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = cantidadDañada;
+                                                    sam3_numeroUnicoInventario.CantidadDanada = cantidadDañada;
                                                 }
                                                 else
                                                 {
-                                                    actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = 0;
+                                                    sam3_numeroUnicoInventario.CantidadDanada = 0;
                                                 }
-                                                actualizaNU.Sam3_NumeroUnicoInventario.InventarioBuenEstado = buenEstado;
-                                                actualizaNU.Sam3_NumeroUnicoInventario.InventarioFisico = fisico;
-                                                actualizaNU.Sam3_NumeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
-                                                actualizaNU.Sam3_NumeroUnicoInventario.UsuarioModificacion = usuario.UsuarioID;
-                                                actualizaNU.Sam3_NumeroUnicoInventario.FechaModificacion = DateTime.Now;
+                                                sam3_numeroUnicoInventario.InventarioBuenEstado = buenEstado;
+                                                sam3_numeroUnicoInventario.InventarioFisico = fisico;
+                                                sam3_numeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
+                                                sam3_numeroUnicoInventario.UsuarioModificacion = usuario.UsuarioID;
+                                                sam3_numeroUnicoInventario.FechaModificacion = DateTime.Now;
 
                                                 if (actualizaNU.Sam3_ItemCode.TipoMaterialID == 1) // tubo
                                                 {
-                                                    segmento = actualizaNU.Sam3_NumeroUnicoSegmento.Where(x => x.Segmento == "A").SingleOrDefault();
+                                                    segmento = lista_Sam3NumeroUnicoSegmento.Where(x => x.Segmento == "A").SingleOrDefault();
                                                     segmento.InventarioBuenEstado = buenEstado;
                                                     if (dañado)
                                                     {
@@ -839,11 +854,11 @@ namespace BackEndSAM.DataAcces
                                                 }
 
                                                 #region validaciones de inventario
-                                                if (actualizaNU.Sam3_NumeroUnicoInventario.InventarioBuenEstado < actualizaNU.Sam3_NumeroUnicoInventario.InventarioCongelado)
+                                                if (sam3_numeroUnicoInventario.InventarioBuenEstado < sam3_numeroUnicoInventario.InventarioCongelado)
                                                 {
                                                     throw new Exception("El inventario físico no puede ser menor al inventario congelado");
                                                 }
-                                                if (actualizaNU.Sam3_NumeroUnicoInventario.InventarioDisponibleCruce < 0)
+                                                if (sam3_numeroUnicoInventario.InventarioDisponibleCruce < 0)
                                                 {
                                                     throw new Exception("El inventario disponible para cruce no puede ser menor a  0");
                                                 }
@@ -908,10 +923,10 @@ namespace BackEndSAM.DataAcces
                                             } // if diferencia de inventario
                                             else // no cambia el inventario
                                             {
-                                                if (dañado || (actualizaNU.Estatus == "A" && actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada > 0)
-                                                    || (actualizaNU.Estatus == "C" && actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada > 0))
+                                                if (dañado || (actualizaNU.Estatus == "A" && sam3_numeroUnicoInventario.CantidadDanada > 0)
+                                                    || (actualizaNU.Estatus == "C" && sam3_numeroUnicoInventario.CantidadDanada > 0))
                                                 {
-                                                    if (actualizaNU.Sam3_NumeroUnicoInventario.InventarioCongelado > 0 && dañado) // si el numerounico tiene congelado
+                                                    if (sam3_numeroUnicoInventario.InventarioCongelado > 0 && dañado) // si el numerounico tiene congelado
                                                     {
                                                         throw new Exception("El Número Único ya cuenta con congelados, no se puede actualizar el inventario por este medio");
                                                     }
@@ -925,16 +940,16 @@ namespace BackEndSAM.DataAcces
 
                                                         if (dañado)
                                                         {
-                                                            actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = cantidadDañada;
+                                                            sam3_numeroUnicoInventario.CantidadDanada = cantidadDañada;
                                                         }
                                                         else
                                                         {
-                                                            actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = 0;
+                                                            sam3_numeroUnicoInventario.CantidadDanada = 0;
                                                         }
-                                                        actualizaNU.Sam3_NumeroUnicoInventario.InventarioBuenEstado = buenEstado;
-                                                        actualizaNU.Sam3_NumeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
+                                                        sam3_numeroUnicoInventario.InventarioBuenEstado = buenEstado;
+                                                        sam3_numeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
 
-                                                        segmento = actualizaNU.Sam3_NumeroUnicoSegmento.Where(s => s.Segmento == "A").SingleOrDefault();
+                                                        segmento = lista_Sam3NumeroUnicoSegmento.Where(s => s.Segmento == "A").SingleOrDefault();
                                                         segmento.InventarioFisico = cantidadRecibida;
                                                         segmento.InventarioBuenEstado = buenEstado;
                                                         if (dañado)
@@ -978,15 +993,15 @@ namespace BackEndSAM.DataAcces
                                                         #region Actualizar SAM3
                                                         if (dañado)
                                                         {
-                                                            actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = cantidadDañada;
+                                                            sam3_numeroUnicoInventario.CantidadDanada = cantidadDañada;
                                                         }
                                                         else
                                                         {
-                                                            actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = 0;
+                                                            sam3_numeroUnicoInventario.CantidadDanada = 0;
                                                         }
 
-                                                        actualizaNU.Sam3_NumeroUnicoInventario.InventarioBuenEstado = buenEstado;
-                                                        actualizaNU.Sam3_NumeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
+                                                        sam3_numeroUnicoInventario.InventarioBuenEstado = buenEstado;
+                                                        sam3_numeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
                                                         #endregion
                                                         #region Actualizar SAM2
                                                         if (dañado)
@@ -1142,7 +1157,7 @@ namespace BackEndSAM.DataAcces
 
                                                 cantidadDespachada = tempDespachados != null ? tempDespachados.Value : 0;
 
-                                                if (actualizaNU.Sam3_NumeroUnicoInventario.InventarioCongelado > 0) // si el numerounico tiene congelado
+                                                if (sam3_numeroUnicoInventario.InventarioCongelado > 0) // si el numerounico tiene congelado
                                                 {
                                                     throw new Exception("El Número Único ya cuenta con congelados, no se puede actualizar el inventario por este medio");
                                                 }
@@ -1160,24 +1175,24 @@ namespace BackEndSAM.DataAcces
                                                 disponibleCruce = buenEstado - congelado;
 
                                                 #region actualizar Sam3
-                                                actualizaNU.Sam3_NumeroUnicoInventario.CantidadRecibida = milimetros;
-                                                actualizaNU.Sam3_NumeroUnicoInventario.InventarioBuenEstado = buenEstado;
-                                                actualizaNU.Sam3_NumeroUnicoInventario.InventarioFisico = fisico;
-                                                actualizaNU.Sam3_NumeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
+                                                sam3_numeroUnicoInventario.CantidadRecibida = milimetros;
+                                                sam3_numeroUnicoInventario.InventarioBuenEstado = buenEstado;
+                                                sam3_numeroUnicoInventario.InventarioFisico = fisico;
+                                                sam3_numeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
                                                 if (dañado)
                                                 {
-                                                    actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = cantidadDañada;
+                                                    sam3_numeroUnicoInventario.CantidadDanada = cantidadDañada;
                                                 }
                                                 else
                                                 {
-                                                    actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = 0;
+                                                    sam3_numeroUnicoInventario.CantidadDanada = 0;
                                                 }
-                                                actualizaNU.Sam3_NumeroUnicoInventario.UsuarioModificacion = usuario.UsuarioID;
-                                                actualizaNU.Sam3_NumeroUnicoInventario.FechaModificacion = DateTime.Now;
+                                                sam3_numeroUnicoInventario.UsuarioModificacion = usuario.UsuarioID;
+                                                sam3_numeroUnicoInventario.FechaModificacion = DateTime.Now;
 
                                                 if (actualizaNU.Sam3_ItemCode.TipoMaterialID == 1) // tubo
                                                 {
-                                                    segmento = actualizaNU.Sam3_NumeroUnicoSegmento.Where(x => x.Segmento == "A").SingleOrDefault();
+                                                    segmento = lista_Sam3NumeroUnicoSegmento.Where(x => x.Segmento == "A").SingleOrDefault();
                                                     segmento.InventarioBuenEstado = buenEstado;
                                                     segmento.InventarioDisponibleCruce = disponibleCruce;
                                                     segmento.InventarioFisico = fisico;
@@ -1224,11 +1239,11 @@ namespace BackEndSAM.DataAcces
                                                 }
 
                                                 #region validaciones de inventario
-                                                if (actualizaNU.Sam3_NumeroUnicoInventario.InventarioBuenEstado < actualizaNU.Sam3_NumeroUnicoInventario.InventarioCongelado)
+                                                if (sam3_numeroUnicoInventario.InventarioBuenEstado < sam3_numeroUnicoInventario.InventarioCongelado)
                                                 {
                                                     throw new Exception("El inventario físico no puede ser menor al inventario congelado");
                                                 }
-                                                if (actualizaNU.Sam3_NumeroUnicoInventario.InventarioDisponibleCruce < 0)
+                                                if (sam3_numeroUnicoInventario.InventarioDisponibleCruce < 0)
                                                 {
                                                     throw new Exception("El inventario disponible para cruce no puede ser menor a  0");
                                                 }
@@ -1300,10 +1315,10 @@ namespace BackEndSAM.DataAcces
                                             }
                                             else //no cambia el inventario
                                             {
-                                                if (dañado || (actualizaNU.Estatus == "A" && actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada > 0)
-                                                    || (actualizaNU.Estatus == "C" && actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada > 0))
+                                                if (dañado || (actualizaNU.Estatus == "A" && sam3_numeroUnicoInventario.CantidadDanada > 0)
+                                                    || (actualizaNU.Estatus == "C" && sam3_numeroUnicoInventario.CantidadDanada > 0))
                                                 {
-                                                    if (actualizaNU.Sam3_NumeroUnicoInventario.InventarioCongelado > 0 && dañado) // si el numerounico tiene congelado
+                                                    if (sam3_numeroUnicoInventario.InventarioCongelado > 0 && dañado) // si el numerounico tiene congelado
                                                     {
                                                         throw new Exception("El Número Único ya cuenta con congelados, no se puede actualizar el inventario por este medio");
                                                     }
@@ -1318,16 +1333,16 @@ namespace BackEndSAM.DataAcces
                                                         #region Actualizar SAM3
                                                         if (dañado)
                                                         {
-                                                            actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = cantidadDañada;
+                                                            sam3_numeroUnicoInventario.CantidadDanada = cantidadDañada;
                                                         }
                                                         else
                                                         {
-                                                            actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = 0;
+                                                            sam3_numeroUnicoInventario.CantidadDanada = 0;
                                                         }
-                                                        actualizaNU.Sam3_NumeroUnicoInventario.InventarioBuenEstado = buenEstado;
-                                                        actualizaNU.Sam3_NumeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
+                                                        sam3_numeroUnicoInventario.InventarioBuenEstado = buenEstado;
+                                                        sam3_numeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
 
-                                                        segmento = actualizaNU.Sam3_NumeroUnicoSegmento.Where(s => s.Segmento == "A").SingleOrDefault();
+                                                        segmento = lista_Sam3NumeroUnicoSegmento.Where(s => s.Segmento == "A").SingleOrDefault();
                                                         segmento.InventarioFisico = cantidadRecibida;
                                                         segmento.InventarioBuenEstado = buenEstado;
                                                         if (dañado)
@@ -1371,14 +1386,14 @@ namespace BackEndSAM.DataAcces
                                                         #region Actualizar SAM3
                                                         if (dañado)
                                                         {
-                                                            actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = cantidadDañada;
+                                                            sam3_numeroUnicoInventario.CantidadDanada = cantidadDañada;
                                                         }
                                                         else
                                                         {
-                                                            actualizaNU.Sam3_NumeroUnicoInventario.CantidadDanada = 0;
+                                                            sam3_numeroUnicoInventario.CantidadDanada = 0;
                                                         }
-                                                        actualizaNU.Sam3_NumeroUnicoInventario.InventarioBuenEstado = buenEstado;
-                                                        actualizaNU.Sam3_NumeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
+                                                        sam3_numeroUnicoInventario.InventarioBuenEstado = buenEstado;
+                                                        sam3_numeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
                                                         #endregion
                                                         #region Actualizar SAM2
                                                         if (dañado)

@@ -247,7 +247,7 @@ namespace BackEndSAM.DataAcces
         /// <param name="itemCodeSteelgoID">item code steelgo seleccionado</param>
         /// <param name="usuario">usuario actual</param>
         /// <returns>objeto con la informacion del item code steelgo</returns>
-        public object ObtenerDetalleRelacionitemCodeSteelgo(string ItemCode, string diam1, string diam2, int mm, Sam3_Usuario usuario,int proyectoID)
+        public object ObtenerDetalleRelacionitemCodeSteelgo(string ItemCode, string diam1, string diam2, int mm, Sam3_Usuario usuario,int proyectoID,int cantidad)
         {
             try
             {
@@ -354,31 +354,63 @@ namespace BackEndSAM.DataAcces
                     }
                     else {
 
-                        
-                        detalle = (from r in ctx.Sam3_ItemCode
-                                   join rid in ctx.Sam3_Rel_ItemCode_Diametro on r.ItemCodeID equals rid.ItemCodeID
-                                   join d1 in ctx.Sam3_Diametro on rid.Diametro1ID equals d1.DiametroID
-                                   join d2 in ctx.Sam3_Diametro on rid.Diametro2ID equals d2.DiametroID
-                                   where r.Activo && rid.Activo
-                                     && r.ItemCodeID == item.ItemCodeID
-                                     && d1.DiametroID == diametro1IID
-                                     && d2.DiametroID == diametro2ID
-                                   select new ItemCodeClienteRetorno
-                                   {
-                                       ItemCodeID = rid.Rel_ItemCode_Diametro_ID,
-                                       ItemCode = r.Codigo + "(" + d1.Valor + ", " + d2.Valor + ")",
-                                       D1 = d1.Valor,
-                                       D2 = d2.Valor,
-                                       //ColadaNombre = (from c in ctx.Sam3_Colada where c.ColadaID == r.ColadaID && c.Activo select c.NumeroColada).FirstOrDefault(),
-                                       Cantidad = r.Cantidad,
-                                       MM = mm,
-                                       Descripcion = r.DescripcionEspanol,
-                                       ItemCodeOrigenID = r.ItemCodeID,
-                                       TipoMaterial = r.TipoMaterialID,
-                                       TextoTipoMaterial = (from tm in ctx.Sam3_TipoMaterial
-                                                               where tm.TipoMaterialID == r.TipoMaterialID
-                                                               select tm.Nombre).FirstOrDefault()
-                                   }).AsParallel().SingleOrDefault();
+                        if (item != null)
+                        {
+                            detalle = (from r in ctx.Sam3_ItemCode
+                                       join rid in ctx.Sam3_Rel_ItemCode_Diametro on r.ItemCodeID equals rid.ItemCodeID
+                                       join d1 in ctx.Sam3_Diametro on rid.Diametro1ID equals d1.DiametroID
+                                       join d2 in ctx.Sam3_Diametro on rid.Diametro2ID equals d2.DiametroID
+                                       where r.Activo && rid.Activo
+                                         && r.ItemCodeID == item.ItemCodeID
+                                         && d1.DiametroID == diametro1IID
+                                         && d2.DiametroID == diametro2ID
+                                       select new ItemCodeClienteRetorno
+                                       {
+                                           ItemCodeID = rid.Rel_ItemCode_Diametro_ID,
+                                           ItemCode = r.Codigo + "(" + d1.Valor + ", " + d2.Valor + ")",
+                                           D1 = d1.Valor,
+                                           D2 = d2.Valor,
+                                           //ColadaNombre = (from c in ctx.Sam3_Colada where c.ColadaID == r.ColadaID && c.Activo select c.NumeroColada).FirstOrDefault(),
+                                           Cantidad = r.Cantidad,
+                                           MM = mm,
+                                           Descripcion = r.DescripcionEspanol,
+                                           ItemCodeOrigenID = r.ItemCodeID,
+                                           TipoMaterial = r.TipoMaterialID,
+                                           TextoTipoMaterial = (from tm in ctx.Sam3_TipoMaterial
+                                                                where tm.TipoMaterialID == r.TipoMaterialID
+                                                                select tm.Nombre).FirstOrDefault()
+                                       }).AsParallel().SingleOrDefault();
+                        }
+                        else
+                        {
+                            
+                            ItemCodeClienteRetorno itemRetorno = new ItemCodeClienteRetorno
+                            {
+                                ItemCode= ItemCode,
+                                BultoID= "",
+                                Descripcion= "", 
+                                D1=decimal.Parse( diam1), 
+                                D2=decimal.Parse( diam2), 
+                                ItemCodeSteelgo= "",
+                                Familia= "", 
+                                Cedula= "", 
+                                TipoAcero= "", 
+                                Colada= "", 
+                                Cantidad= cantidad, 
+                                MM= mm, 
+                                Detallar= "No", 
+                                TieneNU= "No", 
+                                TieneError= true, 
+                                RelFCId= "", 
+                                RelBID= "", 
+                                ItemCodeID= null, 
+                                ItemCodeSteelgoID= "", 
+                                ItemCodeOrigenID= null, 
+                                TipoMaterial= null, 
+                                TextoTipoMaterial= null
+                            };
+                            detalle = itemRetorno;
+                        }
                         return detalle;
                     }
                     
