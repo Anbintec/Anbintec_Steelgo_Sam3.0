@@ -154,6 +154,15 @@
 
             .k-multiselect-wrap li span.k-delete {
                 display: none;
+                display: block;
+                float: right;
+                opacity: .9;
+                background-color: white;
+                padding-right: 0px;
+                border-left: 5px;
+                max-width: 11px;
+                max-height: 11px;
+                margin-left: 6px;
             }
 
 .k-block, .k-button, .k-textbox, .k-drag-clue,
@@ -284,7 +293,7 @@
 }
 
 .k-icon.k-i-close.k-delete {
-    background-image:url("/Content/images/SAMC_Delete.png") !important;
+    background-image: url("/Content/images/SAMC_Delete.png") !important;
 }
 
 .k-list-container {
@@ -359,12 +368,12 @@
         font-weight: 100;
         border-bottom: 1px solid #CCCCCC;
         text-overflow: clip;
-        word-wrap:break-word;
+        word-wrap: break-word;
     }
 
-    .k-grid td.command {
-        padding: 7.5px;
-    }
+        .k-grid td.command {
+            padding: 7.5px;
+        }
 
     .k-grid tr:last-child td {
         border-bottom: none;
@@ -387,12 +396,12 @@
         min-height: 39px;
         height: 39px;
     }
-
+    /*MAFTEC*/
         .k-grid .k-grid-header tr th {
             background: none;
             background-color: #EEEEEE;
-            padding-left: 15px;
-            padding-right: 19px;
+            /*padding-left: 15px;*/
+            /*padding-right: 19px;*/
         }
 
             .k-grid .k-grid-header tr th a.k-link,
@@ -429,17 +438,17 @@
             border-top: none;
         }
 
-        .k-grid .k-grid-header tr th .k-grid-filter{
+        .k-grid .k-grid-header tr th .k-grid-filter {
             background-color: transparent;
         }
 
-        .k-grid .k-grid-header tr th .k-grid-filter.k-state-active {
-            background-color: #F35800;
-        }
+            .k-grid .k-grid-header tr th .k-grid-filter.k-state-active {
+                background-color: #F35800;
+            }
 
         .k-grid .k-grid-header tr th > input {
             width: 100%;
-            box-shadow: none!important;                      
+            box-shadow: none !important;
             text-indent: initial;
         }
 
@@ -449,7 +458,7 @@
         height: 27px;
         max-width: 18px;
         padding: 0;
-        margin: 0 auto;
+        margin: 0 4px;
         font-size: 0;
         border: none;
         outline: none;
@@ -471,7 +480,7 @@
     .k-grid tbody tr td > input.k-textbox {
         height: 40px;
         font-size: 14px;
-            color: #1B3F70;
+        color: #1B3F70;
     }
 
     .k-grid tbody tr td.k-state-selected {
@@ -489,10 +498,10 @@
         padding: 0;
     }
 
-    .k-grid.gridWithInputs tbody tr.k-detail-row .k-grid thead tr th:first-child label,
-    .k-grid.gridWithInputsStorage tbody tr.k-detail-row .k-grid thead tr th label {
-        margin: 0;
-    }
+        .k-grid.gridWithInputs tbody tr.k-detail-row .k-grid thead tr th:first-child label,
+        .k-grid.gridWithInputsStorage tbody tr.k-detail-row .k-grid thead tr th label {
+            margin: 0;
+        }
 
     .k-grid tbody tr td a.k-button:active:hover {
         box-shadow: none !important;
@@ -503,11 +512,46 @@
     .k-grid tbody tr td a.k-button.k-grid-Archivos,
     .k-grid tbody tr td a.k-button.k-grid-Files {
         background-image: url("/Content/images/SAMC_DetailIcon.png");
+        padding-right: 10px;
+        height: 20px;
+        min-width: 20px !important;
+        margin: 0px;
     }
 
     .k-grid tbody tr td a.k-button.k-grid-Cancelar,
     .k-grid tbody tr td a.k-button.k-grid-Cancel {
         background-image: url("/Content/images/SAMC_Delete.png");
+        padding-right: 10px;
+        height: 20px;
+        min-width: 20px !important;
+        margin: 0px;
+    }
+
+    .k-grid tbody tr td a.k-button.k-grid-Limpiar,
+    .k-grid tbody tr td a.k-button.k-grid-Clean {
+        background-image: url('../images/clean_icon.png') !important;
+        padding-right: 10px;
+        height: 20px;
+        min-width: 20px !important;
+        margin: 0px;
+    }
+
+    .k-grid tbody tr td a.k-button.k-grid-Editar,
+    .k-grid tbody tr td a.k-button.k-grid-Update {
+        background-image: url('../images/SAMC_Edit.png') !important;
+        padding-right: 10px;
+        height: 20px;
+        min-width: 20px !important;
+        margin: 0px;
+    }
+
+    .k-grid tbody tr td a.k-button.k-grid-Descarga,
+    .k-grid tbody tr td a.k-button.k-grid-Discharging {
+        background-image: url("/Content/images/SAMC_DischargingIcon.png");
+        padding-right: 10px;
+        height: 20px;
+        min-width: 20px !important;
+        margin: 0px;
     }
 
     .k-grid tbody tr td a.k-button.k-grid-Complemento,
@@ -624,6 +668,14 @@
             padding: 5px;
             letter-spacing: normal;
             line-height: 1.7;
+        }
+
+        .k-grid-pager .k-pager-sizes .k-dropdown-wrap .k-input {
+            min-height: 24px;
+            height: 24px;
+            font-size: 14px;
+            padding: 5px;
+            letter-spacing: normal;
         }
 
         .k-grid-pager .k-pager-sizes .k-dropdown .k-dropdown-wrap .k-select {
@@ -824,8 +876,8 @@
 
     /*$_k-widget*/
     .k-widget.k-window {
-        min-width: 100%!important;
-        left: 0!important;        
+        min-width: 100% !important;
+        left: 0 !important;
     }
 
     .form-group {
@@ -840,7 +892,7 @@
     .k-grid {
         overflow: hidden;
         overflow-x: auto;
-    }       
+    }
 
         .k-grid > table {
             table-layout: auto;
@@ -935,7 +987,6 @@
     .popup .k-dropdown {
         width: 100%;
     }
-
 }
 
 /* sm viewport */
@@ -1029,11 +1080,307 @@
 }
 
 
+/*ESTILOS MAFTEC*/
 
-.k-grid tr.kRowError{
-    background-color:#ffcccc ;
+
+.k-grid tr.kRowError {
+    background-color: #ffcccc;
 }
 
-.k-grid tr.kRowErrorNU{
-    background-color:#FFFF99;
+.k-grid tr.kRowErrorNU {
+    background-color: #FFFF99;
+}
+
+
+
+.k-multiselect .k-delete {
+    background-position: -163px -82px !important;
+}
+
+.k-grid tr.k-filter-row {
+    background-color: #E3E3E3 !important;
+}
+
+.k-grid td {
+    padding: 1px !important;
+    font-size: 12px;
+    color: #111111;
+    font-weight: 100;
+    border-bottom: 1px solid #CCCCCC;
+    white-space: nowrap;
+}
+
+
+
+.k-grid tr:last-child td {
+    border-bottom: none;
+}
+
+.k-grid tr {
+    background-color: #FFFFFF;
+}
+
+    .k-grid tr.k-alt {
+        background-color: #F5F5F5;
+    }
+
+    .k-grid tr:not(.k-detail-row):hover {
+        background-color: #FCEED9;
+    }
+
+.k-grid .k-grid-header tr th {
+    /*background: none;
+    background-color: #EEEEEE;
+    padding-left: 15px;
+    padding-right: 19px;*/
+}
+
+    .k-grid .k-grid-header tr th a.k-link {
+        /*font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;*/
+    }
+
+    .k-grid .k-grid-header tr th .k-filter {
+        background-image: url("/Content/images/SAMC_SearchIconChart.png");
+        background-size: auto;
+        background-position: center 1px;
+    }
+
+.k-grid tbody tr td a.k-button.k-grid-Detalle,
+.k-grid tbody tr td a.k-button.k-grid-Detail,
+.k-grid tbody tr td a.k-button.k-grid-Archivos,
+.k-grid tbody tr td a.k-button.k-grid-Files {
+    background-image: url("/Content/images/SAMC_DetailIcon.png");
+}
+
+.k-grid .k-grid-header tr th .k-i-arrow-n {
+    background-image: url("/Content/images/SAMC_FilterUp.png");
+    background-size: auto;
+    background-position: center !important;
+    vertical-align: middle;
+}
+
+> > > > > > > Steelgo-InHouse .k-grid .k-grid-header tr th .k-i-arrow-s {
+    background-image: url("/Content/images/SAMC_FilterDown.png");
+    background-size: auto;
+    background-position: center !important;
+    vertical-align: middle;
+}
+
+.k-grid tbody tr td a.k-button {
+    color: transparent !important;
+    height: 27px;
+    max-width: 18px;
+    padding: 0;
+    margin: 0 4px;
+    font-size: 0;
+    border: none;
+    outline: none;
+    background: none;
+    background-color: transparent !important;
+    background-repeat: no-repeat;
+    background-position: center !important;
+    box-shadow: none !important;
+}
+
+    .k-grid tbody tr td a.k-button.k-grid-Descarga,
+    .k-grid tbody tr td a.k-button.k-grid-Discharging {
+        background-image: url("/Content/images/SAMC_DischargingIcon.png");
+    }
+
+
+.form .input-group > .input-group-btn {
+    display: none;
+}
+
+
+/*MAFTEC*/
+/*Controles genericos*/
+
+.altoControl {
+    height: 80px !important;
+    overflow: hidden !important;
+}
+
+h6 {
+    margin: 0;
+    font-weight: 600;
+    font-size: larger;
+    line-height: 40px;
+}
+
+.btn-primary.active {
+    background-color: #1c4070 !important;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    background-color: #1c4070;
+}
+
+    .btn-file:hover {
+        position: relative;
+        overflow: hidden;
+        background-color: #152f52;
+    }
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        cursor: inherit;
+        display: block;
+    }
+/*Grid*/
+.k-grid {
+    margin-top: 15px;
+}
+
+    .k-grid .k-grid {
+        margin-top: 0;
+    }
+
+.k-grid-header {
+    padding-right: 0 !important;
+    width: inherit;
+}
+
+    .k-grid-header th.k-header, .k-filter-row th,
+    .nivel2 .k-grid-header th.k-header, .nivel2 .k-filter-row th {
+        font-weight: 500;
+    }
+
+/*.k-grid-pager {
+    padding:3px;
+    height:auto;
+}
+.k-grid-pager .k-link {
+    width:10px;
+    height:10px;
+    }*/
+
+.ScrollUp {
+    overflow-x: scroll;
+    /*margin-top:-20px;*/
+}
+
+.ScrollUpPestania {
+    overflow-x: scroll;
+}
+
+.DivScrollSup {
+    height: 1px;
+    overflow: hidden;
+}
+
+.stick {
+    position: fixed;
+    max-height: 100%;
+    max-width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.GridMenu {
+    height: 1px;
+}
+
+#grid #contextMenu li {
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+button[data-bind="visible:operatorVisible"] {
+    display: none;
+}
+
+.k-filter-menu div label {
+    text-align: center;
+}
+
+.k-filter-row * {
+    box-sizing: border-box !important;
+}
+
+
+.k-grid .ra,
+.k-numerictextbox .k-input {
+    text-align: right;
+}
+
+.k-input-filter {
+    height: 40px;
+    min-height: 40px;
+    color: #1B3F70;
+    border: 1px solid #666;
+    border-radius: 0;
+    font-size: 14px;
+    padding: 0 5px;
+    z-index: 1;
+    -webkit-appearance: none;
+}
+
+    .k-input-filter:focus {
+        border-color: #828282;
+        -moz-box-shadow: 0px 0px 3px #828282; /* FF3.5+ */
+        -webkit-box-shadow: 0px 0px 3px #828282; /* Saf3.0+, Chrome */
+        box-shadow: 0px 0px 3px #828282; /* Opera 10.5, IE9, Chrome 10+ */
+        z-index: 3;
+    }
+
+    .k-input-filter .k-state-focused {
+        box-shadow: none;
+        -moz-box-shadow: none; /* FF3.5+ */
+        -webkit-box-shadow: none;
+    }
+
+    .k-input-filter span {
+        border: none !important;
+    }
+
+        .k-input-filter span input[type="text"]:focus {
+            border: none !important;
+            box-shadow: none;
+        }
+
+.k-grid-footer {
+    padding-right: 0px !important;
+}
+
+
+.party {
+    color: red;
+}
+
+.disabledDay {
+    /* adding some CSS to match the normal days styling */
+    display: block;
+    overflow: hidden;
+    min-height: 22px;
+    line-height: 22px;
+    padding: 0 .45em 0 .1em;
+    cursor: default;
+    opacity: 0.5;
+}
+
+
+.inputtext-popup {
+    border-radius: 0;
+    min-height: 34px;
+    height: 34px;
+    font-weight: normal;
+    font-size: 14px;
+    color: #1B3F70;
+    width: 100%;
+    padding: 2px 0;
 }

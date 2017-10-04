@@ -465,7 +465,7 @@ $Secuencias.add("Secuencias");
 $OK.add("OK");
 
 $FechasSpool.add("FechasSpool");
-$ComplementoRecepcionAlt.add("Listado");
+
 $ImpresionPruebas.add("ImpresionPruebas");
 
 
