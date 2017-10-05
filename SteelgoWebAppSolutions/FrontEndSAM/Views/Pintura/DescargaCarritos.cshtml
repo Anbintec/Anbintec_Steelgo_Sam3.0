@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "DescargaCarro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="PinturaBreadcrumb"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("DescargaCarritos", "Pintura")"><span id="PinturaDescargaCarritosBreadcrumb"></span></a>
+    </li>
+}
+
+<div id="FormListadoRequisicion" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section editButtonSection">
+                            <div class="btn-group save-group">
+                                <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar"></span></button>
+                                <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle botonDeplegaMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caretWhite"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" id="btnGuardar"><span id="botonGuardar2"></span></a></li>
+                                    <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                                </ul>
+                            </div>
+                            <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                        </div>
+                        <div id="DescargaCarroDivSuperior" class="button-section">
+                            <a id="DescargaCarroSuperior" href="@Url.Action("LotesCapturaPrueba","Pintura")" class="btn btn-primary"><span id="CapturaAvanceIntermedioSup"></span></a>
+                        </div>
+                        <div class="button-section actionButtonSection">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="botonAcciones1"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                            </div>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ventanaConfirmCaptura"></div>
+    @*Controles Superior*@
+    <div class="row addedSectionInLineWithoutColor" id="FieldSetView">
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 altoControl" id="InputCarroDiv">
+            <label id="lblCarro"></label>
+            <input id="inputCarro" class="" />
+        </div>
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 altoControl" id="divInputZona">
+            <label>Zona</label>
+            <input id="inputZona" />
+        </div>
+
+    </div>
+
+
+    @*GRID*@
+    <div class="row addedSectionInLine" id="FieldSetView1">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row" id="AreaPlanchado">
+                <div class="col-sm-2 col-md-2 col-lg-2" id="CuadranteDiv">
+                    <label id="lblCuadrante"></label>
+                    <input id="inputCuadrante" class="" />
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-4 col-lg-2 altoControl" id="divLlenadoMasivo">
+                    <label id="lblPlanchar"></label>
+                    <input type="radio" name="LLena" class="radio-responsive" style="width:auto;" value="Vacios" />&nbsp;<span id="lblVacios"></span>&nbsp;&nbsp;
+                    <input type="radio" name="LLena" class="radio-responsive" style="width:auto;" value="Todos" />&nbsp;<span id="lblTodos1"></span>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label id="">&nbsp;</label>
+                    <button type="button" id="ButtonPlanchar" class="btn btn-blue"><span id="botonPlanchar"></span></button>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="ContenedorGrid" class="row">
+                    <div id="grid" data-role="grid" class="k-grid k-widget"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Menu Inferior*@
+    <div class="row ">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar1" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle botonDeplegaMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar1"><span id="botonGuardar4"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="DescargaCarroDivInferior" class="button-section">
+                    <a id="DescargaCarroInferior" href="@Url.Action("LotesCapturaPrueba","Pintura")" class="btn btn-primary"><span id="CapturaAvanceIntermedioInf"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/DescargaCarritos/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/DescargaCarritos/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/DescargaCarritos/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/DescargaCarritos/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/DescargaCarritos/Seguridad.js"></script>
+
+<script>
+        @section JavascriptDocumentReadyFunctions {
+        $authorizationModel["DescargaCarrito"] = $DescargaCarro;
+        }
+</script>

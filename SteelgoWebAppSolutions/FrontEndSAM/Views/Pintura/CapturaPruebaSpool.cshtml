@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewBag.Title = "CapturaPruebaSpool";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="PinturaBreadcrumb"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("CapturaPruebaSpool", "Pintura")"><span id="PinturaCapturaPruebaSpoolBreadcrumb"></span></a>
+    </li>
+}
+
+<div id="FormListadoRequisicion" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu Superior*@
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section editButtonSection">
+                            <div class="btn-group save-group">
+                                <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar2"></span></button>
+                                <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caretWhite"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" id="btnGuardar"><span id="botonGuardar"></span></a></li>
+                                    <li><a href="#" id="btnGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                                </ul>
+                            </div>
+                            <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                        </div>
+                        @*<div id="LotesCapturaReporteDivSuperior" class="button-section">
+                                <a id="LotesCapturaReporteSuperior" href="@Url.Action("Consulta", "Embarque")" class="btn btn-primary"><span id="lblDescargaDeCarroSup"></span></a>
+                            </div>*@
+                        <div class="button-section actionButtonSection">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="botonAcciones1"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="Acciones">
+                                    <li><a href="#/" id="btnGenerarReporte"><span id="botonGenerarReporte"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* Inicia Cuerpo de Pagina*@
+    <div class="row " id="FieldSetView">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row addedSectionInLineWithoutColor">
+                <div class="col-xs-12 col-sm- col-md-2 col-lg-2 altoControl" id="CapturaArmadoHeaderSpoolIDDiv1">
+                    <label id="lblSpoolID" class="security_required"></label>
+                    <input style="width:40%" id="InputOrdenTrabajo" class="item-select general-input" />-<input id="InputID" placeholder="ID" style="width:40%;" />
+                </div>
+                <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 altoControl" id="CapturaArmadoHeaderSpoolIDDiv1">
+                    <label class="security_required">Proceso</label>
+                    <input id="inputProceso" class="" />
+                </div>
+                <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 altoControl" id="divColor" style="display:none">
+                    <label id="lblColor" class="security_required"></label>
+                    <input id="inputColor" />
+                </div>
+                <div class="col-xs-12 col-sm- col-md-2 col-lg-2 altoControl" id="CapturaArmadoHeaderSpoolIDDiv1">
+                    <label id="lblPrueba" class="security_required"></label>
+                    <input id="inputPrueba" class="" />
+                </div>
+
+                <div class="col-xs-12 col-sm- col-md-2 col-lg-2 altoControl" id="CapturaArmadoHeaderSpoolIDDiv1" style="display:none">
+                    <label id="lblBtnExaminar">&nbsp;</label>
+                    @*<button id="btnExaminar" onclick="javascript:void(0);" type="button" class="btn btn-blue"><span>Examinar</span></button>*@
+                    <label class="btn btn-blue " id="lblExaminar"> <input type="file" name="File Upload" id="inputFile" accept=".jpg" class="hidden" /> Examinar</label>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-8 col-md-3 col-lg-2 altoControl">
+                    <label id="lblMostrar"></label>
+                    <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="SinCaptura" /><span id="lblSinCaptura"></span>
+                    <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="Todos" checked /><span id="lblTodos"> </span>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-1 col-lg-2" id="CapturaArmadoHeaderSpoolIDDiv1">
+                    <label id="">&nbsp;</label>
+                    <button id="btnBuscar" onclick="javascript:void(0);" type="button" class="btn btn-blue"><span>Buscar</span></button>
+                </div>
+            </div>
+            <div class="row" id="InformacionSpoolDiv" style="display:none">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 addedSectionInLineWithoutColor">
+                    <div class="row addedSectionInLineWithoutColor">
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 altoControl">
+                            <label id="lblSpoolID1"></label>
+                            <label id="labelSpool"></label>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 altoControl">
+                            <label id="lblSistemaPintura"></label>
+                            <label id="labelSistemaPintura"></label>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 altoControl">
+                            <label id="columnColor"></label>
+                            <label id="labelColor"></label>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-1 altoControl">
+                            <label id="lblAreaPatio"></label>
+                            <label id="labelM2"></label>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-1 altoControl">
+                            <label id="lblLote"></label>
+                            <label id="labelLote"></label>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-1 altoControl">
+                            <label id="lblCuadrante"></label>
+                            <label id="labelCuadrante"></label>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 altoControl">
+                            <label id="lblUnidadMedida"></label>
+                            <label id="labelUnidadMedida"></label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row addedSectionInLine ">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    @*<div class="col-xs-12 col-sm- col-md-2 col-lg-2 altoControl" id="CapturaArmadoHeaderSpoolIDDiv1">
+                            <label id="lblSpoolID1"></label>
+                            <input style="width:40%" id="InputOrdenTrabajo1" class="item-select general-input" />-<input id="InputID1" placeholder="ID" style="width:40%;" />
+                        </div>*@
+                    @*<div class="col-xs-12 col-sm-4 col-md-2 col-lg-2" id="">
+                            <label id="">&nbsp;</label>
+                            <button id="btnAgregar" onclick="javascript:void(0);" type="button" class="btn btn-blue"><span>Agregar Prueba</span></button>
+                        </div>*@
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div id="ContenedorGrid" class="row">
+                            <div id="grid" name="grid-Patio" data-role="grid" class="k-grid k-widget">
+                            </div>
+                            <input id="hdAccionFiltrado" type="hidden" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Finaliza cuerpo de pagina *@
+    <br />
+    <div class="row ">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="button-section editButtonSection">
+                            <div class="btn-group save-group">
+                                <button id="GuardarPie" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar3"></span></button>
+                                <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caretWhite"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" id="btnGuardar1"><span id="botonGuardar4"></span></a></li>
+                                    <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
+                                </ul>
+                            </div>
+                            <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                        </div>
+                        @*<div id="LotesCapturaReporteDivInferior" class="button-section">
+                                <a id="LotesCapturaReporteInferior" href="@Url.Action("Consulta", "Embarque")" class="btn btn-primary"><span id="lblDescargaDeCarroInf"></span></a>
+                            </div>*@
+                        <div class="button-section actionButtonSection">
+                            <div class="dropdown action-group">
+                                <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                                    <span id="botonAcciones2"></span>
+                                    <span class="caretBlue"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                            </div>
+                        </div>
+                        <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/CapturaPruebaSpool/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/CapturaPruebaSpool/Seguridad.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/CapturaPruebaSpool/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/CapturaPruebaSpool/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/CapturaPruebaSpool/Captura.js"></script>
+

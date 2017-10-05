@@ -30,13 +30,6 @@ namespace FrontEndSAM.Controllers.Pintura
             return View();
 
         }
-        public ActionResult CargaCarro()
-
-        {
-
-            return View();
-
-        }
         public ActionResult CapturaAvance()
 
         {

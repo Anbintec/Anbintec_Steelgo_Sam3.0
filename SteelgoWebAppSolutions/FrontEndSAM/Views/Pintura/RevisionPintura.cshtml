@@ -1,0 +1,198 @@
+﻿
+@{
+    //ViewBag.Title = "SistemaPinturaAplicable";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing","Home" )"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="menuConfiguracion"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="PinturaBreadcrumb"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("RevisionPintura","Pintura" )"><span id="PinturaRevisionBreadcrumb"></span></a>
+    </li>
+}
+<div id="FormEntregaRequisicion" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div id="ventanaConfirmCapturaCambioTipo"></div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow  accionGuardar"><span id="botonGuardar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/" id="btnGuardar" class="accionGuardar"><span id="botonGuardar2"></span></a></li>
+                            <li><a href="#/" id="btnGuardarYNuevo" class="accionGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+
+                <div id="CargaCarroSuperior" class="button-section">
+                    <a id="CargaCarroSuperior" href="@Url.Action("AdminCargaCarro", "Pintura")" class="btn btn-primary"><span id="CargaCarroSup"></span></a>
+                </div>
+
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+    @*Filtros de Búsqueda*@
+    <div class="row" id="FieldSetView">
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2" style="left: 16px;">
+            <div id="tipoVista" class="btn-group " data-toggle="buttons" role="group">
+                <label>&nbsp;</label>
+                <div class="btn btn-primary" id="styleSpool">
+                    <input type="radio" name="TipoBusqueda" style="width:auto;" value="spool" /><span id="SistemaPinturaAplicableSpool"></span>
+                </div>
+                <div class="btn btn-primary" id="styleNc">
+                    <input type="radio" name="TipoBusqueda" style="width:auto;" value="nc" /><span id="SistemaPinturaAplicableNC"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="divProyecto" style="left: 12px;">
+            <label id="lblProyecto" class="security_required"></label>
+            <input id="inputProyecto" />
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2" id="divSpool">
+            <label id="lblSpoolContiene" class="security_required"></label>
+            <input id="inputSpool" class="general-input" />
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2" id="divNc">
+            <label id="lblNcContiene" class="security_required"></label>
+            <input id="inputNc" class="general-input" />
+        </div>
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <label id="">&nbsp;</label>
+            <button type="button" id="btnBuscar" class="btn btn-blue botonSizeGeneral"><span id="lblMostrar"></span></button>
+        </div>
+    </div>
+    @*GRID*@
+    <div id="ventanaConfirmCaptura"></div>
+    <div class="row addedSectionInLine">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <label id="labelPlanchadoSP">&nbsp;</label>
+            <input id="inputPlanchadoSP" type="text" />
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <label id="labelPlanchadoColor">&nbsp;</label>
+            <input id="inputPlanchadoColor" type="text" />
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2" id="TodosDiv">
+            <label id="lblGenerarRevision"></label>
+            <input type="radio" id="SelectTodosSi" name="SelectTodos" style="width:auto;" value="Si" /><span id="lblSi"></span><br />
+            <input type="radio" id="SelectTodosNo" name="SelectTodos" style="width:auto;" value="No" /><span id="lblNo"></span><br />
+            <input type="radio" id="SelectTodosNinguno" name="SelectTodos" style="width:auto;" value="Ninguno" /><span id="lblNinguno"></span>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <label id="labelPlanchadoMotivo">&nbsp;</label>
+            <input id="inputPlanchadoMotivo" type="text" />
+        </div>
+        <div class="btn-group col-xs-12 col-sm-6 col-md-2 col-lg-2" role="group" id="LlenaCapturaAvanceIntAcabadoDiv">
+            <label id="lblPlanchar"></label>
+            <input type="radio" id="LlenaTodos" name="LLena" style="width:auto;" value="Todos" /><span id="lblTodos1"></span>
+            <input type="radio" id="LlenaVacios" name="LLena" style="width:auto;" value="Vacios" /><span id="lblVacios"></span>
+
+        </div>
+        <div class="col-xs-12 col-sm-2 col-md-12 col-lg-2">
+            <label id="">&nbsp;</label>
+            <button type="button" id="ButtonPlanchar" class="btn btn-blue botonSizeGeneral"><span id="botonPlanchar"></span></button>
+        </div>
+        <div id="ContenedorGrid" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="grid" data-role="grid" class="k-grid k-widget"></div>
+        </div>
+    </div>
+    @*Menu Inferior*@
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="Guardar1" onclick="javascript:void(0);" type="button" class="btn btn-yellow accionGuardar"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/" id="btnGuardar1" class="accionGuardar"><span id="botonGuardar4"></span></a></li>
+                            <li><a href="#/" id="btnGuardarYNuevo1" class="accionGuardarYNuevo"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="CargaCarroInferior" class="button-section">
+                    <a id="CargaCarroInferior" href="@Url.Action("AdminCargaCarro", "Pintura")" class="btn btn-primary"><span id="CargaCarroInf"></span></a>
+                </div>
+
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones"></ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="windowDownload" style="display:none">
+    <div class="container-fluid" style="margin:0px">
+        <div class="form-group">
+            @*<center>*@
+            <span id="PinturaCargaMsjDescargaSpool"></span>
+            @*</center>*@
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                <input id="inputZonaPopup" placeholder="Zona" />
+            </div>
+            <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+                <input id="inputCuadrantePopup" placeholder="Cuadrante" />
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+        </div>
+        <div class="row">
+            <center>
+                <a class="btn btn-primary confirm_yes" href="#/" id="btnDescargar">
+                    <span id="PinturaCargaDescargar"></span>
+                </a>
+                <a class="btn btn-primary confirm_yes" href="#/" id="btnCerrarPopup">
+                    <span id="PinturaCargaCerrarPopup"></span>
+                </a>
+            </center>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/RevisionPintura/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/RevisionPintura/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/RevisionPintura/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/RevisionPintura/Captura.js"> </script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/RevisionPintura/Seguridad.js"> </script>
+
+<script>
+        @section JavascriptDocumentReadyFunctions {
+    $authorizationModel["RevisonPintura"] = $RevisionPinturaModel;
+    }
+</script>

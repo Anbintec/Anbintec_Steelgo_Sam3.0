@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "OKPintura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section breadcrumb {
+    <li>
+        <a href="#"><span id="lblInicio"></span></a>
+    </li>
+    <li>
+        <a href="#"><span id="PinturaBreadcrumb"></span></a>
+    </li>
+    <li class="active">
+        <a href=""><span>OK Pintura</span></a>
+    </li>
+}
+<div id="FormEntregaRequisicion" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    @*Menu superior*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <input type="hidden" value=@ViewBag.id id="idField" />
+                    <div class="btn-group save-group">
+                        <button id="BotonGuardar" onclick="javascript:void(0);" type="button" class="btn btn-yellow" style="min-width:110px;"><span id="botonGuardar"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="BotonGuardar2"><span id="botonGuardar2"></span></a></li>
+                            <li><a href="#" id="BotonGuardarYNuevo"><span id="botonGuardarYNuevo"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar"></span></a>
+                </div>
+
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones1"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones">
+                            <li><a href="#/" id="btnCargaCsv"><span id="botonCargaExcel"></span></a></li>
+                            <li><a href="#/" id="btnDescargaCsv"><span id="botonDescargaExcel"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <input type="file" name="File Upload" id="files" class="hidden" accept=".csv" />
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+    <div id="FieldSetView">
+        @*Controles Superior*@
+        <div class="row" id="AgregadoDiv">
+            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 altoControl" id="ProyectoDiv">
+                <label id=""><span id="lblProyecto"></span></label>
+                <input id="inputProyecto" class="" />
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2" id="CapturaArmadoHeaderSpoolIDDiv">
+                <label id="">Spool ID Contiene</label>
+                <input id="InputNumeroControl" class="item-select general-input" />
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2 altoControl">
+                <label id="lblMostrar"></label>
+                <input type="radio" name="Muestra" style=" width:auto;" value="SinCaptura" /><span id="lblSinCaptura"></span>
+                <input type="radio" name="Muestra" style=" width:auto;" value="Todos" /><span id="lblTodos"> </span>
+            </div>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+                <label id="">&nbsp;</label>
+                <button type="button" id="ButtonBuscar" class="btn btn-blue botonSizeGeneral"><span id="botonMostrar"></span></button>
+            </div>
+        </div>
+        @*GRID*@
+        <div class="row addedSectionInLine">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="row" id="containerDiv">
+                    <div class="col-sm-2 col-md-2 col-lg-2" id="CapturaArmadoHeaderSpoolIDDiv">
+                        <center><label id="lblSeleccionarTodos"></label></center>
+                        <center><input type="checkbox" id="InputSeleccionTodos" /></center>
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-lg-1">
+                        <button type="button" id="ButtonPlanchar" class="btn btn-blue"><span id="botonPlanchar"></span></button>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="ContenedorGrid" class="row">
+                        <div id="grid" data-role="grid" class="k-grid k-widget"></div>
+                        <input id="hdAccionFiltrado" type="hidden" />
+                        <div id="gridMasivo" type="hidden" data-role="grid" class="k-grid k-widget"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Menu Inferior*@
+    </div>
+    @*GRID POPUP*@
+    <div id="windowGrid" style="display: none; z-index:inherit;">
+
+        <div class="row col-sm-12 col-md-12 col-lg-12" style="width: 100%; padding-right:20px;">
+            <div class="form-group">
+                <div id="ContenedorGridPopUp">
+                    <div id="gridPopUp" data-role="grid" class="k-grid k-widget">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-5 col-md-5 col-lg-5"></div>
+            <a class="btn btn-primary col-sm-2 col-md-2 col-lg-2" href="#" id="CerrarDetalleJunta">
+                <span id="botonCerrar"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="BotonGuardar3" onclick="javascript:void(0);" type="button" class="btn btn-yellow" style="min-width:110px;"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="BotonGuardar4"><span id="botonGuardar4"></span></a></li>
+                            <li><a href="#" id="BotonGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones">
+                            <li><a href="#/" id="btnCargaCsv1"><span id="botonCargaExcel1"></span></a></li>
+                            <li><a href="#/" id="btnDescargaCsv1"><span id="botonDescargaExcel1"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <input type="file" name="File Upload" id="files" class="hidden" accept=".csv" />
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/OKPintura/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/OKPintura/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/OKPintura/Render.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/OKPintura/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/OKPintura/Seguridad.js"></script>
