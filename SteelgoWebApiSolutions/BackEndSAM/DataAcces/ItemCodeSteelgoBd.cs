@@ -294,7 +294,7 @@ namespace BackEndSAM.DataAcces
                                                 && rics.Rel_ItemCode_ItemCodeSteelgo == riit.Rel_ItemCode_ItemCodeSteelgo
                                                 select fm.Nombre).FirstOrDefault(),
                                    Colada="",
-                                   Cantidad = r.Cantidad,
+                                   Cantidad = cantidad,//r.Cantidad,
                                    MM = mm,
                                    Detallar= "No",
                                    TieneNU= "No",
@@ -371,7 +371,7 @@ namespace BackEndSAM.DataAcces
                                            D1 = d1.Valor,
                                            D2 = d2.Valor,
                                            //ColadaNombre = (from c in ctx.Sam3_Colada where c.ColadaID == r.ColadaID && c.Activo select c.NumeroColada).FirstOrDefault(),
-                                           Cantidad = r.Cantidad,
+                                           Cantidad = cantidad,//r.Cantidad,
                                            MM = mm,
                                            Descripcion = r.DescripcionEspanol,
                                            ItemCodeOrigenID = r.ItemCodeID,
@@ -380,6 +380,36 @@ namespace BackEndSAM.DataAcces
                                                                 where tm.TipoMaterialID == r.TipoMaterialID
                                                                 select tm.Nombre).FirstOrDefault()
                                        }).AsParallel().SingleOrDefault();
+
+                            if (detalle == null)
+                            {
+                                ItemCodeClienteRetorno itemRetorno = new ItemCodeClienteRetorno
+                                {
+                                    ItemCode = ItemCode,
+                                    BultoID = "",
+                                    Descripcion = "",
+                                    D1 = decimal.Parse(diam1),
+                                    D2 = decimal.Parse(diam2),
+                                    ItemCodeSteelgo = "",
+                                    Familia = "",
+                                    Cedula = "",
+                                    TipoAcero = "",
+                                    Colada = "",
+                                    Cantidad = cantidad,
+                                    MM = mm,
+                                    Detallar = "No",
+                                    TieneNU = "No",
+                                    TieneError = true,
+                                    RelFCId = "",
+                                    RelBID = "",
+                                    ItemCodeID = null,
+                                    ItemCodeSteelgoID = "",
+                                    ItemCodeOrigenID = null,
+                                    TipoMaterial = null,
+                                    TextoTipoMaterial = null
+                                };
+                                detalle = itemRetorno;
+                            }
                         }
                         else
                         {
