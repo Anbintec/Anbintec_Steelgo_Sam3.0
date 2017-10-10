@@ -1584,7 +1584,7 @@ namespace BackEndSAM.DataAcces
                                                        d1.Valor.ToString() + "," +
                                                        d2.Valor.ToString() + ")(" +
                                                        p.Nombre + ")").AsParallel().SingleOrDefault();
-                            detalle.registroID = int.Parse(detalle.ValorReferencia);
+                            detalle.registroID = detalle.ReferenciaID;
                             break;
                         case 8: // Orden de almacenaje
                             detalle.ReferenciaID = (from r in ctx.Sam3_Rel_Incidencia_OrdenAlmacenaje
