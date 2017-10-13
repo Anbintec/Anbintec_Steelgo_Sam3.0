@@ -536,9 +536,9 @@ namespace BackEndSAM.DataAcces
                             registro.IncidenciaInterna = datos.IncidenciaInterna == 1 ? true : false;
                             registro.TituloIngles = datos.TituloIngles;
                             registro.DescripcionIngles = datos.DescripcionIngles;
-                            registro.RespuestaIngles = datos.RespuestaIngles;
-                            registro.MotivoCancelacionIngles = datos.MotivoCancelacionIngles;
-                            registro.DetalleResolucionIngles = datos.DetalleResolucionIngles;
+                            
+                            
+                            
                             registro.FechaModificacion = DateTime.Now;
                             //registro.IncidenciaOriginalID = registro.IncidenciaID;
                             registro.IncidenciaOriginalID = Convert.ToInt32(datos.FolioOriginalID) == 0 ? datos.FolioIncidenciaID : Convert.ToInt32(datos.FolioOriginalID);
@@ -547,12 +547,14 @@ namespace BackEndSAM.DataAcces
                             if (datos.Estatus == "Cancelado")
                             {
                                 registro.MotivoCancelacion = datos.MotivoCancelacion;
+                                registro.MotivoCancelacionIngles = datos.MotivoCancelacionIngles;
                                 registro.FechaCancelacion = DateTime.Now;
                                 registro.UsuarioCancelaID = usuario.UsuarioID;
                             }
                             if (datos.Estatus == "Resuelto")
                             {
                                 registro.DetalleResolucion = datos.DetalleResolucion;
+                                registro.DetalleResolucionIngles = datos.DetalleResolucionIngles;
                                 if (datos.ResueltoPor != null && datos.ResueltoPor != "") { registro.UsuarioResuelveID = Convert.ToInt32(datos.ResueltoPor); }
                                 if (fechaSolucion.ToShortDateString() != "1/1/0001") { registro.FechaSolucion = fechaSolucion; }
                             }
@@ -560,6 +562,7 @@ namespace BackEndSAM.DataAcces
                             if (datos.Estatus == "Respondido")
                             {
                                 registro.Respuesta = datos.Respuesta;
+                                registro.RespuestaIngles = datos.RespuestaIngles;
                                 if (datos.RespondidoPor != null && datos.RespondidoPor != "") { registro.UsuarioIDRespuesta = Convert.ToInt32(datos.RespondidoPor); }
                                 if (fechaRespuesta.ToShortDateString() != "1/1/0001") { registro.FechaRespuesta = fechaRespuesta; }
                             }
