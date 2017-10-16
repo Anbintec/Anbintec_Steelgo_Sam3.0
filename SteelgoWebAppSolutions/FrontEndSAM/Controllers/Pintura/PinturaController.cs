@@ -107,5 +107,13 @@ namespace FrontEndSAM.Controllers.Pintura
             return View();
 
         }
+        public ActionResult SolicitudInspeccion()
+        {
+            return View();
+        }
+        public ActionResult RequisicionInspeccion()
+        {
+            return View();
+        }
     }
 }

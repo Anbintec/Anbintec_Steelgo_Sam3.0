@@ -95,6 +95,7 @@
         public static string GUARDARCAPTURA_ASIGNACIONENVIO = "Sam3_Embarque_AE_SET_GuardaAsignacionEnvio";
         public static string PLANCHADOMATERIALES = "Sam3_Materiales_SET_PlanchadoMateriales";
         public static string GuardarOrdenRecepcion = "Sam3_OrdenRecepcion_Guardar";
-        
+        public static string GUARDARCAPTURAREQUISICIONINSPECCIONPINTURA = "Sam3_Pintura_RequisicionInspeccion_GuardarCaptura";        
+        public static string GUARDACAPTURAPINTURASOLICITUDINSPECCION = "Sam3_Pintura_SolicitudInspeccion_GuardarCaptura";        
     }
 }

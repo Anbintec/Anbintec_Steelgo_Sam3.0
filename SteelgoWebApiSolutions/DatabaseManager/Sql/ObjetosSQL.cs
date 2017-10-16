@@ -147,7 +147,7 @@ namespace DatabaseManager.Sam3
                 cmd.CommandType = CommandType.StoredProcedure;
                 try
                 {
-                    cmd.CommandTimeout = 0;
+                    cmd.CommandTimeout = 0;                    
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
                     cmd.Connection.Close();
@@ -351,8 +351,8 @@ namespace DatabaseManager.Sam3
                     }
 
                     DataRow row = dtError.NewRow();
-                    row["0"] = "error";
-                    row["1"] = "error";
+                    row["0"] = e.Message;
+                    row["1"] = e.Message;
                     dtError.Rows.Add(row);
                     return dtError;
                 }

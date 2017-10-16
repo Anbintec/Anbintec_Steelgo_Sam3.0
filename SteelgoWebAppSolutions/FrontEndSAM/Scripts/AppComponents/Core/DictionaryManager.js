@@ -8528,6 +8528,50 @@ _dictionary = {
 	    "es-MX": "Pintura",
 	    "en-US": "Paint"
 	},
+	"menuPinturaSolicitudInspeccion": {
+	    "es-MX": "Solicitud De Inspección",
+	    "en-US": "Request Inspection"
+	},
+	"menuPinturaRequisicionInspeccion": {
+	    "es-MX": "Requisición De Inspección De Pintura",
+	    "en-US": "Paint Inspection Requisition"
+	},
+	"columnPinturaFechaSolicitudInsp": {
+	    "es-MX": "Fecha Solicitud",
+	    "en-US": "Application Date"
+	},
+	"msgPinturaRequisicionInspNoEditar":{
+	    "es-MX": "Este Spool ya cuenta con una requisicion de inspeccion de pintura Aprobada, No se puede Editar",
+	    "en-US": "This Spool already has a Paint Inspection Requisition Approved, Can not Edit"
+	},
+	"msgPinturaRequisicionInspNoEliminar": {
+	    "es-MX": "Este Spool ya cuenta con una requisicion de inspeccion de pintura Aprobada, No se puede Eliminar",
+	    "en-US": "This Spool already has a Paint Inspection Requisition Approved, Can not Delete"
+	},
+	"msgPinturaSolicitudInspEliminar": {
+	    "es-MX": "Este Spool ya cuenta con captura de Fecha Solicitud, No Puede Eliminar",
+	    "en-US": "This Spool already has Capture Request Date, Can not Delete"
+	},
+	"msgPinturaRequisicionInspPreguntaEliminar": {
+	    "es-MX": "Este Spool ya cuenta con captura de Fecha de Solicitud, desea continuar?",
+	    "en-US": "This Spool already has Capture Request Date, do you want to continue?"
+	},
+	"msgPinturaSolicitudInspPreguntaDatosConCaptura": {
+	    "es-MX": "Este Spool ya cuenta con captura de Fecha de Inspeccion Ó Resultado, desea continuar?",
+	    "en-US": "This Spool already has Capture Inspection Date or Result, do you want to continue?"
+	},
+    "msgPinturaSolicitudInspNoHayCamposAPlanchar": {
+	    "es-MX": "Seleccione Al Menos Un Campo Para El Planchado",
+	    "en-US": "Select At Least One Field For Ironing"
+    },
+    "msgPinturaSolicitudInspNoHayDatosGrid": {
+        "es-MX": "No Existen Datos Para El Planchado",
+        "en-US": "No Ironing Data Available"
+    },
+	"columnPinturaFechaInspeccion": {
+	    "es-MX": "Fecha Inspección",
+	    "en-US": "Inspection Date"
+	},
 	"menuPinturaCargaCarro": {
 	    "es-MX": "Carga de Carro",
 	    "en-US": "Load Carriage"
@@ -8694,7 +8738,7 @@ _dictionary = {
 	"ErrorColumnaTieneLetrasOKPINTURA": {
 	    "es-MX": "Algún Registro de la columna OKPINTURA no es un Número, Porfavor Verifique.",
 	    "en-US": "Some record of the OKFAB column is not a number, check please."
-	},
+	},	
     //"menuListadoEmbarqueEnviados": {
     //    "es-MX": "Listado Embarques Enviados",
     //    "en-US": "Shipped Shipment List"
@@ -10645,6 +10689,22 @@ _dictionary = {
 	"EditarRequisicionExcepcionGuardado": {
 	    "es-MX": "No hay datos para guardar.",
 	    "en-US": "No data to save."
+	},
+	"lblUbicacionNUAlmacen": {
+	    "es-MX": "Almacén",
+	    "en-US": "Shop"
+	},
+	"lblUbicacionNURack":{
+	    "es-MX": "Rack",
+	    "en-US": "Rack"
+	},
+	"lblUbicacionNUSeccionNivel": {
+	    "es-MX": "Sección/Nivel",
+	    "en-US": "Section/Level"
+	},
+	"lblUbicacionNUSelectRack": {
+	    "es-MX": "Seleccionar Rack a asignar",
+	    "en-US": "Select Rack"
 	},
 
     // Pantalla Captura ResultadosPND
