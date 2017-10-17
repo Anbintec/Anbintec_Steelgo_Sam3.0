@@ -1,12 +1,11 @@
 ﻿IniciaModuloRequisicionInspeccion();
 function IniciaModuloRequisicionInspeccion() {
-    SuscribirEventos();
+    setTimeout(function () { SuscribirEventos(); }, 1000);
     $('input:radio[name=Planchar]:nth(0)').prop("checked", true);
 }
 function changeLanguageCall() {
     CargarGrid();
-    document.title = _dictionary.menuPinturaRequisicionInspeccion[$("#language").data("kendoDropDownList").value()];
-    $("")
+    document.title = _dictionary.menuPinturaRequisicionInspeccion[$("#language").data("kendoDropDownList").value()];    
 };
 
 

@@ -37,7 +37,7 @@ function SuscribirEventoID() {
 function SuscribirEventosOrdenTrabajo() {
     $("#InputOrdenTrabajo").blur(function (e) {
         if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z][0-9]*$")) {
-            try {
+            //try {
                 var OrdenTrabajoOrigianl = $("#InputOrdenTrabajo").val();
                 $RequisicionInspeccion.RequisicionInspeccion.read({ token: Cookies.get("token"), OrdenTrabajo: $("#InputOrdenTrabajo").val(), Lenguaje: $("#language").val() }).done(function (data) {
                     if (Error(data)) {
@@ -52,9 +52,9 @@ function SuscribirEventosOrdenTrabajo() {
                         Cookies.set("LetraProyecto", data.OrdenTrabajo.substring(0, 1), { path: '/' });                        
                     }
                 });
-            } catch (e) {
-                displayNotify("Mensajes_error", e.message, '1');
-            }
+            //} catch (e) {
+            //    displayNotify("Mensajes_error", e.message, '1');
+            //}
         } else {
             displayNotify("CapturaArmadoMensajeOrdenTrabajo", "", '1');
         }
