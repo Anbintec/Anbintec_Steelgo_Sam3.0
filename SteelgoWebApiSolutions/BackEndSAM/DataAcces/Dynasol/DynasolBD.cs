@@ -207,7 +207,7 @@ namespace BackEndSAM.DataAcces.Dynasol
                             ShippingDate = item.ShippingDate,
                             CantS = (float)item.CantidadS.GetValueOrDefault(),
                             FechaRecibidoS = item.FechaRecibidoSteelgo,
-                            InspeccionSteelgo = item.InspeccionSteelgo.GetValueOrDefault(),
+                            InspeccionS = item.InspeccionSteelgo.GetValueOrDefault(),
                             ListaDetalleInspeccion = ObtenerDetalleInspeccion(item.ColadaID),
                             MedidaCeciliaID = item.MedidaCeciliaID,
                             MedidaCecilia = (item.MedidaCecilia == "" && EsTuberia == 0 && Lenguaje == "es-MX") ? "Pza" : (item.MedidaCecilia == "" && EsTuberia == 0 && Lenguaje != "es-MX") ? "Pcs" : item.MedidaCecilia,

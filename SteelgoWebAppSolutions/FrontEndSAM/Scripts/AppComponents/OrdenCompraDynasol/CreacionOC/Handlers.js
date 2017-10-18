@@ -254,16 +254,19 @@ function CSVToArray(strData, strDelimiter) {
     var todoOk = true;
     for (var i = 0; i < arrData.length; i++) {
         arrData[i].RowOk = true;
-        if (arrData[i].Consecutivo == "" || arrData[i].Descripcion == "" && arrData[i].MaterialNorma == ""
-            || arrData[i].Diametro1 == "" || arrData[i].Cantidad == "" || arrData[i].PrecioCompra == "" || arrData[i].PrecioVenta == "") {
-            arrData[i].RowOk = false;
-            todoOk = false; 
+        if (!(arrData[i].Consecutivo == "" && arrData[i].Descripcion == undefined )) {
+
+            if (arrData[i].Consecutivo == "" || arrData[i].Descripcion == "" && arrData[i].MaterialNorma == ""
+                || arrData[i].Diametro1 == "" || arrData[i].Cantidad == "" || arrData[i].PrecioCompra == "" || arrData[i].PrecioVenta == "") {
+                arrData[i].RowOk = false;
+                todoOk = false;
+            }
+            if (arrData[i].diametro2 != "")
+                arrData[i].diametro2 = 0;
+            arrData[i].Revision = arrData[i].Descripcion + arrData[i].MaterialNorma + arrData[i].Diametro1 +
+                        arrData[i].Diametro2 + arrData[i].Shedule + arrData[i].Rating + arrData[i].PrepExt;
+            tmpArray.push(arrData[i]);
         }
-        if (arrData[i].diametro2 != "")
-            arrData[i].diametro2 = 0;
-        arrData[i].Revision = arrData[i].Descripcion + arrData[i].MaterialNorma + arrData[i].Diametro1 +
-                    arrData[i].Diametro2 + arrData[i].Shedule + arrData[i].Rating + arrData[i].PrepExt;
-        tmpArray.push(arrData[i]);
 
     }
     if (!todoOk)

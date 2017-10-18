@@ -95,6 +95,7 @@ function AjaxGuardarCaptura(arregloCaptura, tipoGuardar) {
                     ListaColadas[j].ShippingDate = kendo.toString(arregloCaptura[index].ListaDetalleColadas[j].ShippingDate, labelFecha) == null ? "" : kendo.toString(arregloCaptura[index].ListaDetalleColadas[j].ShippingDate, labelFecha).trim();
                     ListaColadas[j].CantidadS = arregloCaptura[index].ListaDetalleColadas[j].CantS;
                     ListaColadas[j].FechaRecibidoSteelgo = kendo.toString(arregloCaptura[index].ListaDetalleColadas[j].FechaRecibidoS, labelFecha) == null ? "" : kendo.toString(arregloCaptura[index].ListaDetalleColadas[j].FechaRecibidoS, labelFecha).trim();;
+                    ListaColadas[j].InspeccionSteelgo = arregloCaptura[index].ListaDetalleColadas[j].InspeccionS;
                     ListaColadas[j].MedidaCeciliaID = arregloCaptura[index].ListaDetalleColadas[j].MedidaCeciliaID;
                     ListaColadas[j].MedidaGerezID = arregloCaptura[index].ListaDetalleColadas[j].MedidaGerezID;
                     ListaColadas[j].MedidaSteelgoID = arregloCaptura[index].ListaDetalleColadas[j].MedidaSteelgoID;

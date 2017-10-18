@@ -81,7 +81,7 @@ namespace BackEndSAM.Models.Dynasol
             public string ShippingDate { get; set; }
             public float CantS { get; set; }
             public string FechaRecibidoS { get; set; }
-            public int InspeccionSteelgo { get; set; }
+            public int InspeccionS { get; set; }
             public List<DetalleInspeccionClass> ListaDetalleInspeccion { get; set; }
             public int MedidaCeciliaID { get; set; }
             public string MedidaCecilia { get; set; }

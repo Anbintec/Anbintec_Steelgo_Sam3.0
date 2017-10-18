@@ -432,7 +432,7 @@ function CargarGridPopUpDetalleSteelgo() {
 
                         CantS: { type: "number", editable: true },
                         FechaFactura: { type: "date", editable: true },
-                        InspeccionS: { type: "string", editable: true },
+                        InspeccionS: { type: "number", editable: true },
                         FechaRecibidoS: { type: "date", editable: true },
                     }
                 }

@@ -121,14 +121,14 @@ function CargarGrid() {
 
 function cancelarCaptura(e) {
     e.preventDefault();
-    if ($('#botonGuardar').text() == _dictionary.MensajeGuardar[$("#language").data("kendoDropDownList").value()]) {
+    
         e.preventDefault();
         var dataItem = $("#grid").data("kendoGrid").dataItem($(e.currentTarget).closest("tr"));
         var dataSource = $("#grid").data("kendoGrid").dataSource;
 
         dataSource.remove(dataItem);
         $("#grid").data("kendoGrid").dataSource.sync();
-    }
+    
 
 };
 
