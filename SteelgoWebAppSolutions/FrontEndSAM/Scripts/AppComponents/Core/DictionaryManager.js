@@ -8529,8 +8529,8 @@ _dictionary = {
 	    "en-US": "Paint"
 	},
 	"menuPinturaSolicitudInspeccion": {
-	    "es-MX": "Solicitud De Inspección",
-	    "en-US": "Request Inspection"
+	    "es-MX": "Inspección Pintura",
+	    "en-US": "Paint Inspection"
 	},
 	"menuPinturaRequisicionInspeccion": {
 	    "es-MX": "Requisición De Inspección De Pintura",
