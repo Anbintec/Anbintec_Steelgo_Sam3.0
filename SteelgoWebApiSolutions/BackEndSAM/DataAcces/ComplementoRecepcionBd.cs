@@ -210,7 +210,7 @@ namespace BackEndSAM.DataAcces
 
 
                         string diametro = (from ics in ctx.Sam3_ItemCodeSteelgo
-                                           //join ics in ctx.Sam3_ItemCodeSteelgo on ricsd.ItemCodeSteelgoID equals ics.ItemCodeSteelgoID
+                                               //join ics in ctx.Sam3_ItemCodeSteelgo on ricsd.ItemCodeSteelgoID equals ics.ItemCodeSteelgoID
                                            join cat in ctx.Sam3_CatalogoCedulas on ics.CedulaID equals cat.CatalogoCedulasID
                                            join d in ctx.Sam3_Diametro on cat.DiametroID equals d.DiametroID
                                            where ics.ItemCodeSteelgoID == item.ItemCodeSteelgoID
@@ -218,7 +218,7 @@ namespace BackEndSAM.DataAcces
                                            select d.Valor.ToString()).AsParallel().SingleOrDefault();
 
                         string cedulaA = (from ics in ctx.Sam3_ItemCodeSteelgo
-                                          //join ics in ctx.Sam3_ItemCodeSteelgo on ricsd.ItemCodeSteelgoID equals ics.ItemCodeSteelgoID
+                                              //join ics in ctx.Sam3_ItemCodeSteelgo on ricsd.ItemCodeSteelgoID equals ics.ItemCodeSteelgoID
                                           join cat in ctx.Sam3_CatalogoCedulas on ics.CedulaID equals cat.CatalogoCedulasID
                                           join ced in ctx.Sam3_Cedula on cat.CedulaA equals ced.CedulaID
                                           where ics.ItemCodeSteelgoID == item.ItemCodeSteelgoID
@@ -226,7 +226,7 @@ namespace BackEndSAM.DataAcces
                                           select ced.Codigo).AsParallel().SingleOrDefault();
 
                         string cedulaB = (from ics in ctx.Sam3_ItemCodeSteelgo
-                                          //join ics in ctx.Sam3_ItemCodeSteelgo on ricsd.ItemCodeSteelgoID equals ics.ItemCodeSteelgoID
+                                              //join ics in ctx.Sam3_ItemCodeSteelgo on ricsd.ItemCodeSteelgoID equals ics.ItemCodeSteelgoID
                                           join cat in ctx.Sam3_CatalogoCedulas on ics.CedulaID equals cat.CatalogoCedulasID
                                           join ced in ctx.Sam3_Cedula on cat.CedulaB equals ced.CedulaID
                                           where ics.ItemCodeSteelgoID == item.ItemCodeSteelgoID
@@ -234,7 +234,7 @@ namespace BackEndSAM.DataAcces
                                           select ced.Codigo).AsParallel().SingleOrDefault();
 
                         string cedulaC = (from ics in ctx.Sam3_ItemCodeSteelgo
-                                          //join ics in ctx.Sam3_ItemCodeSteelgo on ricsd.ItemCodeSteelgoID equals ics.ItemCodeSteelgoID
+                                              //join ics in ctx.Sam3_ItemCodeSteelgo on ricsd.ItemCodeSteelgoID equals ics.ItemCodeSteelgoID
                                           join cat in ctx.Sam3_CatalogoCedulas on ics.CedulaID equals cat.CatalogoCedulasID
                                           join ced in ctx.Sam3_Cedula on cat.CedulaC equals ced.CedulaID
                                           where ics.ItemCodeSteelgoID == item.ItemCodeSteelgoID
@@ -566,7 +566,7 @@ namespace BackEndSAM.DataAcces
                                 Sam3_ItemCode actualizaItem = ctx.Sam3_ItemCode
                                             .Where(x => x.ItemCodeID == itemCodeJson.ItemCodeID && x.Activo).SingleOrDefault();
 
-                               
+
 
                                 string[] elementos = itemCodeJson.NumeroUnico.Split('-').ToArray();
                                 int temp = Convert.ToInt32(elementos[1]);
@@ -575,13 +575,17 @@ namespace BackEndSAM.DataAcces
                                 actualizaNU = ctx.Sam3_NumeroUnico
                                     .Where(x => x.NumeroUnicoID.ToString() == itemCodeJson.NumeroUnicoID).SingleOrDefault();
 
+
+                                Sam3_EquivalenciaNumeroUnico ItemNumeroUnicoSam2 = ctx.Sam3_EquivalenciaNumeroUnico
+                                            .Where(x => x.Sam3_NumeroUnicoID == actualizaNU.NumeroUnicoID && x.Activo).SingleOrDefault();
+
                                 Sam3_NumeroUnicoInventario sam3_numeroUnicoInventario = (from a in ctx.Sam3_NumeroUnicoInventario
                                                                                          where a.NumeroUnicoID == actualizaNU.NumeroUnicoID && a.Activo
                                                                                          select a).SingleOrDefault();
 
                                 List<Sam3_NumeroUnicoSegmento> lista_Sam3NumeroUnicoSegmento = (from a in ctx.Sam3_NumeroUnicoSegmento
-                                                                                           where a.NumeroUnicoID == actualizaNU.NumeroUnicoID && a.Activo
-                                                                                           select a).ToList();
+                                                                                                where a.NumeroUnicoID == actualizaNU.NumeroUnicoID && a.Activo
+                                                                                                select a).ToList();
 
                                 int coladaID = (from c in ctx.Sam3_Colada
                                                 where c.NumeroColada == itemCodeJson.Colada
@@ -747,7 +751,7 @@ namespace BackEndSAM.DataAcces
                                             ctx2.SaveChanges();
                                             #endregion
 
-                                            
+
 
                                             #region Actualizar MM
                                             //Actuaalizar MM
@@ -762,10 +766,10 @@ namespace BackEndSAM.DataAcces
                                             //si los milimetros son mayores a 0 y si son diferentes del inventario recibido en cuantificacion
                                             if (milimetros > 0 && milimetros != cantidadRecibida)
                                             {
-                                                
-                                                int? tempDespachados = ctx.Sam3_Despacho.Where(x => x.NumeroUnicoID == actualizaNU.NumeroUnicoID && x.Activo && !x.Cancelado)
+
+                                                int? tempDespachados = ctx2.Despacho.Where(x => x.NumeroUnicoID == ItemNumeroUnicoSam2.Sam2_NumeroUnicoID && !x.Cancelado)
                                                     .Select(x => x.DespachoID).Count() > 0 ?
-                                                    ctx.Sam3_Despacho.Where(x => x.NumeroUnicoID == actualizaNU.NumeroUnicoID && x.Activo && !x.Cancelado)
+                                                    ctx2.Despacho.Where(x => x.NumeroUnicoID == ItemNumeroUnicoSam2.Sam2_NumeroUnicoID && !x.Cancelado)
                                                     .Select(x => x.Cantidad).Sum() : 0;
 
                                                 cantidadDespachada = tempDespachados != null ? tempDespachados.Value : 0;
@@ -788,7 +792,7 @@ namespace BackEndSAM.DataAcces
                                                 disponibleCruce = buenEstado - congelado;
 
                                                 #region actualizar Sam3
-                                                
+
 
                                                 sam3_numeroUnicoInventario.CantidadRecibida = milimetros;
                                                 if (dañado)
@@ -1056,7 +1060,7 @@ namespace BackEndSAM.DataAcces
                                         itemCodeJson.TieneError = false;
 
                                         break;
-                                        #endregion
+                                    #endregion
                                     case 2: // Guardar y terminar
                                         #region guardar y terminar
                                         //Actualizo el numero Unico
@@ -1455,7 +1459,7 @@ namespace BackEndSAM.DataAcces
                                         itemCodeJson.TieneError = false;
 
                                         break;
-                                        #endregion
+                                    #endregion
                                     default:
 
                                         result.ReturnMessage.Add("No se encontro el tipo de guardado");
