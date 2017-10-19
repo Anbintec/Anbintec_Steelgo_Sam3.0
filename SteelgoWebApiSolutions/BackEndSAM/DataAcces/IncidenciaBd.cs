@@ -69,7 +69,7 @@ namespace BackEndSAM.DataAcces
                         nuevaIncidencia.UsuarioID = datos.RegistradoPor != null && datos.RegistradoPor != "" ? Convert.ToInt32(datos.RegistradoPor) : 1;
                         nuevaIncidencia.Version = 1;
                         nuevaIncidencia.UsuarioModificacion = usuario.UsuarioID;
-                        nuevaIncidencia.IncidenciaInterna = datos.IncidenciaInterna == 1 ? true : false;
+                        nuevaIncidencia.IncidenciaInterna = datos.IncidenciaInterna;
                         nuevaIncidencia.TituloIngles = datos.TituloIngles;
                         nuevaIncidencia.DescripcionIngles = datos.DescripcionIngles;
                         nuevaIncidencia.RespuestaIngles = datos.RespuestaIngles;
@@ -533,7 +533,7 @@ namespace BackEndSAM.DataAcces
                             registro.TipoIncidenciaID = datos.TipoIncidenciaID;
                             registro.Titulo = datos.Titulo;
                             //if (datos.RegistradoPor != null && datos.RegistradoPor != "") { registro.UsuarioID = Convert.ToInt32(datos.RegistradoPor); }
-                            registro.IncidenciaInterna = datos.IncidenciaInterna == 1 ? true : false;
+                            registro.IncidenciaInterna = datos.IncidenciaInterna ;
                             registro.TituloIngles = datos.TituloIngles;
                             registro.DescripcionIngles = datos.DescripcionIngles;
                             
@@ -585,7 +585,7 @@ namespace BackEndSAM.DataAcces
                             if (fechaRegistro.ToShortTimeString() != "1/1/0001")
                             { nuevoRegistro.FechaCreacion = fechaRegistro; }
                             else { nuevoRegistro.FechaCreacion = DateTime.Now; }
-                            nuevoRegistro.IncidenciaInterna = datos.IncidenciaInterna == 1 ? true : false;
+                            nuevoRegistro.IncidenciaInterna = datos.IncidenciaInterna;
                             nuevoRegistro.TituloIngles = datos.TituloIngles;
                             nuevoRegistro.DescripcionIngles = datos.DescripcionIngles;
                             nuevoRegistro.RespuestaIngles = datos.RespuestaIngles;
@@ -600,6 +600,7 @@ namespace BackEndSAM.DataAcces
                             //nuevoRegistro.Respuesta = datos.Respuesta;
                             nuevoRegistro.TipoIncidenciaID = datos.TipoIncidenciaID;
                             nuevoRegistro.Titulo = datos.Titulo;
+                            nuevoRegistro.IncidenciaInterna = datos.IncidenciaInterna;
                             if (datos.RegistradoPor != null && datos.RegistradoPor != "") { nuevoRegistro.UsuarioID = Convert.ToInt32(datos.RegistradoPor); }
                             //if (datos.RespondidoPor != null && datos.RespondidoPor != "") { nuevoRegistro.UsuarioIDRespuesta = Convert.ToInt32(datos.RespondidoPor); }
                             //if (datos.ResueltoPor != null && datos.ResueltoPor != "") { nuevoRegistro.UsuarioResuelveID = Convert.ToInt32(datos.ResueltoPor); }
@@ -1403,7 +1404,7 @@ namespace BackEndSAM.DataAcces
                                               Titulo = inc.Titulo,
                                               FolioOriginalID = inc.IncidenciaOriginalID.ToString(),
                                               Version = inc.Version.ToString(),
-                                              IncidenciaInterna = inc.IncidenciaInterna == null || false ? 0 : 1,
+                                              IncidenciaInterna = inc.IncidenciaInterna ,
                                               TituloIngles = inc.TituloIngles,
                                               DescripcionIngles = inc.DescripcionIngles,
                                               RespuestaIngles = inc.RespuestaIngles,
