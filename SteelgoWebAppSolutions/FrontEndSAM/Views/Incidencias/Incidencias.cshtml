@@ -111,13 +111,13 @@
                                                         <input id="" class="" type="radio" name="EsInterna" value="1" />
                                                     </div>
                                                     <div id="IncidenciaInternaLabelDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-1">
-                                                        <label id="IncidenciasInterna"></label><br />
+                                                        <label style="display:inline-block !important;" id="IncidenciasInterna"></label><br />
                                                     </div>
                                                     <div id="IncidenciaClienteDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-1">
                                                         <input id="" class="" type="radio" name="EsInterna" value="0" />
                                                     </div>
                                                     <div id="IncidenciaClienteLabelDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-1">
-                                                        <label id="IncidenciasCliente"></label>
+                                                        <label style="display:inline-block !important;" id="IncidenciasCliente"></label>
                                                     </div>
                                                     <div id="VersionDiv" class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-11">
                                                         <label id="Incidencias0005"></label>
@@ -1567,11 +1567,13 @@
                 $("#TipoIncidencia").data("kendoComboBox").value(data.TipoIncidenciaID);
                 CargarTipoIncidencia(data.TipoIncidenciaID);
 
-                if (data.IncidenciaInterna == 1) {
-                    $('input:radio[name=EsInterna]:nth(0)').trigger("click");
-                }
-                else {
-                    $('input:radio[name=EsInterna]:nth(1)').trigger("click");
+                if (data.IncidenciaInterna != null){
+                    if (data.IncidenciaInterna) {
+                        $('input:radio[name=EsInterna]:nth(0)').trigger("click");
+                    }
+                    else {
+                        $('input:radio[name=EsInterna]:nth(1)').trigger("click");
+                    }
                 }
                 RegistroID = data.registroID;
                 TipoIncidenciaID = data.TipoIncidenciaID
@@ -3127,8 +3129,8 @@
                             $("#divTraducionDetalleResolucion1").removeClass("hidden");
                             
                             $("#DescripcionArchivoResolverInglesDiv").removeClass("hidden");
-                            $("#divTraducionDescripcionArchivoResulver").removeClass("hidden");
-                            $("#divTraducionDescripcionArchivoResulver1").removeClass("hidden");
+                            $("#divTraducionDescripcionArchivoResolver").removeClass("hidden");
+                            $("#divTraducionDescripcionArchivoResolver1").removeClass("hidden");
                             
                             break;
                         case "Responder":
@@ -3190,8 +3192,8 @@
             $("#divTraducionDescripcionArchivoIndicencia").addClass("hidden");
         if (!$("#divTraducionDetalleResolucion").hasClass("hidden"))
             $("#divTraducionDetalleResolucion").addClass("hidden");
-        if (!$("#divTraducionDescripcionArchivoResulver").hasClass("hidden"))
-            $("#divTraducionDescripcionArchivoResulver").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoResolver").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoResolver").addClass("hidden");
         if (!$("#divTraducionRespuesta").hasClass("hidden"))
             $("#divTraducionRespuesta").addClass("hidden");
         if (!$("#divTraducionDescripcionArchivoResponder").hasClass("hidden"))
@@ -3209,8 +3211,8 @@
             $("#divTraducionDescripcionArchivoIndicencia1").addClass("hidden");
         if (!$("#divTraducionDetalleResolucion1").hasClass("hidden"))
             $("#divTraducionDetalleResolucion1").addClass("hidden");
-        if (!$("#divTraducionDescripcionArchivoResulver1").hasClass("hidden"))
-            $("#divTraducionDescripcionArchivoResulver1").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoResolver1").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoResolver1").addClass("hidden");
         if (!$("#divTraducionRespuesta1").hasClass("hidden"))
             $("#divTraducionRespuesta1").addClass("hidden");
         if (!$("#divTraducionDescripcionArchivoResponder1").hasClass("hidden"))
