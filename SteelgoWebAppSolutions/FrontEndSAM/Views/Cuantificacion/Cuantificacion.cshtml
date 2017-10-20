@@ -422,6 +422,7 @@
         this.data = {};
         this.recents = false;
         this.get = function (itc, widget) {
+
             if (this.data[itc] !== undefined && this.recents === false) {
                 widget.dataSource.data(this.data[itc]);
             } else {
@@ -429,8 +430,12 @@
             }
         }
         this.set = function (itc, widget) {
+            //alert("busca coladas y las asigna");
             var self = this;
             $Colada.Colada.read({}, { itemcode: itc, token: Cookies.get("token"), paginaID: Cookies.get("navegacion"), idioma: $("#language").data("kendoDropDownList").value(), id: 0, mostrarOpcion: 0 }).done(function (data) {
+                console.log("data");
+                console.log(data);
+                alert("datos");
                 self.data[itc] = data;
                 self.recents = false;
                 self.get(itc, widget);
@@ -1145,19 +1150,21 @@
 
                 var datasource = $("#grid").data("kendoGrid").dataSource.data();
 
-                $(datasource).each(function () {
-                    if (this.get("TipoMaterial") == "2") {//Accesorio
-                        this.set("MM", "N/A");
-                        this.set("DimensionPromedio", "N/A");
-                    }
-                });
+                //$(datasource).each(function () {
+                //    if (this.get("TipoMaterial") == "2") {//Accesorio
+                //        this.set("MM", "N/A");
+                //        this.set("DimensionPromedio", "N/A");
+                //    }
+                //});
 
                 //var ds = $("#grid").data("kendoGrid");
                 //var gridData = ds.dataSource.view();
                 //for (var i = 0; i < gridData.length; i++) {
                 //    if (gridData[i].TipoMaterial == "2") {
+
                 //        gridData[i].MM = "N/A";
                 //        gridData[i].DimensionPromedio = "N/A";
+
                 //    }
                 //}
             },
@@ -1248,9 +1255,9 @@
                 { field: "Cedula", title: _dictionary.Cuantificacion0034[$("#language").data("kendoDropDownList").value()], /*filterable: true,*/ width: "110px" },
                 { field: "TipoAcero", title: _dictionary.Cuantificacion0035[$("#language").data("kendoDropDownList").value()], /*filterable: true,*/ width: "130px" },
                 { field: "Colada", title: _dictionary.Cuantificacion0036[$("#language").data("kendoDropDownList").value()], /*filterable: true,*/ width: "110px", editor: ColadaAutocomplete },
-                { field: "MM", title: _dictionary.Cuantificacion0038[$("#language").data("kendoDropDownList").value()], /*filterable: true,*/ width: "80px" },
+                { field: "MM", title: _dictionary.Cuantificacion0038[$("#language").data("kendoDropDownList").value()], /*filterable: true,*/ width: "80px", template: "<div > <span>#= TipoMaterial == '2' ?'N/A': MM #</span></div>" },
                 { field: "Cantidad", title: _dictionary.Cuantificacion0037[$("#language").data("kendoDropDownList").value()], /*filterable: true,*/ width: "120px", aggregates: ["sum"], footerTemplate: "Total SUM: #=sum#", groupFooterTemplate: "SUM: #=sum#" },
-                { field: "DimensionPromedio", title: _dictionary.Cuantificacion0104[$("#language").data("kendoDropDownList").value()], /*filterable: true,*/ width: "190px" },
+                { field: "DimensionPromedio", title: _dictionary.Cuantificacion0104[$("#language").data("kendoDropDownList").value()], /*filterable: true,*/ width: "190px", template: "<div > <span>#= TipoMaterial == '2' ?'N/A': DimensionPromedio #</span></div>" },
                 { field: "Detallar", title: _dictionary.Cuantificacion0039[$("#language").data("kendoDropDownList").value()], /*filterable: true,*/ width: "120px" },
                 { field: "TieneNU", title: _dictionary.Cuantificacion0040[$("#language").data("kendoDropDownList").value()], /*filterable: true,*/ width: "150px" },
                 { field: "TextoTipoMaterial", title: _dictionary.Cuantificacion0101[$("#language").data("kendoDropDownList").value()], /*filterable: true,*/ width: "180px" },
@@ -3255,6 +3262,7 @@
     };
 
     function cargarItemCodeAutocomplete(cell, value) {
+
         if (value != "0" && value != "Bulto") {
             $ItemCode.ItemCode.read({}, { itemCodeID: value, token: Cookies.get("token") }).done(function (data) {
                 itemCodesJson = data;
@@ -3516,14 +3524,25 @@
             .appendTo(container)
             .kendoComboBox({
                 autoBind: false,
-                //dataSource: {
-                //type: "json",
-                //serverFiltering: true,
-                //transport: {
-                //    read: $URLColada + "itemcode=" + (container.parent().children()[22].firstChild?container.parent().children()[22].firstChild.data:"") + "&token=" + Cookies.get("token") + "&paginaID=" + Cookies.get("navegacion") + "&idioma=" + $("#language").data("kendoDropDownList").value() + "&id=0&mostrarOpcion=0"
-                //}
-                //},
+                dataSource: {
+                    type: "json",
+                    serverFiltering: true,
+                    transport: {
+                        read: {
+                            url: $URLColada ,
+                            data:{
+                                    itemcode: options.model.ItemCodeOrigenID,
+                                    token:Cookies.get("token") ,
+                                    paginaID:  Cookies.get("navegacion"),
+                                    idioma:$("#language").data("kendoDropDownList").value(),
+                                    id:0,
+                                    mostrarOpcion:0
+                            }
+                        }
+                    }
+                },
                 change: function (e) {
+
                     var dataItem = this.dataItem();
                     if (dataItem.ColadaID == 0) {
                         VentanaModal(3);
@@ -3549,7 +3568,7 @@
                 dataTextField: "Nombre",
                 dataValueField: "ColadaID",
             });
-        _q.get(options.model.ItemCodeOrigenID, $("#" + date).data("kendoComboBox"))
+        //_q.get(options.model.ItemCodeOrigenID, $("#" + date).data("kendoComboBox"))
         lastEditedCellIDSColada = options.model;
     };
 
@@ -3957,7 +3976,7 @@
             var fin = new Date();
             var inicioInserta = new Date();
             suspendRefresh = true;
-           
+
             for (var i = 0; i < data.length; i++) {
                 $("#grid").data("kendoGrid").dataSource.insert(data[i]);
             }
@@ -3976,7 +3995,7 @@
             } else {
                 ValidarTipoPackingList();
             }
-            
+
         });
 
 

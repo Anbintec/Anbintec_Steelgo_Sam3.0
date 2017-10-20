@@ -1,12 +1,12 @@
 ﻿var editado = false;
-var ListaPruebas = [];
+var ListaPruebas;
 var ListaUnidadMedida = [];
 
 var dataItemProcesoPintura;
 var paramReqProyectoID = 0;
 var esNormal;
 var tieneAvance = false;
-var registroCompleto=null;
+var registroCompleto = null;
 
 function changeLanguageCall() {
 
@@ -17,7 +17,7 @@ function changeLanguageCall() {
 
 
     CargarGrid();
-    
+
     CargarGridPopUpComponenteAgregado();
     document.title = _dictionary.lblSistemaPinturaSiguientePasoHeader[$("#language").data("kendoDropDownList").value()];
 
@@ -130,7 +130,7 @@ function CargarGrid() {
                         TemplateDetalleComponentes: { type: "string", editable: false },
                         Reductor: { type: "string", editable: true },
                         Pruebas: { type: "string", editable: false },
-                        
+
                     }
                 }
             },
@@ -365,11 +365,12 @@ function agregarComponentesAutomaticos() {
 
 
 
-function LlenarGridPopUp() {
+function LlenarGridPopUp(elementos) {
     //modeloRenglon = data;
     //$("#gridPopUp").data('kendoGrid').dataSource.data([]);
     //var ds = $("#gridPopUp").data("kendoGrid").dataSource;
-    //ListaPruebas = data.listadoPruebasProceso;
+
+    ListaPruebas = JSON.stringify(elementos.listadoPruebasProceso);
     //ListaUnidadMedida = data.listadoUnidadesMedida;
     //var array = data.listadoPruebasDetalle;
     //for (var i = 0; i < array.length; i++) {
@@ -500,7 +501,7 @@ function VentanaModalComponentesAgregados() {
 };
 
 function VentanaModal() {
-  
+
 
     var modalTitle = "";
     modalTitle = "Detalle pruebas";
@@ -515,7 +516,7 @@ function VentanaModal() {
         resizable: false,
         visible: false,
         width: "80%",
-        height:"20%",
+        height: "20%",
         minWidth: 30,
         position: {
             top: "10px",
@@ -523,10 +524,10 @@ function VentanaModal() {
         },
         actions: ["Close"],
         open: onOpen,
-       // close: AsignarPaginaActualCookie,
+        // close: AsignarPaginaActualCookie,
         refresh: onRefresh
     }).data("kendoWindow");
-    
+
     window.data("kendoWindow").title(modalTitle);
     window.data("kendoWindow").center().open();
 
@@ -546,8 +547,7 @@ function SincronizarOrigen(data) {
     return sincronizacionok;
 }
 
-function sincronizarlistasPruebas(listaHijo)
-{
+function sincronizarlistasPruebas(listaHijo) {
     registroCompleto.listadoPruebasDetalle = listaHijo
     $("#grid").data("kendoGrid").dataSource.sync();
 }

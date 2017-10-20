@@ -12,11 +12,11 @@
 }
 
 function changeLanguageCall() {
-   // $("#ContenedorGridPopUp").remove();
-   // $("#ContenedorGridPopUp").appendTo("<div id='gridPopUp' data-role='grid' class='k-grid k-widget'></div>")
+    // $("#ContenedorGridPopUp").remove();
+    // $("#ContenedorGridPopUp").appendTo("<div id='gridPopUp' data-role='grid' class='k-grid k-widget'></div>")
     hideElements();
     CargarGridPopUp();
-   // 
+    // 
 }
 
 SuscribirEventos()
@@ -41,6 +41,7 @@ function hideElements() {
 
 
 function CargarGridPopUp() {
+
     if ($("#gridPopUp").data('kendoGrid') == undefined) {
         $("#gridPopUp").kendoGrid({
             edit: function (e) {
@@ -123,20 +124,28 @@ function CargarGridPopUp() {
                         var currentUid = gridData[i].uid;
                         var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
 
-                        if (gridData[i].ConfiguracionLote == true) {
+                        if (gridData[i].Accion != undefined && gridData[i].ConfiguracionLote == true) {
+
                             currenRow[0].childNodes[0].outerHTML =
                           "<td role='gridcell' style='text-align: center;'>" +
-                          "<table><tr><td>" + "<input class='RadioSector' style=' display:inline-block; width:33% !important;'   type='radio' name='" + i + "' checked=checked > Spool"
-                        + "<input class='RadioSector' style=' display:inline-block; width:33% !important;'   type='radio' name='" + i + "' >M.Lote"
+                          "<table><tr><td>" + "<input value='1' class='RadioSector' style=' display:inline-block; width:33% !important;'   type='radio' name='" + i + "' checked=checked > Spool"
+                        + "<input value='0' class='RadioSector' style=' display:inline-block; width:33% !important;'   type='radio' name='" + i + "' >M.Lote"
 
                         + "</td>" + "</td></tr></table>";
-                        } else if (gridData[i].ConfiguracionLote == false) {
+                        } else if (gridData[i].Accion != undefined && gridData[i].ConfiguracionLote == false) {
+
                             currenRow[0].childNodes[0].outerHTML =
                           "<td role='gridcell' style='text-align: center;'>" +
-                         "<table><tr><td>" + "<input class='RadioSector' style=' display:inline-block; width:33% !important;'   type='radio' name='" + i + "'  >Spool"
-                        + "<input class='RadioSector' style=' display:inline-block; width:33% !important;'  type='radio' name='" + i + "' checked=checked >M.Lote"
+                         "<table><tr><td>" + "<input value='1' class='RadioSector' style=' display:inline-block; width:33% !important;'   type='radio' name='" + i + "'  >Spool"
+                        + "<input value='0' class='RadioSector' style=' display:inline-block; width:33% !important;'  type='radio' name='" + i + "' checked=checked >M.Lote"
 
                         + "</td>" + "</td></tr></table>";
+                        } else if (gridData[i].Accion == undefined) {
+
+                            currenRow[0].childNodes[0].outerHTML =
+                         "<td role='gridcell' style='text-align: center;'>" +
+                        "<table><tr><td>" + "<input class='RadioSector' value='1' style=' display:inline-block; width:33% !important;'   type='radio' name='" + i + "'  >Spool"
+                       + "<input value='0' class='RadioSector' style=' display:inline-block; width:33% !important;'  type='radio' name='" + i + "' >M.Lote"
                         }
 
 
@@ -160,21 +169,17 @@ function CargarGridPopUp() {
         });
 
         $("#gridPopUp").on("change", ":radio", function (e) {
+
             var grid = $("#gridPopUp").data("kendoGrid"),
             dataItem = grid.dataItem($(e.target).closest("tr"));
+            if (dataItem.Accion == undefined)
+                dataItem.Accion = 1
 
-            if ($('#Guardar').text() == _dictionary.MensajeGuardar[$("#language").data("kendoDropDownList").value()]) {
+            dataItem.ConfiguracionLote = e.target.value == 1 ? true : false;
 
-                dataItem.ConfiguracionLote = e.target.checked;
-            }
-            else {
-                dataItem.ConfiguracionLote = !e.target.checked;
-                // $("#grid").data("kendoGrid").dataSource.sync();
-                grid.dataSource.sync();
-            }
-
+            grid.dataSource.sync();
         });
-        
+
         CustomisaGrid($("#gridPopUp"));
     }
 

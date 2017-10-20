@@ -14,8 +14,8 @@
         <a href="@Url.Action("DashboardRecepcionAlmacenaje", "DashboardRecepcionAlmacenaje")"><span id="GenerarOrdenRecepcion0021"></span></a>
     </li>
     @*<li>
-        <a href="@Url.Action("ListadoOrdenRecepcion", "OrdenRecepcion")"><span id="GenerarOrdenRecepcion0022"></span></a>
-    </li>*@
+            <a href="@Url.Action("ListadoOrdenRecepcion", "OrdenRecepcion")"><span id="GenerarOrdenRecepcion0022"></span></a>
+        </li>*@
     <li class="active">
         <a href="@Url.Action("GenerarOrdenRecepcion", "OrdenRecepcion")"><span id="GenerarOrdenRecepcion0023"></span></a>
     </li>
@@ -37,10 +37,10 @@
                                     <li><a href="#" id="GuardarNuevo"><span id="GenerarOrdenRecepcion0017"></span></a></li>
                                     <li><a href="#" id="GuardarImprimirOrden"><span id="GenerarOrdenRecepcion0018"></span></a></li>
                                     <li><a href="#" id="GuardarEtiquetas"><span id="GenerarOrdenRecepcion0019"></span></a></li>
-                                    
+
                                 </ul>
                             </div>
-                           
+
                             <a id="Cancelar" href="#" class="btn btn-black"><span id="GenerarOrdenRecepcion0002"></span></a>
                         </div>
                         <div class="button-section listado">
@@ -51,7 +51,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="Acciones">
                                     <li><a id="RedirectListado"><span id="GenerarOrdenRecepcion0004"></span></a></li>
-                                    <li class="incidencia"><a id="IrIncidencia" href="#" ><span id="GenerarOrdenRecepcion0005"></span></a></li>
+                                    <li class="incidencia"><a id="IrIncidencia" href="#"><span id="GenerarOrdenRecepcion0005"></span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -60,14 +60,14 @@
                 </div>
             </div>
 
-             <div class="row">
+            <div class="row">
                 <div class="filterForm col-xs-12 col-sm-12 col-md-12 col-lg-11">
                     <div class="row">
                         <div id="ProyectoDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <label id="GenerarOrdenRecepcion0006"></label>
                             <input id="ProyectoID" />
                         </div>
-                         <div id="FolioAvisoEntradaDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <div id="FolioAvisoEntradaDiv" class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <label id="GenerarOrdenRecepcion0007"></label>
                             <input id="FolioAvisoEntradaID" class="" />
                         </div>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
             <div class="row listado">
                 <div class="addedSection clearfix">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -88,12 +88,12 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 
 <script>
-    @section JavascriptGlobalVariables 
+    @section JavascriptGlobalVariables
     {
         var detailID=0;
     var checkNodoPrincipal = [];
@@ -103,7 +103,7 @@
 
     var _folioAvisoEntradaID = getUrlParameter("FolioAvisoEntradaID", "-1");
     var _proyectoID = getUrlParameter("ProyectoID", "-1");
-    var _incidenciasURL = "@Url.Action("Incidencias", "Incidencias")"; 
+    var _incidenciasURL = "@Url.Action("Incidencias", "Incidencias")";
 
     var $GenerarOrdenRecepcionModel = {
         listContainer: {
@@ -124,7 +124,7 @@
 
     }
 
-    @section JavascriptGlobalFunctions 
+    @section JavascriptGlobalFunctions
     {
         function changeLanguageCall() {
             var tmp = removeGrid($("#grid"));
@@ -165,6 +165,7 @@
             select: function (e) {
             },
             change: function (e) {
+
                 var dataItem = this.dataItem();
                 dataItem!==undefined ? CargarProyecto(dataItem.ProyectoID, dataItem.Nombre):CargarProyecto("", "");
                 var value = this.value();
@@ -175,7 +176,7 @@
                     Proyecto = {};
                     this.value("");
                 } else if (dataItem.Nombre!="") {
-                   
+
                     ObtenerFoliosAvisoEntrada();
                     CargarDatosGrid();
                 }
@@ -193,6 +194,7 @@
             select: function (e) {
             },
             change: function (e) {
+
                 var dataItem = this.dataItem();
                 dataItem!==undefined ? CargarFolio(dataItem.id):CargarFolio("");
                 var value = this.value();
@@ -210,7 +212,7 @@
             },
             dataBound: function(e){checkIfOne(this);},
         });
-       
+
         $("#ItemCode").kendoComboBox({
             dataTextField: "value",
             dataValueField: "id",
@@ -218,6 +220,7 @@
             select: function (e) {
             },
             change: function (e) {
+
                 var dataItem = this.dataItem();
                 dataItem!==undefined ? CargarItemCode(dataItem.id):CargarItemCode("");
                 var value = this.value();
@@ -227,10 +230,10 @@
                     this.value("");
                 }
                 CargarDatosGrid();
-            },
-            dataBound: function(e){checkIfOne(this);},
+            }//,
+            //dataBound: function(e){checkIfOne(this);},
         });
-        
+
     }
 
     function getMainFields(){
@@ -293,7 +296,7 @@
         grid.tbody.on("change", ".materiales", function () {
             var checkbox = $(this);
             var nextRow = checkbox.closest("tr").next();
- 
+
             if (nextRow.hasClass("k-detail-row")) {
                 nextRow.find(":checkbox")
                     .prop("checked", checkbox.is(":checked"));
@@ -325,23 +328,23 @@
         Proyecto = {};
         Proyecto = { ProyectoID: id, Nombre: value };
     };
-    
+
     function CargarFolio(id) {
         FolioAvisoEntrada = {};
         FolioAvisoEntrada = { FolioAvisoEntradaID: id };
     };
-    
+
     function CargarItemCode(id) {
         ItemCode = {};
         ItemCode = { ItemCodeID: id };
     };
-    
+
     function limpiarFiltroItemCode() {
         ItemCode = {};
         LimpiarCombo("ItemCode");
         $("#grid").data("kendoGrid").dataSource.data([]);
     };
-    
+
     function LimpiarFiltrosProyecto(){
         LimpiarCombo("ItemCode");
         LimpiarCombo("FolioAvisoEntradaID");
@@ -367,7 +370,7 @@
     function ObtenerProyecto() {
         $Proyecto.Proyecto.read({ token: Cookies.get("token") }).done(function (result) {
             ControlErroresObjetosComboBox("ProyectoID", result);
-            //CargarDatosGrid();
+
         });
     };
 
@@ -386,7 +389,22 @@
 
         $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
             ControlErroresObjetosComboBox("ItemCode", result);
-            //CargarDatosGrid();
+            if (Error(result)) {
+                console.log("datos del result");
+                console.log(result);
+                if (result.length === 1) {
+                    $("#ItemCode").data("kendoComboBox").select(0);
+                    $("#ItemCode").data("kendoComboBox").trigger("change");
+                }
+                else {
+
+                    if (_folioAvisoEntradaID > 0)
+                    {
+                        CargarDatosGrid();
+                    }
+                }
+            }
+
         });
     };
 
@@ -395,7 +413,7 @@
         var ProyectoID = Proyecto.ProyectoID ? Proyecto.ProyectoID : "";
         var FolioAvisoEntradaID = FolioAvisoEntrada.FolioAvisoEntradaID ? FolioAvisoEntrada.FolioAvisoEntradaID : "";
         var ItemCodeid = ItemCode.ItemCodeID ? ItemCode.ItemCodeID : "";
-        
+
         var Listado = { ProyectoID: ProyectoID, ItemCodeID: ItemCodeid, FolioAvisoEntradaID: FolioAvisoEntradaID, TipoListado: "8", token: Cookies.get("token") };
 
         $folioEntradaMaterial.Listado.read({}, { data: JSON.stringify(Listado) }).done(function (result) {
@@ -555,10 +573,10 @@
         //loadingStart();
         OrdenRecepcion.Folios = folios;
         OrdenRecepcion.Items = itemCodes;
-       
+
 
         if (itemCodes.length > 0 || folios.length > 0) {
-            
+
             $OrdenRecepcion.OrdenRecepcion.create(OrdenRecepcion, { token: $.cookie("token") }).done(function (result) {
                 //loadingStop();
                 if (Error(result)) {
@@ -570,21 +588,21 @@
             //loadingStop();
         }
     };
-    
-    
+
+
     function GenerarOrdenRecepcionFormatoEtiquetas() {
         var itemCodes = [], x = 0, folios = [];
         OrdenRecepcion = { Folios: "", Items: "" };
 
         folios = ObtenerFoliosDeMemoria();
         itemCodes = ObtenerItemCodesDeMemoria();
-        
+
         //loadingStart();
         OrdenRecepcion.Folios = folios;
         OrdenRecepcion.Items = itemCodes;
 
         if (itemCodes.length>0 || folios.length>0) {
-            
+
             $OrdenRecepcion.OrdenRecepcion.create(OrdenRecepcion, { token: $.cookie("token") }).done(function (result) {
                 //loadingStop();
                 if (Error(result)) {
@@ -682,7 +700,7 @@
         }
         quickHeadFilter(this);
     };
-    
+
 
     function getDetailFields(){
         return {
@@ -806,18 +824,18 @@
             $("#"+detail1).hide();
             $("#"+detail1).data("kendoGrid").dataSource.group({field:"Codigo"})
         }
-        
+
     }
 
-    @section JavascriptDocumentReadyFunctions 
+    @section JavascriptDocumentReadyFunctions
     {
     $authorizationModel["Orden Recepcion"] = $GenerarOrdenRecepcionModel;
     CargaInicial();
-    
+
     if (_folioAvisoEntradaID != "-1" && _proyectoID != "-1") {
         CargaInicialEdicion();
     }
-    //CargarDatosGrid();
+
     }
 
     @section JavascriptDocumentReadyHomeCookie {

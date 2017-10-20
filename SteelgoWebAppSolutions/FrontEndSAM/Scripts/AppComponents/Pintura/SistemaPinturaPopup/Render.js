@@ -1,29 +1,29 @@
 ﻿
 function RenderNumeroPruebas(container, options) {
-    
-        var dataItem;
-        var numeroPruebasNumerico = $('<input data-text-field="NumeroPruebas" id=' + options.model.uid + ' data-value-field="NumeroPruebas" data-bind="value:' + options.field + '"/>')
-         .appendTo(container)
-         .kendoNumericTextBox({
-             format: "#",
-             min: 0
-         });
 
-        numeroPruebasNumerico.focus(function () {
-            this.select();
-        });
-   
+    var dataItem;
+    var numeroPruebasNumerico = $('<input data-text-field="NumeroPruebas" id=' + options.model.uid + ' data-value-field="NumeroPruebas" data-bind="value:' + options.field + '"/>')
+     .appendTo(container)
+     .kendoNumericTextBox({
+         format: "#",
+         min: 0
+     });
+
+    numeroPruebasNumerico.focus(function () {
+        this.select();
+    });
+
 }
 
 
 function comboBoxPruebas(container, options) {
     var dataItem;
-
+    var listaPruebasporProceso = JSON.parse(window.parent.ListaPruebas);
     $('<input required data-text-field="Nombre" id=' + options.model.uid + ' data-value-field="Nombre" data-bind="value:' + options.field + '"/>')
         .appendTo(container)
         .kendoComboBox({
             autoBind: false,
-            dataSource: window.parent.ListaPruebas == undefined ? [] : window.parent.ListaPruebas,
+            dataSource: listaPruebasporProceso,
             dataTextField: "Nombre",
             dataValueField: "PruebaProcesoPinturaID",
             template: "<i class=\"fa fa-#=data.Nombre#\"></i> #=data.Nombre#",
@@ -67,43 +67,43 @@ function comboBoxPruebas(container, options) {
 
 
 function RenderUnidadMinima(container, options) {
-   
 
-        var dataItem;
-        var unidadMinimaNumeric = $('<input data-text-field="UnidadMinima" id=' + options.model.uid + ' data-value-field="UnidadMinima" data-bind="value:' + options.field + '"/>')
-        .appendTo(container)
-        .kendoNumericTextBox({
-            format: "#",
-            min: 0,
-            change: function (e) {
-                //hayDatosCapturados = true;
-            }
-        });
 
-        unidadMinimaNumeric.focus(function () {
-            this.select();
-        });
-   
+    var dataItem;
+    var unidadMinimaNumeric = $('<input data-text-field="UnidadMinima" id=' + options.model.uid + ' data-value-field="UnidadMinima" data-bind="value:' + options.field + '"/>')
+    .appendTo(container)
+    .kendoNumericTextBox({
+        format: "#",
+        min: 0,
+        change: function (e) {
+            //hayDatosCapturados = true;
+        }
+    });
+
+    unidadMinimaNumeric.focus(function () {
+        this.select();
+    });
+
 }
 
 
 function RenderUnidadMaxima(container, options) {
-    
-        var dataItem;
-        var unidadMaximaNumeric = $('<input data-text-field="UnidadMaxima" id=' + options.model.uid + ' data-value-field="UnidadMaxima" data-bind="value:' + options.field + '"/>')
-        .appendTo(container)
-        .kendoNumericTextBox({
-            format: "#",
-            min: 0,
-            change: function (e) {
-                //hayDatosCapturados = true;
-            }
-        });
 
-        unidadMaximaNumeric.focus(function () {
-            this.select();
-        });
-   
+    var dataItem;
+    var unidadMaximaNumeric = $('<input data-text-field="UnidadMaxima" id=' + options.model.uid + ' data-value-field="UnidadMaxima" data-bind="value:' + options.field + '"/>')
+    .appendTo(container)
+    .kendoNumericTextBox({
+        format: "#",
+        min: 0,
+        change: function (e) {
+            //hayDatosCapturados = true;
+        }
+    });
+
+    unidadMaximaNumeric.focus(function () {
+        this.select();
+    });
+
 }
 
 function tieneClase(item) {

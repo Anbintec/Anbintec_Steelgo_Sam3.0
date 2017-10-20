@@ -123,10 +123,10 @@
                                     <label id="ComplementoRecepcion0099"></label>
                                     <div class="row">
                                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-6">
-                                            <input type="number" id="inicio" class="general-input"/>
+                                            <input type="number" id="inicio" class="general-input" />
                                         </div>
                                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-6">
-                                            <input type="number" id="fin" class="general-input"/>
+                                            <input type="number" id="fin" class="general-input" />
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +150,7 @@
                                         </div>
                                         <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                             <label id="ComplementoRecepcion0100"></label>
-                                            <input id="NumUnicoB" class="general-input"/>
+                                            <input id="NumUnicoB" class="general-input" />
                                         </div>
                                         <div class="form-group standalone col-xs-12 col-sm-6 col-md-2 col-lg-1">
                                             <a id="Aplicar" href="#" class="btn btn-primary"><span id="ComplementoRecepcion0097"></span></a>
@@ -161,7 +161,7 @@
                             <div class="row">
                                 <div class="form-group col-xs-12 col-sm-12 col-md-offset-2 col-md-13 col-md-offset-3 col-lg-13" style="margin-top:-35px;">
                                     <label id="ComplementoRecepcion0094"></label>
-                                    <input id="Descripcion" class="general-input" readonly disabled/>
+                                    <input id="Descripcion" class="general-input" readonly disabled />
                                 </div>
                             </div>
                         </div>
@@ -258,7 +258,7 @@
 <input id="hdnItemCodeIDSeleccionado" type="hidden" />
 <input id="hdnItemCodeSeleccionado" type="hidden" />
 <script>
-    @section JavascriptGlobalVariables 
+    @section JavascriptGlobalVariables
     {
     var Proyecto = {}, Cuantificacion = {}, TipoUso = {}, resultadoJson,
         lastEditedFisicoCellIDS = "", lastEditedTipoUsoCellIDS = "",
@@ -405,7 +405,7 @@
     };
 
 
-    @section JavascriptGlobalFunctions 
+    @section JavascriptGlobalFunctions
     {
     function changeLanguageCall() {
         var tmp = removeGrid($("#grid"));
@@ -674,7 +674,7 @@
                             rowselected.Titulo = "The unique Number " + rowselected.NumeroUnico + " change " + rowselected.ColadaOriginal + " to " + dataItem.Nombre;
                         }
                     }
-                    
+
                     $("#Titulo").val(rowselected.Titulo);
                     $("#DescripcionIncidencia").val(rowselected.DescripcionIncidencia);
                 } else {
@@ -704,7 +704,7 @@
         //        if (dataItem.ColadaID == "0") {
         //            VentanaModal(1);
         //            e.preventDefault();
-        //        } 
+        //        }
         //    },
         //    change: function (e) {
 
@@ -771,7 +771,7 @@
                 $("#grid").data("kendoGrid").dataSource.data(data[2]);
             })
         }
-        
+
         $("#ItemCodeBusq").kendoComboBox({
             dataSource:{
                 transport:{
@@ -872,11 +872,11 @@
             }
             //
         });
-        
+
         $("#Aplicar").on("click",function(){
             Aplicar()
         })
-        
+
     };
 
     function sameData(data){
@@ -898,21 +898,22 @@
         if($("#NumUnicoB").val()!=="" && $("#ItemCodeBusq").data("kendoComboBox").value()==="" && $("#d1Busq").data("kendoComboBox").value()==="" && $("#d2Busq").data("kendoComboBox").value()==="" && data.length>0){
             //if(sameData(data)){
                 var dataTemp=[];
-                data.forEach(function(n){
+                data.forEach(function (n) {
                     dataTemp.push({
-                        itemCode:n.ItemCodeID,
-                        d1:n.D1,
-                        d1id:n.Diametro1ID,
-                        d2:n.D2,
-                        d2id:n.Diametro2ID,
-                        nu:n.NumeroUnicoID,
-                        nuc:($("#NumUnicoB").val()!==""?$("#NumUnicoB").val():n.NumeroUnicoCliente)
+                        itemCode: n.ItemCodeID,
+                        d1: n.D1,
+                        d1id: n.Diametro1ID,
+                        d2: n.D2,
+                        d2id: n.Diametro2ID,
+                        nu: n.NumeroUnicoID,
+                        nuc: ($("#NumUnicoB").val() !== "" ? $("#NumUnicoB").val() : n.NumeroUnicoCliente)
                     })
-                })
+                });
+
                 postApply(dataTemp);
             //}
         }
-        else{
+        else {
             var ItemCode={ic:data[0].ItemCode,icid:data[0].ItemCodeID}
             if(sameData(data)){
                 var bit1=$("#ItemCodeBusq").data("kendoComboBox").value()!=="" ? 4 : 0;
@@ -1049,24 +1050,29 @@
             }
         }
     }
-    
+
     function postApply(arr){
-        var params=arr.pop();
+        var params = arr.pop();
+        console.log("obtiene parametro arr.pop()");
+        console.log(params);
         if(params!==undefined){
             params={NumerosUnicos:[params.nu],ItemCodeID:params.itemCode,d1:params.d1,d2:params.d2,NumeroUnicoCliente:params.nuc,RelFCID:params.fcid}
             $ComplementarRecepcion.ComplementarRecepcion.create({},{datos:JSON.stringify(params),token:Cookies.get("token")}).done(function(res){
                 if(res.ReturnCode!==undefined && res.ReturnCode===200){
                     postApply(arr)
-                }else{
+                } else {
+                    console.log("error no se porque chingada madre xd ");
+                    console.log("xd="+res.ReturnCode);
                     displayMessage("notificationslabel0109", '', '1');
                 }
             })
-        }else{
+        } else {
+
             $("#Mostrar").click()
             displayMessage("notificationslabel0056", '', '0');
         }
     }
-    
+
     function ActualizarPadre() {
         ObtenerTipoUso();
     };
@@ -1361,7 +1367,7 @@
         };
 
         function ObtenerColada(id, opciones, mostrarOpcionNuevo) {
-            
+
 
             $Colada.Colada.read({ proyectoID: Proyecto.ProyectoID, token: Cookies.get("token"), paginaID: Cookies.get("navegacion"), id: opciones, mostrarOpcion: mostrarOpcionNuevo}).done(function (result) {
                 ControlErroresObjetosComboBox(id, result);
@@ -1539,7 +1545,7 @@
                         //get currently navigated cell, this id follows user's navigation
                         var activeCell = $("#grid_active_cell");
 
-                        //don't do anything if already editing cell        
+                        //don't do anything if already editing cell
                         if (activeCell.hasClass("k-edit-cell")) return;
 
                         grid.editCell(activeCell);
@@ -2061,7 +2067,7 @@
             $("#FolioCuantificacionID").data("kendoComboBox").dataSource.data([]);
             $("#FolioCuantificacionID").data("kendoComboBox").value("");
             if ($("#grid").data("kendoGrid"))
-            { 
+            {
                 $("#grid").data("kendoGrid").dataSource.data([]);
             }
             _folioCuantificacion = "-1";
@@ -2125,7 +2131,7 @@
             return error;
         };
 
-        
+
 
         function cicloGuardadoParcial(ListadoCuantificacion, i, idGuardado, error) {
             if (ListadoCuantificacion[i]) {
@@ -2288,8 +2294,8 @@
                     change: function (e) {
                         var value = this.text();
                         var dataItem = fila;
-                       
-                        
+
+
                         console.log("dataitem");
                         console.log(dataItem);
 
@@ -2551,14 +2557,14 @@
         };
 
         function ErrorBool(data) {
-            /*
+
 			if (data.ReturnCode) {
                 if (data.ReturnCode != 200) {
                     if (data.ReturnCode == 401) {
                         removeUserSession();
                         return true;
                     } else {
-                        //displayMessage("notificationslabel0008", data.ReturnMessage, '2');
+                        displayMessage("notificationslabel0008", data.ReturnMessage, '2');
                         return false;
                     }
                 } else {
@@ -2567,11 +2573,11 @@
             } else {
                 return true;
             }
-			*/
-			if(data){
-				return data.TieneError;
-			}
-			return false;
+
+			//if(data){
+			//	return data.TieneError;
+			//}
+			//return false;
         };
 
         function Error(data) {
@@ -2669,14 +2675,14 @@
                 }
                 //}
             };
-            
+
 
             if (!ListadoCuantificacion.length && ListadoCuantificacionIncompletos.length) {
                 llenarGrid(null, ListadoCuantificacionIncompletos);
                 ordenamientoGrid();
                 //loadingStop();
                 displayMessage("notificationslabel0051", '', '1');
-                //alert("entra aqui joder");
+
                 return;
             }
 
@@ -2687,7 +2693,7 @@
                 displayMessage("notificationslabel0053", '', '1');
                 //loadingStop();
 
-                //alert("entra aqui joder joder!!");
+
                 return;
             }
 
@@ -2702,7 +2708,7 @@
             }
 
             Captura[0].Detalles = ListaDetalle;
-           
+
             GuardarListadoCuantificacionParcial(Captura[0], ListadoCuantificacionIncompletos, "1");
         };
 
@@ -2816,7 +2822,7 @@
             Captura[0].Detalles = ListaDetalle;
 
             $ComplementarRecepcion.ComplementarRecepcion.update(Captura[0], { tipoGuardado: "2", token: Cookies.get("token") }).done(function (data) {
-                
+
                 error = data[0];
                 for (var i = 0; i < data[1].length; i++) {
                     if (ErrorBool(data[1][i]))
@@ -2849,7 +2855,7 @@
                 ObtenerDatosDelFolioCuantificacion();
 
                 //
-               
+
                 BotonAlta();
 
             });
@@ -2966,7 +2972,7 @@
             Captura[0].Detalles = ListaDetalle;
 
             $ComplementarRecepcion.ComplementarRecepcion.update(Captura[0], { tipoGuardado: "2", token: Cookies.get("token") }).done(function (data) {
-               
+
                 error = [0]
                 for (var i = 0; i < data[1].length; i++) {
                     if (ErrorBool(data[1][i]))
@@ -3030,10 +3036,10 @@
                 console.log(restarHoras(inicio, fin));
 
                 var inicioInserta = new Date();
-
+                console.log("aqui7")
                 BotonAlta();
                 ocultarStatus();
-
+                console.log("aqui6")
                 error = data[0];
                 for (var i = 0; i < data[1].length; i++) {
                     if (ErrorBool(data[1][i]))
@@ -3041,7 +3047,7 @@
                     else
                         cargarGridErrores(data[1][i]);
                 }
-
+                console.log("aqui5")
                 ordenamientoGrid();
                 if (error) {
                     displayMessage("notificationslabel0051", error, '2');
@@ -3049,17 +3055,17 @@
                     loadingStop();
                     return;
                 }
-
+                console.log("aqui")
                 //cicloGuardadoParcial(ListadoCuantificacion, i, idGuardado, error);
                 ObtenerDatosDelFolioCuantificacion();
 
                 cargarTituloFolio();
                 CargarLabelEstatus("En Proceso de Recepción");
-
+                console.log("aqui2")
                 CambiarEstatus("En Proceso de Recepción");
                 AsignarPaginaActualCookie();
                 applySecurityPolicy(false);
-
+                console.log("aqui3")
                 var finInserta = new Date();
                 console.log("Termino insertar la informacion en grid")
                 console.log(restarHoras(inicioInserta, finInserta));
@@ -3091,7 +3097,7 @@
         }
 
 
-    @section JavascriptDocumentReadyFunctions 
+    @section JavascriptDocumentReadyFunctions
     {
         var dispositivo = navigator.userAgent.toLowerCase();
         if (!dispositivo.match(/(iphone|ipod|ipad|android)/)) {
@@ -3101,7 +3107,7 @@
                 if (e.keyCode == ctrlKey) ctrlDown = false;
             });
         };
-        
+
         cargaInicial();
 
         ////edicion de un folio cuantificacion

@@ -1,6 +1,6 @@
 ﻿function AjaxObtenerProyectos() {
     loadingStart();
-    
+
     $Proyectos.Proyectos.read({ token: Cookies.get("token") }).done(function (data) {
         if (Error(data)) {
             $("#inputProyecto").data("kendoMultiSelect").dataSource.data([]);
@@ -14,7 +14,7 @@
 
 function AjaxObtenerColor() {
     loadingStart();
-    
+
     $PinturaGeneral.PinturaGeneral.read({ token: Cookies.get("token"), Lenguaje: $("#language").val() }).done(function (data) {
         if (Error(data)) {
             $("#inputColor").data("kendoMultiSelect").dataSource.data([]);
@@ -293,7 +293,7 @@ function AjaxGuardarCaptura(arregloCaptura, tipoGuardar) {
 
 
                     for (var j = 0; j < arregloCaptura[index].listadoPruebasDetalle.length; j++) {
-                        ListaDetalles[i].ListadoPruebas[j] = { Accion: "", UnidadMedidaID: "", UnidadMinima: "", UnidadMaxima: "", ProyectoID: "", ProcesoPinturaID: "", PruebaProcesoPinturaID: "" };
+                        ListaDetalles[i].ListadoPruebas[j] = { Accion: "", UnidadMedidaID: "", UnidadMinima: "", UnidadMaxima: "", ProyectoID: "", ProcesoPinturaID: "", PruebaProcesoPinturaID: "", ConfiguracionLote: "" };
                         ListaDetalles[i].ListadoPruebas[j].Accion = arregloCaptura[index].listadoPruebasDetalle[j].Accion;
                         ListaDetalles[i].ListadoPruebas[j].ProcesoPinturaID = ListaDetalles[i].ProcesoPinturaID;
                         ListaDetalles[i].ListadoPruebas[j].ProyectoID = ListaProyectos[k].ProyectoID;
@@ -301,6 +301,10 @@ function AjaxGuardarCaptura(arregloCaptura, tipoGuardar) {
                         ListaDetalles[i].ListadoPruebas[j].UnidadMinima = arregloCaptura[index].listadoPruebasDetalle[j].UnidadMinima;
                         ListaDetalles[i].ListadoPruebas[j].UnidadMaxima = arregloCaptura[index].listadoPruebasDetalle[j].UnidadMaxima;
                         ListaDetalles[i].ListadoPruebas[j].PruebaProcesoPinturaID = arregloCaptura[index].listadoPruebasDetalle[j].PruebaProcesoPinturaID;
+                        ListaDetalles[i].ListadoPruebas[j].ConfiguracionLote = arregloCaptura[index].listadoPruebasDetalle[j].ConfiguracionLote;
+                        ListaDetalles[i].ListadoPruebas[j].Cantidad = arregloCaptura[index].listadoPruebasDetalle[j].Cantidad;
+                        ListaDetalles[i].ListadoPruebas[j].NumeroPruebas = arregloCaptura[index].listadoPruebasDetalle[j].NumeroPruebas;
+
                     }
                     if (arregloCaptura[index].Agregar && (/*arregloCaptura[index].MetrosLote == null || arregloCaptura[index].MetrosLote == 0 || arregloCaptura[index].NumeroPruebas == 0 || arregloCaptura[index].NumeroPruebas == null || arregloCaptura[index].listadoPruebasDetalle.length == 0 ||*/ arregloCaptura[index].NumeroComponentes == 0 || tieneComponentesSinCaptura(arregloCaptura[index].ListaDetalleComponentesAgregados))) {
                         ListaDetalles[i].Estatus = 0;
