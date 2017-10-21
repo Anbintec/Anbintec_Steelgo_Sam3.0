@@ -25,7 +25,7 @@ namespace BackEndSAM.Controllers.Sam3General.Proyectos
                 {
                     JavaScriptSerializer serializer = new JavaScriptSerializer();
                     Sam3_Usuario Usuario = serializer.Deserialize<Sam3_Usuario>(payload);
-                    
+
                     return ProyectosBD.Instance.ObtenerListadoProyectos(Usuario);
                 }
                 else
@@ -48,41 +48,41 @@ namespace BackEndSAM.Controllers.Sam3General.Proyectos
                 return result;
             }
         }
-        [HttpGet]
-        public object ObtieneListadoProyectosIngeneria(string tkn)
-        {
-            try
-            {
-                string payload = "";
-                string newToken = "";
-                bool totokenValido = ManageTokens.Instance.ValidateToken(tkn, out payload, out newToken);
-                if (totokenValido)
-                {
-                    JavaScriptSerializer serializer = new JavaScriptSerializer();
-                    Sam3_Usuario Usuario = serializer.Deserialize<Sam3_Usuario>(payload);
+        //[HttpGet]
+        //public object ObtieneListadoProyectosIngeneria(string tkn)
+        //{
+        //    try
+        //    {
+        //        string payload = "";
+        //        string newToken = "";
+        //        bool totokenValido = ManageTokens.Instance.ValidateToken(tkn, out payload, out newToken);
+        //        if (totokenValido)
+        //        {
+        //            JavaScriptSerializer serializer = new JavaScriptSerializer();
+        //            Sam3_Usuario Usuario = serializer.Deserialize<Sam3_Usuario>(payload);
 
-                    return ProyectosBD.Instance.ObtenerListadoProyectosIngeneria(Usuario.UsuarioID);
-                }
-                else
-                {
-                    TransactionalInformation result = new TransactionalInformation();
-                    result.ReturnMessage.Add(payload);
-                    result.ReturnCode = 401;
-                    result.ReturnStatus = false;
-                    result.IsAuthenicated = false;
-                    return result;
-                }
-            }
-            catch (Exception ex)
-            {
-                TransactionalInformation result = new TransactionalInformation();
-                result.ReturnMessage.Add(ex.Message);
-                result.ReturnCode = 500;
-                result.ReturnStatus = false;
-                result.IsAuthenicated = true;
-                return result;
-            }
-        }
+        //            return ProyectosBD.Instance.ObtenerListadoProyectosIngeneria(Usuario.UsuarioID);
+        //        }
+        //        else
+        //        {
+        //            TransactionalInformation result = new TransactionalInformation();
+        //            result.ReturnMessage.Add(payload);
+        //            result.ReturnCode = 401;
+        //            result.ReturnStatus = false;
+        //            result.IsAuthenicated = false;
+        //            return result;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TransactionalInformation result = new TransactionalInformation();
+        //        result.ReturnMessage.Add(ex.Message);
+        //        result.ReturnCode = 500;
+        //        result.ReturnStatus = false;
+        //        result.IsAuthenicated = true;
+        //        return result;
+        //    }
+        //}
 
         public object Get(string ordenTrabajo, int tipo, string token, string lenguaje)
         {
@@ -97,7 +97,7 @@ namespace BackEndSAM.Controllers.Sam3General.Proyectos
                 IdOrdenTrabajo idOrdenTrabajo = new IdOrdenTrabajo();
 
                 List<Spool> listaSpools = (List<Spool>)ProyectosBD.Instance.ObtenerIDOrdenTrabajo(usuario, ordenTrabajo, tipo, lenguaje);
-               
+
                 if (listaSpools.Count > 0)
                 {
                     idOrdenTrabajo = new IdOrdenTrabajo

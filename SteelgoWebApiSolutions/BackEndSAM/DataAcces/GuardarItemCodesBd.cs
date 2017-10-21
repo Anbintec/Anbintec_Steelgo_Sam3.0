@@ -243,7 +243,7 @@ namespace BackEndSAM.DataAcces
 
                                         datosItemCode.Cedula = datosItemCode.ItemCodeSteelgoID == "1" ? "" : diametro + " - " + cedulaA + " - " + cedulaB + " - " + cedulaC;
                                     }
-                                        
+
                                     //if (datosItemCode.ItemCodeSteelgoID != "" && datosItemCode.ItemCodeSteelgoID != null)
                                     //{
                                     //    ICS = ActualizarItemCodeSteelgo(datosItemCode, ICS, usuario);
@@ -1409,6 +1409,13 @@ namespace BackEndSAM.DataAcces
                         }
                         sam3_tran.Commit();
 #if DEBUG
+                        if (listaNuevosIC.Count > 0)
+                        {
+                            listaNuevosIC[0].ItemCodeSteelgo = datosItemCode.ItemCodeSteelgo == "ICS-Default" ? "" : datosItemCode.ItemCodeSteelgo;
+                            listaNuevosIC[0].ItemCodeSteelgoID = datosItemCode.ItemCodeSteelgoID == "1" ? "" : datosItemCode.ItemCodeSteelgoID;
+                            listaNuevosIC[0].Familia = datosItemCode.Familia == "Sin Trazabilidad" ? "" : datosItemCode.Familia;
+                            listaNuevosIC[0].TipoAcero = datosItemCode.TipoAcero == "Familia Material Default" ? "" : datosItemCode.TipoAcero;
+                        }
                         JavaScriptSerializer serializer = new JavaScriptSerializer();
                         string json = serializer.Serialize(listaNuevosIC);
 #endif
@@ -1591,14 +1598,14 @@ namespace BackEndSAM.DataAcces
                         int diametroID = ctx.Sam3_Diametro.Where(x => x.Valor.ToString() == diametro).Select(x => x.DiametroID).AsParallel().SingleOrDefault();
 
                         int cedulaAID = (from ced in ctx.Sam3_Cedula where ced.Codigo == cedulaA && ced.Activo select ced.CedulaID).AsParallel().SingleOrDefault();
-                        int cedulaBID = (from ced in ctx.Sam3_Cedula where ced.Codigo == cedulaB  && ced.Activo select ced.CedulaID).AsParallel().SingleOrDefault();
+                        int cedulaBID = (from ced in ctx.Sam3_Cedula where ced.Codigo == cedulaB && ced.Activo select ced.CedulaID).AsParallel().SingleOrDefault();
                         int cedulaCID = (from ced in ctx.Sam3_Cedula where ced.Codigo == cedulaC && ced.Activo select ced.CedulaID).AsParallel().SingleOrDefault();
 
-                       cedulaID = ctx.Sam3_CatalogoCedulas.Where(x => x.DiametroID == diametroID &&
-                                                    x.CedulaA == cedulaAID &&
-                                                    x.CedulaB == cedulaBID &&
-                                                    x.CedulaC == cedulaCID &&
-                                                    x.Activo).Select(x => x.CatalogoCedulasID).AsParallel().SingleOrDefault();
+                        cedulaID = ctx.Sam3_CatalogoCedulas.Where(x => x.DiametroID == diametroID &&
+                                                     x.CedulaA == cedulaAID &&
+                                                     x.CedulaB == cedulaBID &&
+                                                     x.CedulaC == cedulaCID &&
+                                                     x.Activo).Select(x => x.CatalogoCedulasID).AsParallel().SingleOrDefault();
                     }
 
                     ICS.DescripcionEspanol = item.Descripcion;

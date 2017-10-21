@@ -258,8 +258,8 @@ namespace BackEndSAM.DataAcces
                     lstReturn.Add(listado);
 
 #if DEBUG
-                    JavaScriptSerializer serializer = new JavaScriptSerializer();
-                    string json = serializer.Serialize(lstReturn);
+                    //JavaScriptSerializer serializer = new JavaScriptSerializer();
+                    //string json = serializer.Serialize(lstReturn);
 #endif
                     if (soloListado)
                     {

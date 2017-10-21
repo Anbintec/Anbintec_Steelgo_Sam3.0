@@ -948,16 +948,16 @@ namespace BackEndSAM.DataAcces
                         DataTable dt = new DataTable();
                         dt = BackEndSAM.Utilities.ConvertirDataTable.ToDataTable.Instance.toDataTable(RelItemCodesD);
                         if (((TransactionalInformation)GenerarNumerosUnicos(dt, orden.OrdenRecepcionID, usuario.UsuarioID)).ReturnMessage[0] != "Ok")
-                            throw new Exception("Error al generar los numeros unicos.");
-                       
-                       
+                            throw new Exception("error" + ((TransactionalInformation)GenerarNumerosUnicos(dt, orden.OrdenRecepcionID, usuario.UsuarioID)).ReturnMessage[0]);
+
+
                         if (!(bool)EnviarAvisosBd.Instance.EnviarNotificación(1,
                             string.Format("Se generó una nueva orden de recepcion con folio: {0}",
                             nuevaOrden.OrdenRecepcionID), usuario))
                         {
                             //Agregar error a la bitacora  PENDIENTE
                         }
-                       
+
                     } // fin transaccion
                 } // fin samcontext
 
@@ -1002,7 +1002,7 @@ namespace BackEndSAM.DataAcces
 
                     if (_SQL.EjecutaDataAdapter(Stords.GuardarOrdenRecepcion, Datos, "@TablaItemCodes", Parametros).Rows[0][0].ToString() == "ok")
                     {
-                        
+
                         result.ReturnMessage.Add("Ok");
                         result.ReturnCode = 200;
                         result.ReturnStatus = false;
@@ -1010,12 +1010,12 @@ namespace BackEndSAM.DataAcces
                     }
                     else
                     {
-                       
+
                         result.ReturnMessage.Add("Error");
                         result.ReturnCode = 500;
                         result.ReturnStatus = false;
                         result.IsAuthenicated = true;
-                     
+
                     }
                     return result;
                 }

@@ -213,6 +213,9 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
         public int UnidadMaxima { get; set; }
         public int PruebaProcesoPinturaID { get; set; }
         public int Accion { get; set; }
+        public bool ConfiguracionLote { get; set; }
+        public int Cantidad { get; set; }
+        public int NumeroPruebas { get; set; }
     }
 
     public class SPProyectoProcesoComponentes

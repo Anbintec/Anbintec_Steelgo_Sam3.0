@@ -101,30 +101,7 @@ namespace BackEndSAM.Models
         public int? ItemCodeOrigenID { get; set; }
         public int? TipoMaterial { get; set; }
         public string TextoTipoMaterial { get; set; }
-
-
-        //ItemCode: data.ItemCode,
-        //    Descripcion: itemCodesJsonSteelgo.Descripcion, 
-        //    D1: itemCodesJsonSteelgo.Diametro1, 
-        //    D2: itemCodesJsonSteelgo.Diametro2, 
-        //    ItemCodeSteelgo: itemCodesJsonSteelgo.ItemCodeSteelgo, 
-        //    Familia: itemCodesJsonSteelgo.FamiliaAcero,
-        //    Cedula: itemCodesJsonSteelgo.Cedula,
-        //    TipoAcero: itemCodesJsonSteelgo.TipoAcero, 
-        //    Colada: itemCodesJsonSteelgo.ColadaNombre, 
-        //    Cantidad: dataJson[key].Cantidad, 
-        //    MM: itemCodesJsonSteelgo.MM, 
-        //    Detallar: "No", 
-        //    TieneNU: "No", 
-        //    TieneError: false, 
-        //    BultoID: "",
-        //    RelFCId: "", 
-        //    RelBID: "", 
-        //    ItemCodeID: itemCodesJsonSteelgo.ItemCodeID,
-        //    ItemCodeSteelgoID: itemCodesJsonSteelgo.ItemCodeSteelgoID,
-        //    ItemCodeOrigenID: itemCodesJsonSteelgo.ItemCodeOrigenID,
-        //    TipoMaterial: itemCodesJsonSteelgo.TipoPackingList, 
-        //    TextoTipoMaterial: itemCodesJsonSteelgo.TextoTipoPackingList
+        public string DimensionPromedio { get; set; }
     }
 
     public class ElementoValidoItemcode
