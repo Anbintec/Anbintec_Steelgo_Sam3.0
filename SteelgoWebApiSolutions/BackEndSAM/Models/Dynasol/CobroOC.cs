@@ -20,7 +20,7 @@ namespace BackEndSAM.Models.Dynasol
             public float Diametro1 { get; set; }
             public float Diametro2 { get; set; }                     
             public string Colada { get; set; }
-            public int CantOC { get; set; }
+            public double CantOC { get; set; }
             public int CantC { get; set; }
             public int CantG { get; set; }
             public int CantS { get; set; }

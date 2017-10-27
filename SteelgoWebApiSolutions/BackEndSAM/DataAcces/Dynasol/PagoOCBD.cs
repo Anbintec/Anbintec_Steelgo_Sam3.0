@@ -54,6 +54,7 @@ namespace BackEndSAM.DataAcces.Dynasol
                             Diametro1 = (float)item.Diametro1,
                             Diametro2 = (float)item.Diametro2,
                             Colada = item.Colada,
+                            CantOC = item.CantOC.GetValueOrDefault(),
                             CantC = item.CantC.GetValueOrDefault(),
                             CantG = item.CantG.GetValueOrDefault(),
                             CantS = item.CantS.GetValueOrDefault(),

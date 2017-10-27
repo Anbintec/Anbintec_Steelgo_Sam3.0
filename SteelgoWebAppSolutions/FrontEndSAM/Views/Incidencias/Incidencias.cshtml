@@ -2259,7 +2259,7 @@
         Listado.Nuevo = false;
         Listado.Estatus = $("#hdEstatus").val();
         Listado.FolioOriginalID = _folioOriginalID;
-        Listado.IncidenciaInterna = $('input:radio[name=EsInterna]:checked').val();
+        Listado.IncidenciaInterna = $('input:radio[name=EsInterna]:checked').val() == "1" ? true : false;
         Listado.TituloIngles = $("#TituloIngles").val();
         Listado.DescripcionIngles = $("#DescripcionIngles").val();
         Listado.RespuestaIngles = $("#RespuestaIngles").val();
