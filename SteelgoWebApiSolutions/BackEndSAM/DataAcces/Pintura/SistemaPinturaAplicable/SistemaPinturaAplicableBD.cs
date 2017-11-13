@@ -45,8 +45,7 @@ namespace BackEndSAM.DataAcces.Pintura.SistemaPinturaAplicable
 
                     foreach (Sam3_SPA_Get_SistemaPintura_Result item in result)
                     {
-                        list.Add(new SistemaPinturaData
-                        {
+                        list.Add(new SistemaPinturaData {
                             SistemaPinturaID = item.SistemaPinturaID,
                             Nombre = item.Nombre.Split('~')[0],
                             NoPintable = item.NoPintable.GetValueOrDefault()
@@ -67,7 +66,7 @@ namespace BackEndSAM.DataAcces.Pintura.SistemaPinturaAplicable
             }
         }
 
-        public object ObtieneListadoColorPintura(int SistemaPinturaID, string lenguaje, int proyectoID)
+        public object ObtieneListadoColorPintura(int SistemaPinturaID, string lenguaje,int proyectoID)
         {
             try
             {
@@ -79,8 +78,7 @@ namespace BackEndSAM.DataAcces.Pintura.SistemaPinturaAplicable
                     list.Add(new ColorPintura());
                     foreach (Sam3_SPA_Get_ColorPintura_Result item in result)
                     {
-                        list.Add(new ColorPintura
-                        {
+                        list.Add(new ColorPintura {
                             SistemaPinturaColorID = item.SistemaPinturaColorID,
                             ColorPinturaID = item.ColorPinturaID,
                             Nombre = item.ColorPintura
@@ -133,12 +131,11 @@ namespace BackEndSAM.DataAcces.Pintura.SistemaPinturaAplicable
                 using (SamContext ctx = new SamContext())
                 {
                     List<SpoolAplicableDetalle> listaDetalle = new List<SpoolAplicableDetalle>();
-                    List<Sam3_SPA_GetDetalleSpool_Result> result = ctx.Sam3_SPA_GetDetalleSpool(ProyectoID, TipoBusqueda, Cadena, Lenguaje).ToList();
+                    List<Sam3_SPA_GetDetalleSpool_Result> result= ctx.Sam3_SPA_GetDetalleSpool(ProyectoID, TipoBusqueda, Cadena, Lenguaje).ToList();
 
                     foreach (Sam3_SPA_GetDetalleSpool_Result item in result)
                     {
-                        listaDetalle.Add(new SpoolAplicableDetalle
-                        {
+                        listaDetalle.Add(new SpoolAplicableDetalle {
                             Accion = item.Accion,
                             SpoolAplicableID = item.SpoolAplicableID.GetValueOrDefault(),
                             OrdenTrabajoID = item.OrdenTrabajoID.GetValueOrDefault(),
@@ -154,9 +151,9 @@ namespace BackEndSAM.DataAcces.Pintura.SistemaPinturaAplicable
                             Color = item.Color != null ? item.Color : "",
                             EstatusCaptura = item.EstatusCaptura,
                             ListaSistemPintura = (List<SistemaPinturaData>)SistemaPinturaAplicableBD.Instance.ObtieneListadoSistemaPintura(ProyectoID),
-                            ListaColorPintura = item.SistemaPinturaID.GetValueOrDefault() != 0 ? (List<ColorPintura>)SistemaPinturaAplicableBD.Instance.ObtieneListadoColorPintura(item.SistemaPinturaID.GetValueOrDefault(), Lenguaje, item.ProyectoID.GetValueOrDefault()) : null,
-                            AsignadoSpool = item.AsignadoSpool,
-                            NombreCarro = item.NombreCarro
+                            ListaColorPintura = item.SistemaPinturaID.GetValueOrDefault() != 0 ? (List<ColorPintura>)SistemaPinturaAplicableBD.Instance.ObtieneListadoColorPintura(item.SistemaPinturaID.GetValueOrDefault(), Lenguaje,item.ProyectoID.GetValueOrDefault()) : null,
+                            AsignadoSpool=item.AsignadoSpool,
+                            NombreCarro=item.NombreCarro
                         });
                     }
 
@@ -212,15 +209,14 @@ namespace BackEndSAM.DataAcces.Pintura.SistemaPinturaAplicable
         {
             try
             {
-                using (SamContext ctx = new SamContext())
-                {
+                using (SamContext ctx = new SamContext()) {
 
                     ObjetosSQL _SQL = new ObjetosSQL();
                     string[,] parametro = { { "@UsuarioID", UsuarioID.ToString() }, { "@TipoCarga", TipoCarga.ToString() }, { "@Lenguaje", Lenguaje }, { "@ProyectoID", ProyectoID.ToString() } };
 
                     int resultado = _SQL.EjecutaInsertUpdate(Stords.GUARDACAPTURASISTEMAAPLICABLEMASIVO, dtDetalleCaptura, "@TablaCargaMasiva", parametro);
 
-                    return resultado == 1 ? "Si" : resultado >= 1 ? "Actualizo mas de 1" : "No"; //ToDataTable.table_to_csv(list);
+                    return resultado == 1 ?"Si": resultado >= 1 ?"Actualizo mas de 1": "No"; //ToDataTable.table_to_csv(list);
                 }
             }
             catch (Exception ex)

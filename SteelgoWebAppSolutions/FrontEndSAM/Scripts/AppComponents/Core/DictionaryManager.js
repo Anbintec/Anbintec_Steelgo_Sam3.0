@@ -7452,8 +7452,8 @@ _dictionary = {
 	    "en-US": "Dewpoint: "
 	},
 	"lblMedicionesCampoX": {
-	    "es-MX": "Campo X: ",
-	    "en-US": "Field X: "
+	    "es-MX": "Temperatura del sustrato: ",
+	    "en-US": "Substrate temperature: "
 	},
 	"lblEquipoTomaTemperatura": {
 	    "es-MX": "Equipo de Toma: ",
@@ -8579,6 +8579,10 @@ _dictionary = {
 	"LoteActualizado": {
 	    "es-MX": "Se actualizo el Lote correctamente",
 	    "en-US": "Lot successfully updated"
+	},
+	"SpoolSinLote": {
+	    "es-MX": "el Spool no se encuentra en un lote",
+	    "en-US": "The spool is not a lot"
 	},
 	"NoLoteActualizado": {
 	    "es-MX": "No se actualizo el Lote",

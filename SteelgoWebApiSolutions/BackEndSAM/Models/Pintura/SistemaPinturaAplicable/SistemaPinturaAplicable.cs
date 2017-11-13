@@ -5,6 +5,7 @@ using System.Web;
 
 namespace BackEndSAM.Models.Pintura.SistemaPinturaAplicable
 {
+
     public class SistemaPinturaData
     {
         public SistemaPinturaData()
@@ -69,7 +70,7 @@ namespace BackEndSAM.Models.Pintura.SistemaPinturaAplicable
 
     public class Captura
     {
-        public List<DetalleGuardarJson> detalle { get; set; }
+       public List<DetalleGuardarJson> detalle { get; set; }
     }
 
     public class CargaMasiva
@@ -83,5 +84,5 @@ namespace BackEndSAM.Models.Pintura.SistemaPinturaAplicable
         public string NumeroControl { get; set; }
         public string SistemaPintura { get; set; }
         public string Color { get; set; }
-    }
+    }    
 }

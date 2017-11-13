@@ -6,8 +6,8 @@
     SuscribirEventoGuardar();
     SuscribirEventoColor();
     suscribirEventoWindowsConfirmaCapturaSinCambiarTipoBusqueda();
+    
 }
-
 
 function suscribirEventoWindowsConfirmaCapturaSinCambiarTipoBusqueda() {
     ventanaConfirmEdicionSinTipoBusqueda = $("#ventanaConfirmCaptura").kendoWindow({
@@ -59,7 +59,6 @@ function suscribirEventoWindowsConfirmaCapturaSinCambiarTipoBusqueda() {
         ventanaConfirmEdicionSinTipoBusqueda.close();
     });
 }
-
 
 function SuscribirEventoProceso() {
 
@@ -240,8 +239,6 @@ function SuscribirEventoSpoolID() {
     });
 }
 
-
-
 function SuscribirEventoBuscar() {
     $('#btnBuscar').click(function (e) {
         
@@ -268,12 +265,6 @@ function SuscribirEventoBuscar() {
     });
 }
 
-
-
-
-
-
-
 function SuscribirEventoGuardar() {
     //convertirImagen();
     $('#btnGuardarYNuevo,#btnGuardarYNuevo1').click(function (e) {
@@ -290,8 +281,6 @@ function SuscribirEventoGuardar() {
 
 
 };
-
-
 
 function opcionHabilitarView(valor, name) {
     if (valor) {

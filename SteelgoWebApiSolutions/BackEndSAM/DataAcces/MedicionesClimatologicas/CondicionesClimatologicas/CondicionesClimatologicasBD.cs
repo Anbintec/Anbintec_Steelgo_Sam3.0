@@ -1,8 +1,10 @@
 ﻿using BackEndSAM.Models.MedicionesClimatologicas;
+using DatabaseManager.Constantes;
 using DatabaseManager.Sam3;
 using SecurityManager.Api.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -39,7 +41,7 @@ namespace BackEndSAM.DataAcces.MedicionesClimatologicas.CondicionesClimatologica
                     List<EquiposDeToma> listaEquipos = new List<EquiposDeToma>();
                     listaEquipos.Add(new EquiposDeToma());
                     listaEquipos[0].Equipos.Add(new ListasEquipos());
-                    
+
 
 
                     foreach (Sam3_Steelgo_Get_EquiposDeToma_Result item in result)
@@ -52,7 +54,7 @@ namespace BackEndSAM.DataAcces.MedicionesClimatologicas.CondicionesClimatologica
                         });
                     }
 
-                    for(int i = 0; i < listaDetalle.Count; i++)
+                    for (int i = 0; i < listaDetalle.Count; i++)
                     {
                         if (listaDetalle[i].NombreCategoria.Equals("Humedad"))
                         {
@@ -78,6 +80,36 @@ namespace BackEndSAM.DataAcces.MedicionesClimatologicas.CondicionesClimatologica
                     listaEquipos[0].Equipos[0].EquiposCampoX.Insert(0, new DetalleEquipos());
 
                     return listaEquipos;
+                }
+            }
+            catch (Exception ex)
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
+
+        public object InsertarCapturaInspeccion(DataTable dtDetalleCaptura, Sam3_Usuario usuario, string lenguaje)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {
+                    ObjetosSQL _SQL = new ObjetosSQL();
+                    string[,] parametro = { { "@Usuario", usuario.UsuarioID.ToString() }, { "@Lenguaje", lenguaje } };
+                    _SQL.Ejecuta(Stords.GuardarCondicionesClimatologias, dtDetalleCaptura, "@TablaCaptura", parametro);
+                    TransactionalInformation result = new TransactionalInformation();
+                    result.ReturnMessage.Add("Ok");
+                    result.ReturnCode = 200;
+                    result.ReturnStatus = true;
+                    result.IsAuthenicated = true;
+
+                    return result;
                 }
             }
             catch (Exception ex)

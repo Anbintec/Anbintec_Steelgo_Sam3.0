@@ -198,7 +198,7 @@ namespace BackEndSAM.DataAcces.Pintura.AdminComponentes
                         {
                             ProyectoProcesoComponenteID = item.ProyectoProcesoComponenteID,
                             Accion = 2,
-                            ComponenteAgregadoID = numeroComponente + 1,
+                            ComponenteAgregadoID = numeroComponente+1,
                             ComponenteID = item.ComponenteID,
                             Nombre = item.Nombre,
                             ListadoComponentes = listadoComponentes
@@ -206,26 +206,26 @@ namespace BackEndSAM.DataAcces.Pintura.AdminComponentes
                         numeroComponente++;
                         listaComponentesAgregados.Add(componentesAgregados);
                     };
-
+                    
                     return listaComponentesAgregados;
                 }
 
 
             }
-
+            
             catch (Exception ex)
             {
                 TransactionalInformation result = new TransactionalInformation();
-                result.ReturnMessage.Add(ex.Message);
+        result.ReturnMessage.Add(ex.Message);
                 result.ReturnCode = 500;
                 result.ReturnStatus = false;
                 result.IsAuthenicated = true;
 
                 return result;
             }
-        }
+}
 
-        public object ValidarComponente(int ComponenteID, string Lote, int Cantidad)
+        public object ValidarComponente(int ComponenteID,string Lote,int Cantidad)
         {
             try
             {

@@ -244,11 +244,12 @@ function CargarGridPopUp() {
                        { field: "UnidadMedida", editor: RenderAprobado, title: "Valor U. Medida", filterable: getGridFilterableCellNumberMaftecPopup(), width: "25px", attributes: { style: "text-align:right;" }, editor: RenderMedida },
                        {
                            field: "ResultadoEvaluacion", title: "Aprobado", filterable: {
+                               mode: "row",
                                multi: true,
                                messages: {
                                    isTrue: _dictionary.lblVerdadero[$("#language").data("kendoDropDownList").value()],
-                                   isFalse: _dictionary.lblFalso[$("#language").data("kendoDropDownList").value()],
-                                   style: "max-width:120px;"
+                                   isFalse:'..'+ _dictionary.lblFalso[$("#language").data("kendoDropDownList").value()],
+                                   style: "max-width:180px;"
                                },
                                dataSource: [{ ResultadoEvaluacion: true }, { ResultadoEvaluacion: false }]
                            }, template: "#= ResultadoEvaluacion ? 'Si' : 'No' #", width: "15px", attributes: { style: "text-align:center;" }

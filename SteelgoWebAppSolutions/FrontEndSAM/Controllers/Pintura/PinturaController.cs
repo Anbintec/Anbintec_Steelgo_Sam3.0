@@ -8,8 +8,31 @@ namespace FrontEndSAM.Controllers.Pintura
 {
     public class PinturaController : Controller
     {
-        // GET: Pintura
-        public ActionResult Index()
+        public ActionResult AdminCargaCarro()
+        {
+            return View();
+        }
+        public ActionResult CargaCarro()
+        {
+            return View();
+        }
+
+        public ActionResult CapturaAvance()
+        {
+            return View();
+        }
+
+        public ActionResult LotesCapturaPrueba()
+        {
+            return View();
+        }
+
+        public ActionResult CapturaPruebaSpool()
+        {
+            return View();
+        }
+
+        public ActionResult DescargaCarritos()
         {
             return View();
         }
@@ -19,93 +42,39 @@ namespace FrontEndSAM.Controllers.Pintura
             return View();
         }
 
-        public ActionResult SistemaPinturaProcesoPruebasPopup()
-        {
-            return View();
-        }
-        public ActionResult AdminCargaCarro()
-
-        {
-
-            return View();
-
-        }
-        public ActionResult CapturaAvance()
-
-        {
-
-            return View();
-
-        }
-        public ActionResult LotesCapturaPrueba()
-
-        {
-
-            return View();
-
-        }
-        public ActionResult CapturaPruebaSpool()
-
-        {
-
-            return View();
-
-        }
-        public ActionResult DescargaCarritos()
-
-        {
-
-            return View();
-
-        }
         public ActionResult ListadoSistemaPintura()
-
         {
-
             return View();
-
         }
+
         public ActionResult SistemaPinturaAplicable()
-
         {
-
             return View();
-
         }
+
         public ActionResult OKPintura()
-
         {
-
             return View();
-
         }
+
         public ActionResult AdminComponentes()
-
         {
-
             return View();
-
         }
+
         public ActionResult AdminReductores()
-
         {
-
             return View();
-
         }
+
         public ActionResult RevisionPintura()
-
         {
-
             return View();
-
         }
+
         public ActionResult AvanceCuadrante()
-
         {
-
             return View();
-
         }
         public ActionResult SolicitudInspeccion()
         {
@@ -113,6 +82,11 @@ namespace FrontEndSAM.Controllers.Pintura
         }
         public ActionResult RequisicionInspeccion()
         {
+            return View();
+        }
+
+        public ActionResult DashboardPintura() {
+
             return View();
         }
     }

@@ -136,6 +136,7 @@ namespace BackEndSAM.Models.Pintura.PruebasPorLote
 
     public class DetallePruebasPorSpool
     {
+        public int? Lote { get; set; }
         public int Accion { get; set; }
         public int? SpoolID { get; set; }
         public int? ProyectoProcesoPruebaID { get; set; }
@@ -155,6 +156,7 @@ namespace BackEndSAM.Models.Pintura.PruebasPorLote
     }
     public class DetalleGuardarPruebasPorSpool
     {
+        public int LoteID { get; set; }
         public int Accion { get; set; }
         public int SpoolID { get; set; }
         public int ProyectoProcesoPruebaID { get; set; }

@@ -2,16 +2,19 @@
 
 function AjaxCargarCamposPredeterminados() {
     $CamposPredeterminados.CamposPredeterminados.read({ token: Cookies.get("token"), lenguaje: $("#language").val(), id: TipoMuestraPredeterminadoID }).done(function (data) {
-        $('#inputMedicionesfechaToma').val(data);
 
+        $('#inputMedicionesfechaToma').val(data);
+        AjaxGetListaPatio();
         loadingStop();
     });
 
-    AjaxGetListaPatio();
+
 };
 
 function AjaxGetListaPatio() {
+
     $Patios.Patios.read({ token: Cookies.get("token") }).done(function (data) {
+
         $("#inputPatio").data("kendoComboBox").dataSource.data(data);
 
         if ($("#inputPatio").data("kendoComboBox").dataSource._data.length == 2) {
@@ -64,7 +67,7 @@ function AjaxCargarEquiposToma() {
     });
 }
 
-function AjaxGuardarCaptura() {
+function AjaxGuardarCaptura( tipoGuardado) {
     var FechaToma = $('#inputMedicionesfechaToma').val();
     var HoraToma = $('#inputMedicionesHoraToma').val();
     var PatioID = $('#inputPatio').val();
@@ -77,6 +80,29 @@ function AjaxGuardarCaptura() {
     var EquipoTomaPuntoRocioID = $('#inputEquipoTomaPtoRocio').val();
     var CampoX = $('#inputMedicionesCampoX').val();
     var EquipoTomaCampoXID = $('#inputEquipoTomaCampoX').val();
+    
+
+    Captura = [];
+    Captura[0] = { Detalles: "" };
+
+    ListaDetalle = [];
+    i = 0;
+    ListaDetalle[i] = { FechaToma: "", HoraToma: "", PatioID: "", ZonaID: "", TempAmb: "", EquipoTomaTemAmbID: "", Humedad: "", EquipoTomaHumedadID: "", PuntoRocio: "", EquipoTomaPuntoRocioID: "", CampoX: "", EquipoTomaCampoXID: "" };
+    ListaDetalle[i].FechaToma = FechaToma;
+    ListaDetalle[i].HoraToma = HoraToma;
+    ListaDetalle[i].PatioID = PatioID;
+    ListaDetalle[i].ZonaID = ZonaID;
+    ListaDetalle[i].TempAmb = TempAmb;
+    ListaDetalle[i].EquipoTomaTemAmbID = EquipoTomaTemAmbID;
+    ListaDetalle[i].Humedad = Humedad;
+    ListaDetalle[i].EquipoTomaHumedadID = EquipoTomaHumedadID;
+    ListaDetalle[i].PuntoRocio = PuntoRocio;
+    ListaDetalle[i].EquipoTomaPuntoRocioID = EquipoTomaPuntoRocioID;
+    ListaDetalle[i].CampoX = CampoX;
+    ListaDetalle[i].EquipoTomaCampoXID = EquipoTomaCampoXID;
+
+
+    Captura[0].Detalles = ListaDetalle;
 
     if (FechaToma != "" && HoraToma != "" && PatioID > 0 && PatioID != undefined && ZonaID > 0 && ZonaID != undefined
         && TempAmb != "" && EquipoTomaTemAmbID > 0 && EquipoTomaTemAmbID != undefined
@@ -84,17 +110,18 @@ function AjaxGuardarCaptura() {
         && PuntoRocio != "" && EquipoTomaPuntoRocioID > 0 && EquipoTomaPuntoRocioID != undefined
         && CampoX != "" && EquipoTomaCampoXID > 0 && EquipoTomaCampoXID != undefined) {
 
-        ajaxGuardar();
+     
+        $CondicionesClimatologicas.CondicionesClimatologicas.create(Captura[0], { token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {
+            if (Error(data)) {
+                displayNotify("PinturaCargaGuardar", "", '0');
+                if (tipoGuardado == 1) {
+                    opcionHabilitarView(true, "FieldSetView");
+                }
+                else {
+                    $("#Cancelar").trigger("click");
+                }
+            }
+        });
     }
     else displayNotify("", "Todos los campos deben ser capturados", '1');
 }
-
-function ajaxGuardar() {
-    loadingStart();
-    displayNotify("", "se guardo correctamente la informacion", '0');
-    opcionHabilitarView(true, "FieldSetView");
-
-
-    setTimeout(function () { loadingStop() }, 500);
-
-};

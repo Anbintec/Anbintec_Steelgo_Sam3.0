@@ -72,11 +72,12 @@ function ajaxGuardar(data, guardarYNuevo) {
     var index = 0;
     for (var i = 0; i < data.length; i++) {
         $("#grid").data("kendoGrid").dataSource._data[i].RowOk = true;
-        ListaDetalles[index] = { Accion: "", SpoolID: "", ProyectoProcesoPruebaID: "", UnidadMedida: "", FechaPrueba: "", ResultadoEvaluacion: "", Estatus: 1, SistemaPinturaColorID: "", PruebaLoteID: "" };
+        ListaDetalles[index] = { Accion: "", SpoolID: "", ProyectoProcesoPruebaID: "", UnidadMedida: "", FechaPrueba: "", ResultadoEvaluacion: "", Estatus: 1, SistemaPinturaColorID: "", PruebaLoteID: "",LoteID:"" };
         ListaDetalles[index].Accion = (data[i].Accion == undefined || data[i].Accion == 0 || data[i].Accion == null) ? 1 : data[i].Accion;
         ListaDetalles[index].SpoolID = $("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).SpoolID;
         ListaDetalles[index].ProyectoProcesoPruebaID = $("#inputPrueba").data("kendoComboBox").dataItem($("#inputPrueba").data("kendoComboBox").select()).ProyectoProcesoPruebaID;
         ListaDetalles[index].UnidadMedida = data[i].UnidadMedida;
+        ListaDetalles[index].LoteID = data[i].Lote;
         ListaDetalles[index].ResultadoEvaluacion = data[i].ResultadoEvaluacion;
         ListaDetalles[index].FechaPrueba = data[i].FechaPrueba == null ? "" : kendo.toString(data[i].FechaPrueba, String(_dictionary.FormatoFecha[$("#language").data("kendoDropDownList").value()].replace('{', '').replace('}', '').replace("0:", ""))).trim();
         ListaDetalles[index].SistemaPinturaColorID = $("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID != 4 ? 0 : $("#inputColor").data("kendoComboBox").dataItem($("#inputColor").data("kendoComboBox").select()).SistemaPinturaColorID;
@@ -170,13 +171,10 @@ function ajaxObtenerProcesosPorSpool(dato, catalogo) {
                 }
 
                 if (data.length == 0) {
-                    displayNotify("PinturaCargaCarroSinSpools", "", '1');
-                    $('.k-grid-add').click(function () { return false; });
+                    displayNotify("SpoolSinLote", "", '1');
                 }
-                else {
-                    $('.k-grid-add').unbind('click');
 
-                }
+                
             }
             else if (catalogo == 2) {
                 $("#inputPrueba").data("kendoComboBox").dataSource.data(data);
@@ -231,7 +229,6 @@ function AjaxEjecutarGuardado(data, guardarYNuevo) {
     });
 }
 
-
 function AjaxMostrarInformacionSpool(unidadMedida, unidadMinima, unidadMaxima) {
     loadingStart();
     $PruebasPorLote.PruebasPorLote.read({ token: Cookies.get("token"), ordentrabajospoolid: $("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).Valor, sistemapinturacolorid: $("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID == 4 ? $("#inputColor").data("kendoComboBox").dataItem($("#inputColor").data("kendoComboBox").select()).SistemaPinturaColorID : 0, lenguaje: $("#language").val(), variable: 0 }).done(function (data) {
@@ -242,11 +239,13 @@ function AjaxMostrarInformacionSpool(unidadMedida, unidadMinima, unidadMaxima) {
                 $("#labelSistemaPintura").text(data[0].SistemaPintura);
                 $("#labelColor").text(data[0].Color);
                 $("#labelM2").text(data[0].Area);
-                $("#labelLote").text(data[0].LoteID);
+                //$("#labelLote").text(data[0].LoteID);
                 $("#labelCuadrante").text(data[0].NombreCuadrante);
                 $("#labelUnidadMedida").text(unidadMedida);
                 $("#labelUnidadMinima").text(unidadMinima);
                 $("#labelUnidadMaxima").text(unidadMaxima);
+                CantidadLotes = data[0].LoteID.split(',').length;
+                DatosLotes = data[0].LoteID
             }
             else {
 

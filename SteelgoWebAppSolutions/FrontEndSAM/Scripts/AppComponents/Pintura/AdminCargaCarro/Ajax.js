@@ -311,7 +311,7 @@ function AjaxObtenerDetalleCargaCarro(MedioTransporteID, tipoEscenario, valorBus
 function AjaxObtenerSpoolID() {
 
 	var OrdenTrabajoOrigianl = $("#InputOrdenTrabajo").val();
-	$Armado.Armado.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {
+	$Armado.Armado.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val(), proyectoID: $("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select()).ProyectoID }).done(function (data) {
 		dataSpoolArray = data;
 		if (Error(data)) {
 			if (data.OrdenTrabajo != "") {

@@ -83,10 +83,10 @@ namespace BackEndSAM.DataAcces
                                                                         && fc.FolioCuantificacionID == FolioCuantificacion
                                                                         select fc).AsParallel().SingleOrDefault();
 
-                        datosItemCode.ItemCodeSteelgo = string.IsNullOrEmpty(datosItemCode.ItemCodeSteelgo) ? "ICS-Default" : datosItemCode.ItemCodeSteelgo;
-                        datosItemCode.ItemCodeSteelgoID = string.IsNullOrEmpty(datosItemCode.ItemCodeSteelgoID) || datosItemCode.ItemCodeSteelgoID == "0" ? "1" : datosItemCode.ItemCodeSteelgoID;
-                        datosItemCode.Familia = string.IsNullOrEmpty(datosItemCode.Familia) ? datosItemCode.Familia = "Sin Trazabilidad" : datosItemCode.Familia;
-                        datosItemCode.TipoAcero = string.IsNullOrEmpty(datosItemCode.TipoAcero) ? datosItemCode.TipoAcero = "Familia Material Default" : datosItemCode.TipoAcero;
+                        //datosItemCode.ItemCodeSteelgo = string.IsNullOrEmpty(datosItemCode.ItemCodeSteelgo) ? "ICS-Default" : datosItemCode.ItemCodeSteelgo;
+                        //datosItemCode.ItemCodeSteelgoID = string.IsNullOrEmpty(datosItemCode.ItemCodeSteelgoID) || datosItemCode.ItemCodeSteelgoID == "0" ? "1" : datosItemCode.ItemCodeSteelgoID;
+                        //datosItemCode.Familia = string.IsNullOrEmpty(datosItemCode.Familia) ? datosItemCode.Familia = "Sin Trazabilidad" : datosItemCode.Familia;
+                        //datosItemCode.TipoAcero = string.IsNullOrEmpty(datosItemCode.TipoAcero) ? datosItemCode.TipoAcero = "Familia Material Default" : datosItemCode.TipoAcero;
 
                         switch (tipoGuardado)
                         {
@@ -241,7 +241,7 @@ namespace BackEndSAM.DataAcces
                                                           && ricsd.Activo && ics.Activo && cat.Activo && ced.Activo
                                                           select ced.Codigo).AsParallel().SingleOrDefault();
 
-                                        datosItemCode.Cedula = datosItemCode.ItemCodeSteelgoID == "1" ? "" : diametro + " - " + cedulaA + " - " + cedulaB + " - " + cedulaC;
+                                        datosItemCode.Cedula = datosItemCode.ItemCodeSteelgoID == "0" || datosItemCode.ItemCodeSteelgoID == "" || datosItemCode.ItemCodeSteelgoID == null ? "" : diametro + " - " + cedulaA + " - " + cedulaB + " - " + cedulaC;
                                     }
 
                                     //if (datosItemCode.ItemCodeSteelgoID != "" && datosItemCode.ItemCodeSteelgoID != null)
@@ -540,7 +540,7 @@ namespace BackEndSAM.DataAcces
                                                           && ricsd.Activo && ics.Activo && cat.Activo && ced.Activo
                                                           select ced.Codigo).AsParallel().SingleOrDefault();
 
-                                        datosItemCode.Cedula = datosItemCode.ItemCodeSteelgoID == "1" ? "" : diametro + " - " + cedulaA + " - " + cedulaB + " - " + cedulaC;
+                                        datosItemCode.Cedula = datosItemCode.ItemCodeSteelgoID == "0" || datosItemCode.ItemCodeSteelgoID == "" || datosItemCode.ItemCodeSteelgoID == null  ? "" : diametro + " - " + cedulaA + " - " + cedulaB + " - " + cedulaC;
                                     }
 
                                     #region rel folio itemcode
@@ -832,7 +832,7 @@ namespace BackEndSAM.DataAcces
                                                           && ricsd.Activo && ics.Activo && cat.Activo && ced.Activo
                                                           select ced.Codigo).AsParallel().SingleOrDefault();
 
-                                        datosItemCode.Cedula = datosItemCode.ItemCodeSteelgoID == "1" ? "" : diametro + " - " + cedulaA + " - " + cedulaB + " - " + cedulaC;
+                                        datosItemCode.Cedula = datosItemCode.ItemCodeSteelgoID == "0" || datosItemCode.ItemCodeSteelgoID == "" || datosItemCode.ItemCodeSteelgoID == null ? "" : diametro + " - " + cedulaA + " - " + cedulaB + " - " + cedulaC;
                                     }
 
                                     #region rel folioc itemcode
@@ -1059,7 +1059,7 @@ namespace BackEndSAM.DataAcces
                                                           && ricsd.Activo && ics.Activo && cat.Activo && ced.Activo
                                                           select ced.Codigo).AsParallel().SingleOrDefault();
 
-                                        datosItemCode.Cedula = datosItemCode.ItemCodeSteelgoID == "1" ? "" : diametro + " - " + cedulaA + " - " + cedulaB + " - " + cedulaC;
+                                        datosItemCode.Cedula = datosItemCode.ItemCodeSteelgoID == "0" || datosItemCode.ItemCodeSteelgoID == "" || datosItemCode.ItemCodeSteelgoID == null ? "" : diametro + " - " + cedulaA + " - " + cedulaB + " - " + cedulaC;
                                     }
 
                                     //if (datosItemCode.ItemCodeSteelgoID != "" && datosItemCode.ItemCodeSteelgoID != null)
@@ -1345,7 +1345,7 @@ namespace BackEndSAM.DataAcces
                                                           && ricsd.Activo && ics.Activo && cat.Activo && ced.Activo
                                                           select ced.Codigo).AsParallel().SingleOrDefault();
 
-                                        datosItemCode.Cedula = datosItemCode.ItemCodeSteelgoID == "1" ? "" : diametro + " - " + cedulaA + " - " + cedulaB + " - " + cedulaC;
+                                        datosItemCode.Cedula = datosItemCode.ItemCodeSteelgoID == "0" || datosItemCode.ItemCodeSteelgoID == "" || datosItemCode.ItemCodeSteelgoID == null ? "" : diametro + " - " + cedulaA + " - " + cedulaB + " - " + cedulaC;
                                     }
 
                                     #region rel bulto itemcode
@@ -1416,8 +1416,9 @@ namespace BackEndSAM.DataAcces
                             listaNuevosIC[0].Familia = datosItemCode.Familia == "Sin Trazabilidad" ? "" : datosItemCode.Familia;
                             listaNuevosIC[0].TipoAcero = datosItemCode.TipoAcero == "Familia Material Default" ? "" : datosItemCode.TipoAcero;
                         }
-                        JavaScriptSerializer serializer = new JavaScriptSerializer();
-                        string json = serializer.Serialize(listaNuevosIC);
+
+                        //JavaScriptSerializer serializer = new JavaScriptSerializer();
+                        //string json = serializer.Serialize(listaNuevosIC);
 #endif
 
                         return listaNuevosIC;

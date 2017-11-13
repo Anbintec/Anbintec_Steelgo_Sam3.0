@@ -152,5 +152,6 @@ namespace BackEndSAM.Controllers.Pintura.SistemaPintura
                 return result;
             }
         }
+
     }
 }

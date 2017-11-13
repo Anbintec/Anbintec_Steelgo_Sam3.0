@@ -3,8 +3,8 @@ var ventanaConfirmEdicionSinTipoBusqueda;
 
 var LineaCaptura = {OrdenTrabajoSpool:"", ProcesoIDSeleccionado: "", ColorIDSeleccionado: "", ProyectoProcesoPruebaIDSeleccionado: "", InputIDSeleccionado: "" }
 var EjecutaChange = 0;
-
-
+var CantidadLotes = 0;
+var DatosLotes = '';
 
 function changeLanguageCall() {
     SuscribirEventos();
@@ -67,7 +67,9 @@ function CargarGrid() {
 
                         FechaPrueba: { type: "date", editable: true },
                         UnidadMedida: { type: "number", editable: true },
-                        ResultadoEvaluacion: { type: "boolean", editable: false }
+                        ResultadoEvaluacion: { type: "boolean", editable: false },
+
+                        Lote: { type: "number", editable: false }
                     }
                 }
             }, filter: {
@@ -86,6 +88,7 @@ function CargarGrid() {
         selectable: true,
         filterable: getGridFilterableMaftec(),
         columns: [
+                  { field: "Lote", title: _dictionary.columnLote[$("#language").data("kendoDropDownList").value()], filterable: { cell: { showOperators: false } }, width: "20px" },
                   { field: "FechaPrueba", format: _dictionary.FormatoFecha[$("#language").data("kendoDropDownList").value()], editor: RenderDatePicker, title: _dictionary.columnFechaPrueba[$("#language").data("kendoDropDownList").value()], filterable: { cell: { showOperators: false } }, width: "20px" },
                   { field: "UnidadMedida", title: "Valor U. Medida", filterable: getGridFilterableCellNumberMaftec(), width: "20px", attributes: { style: "text-align:right;" }, editor: RenderMedida },
                    {
@@ -125,6 +128,26 @@ function CargarGrid() {
                     grid.table.find("tr[data-uid='" + currentUid + "']").removeClass("kRowError");
                 }
             }
+        }
+    });
+
+    $(".k-button, .k-button-icontext, .k-grid-add").click(function (e) {
+        if (CantidadLotes > 0) {
+            for (var i = 0; i < CantidadLotes ; i++) {
+                var dataSource = $("#grid").data("kendoGrid").dataSource;
+                
+                var total = $("#grid").data("kendoGrid").dataSource.data().length;
+                var nuevoDato = { Lote: DatosLotes.split(',')[i], ResultadoEvaluacion :false}
+
+                $("#grid").data("kendoGrid").dataSource.insert(total, nuevoDato);
+                $("#grid").data("kendoGrid").dataSource.page(dataSource.totalPages());
+
+            }
+            return false;
+        }
+        else {
+            displayNotify("SpoolSinLote", "", '1');
+            return false;
         }
     });
     CustomisaGrid($("#grid"));

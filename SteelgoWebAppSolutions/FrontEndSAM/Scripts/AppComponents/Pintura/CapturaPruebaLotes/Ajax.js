@@ -223,6 +223,7 @@ function ajaxGuardar(data, guardarYNuevo) {
             ListaDetalles[index].FechaPrueba = data[i].ListaDetallePruebas[j].FechaPrueba == null ? "" : kendo.toString(data[i].ListaDetallePruebas[j].FechaPrueba, String(_dictionary.FormatoFecha[$("#language").data("kendoDropDownList").value()].replace('{', '').replace('}', '').replace("0:", ""))).trim().split(" ")[0];
             ListaDetalles[index].SistemaPinturaColorID = $("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID != 4 ? 0 : $("#inputColor").data("kendoComboBox").dataItem($("#inputColor").data("kendoComboBox").select()).SistemaPinturaColorID;
             ListaDetalles[index].PruebaLoteID = (data[i].ListaDetallePruebas[j].Accion == undefined || data[i].ListaDetallePruebas[j].Accion == 0 || data[i].ListaDetallePruebas[j].Accion == null) ? $("#inputLote").data("kendoComboBox").dataItem($("#inputLote").data("kendoComboBox").select()).LoteID : data[i].ListaDetallePruebas[j].PruebaLoteID;
+            ListaDetalles[index].LoteID = $("#inputLote").data("kendoComboBox").dataItem($("#inputLote").data("kendoComboBox").select()).LoteID;
             index++;
         }
     }

@@ -37,19 +37,16 @@ function EventoGuardar() {
 
 function suscribirEventoGuardar() {
     $('#Guardar, #btnGuardar, #GuardarPie, #btnGuardarPie').click(function (e) {
-        if ($('#botonGuardar').text() == "Guardar") {
-            AjaxGuardarCaptura(0);
+        if ($('#Guardar').text() == "Guardar") {
+            AjaxGuardarCaptura(1);
         }
-        else if ($('#botonGuardar').text() == "Editar")
+        else if ($('#Guardar').text() == "Editar")
             opcionHabilitarView(false, "FieldSetView")
     });
 
     $('#btnGuardarYNuevo, #btnGuardarYNuevoPie').click(function (e) {
-        if ($('#botonGuardar').text() == "Guardar") {
-            AjaxGuardarCaptura(1);
-        }
-        else if ($('#botonGuardar').text() == "Editar") {
-            AjaxGuardarCaptura(1);
+        if ($('#Guardar').text() == "Guardar") {
+            AjaxGuardarCaptura(2);
         }
     });
 }
@@ -68,19 +65,7 @@ function Limpiar() {
     }
 }
 
-function opcionHabilitarView(valor, name) {
-    if (valor) {
-        $('#FieldSetView').find('*').attr('disabled', true);
 
-        $('#Guardar, #btnGuardar, #GuardarPie, #btnGuardarPie').text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
-    }
-    else {
-        $('#FieldSetView').find('*').attr('disabled', false);
-
-        $('#Guardar, #btnGuardar, #GuardarPie, #btnGuardarPie').text(_dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]);
-
-    }
-}
 //patios
 function SuscribirEventoPatio() {
     cbxPatios = $('#inputPatio').kendoComboBox({
@@ -182,33 +167,59 @@ function SubscribeCalendarFechaToma() {
     });
 }
 
+
 //habilitar botones 
 function opcionHabilitarView(valor, name) {
 
     if (valor) {
-        $('#Guardar, #').text(_dictionary.textoEditar[$("#language").data("kendoDropDownList").value()]);
-        $("#GuardarPie").text(_dictionary.textoEditar[$("#language").data("kendoDropDownList").value()]);
+        $('#botonGuardar').text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
+        $("#botonGuardar2").text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
         
+        $('#botonGuardar3').text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
+        $("#btnGuardarPie").text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
+
+        $("#inputMedicionesHoraToma").data("kendoTimePicker").enable(false);
+        $("#inputMedicionesfechaToma").data("kendoDatePicker").enable(false);
+
+        $('#inputMedicionesTempAmbiente').data("kendoNumericTextBox").enable(false);
+        $('#inputMedicionesHumedad').data("kendoNumericTextBox").enable(false);
+        $('#inputMedicionesPuntoRocio').data("kendoNumericTextBox").enable(false);
+        $('#inputMedicionesCampoX').data("kendoNumericTextBox").enable(false);
+
+        $("#inputPatio").data("kendoComboBox").enable(false);
+        $("#inputEquipoTomaCampoX").data("kendoComboBox").enable(false);
+        $("#inputEquipoTomaTempAmb").data("kendoComboBox").enable(false);
+        $("#inputEquipoTomaHumedad").data("kendoComboBox").enable(false);
+        $("#inputEquipoTomaPtoRocio").data("kendoComboBox").enable(false);
+        $("#inputZona").data("kendoComboBox").enable(false);
         $('#FieldSetView').find('*').attr('disabled', true);
+
     }
     else {
-        $('#botonGuardar2').text(_dictionary.textoGuardar[$("#language").data("kendoDropDownList").value()]);
-        $("#botonGuardar").text(_dictionary.textoGuardar[$("#language").data("kendoDropDownList").value()]);
 
-        $('#FieldSetView').find('*').attr('disabled', false);
+        $('#botonGuardar').text(_dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]);
+        $("#botonGuardar2").text(_dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]);
 
-        //$("#inputPatio").data("kendoComboBox").enable(true);
-        //$("#inputZona").data("kendoComboBox").enable(true);
-        //$("#inputMedicionesfechaToma").data("kendoComboBox").enable(true);
-        //$("#inputMedicionesHoraToma").data("kendoComboBox").enable(true);
-        //$("#inputMedicionesTempAmbiente").data("kendoComboBox").enable(true);
-        //$("#inputEquipoTomaTempAmb").data("kendoComboBox").enable(true);
-        //$("#inputMedicionesHumedad").data("kendoComboBox").enable(true);
-        //$("#inputEquipoTomaHumedad").data("kendoComboBox").enable(true);
-        //$("#inputMedicionesPuntoRocio").data("kendoComboBox").enable(true);
-        //$("#inputEquipoTomaPtoRocio").data("kendoComboBox").enable(true);
-        //$("#inputMedicionesCampoX").data("kendoComboBox").enable(true);
-        //$("#inputEquipoTomaCampoX").data("kendoComboBox").enable(true);
+        $('#botonGuardar3').text(_dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]);
+        $("#btnGuardarPie").text(_dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]);
+
+        
+        $('#FieldSetView').find('*').attr('disabled', true);
+
+        $('#inputMedicionesTempAmbiente').data("kendoNumericTextBox").enable(true);
+        $('#inputMedicionesHumedad').data("kendoNumericTextBox").enable(true);
+        $('#inputMedicionesPuntoRocio').data("kendoNumericTextBox").enable(true);
+        $('#inputMedicionesCampoX').data("kendoNumericTextBox").enable(true);
+
+        $("#inputMedicionesHoraToma").data("kendoTimePicker").enable(true);
+        $("#inputMedicionesfechaToma").data("kendoDatePicker").enable(true);
+        $("#inputPatio").data("kendoComboBox").enable(true);
+        $("#inputEquipoTomaCampoX").data("kendoComboBox").enable(true);
+        $("#inputEquipoTomaTempAmb").data("kendoComboBox").enable(true);
+        $("#inputEquipoTomaHumedad").data("kendoComboBox").enable(true);
+        $("#inputEquipoTomaPtoRocio").data("kendoComboBox").enable(true);
+        $("#inputZona").data("kendoComboBox").enable(true);
+        
     }
 }
 

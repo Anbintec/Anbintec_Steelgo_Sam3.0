@@ -999,8 +999,8 @@ namespace BackEndSAM.DataAcces
                         { "@usuario", UsuarioID.ToString() }
                     };
                     TransactionalInformation result = new TransactionalInformation();
-
-                    if (_SQL.EjecutaDataAdapter(Stords.GuardarOrdenRecepcion, Datos, "@TablaItemCodes", Parametros).Rows[0][0].ToString() == "ok")
+                    string respuesta = _SQL.EjecutaDataAdapter(Stords.GuardarOrdenRecepcion, Datos, "@TablaItemCodes", Parametros).Rows[0][0].ToString();
+                    if (respuesta == "ok")
                     {
 
                         result.ReturnMessage.Add("Ok");
@@ -1011,7 +1011,7 @@ namespace BackEndSAM.DataAcces
                     else
                     {
 
-                        result.ReturnMessage.Add("Error");
+                        result.ReturnMessage.Add(respuesta);
                         result.ReturnCode = 500;
                         result.ReturnStatus = false;
                         result.IsAuthenicated = true;

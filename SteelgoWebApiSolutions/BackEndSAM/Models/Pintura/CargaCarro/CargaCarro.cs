@@ -50,7 +50,7 @@ namespace BackEndSAM.Models.Pintura.CargaCarro
         public int SpoolID { get; set; }
         public int MedioTransporteCargaID { get; set; }
         public int CuadranteID { set; get; }
-        // public int SistemaPinturaID { get; set; }
+       // public int SistemaPinturaID { get; set; }
     }
 
     public class DetalleCargaCarro
@@ -80,7 +80,7 @@ namespace BackEndSAM.Models.Pintura.CargaCarro
         public bool? NoPintable { get; set; }
     }
 
-
+  
     public class CerrarMedioTransporte
     {
         public int CerrarCarro { get; set; }
@@ -92,7 +92,7 @@ namespace BackEndSAM.Models.Pintura.CargaCarro
     {
         public List<GuardarDescarga> Detalles { get; set; }
     }
-
+    
     public class GuardarDescarga
     {
         public int Accion { get; set; }
@@ -100,7 +100,7 @@ namespace BackEndSAM.Models.Pintura.CargaCarro
         public int MedioTransporteID { get; set; }
         public int CuadranteID { get; set; }
     }
-
+    
     public class CamposPredeterminados
     {
         public string Vista { get; set; }
@@ -108,4 +108,4 @@ namespace BackEndSAM.Models.Pintura.CargaCarro
         public string Muestra { get; set; }
     }
 
-}
+ }

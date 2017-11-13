@@ -55,64 +55,64 @@
             </div>
         </div>
     </div>
-
-    @*Controles Superior*@
-    <div class="row  addedSectionInLineWithoutColor" id="ProcesoPinturaDiv">
-        <div class="row col-xs-12 col-sm-4 col-md-2 col-lg-6 altoControl" id="carroDiv">
-            <label><span id="lblProcesosPintura"></span></label>
-            <div class="btn-group " data-toggle="buttons" role="group">
-                <label>&nbsp;</label>
-                <div class="btn btn-primary" id="stylePPShotBlast">
-                    <input type="radio" name="ProcesoPintura" style=" width:auto;" value="1" class="radioProcesoPintura" /><span id="lblSPShotBlast"></span>
-                </div>
-                <div class="btn btn-primary" id="stylePPPrimario">
-                    <input type="radio" name="ProcesoPintura" style=" width:auto;" value="2" class="radioProcesoPintura" /><span id="lblSPPrimario"> </span>
-                </div>
-                <div class="btn btn-primary" id="stylePPIntermedio">
-                    <input type="radio" name="ProcesoPintura" style=" width:auto;" value="3" class="radioProcesoPintura" /><span id="lblSPIntermedio"> </span>
-                </div>
-                <div class="btn btn-primary" id="stylePPAvanzado">
-                    <input type="radio" name="ProcesoPintura" style=" width:auto;" value="4" class="radioProcesoPintura" /><span id="lblSPAvanzado"> </span>
+    
+        @*Controles Superior*@
+        <div class="row  addedSectionInLineWithoutColor" id="ProcesoPinturaDiv">
+            <div class="row col-xs-12 col-sm-4 col-md-2 col-lg-6 altoControl" id="carroDiv">
+                <label><span id="lblProcesosPintura"></span></label>
+                <div class="btn-group " data-toggle="buttons" role="group">
+                    <label>&nbsp;</label>
+                    <div class="btn btn-primary" id="stylePPShotBlast">
+                        <input type="radio" name="ProcesoPintura" style=" width:auto;" value="1" class="radioProcesoPintura" /><span id="lblSPShotBlast"></span>
+                    </div>
+                    <div class="btn btn-primary" id="stylePPPrimario">
+                        <input type="radio" name="ProcesoPintura" style=" width:auto;" value="2" class="radioProcesoPintura" /><span id="lblSPPrimario"> </span>
+                    </div>
+                    <div class="btn btn-primary" id="stylePPIntermedio">
+                        <input type="radio" name="ProcesoPintura" style=" width:auto;" value="3" class="radioProcesoPintura" /><span id="lblSPIntermedio"> </span>
+                    </div>
+                    <div class="btn btn-primary" id="stylePPAvanzado">
+                        <input type="radio" name="ProcesoPintura" style=" width:auto;" value="4" class="radioProcesoPintura" /><span id="lblSPAvanzado"> </span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row addedSectionInLineWithoutColor" id="FieldSetView">
-        <div class="row col-xs-12 col-sm-4 col-md-2 col-lg-4 altoControl" id="carroDiv">
-            <label><span id="lblCarroEscritorio"></span></label>
-            <input style="width:60%;" id="inputCarro" />
+        <div class="row addedSectionInLineWithoutColor" id="FieldSetView">
+            <div class="row col-xs-12 col-sm-4 col-md-2 col-lg-4 altoControl" id="carroDiv">
+                <label><span id="lblCarroEscritorio"></span></label>
+                <input style="width:60%;" id="inputCarro" />
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 altoControl" id="divColor">
+                <label id="lblColor"></label>
+                <input id="inputColor" />
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 altoControl">
+                <label id="lblMostrar"></label>
+                <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="SinCaptura" /><span id="lblSinCaptura"></span>
+                <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="Todos" /><span id="lblTodos"> </span>
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-3" id="">
+                <label id="">&nbsp;</label>
+                <button type="button" id="btnMostrar" class="btn btn-blue"><span id="botonMostrar"></span></button>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 altoControl" id="divColor">
-            <label id="lblColor"></label>
-            <input id="inputColor" />
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 altoControl">
-            <label id="lblMostrar"></label>
-            <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="SinCaptura" /><span id="lblSinCaptura"></span>
-            <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="Todos" /><span id="lblTodos"> </span>
-        </div>
-        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-3" id="">
-            <label id="">&nbsp;</label>
-            <button type="button" id="btnMostrar" class="btn btn-blue"><span id="botonMostrar"></span></button>
-        </div>
-    </div>
 
-    <div class="row addedSectionInLineWithoutColor">
-        <div class="row col-xs-12 col-sm-2 col-md-2 col-lg-4" id="InputIDDiv">
-            <label id="lblSpoolID"></label>
-            <input style="width:43%" id="InputOrdenTrabajo" class="general-input" />-<input id="InputID" placeholder="ID" style="width:44%;" />
+        <div class="row addedSectionInLineWithoutColor">
+            <div class="row col-xs-12 col-sm-2 col-md-2 col-lg-4" id="InputIDDiv">
+                <label id="lblSpoolID"></label>
+                <input style="width:43%" id="InputOrdenTrabajo" class="general-input" />-<input id="InputID" placeholder="ID" style="width:44%;" />
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 altoControl" style="display:none">
+                <label id="lblVersion"></label>
+                <input style="width:60%;" id="inputVersion" />
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-3" id="">
+                <label id="">&nbsp;</label>
+                <button type="button" id="btnAgregar" class="btn btn-blue"><span id="botonAgregar"></span></button>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 altoControl" style="display:none">
-            <label id="lblVersion"></label>
-            <input style="width:60%;" id="inputVersion" />
-        </div>
-        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-3" id="">
-            <label id="">&nbsp;</label>
-            <button type="button" id="btnAgregar" class="btn btn-blue"><span id="botonAgregar"></span></button>
-        </div>
-    </div>
-
+    
     @*GRID*@
 
     <div class="row addedSectionInLine">
@@ -125,17 +125,17 @@
             <label><span id="lbltrabajador"></span></label>
             <input id="inputShotBlastero" />
         </div>
-        <div id="divAgregarComponentesReductoresDinamicos" style="width:auto; padding-left:0px; padding-right:0px;">
+        <div  id="divAgregarComponentesReductoresDinamicos" style="width:auto; padding-left:0px; padding-right:0px;">
         </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-2 " id="LlenaCapturaAvanceIntAcabadoDiv">
+        <div class="col-xs-12 col-sm-6 col-md-2 " id="LlenaCapturaAvanceIntAcabadoDiv" >
             <label id="lblPlanchar"></label>
             <input type="radio" id="LlenaTodos" name="LLena" class="radio-responsive" style="width:auto;" value="Todos" /><span id="lblTodos1"></span>
             <input type="radio" id="LlenaVacios" name="LLena" class="radio-responsive" style="width:auto;" value="Vacios" /><span id="lblVacio"></span>
 
         </div>
-
-        <div class="col-xs-12 col-sm-4 col-md-1">
+        
+        <div class="col-xs-12 col-sm-4 col-md-1" >
             <label id="">&nbsp;</label>
             <button type="button" id="ButtonPlanchar" class="btn btn-blue"><span id="botonPlanchar"></span></button>
         </div>

@@ -163,7 +163,7 @@ namespace BackEndSAM.Controllers.Pintura.PinturaGeneral
         //}
 
         [HttpGet]
-        public object DescargaCuadranteSpool(string token, int CarroID, int SpoolID, int CuadranteID, int CuadranteSam2ID, int CuadranteAnterior, int Pantalla)
+        public object DescargaCuadranteSpool(string token,int CarroID, int SpoolID, int CuadranteID, int CuadranteSam2ID, int CuadranteAnterior,int Pantalla)
         {
             string payload = "";
             string newToken = "";

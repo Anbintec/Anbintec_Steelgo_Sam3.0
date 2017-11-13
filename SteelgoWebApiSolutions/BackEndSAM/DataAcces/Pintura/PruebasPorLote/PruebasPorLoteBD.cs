@@ -216,7 +216,7 @@ namespace BackEndSAM.DataAcces.Pintura.PruebasPorLote
             {
                 using (SamContext ctx = new SamContext())
                 {
-                    List<Sam3_Pintura_PruebasLote_Get_Lotes_Result> lista = ctx.Sam3_Pintura_PruebasLote_Get_Lotes(ProcesoPinturaID, SistemaPinturaProyectoID, PruebaProcesoPinturaID, FechaLote, lenguaje, sistemaPinturaColorID).ToList();
+                    List<Sam3_Pintura_PruebasLote_Get_Lotes_Result> lista =  ctx.Sam3_Pintura_PruebasLote_Get_Lotes(ProcesoPinturaID, SistemaPinturaProyectoID, PruebaProcesoPinturaID, FechaLote, lenguaje/*, sistemaPinturaColorID*/).ToList();
                     List<Lotes> listaLotes = new List<Lotes>();
 
                     if (lista.Count > 0)
@@ -321,6 +321,7 @@ namespace BackEndSAM.DataAcces.Pintura.PruebasPorLote
                     {
                         DetallePruebasPorSpool objeto = new DetallePruebasPorSpool
                         {
+                            Lote=item.LoteID,
                             SpoolID = item.SpoolID,
                             ProyectoProcesoPruebaID = item.ProyectoProcesoPruebaID,
                             FechaPrueba = item.FechaPrueba.ToString(),
@@ -392,17 +393,17 @@ namespace BackEndSAM.DataAcces.Pintura.PruebasPorLote
             {
                 using (SamContext ctx = new SamContext())
                 {
-                    List<Sam3_Pintura_Pruebas_Get_ProcesosPorSpool_Result> lista = ctx.Sam3_Pintura_Pruebas_Get_ProcesosPorSpool(OrdenTrabajoSpoolID, lenguaje).ToList();
+                    List<Sam3_Pintura_Pruebas_Get_ProcesosSpoolID_Result> lista = ctx.Sam3_Pintura_Pruebas_Get_ProcesosSpoolID(OrdenTrabajoSpoolID, lenguaje).ToList();
                     List<ProcesosPinturaSpool> listaLotes = new List<ProcesosPinturaSpool>();
 
                     if (lista.Count > 0)
                         listaLotes.Add(new ProcesosPinturaSpool());
 
-                    foreach (Sam3_Pintura_Pruebas_Get_ProcesosPorSpool_Result item in lista)
+                    foreach (Sam3_Pintura_Pruebas_Get_ProcesosSpoolID_Result item in lista)
                     {
                         ProcesosPinturaSpool objeto = new ProcesosPinturaSpool
                         {
-                            SpoolID=item.SpoolID,
+                            SpoolID=item.spoolID,
                             ProcesoPinturaID=item.ProcesoPinturaID,
                             ProcesoPintura=item.ProcesoPintura,
                             Status=item.Status,
@@ -415,8 +416,6 @@ namespace BackEndSAM.DataAcces.Pintura.PruebasPorLote
                     return listaLotes;
 
                 }
-
-                return null;
             }
             catch (Exception ex)
             {

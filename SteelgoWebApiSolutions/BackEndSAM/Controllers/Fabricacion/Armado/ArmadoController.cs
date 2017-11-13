@@ -17,6 +17,57 @@ namespace BackEndSAM.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ArmadoController : ApiController
     {
+        //obtenemos la spools a partir de la orden de trabajo.
+        public object Get(string ordenTrabajo, int tipo, string token, string lenguaje,int proyectoID)
+        {
+            //Create a generic return object
+            string payload = "";
+            string newToken = "";
+            bool tokenValido = ManageTokens.Instance.ValidateToken(token, out payload, out newToken);
+            if (tokenValido)
+            {
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                Sam3_Usuario usuario = serializer.Deserialize<Sam3_Usuario>(payload);
+                IdOrdenTrabajo idOrdenTrabajo = new IdOrdenTrabajo();
+
+                List<Sam3_Steelgo_Get_SpoolID_ProyectoID_Result> lista = (List<Sam3_Steelgo_Get_SpoolID_ProyectoID_Result>)ArmadoBD.Instance.ObtenerIDOrdenTrabajo(usuario, ordenTrabajo, tipo, lenguaje, proyectoID);
+                List<IDS> listaAtatus = new List<IDS>();
+                if (lista.Count > 0)
+                {
+                    listaAtatus.Add(new IDS());
+                    foreach (var item in lista)
+                    {
+                        listaAtatus.Add(new IDS { Status = item.status, IDValido = item.ID, Proyecto = item.NombreProyecto, Valor = item.OrdenTrabajoSpoolID, ProyectoID = item.ProyectoID, HabilitadoHoldFecha = item.HabilitadoHoldFecha });
+                    }
+
+                    idOrdenTrabajo = new IdOrdenTrabajo
+                    {
+                        OrdenTrabajo = lista[0].OrdenTrabajo,
+                        idStatus = listaAtatus
+                    };
+                }
+                else
+                {
+                    idOrdenTrabajo = new IdOrdenTrabajo
+                    {
+                        OrdenTrabajo = "",
+                        idStatus = listaAtatus
+                    };
+                };
+                return idOrdenTrabajo;
+
+            }
+            else
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(payload);
+                result.ReturnCode = 401;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = false;
+                return result;
+            }
+
+        }
 
         //obtenemos la spools a partir de la orden de trabajo.
         public object Get(string ordenTrabajo, int tipo, string token, string lenguaje)

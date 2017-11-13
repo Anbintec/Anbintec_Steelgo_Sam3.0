@@ -1399,10 +1399,15 @@ namespace BackEndSAM.DataAcces
                                             //si los milimetros son mayores a 0 y si son diferentes del inventario recibido en cuantificacion
                                             if (milimetros > 0 && milimetros != cantidadRecibida)
                                             {
-                                                int? tempDespachados = ctx.Sam3_Despacho.Where(x => x.NumeroUnicoID == actualizaNU.NumeroUnicoID && x.Activo && !x.Cancelado)
-                                                    .Select(x => x.DespachoID).Count() > 0 ?
-                                                    ctx.Sam3_Despacho.Where(x => x.NumeroUnicoID == actualizaNU.NumeroUnicoID && x.Activo && !x.Cancelado)
-                                                    .Select(x => x.Cantidad).Sum() : 0;
+                                                int? tempDespachados = ctx2.Despacho.Where(x => x.NumeroUnicoID == ItemNumeroUnicoSam2.Sam2_NumeroUnicoID && !x.Cancelado)
+                                                   .Select(x => x.DespachoID).Count() > 0 ?
+                                                   ctx2.Despacho.Where(x => x.NumeroUnicoID == ItemNumeroUnicoSam2.Sam2_NumeroUnicoID && !x.Cancelado)
+                                                   .Select(x => x.Cantidad).Sum() : 0;
+
+                                                //int? tempDespachados = ctx.Sam3_Despacho.Where(x => x.NumeroUnicoID == actualizaNU.NumeroUnicoID && x.Activo && !x.Cancelado)
+                                                //    .Select(x => x.DespachoID).Count() > 0 ?
+                                                //    ctx.Sam3_Despacho.Where(x => x.NumeroUnicoID == actualizaNU.NumeroUnicoID && x.Activo && !x.Cancelado)
+                                                //    .Select(x => x.Cantidad).Sum() : 0;
 
                                                 cantidadDespachada = tempDespachados != null ? tempDespachados.Value : 0;
 

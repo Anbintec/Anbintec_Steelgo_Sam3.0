@@ -1,4 +1,5 @@
-﻿using BackEndSAM.Models.Pintura.SistemaPinturaAplicable;
+﻿
+using BackEndSAM.Models.Pintura.SistemaPinturaAplicable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace BackEndSAM.Models.Pintura.PinturaGeneral
         public int MedioTransporteCargaID { get; set; }
         public string Nombre { get; set; }
         public bool CarroCerrado { get; set; }
-        public int ProyectoID { get; set; }
+        public int  ProyectoID { get; set; }
 
         public MedioTransporte()
         {
@@ -39,7 +40,7 @@ namespace BackEndSAM.Models.Pintura.PinturaGeneral
             ColorID = 0;
             Nombre = "";
             CodigoHexadecimal = "";
-        }
+    }
 
         public int ColorID { get; set; }
         public string Nombre { get; set; }
@@ -63,7 +64,7 @@ namespace BackEndSAM.Models.Pintura.PinturaGeneral
         public string NumeroControl { get; set; }
         public int? SistemaPinturaID { get; set; }
         public string SistemaPintura { get; set; }
-        public List<BackEndSAM.Models.Pintura.RevisionPintura.SistemaPintura> ListadoSistemaPinturaPorProyecto { get; set; }
+        public  List<BackEndSAM.Models.Pintura.RevisionPintura.SistemaPintura> ListadoSistemaPinturaPorProyecto { get; set; }
         public int? SistemaPinturaColorID { get; set; }
         public List<ColorPintura> ListaColorPintura { get; set; }
         public string Color { get; set; }
@@ -74,7 +75,7 @@ namespace BackEndSAM.Models.Pintura.PinturaGeneral
         public List<TiposRechazo> ListaMotivosRechazo { get; set; }
         public int? Version { get; set; }
         public int Accion { get; set; }
-
+        
         public bool? NoPintable { get; set; }
 
         public bool? CargaCarroID { get; set; }
@@ -82,7 +83,7 @@ namespace BackEndSAM.Models.Pintura.PinturaGeneral
         public int? CarroID { get; set; }
 
         public int? CuadranteID { get; set; }
-
+        
 
         public PinturaRevision()
         {
@@ -129,7 +130,7 @@ namespace BackEndSAM.Models.Pintura.PinturaGeneral
         public int SistemaPinturaColorID { get; set; }
     }
 
-
+    
 
     public class ElementosCapturados
     {

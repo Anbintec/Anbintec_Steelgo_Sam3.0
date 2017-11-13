@@ -909,11 +909,13 @@
                         nuc: ($("#NumUnicoB").val() !== "" ? $("#NumUnicoB").val() : n.NumeroUnicoCliente)
                     })
                 });
-
+                console.log( dataTemp);
+                
                 postApply(dataTemp);
             //}
         }
         else {
+            
             var ItemCode={ic:data[0].ItemCode,icid:data[0].ItemCodeID}
             if(sameData(data)){
                 var bit1=$("#ItemCodeBusq").data("kendoComboBox").value()!=="" ? 4 : 0;
@@ -1051,7 +1053,8 @@
         }
     }
 
-    function postApply(arr){
+    function postApply(arr) {
+        
         var params = arr.pop();
         console.log("obtiene parametro arr.pop()");
         console.log(params);
@@ -1061,8 +1064,6 @@
                 if(res.ReturnCode!==undefined && res.ReturnCode===200){
                     postApply(arr)
                 } else {
-                    console.log("error no se porque chingada madre xd ");
-                    console.log("xd="+res.ReturnCode);
                     displayMessage("notificationslabel0109", '', '1');
                 }
             })

@@ -1,9 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "SistemaPintura";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @section breadcrumb {
     <li>
         <a href="@Url.Action("landing", "Home")"><span id="lblInicio"></span></a>
@@ -100,86 +98,112 @@
     </div>
     @*GRID*@
 
-    <div id="windowGrid"></div>
+    @*GRID POPUP*@
+    <div id="windowGrid" style="display: none; z-index:inherit;">
 
-
-        @*GRID POPUPCOMPONENTEAGREGADO*@
-        <div id="windowGridComponenteAgregado" style="display: none; z-index:inherit;">
-
-            <div class="row col-sm-12 col-md-12 col-lg-12" style="width: 100%; padding-right:0px; ">
-                <div class="form-group">
-                    <div id="ContenedorGridPopUpComponenteAgregado">
-                        <div id="gridPopUpComponentesAgregados" data-role="grid" class="k-grid k-widget">
-                        </div>
+        <div class="row col-sm-12 col-md-12 col-lg-12" style="width: 100%; padding-right:0px; ">
+            <div class="form-group">
+                <div id="ContenedorGridPopUp">
+                    <div id="gridPopUp" data-role="grid" class="k-grid k-widget">
                     </div>
-                </div>
-            </div>
-            <div class="row col-sm-12 col-md-12 col-lg-12" style="padding-right:0px;">
-                <div class="col-sm-2 col-md-2 col-lg-2">
-                </div>
-                <div class="col-sm-3 col-d-3 col-lg-3">
-                    <label id="">&nbsp;</label>
-                    <a class=" btn btn-primary " href="#" id="GuardarDetalleComponenteAgregado">
-                        <span id="botonGuardarComponenteAgregado"></span>
-                    </a>
-                </div>
-                <div class="col-sm-3 col-d-3 col-lg-3">
-                    <label id="">&nbsp;</label>
-                    <a class=" btn btn-primary " href="#" id="CerrarDetalleComponenteAgregado">
-                        <span id="botonCancelarComponenteAgregado"></span>
-                    </a>
                 </div>
             </div>
         </div>
-
-        <div class="row ">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="formNav clearfix">
-                    <div class="button-section editButtonSection">
-                        <div class="btn-group save-group">
-                            <button id="GuardarPie" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar3"></span></button>
-                            <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="caretWhite"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" id="btnGuardar1"><span id="botonGuardar4"></span></a></li>
-                                <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
-                            </ul>
-                        </div>
-                        <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
-                    </div>
-                    <div id="SistemaPinturaDivInferior" class="button-section">
-                        <a id="SistemaPinturaDivInferior" href="@Url.Action("SistemaPinturaAplicable", "Pintura")" class="btn btn-primary"><span id="SistemaPinturaInf"></span></a>
-                    </div>
-                    <div class="button-section actionButtonSection">
-                        <div class="dropdown action-group">
-                            <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
-                                <span id="botonAcciones2"></span>
-                                <span class="caretBlue"></span>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="Acciones">
-                                <li><a href="@Url.Action("ListadoSistemaPintura", "Pintura")"><span id="menuListadoSistemaPintura2"></span></a></li>
-                                <li> <a href="#" class="eliminarSistema"><span id="botonAccionEliminar2"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
-
-
-                </div>
+        <div class="row col-sm-12 col-md-12 col-lg-12" style="padding-right:0px;">
+            <div class="col-sm-2 col-md-2 col-lg-2">
+            </div>
+            <div class="col-sm-3 col-d-3 col-lg-3">
+                <label id="">&nbsp;</label>
+                <a class=" btn btn-primary " href="#" id="GuardarDetallePruebas">
+                    <span id="botonAgregarComponente"></span>
+                </a>
+            </div>
+            <div class="col-sm-3 col-d-3 col-lg-3">
+                <label id="">&nbsp;</label>
+                <a class=" btn btn-primary " href="#" id="CerrarDetallePruebas">
+                    <span id="botonCancelar2"></span>
+                </a>
             </div>
         </div>
     </div>
+
+    @*GRID POPUPCOMPONENTEAGREGADO*@
+    <div id="windowGridComponenteAgregado" style="display: none; z-index:inherit;">
+
+        <div class="row col-sm-12 col-md-12 col-lg-12" style="width: 100%; padding-right:0px; ">
+            <div class="form-group">
+                <div id="ContenedorGridPopUpComponenteAgregado">
+                    <div id="gridPopUpComponentesAgregados" data-role="grid" class="k-grid k-widget">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-sm-12 col-md-12 col-lg-12" style="padding-right:0px;">
+            <div class="col-sm-2 col-md-2 col-lg-2">
+            </div>
+            <div class="col-sm-3 col-d-3 col-lg-3">
+                <label id="">&nbsp;</label>
+                <a class=" btn btn-primary " href="#" id="GuardarDetalleComponenteAgregado">
+                    <span id="botonGuardarComponenteAgregado"></span>
+                </a>
+            </div>
+            <div class="col-sm-3 col-d-3 col-lg-3">
+                <label id="">&nbsp;</label>
+                <a class=" btn btn-primary " href="#" id="CerrarDetalleComponenteAgregado">
+                    <span id="botonCancelarComponenteAgregado"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row ">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav clearfix">
+                <div class="button-section editButtonSection">
+                    <div class="btn-group save-group">
+                        <button id="GuardarPie" onclick="javascript:void(0);" type="button" class="btn btn-yellow"><span id="botonGuardar3"></span></button>
+                        <button id="dropdown-toggle" type="button" class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caretWhite"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="btnGuardar1"><span id="botonGuardar4"></span></a></li>
+                            <li><a href="#" id="btnGuardarYNuevo1"><span id="botonGuardarYNuevo1"></span></a></li>
+                        </ul>
+                    </div>
+                    <a id="btnCancelar" class="btn btn-black"><span id="botonCancelar1"></span></a>
+                </div>
+                <div id="SistemaPinturaDivInferior" class="button-section">
+                    <a id="SistemaPinturaDivInferior" href="@Url.Action("SistemaPinturaAplicable", "Pintura")" class="btn btn-primary"><span id="SistemaPinturaInf"></span></a>
+                </div>
+                <div class="button-section actionButtonSection">
+                    <div class="dropdown action-group">
+                        <a id="Acciones" data-target="#" href="#/" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false" class="btn btn-default">
+                            <span id="botonAcciones2"></span>
+                            <span class="caretBlue"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Acciones">
+                            <li><a href="@Url.Action("ListadoSistemaPintura", "Pintura")"><span id="menuListadoSistemaPintura2"></span></a></li>
+                            <li> <a href="#" class="eliminarSistema"><span id="botonAccionEliminar2"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <a id="Imprimir" href="#" class="btn btn-fadeBlue actionButtonSection"></a>
+
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script type="text/javascript" src="~/Scripts/AppComponents/Pintura/SistemaPintura/Render.js"></script>
 <script type="text/javascript" src="~/Scripts/AppComponents/Pintura/SistemaPintura/Ajax.js"></script>
 <script type="text/javascript" src="~/Scripts/AppComponents/Pintura/SistemaPintura/Handlers.js"></script>
 <script type="text/javascript" src="~/Scripts/AppComponents/Pintura/SistemaPintura/Captura.js"> </script>
-@*<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/SistemaPintura/Seguridad.js"> </script>*@
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/SistemaPintura/Seguridad.js"> </script>
 
-@*<script>
+<script>
         @section JavascriptDocumentReadyFunctions {
     $authorizationModel["SistemaPintura"] = $SistemaPinturaModel;
     }
-</script>*@
+</script>

@@ -178,7 +178,7 @@ namespace BackEndSAM.DataAcces.Pintura.AdminReductores
             }
         }
 
-        public object ValidarComponente(int ReductorID, string lote, int cantidad)
+        public object ValidarComponente(int ReductorID,string lote,int cantidad)
         {
             try
             {
@@ -222,6 +222,6 @@ namespace BackEndSAM.DataAcces.Pintura.AdminReductores
             }
         }
 
-
+        
     }
 }

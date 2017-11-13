@@ -43,4 +43,26 @@ namespace BackEndSAM.Models.MedicionesClimatologicas
         public string NombreEquipo { get; set; }
         public string NombreCategoria { get; set; }
     }
+
+    public class Captura
+    {
+        public List<DetalleCapturaCondiciones> Detalles { get; set; }
+    }
+
+    public class DetalleCapturaCondiciones
+    {
+        public string FechaToma { get; set; }
+        public string HoraToma { get; set; }
+        public int PatioID { get; set; }
+        public int ZonaID { get; set; }
+        public string TempAmb { get; set; }
+        public int EquipoTomaTemAmbID { get; set; }
+        public int Humedad { get; set; }
+        public int EquipoTomaHumedadID { get; set; }
+        public int PuntoRocio { get; set; }
+        public int EquipoTomaPuntoRocioID { get; set; }
+        public int CampoX { get; set; }
+        public int EquipoTomaCampoXID { get; set; }
+
+    }
 }

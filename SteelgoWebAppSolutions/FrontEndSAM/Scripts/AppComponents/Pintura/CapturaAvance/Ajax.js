@@ -3,9 +3,9 @@
     loadingStart();
 
     $CapturaAvance.CapturaAvance.read({ token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {
-        var NewDate = kendo.toString(data.FechaShotblast, _dictionary.FormatoFecha[$("#language").data("kendoDropDownList").value()]);
+        var NewDate = kendo.toString(data.FechaShotblast, _dictionary.FormatoFecha2[$("#language").data("kendoDropDownList").value()]);
         endRangeDateShotblast.val(NewDate);
-        var NewDate2 = kendo.toString(data.FechaPrimario, _dictionary.FormatoFecha[$("#language").data("kendoDropDownList").value()]);
+        var NewDate2 = kendo.toString(data.FechaPrimario, _dictionary.FormatoFecha2[$("#language").data("kendoDropDownList").value()]);
         endRangeDatePrimario.val(NewDate2);
 
         if (data.Llenado.toLowerCase() == "todos") {

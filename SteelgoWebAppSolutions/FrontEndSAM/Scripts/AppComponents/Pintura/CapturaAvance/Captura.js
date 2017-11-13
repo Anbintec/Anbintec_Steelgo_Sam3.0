@@ -90,7 +90,7 @@ function changeLanguageCall() {
 
 
     endRangeDateShotblast.data("kendoDatePicker").setOptions({
-        format: _dictionary.FormatoFecha[$("#language").data("kendoDropDownList").value()]
+        format: _dictionary.FormatoFecha2[$("#language").data("kendoDropDownList").value()]
     });
     SuscribirEventos();
     AjaxCargarCamposPredeterminados();

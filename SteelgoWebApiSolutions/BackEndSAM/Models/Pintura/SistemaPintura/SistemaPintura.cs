@@ -2,7 +2,8 @@
 using BackEndSAM.Models.Pintura.PinturaGeneral;
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Web;
 
 namespace BackEndSAM.Models.Pintura.SistemaPintura
 {
@@ -26,8 +27,8 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
         public bool Agregar { get; set; }
         public int ProcesoPinturaID { get; set; }
         public string Proceso { get; set; }
-        //public double? MetrosLote { get; set; }
-        //public int NumeroPruebas { get; set; }
+        public double? MetrosLote { get; set; }
+        public int NumeroPruebas { get; set; }
         public int SistemaPinturaProyectoProcesoID { get; set; }
         public int ProyectoID { get; set; }
         public int SistemaPinturaID { get; set; }
@@ -42,12 +43,12 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
         public List<UnidadMedida> listadoUnidadesMedida { get; set; }
         public List<PruebasProcesos> listadoPruebasProceso { get; set; }
         public List<DetallePruebas> listadoPruebasDetalle { get; set; }
-
+       
     }
 
+   
 
-
-
+   
     public class UnidadMedida
     {
         public UnidadMedida()
@@ -85,9 +86,6 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
         public double UnidadMaxima { get; set; }
         public int PruebaProcesoPinturaID { get; set; }
         public string ProyectoProcesoPrueba { get; set; }
-        public bool? ConfiguracionLote { get; set; }
-        public int? Cantidad { get; set; }
-        public int NumeroPruebas { get; set; }
     }
 
     public class SistemaPinturaEdicion
@@ -167,7 +165,7 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
         public List<SPProyecto> ListaSPProyecto { get; set; }
         public List<SPColor> ListaSPColor { get; set; }
         public List<SPProyectoProceso> ListaSPProyectoProceso { get; set; }
-
+        
     }
 
     public class SPNuevo
@@ -176,8 +174,7 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
         public int Accion { get; set; }
     }
 
-    public class SPProyecto
-    {
+    public class SPProyecto {
         public int ProyectoID { get; set; }
         public int Accion { get; set; }
         public int NoPintable { get; set; }
@@ -195,8 +192,8 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
     {
         public int Accion { get; set; }
         public int ProcesoPinturaID { get; set; }
-        //public double MetrosLote { get; set; }
-        //public int NumeroPruebas { get; set; }
+        public double MetrosLote { get; set; }
+        public int NumeroPruebas { get; set; }
         public int ProyectoID { get; set; }
         public int NumeroComponentes { get; set; }
         public int ReductorID { get; set; }
@@ -213,9 +210,6 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
         public int UnidadMaxima { get; set; }
         public int PruebaProcesoPinturaID { get; set; }
         public int Accion { get; set; }
-        public bool ConfiguracionLote { get; set; }
-        public int Cantidad { get; set; }
-        public int NumeroPruebas { get; set; }
     }
 
     public class SPProyectoProcesoComponentes

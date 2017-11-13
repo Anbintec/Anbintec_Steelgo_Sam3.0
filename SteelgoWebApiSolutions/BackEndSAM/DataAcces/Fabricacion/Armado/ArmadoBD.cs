@@ -59,6 +59,29 @@ namespace BackEndSAM.DataAcces.ArmadoBD
         }
 
 
+        public object ObtenerIDOrdenTrabajo(Sam3_Usuario usuario, string ordentrabajo, int tipo, string lenguaje,int proyectoID)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {
+                    List<Sam3_Steelgo_Get_SpoolID_ProyectoID_Result> lista = ctx.Sam3_Steelgo_Get_SpoolID_ProyectoID(tipo, ordentrabajo, lenguaje, proyectoID).ToList();
+                    return lista;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
+
 
         public object ObtenerIDOrdenTrabajo(Sam3_Usuario usuario, string ordentrabajo, int tipo, string lenguaje)
         {
