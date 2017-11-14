@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
@@ -17,7 +18,7 @@ namespace BackEndSAM.Models.Pintura.RevisionPintura
             SistemaPinturaID = 0;
             Nombre = "";
             SistemaPinturaProyectoID = 0;
-            NoPintable = false;
+            NoPintable= false;
         }
     }
 }

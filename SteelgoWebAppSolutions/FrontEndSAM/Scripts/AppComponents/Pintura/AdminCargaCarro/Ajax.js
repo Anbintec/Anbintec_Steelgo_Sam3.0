@@ -205,7 +205,8 @@ function AjaxObtenerDetalleCargaCarro(MedioTransporteID, tipoEscenario, valorBus
 					                                displayNotify("menuSistemaPinturaNoPintable", "", '1');
 					                            }
 					                            else {
-					                                ds.add(array[i]);
+					                                ds._data.unshift(array[i]);
+					                                //ds.add();
 					                                if (elementosModificados != "")
 					                                    elementosModificados += ", " + array[i].NumeroControl;
 					                                else
@@ -220,7 +221,8 @@ function AjaxObtenerDetalleCargaCarro(MedioTransporteID, tipoEscenario, valorBus
 					                                displayNotify("menuSistemaPinturaNoPintable", "", '1');
 					                            }
 					                            else {
-					                                ds.add(array[i]);
+					                                ds._data.unshift(array[i]);
+					                                //ds.add(array[i]);
 					                                if (elementosModificados != "")
 					                                    elementosModificados += ", " + array[i].NumeroControl;
 					                                else

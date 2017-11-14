@@ -7276,8 +7276,8 @@ _dictionary = {
 	    "en-US": "Defects"
 	},
 	"lblPlanchar": {
-	    "es-MX": "Planchado",
-	    "en-US": "Ironed"
+	    "es-MX": "Reemplazo",
+	    "en-US": "Replacement"
 	},
 	"lblVacio": {
 	    "es-MX": "Vacíos",
@@ -7336,16 +7336,16 @@ _dictionary = {
 	    "en-US": "Select all"
 	},
 	"lblCarro": {
-	    "es-MX": "Carro",
-	    "en-US": "Car"
+	    "es-MX": "Trineo",
+	    "en-US": "Sled"
 	},
 	"lblCarroEscritorio": {
-	    "es-MX": "Carro",
-	    "en-US": "Car"
+	    "es-MX": "Trineo",
+	    "en-US": "Sled"
 	},
 	"lblCarroPatio": {
-	    "es-MX": "Carro",
-	    "en-US": "Car"
+	    "es-MX": "Trineo",
+	    "en-US": "Sled"
 	},
 	"lblCerrarCarroEscritorio": {
 	    "es-MX": "Cerrar",
@@ -8573,8 +8573,8 @@ _dictionary = {
 	    "en-US": "Inspection Date"
 	},
 	"menuPinturaCargaCarro": {
-	    "es-MX": "Carga de Carro",
-	    "en-US": "Load Carriage"
+	    "es-MX": "Carga de trineo",
+	    "en-US": "Sled Load"
 	},
 	"LoteActualizado": {
 	    "es-MX": "Se actualizo el Lote correctamente",
@@ -8589,8 +8589,8 @@ _dictionary = {
 	    "en-US": "The lot was not updated"
 	},
 	"menuPinturaCargaAvance": {
-	    "es-MX": "Avance de Carro",
-	    "en-US": "Car Advance"
+	    "es-MX": "Avance de trineo",
+	    "en-US": "Sled Advance"
 	},
 	"menuPinturaSpoolColorDiferente": {
 	    "es-MX": "No puedes agregar un spool con un color diferente",
@@ -8601,8 +8601,8 @@ _dictionary = {
 	    "en-US": "Quadrant of Advance"
 	},
 	"menuDescargaCarritos": {
-	    "es-MX": "Descarga de Carro",
-	    "en-US": "Download Carriage"
+	    "es-MX": "Descarga de trineo",
+	    "en-US": "Download sled"
 	},
 	"menuLotesCapturaPrueba": {
 	    "es-MX": "Captura Pruebas por Lotes",
@@ -9031,8 +9031,8 @@ _dictionary = {
 	    "en-US": "KG"
 	},
 	"columnMedioTransporte": {
-	    "es-MX": "Carro",
-	    "en-US": "Car"
+	    "es-MX": "Trineo",
+	    "en-US": "Sled"
 	},
 	"columnCuadrante1": {
 	    "es-MX": "Cuadrante",
@@ -10660,8 +10660,8 @@ _dictionary = {
     // Finaliza Validacion de resultados
     //carga de carro
 	"PinturaCargaCarroCerrar": {
-	    "es-MX": "Favor de abrir el carro",
-	    "en-US": "Please open the car"
+	    "es-MX": "Favor de abrir el trineo",
+	    "en-US": "Please open the sled"
 	},
     //fin carga de carro
     //Reportes
@@ -10957,20 +10957,20 @@ _dictionary = {
 	    "en-US": "Paint"
 	},
 	"PinturaCargaCarroBreadcrumb": {
-	    "es-MX": "Carga Carro",
-	    "en-US": "Load Carriage"
+	    "es-MX": "Carga trineo",
+	    "en-US": "Sled Load"
 	},
 	"PinturaCargaCarroSup": {
-	    "es-MX": "Carga Carro",
-	    "en-US": "Load Carriage"
+	    "es-MX": "Carga trineo",
+	    "en-US": "Sled Load"
 	},
 	"PinturaCargaCarroInf": {
-	    "es-MX": "Carga Carro",
-	    "en-US": "Load Carriage"
+	    "es-MX": "Carga trineo",
+	    "en-US": "Sled Load"
 	},
 	"PinturaCapturaAvanceBreadcrumb": {
-	    "es-MX": "Avance de Carro",
-	    "en-US": "Car Advance"
+	    "es-MX": "Avance de trineo",
+	    "en-US": "Sled Advance"
 	},
 	"PinturaAvanceIntermedioAcabadoBreadcrumb": {
 	    "es-MX": "Avance Cuadrante",
@@ -10993,8 +10993,8 @@ _dictionary = {
 	    "en-US": "Download Carriage"
 	},
 	"PinturaDescargaCarroStatusAbierto": {
-	    "es-MX": "El carro se encuentra abierto y se podra encontrar en el modulo Carga de carro",
-	    "en-US": "The car is open and can be found in the Car Charging module"
+	    "es-MX": "El trineo se encuentra abierto y se podra encontrar en el modulo Carga de trineo",
+	    "en-US": "The sled is open and can be found in the sled Charging module"
 	},
 	"PinturaCargaOpcionSpool": {
 	    "es-MX": "Spool",
@@ -11112,8 +11112,8 @@ _dictionary = {
 	    "en-US": "The spool is in:"
 	},
 	"PinturaSpoolCargadoEnCarro": {
-	    "es-MX": "El spool se encuentra cargado en el carro '?'",
-	    "en-US": "The spool is loaded in the cart '?' "
+	    "es-MX": "El spool se encuentra cargado en el trineo '?'",
+	    "en-US": "The spool is loaded in the sled '?' "
 	},
 	"PinturaCargaCarroSinSpools": {
 	    "es-MX": "El spool seleccionado no tiene un sistema de pintura",
@@ -11128,12 +11128,12 @@ _dictionary = {
 	    "en-US": "Areway"
 	},
 	"PinturaCapturaAvanceSup": {
-	    "es-MX": "Avance de Carro",
-	    "en-US": "Car Advance"
+	    "es-MX": "Avance de trineo",
+	    "en-US": "Sled Advance"
 	},
 	"PinturaCapturaAvanceInf": {
-	    "es-MX": "Avance de Carro",
-	    "en-US": "Car Advance"
+	    "es-MX": "Avance de trineo",
+	    "en-US": "Sled Advance"
 	},
 	"PinturaCargaTitulo": {
 	    "es-MX": "Alerta!!!",
@@ -11158,40 +11158,40 @@ _dictionary = {
 	}
      ,
 	"PinturaCerrarCarro": {
-	    "es-MX": "Se cerró el carro correctamente",
-	    "en-US": "Cart closed successfuly"
+	    "es-MX": "Se cerró el trineo correctamente",
+	    "en-US": "Sled closed successfuly"
 	},
 	"PinturaGuardarErrorGuardar": {
 	    "es-MX": "No se guardo la informacion",
 	    "en-US": "no information was saved"
 	},
 	"PinturaCargaAgregarNuevoCarro": {
-	    "es-MX": "Agregar nuevo carro",
-	    "en-US": "Add new car"
+	    "es-MX": "Agregar nuevo trineo",
+	    "en-US": "Add new sled"
 	},
 	"PinturaCargaNuevoCarro": {
-	    "es-MX": "Crear nuevo carro",
-	    "en-US": "Create new car"
+	    "es-MX": "Crear nuevo trineo",
+	    "en-US": "Create new sled"
 	},
 	"lblNombreMedioTransporte": {
 	    "es-MX": "Nombre",
 	    "en-US": "Name"
 	},
 	"PinturaGuardarNuevoCarro": {
-	    "es-MX": "El carro fue creado satisfactoriamente",
-	    "en-US": "The carr was created sucessfull"
+	    "es-MX": "El trineo fue creado satisfactoriamente",
+	    "en-US": "The sled was created sucessfull"
 	},
 	"PinturaErrorGuardarNuevoCarro": {
-	    "es-MX": "El carro ya existe",
-	    "en-US": "The car already exists"
+	    "es-MX": "El trineo ya existe",
+	    "en-US": "The sled already exists"
 	},
 	"PinturaGuardarNuevoCarroNombre": {
-	    "es-MX": "Favor de ingresar el nombre del carro",
-	    "en-US": "Please enter the name of the car"
+	    "es-MX": "Favor de ingresar el nombre del trineo",
+	    "en-US": "Please enter the name of the sled"
 	},
 	"PinturaHeaderCargaCarro": {
-	    "es-MX": "Carga de Carro",
-	    "en-US": "Load Carriage"
+	    "es-MX": "Carga de trineo",
+	    "en-US": "Sled Load"
 	},
 	"PinturaCargaBackLogMensajeErrorServicioPintura": {
 	    "es-MX": "El sistema de pintura debe ser ",
@@ -11202,8 +11202,8 @@ _dictionary = {
 	    "en-US": "Select a painting system"
 	},
 	"PinturaCargaBackLogMensajeGuardadoExitoso": {
-	    "es-MX": "Se subio al carro correctamente",
-	    "en-US": "uploaded to car correctly"
+	    "es-MX": "Se subio al trineo correctamente",
+	    "en-US": "uploaded to sled correctly"
 	},
 	"PinturaCargaBackLogMensajeSeleccionaSpool": {
 	    "es-MX": "Selecciona al menos un spool",
@@ -11214,8 +11214,8 @@ _dictionary = {
 	    "en-US": "Select a spool please"
 	},
 	"PinturaCargaNoHaySpoolsEnElCarro": {
-	    "es-MX": "No hay spools en el carro",
-	    "en-US": "There aren't any spool in the car"
+	    "es-MX": "No hay spools en el trineo",
+	    "en-US": "There aren't any spool in the sled"
 	},
 	"PinturaCargaSeleccionaCodigo": {
 	    "es-MX": "Por favor selecciona un código",
@@ -11234,12 +11234,12 @@ _dictionary = {
 	    "en-US": "Please select the quadrant from discharge"
 	},
 	"PinturaSeleccionaCarro": {
-	    "es-MX": "Por favor seleccione un carro para la carga del spool",
-	    "en-US": "Please select a cart to load the spool"
+	    "es-MX": "Por favor seleccione un trineo para la carga del spool",
+	    "en-US": "Please select a sled to load the spool"
 	},
 	"PinturaSeleccionaCarroDescarga": {
-	    "es-MX": "Por favor seleccione un carro para la descarga del spool",
-	    "en-US": "Please select a cart to discharge the spool"
+	    "es-MX": "Por favor seleccione un trineo para la descarga del spool",
+	    "en-US": "Please select a sled to discharge the spool"
 	},
 	"PinturaBotonMostrar": {
 	    "es-MX": "Necesitas presionar el boton mostrar para despues agregar un spool",
@@ -11247,13 +11247,13 @@ _dictionary = {
 	},
 
 	"CargaCarroSup": {
-	    "es-MX": "Carga de Carro",
-	    "en-US": "Load Carriage"
+	    "es-MX": "Carga de trineo",
+	    "en-US": "Sled load"
 	},
 
 	"CargaCarroInf": {
-	    "es-MX": "Carga de Carro",
-	    "en-US": "Load Carriage"
+	    "es-MX": "Carga de Trineo",
+	    "en-US": "Sled Load"
 	},
 
 	"PinturaSpoolSistemaPinturaNoCoincideVersion": {
@@ -11269,8 +11269,8 @@ _dictionary = {
 	    "en-US": "The location will not be changed if the spool is in a shipping process"
 	},
 	"PinturaCargaCarroSistemaPinturaCerradoSinSpools": {
-	    "es-MX": "No puedes cerrar un carro vacio",
-	    "en-US": "You can not close an empty car"
+	    "es-MX": "No puedes cerrar un trineo vacio",
+	    "en-US": "You can not close an empty sled"
 	},
 
 	"PinturaSpoolSistemaPinturaNoCoincide": {
@@ -11417,12 +11417,12 @@ _dictionary = {
 
     //Comienza Lote Captura Reporte 
 	"lblDescargaDeCarroSup": {
-	    "es-MX": "Descarga de Carro",
-	    "en-US": "Download Carrige "
+	    "es-MX": "Descarga de trineo",
+	    "en-US": "Download sled "
 	},
 	"lblDescargaDeCarroInf": {
-	    "es-MX": "Descarga de Carro",
-	    "en-US": "Download Carrige "
+	    "es-MX": "Descarga de trineo",
+	    "en-US": "Download sled "
 	},
 	"lblCerrarLote": {
 	    "es-MX": "Cerrar Lote",
@@ -11441,12 +11441,12 @@ _dictionary = {
 
     //Comienza Condiciones Climatologicas 
 	"lblDescargaDeCarroSup": {
-	    "es-MX": "Descarga de Carro",
-	    "en-US": "Download Carrige "
+	    "es-MX": "Descarga de trineo",
+	    "en-US": "Download sled "
 	},
 	"lblDescargaDeCarroInf": {
-	    "es-MX": "Descarga de Carro",
-	    "en-US": "Download Carrige "
+	    "es-MX": "Descarga de trineo",
+	    "en-US": "Download sled "
 	},
 
 
@@ -11511,8 +11511,8 @@ _dictionary = {
 	    "en-US": "No data to save."
 	},
 	"SistemaPinturaAplicableYaAsigando": {
-	    "es-MX": "El spool ya se encuentra en un carro",
-	    "en-US": "The spool is already in a car"
+	    "es-MX": "El spool ya se encuentra en un trineo",
+	    "en-US": "The spool is already in a sled"
 	},
 	"SistemaPinturaAplicableMensajeGuardadoExistoso": {
 	    "es-MX": "Datos guardados correctamente.",
@@ -12189,8 +12189,8 @@ _dictionary = {
 	    "en-US": "The Spool is loaded on the flat "
 	},
 	"EmbarqueCargaMsjErrorSpoolAgregarCarro": {
-	    "es-MX": "El Spool se encuentra cargado en el carro ",
-	    "en-US": "The Spool is loaded on the car "
+	    "es-MX": "El Spool se encuentra cargado en el trineo ",
+	    "en-US": "The Spool is loaded on the sled "
 	},
 	"EmbarqueCargaMsjErrorSpoolAgregarExiste": {
 	    "es-MX": "El Spool ya existe en la captura",
@@ -13282,12 +13282,12 @@ _dictionary = {
 	    "en-US": "Painting Revision"
 	},
 	"RevisionPinturaGenerarRevision": {
-	    "es-MX": "Al generar una revision se cancelará la informacion capturada en carga de carro,Avance y Pruebas",
+	    "es-MX": "Al generar una revision se cancelará la informacion capturada en carga de trineo,Avance y Pruebas",
 	    "en-US": " "
 	},
 	"RevisionPinturaNoEditarSP": {
-	    "es-MX": "Necesitas descargar el spool del carro  para que puedas cambiar el sistema de pintura ",
-	    "en-US": "you need to unload the spool of the cart  so you can change the paint system"
+	    "es-MX": "Necesitas descargar el spool del trineo  para que puedas cambiar el sistema de pintura ",
+	    "en-US": "you need to unload the spool of the sled  so you can change the paint system"
 	},
 	"InformacionAgregada": {
 	    "es-MX": "Se agrego la informacion a la captura",

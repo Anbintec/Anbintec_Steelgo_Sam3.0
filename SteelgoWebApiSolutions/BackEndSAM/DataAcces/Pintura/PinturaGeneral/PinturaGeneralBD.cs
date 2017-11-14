@@ -146,7 +146,7 @@ namespace BackEndSAM.DataAcces.Pintura.PinturaGeneral
             }
         }
 
-
+       
         public object GuardarImagenSerializa(byte[] imgSerializada)
         {
             try

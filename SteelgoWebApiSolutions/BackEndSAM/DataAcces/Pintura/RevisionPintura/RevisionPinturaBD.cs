@@ -33,14 +33,14 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
             }
         }
 
-
+        
         public object GetRechazos(string lenguaje)
         {
             try
             {
                 using (SamContext ctx = new SamContext())
                 {
-
+                   
                     List<Sam3_Pintura_Get_Rechazos_Result> lista = ctx.Sam3_Pintura_Get_Rechazos(lenguaje).ToList();
 
                     List<TiposRechazo> listaRechazos = new List<TiposRechazo>();
@@ -57,8 +57,8 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
                         };
                         listaRechazos.Add(tipoRechazo);
                     }
-
-
+                        
+                    
                     return listaRechazos;
                 }
 
@@ -75,7 +75,7 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
             }
         }
 
-        public object GuardarSpoolRevision(DataTable dtCaptura, int usuario)
+        public object GuardarSpoolRevision(DataTable dtCaptura,int usuario)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
             }
         }
 
-        public List<PinturaRevision> ActualizaDatos(DataTable dtActualizar, string lenguaje)
+        public List<PinturaRevision> ActualizaDatos(DataTable dtActualizar,string lenguaje)
         {
 
             using (SamContext ctx = new SamContext())
@@ -116,7 +116,7 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
 
                 string[,] parametro = { { "@lenguaje", lenguaje } };
 
-                DataTable dtCaptura = _SQL.EjecutaDataAdapter(Stords.ACTUALIZARCAPTURAREVISIONPINTURA, dtActualizar, "@SpoolCapturados", parametro);
+                DataTable dtCaptura =  _SQL.EjecutaDataAdapter(Stords.ACTUALIZARCAPTURAREVISIONPINTURA, dtActualizar, "@SpoolCapturados", parametro);
 
                 List<PinturaRevision> listaRevisionSpool = new List<PinturaRevision>();
 
@@ -127,20 +127,20 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
                     listaRevisionSpool.Add(new PinturaRevision
                     {
                         Accion = 1,
-                        SpoolID = int.Parse(row["SpoolID"].ToString()),
+                        SpoolID =int.Parse( row["SpoolID"].ToString()),
                         NombreSpool = row["NombreSpool"].ToString(),
                         NumeroControl = row["NumeroControl"].ToString(),
                         SistemaPintura = row["SistemaPintura"].ToString(),
                         Color = row["Color"].ToString(),
                         Area = decimal.Parse(row["Area"].ToString()),
                         GenerarRevision = false,
-                        ComentarioID = row["ComentarioID"].ToString() == "" ? 0 : int.Parse(row["ComentarioID"].ToString()),
+                        ComentarioID = row["ComentarioID"].ToString()==""?0: int.Parse(row["ComentarioID"].ToString()),
                         Comentario = row["Comentario"].ToString(),
-                        Version = row["Version"].ToString() == "" ? default(int) : int.Parse(row["Version"].ToString()),
-                        ListaMotivosRechazo = listaRechazos,
-                        SistemaPinturaID = int.Parse(row["SistemaPinturaID"].ToString()),
-                        NoPintable = bool.Parse(row["NoPintable"].ToString()),
-                        SistemaPinturaColorID = row["SistemaPinturaColorID"].ToString() == "" ? 0 : int.Parse(row["SistemaPinturaColorID"].ToString()),
+                        Version = row["Version"].ToString() == "" ? default(int) : int.Parse( row["Version"].ToString()),
+                        ListaMotivosRechazo= listaRechazos,
+                        SistemaPinturaID =int.Parse(row["SistemaPinturaID"].ToString()),
+                        NoPintable =bool.Parse(row["NoPintable"].ToString()),
+                        SistemaPinturaColorID= row["SistemaPinturaColorID"].ToString()=="" ? 0: int.Parse(row["SistemaPinturaColorID"].ToString()),
                         ListadoSistemaPinturaPorProyecto = GetSistemaPinturaPorProyecto(ctx.Sam3_Pintura_Get_SP(int.Parse(row["ProyectoID"].ToString())).ToList()),
                         ListaColorPintura = (List<ColorPintura>)SistemaPinturaAplicableBD.Instance.ObtieneListadoColorPintura(int.Parse(row["SistemaPinturaID"].ToString()), lenguaje, int.Parse(row["ProyectoID"].ToString()))
                     });
@@ -148,14 +148,14 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
                 return listaRevisionSpool;
             }
 
-
+          
         }
 
         public List<BackEndSAM.Models.Pintura.RevisionPintura.SistemaPintura> GetSistemaPinturaPorProyecto(List<Sam3_Pintura_Get_SP_Result> listaSistemaPinturaProyecto)
         {
             List<BackEndSAM.Models.Pintura.RevisionPintura.SistemaPintura> listadoSistemaPintura = new List<BackEndSAM.Models.Pintura.RevisionPintura.SistemaPintura>();
 
-            if (listaSistemaPinturaProyecto.Count > 0)
+            if(listaSistemaPinturaProyecto.Count>0)
                 listadoSistemaPintura.Add(new BackEndSAM.Models.Pintura.RevisionPintura.SistemaPintura());
 
             foreach (Sam3_Pintura_Get_SP_Result item in listaSistemaPinturaProyecto)
@@ -165,7 +165,7 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
                     SistemaPinturaID = item.SistemaPinturaID,
                     Nombre = item.Nombre,
                     SistemaPinturaProyectoID = item.SistemaPinturaProyectoID,
-                    NoPintable = item.NoPintable
+                    NoPintable= item.NoPintable
                 };
                 listadoSistemaPintura.Add(sistemaPintura);
             }
@@ -252,16 +252,16 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
                             Color = item.Color,
                             Area = item.Area,
                             GenerarRevision = false,
-                            ComentarioID = item.ComentarioID,
+                            ComentarioID=item.ComentarioID,
                             Comentario = item.Comentario,
-                            Version = item.Version == null ? 0 : item.Version,
+                            Version = item.Version==null?0 : item.Version,
                             ListaMotivosRechazo = listaRechazos,
-                            NoPintable = item.NoPintable,
-                            SistemaPinturaColorID = item.SistemaPinturaColorID,
-                            ListaColorPintura = (List<ColorPintura>)SistemaPinturaAplicableBD.Instance.ObtieneListadoColorPintura(item.SistemaPinturaID.GetValueOrDefault(), lenguaje, item.ProyectoID.GetValueOrDefault()),
-                            CargaCarroID = item.CargaCarroID,
-                            CarroID = item.CarroID,
-                            CuadranteID = item.CuadranteID
+                            NoPintable=item.NoPintable,
+                            SistemaPinturaColorID=item.SistemaPinturaColorID,
+                            ListaColorPintura = (List<ColorPintura>)SistemaPinturaAplicableBD.Instance.ObtieneListadoColorPintura(item.SistemaPinturaID.GetValueOrDefault(), lenguaje,item.ProyectoID.GetValueOrDefault()),
+                            CargaCarroID=item.CargaCarroID,
+                            CarroID=item.CarroID,
+                            CuadranteID=item.CuadranteID
 
                         });
                     }
@@ -286,7 +286,7 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
                 using (SamContext ctx = new SamContext())
                 {
                     List<PinturaRevision> listaRevisionSpool = new List<PinturaRevision>();
-                    int cantidadDatos = ctx.Sam3_Pintura_Revison_CantidadSpools(proyectoID, dato, tipoBusqueda);
+                    int cantidadDatos= ctx.Sam3_Pintura_Revison_CantidadSpools(proyectoID, dato, tipoBusqueda);
                     return cantidadDatos;
 
                 }
