@@ -172,7 +172,8 @@ function AjaxCargarLayoutGrid(CuadranteID, SistemaPinturaProyectoID, SistemaPint
                             Spool: { type: "string", editable: false },
                             Area: { type: "string", editable: false },
                             LoteID: { type: "string", editable: false },
-                            FechaProceso: { type: "date", editable: true }
+                            FechaProceso: { type: "date", editable: true },
+                            ZonaActual: { type: "string", editable: false }
                         }
                     }
                 },
@@ -216,6 +217,7 @@ function AjaxCargarLayoutGrid(CuadranteID, SistemaPinturaProyectoID, SistemaPint
             options.columns = $("#grid").data("kendoGrid").columns;
 
             options.columns.push({ field: "Spool", title: _dictionary.columnNumeroControl[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "100px" });
+            options.columns.push({ field: "ZonaActual", title: _dictionary.columnZona[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "100px" });
             options.columns.push({ field: "Area", title: _dictionary.columnM2[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), attributes: { style: "text-align:right;" }, width: "80px" });
             options.columns.push({ field: "LoteID", title: _dictionary.columnLote[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), attributes: { style: "text-align:right;" }, width: "80px" });
             options.columns.push({ field: "FechaProceso", title: _dictionary.columnFechaShotblast[$("#language").data("kendoDropDownList").value()], type: "date", filterable: { cell: { showOperators: false } }, editor: RenderDatePicker, format: _dictionary.FormatoFecha[$("#language").data("kendoDropDownList").value()], width: "160px" });
@@ -272,7 +274,7 @@ function AjaxCargarSpool(ProyectoID, CuadranteID, sistemaPinturaProyectoId, Sist
 function AjaxObtenerSpoolID() {
 
     var OrdenTrabajoOrigianl = $("#InputOrdenTrabajo").val();
-    $Armado.Armado.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {
+    $Armado.Armado.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val(), proyectoID: $("#inputProyecto").data("kendoComboBox").value() }).done(function (data) {
         dataSpoolArray = data;
         if (Error(data)) {
             if (data.OrdenTrabajo != "") {

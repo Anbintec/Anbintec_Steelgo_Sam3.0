@@ -324,7 +324,7 @@ namespace BackEndSAM.DataAcces.Pintura.PruebasPorLote
                             Lote=item.LoteID,
                             SpoolID = item.SpoolID,
                             ProyectoProcesoPruebaID = item.ProyectoProcesoPruebaID,
-                            FechaPrueba = item.FechaPrueba.ToString(),
+                            FechaPrueba = item.FechaPrueba,
                             UnidadMedida = double.Parse(item.UnidadMedida.ToString()),
                             ResultadoEvaluacion = item.ResultadoEvaluacion,
                             Medida=item.Medida,

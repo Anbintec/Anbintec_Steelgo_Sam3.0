@@ -197,8 +197,9 @@ function AjaxCargarLayoutGrid(sistemaPinturaProyectoId, procesoID, CargaCarroID)
                             Color: { type: "string", editable: false },
                             Area: { type: "string", editable: false },
                             LoteID: { type: "string", editable: false },
-                            FechaShotblast: { type: "date", editable: true }
-
+                            FechaShotblast: { type: "date", editable: true },
+                            ZonaActual: { type: "string", editable: false }
+                            
                         }
                     }
                 },
@@ -242,6 +243,7 @@ function AjaxCargarLayoutGrid(sistemaPinturaProyectoId, procesoID, CargaCarroID)
             options.columns = $("#grid").data("kendoGrid").columns;
 
             options.columns.push({ field: "Spool", title: _dictionary.columnNumeroControl[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "100px" });
+            options.columns.push({ field: "ZonaActual", title: _dictionary.columnZona[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "100px" });
             options.columns.push({ field: "SistemaPintura", title: _dictionary.columnSistemaPintura[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "160px" });
             options.columns.push({ field: "Color", title: _dictionary.columnColor[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "100px", attributes: { style: "text-align:center;" } });
             options.columns.push({ field: "Area", title: _dictionary.columnM2[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), attributes: { style: "text-align:right;" }, width: "80px" });

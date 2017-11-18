@@ -7415,6 +7415,11 @@ _dictionary = {
 	    "es-MX": "Sist Pintura",
 	    "en-US": "Paint Sys"
 	},
+	"columnZona": {
+	    "es-MX": "Zona",
+	    "en-US": "Zone"
+	},
+    
 	"lblComposicion": {
 	    "es-MX": "Componente",
 	    "en-US": "Component"
