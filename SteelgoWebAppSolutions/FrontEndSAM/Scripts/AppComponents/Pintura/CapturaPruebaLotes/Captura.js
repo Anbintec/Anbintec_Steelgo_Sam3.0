@@ -247,8 +247,8 @@ function CargarGridPopUp() {
                                mode: "row",
                                multi: true,
                                messages: {
-                                   isTrue: _dictionary.lblVerdadero[$("#language").data("kendoDropDownList").value()],
-                                   isFalse:'..'+ _dictionary.lblFalso[$("#language").data("kendoDropDownList").value()],
+                                   isTrue: (_dictionary.lblVerdadero[$("#language").data("kendoDropDownList").value()] + "   "),
+                                   isFalse: ("...."+ _dictionary.lblFalso[$("#language").data("kendoDropDownList").value()]),
                                    style: "max-width:180px;"
                                },
                                dataSource: [{ ResultadoEvaluacion: true }, { ResultadoEvaluacion: false }]

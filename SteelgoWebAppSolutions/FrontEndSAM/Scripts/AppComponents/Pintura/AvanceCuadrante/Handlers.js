@@ -58,7 +58,17 @@ function SuscribirEventoPlanchar() {
 function SuscribirEventoAgregar() {
     $("#btnAgregar").click(function () {
         if ($("#InputID").data("kendoComboBox").value() > 0) {
-            AjaxAgregarSpool($("#InputID").data("kendoComboBox").value());
+
+            var dataSource = $("#grid").data("kendoGrid").dataSource;
+            var filters = dataSource.filter();
+            var allData = dataSource.data();
+            var query = new kendo.data.Query(allData);
+            var data = query.filter(filters).data;
+            if (data.length > 0) {
+                AjaxAgregarSpool($("#InputID").data("kendoComboBox").value());
+            }
+            else
+                displayNotify("PinturaBotonMostrar", "", '1');
         }
         else {
             displayNotify("PinturaCargaSeleccionaSpool", "", '1');

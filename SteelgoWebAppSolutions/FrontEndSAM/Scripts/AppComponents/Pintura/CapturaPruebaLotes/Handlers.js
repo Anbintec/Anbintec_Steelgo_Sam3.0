@@ -88,7 +88,7 @@ function SuscribirEventoVentanaPopupPruebas() {
         iframe: true,
         resizable: false,
         visible: true,
-        width: "40%",
+        width: "60%",
         height: "auto",
         visible: false,
         animation: false,
