@@ -65,4 +65,18 @@ namespace BackEndSAM.Models.MedicionesClimatologicas
         public int EquipoTomaCampoXID { get; set; }
 
     }
+
+    public class DetalleCondicionesClimatologicas
+    {
+        
+        public decimal TempAmb { get; set; }
+        public string NombreEquipoTemAmb { get; set; }
+        public decimal Humedad { get; set; }
+        public string NombreEquipoHumedad { get; set; }
+        public decimal PuntoRocio { get; set; }
+        public string NombreEquipoPuntoRocio { get; set; }
+        public decimal CampoX { get; set; }
+        public string NombreEquipoCampoX { get; set; }
+
+    }
 }

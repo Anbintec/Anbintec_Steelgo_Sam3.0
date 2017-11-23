@@ -125,3 +125,30 @@ function AjaxGuardarCaptura( tipoGuardado) {
     }
     else displayNotify("", "Todos los campos deben ser capturados", '1');
 }
+
+function ConsultarExistenciaCondicionesClimatologicas() {
+    var FechaToma = $('#inputMedicionesfechaToma').val();
+    var HoraToma = $('#inputMedicionesHoraToma').val();
+    var PatioID = $('#inputPatio').val();
+    var ZonaID = $('#inputZona').val();
+
+    if (FechaToma != "", HoraToma != "", PatioID != "", ZonaID != "") {
+        loadingStart();
+        $CondicionesClimatologicas.CondicionesClimatologicas.read({ token: Cookies.get("token"), fechatoma: FechaToma, horatoma: HoraToma, patioid: PatioID, zonaid: ZonaID, lenguaje: $("#language").val() }).done(function (data) {
+            if (Error(data)) {
+                if (data.length > 0) {
+                    displayNotify("", "Ya existe informacion para esta fecha, hora, patio y zona por lo tanto se actualizará automaticamente", '1');
+                    $('#inputMedicionesTempAmbiente').data("kendoNumericTextBox").value(data[0].TempAmb);
+                    $("#inputEquipoTomaTempAmb").data("kendoComboBox").value(data[0].NombreEquipoTemAmb);
+                    $('#inputMedicionesHumedad').data("kendoNumericTextBox").value(data[0].Humedad)
+                    $("#inputEquipoTomaHumedad").data("kendoComboBox").value(data[0].NombreEquipoHumedad);
+                    $('#inputMedicionesPuntoRocio').data("kendoNumericTextBox").value(data[0].PuntoRocio)
+                    $("#inputEquipoTomaPtoRocio").data("kendoComboBox").value(data[0].NombreEquipoPuntoRocio);
+                    $('#inputMedicionesCampoX').data("kendoNumericTextBox").value(data[0].CampoX)
+                    $("#inputEquipoTomaCampoX").data("kendoComboBox").value(data[0].NombreEquipoCampoX);
+                }
+            }
+            loadingStop();
+        });
+    }
+}

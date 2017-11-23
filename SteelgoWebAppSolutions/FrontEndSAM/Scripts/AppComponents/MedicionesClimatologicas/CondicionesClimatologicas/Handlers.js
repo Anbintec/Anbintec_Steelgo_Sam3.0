@@ -53,7 +53,12 @@ function suscribirEventoGuardar() {
 
 function suscribirEventoHoras() {
     var dataItem;
-    $("#inputMedicionesHoraToma").kendoTimePicker();
+    $("#inputMedicionesHoraToma").kendoTimePicker({
+        change: function (e) {
+            ConsultarExistenciaCondicionesClimatologicas();
+        }
+    });
+    $("#inputMedicionesHoraToma").attr("readonly", true);
 }
 
 function Limpiar() {
@@ -74,19 +79,11 @@ function SuscribirEventoPatio() {
         suggest: true,
         filter: "contains",
         index: 0,
-        select: function (e) {
-            var dataItem = this.dataItem(e.item.index());
-            if (dataItem == undefined) {
-                //displayMessage("errorNoExistePatio", '', '2');
-            }
 
-            //var patio = $(this).value();
-            //alert(patio);
-
-        },
         change: function (e) {
             if ($("#inputPatio").data("kendoComboBox").dataItem($("#inputPatio").data("kendoComboBox").select()) != undefined) {
                 AjaxGetListaZona();
+                ConsultarExistenciaCondicionesClimatologicas();
             }
             else {
                 $("#inputPatio").data("kendoComboBox").value("");
@@ -107,7 +104,7 @@ function suscribirEventoZona() {
         index: 3,
         change: function (e) {
             if ($("#inputZona").data("kendoComboBox").dataItem($("#inputZona").data("kendoComboBox").select()) != undefined) {
-                AjaxCargarEquiposToma();
+                ConsultarExistenciaCondicionesClimatologicas();
             }
             else {
                 $("#inputZona").data("kendoComboBox").value("");
@@ -160,10 +157,13 @@ function SubscribeMedicionesCampoX() {
 }
 
 
-
 function SubscribeCalendarFechaToma() {
     $("#inputMedicionesfechaToma").kendoDatePicker({
-        parseFormats: ["MMddyyyy"]
+        parseFormats: ["MMddyyyy"],
+        change: function (e) {
+            if (ValidarFecha(e.sender._value))
+                ConsultarExistenciaCondicionesClimatologicas();
+        }
     });
 }
 
@@ -174,7 +174,7 @@ function opcionHabilitarView(valor, name) {
     if (valor) {
         $('#botonGuardar').text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
         $("#botonGuardar2").text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
-        
+
         $('#botonGuardar3').text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
         $("#btnGuardarPie").text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
 
@@ -203,7 +203,7 @@ function opcionHabilitarView(valor, name) {
         $('#botonGuardar3').text(_dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]);
         $("#btnGuardarPie").text(_dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]);
 
-        
+
         $('#FieldSetView').find('*').attr('disabled', true);
 
         $('#inputMedicionesTempAmbiente').data("kendoNumericTextBox").enable(true);
@@ -219,7 +219,7 @@ function opcionHabilitarView(valor, name) {
         $("#inputEquipoTomaHumedad").data("kendoComboBox").enable(true);
         $("#inputEquipoTomaPtoRocio").data("kendoComboBox").enable(true);
         $("#inputZona").data("kendoComboBox").enable(true);
-        
+
     }
 }
 

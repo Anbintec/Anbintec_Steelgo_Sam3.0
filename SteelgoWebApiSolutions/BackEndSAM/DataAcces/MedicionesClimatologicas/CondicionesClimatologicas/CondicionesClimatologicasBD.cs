@@ -123,5 +123,46 @@ namespace BackEndSAM.DataAcces.MedicionesClimatologicas.CondicionesClimatologica
                 return result;
             }
         }
+
+        public object ObtenerCondicionClimatologica( string fechatoma, string horatoma, int patioid, int zonaid, string lenguaje)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {
+                    List<Sam3_Pintura_GET_CC_Result> listadoElementos = ctx.Sam3_Pintura_GET_CC(fechatoma, horatoma, patioid, zonaid, lenguaje).ToList();
+
+                    List<DetalleCondicionesClimatologicas> listaDetalleCondicionesClimatologicas = new List<DetalleCondicionesClimatologicas>();
+                    if (listadoElementos.Count > 0)
+                    {
+                        foreach (Sam3_Pintura_GET_CC_Result item in listadoElementos)
+                        {
+                            listaDetalleCondicionesClimatologicas.Add( new DetalleCondicionesClimatologicas {
+                                TempAmb=item.TempAmb,
+                                NombreEquipoTemAmb=item.NombreEquipoTemAmb,
+                                Humedad=item.Humedad,
+                                NombreEquipoHumedad=item.NombreEquipoHumedad,
+                                PuntoRocio=item.PuntoRocio,
+                                NombreEquipoPuntoRocio=item.NombreEquipoPuntoRocio,
+                                CampoX=item.CampoX,
+                                NombreEquipoCampoX=item.NombreEquipoCampoX
+                            });
+                        }
+                    }
+
+                    return listaDetalleCondicionesClimatologicas;
+                }
+            }
+            catch (Exception ex)
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
     }
 }
