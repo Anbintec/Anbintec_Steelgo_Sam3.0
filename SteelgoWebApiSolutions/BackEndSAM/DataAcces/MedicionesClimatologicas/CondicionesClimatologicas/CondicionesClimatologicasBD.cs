@@ -164,5 +164,40 @@ namespace BackEndSAM.DataAcces.MedicionesClimatologicas.CondicionesClimatologica
                 return result;
             }
         }
+
+        public object ObtenerValorPutoRocio(int humedad, int tempamb)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {
+                    List<decimal?> listadoElementos = ctx.Sam3_CC_GET_PuntoRocio( tempamb, humedad).ToList();
+
+                    List<decimal?> listaValorPuntoRocio = new List<decimal?>();
+
+                    if (listadoElementos.Count > 0)
+                    {
+                        foreach (decimal? item in listadoElementos)
+                        {
+                            listaValorPuntoRocio.Add(item);
+                        }
+                    }
+
+                    return listaValorPuntoRocio;
+                }
+            }
+            catch (Exception ex)
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
+
+        
     }
 }

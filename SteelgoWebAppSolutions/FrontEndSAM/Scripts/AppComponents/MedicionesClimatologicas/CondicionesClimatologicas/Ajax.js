@@ -139,13 +139,32 @@ function ConsultarExistenciaCondicionesClimatologicas() {
                 if (data.length > 0) {
                     displayNotify("", "Ya existe informacion para esta fecha, hora, patio y zona por lo tanto se actualizará automaticamente", '1');
                     $('#inputMedicionesTempAmbiente').data("kendoNumericTextBox").value(data[0].TempAmb);
-                    $("#inputEquipoTomaTempAmb").data("kendoComboBox").value(data[0].NombreEquipoTemAmb);
+                    $("#inputEquipoTomaTempAmb").data("kendoComboBox").text(data[0].NombreEquipoTemAmb);
                     $('#inputMedicionesHumedad').data("kendoNumericTextBox").value(data[0].Humedad)
-                    $("#inputEquipoTomaHumedad").data("kendoComboBox").value(data[0].NombreEquipoHumedad);
+                    $("#inputEquipoTomaHumedad").data("kendoComboBox").text(data[0].NombreEquipoHumedad);
                     $('#inputMedicionesPuntoRocio').data("kendoNumericTextBox").value(data[0].PuntoRocio)
-                    $("#inputEquipoTomaPtoRocio").data("kendoComboBox").value(data[0].NombreEquipoPuntoRocio);
+                    $("#inputEquipoTomaPtoRocio").data("kendoComboBox").text(data[0].NombreEquipoPuntoRocio);
                     $('#inputMedicionesCampoX').data("kendoNumericTextBox").value(data[0].CampoX)
-                    $("#inputEquipoTomaCampoX").data("kendoComboBox").value(data[0].NombreEquipoCampoX);
+                    $("#inputEquipoTomaCampoX").data("kendoComboBox").text(data[0].NombreEquipoCampoX);
+                }
+            }
+            loadingStop();
+        });
+    }
+}
+
+function ajaxObtenerPuntoRocio() {
+    var TempAmb = $('#inputMedicionesTempAmbiente').val();
+    var Humedad = $('#inputMedicionesHumedad').val();
+    if (TempAmb != "" && Humedad != "" && TempAmb != undefined && Humedad != undefined) {
+        loadingStart();
+        $CondicionesClimatologicas.CondicionesClimatologicas.read({ token: Cookies.get("token"), tempAmb: TempAmb, humedad: Humedad }).done(function (data) {
+            if (Error(data)) {
+                if (data.length > 0) {
+                    $('#lblCalculoPuntoRocio').text("Diferencial del punto de rocio: " + data);
+                }
+                else {
+                    $('#lblCalculoPuntoRocio').text("Diferencial del punto de rocio:Error");
                 }
             }
             loadingStop();

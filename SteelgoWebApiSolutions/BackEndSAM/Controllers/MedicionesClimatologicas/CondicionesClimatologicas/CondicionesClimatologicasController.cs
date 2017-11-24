@@ -94,6 +94,31 @@ namespace BackEndSAM.Controllers.MedicionesClimatologicas.CondicionesClimatologi
                 return result;
             }
         }
+
+        [HttpGet]
+        public object ObtieneCondicionesClimatologicas(string token, int tempAmb, int humedad)
+        {
+            string payload = "";
+            string newToken = "";
+            bool tokenValido = ManageTokens.Instance.ValidateToken(token, out payload, out newToken);
+            if (tokenValido)
+            {
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                Sam3_Usuario usuario = serializer.Deserialize<Sam3_Usuario>(payload);
+
+                return CondicionesClimatologicasBD.Instance.ObtenerValorPutoRocio(humedad,tempAmb );
+            }
+            else
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(payload);
+                result.ReturnCode = 401;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = false;
+                return result;
+            }
+        }
+
     }
 }
 

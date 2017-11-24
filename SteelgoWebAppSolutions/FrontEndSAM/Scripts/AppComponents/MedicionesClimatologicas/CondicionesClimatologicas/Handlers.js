@@ -121,6 +121,8 @@ function SubscribeMedicionesTempAmbiente() {
         filter: "contains",
         index: 0
     });
+
+
 }
 
 function SubscribeMedicionesHumedad() {
@@ -131,6 +133,7 @@ function SubscribeMedicionesHumedad() {
         filter: "contains",
         index: 0
     });
+    
 
 }
 
@@ -237,4 +240,11 @@ function changeInputs() {
     $('#inputMedicionesHumedad').kendoNumericTextBox();
     $('#inputMedicionesPuntoRocio').kendoNumericTextBox();
     $('#inputMedicionesCampoX').kendoNumericTextBox();
+
+    $("#inputMedicionesTempAmbiente").blur(function (e) {
+        ajaxObtenerPuntoRocio();
+    });
+    $("#inputMedicionesHumedad").blur(function (e) {
+        ajaxObtenerPuntoRocio();
+    });
 }
