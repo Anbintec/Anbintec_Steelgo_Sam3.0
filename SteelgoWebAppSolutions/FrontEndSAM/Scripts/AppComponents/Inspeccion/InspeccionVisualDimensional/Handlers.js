@@ -91,7 +91,7 @@ function SuscribirEventoListaJuntas() {
 
 function SuscribirEventoOrdenTrabajo() {
     $("#InputOrdenTrabajo").blur(function (e) {
-        if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z][0-9]*$")) {
+        if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z]*[0-9]*$")) {
             try {
                 ajaxObtenerSpoolID();
 
@@ -108,7 +108,8 @@ function SuscribirEventoOrdenTrabajo() {
     $("#InputOrdenTrabajo").focus(function (e) {
         $("#InputOrdenTrabajo").val("");
         $("#InputID").data("kendoComboBox").value("");
-        //$("#InputID").data("kendoComboBox").setDataSource();
+        $("#InputID").data("kendoComboBox").setDataSource([]);
+        $('#InputID').data("kendoComboBox").text("");
         //limpiarJuntaMultiselect();
     });
 }
@@ -118,7 +119,7 @@ function SuscribirEventoOrdenTrabajo() {
 
 
 function SuscribirEventoSpoolID() {
-
+    var hold = false;
     $("#InputID").kendoComboBox({
         dataTextField: "IDValido",
         dataValueField: "Valor",
@@ -130,12 +131,21 @@ function SuscribirEventoSpoolID() {
             dataItem = this.dataItem(e.sender.selectedIndex);
             aplicarColorBlancoCapturaDimensional();
 
-            if (dataItem != undefined ) {
-                if (editado) {
-                    ventanaConfirmCambiarCaptura.open().center();
+            if (dataItem != undefined) {
+                if (dataItem.Status != "1") {
+                    e.preventDefault();
+                    $("#InputID").data("kendoComboBox").value("0");
+                    $("#InputID").data("kendoComboBox").text("");
+                    displayNotify("notificationslabel0057", "", 1)
+                    hold = true;
                 }
                 else {
-                    EjecutarCambioElemento(dataItem);
+                    if (editado) {
+                        ventanaConfirmCambiarCaptura.open().center();
+                    }
+                    else {
+                        EjecutarCambioElemento(dataItem);
+                    }
                 }
             }
 
@@ -170,7 +180,12 @@ function SuscribirEventoSpoolID() {
                     }
                 }
             }
-            else displayNotify("NoExisteSpoolID", '', '1');
+            else {
+                if(!hold)
+                displayNotify("NoExisteSpoolID", '', '1');
+            }
+                
+                
         }
     });
 

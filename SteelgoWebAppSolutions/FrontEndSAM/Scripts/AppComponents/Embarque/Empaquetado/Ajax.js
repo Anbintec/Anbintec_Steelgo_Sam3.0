@@ -294,10 +294,10 @@ function AjaxGuardarCaptura(ds, tipoGuardado, cerrarPaquete, Paquete, Proyecto) 
     }
     Captura.listaDetalle = Detalle;
 
-
+    loadingStart();
     //validacion de carga plana
     $Empaquetado.Empaquetado.create(Captura, { token: Cookies.get("token"), PaqueteID: Paquete.PaqueteID }).done(function (dataValidacion) {
-        loadingStop();
+        
         var esCorrectaValidacion = true;
         for (var j = 0; j < ds.length; j++) {
             for (var i = 0; i < dataValidacion.length; i++) {
@@ -340,10 +340,13 @@ function AjaxGuardarCaptura(ds, tipoGuardado, cerrarPaquete, Paquete, Proyecto) 
                 } else {
                     displayNotify("MensajeGuardadoErroneo", "", '2');
                 }
+                loadingStop();
             });
         }
-        else
+        else {
+            loadingStop();
             displayNotify("EmbarqueEmpaquetadoValidacionEmpaquetado", "", "1");
+        }
 
     });
 

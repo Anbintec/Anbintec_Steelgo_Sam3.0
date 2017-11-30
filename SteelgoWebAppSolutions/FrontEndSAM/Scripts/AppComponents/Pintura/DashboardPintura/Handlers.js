@@ -2,16 +2,15 @@
     SuscribirEventoProyecto();
     SuscribirEventoFecha();
     SuscribirEventoCliente();
-    //suscribirEventoChangeRadioTipoBusquedas();
+    SuscribirEventoPeriodo();
+    suscribirEventoBuscar();
+    changeRadioElementos();
 }
 
 function SuscribirEventoProyecto() {
     $("#inputProyecto").kendoComboBox({
-        dataSource: {
-            data: ["", "ETILENO XXI"]
-        },
-        //dataTextField: "Nombre",
-        //dataValueField: "ProyectoID",
+        dataTextField: "Nombre",
+        dataValueField: "ProyectoID",
         suggest: true,
         delay: 10,
         filter: "contains",
@@ -20,7 +19,7 @@ function SuscribirEventoProyecto() {
             var dataItem = this.dataItem(e.sender.selectedIndex);
 
             if (dataItem != undefined) {
-                AjaxPruebas();
+                
             }
             else {
                 $("#inputProyecto").data("kendoComboBox").value("");
@@ -31,11 +30,8 @@ function SuscribirEventoProyecto() {
 
 function SuscribirEventoCliente() {
     $("#inputCliente").kendoComboBox({
-        dataSource: {
-            data: ["", "SYPRIS TECHNOLOGIES", "EDGEN MURRAY CORPORATION", "VIAR S.P.A."]
-        },
-        //dataTextField: "Nombre",
-        //dataValueField: "ProyectoID",
+        dataTextField: "Cliente",
+        dataValueField: "ClienteID",
         suggest: true,
         delay: 10,
         filter: "contains",
@@ -44,49 +40,7 @@ function SuscribirEventoCliente() {
             var dataItem = this.dataItem(e.sender.selectedIndex);
 
             if (dataItem != undefined) {
-                AjaxPruebas();
-            }
-            else {
-                $("#inputProyecto").data("kendoComboBox").value("");
-            }
-        }
-    });
-}
-
-function SuscribirEventoCuadrante() {
-    $("#inputCuadrante").kendoComboBox({
-        dataTextField: "Nombre",
-        dataValueField: "ProyectoID",
-        suggest: true,
-        delay: 10,
-        filter: "contains",
-        index: 3,
-        change: function (e) {
-            var dataItem = this.dataItem(e.sender.selectedIndex);
-
-            if (dataItem != undefined) {
-                AjaxPruebas();
-            }
-            else {
-                $("#inputProyecto").data("kendoComboBox").value("");
-            }
-        }
-    });
-}
-
-function SuscribirEventoZona() {
-    $("#inputZona").kendoComboBox({
-        dataTextField: "Nombre",
-        dataValueField: "ProyectoID",
-        suggest: true,
-        delay: 10,
-        filter: "contains",
-        index: 3,
-        change: function (e) {
-            var dataItem = this.dataItem(e.sender.selectedIndex);
-
-            if (dataItem != undefined) {
-                AjaxPruebas();
+                
             }
             else {
                 $("#inputProyecto").data("kendoComboBox").value("");
@@ -106,15 +60,52 @@ function SuscribirEventoFecha() {
     });
 };
 
-//function suscribirEventoChangeRadioTipoBusquedas() {
-//    $('input:radio[name=Tiempo]:nth(0)').change(function () {
-//        $('#divPeriodo').hide();
-//        $('#FechaInicialDiv').show();
-//        $('#FechaFinalDiv').show();
-//    });
-//    $('input:radio[name=Tiempo]:nth(1)').change(function () {
-//        $('#FechaInicialDiv').hide();
-//        $('#FechaFinalDiv').hide();
-//        $('#divPeriodo').show();
-//    });
-//}
+function SuscribirEventoPeriodo() {
+    $("#InputPeriodo").kendoComboBox({
+        dataTextField: "Periodo",
+        dataValueField: "PeriodoID",
+        suggest: true,
+        filter: "contains",
+        index: 3,
+        change: function (e) {
+            var dataItem = this.dataItem(e.sender.selectedIndex);
+            $("#inputFechaInicio").val("");
+            $("#InputFechaFin").val("");
+            if (dataItem != undefined) {
+                if (dataItem.PeriodoID != 0) {
+                    AjaxCargarRangoFechas(dataItem);
+                    console.log(dataItem);
+                }
+            }
+            else {
+                $("#InputPeriodo").data("kendoComboBox").value("");
+            }
+        }
+    });
+}
+
+function suscribirEventoBuscar() {
+    $("#btnBuscar").click(function (e) {
+        
+        if ($("#inputProyecto").data("kendoComboBox").text() != "") {
+            AjaxCargarHeaderDashboard();    
+        }
+        else {
+            displayNotify("","Elije un proyecto, para consultar el dashboard",1);
+        }
+    });
+}
+
+
+
+function changeRadioElementos() {
+    $('input:radio[name=Muestra]:nth(0)').change(function () {
+        mostrarFiltro();
+    });
+    $('input:radio[name=Muestra]:nth(1)').change(function () {
+        mostrarFiltro();
+    });
+    $('input:radio[name=Muestra]:nth(2)').change(function () {
+        mostrarFiltro();
+    });
+}

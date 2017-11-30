@@ -112,11 +112,15 @@ function AjaxObtenerPlanas(ProveedorID, nuevaPlana) {
             data.splice(1, 0, {
                 PlanaID: -1, Nombre: _dictionary.EmbarqueCargaNuevaPlana[$("#language").data("kendoDropDownList").value()]
             });
+            loadingStop();
             $("#inputEmbarqueCargaPLacaPlana").data("kendoComboBox").dataSource.data(data);
             $("#inputEmbarqueCargaPLacaPlana").data("kendoComboBox").value(PlanaID);
             $("#inputEmbarqueCargaPLacaPlana").data("kendoComboBox").trigger("change");
+            
         }
-        loadingStop();
+        else {
+            loadingStop();
+        }
     });
 }
 
@@ -274,16 +278,20 @@ function AjaxObtenerGrid() {
             var array = data;
 
             if (data.length > 0) {
+                loadingStart();
                 for (var i = 0; i < array.length; i++) {
                     array[i].Consecutivo = $("#grid").data("kendoGrid").dataSource._data.length + 1;
                     ds.add(array[i]);
+                    if ((array.length - 1) == i) {
+                        ImprimirTotalToneladas(ds._data);
+                        ImprimirTotalPiezas(ds._data);
+                        ds.sync();
+                        loadingStop();
+                    }
                 }
             }
 
-            ImprimirTotalToneladas(ds._data);
-            ImprimirTotalPiezas(ds._data);
-            ds.sync();
-            loadingStop();
+            
         });
     } else {
         displayNotify('EmarqueCargaMensajeEligePlana', '', '1');
@@ -512,8 +520,9 @@ function ajaxGuardar(arregloCaptura, tipoGuardar) {
                             }
                             else {
                                 $("#grid").data("kendoGrid").dataSource.data([]);
-                                AjaxCargarPaquetes($("#inputProyecto").data("kendoComboBox").value());
                                 AjaxObtenerGrid();
+                                //AjaxCargarPaquetes($("#inputProyecto").data("kendoComboBox").value());
+                                
                                 opcionHabilitarView(true, "FieldSetView");
 
 

@@ -624,11 +624,17 @@ function ajaxGuardado(jSonCaptura, tipoGuardar) {
                     ListaDetalleGuardarInspeccionVisual[index].FechaInspeccion == " " || ListaDetalleGuardarInspeccionVisual[index].FechaInspeccion == "0"
                 ) && (ListaDetalleGuardarInspeccionVisual[index].Accion != 4 && ListaDetalleGuardarInspeccionVisual[index].Accion != 3)) {
 
-                    if (ListaDetalleGuardarInspeccionVisual[index].Accion == 2) ListaDetalleGuardarInspeccionVisual[index].Accion = 4;
-
-                    ListaDetalleGuardarInspeccionVisual[index].Estatus = 0;
-                    $("#grid").data("kendoGrid").dataSource._data[index].RowOk = false;
-                    existRowEmpty = true;
+                    if (ListaDetalleGuardarInspeccionVisual[index].Accion == 2 && ListaDetalleGuardarInspeccionVisual[index].TallerID == 0
+                        && ListaDetalleGuardarInspeccionVisual[index].ResultadoID == "0" && ListaDetalleGuardarInspeccionVisual[index].ObreroID == 0
+                        && ListaDetalleGuardarInspeccionVisual[index].DefectosID == 0 && ListaDetalleGuardarInspeccionVisual[index].FechaInspeccion == " ") {
+                        ListaDetalleGuardarInspeccionVisual[index].Accion = 4;
+                    }
+                    else {
+                        ListaDetalleGuardarInspeccionVisual[index].Estatus = 0;
+                        $("#grid").data("kendoGrid").dataSource._data[index].RowOk = false;
+                        existRowEmpty = true;
+                    }
+                    
                 }
                 else if (ListaDetalleGuardarInspeccionVisual[index].Accion == 4) {
                     if (!(ListaDetalleGuardarInspeccionVisual[index].TallerID == "" || ListaDetalleGuardarInspeccionVisual[index].TallerID == "0" ||
@@ -846,9 +852,9 @@ function ObtenerDato(fecha, tipoDatoObtener) {
             break;
         case 2://mes
             if (cultura = 'es-MX')
-                return fecha.split('/')[1]
+                return fecha.split('/')[1] - 1;
             else
-                return fecha.split('/')[0]
+                return fecha.split('/')[0] - 1;
             break;
         case 3://dia
             if (cultura = 'es-MX')

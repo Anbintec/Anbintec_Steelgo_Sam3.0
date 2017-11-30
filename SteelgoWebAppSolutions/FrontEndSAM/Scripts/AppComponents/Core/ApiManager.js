@@ -231,6 +231,7 @@ var $PruebasPorLote = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $OkPintura = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $RequisicionInspeccion = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $SolicitudInspeccion = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
+var $DashboardPintura = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 
 //Embarque
 var $Etiquetado = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
@@ -440,6 +441,7 @@ $PruebasPorLote.add("PruebasPorLote");
 $OkPintura.add("OKPintura");
 $RequisicionInspeccion.add("RequisicionInspeccion");
 $SolicitudInspeccion.add("SolicitudInspeccion");
+$DashboardPintura.add("DashboardPintura");
 
 //Embarque
 $Etiquetado.add("Etiquetado");

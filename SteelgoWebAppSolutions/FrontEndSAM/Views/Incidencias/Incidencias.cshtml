@@ -1707,6 +1707,7 @@
                         //    $("#Registro").data("kendoComboBox").enable(false);
                         //},800)
                     }
+                    desactivaInglesLevantarIncidencia();
                 }
                 //loadingStop();
                 AsignarPaginaActualCookie();
@@ -3160,6 +3161,70 @@
 
             }
         });
+    }
+
+    function desactivaInglesLevantarIncidencia() {
+        if (!$("#TituloInglesDiv").hasClass("hidden"))
+            $("#TituloInglesDiv").addClass("hidden");
+        if (!$("#DescripcionInglesDiv").hasClass("hidden"))
+            $("#DescripcionInglesDiv").addClass("hidden");
+        if (!$("#DescripcionArchivoIncidenciaInglesDiv").hasClass("hidden"))
+            $("#DescripcionArchivoIncidenciaInglesDiv").addClass("hidden");
+        if (!$("#DetalleResolucionInglesDiv").hasClass("hidden"))
+            $("#DetalleResolucionInglesDiv").addClass("hidden");
+        if (!$("#DescripcionArchivoResolverInglesDiv").hasClass("hidden"))
+            $("#DescripcionArchivoResolverInglesDiv").addClass("hidden");
+        if (!$("#RespuestaInglesDiv").hasClass("hidden"))
+            $("#RespuestaInglesDiv").addClass("hidden");
+        if (!$("#DescripcionArchivoResponderInglesDiv").hasClass("hidden"))
+            $("#DescripcionArchivoResponderInglesDiv").addClass("hidden");
+        if (!$("#MotivoCancelacionInglesDiv").hasClass("hidden"))
+            $("#MotivoCancelacionInglesDiv").addClass("hidden");
+        if (!$("#DescripcionArchivoCancelarInglesDiv").hasClass("hidden"))
+            $("#DescripcionArchivoCancelarInglesDiv").addClass("hidden");
+
+
+        if (!$("#divTraducionTItulo").hasClass("hidden"))
+            $("#divTraducionTItulo").addClass("hidden");
+        if (!$("#divTraducionDescripcion").hasClass("hidden"))
+            $("#divTraducionDescripcion").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoIndicencia").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoIndicencia").addClass("hidden");
+        if (!$("#divTraducionDetalleResolucion").hasClass("hidden"))
+            $("#divTraducionDetalleResolucion").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoResolver").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoResolver").addClass("hidden");
+        if (!$("#divTraducionRespuesta").hasClass("hidden"))
+            $("#divTraducionRespuesta").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoResponder").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoResponder").addClass("hidden");
+        if (!$("#divTraducionMotivoCancelacion").hasClass("hidden"))
+            $("#divTraducionMotivoCancelacion").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoCancelar").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoCancelar").addClass("hidden");
+
+        if (!$("#divTraducionTItulo1").hasClass("hidden"))
+            $("#divTraducionTItulo1").addClass("hidden");
+        if (!$("#divTraducionDescripcion1").hasClass("hidden"))
+            $("#divTraducionDescripcion1").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoIndicencia1").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoIndicencia1").addClass("hidden");
+        if (!$("#divTraducionDetalleResolucion1").hasClass("hidden"))
+            $("#divTraducionDetalleResolucion1").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoResolver1").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoResolver1").addClass("hidden");
+        if (!$("#divTraducionRespuesta1").hasClass("hidden"))
+            $("#divTraducionRespuesta1").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoResponder1").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoResponder1").addClass("hidden");
+        if (!$("#divTraducionMotivoCancelacion1").hasClass("hidden"))
+            $("#divTraducionMotivoCancelacion1").addClass("hidden");
+        if (!$("#divTraducionDescripcionArchivoCancelar1").hasClass("hidden"))
+            $("#divTraducionDescripcionArchivoCancelar1").addClass("hidden");
+
+
+        ObtenerRequiereIncidenciaBilingue(TipoIncidencia.TipoIncidenciaID, Registro.RegistroID);
+
     }
 
 

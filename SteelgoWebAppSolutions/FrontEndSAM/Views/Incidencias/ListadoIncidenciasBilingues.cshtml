@@ -23,8 +23,8 @@
                     <div class="col-xs-12 col-sm-8 col-md-7 col-lg-8 filter-section">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                <label id="ListadoIncidencias0004"></label>
-                                <input id="ClienteID" class="" />
+                                <label id="">Etapa</label>
+                                <input id="EtapaID" class="" />
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                                 <label id="ListadoIncidencias0005"></label>
@@ -190,25 +190,15 @@
             window.location.href = _IncidenciasUrl + "?leng=" + $("#language").data("kendoDropDownList").value();
         });
 
-        $("#ClienteID").kendoComboBox({
+        $("#EtapaID").kendoComboBox({
             dataTextField: "Nombre",
-            dataValueField: "ClienteID",
-            select: function (e) {
-            },
+            dataValueField: "EtapaID",
             change: function (e) {
-                var dataItem = this.dataItem();
-                dataItem!==undefined ? CargarCliente(dataItem.ClienteID, dataItem.Nombre):CargarCliente("", "");
-                var value = this.value();
-                if (!value || this.selectedIndex == -1) {
-                    messageindexKendoCombobox(this);
-                    Cliente = {};
-                    this.value("");
-                }
-                Filtros();
+                
             },
             filter: "contains",
         });
-        ObtenerCliente();
+        //ObtenerCliente();
 
         $("#ProyectoID").kendoComboBox({
             dataTextField: "Nombre",
@@ -269,8 +259,8 @@
                     model: {
                         id:"FolioOriginalID",
                         fields: {
-                            FolioConfiguracionIncidencia: { type: "number" },
-                            FolioOriginalID: {type:"number"},
+                            //FolioConfiguracionIncidencia: { type: "number" },
+                            //FolioOriginalID: {type:"number"},
                             FolioIncidenciaID: { type: "string" },
                             Clasificacion: { type: "string" },
                             TipoIncidencia: { type: "string" },
@@ -308,26 +298,20 @@
                 { field: "Estatus", title: _dictionary.ListadoIncidencias0011[$("#language").data("kendoDropDownList").value()] },
                 { field: "RegistradoPor", title: _dictionary.ListadoIncidencias0012[$("#language").data("kendoDropDownList").value()] },
                 { field: "FechaRegistro", title: _dictionary.ListadoIncidencias0013[$("#language").data("kendoDropDownList").value()], format: "{0:dd/MM/yyyy}", },
-                { field: "FolioIncidenciaID", title: _dictionary.ListadoIncidencias0008[$("#language").data("kendoDropDownList").value()], template: "<a class='detailLink' onclick='mostrarDetalle(#:FolioIncidenciaID#)'>#:FolioIncidenciaID#</a>", hidden:true },
+                { field: "FolioIncidenciaID", title: _dictionary.ListadoIncidencias0008[$("#language").data("kendoDropDownList").value()], template: "<a class='detailLink' onclick='mostrarDetalle(#:FolioIncidenciaID#)'>#:FolioIncidenciaID#</a>", hidden: true },
+                { field: "Titulo", title: "Titulo" },
+                { field: "TituloIngles", title: "Titulo Ingles" },
+                { field: "DescripcionIngles", title: "Descripcion" },
+                { field: "DescripcionIngles", title: "Descripcion Ingles" },
+                { field: "Respuesta", title: "Respuesta" },
+                { field: "RespuestaIngles", title: "Respuesta Ingles" },
+                { field: "DetalleResolucion", title: "Resolucion" },
+                { field: "DetalleResolucionIngles", title: "Resolucion Ingles" },
+                { field: "MotivoCancelacion", title: "Mot. Cancelacion" },
+                { field: "MotivoCancelacionIngles", title: "Mot Cancelacion Ingles" },
+
             ],
             dataBound: function (e) {
-                //$(".k-grid input.k-textbox").prop('readonly', true);
-                //$(".k-grid td .k-button").text('');
-                //$(".k-grid td:first-child, .k-grid td:last-child").css('text-overflow', 'clip');
-
-                //$("th[data-field='FolioConfiguracionIncidencia']").append($("#FolioID"));
-                //$("th[data-field='Clasificacion']").append($("#Clasificacion"));
-                //$("th[data-field='TipoIncidencia']").append($("#TipoIncidencia"));
-                //$("th[data-field='Estatus']").append($("#Estatus"));
-                //$("th[data-field='RegistradoPor']").append($("#RegistradoPor"));
-                //$("th[data-field='FechaRegistro']").append($("#FechaRegistro"));
-
-                //$("#FolioID").click(function( event ) {event.stopPropagation();});
-                //$("#Clasificacion").click(function( event ) {event.stopPropagation();});
-                //$("#TipoIncidencia").click(function( event ) {event.stopPropagation();});
-                //$("#Estatus").click(function( event ) {event.stopPropagation();});
-                //$("#RegistradoPor").click(function( event ) {event.stopPropagation();});
-                //$("#FechaRegistro").click(function( event ) {event.stopPropagation();});
                 checkTH($("#grid").data("kendoGrid"))
                 quickHeadFilter($("#grid").data("kendoGrid"));
             }
@@ -479,10 +463,10 @@
         $("#FechaFinal").data("kendoDatePicker").value(fechaFinalkendo);
     };
 
-    function CargarCliente(id, value) {
-        Cliente = {};
-        Cliente = { ClienteID: id };
-    };
+    //function CargarCliente(id, value) {
+    //    Cliente = {};
+    //    Cliente = { ClienteID: id };
+    //};
 
     function CargarProyecto(id, value) {
         Proyecto = {};
@@ -500,11 +484,11 @@
         });
     };
 
-    function ObtenerCliente() {
-        $Cliente.Cliente.read({ token: Cookies.get("token") }).done(function (result) {
-            ControlErroresObjetosComboBox("ClienteID", result);
-        });
-    };
+    //function ObtenerCliente() {
+    //    $Cliente.Cliente.read({ token: Cookies.get("token") }).done(function (result) {
+    //        ControlErroresObjetosComboBox("ClienteID", result);
+    //    });
+    //};
 
     function mostrarDetalle(FolioIncidenciaID) {
         if ((typeof returnOfSecurityCheck != 'undefined') && (typeof returnOfSecurityCheck["Incidencias"] != 'undefined') && (typeof returnOfSecurityCheck["Incidencias"]["detail"] != 'undefined') && returnOfSecurityCheck["Incidencias"]["detail"]) {
@@ -549,7 +533,7 @@
     }
     function ArregloListado(accion) {
         var Listado;
-        Listado = { ProyectoID: "", ClienteID: "", FechaInicial: "", FechaFinal: "", token: "" };
+        Listado = { ProyectoID: "",FechaInicial: "", FechaFinal: "", token: "" };
 
         var d = new Date($("#FechaInicial").data("kendoDatePicker").value());
         var d1 = new Date($("#FechaFinal").data("kendoDatePicker").value());
@@ -561,7 +545,7 @@
             d1 = new Date();
         }
         Listado.ProyectoID = Proyecto.ProyectoID ? Proyecto.ProyectoID : "";
-        Listado.ClienteID = Cliente.ClienteID ? Cliente.ClienteID : "";
+        //Listado.ClienteID = Cliente.ClienteID ? Cliente.ClienteID : "";
         Listado.FechaInicial = obtenerFormatoFecha(d);
         Listado.FechaFinal = obtenerFormatoFecha(d1);
         Listado.token = Cookies.get("token");

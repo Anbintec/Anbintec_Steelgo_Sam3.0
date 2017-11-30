@@ -250,7 +250,7 @@ function RenderOptionResultado(container, options) {
                 if (dataItem != undefined) {
                     options.model.Resultado = dataItem._Resultado;
                     options.model.ResultadoID = dataItem._ResultadoID;
-                    if (options.model.ResultadoID == "1") {
+                    if (options.model.ResultadoID != "2") {
                         options.model.DefectosID = 0;
                         options.model.Defectos = "";
                         options.model.Accion = options.model.Accion == 4 ? 2 : options.model.Accion;
@@ -320,18 +320,21 @@ function RenderDatePicker(container, options) {
     //container  contiene las propiedades de la celda
     //options contiene el modelo del datasource ejemplo options.model.Junta
     var dataItem;
-
     $('<input   data-bind="value:' + options.field + '"/>')
         .appendTo(container)
         .kendoDatePicker({
             max: new Date(),
+            value: options.model.FechaInspeccion,
             change: function () {
                 var value = this.value();
-                options.model.FechaInspeccion = value;
+                var fecha = kendo.toString(value, String(_dictionary.FormatoFecha[$("#language").data("kendoDropDownList").value()].replace('{', '').replace('}', '').replace("0:", "")));
+                if (fecha == null) {
+                    options.model.FechaInspeccion = '';
+                    this.value('');
+                }
 
                 $("#grid").data("kendoGrid").dataSource.sync();
             }
-        }
-        );
+        });
 
 }

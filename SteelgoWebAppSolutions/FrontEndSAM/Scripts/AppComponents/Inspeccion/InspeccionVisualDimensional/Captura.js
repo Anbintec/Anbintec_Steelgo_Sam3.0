@@ -169,6 +169,21 @@ function CargarGrid() {
     $("#grid").kendoGrid({
         autoBind: true,
         autoSync: true,
+        save: function (e) {
+            var focusedCellIndex = this.current()[0].cellIndex;
+            var dataItem = e.model;
+            var grid = this;
+            nextDataItem = this.dataSource.at(this.dataSource.indexOf(dataItem) + 1);
+
+            this.refresh();
+            setTimeout(function () {
+                return function () {
+                    var focusedCell = $("#grid tr[data-uid='" + e.model.uid + "'] td:nth-child(" + (focusedCellIndex + 1) + ")");
+                    grid.select(focusedCell);
+                    grid.editCell(focusedCell);
+                }
+            }(), 10);
+        },
         edit: function (e) {
 
 
@@ -189,7 +204,9 @@ function CargarGrid() {
             else {
                 esNormal = false;
             }
+            
         },
+        
         change: function () {
             var dataItem = this.dataSource.view()[this.select().index()];
         },
@@ -246,7 +263,7 @@ function CargarGrid() {
             { field: "Resultado", title: _dictionary.columnResultado[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), editor: RenderOptionResultado, width: "85px" },
             { field: "Defectos", title: _dictionary.columnDefectos[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), editor: RenderComboBoxDefectos, width: "80px" },
             { field: "Inspector", title: _dictionary.columnInspector[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), editor: RenderComboBoxInspector, width: "80px" },
-            { field: "FechaInspeccion", title: _dictionary.columnFecha[$("#language").data("kendoDropDownList").value()], filterable: { cell: { showOperators: false } }, format: _dictionary.FormatoFecha[$("#language").data("kendoDropDownList").value()], width: "80px", editor: RenderDatePicker },
+            { field: "FechaInspeccion", title: _dictionary.columnFecha[$("#language").data("kendoDropDownList").value()], filterable: getKendoGridFilterableDateMaftec(), format: _dictionary.FormatoFecha[$("#language").data("kendoDropDownList").value()], width: "90px", editor: RenderDatePicker },
             { field: "NumeroUnico1", title: _dictionary.columnNumeroUnico1[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), editor: RenderComboBoxNumeroUnico1, width: "80px" },
             { field: "NumeroUnico2", title: _dictionary.columnNumeroUnico2[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), editor: RenderComboBoxNumeroUnico2, width: "80px" },
             { command: { text: _dictionary.botonCancelar[$("#language").data("kendoDropDownList").value()], click: cancelarCaptura }, title: _dictionary.columnELM[$("#language").data("kendoDropDownList").value()], width: "35px" },
@@ -575,16 +592,22 @@ function PlanchaTaller() {
     var allData = dataSource.data();
     var query = new kendo.data.Query(allData);
     var data = query.filter(filters).data;
-
+    
     for (var i = 0; i < data.length; i++) {
         if ($('input:radio[name=LLena]:checked').val() === "Todos") {
             data[i].TallerID = $("#inputTaller").val();
             data[i].Taller = $("#inputTaller").data("kendoComboBox").text();
+            if (data[i].Accion == 4) {
+                data[i].Accion = 2;
+            }
         }
         else {
             if (data[i].Taller == "" || data[i].Taller == null || data[i].Taller == undefined) {
                 data[i].TallerID = $("#inputTaller").val();
                 data[i].Taller = $("#inputTaller").data("kendoComboBox").text();
+                if (data[i].Accion == 4) {
+                    data[i].Accion = 2;
+                }
             }
         }
     }
@@ -601,11 +624,17 @@ function PlanchaInspector() {
         if ($('input:radio[name=LLena]:checked').val() === "Todos") {
             data[i].InspectorID = $("#inputInspectorVisual").val();
             data[i].Inspector = $("#inputInspectorVisual").data("kendoComboBox").text();
+            if (data[i].Accion == 4) {
+                data[i].Accion = 2;
+            }
         }
         else {
             if (data[i].Inspector == "" || data[i].Inspector == null || data[i].Inspector == undefined) {
                 data[i].InspectorID = $("#inputInspectorVisual").val();
                 data[i].Inspector = $("#inputInspectorVisual").data("kendoComboBox").text();
+                if (data[i].Accion == 4) {
+                    data[i].Accion = 2;
+                }
             }
         }
     }
@@ -622,11 +651,18 @@ function PlanchaDefecto() {
         if ($('input:radio[name=LLena]:checked').val() === "Todos") {
             data[i].DefectosID = $("#inputDefectosVisual").val();
             data[i].Defectos = $("#inputDefectosVisual").data("kendoComboBox").text();
+
+            if (data[i].Accion == 4) {
+                data[i].Accion = 2;
+            }
         }
         else {
             if ((data[i].Defectos == "" || data[i].Defectos == null || data[i].Defectos == undefined) && data[i].Resultado != "Aprobado") {
                 data[i].DefectosID = $("#inputDefectosVisual").val();
                 data[i].Defectos = $("#inputDefectosVisual").data("kendoComboBox").text();
+                if (data[i].Accion == 4) {
+                    data[i].Accion = 2;
+                }
             }
         }
     }
@@ -642,10 +678,16 @@ function PlanchaFecha() {
     for (var i = 0; i < data.length; i++) {
         if ($('input:radio[name=LLena]:checked').val() === "Todos") {
             data[i].FechaInspeccion = new Date(ObtenerDato(endRangeDateV.val(), 1), ObtenerDato(endRangeDateV.val(), 2), ObtenerDato(endRangeDateV.val(), 3));//año, mes, dia;
+            if (data[i].Accion == 4) {
+                data[i].Accion = 2;
+            }
         }
         else {
             if (data[i].FechaInspeccion == "" || data[i].FechaInspeccion == null || data[i].FechaInspeccion == undefined) {
                 data[i].FechaInspeccion = new Date(ObtenerDato(endRangeDateV.val(), 1), ObtenerDato(endRangeDateV.val(), 2), ObtenerDato(endRangeDateV.val(), 3));//año, mes, dia;
+                if (data[i].Accion == 4) {
+                    data[i].Accion = 2;
+                }
             }
         }
     }
@@ -671,6 +713,9 @@ function PlanchadoResultadoVisual() {
                     data[i].DefectosID = "";
                     data[i].Defectos = "";
                 }
+                if (data[i].Accion == 4) {
+                    data[i].Accion = 2;
+                }
             }
             else {
                 if ((data[i].Resultado == "" || data[i].Resultado == null || data[i].Resultado == undefined) && $('input:radio[name=ResultadoVisual]:checked').val() != "Ninguno") {
@@ -684,6 +729,9 @@ function PlanchadoResultadoVisual() {
                     if (data[i].Resultado == "Aprobado") {
                         data[i].DefectosID = "";
                         data[i].Defectos = "";
+                    }
+                    if (data[i].Accion == 4) {
+                        data[i].Accion = 2;
                     }
                 }
             }

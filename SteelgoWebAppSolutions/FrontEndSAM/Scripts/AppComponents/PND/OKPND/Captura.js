@@ -1,17 +1,17 @@
 ﻿IniciarCaptura();
 
-function IniciarCaptura() {    
+function IniciarCaptura() {
     SuscribirEventos();
     $('input:radio[name=TipoAgregado]:nth(0)').prop("checked", true);
     $("#styleSpoolContiene").addClass("active");
 };
 
-function changeLanguageCall() {    
+function changeLanguageCall() {
     CargarGrid();
-    CargarGridPopUp();    
+    CargarGridPopUp();
     document.title = _dictionary.menuOKPND[$("#language").data("kendoDropDownList").value()];
     AjaxGetListaProyectos();
-    AjaxCargarCamposPredeterminados();    
+    AjaxCargarCamposPredeterminados();
 };
 
 function FiltroMostrar1(mostrar) {
@@ -39,16 +39,16 @@ function FiltroMostrar1(mostrar) {
 
 function FiltroMostrar(mostrar) {
     var ds = $("#grid").data("kendoGrid").dataSource;
-    if (mostrar == 1) {        
+    if (mostrar == 1) {
         //var curr_filters = ds.filter().filters;
-        var curr_filters = ds.filter();        
+        var curr_filters = ds.filter();
         if (curr_filters.length != 0)
             ds.filter().filters = [];
         ds.sync();
     }
     else {
         var filters = ds.filter();
-        filters.logic = "or"        
+        filters.logic = "or"
         filters.filters.push({ field: "OK", operator: "eq", value: 0 });
         ds.sync();
     }
@@ -93,13 +93,13 @@ function CargarGrid() {
     $("#grid").kendoGrid({
         autoBind: true,
         autoSync: true,
-        save: function (e) {            
+        save: function (e) {
             if (e.model.Observaciones != e.values.Observaciones) {
                 e.model.ModificadoPorUsuario = true;
                 cambiosCheckOK++;
             } else {
                 e.model.ModificadoPorUsuario = false;
-            }            
+            }
         },
         edit: function (e) {
             setTimeout(function () {
@@ -113,13 +113,13 @@ function CargarGrid() {
             data: '',
             schema: {
                 model: {
-                    fields: {                                                
+                    fields: {
                         SpoolWorkStatusID: { type: "int", editable: false },
-                        NombreSpool: { type: "string", editable: false },                        
+                        NombreSpool: { type: "string", editable: false },
                         Cuadrante: { type: "string", editable: false },
                         Prioridad: { type: "number", editable: false },
                         SpoolID: { type: "int", editable: false },
-                        OrdenTrabajoSpoolID: { type: "int", editable: false },                        
+                        OrdenTrabajoSpoolID: { type: "int", editable: false },
                         OK: { type: "boolean", editable: false },
                         Detalle: { type: "string", editable: false },
                         Observaciones: { type: "string", editable: true }
@@ -146,16 +146,16 @@ function CargarGrid() {
             pageSizes: [10, 25, 50, 100],
             info: false,
             input: false,
-            numeric: true            
+            numeric: true
         },
         filterable: getGridFilterableMaftec(),
         columns: [
             { field: "NombreSpool", title: _dictionary.columnNumeroControl[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "130px" },
             { field: "Cuadrante", title: _dictionary.columnCuadrante[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "127px" },
-            { field: "Prioridad", title: _dictionary.columnPrioridad[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "40px", attributes: { style: "text-align:right;" } },            
+            { field: "Prioridad", title: _dictionary.columnPrioridad[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "40px", attributes: { style: "text-align:right;" } },
             { field: "Detalle", title: _dictionary.columnDetalleJunta[$("#language").data("kendoDropDownList").value()], template: "<div class='EnlaceDetalleJunta' style='text-align:center;'><a href='\\#'  > <span>#=Detalle#</span></a></div>", filterable: false, width: "90px" },
             //{ field: "Observaciones", title: _dictionary.lblOKFABObservacion[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "127px" }
-            {                
+            {
                 field: "OK", title: _dictionary.columnOkPND[$("#language").data("kendoDropDownList").value()], filterable: {
                     multi: true,
                     messages: {
@@ -163,7 +163,7 @@ function CargarGrid() {
                         isFalse: _dictionary.lblFalso[$("#language").data("kendoDropDownList").value()],
                         style: "max-width:100px;"
                     },
-                    dataSource: [{ Etiquetado: true }, { Etiquetado: false }]                    
+                    dataSource: [{ Etiquetado: true }, { Etiquetado: false }]
                 }, template: "<input name='fullyPaid' class='ob-paid' type='checkbox' #= OK ? 'checked=checked':'' #/>", width: "50px", attributes: { style: "text-align:center;" }
             },
         ],
@@ -173,35 +173,35 @@ function CargarGrid() {
                     var grid = $("#grid").data("kendoGrid");
                     dataItem = grid.dataItem($(e.target).closest("tr"));
                     if (dataItem != null) {
-                        if (e.target.checked == true)                            
+                        if (e.target.checked == true)
                             dataItem.OK = true;
-                        else                            
+                        else
                             dataItem.OK = false;
-                    }                    
+                    }
                 }
                 else {
                     $("#grid").data("kendoGrid").closeCell();
-                }                    
+                }
             });
         }
     });
 
     $("#grid").on("change", ":checkbox", function (e) {
-        if ($('#Guardar').text() == _dictionary.MensajeGuardar[$("#language").data("kendoDropDownList").value()]) {
-            var grid = $("#grid").data("kendoGrid"),
-            dataItem = grid.dataItem($(e.target).closest("tr"));
-            if (dataItem = ! null) {
-                if (dataItem.OK != this.checked) {
-                    dataItem.ModificadoPorUsuario = true;
-                } else {
-                    dataItem.ModificadoPorUsuario = false;
-                }
-                if (e.target.checked == true) {
-                    dataItem.OK = true;
-                } else {
-                    dataItem.OK = false;
-                } 
+        if ($("#BotonGuardar").text() == _dictionary.MensajeGuardar[$("#language").data("kendoDropDownList").value()]) {
+            var grid = $("#grid").data("kendoGrid");
+            var Item = grid.dataItem($(e.target).closest("tr"));
+            // if (Item =! null) {
+            // if (Item.OK != this.checked) {
+            Item.ModificadoPorUsuario = true;
+            // } else {
+            // Item.ModificadoPorUsuario = false;
+            // }
+            if (e.target.checked == true) {
+                Item.OK = true;
+            } else {
+                Item.OK = false;
             }
+            // }
         } else {
             $("#grid").data("kendoGrid").closeCell();
         }
@@ -222,7 +222,7 @@ function CargarGrid() {
                 model: {
                     fields: {
                         NumeroControl: { type: "string", editable: false },
-                        OKFAB: { type: "boolean", editable: false }                        
+                        OKFAB: { type: "boolean", editable: false }
                     }
                 }
             },
@@ -247,7 +247,7 @@ function CargarGrid() {
         filterable: getGridFilterableMaftec(),
         columns: [
             { field: "NumeroControl", title: _dictionary.columnNumeroControl[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "130px" },
-            {                
+            {
                 field: "OKFAB", title: _dictionary.columnOkPND[$("#language").data("kendoDropDownList").value()], filterable: {
                     multi: true,
                     messages: {
@@ -255,7 +255,7 @@ function CargarGrid() {
                         isFalse: _dictionary.lblFalso[$("#language").data("kendoDropDownList").value()],
                         style: "max-width:100px;"
                     },
-                    dataSource: [{ Etiquetado: true }, { Etiquetado: false }]                    
+                    dataSource: [{ Etiquetado: true }, { Etiquetado: false }]
                 }, template: "<input name='fullyPaid' class='ob-paid' type='checkbox' #= OKFAB ? 'checked=checked':'' #/>", width: "50px", attributes: { style: "text-align:center;" }
             },
         ]

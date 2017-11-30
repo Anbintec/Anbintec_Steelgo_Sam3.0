@@ -90,7 +90,7 @@ function SuscribirEventoAgregarCapturaRapida() {
 
 
 function SuscribirEventoSpoolID() {
-
+    var hold = false;
     $("#InputID").kendoComboBox({
         dataTextField: "IDValido",
         dataValueField: "Valor",
@@ -104,8 +104,10 @@ function SuscribirEventoSpoolID() {
                 eventoAgreagarGridEscrito = false;
                 if (dataItem.Status != "1") {
                     e.preventDefault();
-                    $("#InputID").val("");
-                    console.log("borrar datos");
+                    $("#InputID").data("kendoComboBox").value("0");
+                    $("#InputID").data("kendoComboBox").text("");
+                    displayNotify("notificationslabel0057", "", 1)
+                    hold = true;
                 }
                 else {
                     $("#InputID").val(dataItem.IDValido);
@@ -122,7 +124,7 @@ function SuscribirEventoSpoolID() {
 
     $("#InputOrdenTrabajo").blur(function (e) {
 
-        if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z][0-9]*$")) {
+        if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z]*[0-9]*$")) {
             try {
                 AjaxObtenerSpoolID();
             } catch (e) {
@@ -136,7 +138,8 @@ function SuscribirEventoSpoolID() {
     $("#InputOrdenTrabajo").focus(function (e) {
         $("#InputOrdenTrabajo").val("");
         $("#InputID").data("kendoComboBox").value("");
-        //$("#InputID").data("kendoComboBox").setDataSource();
+        $("#InputID").data("kendoComboBox").setDataSource([]);
+        $('#InputID').data("kendoComboBox").text("");
     });
 
     $("#InputID").blur(function (e) {
@@ -153,12 +156,28 @@ function SuscribirEventoSpoolID() {
         else if (e.keyCode == 9) {
             if (tieneClase(e.currentTarget)) {
                 $("#InputID").data("kendoComboBox").select(0);
+                if ($('#InputID').data("kendoComboBox").dataSource._data[$('#InputID').data("kendoComboBox").selectedIndex].Status != "1") {
+                    e.preventDefault();
+                    $("#InputID").data("kendoComboBox").value("0");
+                    $("#InputID").data("kendoComboBox").text("");
+                    displayNotify("notificationslabel0057", "", 1)
+                    hold = true;
+                    
+                    $("#InputID").data("kendoComboBox").close();
+                }
+
             }
         }
 
         else if (e.keyCode == 40) {
             $("#InputID").data("kendoComboBox").select();
         }
+        
+
+
+
+
+
         else if (e.keyCode == 13) {
             if ($("#InputID").data("kendoComboBox").select() != -1) {
                 if ($("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()) != undefined && $("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).IDValido != "") {
@@ -174,8 +193,11 @@ function SuscribirEventoSpoolID() {
 
                     }
                 }
-                else
-                    MensajesSteelGO('InputID-SelectInvalid', '')
+                else {
+                    if(!hold)
+                        MensajesSteelGO('InputID-SelectInvalid', '')
+                }
+                    
             }
             else {
                 var valorEncontrado = false;
@@ -194,7 +216,8 @@ function SuscribirEventoSpoolID() {
 
                     if (!valorEncontrado)
                     {
-                        MensajesSteelGO('InputID-SelectInvalid', '')
+                        if (!hold)
+                            MensajesSteelGO('InputID-SelectInvalid', '')
                     }
                 }
             }

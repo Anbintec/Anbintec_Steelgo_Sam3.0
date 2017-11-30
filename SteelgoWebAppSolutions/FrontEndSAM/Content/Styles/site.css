@@ -1221,24 +1221,29 @@ body.loading {
 
 
 .btn-tab.btn-dashPintura {
-    width: 9% !important;
+    width: 8% !important;
     border-top: #FFFFFF;
 }
 
 .btn-tab.btn-dashPinturaHeader {
-    width: 26.81% !important;
+    width: 31.8% !important;
     height: 40px;
+    /*border-bottom: #FFFFFF;*/
+}
+.btn-tab.btn-dashPintura3Header {
+    width: 23.8% !important;
+    height: 40px !important;
     /*border-bottom: #FFFFFF;*/
 }
 
 .btn-tab.btn-dashPintura2Header {
-    width: 17.91% !important;
+    width: 15.9% !important;
     height: 40px;
     /*border-bottom: #FFFFFF;*/
 }
 
 .btn-tab.btn-dashPinturaOKPinturaHeader {
-    width: 10% !important;
+    width: 12.4% !important;
     height: 40px;
     /*border-bottom: #FFFFFF;*/
 }
@@ -1257,4 +1262,13 @@ body.loading {
 
   .btn.btn-tabList.btn-listEmbarque {
         width: 24.4%;
+    }
+
+    .btn.btn-tabList.btn-listPintura {
+        width: 8% !important;
+        height: 60% !important;
+    }
+    .btn.btn-tabList.btn-listPinturaOk {
+        width: 12.4% !important;
+        height: 60% !important;
     }

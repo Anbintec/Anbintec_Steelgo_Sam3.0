@@ -329,19 +329,19 @@ function cancelarCaptura(e) {
 
             var dataSource = $("#grid").data("kendoGrid").dataSource;
 
-            if (dataItem.Accion == 1) {
+            //if (dataItem.Accion == 1) {
                 dataSource.remove(dataItem);
-            }
-            else {
-                dataItem.Accion = 3;
-                for (var i = 0; i < dataItem.ListaJuntasSeleccionadas.length; i++) {
-                    dataItem.ListaJuntasSeleccionadas[i].Accion = dataItem.ListaJuntasSeleccionadas[i].Accion == 2 ? 3 : dataItem.ListaJuntasSeleccionadas[i].Accion;
-                }
+            //}
+            //else {
+            //    dataItem.Accion = 3;
+            //    for (var i = 0; i < dataItem.ListaJuntasSeleccionadas.length; i++) {
+            //        dataItem.ListaJuntasSeleccionadas[i].Accion = dataItem.ListaJuntasSeleccionadas[i].Accion == 2 ? 3 : dataItem.ListaJuntasSeleccionadas[i].Accion;
+            //    }
 
-                for (var i = 0; i < dataItem.ListaJuntasSeleccionadasInicial.length; i++) {
-                    dataItem.ListaJuntasSeleccionadasInicial[i].Accion = dataItem.ListaJuntasSeleccionadasInicial[i].Accion == 2 ? 3 : dataItem.ListaJuntasSeleccionadasInicial[i].Accion;
-                }
-            }
+            //    for (var i = 0; i < dataItem.ListaJuntasSeleccionadasInicial.length; i++) {
+            //        dataItem.ListaJuntasSeleccionadasInicial[i].Accion = dataItem.ListaJuntasSeleccionadasInicial[i].Accion == 2 ? 3 : dataItem.ListaJuntasSeleccionadasInicial[i].Accion;
+            //    }
+            //}
 
             $("#grid").data("kendoGrid").dataSource.sync();
 
