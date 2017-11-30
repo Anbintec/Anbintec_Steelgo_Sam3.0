@@ -105,7 +105,9 @@ function CargarGrid() {
                         AprobadoAduanaDesc: { type: "string", editable: true },
                         OkCliente: { type: "boolean", editable: true },
                         OkEmbarque: { type: "boolean", editable: false },
+                        OkClienteCarga: { type: "boolean", editable: false },
                         RequierePermisoAduana: { type: "boolean", editable: false },
+                        RequiereRevisionCliente: { type: "boolean", editable: false },
                         RequierePapCliente: { type: "boolean", editable: false },
                         Enviar: { type: "boolean", editable: false }
                     }
@@ -325,16 +327,96 @@ function AltaFecha() {
 
 function SetValueEnviar(obj) {
     var retorno = false;
+    var aduana = false;
+    var campos = false;
+    var obligado = false;
     if (obj != undefined) {
-        if (!obj.RequierePapCliente && (obj.Destino != "" && obj.Destino != null && obj.Destino != undefined) && !obj.RequierePermisoAduana && obj.RequiereRevisionCliente && !obj.OkClienteEmbarque && !obj.OkCliente && obj.OkEmbarque) { //crossover
-            retorno = true; 
-        } else if (!obj.RequierePapCliente && (obj.Destino != "" && obj.Destino != null && obj.Destino != undefined) && (obj.FolioSolicitudPermiso != "" && obj.FolioSolicitudPermiso != null) && (obj.FechaSolicitudPermiso != "" && obj.FechaSolicitudPermiso != null) && (obj.AprobadoAduanaDesc == "Aprobado") && obj.RequierePermisoAduana && obj.RequiereRevisionCliente && !obj.OkClienteEmbarque && !obj.OkCliente && obj.OkEmbarque) { //pesqueria
-            retorno = true;            
-        } else if (obj.RequierePapCliente && (obj.Destino != "" && obj.Destino != null && obj.Destino != undefined) && !obj.RequierePermisoAduana && obj.RequiereRevisionCliente && obj.OkClienteEmbarque && obj.OkCliente && obj.OkEmbarque) { //ramones            
-            retorno = true;            
-        } else if (obj.RequierePapCliente && obj.DestinoID != 0 && (obj.FolioSolicitudPermiso != "" && obj.FolioSolicitudPermiso != null && obj.FolioSolicitudPermiso != undefined) && ((obj.FechaSolicitudPermiso != "" && obj.FechaSolicitudPermiso != undefined) && obj.FechaSolicitudPermiso != null) && (obj.AprobadoAduanaDesc == "Aprobado") && obj.RequierePermisoAduana && !obj.RequiereRevisionCliente && obj.OkClienteEmbarque && obj.OkCliente && obj.OkEmbarque) { //salamanca y etileno
+        if (obj.RequierePermisoAduana) {
+            if ((obj.FechaSolicitudPermiso != null && obj.FechaSolicitudPermiso != "") && (obj.FolioSolicitudPermiso != null && obj.FolioSolicitudPermiso != "" && obj.FolioSolicitudPermiso.toString().trim()) && obj.AprobadoAduanaDesc == ($("#language").val() == "es-MX" ? "Aprobado" : "Approved")) {                
+                aduana = true;
+                obligado = true;
+            }else{
+                aduana = false;
+                obligado = true;
+            }
+        } else {
+            aduana = false;
+            obligado = false;
+        }
+
+        if ((obj.Destino != "" && obj.Destino != null) && obj.OkEmbarque) {
+            campos = true;
+        } else {
+            campos = false;
+        }
+      
+        
+        if (aduana && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        }        
+        } else if (aduana && obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (aduana && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (aduana && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (aduana && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && obj.OkClienteCarga && campos) {
+            retorno = true;
+        }
+        else if (aduana && obligado && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (aduana && obligado && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        }
+        else if (aduana && obligado && obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (aduana && obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (aduana && obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (aduana && obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (aduana && obligado && obj.RequierePapCliente && obj.RequiereRevisionCliente && (obj.OkClienteEmbarque && obj.OkCliente) && campos) {
+            retorno = true;
+        } else if (aduana && obligado && obj.RequierePapCliente && obj.OkClienteCarga && (obj.OkClienteEmbarque && obj.OkCliente) && campos) {
+            retorno = true;
+        } else if (aduana && obligado && obj.RequiereRevisionCliente && obj.OkClienteCarga && (obj.OkClienteEmbarque && obj.OkCliente) && campos) {
+            retorno = true;
+        } else if (aduana && obligado && obj.RequierePapCliente && obj.RequiereRevisionCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && campos) {
+            retorno = true;
+        } else if (aduana && obligado && obj.RequierePapCliente && obj.OkClienteCarga && (!obj.OkClienteEmbarque && !obj.OkCliente) && campos) {
+            retorno = true;
+        } else if (aduana && obligado && obj.RequiereRevisionCliente && obj.OkClienteCarga && (!obj.OkClienteEmbarque && !obj.OkCliente) && campos) {
+            retorno = true;
+        }
+        else if (!aduana && !obligado && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (!aduana && !obligado && obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (!aduana && !obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (!aduana && !obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (!aduana && !obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (obj.RequierePapCliente && !aduana && !obligado && campos) {
+            retorno = true;
+        } else if (obj.RequiereRevisionCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } else if ((obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } else if (obj.OkClienteCarga && (obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } else if (obj.OkClienteCarga && (!obj.OkClienteEmbarque && !obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } 
+        else if (!obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } else if (!obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } else if (!obj.RequiereRevisionCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } 
+        
     }
     return retorno;
 }
