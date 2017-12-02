@@ -76,7 +76,8 @@ function SuscribirEventoPopUPEnviarEmbarque() {
 }
 
 function SuscribirEventoEnviarEmbarque() {
-    $(document).on('click', '.enviarEmbarque', function (e) {
+    //$(document).on('click', '.enviarEmbarque', function (e) {
+    $(document).on('click', '.botonEnviar', function (e) {
         if ($('#Guardar').text() == _dictionary.lblGuardar[$("#language").data("kendoDropDownList").value()]) {
             var grid = $("#grid").data("kendoGrid");
             var dataItem = grid.dataItem($(e.target).closest("tr"));

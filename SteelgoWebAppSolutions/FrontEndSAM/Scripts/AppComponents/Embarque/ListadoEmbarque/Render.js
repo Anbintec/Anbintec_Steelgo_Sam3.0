@@ -14,34 +14,43 @@
                     options.model.Destino = dataItem.Destino;
                     options.model.DestinoID = dataItem.DestinoID;
                     options.model.ModificadoPorUsuario = true;
-                    $("#grid").data("kendoGrid").dataSource.sync();
+                    //$("#grid").data("kendoGrid").dataSource.sync();
                 }
                 else {
                     options.model.Destino = "";
                     options.model.DestinoID = 0;
                     options.model.ModificadoPorUsuario = true;                    
                 }
-                SetValueEnviar(options.model) ? options.model.Enviar = true : options.model.Enviar = false;                
-                $("#grid").data("kendoGrid").dataSource.sync();
+                var clase = ".enviarEmbarque" + options.model.Cont;
+                if (SetValueEnviar(options.model)) {
+                    options.model.Enviar = true;
+                    $(clase).css("display", "block");
+                }
+                else {
+                    options.model.Enviar = false;
+                    $(clase).css("display", "none");
+                }
+                //SetValueEnviar(options.model) ? options.model.Enviar = true : options.model.Enviar = false;                
+                //$("#grid").data("kendoGrid").dataSource.sync();
             }
         });
 }
 
-function SetValueEnviar(obj) {
-    var retorno = false;
-    if (obj != undefined) {
-        if (!obj.RequierePapCliente && (obj.Destino != "" && obj.Destino != null && obj.Destino != undefined) && !obj.RequierePermisoAduana && obj.RequiereRevisionCliente && !obj.OkClienteEmbarque && !obj.OkCliente && obj.OkEmbarque) { //crossover
-            retorno = true; 
-        } else if (!obj.RequierePapCliente && (obj.Destino != "" && obj.Destino != null && obj.Destino != undefined) && (obj.FolioSolicitudPermiso != "" && obj.FolioSolicitudPermiso != null && noHayFolio) && (obj.FechaSolicitudPermiso != "" && obj.FechaSolicitudPermiso != null) && (obj.AprobadoAduanaDesc == "Aprobado") && obj.RequierePermisoAduana && obj.RequiereRevisionCliente && !obj.OkClienteEmbarque && !obj.OkCliente && obj.OkEmbarque) { //pesqueria
-            retorno = true;            
-        } else if (obj.RequierePapCliente && (obj.Destino != "" && obj.Destino != null && obj.Destino != undefined) && !obj.RequierePermisoAduana && obj.RequiereRevisionCliente && obj.OkClienteEmbarque && obj.OkCliente && obj.OkEmbarque) { //ramones            
-            retorno = true;            
-        } else if (obj.RequierePapCliente && obj.DestinoID != 0 && (obj.FolioSolicitudPermiso != "" && obj.FolioSolicitudPermiso != null) && (obj.FechaSolicitudPermiso != "" && obj.FechaSolicitudPermiso != null) && (obj.AprobadoAduanaDesc == "Aprobado") && obj.RequierePermisoAduana && !obj.RequiereRevisionCliente && obj.OkClienteEmbarque && obj.OkCliente && obj.OkEmbarque) { //salamanca y etileno
-            retorno = true;
-        }        
-    }
-    return retorno;
-}
+//function SetValueEnviar(obj) {
+//    var retorno = false;
+//    if (obj != undefined) {
+//        if (!obj.RequierePapCliente && (obj.Destino != "" && obj.Destino != null && obj.Destino != undefined) && !obj.RequierePermisoAduana && obj.RequiereRevisionCliente && !obj.OkClienteEmbarque && !obj.OkCliente && obj.OkEmbarque) { //crossover
+//            retorno = true; 
+//        } else if (!obj.RequierePapCliente && (obj.Destino != "" && obj.Destino != null && obj.Destino != undefined) && (obj.FolioSolicitudPermiso != "" && obj.FolioSolicitudPermiso != null && noHayFolio) && (obj.FechaSolicitudPermiso != "" && obj.FechaSolicitudPermiso != null) && (obj.AprobadoAduanaDesc == "Aprobado") && obj.RequierePermisoAduana && obj.RequiereRevisionCliente && !obj.OkClienteEmbarque && !obj.OkCliente && obj.OkEmbarque) { //pesqueria
+//            retorno = true;            
+//        } else if (obj.RequierePapCliente && (obj.Destino != "" && obj.Destino != null && obj.Destino != undefined) && !obj.RequierePermisoAduana && obj.RequiereRevisionCliente && obj.OkClienteEmbarque && obj.OkCliente && obj.OkEmbarque) { //ramones            
+//            retorno = true;            
+//        } else if (obj.RequierePapCliente && obj.DestinoID != 0 && (obj.FolioSolicitudPermiso != "" && obj.FolioSolicitudPermiso != null) && (obj.FechaSolicitudPermiso != "" && obj.FechaSolicitudPermiso != null) && (obj.AprobadoAduanaDesc == "Aprobado") && obj.RequierePermisoAduana && !obj.RequiereRevisionCliente && obj.OkClienteEmbarque && obj.OkCliente && obj.OkEmbarque) { //salamanca y etileno
+//            retorno = true;
+//        }        
+//    }
+//    return retorno;
+//}
 
 function RenderComboBoxAprobacionAduana(container, options) {
     var valores;
@@ -52,20 +61,24 @@ function RenderComboBoxAprobacionAduana(container, options) {
             dataSource: options.model.listaEstatus,
             template: "<i class=\"fa fa-#=data.Descripcion.toLowerCase()#\"></i> #=data.Descripcion#",
             change: function (e) {
-                e.preventDefault();
+                //e.preventDefault();
                 var dataItem = this.dataItem(e.sender.selectedIndex);
 
                 if (dataItem != undefined && dataItem.OpcionValidacionID != 0) {
                         options.model.AprobadoAduanaDesc = dataItem.Descripcion;
                         options.model.AprobadoAduana = dataItem.OpcionValidacionID;
                         options.model.ModificadoPorUsuario = true;
+                        var clase = ".enviarEmbarque" + options.model.Cont;
+                        if (SetValueEnviar(options.model)) {
+                            options.model.Enviar = true;
+                            $(clase).css("display", "block");
+                        }
+                        else {
+                            options.model.Enviar = false;
+                            $(clase).css("display", "none");
+                        }
 
-                   if (SetValueEnviar(options.model))
-                        options.model.Enviar = true;
-                   else
-                        options.model.Enviar = false;
-
-                    $("#grid").data("kendoGrid").dataSource.sync();
+                   //$("#grid").data("kendoGrid").dataSource.sync();
                 }
                 else {
                     options.model.AprobadoAduanaDesc = "";
@@ -89,14 +102,22 @@ function RenderDatePicker(container, options) {
                     options.model.FechaSolicitudPermiso = value;
                 else
                     options.model.FechaSolicitudPermiso = "";
-
+                var clase = ".enviarEmbarque" + options.model.Cont;
                 if (SetValueEnviar(options.model)) {
                     options.model.Enviar = true;
-                    $("#grid").data("kendoGrid").dataSource.sync();
-                } else {
-                    options.model.Enviar = false;
-                    $("#grid").data("kendoGrid").dataSource.sync();
+                    $(clase).css("display", "block");
                 }
+                else {
+                    options.model.Enviar = false;
+                    $(clase).css("display", "none");
+                }
+                //if (SetValueEnviar(options.model)) {
+                //    options.model.Enviar = true;
+                //    $("#grid").data("kendoGrid").dataSource.sync();
+                //} else {
+                //    options.model.Enviar = false;
+                //    $("#grid").data("kendoGrid").dataSource.sync();
+                //}
             }
         }
     );

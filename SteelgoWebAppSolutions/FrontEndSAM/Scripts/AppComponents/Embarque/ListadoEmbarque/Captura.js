@@ -49,7 +49,7 @@ function CargarGrid() {
             var grid = this;
             nextDataItem = this.dataSource.at(this.dataSource.indexOf(dataItem) + 1);
 
-            this.refresh();
+            //this.refresh();
             //setTimeout(function () {            
             //    return function () {                
             //        var focusedCell = $("#grid tr[data-uid='" + e.model.uid + "'] td:nth-child(" + (focusedCellIndex + 1) + ")");
@@ -109,7 +109,8 @@ function CargarGrid() {
                         RequierePermisoAduana: { type: "boolean", editable: false },
                         RequiereRevisionCliente: { type: "boolean", editable: false },
                         RequierePapCliente: { type: "boolean", editable: false },
-                        Enviar: { type: "boolean", editable: false }
+                        Enviar: { type: "boolean", editable: false },
+                        Cont: { type: "int", editable: false }
                     }
                 }
             },
@@ -119,11 +120,20 @@ function CargarGrid() {
             serverSorting: false,
             change: function (e) {
                 if (e.field === "FolioSolicitudPermiso") {
+                    var clase = ".enviarEmbarque" + e.items[0].Cont;
                     if (SetValueEnviar(e.items[0])) {
                         e.items[0].Enviar = true;
-                    } else {
-                        e.items[0].Enviar = false;
+                        $(clase).css("display", "block");
                     }
+                    else {
+                        e.items[0].Enviar = false;
+                        $(clase).css("display", "none");
+                    }
+                    //if (SetValueEnviar(e.items[0])) {
+                    //    e.items[0].Enviar = true;
+                    //} else {
+                    //    e.items[0].Enviar = false;
+                    //}
                 }                
             }
         },        
@@ -177,9 +187,9 @@ function CargarGrid() {
                     },
                     dataSource: [{ OkEmbarque: true }, { OkEmbarque: false }]
                 }, template: '<input type="checkbox" class="chk-OkEmbarque" #= OkEmbarque ? "checked=checked" : "" # class="chkbx" ></input>', width: "150px", attributes: { style: "text-align:center;" }
-            },
+            },          
             {
-                field: "Enviar", title: _dictionary.columnEnviar[$("#language").data("kendoDropDownList").value()], filterable: false, template: "<center><button  type='button' class='btn btn-blue enviarEmbarque' Style='display: #= Enviar == true ?'block;' : 'none;' #' ><span>" +
+                field: "Enviar", title: _dictionary.columnEnviar[$("#language").data("kendoDropDownList").value()], filterable: false, template: "<center><button  type='button' class='btn btn-blue enviarEmbarque#=Cont # botonEnviar ' Style='display: #= Enviar == true ?'block;' : 'none;' #' ><span>" +
                    _dictionary.botonEnviar[$("#language").data("kendoDropDownList").value()] + "</span></button></center>", width: "100px"
             },
         ],
@@ -217,11 +227,18 @@ function CargarGrid() {
 
                         if (dataItem.Accion == 2)
                             dataItem.ModificadoPorUsuario = true;
-                    }                   
-                    if (SetValueEnviar(dataItem))
+                    }
+                    var clase = ".enviarEmbarque" + dataItem.Cont;
+                    if (SetValueEnviar(dataItem)){
                         dataItem.Enviar = true;
-                    else
-                        dataItem.Enviar = false;                        
+                        
+                        $(clase).css("display", "block");
+                    }                        
+                    else {
+                        dataItem.Enviar = false;
+                        $(clase).css("display", "none");
+                    }
+                        
                 } else {
                     if (e.target.checked)
                         $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).OkEmbarque = false;
@@ -235,7 +252,7 @@ function CargarGrid() {
                 else
                     $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).OkEmbarque = true;
             }            
-            $("#grid").data("kendoGrid").dataSource.sync();            
+            //$("#grid").data("kendoGrid").dataSource.sync();            
         } else if ($(this)[0].className == "chk-OkCliente" || $(this)[0].name == "OkCliente") {
             if ($('#Guardar').text() == _dictionary.lblGuardar[$("#language").data("kendoDropDownList").value()]) {
                 var grid = $("#grid").data("kendoGrid");
@@ -253,11 +270,15 @@ function CargarGrid() {
                         if (dataItem.Accion == 2)
                             dataItem.ModificadoPorUsuario = true;
                     }
-
-                    if (SetValueEnviar(dataItem))
+                    var clase = ".enviarEmbarque" + dataItem.Cont;
+                    if (SetValueEnviar(dataItem)) {
                         dataItem.Enviar = true;
-                    else
-                        dataItem.Enviar = false;                                       
+                        $(clase).css("display", "block");
+                    }
+                    else {
+                        dataItem.Enviar = false;
+                        $(clase).css("display", "none");
+                    }
                 } else {
                     if (e.target.checked)
                         $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).OkCliente = false;
@@ -271,13 +292,9 @@ function CargarGrid() {
                 else
                     $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).OkCliente = true;
             }                                               
-            $("#grid").data("kendoGrid").dataSource.sync();
+            //$("#grid").data("kendoGrid").dataSource.sync();
         }       
     });
-
-    //$("#grid").data("kendoGrid").dataSource.bind("change",  functionChange);
-    //$("#grid").data("kendoGrid").dataSource.sync();
-    //$("#grid").data("kendoGrid").dataSource.fetch();
 
     CustomisaGrid($("#grid"));
 };
@@ -365,6 +382,8 @@ function SetValueEnviar(obj) {
         else if (aduana && obligado && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
         } else if (aduana && obligado && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+            retorno = true;
+        } else if (aduana && obligado && !obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
         }
         else if (aduana && obligado && obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {

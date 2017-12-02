@@ -75,7 +75,8 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                     List<DetalleOpcionValidacion> listado = (List<DetalleOpcionValidacion>)OpcionValidacionBD.Instance.ObtenerListaOpcionValidacion(Lenguaje);
 
                     List<Sam3_Embarque_LE_Get_ListadoEmbarque_Result> result = ctx.Sam3_Embarque_LE_Get_ListadoEmbarque(Lenguaje , EstatusEmbarque, UsuarioID).ToList();
-                    List<DetalleListadoEmbarque> listaDetalle = new List<DetalleListadoEmbarque>();                    
+                    List<DetalleListadoEmbarque> listaDetalle = new List<DetalleListadoEmbarque>();
+                    var cont = 0;            
                     foreach (Sam3_Embarque_LE_Get_ListadoEmbarque_Result item in result)
                     {                        
                         listaDetalle.Add(new DetalleListadoEmbarque
@@ -116,8 +117,10 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                             CapturaEnvioID = item.CapturaEnvioID.GetValueOrDefault(),
                             ModificadoPorUsuario = false,
                             RowOk = true,
+                            Cont = cont,
                             listaEstatus = listado
                         });
+                        cont++;
                     }
                     return listaDetalle;
                 }

@@ -172,10 +172,14 @@ function AjaxAgregarDetalleSpool(tipoConsulta, ordenTrabajoSpoolID, codigo) {
                                 if (array[0].DetalleCargaID != 0) {
                                     cadena = _dictionary.EmbarqueRevisionMsjDescargaSpoolPlana[$("#language").data("kendoDropDownList").value()] +
                                         data[0].Plana + _dictionary.EmbarqueRevisionMsjDescargaSpoolConfirmacion[$("#language").data("kendoDropDownList").value()];
-                                } else {
+                                } else if (array[0].Paquete != "" && array[0].Paquete != "NA") {
                                     cadena = _dictionary.EmbarqueRevisionMsjDescargaSpoolPaquete[$("#language").data("kendoDropDownList").value()] +
-                                        data[0].Plana + _dictionary.EmbarqueRevisionMsjDescargaSpoolConfirmacion[$("#language").data("kendoDropDownList").value()];
+                                        array[0].Paquete + _dictionary.EmbarqueRevisionMsjDescargaSpoolConfirmacion[$("#language").data("kendoDropDownList").value()];
                                 }
+                                //else {
+                                //    cadena = _dictionary.EmbarqueRevisionMsjDescargaSpoolPaquete[$("#language").data("kendoDropDownList").value()] +
+                                //        data[0].Plana + _dictionary.EmbarqueRevisionMsjDescargaSpoolConfirmacion[$("#language").data("kendoDropDownList").value()];
+                                //}
                             }
                             ds.sync();
                             $("#spanDescargaSpool").text(cadena);

@@ -50,6 +50,7 @@ namespace BackEndSAM.Models.Embarque.ListadoEmbarque
         public int CapturaEnvioID { get; set; }
         public bool ModificadoPorUsuario { get; set; }
         public bool RowOk { get; set; }
+        public int Cont { get; set; }
         public List<ListadoDestino> listaDestino { get; set; }
         public List<DetalleOpcionValidacion> listaEstatus { get; set; }
 

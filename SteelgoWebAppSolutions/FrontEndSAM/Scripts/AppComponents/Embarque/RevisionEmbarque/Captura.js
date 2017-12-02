@@ -197,19 +197,16 @@ function CargarGrid() {
                 }
                 
                 var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
-                var editButton = $(currenRow).find(".k-button");
+                var editButton = $(currenRow).find(".k-button");                
                 if (gridData[i].CapturaManual && gridData[i].Paquete == "NA" && !gridData[i].Empaquetado ) {
                     var classDescarga = $("#language").val() == "es-MX" ? "k-grid-Cancelar" : "k-grid-Cancel";
-                    editButton[0].outerHTML = '<a class="k-button k-button-icontext ' + classDescarga + '" href="#/"><span class=""></span>' +
+                    editButton[0].outerHTML = '<a class="k-button k-button-icontext ' + classDescarga + '" href="#/" style="margin: 0 auto;"><span class=""></span>' +
                         _dictionary.botonDescarga[$("#language").data("kendoDropDownList").value()] + '</a>';
-
                 } else {
                     var classDescarga = $("#language").val() == "es-MX" ? "k-grid-Cancelar" : "k-grid-Cancel";
                     editButton[0].outerHTML = '<a class="k-button k-button-icontext ' + classDescarga + '" style="display:none;" href="#/"><span class=""></span>' +
                         _dictionary.botonDescarga[$("#language").data("kendoDropDownList").value()] + '</a>';
                 }
-
-
             }
 
             if (esNormal) {

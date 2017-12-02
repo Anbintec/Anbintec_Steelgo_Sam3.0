@@ -29,26 +29,31 @@ function AjaxObtenerDetalleListadoEmbarque(estatus) {
     $ListadoEmbarque.ListadoEmbarque.read({ token: Cookies.get("token"), Lenguaje: $("#language").val(), EstatusEmbarque: estatus }).done(function (data) {
         $("#grid").data("kendoGrid").dataSource.data([]);
         var ds = $("#grid").data("kendoGrid").dataSource;
-
+        
         if (data.length > 0) {
             if (estatus == 1) {
                 for (var x = 0; x < data.length; x++) {
                     if (data[x].listaDestino.length == 2 && data[x].DestinoID == 0) {
                         data[x].DestinoID = data[x].listaDestino[1].DestinoID;
-                        data[x].Destino = data[x].listaDestino[1].Destino;
-                    }
-
+                        data[x].Destino = data[x].listaDestino[1].Destino;                        
+                    }                    
                 }
                 $("#grid").data("kendoGrid").showColumn("Enviar");
-            } else {
+            } else {                
                 $("#grid").data("kendoGrid").hideColumn("Enviar");
             }
             ds.data(data);
             ds.page(1);
-        } else
+        } else {
             ds.page(0);
-
+            //ds.dataSource._data[0].Cont = 0;
+        }
+            
+        for (var i = 0; i < ds.length; i++) {
+            ds[i].Cont = i;
+        }
         ds.sync();
+        
         AjaxObtenerContadorPorEstatus();
     });
 }

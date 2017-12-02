@@ -13,7 +13,7 @@ function changeLanguageCall() {
         format: _dictionary.FormatoFecha2[$("#language").data("kendoDropDownList").value()]
     });
     opcionHabilitarView(false, "FieldSetView");
-    SuscribirEventoPopUpGuardarEmbarque();
+    SuscribirEventoPopUpGuardarEmbarque();    
 };
 
 
@@ -186,6 +186,8 @@ function CargaPopupNuevoTracto(e) {
     $("#inputNombreNuevoTracto").focus();
 }
 
+
+
 function CargaPopupNuevoChofer(e) {
     $("#inputNombreNuevoChofer").val("");
 
@@ -211,6 +213,97 @@ function CargaPopupNuevoChofer(e) {
     $("#divNuevoChofer").data("kendoWindow").center().open();
 
     $("#inputNombreNuevoChofer").focus();
+}
+
+function CargaPopupNuevoProveedorEnvio(e) {
+    $("#inputNombreNuevoProveedorEnvio").val("");
+    $("#lblBtnGuardar1").text("");
+    $("#lblBtnGuardar1").text($("#language").val() == "es-MX" ? "Guardar" : "Save");
+    $("#lblBotonCerrar1").text("");
+    $("#lblBotonCerrar1").text($("#language").val() == "es-MX" ? "Cerrar" : "Close");
+    windowNewProviderEnvio = $("#divNuevoProveedorEnvio").kendoWindow({
+        modal: true,
+        resizable: false,
+        visible: true,
+        width: "500px",
+        height: "auto",
+        draggable: false,
+        resizable: false,
+        animation: {
+            close: false,
+            open: false
+        },
+        position: {
+            top: "1%",
+            left: "1%"
+        },
+        actions: []
+    }).data("kendoWindow");
+    $("#divNuevoProveedorEnvio").data("kendoWindow").title(_dictionary.EmbarqueCargaNuevoProveedor[$("#language").data("kendoDropDownList").value()]);
+    $("#divNuevoProveedorEnvio").data("kendoWindow").center().open();
+
+    $("#inputNombreNuevoProveedorEnvio").focus();
+}
+
+function CargaPopupNuevoTractoEnvio(e) {
+    $("#inputNombreNuevoTractoEnvio").val("");
+    $("#lblBtnGuardar2").text("");
+    $("#lblBtnGuardar2").text($("#language").val() == "es-MX" ? "Guardar" : "Save");
+    $("#lblBotonCerrar2").text("");
+    $("#lblBotonCerrar2").text($("#language").val() == "es-MX" ? "Cerrar" : "Close");
+    windowNewTractoEnvio = $("#divNuevoTractoEnvio").kendoWindow({
+        modal: true,
+        resizable: false,
+        visible: true,
+        width: "500px",
+        height: "auto",
+        draggable: false,
+        resizable: false,
+        animation: {
+            close: false,
+            open: false
+        },
+        position: {
+            top: "1%",
+            left: "1%"
+        },
+        actions: []
+    }).data("kendoWindow");
+    $("#divNuevoTractoEnvio").data("kendoWindow").title(_dictionary.EmbarquePreparacionTractoNuevo[$("#language").data("kendoDropDownList").value()]);
+    $("#divNuevoTractoEnvio").data("kendoWindow").center().open();
+
+    $("#inputNombreNuevoTractoEnvio").focus();
+}
+
+
+function CargaPopupNuevoChoferEnvio(e) {
+    $("#inputNombreNuevoChoferEnvio").val("");
+    $("#lblBtnGuardar3").text("");
+    $("#lblBtnGuardar3").text($("#language").val() == "es-MX" ? "Guardar" : "Save");
+    $("#lblBotonCerrar3").text("");
+    $("#lblBotonCerrar3").text($("#language").val() == "es-MX" ? "Cerrar" : "Close");
+    windowNewChoferEnvio = $("#divNuevoChoferEnvio").kendoWindow({
+        modal: true,
+        resizable: false,
+        visible: true,
+        width: "500px",
+        height: "auto",
+        draggable: false,
+        resizable: false,
+        animation: {
+            close: false,
+            open: false
+        },
+        position: {
+            top: "1%",
+            left: "1%"
+        },
+        actions: []
+    }).data("kendoWindow");
+    $("#divNuevoChoferEnvio").data("kendoWindow").title(_dictionary.EmbarquePreparacionChoferNuevo[$("#language").data("kendoDropDownList").value()]);
+    $("#divNuevoChoferEnvio").data("kendoWindow").center().open();
+
+    $("#inputNombreNuevoChoferEnvio").focus();
 }
 
 function existenCambios() {
