@@ -64,6 +64,36 @@ namespace BackEndSAM.DataAcces.Sam3General.CapturasRapidas
                 return result;
             }
         }
+
+        /// <summary>
+        /// obtiene la orden de trabajo mediante Numero de Control
+        /// </summary>
+        /// <param name="ordentrabajo">Orden de trabajo</param>
+        /// <param name="tipo">Tipo de ejecucion en el stord</param>
+        /// <returns></returns>
+        public object ObtenerIDOrdenTrabajoByNumeroControl(string ordentrabajo, string lenguaje)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {
+                    //List<Sam3_Steelgo_Get_SpoolID_Result> lista = ctx.Sam3_Steelgo_Get_SpoolID(tipo, ordentrabajo, lenguaje).ToList();
+                    List<Sam3_Steelgo_Get_SpoolID_By_NumeroControl_Result> lista = ctx.Sam3_Steelgo_Get_SpoolID_By_NumeroControl(ordentrabajo, lenguaje).ToList();
+                    return lista;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
         /// <summary>
         /// obtiene las juntas que tiene la orden de trabajo
         /// </summary>

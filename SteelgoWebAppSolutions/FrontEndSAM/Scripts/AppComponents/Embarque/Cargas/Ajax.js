@@ -20,9 +20,8 @@ function AjaxCargarCamposPredeterminados() {
 };
 
 function AjaxObtenerSpoolID() {
-
     var OrdenTrabajoOrigianl = $("#InputOrdenTrabajo").val();
-    $Armado.Armado.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {
+    $CapturasRapidas.CapturasRapidas.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {
         dataSpoolArray = data;
         if (Error(data)) {
             if (data.OrdenTrabajo != "") {
@@ -168,6 +167,22 @@ function AjaxEmbarqueCargaProveedores(ProyectoID, nuevoProveedor) {
         loadingStop();
     });
 }
+
+
+function AjaxTieneHoldPorNumControl(NumeroControl) {
+    $CapturasRapidas.CapturasRapidas.read({ extra: true, ordenTrabajo: NumeroControl, token: Cookies.get("token"), lenguaje: $("#language").val(), extra2: true }).done(function (data) {
+        if (Error(data)) {
+            if (data.idStatus.length > 0) {
+                if (data.idStatus[0].Status != "1") {
+                    displayNotify("notificationslabel0057", "", 1);
+                } else {
+                    AjaxAgregarCarga();
+                }
+            }
+        }
+    });
+}
+
 
 function AjaxAgregarCarga() {
     var SpoolID = $("#InputID").data("kendoComboBox").value() != "" ? $("#InputID").data("kendoComboBox").value() : 0;

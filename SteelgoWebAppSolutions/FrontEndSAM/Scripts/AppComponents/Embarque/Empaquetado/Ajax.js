@@ -52,6 +52,20 @@ function AjaxObtenerSpoolID() {
     }
 }
 
+function AjaxTieneHoldPorNumControl(tipoConsulta, NumeroControl) {        
+    $CapturasRapidas.CapturasRapidas.read({ extra: true, ordenTrabajo: NumeroControl, token: Cookies.get("token"), lenguaje: $("#language").val(), extra2: true}).done(function (data) {
+        if (Error(data)) {
+            if (data.idStatus.length > 0) {
+                if (data.idStatus[0].Status != "1") {
+                    displayNotify("notificationslabel0057", "", 1);
+                } else {
+                    AjaxObtenerDetalleSpool(tipoConsulta, 0, NumeroControl);
+                }
+            }                
+        }
+    });        
+}
+
 function AjaxCargarPaquetes(proyectoID, paqueteID) {
     loadingStart();
     $Empaquetado.Empaquetado.read({ token: Cookies.get("token"), ProyectoID: proyectoID, lenguaje: $("#language").val() }).done(function (data) {
@@ -193,7 +207,7 @@ function AjaxCargarDetalleEmpaquetado(paqueteID, todos) {
 }
 
 function AjaxObtenerDetalleSpool(tipoConsulta, spoolID, codigo) {
-    loadingStart();
+    loadingStart();    
     var ProyectoID = parseInt($("#InputProyecto").data("kendoComboBox").value());
     $Empaquetado.Empaquetado.read({ token: Cookies.get("token"), TipoConsulta: tipoConsulta, OrdenTrabajoSpoolID: spoolID, Codigo: codigo }).done(function (data) {
         if (data != null) {
@@ -214,7 +228,7 @@ function AjaxObtenerDetalleSpool(tipoConsulta, spoolID, codigo) {
                                         data[i].Plana, '1');
                             else
                                 displayNotify('', _dictionary.EmbarqueCargaMsjErrorSpoolAgregarCarro[$("#language").data("kendoDropDownList").value()]
-                                     + data[i].CarroCargado, '1');
+                                        + data[i].CarroCargado, '1');
                         }
                     } else {
                         displayNotify("EmbarqueEmpaquetadoErrorProyectoDiferente", "", '1');
@@ -229,14 +243,14 @@ function AjaxObtenerDetalleSpool(tipoConsulta, spoolID, codigo) {
 
 
         }
-
+        
         $("#InputID").data("kendoComboBox").value("");
         $("#inputCodigo").val("");
         ObtieneConsecutivo();
         ImprimirTotalToneladas(ds._data);
         ImprimirTotalPiezas(ds._data);
         loadingStop();
-    });
+     });        
 }
 
 function AbrirPopUpGuardar(Paquete, TipoGuardado, PatioID) {

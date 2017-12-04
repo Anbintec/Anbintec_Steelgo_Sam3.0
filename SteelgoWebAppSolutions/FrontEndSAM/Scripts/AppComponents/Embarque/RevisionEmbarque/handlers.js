@@ -511,9 +511,9 @@ function SuscribirEventoEnterCodigo() {
 
                         }else if(TipoConsulta == 2){
                             codigo = $("#inputCodigo").val();
-
-                            if (codigo != "" && codigo != undefined) {                                
-                                AjaxAgregarDetalleSpool(TipoConsulta, ordenTrabajoSpoolID, codigo.toString().trim().toUpperCase());
+                            if (codigo != "" && codigo != undefined) {
+                                AjaxTieneHoldPorNumControl(TipoConsulta, ordenTrabajoSpoolID, codigo.toString().trim().toUpperCase());
+                                //AjaxAgregarDetalleSpool(TipoConsulta, ordenTrabajoSpoolID, codigo.toString().trim().toUpperCase());
                             }
                         }
                         else if (TipoConsulta == 3) {
@@ -561,9 +561,9 @@ function SuscribirEventoAgregar() {
 
                     }else if(TipoConsulta == 2){
                         codigo = $("#inputCodigo").val();
-
                         if (codigo != "" && codigo != undefined) {
-                            AjaxAgregarDetalleSpool(TipoConsulta, ordenTrabajoSpoolID, codigo.toString().trim().toUpperCase());
+                            AjaxTieneHoldPorNumControl(TipoConsulta, ordenTrabajoSpoolID, codigo.toString().trim().toUpperCase());
+                            //AjaxAgregarDetalleSpool(TipoConsulta, ordenTrabajoSpoolID, codigo.toString().trim().toUpperCase());
                         }
                     }
                     else if (TipoConsulta == 3) {
@@ -606,32 +606,31 @@ function SuscribirEventoPaquete() {
 
 
 function SuscribirEventoSpoolID() {
-
+    var dataitem;
     $("#InputID").kendoComboBox({
         dataTextField: "IDValido",
         dataValueField: "Valor",
         suggest: true,
         filter: "contains",
         index: 3,
+        delay: 10,
         select: function (e) {
-
             var dataItem = this.dataItem(e.item.index());
-
-            if (dataItem.Status != "1") {
-                e.preventDefault();
-                $("#InputID").val("");
-                displayNotify("Mensajes_error", dataItem.Status, '1');
-
+            if (dataItem != undefined && dataItem.IDValido != "") {                
+                if (dataItem.Status != "1") {
+                    e.preventDefault();
+                    $("#InputID").data("kendoComboBox").value("0");
+                    $("#InputID").data("kendoComboBox").text("");
+                    displayNotify("notificationslabel0057", "", 1)                    
+                }
+                else {
+                    $("#InputID").val(dataItem.IDValido);
+                    Cookies.set("Proyecto", dataItem.ProyectoID + '°' + dataItem.Proyecto);
+                    $("#LabelProyecto").text(dataItem.Proyecto);
+                }
             }
-            else {
-                $("#InputID").val(dataItem.IDValido);
-                Cookies.set("Proyecto", dataItem.ProyectoID + '°' + dataItem.Proyecto);
-                $("#LabelProyecto").text(dataItem.Proyecto);
-            }
-
-        }
-        ,
-        change: function (e) {
+        },
+        change: function (e) {            
             dataItem = this.dataItem(e.sender.selectedIndex);
             if ($("#InputID").val().length == 1) {
                 $("#InputID").data("kendoComboBox").value(("00" + $("#InputID").val()).slice(-3));
@@ -639,26 +638,60 @@ function SuscribirEventoSpoolID() {
             if ($("#InputID").val() != '' && $("#InputOrdenTrabajo").val() != '') {
                 Cookies.set("Proyecto", dataItem.ProyectoID + '°' + dataItem.Proyecto);
                 $("#LabelProyecto").text(dataItem.Proyecto);
-
             }
         }
+        //select: function (e) {
+
+        //    var dataItem = this.dataItem(e.item.index());
+
+        //    if (dataItem.Status != "1") {
+        //        e.preventDefault();
+        //        $("#InputID").val("");
+        //        displayNotify("notificationslabel0057", "", 1);
+
+        //    }
+        //    else {
+        //        $("#InputID").val(dataItem.IDValido);
+        //        Cookies.set("Proyecto", dataItem.ProyectoID + '°' + dataItem.Proyecto);
+        //        $("#LabelProyecto").text(dataItem.Proyecto);
+        //    }
+
+        //}
+        //,
+        //change: function (e) {
+        //    dataItem = this.dataItem(e.sender.selectedIndex);
+        //    if ($("#InputID").val().length == 1) {
+        //        $("#InputID").data("kendoComboBox").value(("00" + $("#InputID").val()).slice(-3));
+        //    }
+        //    if ($("#InputID").val() != '' && $("#InputOrdenTrabajo").val() != '') {
+        //        Cookies.set("Proyecto", dataItem.ProyectoID + '°' + dataItem.Proyecto);
+        //        $("#LabelProyecto").text(dataItem.Proyecto);
+
+        //    }
+        //}
     });
 
     $("#InputOrdenTrabajo").blur(function (e) {
-
-        if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z]*[0-9]*$")) {
-            try {
-                AjaxObtenerSpoolID();
-            } catch (e) {
-                displayNotify("Mensajes_error", e.message, '2');
+        if ($("#InputOrdenTrabajo").val() != "") {
+            if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z]*[0-9]*$")) {
+                try {
+                    AjaxObtenerSpoolID();
+                } catch (e) {
+                    displayNotify("Mensajes_error", e.message, '2');
+                }
+            } else {
+                displayNotify("MensajeOrdenTrabajoNoValida", "", '1');
             }
         } else {
-            displayNotify("MensajeOrdenTrabajoNoValida", "", '1');
+            $("#InputID").data("kendoComboBox").dataSource.data([]);
+            $("#InputID").data("kendoComboBox").value("");
         }
+        
     });
 
     $("#InputOrdenTrabajo").focus(function (e) {
         $("#InputOrdenTrabajo").val("");
+        //$("#InputID").data("kendoComboBox").setDataSource();
         $("#InputID").data("kendoComboBox").dataSource.data([]);
         $("#InputID").data("kendoComboBox").value("");
     });
@@ -671,19 +704,87 @@ function SuscribirEventoSpoolID() {
         }
         else if (e.keyCode == 40) {
             $("#InputID").data("kendoComboBox").select();
-        }
-        else if (e.keyCode == 13) {
-            if (!$("#InputCerrar").is(":checked")) {
-
-                var ordenTrabajoSpoolID = $('#InputID').data("kendoComboBox").value();
-                if (ordenTrabajoSpoolID != "" && ordenTrabajoSpoolID != undefined && ordenTrabajoSpoolID != "0") {
-                    AjaxAgregarDetalleSpool(1, ordenTrabajoSpoolID, "");
+        } else if (e.keyCode == 13) {
+            if ($("#InputID").data("kendoComboBox").select() != -1) {
+                if ($("#InputID").data("kendoComboBox").value() != undefined) {
+                    if (!$("#InputCerrar").is(":checked")) {
+                        //if ($('#InputID').data("kendoComboBox").dataSource._data[$('#InputID').data("kendoComboBox").selectedIndex].Status != "1") {
+                        if ($("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()) != undefined && $("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).IDValido != "") {
+                            var ordenTrabajoSpoolID = $('#InputID').data("kendoComboBox").value();
+                            if (ordenTrabajoSpoolID != "" && ordenTrabajoSpoolID != undefined && ordenTrabajoSpoolID != "0") {
+                                AjaxAgregarDetalleSpool(1, ordenTrabajoSpoolID, "");
+                            }                            
+                        } else {
+                            e.preventDefault();
+                            $("#InputID").data("kendoComboBox").value("0");
+                            $("#InputID").data("kendoComboBox").text("");
+                            displayNotify("notificationslabel0057", "", 1)
+                            $("#InputID").data("kendoComboBox").close();
+                        }
+                    }
+                    else {
+                        displayNotify('EmarqueCargaMensajePlanaCerrada', '', '1');
+                    }
                 }
-            } else
-                displayNotify('EmbarqueRevisionMsjRevisionCerrada', '', '1');
-        }
-    });
+                else {
+                    $("#InputID").data("kendoComboBox").value("");
+                    displayNotify("PinturaCargaNoExisteSpoolID", '', '1');
+                }
+            } else {
+                var valorEncontrado = false;
+                var spoollIDValue = $("#InputID").val().trim();
+                var listaSpoolID = $("#InputID").data("kendoComboBox").dataSource._data;
+                if (listaSpoolID.length > 0) {
+                    for (var i = 0; i < listaSpoolID.length; i++) {
+                        if (TryParseInt(spoollIDValue, 0) != 0 && (TryParseInt(spoollIDValue, 0) == TryParseInt(listaSpoolID[i].IDValido, 0))) {
+                            valorEncontrado = true;
+                            $("#InputID").data("kendoComboBox").select(0);
+                            $("#InputID").data("kendoComboBox").value(listaSpoolID[i].Valor);
+                            AjaxAgregarDetalleSpool(1, listaSpoolID[i].Valor);
+                            break;
+                        }
+                    }
+                }
+            }
+            
 
+            //if ($('#InputID').data("kendoComboBox").value() != undefined) {
+            //    if (!$("#InputCerrar").is(":checked")) {
+            //        if ($('#InputID').data("kendoComboBox").dataSource._data[$('#InputID').data("kendoComboBox").selectedIndex].Status != "1") {
+            //            e.preventDefault();
+            //            $("#InputID").data("kendoComboBox").value("0");
+            //            $("#InputID").data("kendoComboBox").text("");
+            //            displayNotify("notificationslabel0057", "", 1)
+            //            hold = true;
+
+            //            $("#InputID").data("kendoComboBox").close();
+            //        } else {
+            //            var ordenTrabajoSpoolID = $('#InputID').data("kendoComboBox").value();
+            //            if (ordenTrabajoSpoolID != "" && ordenTrabajoSpoolID != undefined && ordenTrabajoSpoolID != "0") {
+            //                AjaxAgregarDetalleSpool(1, ordenTrabajoSpoolID, "");
+            //            }
+            //        }
+            //    } else
+            //        displayNotify('EmbarqueRevisionMsjRevisionCerrada', '', '1');
+            //} else {
+            //    $("#InputID").data("kendoComboBox").value("");
+            //    displayNotify("PinturaCargaNoExisteSpoolID", '', '1');
+            //}            
+        } else if (e.keyCode == 9) {
+            if (!$("#InputCerrar").is(":checked")) {
+                $("#InputID").data("kendoComboBox").select(0);
+                if ($('#InputID').data("kendoComboBox").dataSource._data[$('#InputID').data("kendoComboBox").selectedIndex].Status != "1") {
+                    e.preventDefault();
+                    $("#InputID").data("kendoComboBox").value("0");
+                    $("#InputID").data("kendoComboBox").text("");
+                    displayNotify("notificationslabel0057", "", 1)                   
+                    $("#InputID").data("kendoComboBox").close();
+                }
+            } else {
+                displayNotify('EmbarqueRevisionMsjRevisionCerrada', '', '1');
+            }          
+        }
+    });    
 };
 
 function SuscribirEventoMostrarDetalle() {

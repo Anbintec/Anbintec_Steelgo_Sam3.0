@@ -100,16 +100,24 @@ function AjaxCargarPaquetes(proyectoID) {
 function AjaxObtenerSpoolID() {
     try {
         loadingStart();
-        $CapturasRapidas.CapturasRapidas.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {
+        $CapturasRapidas.CapturasRapidas.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {            
             if (Error(data)) {
-                $("#InputOrdenTrabajo").val(data.OrdenTrabajo);
-                $("#InputID").data("kendoComboBox").dataSource.data(data.idStatus)
+                if (data.OrdenTrabajo != "") {
+                    $("#InputOrdenTrabajo").val(data.OrdenTrabajo);
+                }
+                else {
+                    $("#InputOrdenTrabajo").val(OrdenTrabajoOrigianl);
+                    displayNotify("CapturaArmadoMensajeOrdenTrabajoNoEncontrada", "", '1');
+                }
+
+                $("#InputID").data("kendoComboBox").dataSource.data(data.idStatus);
                 Cookies.set("LetraProyecto", data.OrdenTrabajo.substring(0, 1), { path: '/' });
-                loadingStop();
-            }
+                $("#InputID").data("kendoComboBox").enable(true);
+                $("#InputID").data("kendoComboBox").input.focus();
+            }          
         });
     } catch (e) {
-        displayNotify("Mensajes_error", e.message, '2');
+        displayNotify("", "Error: " + e.message, '2');
     }
 }
 
@@ -128,6 +136,20 @@ function AjaxObtieneDetalle(EmbarqueID) {
         loadingStop();
     });
 }
+function AjaxTieneHoldPorNumControl(tipoConsulta, ordenTrabajoSpool, NumeroControl) {
+    $CapturasRapidas.CapturasRapidas.read({ extra: true, ordenTrabajo: NumeroControl, token: Cookies.get("token"), lenguaje: $("#language").val(), extra2: true }).done(function (data) {
+        if (Error(data)) {
+            if (data.idStatus.length > 0) {
+                if (data.idStatus[0].Status != "1") {
+                    displayNotify("notificationslabel0057", "", 1);
+                } else {
+                    AjaxAgregarDetalleSpool(tipoConsulta, ordenTrabajoSpool, NumeroControl);
+                }
+            }
+        }
+    });
+}
+
 
 function AjaxAgregarDetalleSpool(tipoConsulta, ordenTrabajoSpoolID, codigo) {
     loadingStart();
