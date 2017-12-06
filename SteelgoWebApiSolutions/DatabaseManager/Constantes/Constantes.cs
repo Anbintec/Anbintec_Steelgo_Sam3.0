@@ -98,5 +98,8 @@
         public static string GUARDARCAPTURAREQUISICIONINSPECCIONPINTURA = "Sam3_Pintura_RequisicionInspeccion_GuardarCaptura";        
         public static string GUARDACAPTURAPINTURASOLICITUDINSPECCION = "Sam3_Pintura_SolicitudInspeccion_GuardarCaptura";
         public static string GuardarCondicionesClimatologias = "Sam3_Pintura_CondicionesClimatologicas";
+        public static string GuardarListadoIncidenciasBilingues = "Sam3_Incidencias_LIB_Guardar";
+
+        
     }
 }

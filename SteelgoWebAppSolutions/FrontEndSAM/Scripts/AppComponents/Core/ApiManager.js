@@ -273,6 +273,9 @@ var $WPS = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 var $SoldadorCertificacion = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 //#endregion
 
+// LISTADO INCIDENCIAS BILINGUES
+
+var $ListadoIncidencias = new $.RestClient($BackEndSAMUri + '/backendsam/api/');
 
 /****************************/
 /*    Document Ready        */
@@ -489,3 +492,8 @@ $CompraPagoOC.add("CompraPagoOC");
 $CobroOC.add("CobroOC");
 $PagoOC.add("PagoOC");
 $CreacionOC.add("CreacionOC");
+
+
+// LISTADO INCIDENCIAS BILINGUES 
+
+$ListadoIncidencias.add("ListadoIncidencias");
