@@ -3,7 +3,7 @@ var editado = false;
 var ventanaConfirmEdicionSinTipoBusqueda;
 
 var EjecutaChange = 0;
-var LineaCaptura = { CarroIDseleccionado:"",ZonaIDSeleccionada:"" }
+var LineaCaptura = { CarroIDseleccionado: "", ZonaIDSeleccionada: "" }
 
 function changeLanguageCall() {
     SuscribirEventos();
@@ -62,8 +62,8 @@ function CargarGrid() {
     $("#grid").kendoGrid({
         autoBind: true,
         edit: function (e) {
-           var inputName = e.container.find('input');
-                inputName.select();
+            var inputName = e.container.find('input');
+            inputName.select();
             if ($('#botonGuardar').text() != _dictionary.MensajeGuardar[$("#language").data("kendoDropDownList").value()]) {
                 this.closeCell();
             }
@@ -197,11 +197,12 @@ function PlanchaCuadrante() {
 
 
 function Limpiar() {
-   
+
     $("#inputCarro").data("kendoComboBox").dataSource.data([]);
     $("#inputCarro").data("kendoComboBox").value("");
     $("#inputCarro").val("");
     $("#grid").data('kendoGrid').dataSource.data([]);
     $("#grid").data('kendoGrid').dataSource.sync();
+    editado = false;
     opcionHabilitarView(false, "FieldSetView");
 }

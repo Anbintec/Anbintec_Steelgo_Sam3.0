@@ -6,13 +6,13 @@
     SuscribirEventoGuardar();
     SuscribirEventoColor();
     suscribirEventoWindowsConfirmaCapturaSinCambiarTipoBusqueda();
-    
+
 }
 
 function suscribirEventoWindowsConfirmaCapturaSinCambiarTipoBusqueda() {
     ventanaConfirmEdicionSinTipoBusqueda = $("#ventanaConfirmCaptura").kendoWindow({
         iframe: true,
-         title: _dictionary.CapturaArmadoTituloPopup[$("#language").data("kendoDropDownList").value()],
+        title: _dictionary.CapturaArmadoTituloPopup[$("#language").data("kendoDropDownList").value()],
         visible: false,
         width: "auto",
         height: "auto",
@@ -27,7 +27,7 @@ function suscribirEventoWindowsConfirmaCapturaSinCambiarTipoBusqueda() {
 
     $("#yesButtonProySinTipoBusqueda").click(function (e) {
 
-       ventanaConfirmEdicionSinTipoBusqueda.close();
+        ventanaConfirmEdicionSinTipoBusqueda.close();
         editado = false;
 
         $("#grid").data("kendoGrid").dataSource.data([]);
@@ -193,32 +193,32 @@ function SuscribirEventoSpoolID() {
 
     $("#InputOrdenTrabajo").blur(function (e) {
         if ($("#InputOrdenTrabajo").val() != "") {
-            if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z][0-9]*$")) {
-                try {
-                    //if (!editado) {
-                        $("#inputProceso").data("kendoComboBox").dataSource.data([]);
-                        $("#inputProceso").data("kendoComboBox").value("");
-                        $("#inputPrueba").data("kendoComboBox").dataSource.data([]);
-                        $("#inputPrueba").data("kendoComboBox").value("");
-                        $("#inputColor").data("kendoComboBox").dataSource.data([]);
-                        $("#inputColor").data("kendoComboBox").value("");
+            //if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z][0-9]*$")) {
+            try {
+                //if (!editado) {
+                $("#inputProceso").data("kendoComboBox").dataSource.data([]);
+                $("#inputProceso").data("kendoComboBox").value("");
+                $("#inputPrueba").data("kendoComboBox").dataSource.data([]);
+                $("#inputPrueba").data("kendoComboBox").value("");
+                $("#inputColor").data("kendoComboBox").dataSource.data([]);
+                $("#inputColor").data("kendoComboBox").value("");
 
-                        AjaxObtenerSpoolID();
-                    //}
-                    //else {
-                    //    ventanaConfirmEdicionSinTipoBusqueda.open().center();
-                    //}
-                } catch (e) {
-                    displayNotify("", e.message, '2');
-                }
-            } else {
-                $("#InputOrdenTrabajo").val("");
-                displayNotify("PinturaCargaMensajeOrdenTrabajo", "", '1');
+                AjaxObtenerSpoolID();
+                //}
+                //else {
+                //    ventanaConfirmEdicionSinTipoBusqueda.open().center();
+                //}
+            } catch (e) {
+                displayNotify("", e.message, '2');
             }
+            //} else {
+            //    $("#InputOrdenTrabajo").val("");
+            //    displayNotify("PinturaCargaMensajeOrdenTrabajo", "", '1');
+            //}
         }
     });
 
- 
+
 
     $('#InputID').blur(function (e) {
         var spoollIDValue = $("#InputID").val().trim();
@@ -241,7 +241,7 @@ function SuscribirEventoSpoolID() {
 
 function SuscribirEventoBuscar() {
     $('#btnBuscar').click(function (e) {
-        
+
         if ($("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).Valor != "" || $("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).Valor != 0) {
             if ($("#inputProceso").data("kendoComboBox").select() > 0) {
                 if ($("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID == 4 ? $("#inputColor").data("kendoComboBox").select() > 0 : true) {
@@ -261,7 +261,7 @@ function SuscribirEventoBuscar() {
         else
             displayNotify("Despacho0028", "", '1');
 
-        
+
     });
 }
 
@@ -285,23 +285,23 @@ function SuscribirEventoGuardar() {
 function opcionHabilitarView(valor, name) {
     if (valor) {
         $('#FieldSetView').find('*').attr('disabled', true);
-       
+
 
         $('#InputID').data("kendoComboBox").enable(false);
         $("#inputProceso").data("kendoComboBox").enable(false);
         $("#inputPrueba").data("kendoComboBox").enable(false);
         $("#inputColor").data("kendoComboBox").enable(false);
-        
+
         $('#botonGuardar2').text("Editar");
         $('#botonGuardar').text("Editar");
         $('#botonGuardar3').text("Editar");
         $('#botonGuardar4').text("Editar");
         $('.k-grid-add').click(function () { return false; });
-       
+
     }
     else {
         $('#FieldSetView').find('*').attr('disabled', false);
-        
+
 
         $('#InputID').data("kendoComboBox").enable(true);
         $("#inputProceso").data("kendoComboBox").enable(true);

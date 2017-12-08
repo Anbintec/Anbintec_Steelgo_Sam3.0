@@ -508,16 +508,13 @@ function SuscribirEventoSpoolID() {
 	$("#InputOrdenTrabajo").blur(function (e) {
 
 		if ($("#InputOrdenTrabajo").val() != "") {
-			if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z][0-9]*$")) {
+			
 				try {
 					AjaxObtenerSpoolID();
 				} catch (e) {
 					displayNotify("", e.message, '2');
 				}
-			} else {
-				$("#InputOrdenTrabajo").val("");
-				displayNotify("PinturaCargaMensajeOrdenTrabajo", "", '1');
-			}
+			
 		}
 
 	});

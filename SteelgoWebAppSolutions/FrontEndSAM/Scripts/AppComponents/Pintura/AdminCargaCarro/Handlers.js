@@ -93,7 +93,7 @@ function SuscribirEventoCuadrante() {
         filter: "contains",
         change: function (e) {
             var dataItem = this.dataItem(e.sender.selectedIndex);
-            if (dataItem != undefined && dataItem.Cuadrante!="") {
+            if (dataItem != undefined && dataItem.Cuadrante != "") {
 
             }
             else {
@@ -280,23 +280,36 @@ function SuscribirEventoSpoolID() {
         suggest: true,
         filter: "contains",
         index: 3,
-        delay: 10
+        delay: 10,
+        change: function (e) {
+            var dataItem = this.dataItem(e.sender.selectedIndex);
+
+            if (dataItem != undefined) {
+                if (dataItem.Status != 1) {
+                    displayNotify("", dataItem.Status, '1');
+                    $("#InputID").data("kendoComboBox").value("");
+                }
+            }
+            else {
+                $("#InputID").data("kendoComboBox").value("");
+            }
+        }
     });
 
     $("#InputOrdenTrabajo").blur(function (e) {
 
-        if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z][0-9]*$")) {
-            try {
-                $("#InputID").data("kendoComboBox").enable(false);
-                AjaxObtenerSpoolID();
-            } catch (e) {
-                displayNotify("Mensajes_error", e.message, '2');
+        //if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z][0-9]*$")) {
+        try {
+            $("#InputID").data("kendoComboBox").enable(false);
+            AjaxObtenerSpoolID();
+        } catch (e) {
+            displayNotify("Mensajes_error", e.message, '2');
 
-            }
-        } else {
-            displayNotify("CapturaArmadoMensajeOrdenTrabajo", "", '1');
-            //$("#InputOrdenTrabajo").focus();
         }
+        //} else {
+        //    displayNotify("CapturaArmadoMensajeOrdenTrabajo", "", '1');
+        //    //$("#InputOrdenTrabajo").focus();
+        //}
     });
 
 

@@ -82,7 +82,8 @@ namespace BackEndSAM.DataAcces.PinturaBD.CapturaAvanceBD
                             Nombre = item.Nombre,
                             MedioTransporteCargaID = item.MedioTransporteCargaID,
                             SistemaPinturaProyectoID = item.SistemaPinturaProyectoID,
-                            CuadranteID=item.CuadranteID
+                            CuadranteID=item.CuadranteID,
+                            ProyectoID=item.ProyectoID
                         });
 
                     }

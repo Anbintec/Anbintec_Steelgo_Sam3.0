@@ -155,6 +155,7 @@ namespace BackEndSAM.Models.Pintura.CapturaAvance
         public int SistemaPinturaProyectoID { get; set; }
 
         public int CuadranteID { get; set; }
+        public int ProyectoID { get; set; }
 
         public CarroCerrado()
         {
@@ -163,6 +164,7 @@ namespace BackEndSAM.Models.Pintura.CapturaAvance
             Nombre = "";
             SistemaPinturaProyectoID = 0;
             CuadranteID = 0;
+            ProyectoID = 0;
         }
     }
 
