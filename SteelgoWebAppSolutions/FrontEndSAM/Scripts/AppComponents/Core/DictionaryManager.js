@@ -13667,6 +13667,10 @@ _dictionary = {
 	    "es-MX": "Sustituir",
 	    "en-US": "Replace"
 	},
+	"MenuListadoIncidenciasBilingues": {
+	    "es-MX": "Listado de Incidencias Bilingues",
+	    "en-US": "Bilingual Incidences List"
+	},
     //Finaliza Modulo Incidencias
 
 };

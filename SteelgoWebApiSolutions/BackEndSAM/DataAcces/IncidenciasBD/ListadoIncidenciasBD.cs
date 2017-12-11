@@ -126,7 +126,7 @@ namespace BackEndSAM.DataAcces.IncidenciasBD
                         //fechaInicial = new DateTime(year, mes, DateTime.Now.Day);
                         fechaInicial = new DateTime(2000, 01, 01);
                     }
-
+                    fechaFinal = fechaFinal.AddDays(1);
                     int proyectoID = ProyectoID != 0 ? Convert.ToInt32(ProyectoID) : 0;
                     int clienteID = 0;
 
