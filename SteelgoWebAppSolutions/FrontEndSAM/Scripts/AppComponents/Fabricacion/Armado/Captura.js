@@ -152,7 +152,24 @@ function FiltroMostrar(mostrar) {
 }
 function CargarGrid() {
 
-	$("#grid").kendoGrid({
+    $("#grid").kendoGrid({
+        autoBind: true,
+        autoSync: true,
+        save: function (e) {
+            var focusedCellIndex = this.current()[0].cellIndex;
+            var dataItem = e.model;
+            var grid = this;
+            nextDataItem = this.dataSource.at(this.dataSource.indexOf(dataItem) + 1);
+
+            this.refresh();
+            setTimeout(function () {
+                return function () {
+                    var focusedCell = $("#grid tr[data-uid='" + e.model.uid + "'] td:nth-child(" + (focusedCellIndex + 1) + ")");
+                    grid.select(focusedCell);
+                    grid.editCell(focusedCell);
+                }
+            }(), 10);
+        },
 		edit: function (e) {
 
 			//if ($('#botonGuardar').text() == _dictionary.MensajeGuardar[$("#language").data("kendoDropDownList").value()]) {
@@ -245,11 +262,11 @@ function CargarGrid() {
 		scrollable: true,
 		selectable: true,
 		pageable: {
-			refresh: false,
-			pageSizes: [10, 25, 50, 100],
-			info: false,
-			input: false,
-			numeric: true
+		    refresh: false,
+		    pageSizes: [10, 25, 50, 100],
+		    info: false,
+		    input: false,
+		    numeric: true,
 		},
 		filterable: getGridFilterableMaftec(),
 		columns: [

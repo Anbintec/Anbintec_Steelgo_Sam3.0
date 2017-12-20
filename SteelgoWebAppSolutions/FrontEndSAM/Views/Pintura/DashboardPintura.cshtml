@@ -1,0 +1,307 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #grid > .k-grid-header > div > table,
+    #grid > .k-grid-content > table {
+        width: 100% !important;
+    }
+</style>
+
+@section breadcrumb {
+    <li>
+        <a href="@Url.Action("landing", "Home")"><span id="DashboardDespachoCorte0001"></span></a>
+    </li>
+    <li class="">
+        <a href="#"><span id="PinturaBreadcrumb"></span></a>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("DashboardPintura", "Pintura")"><span id="PinturaDashboardBreadcrumb"></span></a>
+    </li>
+}
+
+
+<div id="formDashboardPintura" class="form clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="formNav filtersFields clearfix">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2">
+                        <label id="lblMostrar"></label>
+
+                        <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="PorSpool"  checked/><span>Por Spool</span><br />
+                        <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="PorM2" /><span>Por M2</span><br />
+                        <input type="radio" name="Muestra" class="radio-responsive" style="width:auto;" value="PorToneladas" /><span>Por Toneladas</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="divProyecto">
+                        <label id="lblProyecto"></label>
+                        <input id="inputProyecto" />
+                    </div>
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" id="divCliente">
+                        <label id="lblCliente"></label>
+                        <input id="inputCliente" />
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-2 col-lg-3" id="divPeriodo">
+                        <label id="lblPeriodo"></label>
+                        <input id="InputPeriodo" />
+                    </div>
+                    
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2">
+                        <label></label>
+                    </div>
+                    
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 altoControl" id="FechaInicialDiv">
+                        <label id="lblFechaInicial"></label>
+                        <input id="inputFechaInicial" />
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3" id="FechaFinalDiv">   
+                        <label id="lblFechaFinal"></label>
+                        <input id="inputFechaFinal" />
+                    </div>
+                    <div class="col-xs-12 col-sm-2 col-md-3 col-lg-3">
+                        <label id="">&nbsp;</label>
+                        <button class="btn btn-blue"  id="btnBuscar">
+                            <span id="botonMostrar"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            @*GRID POPUP*@
+            <div id="windowGrid" style="display: none; z-index:inherit;">
+
+                <div class="row col-sm-12 col-md-12 col-lg-12" style="width: 100%; padding-right:20px;">
+                    <div class="form-group">
+                        <div id="ContenedorGridPopUp">
+                            <div id="gridPopUp" data-role="grid" class="k-grid k-widget">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-sm-5 col-md-5 col-lg-5"></div>
+                    <a class=" btn btn-primary col-sm-1 col-md-1 col-lg-1" href="#" id="CerrarDetalleJunta">
+                        <span id="botonCerrar"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div id="tabEstatus" class="btn-group col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboardNoPadding" role="group" arial-label="tabs">
+                    <button id="btnShotBlast" class="btn btn-tab btn-dashPinturaHeader" >
+                        <label id="lblShotblast"></label>
+                    </button>
+                    <button id="btnPrimario" class="btn btn-tab btn-dashPintura3Header" >
+                        <label id="lblPrimario"></label>
+                    </button>
+                    <button id="btnIntermedio" class="btn btn-tab btn-dashPintura2Header" >
+                        <label id="lblIntermedio"></label>
+                    </button>
+                    <button id="btnAcabado" class="btn btn-tab btn-dashPintura2Header" >
+                        <label id="lblAcabado"></label>
+                    </button>
+                    <button id="btnOKPintura" class="btn btn-tab btn-dashPinturaOKPinturaHeader" >
+                        <label id="menuOkPintura"></label>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div id="tabEstatus2"  class="btn-group col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboardNoPadding" role="group" arial-label="tabs">
+                    <button class="btn btn-tab btn-dashPintura" onclick="ActivarRefrescarGrid(1)">
+                        <label >Por cargar</label>
+                        <span id="SPorCargar" class="filtroSpool">0</span>
+                        <span id="SPorCargar2" class="filtroM2">1</span>
+                        <span id="SPorCargar3" class="filtroTon">2</span>
+                    </button>
+                    <button  class="btn btn-tab btn-dashPintura" onclick="ActivarRefrescarGrid(2)">
+                        <label>Por Capturar</label>
+                        <span id="SPorCapturar" class="filtroSpool">0</span>
+                        <span id="SPorCapturar2" class="filtroM2">1</span>
+                        <span id="SPorCapturar3" class="filtroTon">2</span>
+                    </button>
+                    <button class="btn btn-tab btn-dashPintura" onclick="ActivarRefrescarGrid(3)">
+                        <label >Por Probar</label>
+                        <span id="SPorProbar" class="filtroSpool">0</span>
+                        <span id="SPorProbar2" class="filtroM2">1</span>
+                        <span id="SPorProbar3" class="filtroTon">2</span>
+                    </button>
+                    <button class="btn btn-tab btn-dashPintura" onclick="ActivarRefrescarGrid(12)">
+                        <label>Por Descargar</label>
+                        <span id="SPorDescargar" class="filtroSpool">3</span>
+                        <span id="SPorDescargar2" class="filtroM2">1</span>
+                        <span id="SPorDescargar3" class="filtroTon">2</span>
+                    </button>
+
+
+                    <button class="btn btn-tab btn-dashPintura" onclick="ActivarRefrescarGrid(4)">
+                        <label >Por Capturar</label>
+                        <span id="PPorCapturar" class="filtroSpool">0</span>
+                        <span id="PPorCapturar2" class="filtroM2">1</span>
+                        <span id="PPorCapturar3" class="filtroTon">2</span>
+                    </button>
+                    <button class="btn btn-tab btn-dashPintura" onclick="ActivarRefrescarGrid(5)">
+                        <label >Por Probar</label>
+                        <span id="PPorProbar" class="filtroSpool">5</span>
+                        <span id="PPorProbar2" class="filtroM2">1</span>
+                        <span id="PPorProbar3" class="filtroTon">2</span>
+                    </button>
+                    <button class="btn btn-tab btn-dashPintura" onclick="ActivarRefrescarGrid(6)">
+                        <label >Por Descargar</label>
+                        <span id="PPorDescargar" class="filtroSpool">3</span>
+                        <span id="PPorDescargar2" class="filtroM2">1</span>
+                        <span id="PPorDescargar3" class="filtroTon">2</span>
+                    </button>
+
+                    <button class="btn btn-tab btn-dashPintura" onclick="ActivarRefrescarGrid(7)">
+                        <label >Por Capturar</label>
+                        <span id="IPorCapturar" class="filtroSpool">0</span>
+                        <span id="IPorCapturar2" class="filtroM2">1</span>
+                        <span id="IPorCapturar3" class="filtroTon">2</span>
+                    </button>
+                    <button class="btn btn-tab btn-dashPintura" onclick="ActivarRefrescarGrid(8)">
+                        <label >Por Probar</label>
+                        <span id="IPorProbar" class="filtroSpool">0</span>
+                        <span id="IPorProbar2" class="filtroM2">1</span>
+                        <span id="IPorProbar3" class="filtroTon">2</span>
+                    </button>
+
+                    <button class="btn btn-tab btn-dashPintura" onclick="ActivarRefrescarGrid(9)">
+                        <label>Por Capturar</label>
+                        <span id="APorCapturar" class="filtroSpool">0</span>
+                        <span id="APorCapturar2" class="filtroM2">1</span>
+                        <span id="APorCapturar3" class="filtroTon">2</span>
+                    </button>
+                    <button class="btn btn-tab btn-dashPintura" onclick="ActivarRefrescarGrid(10)">
+                        <label>Por Probar</label>
+                        <span id="APorProbar" class="filtroSpool">4</span>
+                        <span id="APorProbar2" class="filtroM2">1</span>
+                        <span id="APorProbar3" class="filtroTon">2</span>
+                    </button>
+                    <button class="btn btn-tab btn-dashPinturaOKPintura" onclick="ActivarRefrescarGrid(11)">
+                        <label></label>
+                        <span id="OkPintura" class="filtroSpool">7</span>
+                        <span id="OkPintura2" class="filtroM2">1</span>
+                        <span id="OkPintura3" class="filtroTon">2</span>
+                    </button>
+                </div>
+
+                <div id="contenidoDashboardTab" class="btn-group form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboardNoPadding" style="z-index:999; position:absolute; display:none;" role="group" arial-label="tabs">
+
+                    <button id="1" class="btn btn-tabList btn-listPintura" onclick="ActivarRefrescarGrid(1)">
+                        <span>Por <br>cargar</span>
+                        <span id="SPorCargar4" class="filtroSpool">0</span>
+                        <span id="SPorCargar5" class="filtroM2">1</span>
+                        <span id="SPorCargar6" class="filtroTon">2</span>
+                    </button>
+                    <button id ="2" class="btn btn-tabList btn-listPintura" onclick="ActivarRefrescarGrid(2)">
+                        <span>Por<br> Capturar</span>
+                        <span id="SPorCapturar4" class="filtroSpool">0</span>
+                        <span id="SPorCapturar5" class="filtroM2">1</span>
+                        <span id="SPorCapturar6" class="filtroTon">2</span>
+                    </button>
+                    <button id ="3"  class="btn btn-tabList btn-listPintura" onclick="ActivarRefrescarGrid(3)">
+                        <span>Por<br> Probar</span>
+                        <span id="SPorProbar4" class="filtroSpool">0</span>
+                        <span id="SPorProbar5" class="filtroM2">1</span>
+                        <span id="SPorProbar6" class="filtroTon">2</span>
+                    </button>
+                    <button id="12" class="btn btn-tabList btn-listPintura" onclick="ActivarRefrescarGrid(12)">
+                        <span>Por<br> Descargar</span>
+                        <span id="SPorDescargar4" class="filtroSpool">3</span>
+                        <span id="SPorDescargar5" class="filtroM2">1</span>
+                        <span id="SPorDescargar6" class="filtroTon">2</span>
+                    </button>
+
+                    <button id ="4"  class="btn btn-tabList btn-listPintura" onclick="ActivarRefrescarGrid(4)">
+                        <span>Por<br> Capturar</span>
+                        <span id="PPorCapturar4" class="filtroSpool">0</span>
+                        <span id="PPorCapturar5" class="filtroM2">1</span>
+                        <span id="PPorCapturar6" class="filtroTon">2</span>
+                    </button>
+                    <button id ="5"  class="btn btn-tabList btn-listPintura" onclick="ActivarRefrescarGrid(5)">
+                        <span>Por<br> Probar</span>
+                        <span id="PPorProbar4" class="filtroSpool">5</span>
+                        <span id="PPorProbar5" class="filtroM2">1</span>
+                        <span id="PPorProbar6" class="filtroTon">2</span>
+                    </button>
+                    <button id ="6"  class="btn btn-tabList btn-listPintura" onclick="ActivarRefrescarGrid(6)">
+                        <span>Por<br> Descargar</span>
+                        <span id="PPorDescargar4" class="filtroSpool">3</span>
+                        <span id="PPorDescargar5" class="filtroM2">1</span>
+                        <span id="PPorDescargar6" class="filtroTon">2</span>
+                    </button>
+
+                    <button id ="7" class="btn btn-tabList btn-listPintura" onclick="ActivarRefrescarGrid(7)">
+                        <span>Por<br> Capturar</span>
+                        <span id="IPorCapturar4" class="filtroSpool">0</span>
+                        <span id="IPorCapturar5" class="filtroM2">1</span>
+                        <span id="IPorCapturar6" class="filtroTon">2</span>
+                    </button>
+                    <button id ="8"  class="btn btn-tabList btn-listPintura" onclick="ActivarRefrescarGrid(8)">
+                        <span>Por<br> Probar</span>
+                        <span id="IPorProbar4" class="filtroSpool">0</span>
+                        <span id="IPorProbar5" class="filtroM2">1</span>
+                        <span id="IPorProbar6" class="filtroTon">2</span>
+                    </button>
+
+                    <button id ="9"  class="btn btn-tabList btn-listPintura" onclick="ActivarRefrescarGrid(9)">
+                        <span>Por<br> Capturar</span>
+                        <span id="APorCapturar4" class="filtroSpool">0</span>
+                        <span id="APorCapturar5" class="filtroM2">1</span>
+                        <span id="APorCapturar6" class="filtroTon">2</span>
+                    </button>
+                    <button id ="10"  class="btn btn-tabList btn-listPintura" onclick="ActivarRefrescarGrid(10)">
+                        <span>Por<br> Probar</span>
+                        <span id="APorProbar4" class="filtroSpool">4</span>
+                        <span id="APorProbar5" class="filtroM2">1</span>
+                        <span id="APorProbar6" class="filtroTon">2</span>
+                    </button>
+                    <button id ="11" class="btn btn-tabList btn-listPinturaOk" onclick="ActivarRefrescarGrid(11)">
+                        <span> Ok<br> Pintura</span>
+                        <span id="OkPintura4" class="filtroSpool">7</span>
+                        <span id="OkPintura5" class="filtroM2">1</span>
+                        <span id="OkPintura6" class="filtroTon">2</span>
+                    </button>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            @*GRID*@
+            <div class="row " style="display:none;" id="contenidoDashboard">
+               
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    
+                    <div id="ContenedorGrid" style="display:none;">
+                        <div id="grid" data-role="grid" class="k-grid k-widget">
+                        </div>
+                        <input id="hdAccionFiltrado" type="hidden" />
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/DashboardPintura/Ajax.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/DashboardPintura/Handlers.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/DashboardPintura/Captura.js"></script>
+<script type="text/javascript" src="~/Scripts/AppComponents/Pintura/DashboardPintura/Seguridad.js"></script>
+
+
+    <script>
+    Cookies.set("home", true, { path: '/' });
+    Cookies.set("navegacion", "10042", { path: '/' });
+    @section JavascriptDocumentReadyFunctions {
+    //$authorizationModel["AsignarRequisicion"] = $AsignarRequisicionModel;
+    }
+    </script>
