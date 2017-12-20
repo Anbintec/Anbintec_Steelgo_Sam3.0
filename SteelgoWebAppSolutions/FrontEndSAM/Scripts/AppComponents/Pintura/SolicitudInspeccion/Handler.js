@@ -13,19 +13,35 @@ function SuscribirEventos() {
 function SuscribirEventoID() {
     var dataItem;
     $("#InputID").kendoComboBox({
-        dataTextField: "ID",
-        dataValueField: "SpoolID",
+        dataTextField: "IDValido",
+        dataValueField: "Valor",
         suggest: true,
         delay: 10,
         filter: "endswith",
         index: 3,
         change: function (e) {
-            dataItem = this.dataItem(e.sender.selectedIndex);
-            if (dataItem != undefined) {
-                if ($("#InputID").val().length == 1) {
-                    $("#InputID").data("kendoComboBox").value(("00" + $("#InputID").val()).slice(-3));
+            //dataItem = this.dataItem(e.sender.selectedIndex);
+            //if (dataItem != undefined) {
+            //    if ($("#InputID").val().length == 1) {
+            //        $("#InputID").data("kendoComboBox").value(("00" + $("#InputID").val()).slice(-3));
+            //    }
+            //    if ($("#InputID").val() != '' && $("#InputOrdenTrabajo").val() != '') {
+            //        Cookies.set("Proyecto", dataItem.ProyectoID + '°' + dataItem.Proyecto);
+            //        $("#LabelProyecto").text(dataItem.Proyecto);
+            //    }
+            //}
+        },
+        select: function (e) {
+            var dataItem = this.dataItem(e.item.index());
+            if (dataItem != undefined && dataItem.IDValido != "") {
+                if (dataItem.Status != "1") {
+                    e.preventDefault();
+                    $("#InputID").data("kendoComboBox").value("0");
+                    $("#InputID").data("kendoComboBox").text("");
+                    displayNotify("notificationslabel0057", "", 1)
                 }
-                if ($("#InputID").val() != '' && $("#InputOrdenTrabajo").val() != '') {
+                else {
+                    $("#InputID").val(dataItem.IDValido);
                     Cookies.set("Proyecto", dataItem.ProyectoID + '°' + dataItem.Proyecto);
                     $("#LabelProyecto").text(dataItem.Proyecto);
                 }
@@ -39,8 +55,9 @@ function SuscribirEventosOrdenTrabajo() {
     $("#InputOrdenTrabajo").blur(function (e) {
         if ($("#InputOrdenTrabajo").val().match("^[a-zA-Z][0-9]*$")) {
             //try {
-                var OrdenTrabajoOrigianl = $("#InputOrdenTrabajo").val();
-                $SolicitudInspeccion.SolicitudInspeccion.read({ token: Cookies.get("token"), OrdenTrabajo: $("#InputOrdenTrabajo").val(), Lenguaje: $("#language").val() }).done(function (data) {
+            var OrdenTrabajoOrigianl = $("#InputOrdenTrabajo").val();            
+            //$SolicitudInspeccion.SolicitudInspeccion.read({ token: Cookies.get("token"), OrdenTrabajo: $("#InputOrdenTrabajo").val(), Lenguaje: $("#language").val() }).done(function (data) {
+            $RequisicionInspeccion.RequisicionInspeccion.read({ token: Cookies.get("token"), OrdenTrabajo: $("#InputOrdenTrabajo").val(), Lenguaje: $("#language").val() }).done(function (data) {
                     if (Error(data)) {
                         if (data.OrdenTrabajo != "") {
                             $("#InputOrdenTrabajo").val(data.OrdenTrabajo);
@@ -155,8 +172,18 @@ function SuscribirEventoAgregar() {
         var InputID = $("#InputID").data("kendoComboBox").text();
         if ($('#btnGuardarSup').text() == _dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]) {
             if (OrdenTrabajo != "" && InputID != "") {
-                AjaxObtenerInfoBySpool((OrdenTrabajo + "-" + InputID).toString());
-                $("#InputID").data("kendoComboBox").value("");
+                if ($("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()) != undefined && $("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).IDValido != "") {
+                    AjaxObtenerInfoBySpool((OrdenTrabajo + "-" + InputID).toString());
+                    $("#InputID").data("kendoComboBox").value("");
+                } else {
+                    e.preventDefault();
+                    $("#InputID").data("kendoComboBox").value("0");
+                    $("#InputID").data("kendoComboBox").text("");
+                    displayNotify("notificationslabel0057", "", 1)
+                    $("#InputID").data("kendoComboBox").close();
+                }
+                //AjaxObtenerInfoBySpool((OrdenTrabajo + "-" + InputID).toString());
+                //$("#InputID").data("kendoComboBox").value("");
             } else {
                 displayNotify("", "Por Favor Ingrese Spool ID", "1");
             }
@@ -171,8 +198,18 @@ function SuscribirEventoEnterSpoolID() {
             var InputID = $("#InputID").data("kendoComboBox").text();
             if ($('#btnGuardarSup').text() == _dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]) {
                 if (OrdenTrabajo != "" && InputID != "") {
-                    AjaxObtenerInfoBySpool((OrdenTrabajo + "-" + InputID).toString());
-                    $("#InputID").data("kendoComboBox").value("");
+                    if ($("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()) != undefined && $("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).IDValido != "") {
+                        AjaxObtenerInfoBySpool((OrdenTrabajo + "-" + InputID).toString());
+                        $("#InputID").data("kendoComboBox").value("");
+                    } else {
+                        e.preventDefault();
+                        $("#InputID").data("kendoComboBox").value("0");
+                        $("#InputID").data("kendoComboBox").text("");
+                        displayNotify("notificationslabel0057", "", 1)
+                        $("#InputID").data("kendoComboBox").close();
+                    }
+                    //AjaxObtenerInfoBySpool((OrdenTrabajo + "-" + InputID).toString());
+                    //$("#InputID").data("kendoComboBox").value("");
                 } else {
                     displayNotify("", "Por Favor Ingrese Spool ID", "1");
                 }

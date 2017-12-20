@@ -30,18 +30,22 @@ namespace BackEndSAM.Controllers.Pintura.RequisicionInspeccion
                 bool tokenValido = ManageTokens.Instance.ValidateToken(token, out payload, out newToken);
                 if (tokenValido)
                 {
-                    IdOrdenTrabajoPintura idOrdenTrabajo = new IdOrdenTrabajoPintura();
+                    //IdOrdenTrabajoPintura idOrdenTrabajo = new IdOrdenTrabajoPintura();
+                    IdOrdenTrabajo idOrdenTrabajo = new IdOrdenTrabajo();
                     List<Sam3_Pintura_GET_SpoolIDRequisitado_Result> lista = (List<Sam3_Pintura_GET_SpoolIDRequisitado_Result>)RequisicionInspeccionBD.Instance.ObtenerSpoolID(OrdenTrabajo, Lenguaje);
-                    List<Spool> listaAtatus = new List<Spool>();
+                    //List<Spool> listaAtatus = new List<Spool>();
+                    List<IDS> listaAtatus = new List<IDS>();
                     if (lista.Count > 0)
                     {
-                        listaAtatus.Add(new Spool());
+                        //listaAtatus.Add(new Spool());
+                        listaAtatus.Add(new IDS());
                         foreach (var item in lista)
                         {
-                            //listaAtatus.Add(new IDS { Status = item.status, IDValido = item.ID, Proyecto = item.NombreProyecto, Valor = item.OrdenTrabajoSpoolID, ProyectoID = item.ProyectoID });
-                            listaAtatus.Add(new Spool { SpoolID = item.SpoolID, OrdenTrabajo = item.OrdenTrabajo, ID = item.ID, OrdenTrabajoSpoolID = item.OrdenTrabajoSpoolID });
+                            listaAtatus.Add(new IDS { Status = item.status, IDValido = item.ID, Proyecto = item.NombreProyecto, Valor = item.OrdenTrabajoSpoolID, ProyectoID = item.ProyectoID });
+                            //listaAtatus.Add(new Spool { SpoolID = item.SpoolID, OrdenTrabajo = item.OrdenTrabajo, ID = item.ID, OrdenTrabajoSpoolID = item.OrdenTrabajoSpoolID });
                         }
-                        idOrdenTrabajo = new IdOrdenTrabajoPintura
+                        //idOrdenTrabajo = new IdOrdenTrabajoPintura
+                        idOrdenTrabajo = new IdOrdenTrabajo
                         {
                             OrdenTrabajo = lista[0].OrdenTrabajo,
                             idStatus = listaAtatus
@@ -49,7 +53,8 @@ namespace BackEndSAM.Controllers.Pintura.RequisicionInspeccion
                     }
                     else
                     {
-                        idOrdenTrabajo = new IdOrdenTrabajoPintura
+                        //idOrdenTrabajo = new IdOrdenTrabajoPintura
+                        idOrdenTrabajo = new IdOrdenTrabajo
                         {
                             OrdenTrabajo = "",
                             idStatus = listaAtatus
