@@ -100,7 +100,8 @@ function AjaxCargarPaquetes(proyectoID) {
 function AjaxObtenerSpoolID() {
     try {
         loadingStart();
-        $CapturasRapidas.CapturasRapidas.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {            
+        //$CapturasRapidas.CapturasRapidas.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {            
+        $CapturasRapidas.CapturasRapidas.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val(), ProyectoID: $("#Proyecto").val() == undefined ? 0 : $("#Proyecto").val(), ParametroExtra: true }).done(function (data) {
             if (Error(data)) {
                 if (data.OrdenTrabajo != "") {
                     $("#InputOrdenTrabajo").val(data.OrdenTrabajo);

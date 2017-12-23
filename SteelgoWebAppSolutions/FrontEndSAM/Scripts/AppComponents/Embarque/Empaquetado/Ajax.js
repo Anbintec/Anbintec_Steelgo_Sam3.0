@@ -39,7 +39,8 @@ function AjaxCargarProyectos() {
 function AjaxObtenerSpoolID() {
     try {
         loadingStart();
-        $CapturasRapidas.CapturasRapidas.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {
+        //$CapturasRapidas.CapturasRapidas.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {
+        $CapturasRapidas.CapturasRapidas.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val(), ProyectoID: $("#InputProyecto").val() == undefined ? 0 : $("#InputProyecto").val(), ParametroExtra: true }).done(function (data) {
             if (Error(data)) {
                 $("#InputOrdenTrabajo").val(data.OrdenTrabajo);
                 $("#InputID").data("kendoComboBox").dataSource.data(data.idStatus)

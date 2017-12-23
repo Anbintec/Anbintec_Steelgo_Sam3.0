@@ -65,6 +65,28 @@ namespace BackEndSAM.DataAcces.Sam3General.CapturasRapidas
             }
         }
 
+        public object ObtenerIDOrdenTrabajoPorProyecto(string ordentrabajo, int ProyectoID, int tipo, string lenguaje)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {
+                    List<Sam3_Steelgo_Get_SpoolID_ProyectoID_Result> lista = ctx.Sam3_Steelgo_Get_SpoolID_ProyectoID(tipo, ordentrabajo, lenguaje, ProyectoID).ToList();
+                    return lista;
+                }
+            }
+            catch (Exception ex)
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
+
         /// <summary>
         /// obtiene la orden de trabajo mediante Numero de Control
         /// </summary>

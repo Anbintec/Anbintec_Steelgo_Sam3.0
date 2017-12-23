@@ -74,6 +74,57 @@ namespace BackEndSAM.Controllers.Sam3General.CapturasRapidas
             }
 
         }
+        public object Get(string ordenTrabajo, int tipo, string token, string lenguaje, int ProyectoID, bool ParametroExtra)
+        {
+            //Create a generic return object
+            string payload = "";
+            string newToken = "";
+            bool tokenValido = ManageTokens.Instance.ValidateToken(token, out payload, out newToken);
+            if (tokenValido)
+            {
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                Sam3_Usuario usuario = serializer.Deserialize<Sam3_Usuario>(payload);
+                IdOrdenTrabajo idOrdenTrabajo = new IdOrdenTrabajo();
+
+                List<Sam3_Steelgo_Get_SpoolID_ProyectoID_Result> lista = (List<Sam3_Steelgo_Get_SpoolID_ProyectoID_Result>)CapturasRapidasBd.Instance.ObtenerIDOrdenTrabajoPorProyecto(ordenTrabajo, ProyectoID, tipo, lenguaje);
+                List<IDS> listaAtatus = new List<IDS>();
+                if (lista.Count > 0)
+                {
+                    listaAtatus.Add(new IDS());
+                    foreach (var item in lista)
+                    {
+                        listaAtatus.Add(new IDS { Status = item.status, IDValido = item.ID, Proyecto = item.NombreProyecto, Valor = item.OrdenTrabajoSpoolID, ProyectoID = item.ProyectoID });
+                    }
+
+                    idOrdenTrabajo = new IdOrdenTrabajo
+                    {
+                        OrdenTrabajo = lista[0].OrdenTrabajo,
+                        idStatus = listaAtatus
+                    };
+                }
+                else
+                {
+                    idOrdenTrabajo = new IdOrdenTrabajo
+                    {
+                        OrdenTrabajo = "",
+                        idStatus = listaAtatus
+                    };
+                };
+                return idOrdenTrabajo;
+
+            }
+            else
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(payload);
+                result.ReturnCode = 401;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = false;
+                return result;
+            }
+
+        }
+
         [HttpGet]
         public object ObtenerOrdenTrabajoPorNumeroControl(bool extra, string ordenTrabajo, string token, string lenguaje, bool extra2)
         {

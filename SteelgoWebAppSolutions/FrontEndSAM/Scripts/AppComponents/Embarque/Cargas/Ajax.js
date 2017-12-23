@@ -21,7 +21,7 @@ function AjaxCargarCamposPredeterminados() {
 
 function AjaxObtenerSpoolID() {
     var OrdenTrabajoOrigianl = $("#InputOrdenTrabajo").val();
-    $CapturasRapidas.CapturasRapidas.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {
+    $CapturasRapidas.CapturasRapidas.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val(), ProyectoID: $("#inputProyecto").val() == undefined ? 0 : $("#inputProyecto").val(), ParametroExtra: true }).done(function (data) {
         dataSpoolArray = data;
         if (Error(data)) {
             if (data.OrdenTrabajo != "") {
