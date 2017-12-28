@@ -233,7 +233,7 @@ function AjaxEjecutarGuardado(data, guardarYNuevo) {
 
 function AjaxMostrarInformacionSpool(unidadMedida, unidadMinima, unidadMaxima) {
     loadingStart();
-    $PruebasPorLote.PruebasPorLote.read({ token: Cookies.get("token"), ordentrabajospoolid: $("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).Valor, sistemapinturacolorid: $("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID == 4 ? $("#inputColor").data("kendoComboBox").dataItem($("#inputColor").data("kendoComboBox").select()).SistemaPinturaColorID : 0, lenguaje: $("#language").val(), variable: 0 }).done(function (data) {
+    $PruebasPorLote.PruebasPorLote.read({ token: Cookies.get("token"), ordentrabajospoolid: $("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).Valor, sistemapinturacolorid: $("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID == 4 ? $("#inputColor").data("kendoComboBox").dataItem($("#inputColor").data("kendoComboBox").select()).SistemaPinturaColorID : 0, lenguaje: $("#language").val(), ProcesoPinturaID: $("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID }).done(function (data) {
         if (Error(data)) {
             if (data.length > 0) {
                 $('#InformacionSpoolDiv').show();

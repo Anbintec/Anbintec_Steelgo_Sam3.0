@@ -493,14 +493,17 @@ function SuscribirEventoSpoolID() {
 		index: 3,
 		delay: 10,
 		change: function (e) {
-			dataItem = this.dataItem(e.sender.selectedIndex);
+		    dataItem = this.dataItem(e.sender.selectedIndex);
 
-			if (dataItem != undefined) {
-
-			}
-			else {
-				$("#InputID").data("kendoComboBox").value("");
-			}
+		    if (dataItem != undefined) {
+		        if (dataItem.Status != 1) {
+		            displayNotify("", dataItem.Status, '1');
+		            $("#InputID").data("kendoComboBox").value("");
+		        }
+		    }
+		    else {
+		        $("#InputID").data("kendoComboBox").value("");
+		    }
 
 		}
 	});

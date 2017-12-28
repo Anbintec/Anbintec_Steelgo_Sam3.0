@@ -17,6 +17,8 @@ var CarroAnterior;
 var ColorAnterior;
 
 IniciarCapturaArmado();
+var nextCell = null;
+
 
 function IniciarCapturaArmado() {
     AltaFecha();
@@ -403,6 +405,11 @@ function CrearGrid() {
                 this.closeCell();
             }
 
+            nextCell = {
+                cellIndex: e.container[0].cellIndex,
+                uid: e.model.uid,
+            };
+
         },
         dataBound: function (e) {
             var ds = $("#grid").data("kendoGrid");
@@ -440,6 +447,15 @@ function CrearGrid() {
             }
             else {
                 $(".k-grid-content td").css("white-space", "nowrap");
+            }
+
+            if (nextCell != null) {
+                var grid = e.sender;
+                console.log("set focus to next cell", nextCell);
+                var nextCellIndex = nextCell.cellIndex;
+                var row = grid.items().filter("tr[data-uid=" + nextCell.uid + "]");
+                var cell = row.find("td:eq(" + nextCellIndex + ")");
+                grid.current(cell);
             }
         }
     });

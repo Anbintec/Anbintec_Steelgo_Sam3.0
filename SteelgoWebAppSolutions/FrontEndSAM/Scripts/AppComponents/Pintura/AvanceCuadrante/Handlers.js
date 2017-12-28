@@ -321,7 +321,21 @@ function SuscribirEventoSpoolID() {
         suggest: true,
         filter: "contains",
         index: 3,
-        delay: 10
+        delay: 10,
+        change: function (e) {
+            dataItem = this.dataItem(e.sender.selectedIndex);
+
+            if (dataItem != undefined) {
+                if (dataItem.Status != 1) {
+                    displayNotify("", dataItem.Status, '1');
+                    $("#InputID").data("kendoComboBox").value("");
+                }
+            }
+            else {
+                $("#InputID").data("kendoComboBox").value("");
+            }
+
+        }
         
     });
 

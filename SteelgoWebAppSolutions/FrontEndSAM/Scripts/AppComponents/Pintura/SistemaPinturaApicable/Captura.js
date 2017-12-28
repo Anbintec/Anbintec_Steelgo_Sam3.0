@@ -1,4 +1,4 @@
-﻿
+﻿ 
 var esNormal;
 var editado = false;
 var lineaCaptura = { ProyectoID: "", dato: "" }

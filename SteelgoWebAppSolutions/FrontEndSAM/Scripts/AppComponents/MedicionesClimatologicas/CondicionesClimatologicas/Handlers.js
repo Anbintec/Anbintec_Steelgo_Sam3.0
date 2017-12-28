@@ -29,7 +29,7 @@ function SuscribirEventos() {
     //SubscribeHora();
 
 };
-SuscribirEventos();
+setTimeout(function () { SuscribirEventos() }, 800);
 
 function EventoGuardar() {
     //AjaxGuardarCaptura(0);
@@ -133,7 +133,7 @@ function SubscribeMedicionesHumedad() {
         filter: "contains",
         index: 0
     });
-    
+
 
 }
 
@@ -158,15 +158,18 @@ function SubscribeMedicionesCampoX() {
     });
 
 }
-
+var fechaToma;
 
 function SubscribeCalendarFechaToma() {
-    $("#inputMedicionesfechaToma").kendoDatePicker({
-        parseFormats: ["MMddyyyy"],
+    fechaToma = $("#inputMedicionesfechaToma").kendoDatePicker({
+
         change: function (e) {
             if (ValidarFecha(e.sender._value))
                 ConsultarExistenciaCondicionesClimatologicas();
         }
+    });
+    fechaToma.data("kendoDatePicker").setOptions({
+        format: _dictionary.FormatoFecha2[$("#language").data("kendoDropDownList").value()]
     });
 }
 

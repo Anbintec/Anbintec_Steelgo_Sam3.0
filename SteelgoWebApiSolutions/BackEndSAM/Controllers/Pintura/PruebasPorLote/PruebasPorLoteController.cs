@@ -244,7 +244,7 @@ namespace BackEndSAM.Controllers.Pintura
         }
 
         [HttpGet]
-        public object Get(string token, int ordentrabajospoolid ,int sistemapinturacolorid, string lenguaje,int variable)
+        public object Get(string token, int ordentrabajospoolid ,int sistemapinturacolorid, string lenguaje,int ProcesoPinturaID)
         {
             string payload = "";
             string newToken = "";
@@ -254,7 +254,7 @@ namespace BackEndSAM.Controllers.Pintura
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 Sam3_Usuario usuario = serializer.Deserialize<Sam3_Usuario>(payload);
                 
-                    return PruebasPorLoteBD.Instance.ObtenerDetalleSpool(ordentrabajospoolid, sistemapinturacolorid, lenguaje);
+                    return PruebasPorLoteBD.Instance.ObtenerDetalleSpool(ordentrabajospoolid, sistemapinturacolorid, lenguaje, ProcesoPinturaID);
 
             }
             else

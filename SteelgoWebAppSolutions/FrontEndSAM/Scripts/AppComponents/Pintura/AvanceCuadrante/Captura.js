@@ -11,7 +11,7 @@ var ventanaConfirmEdicionCaptura;
 var elementoEjecutoChange;
 var endRangeDate;
 var LineaCaptura = { proyectoIDSeleccionado: "", zonaIDSeleccionado: "", cuadranteIDSeleccionado: "", sistemaPinturaIDSeleccionado: "", ColorIDSeleccionado: "" }
-
+var nextCell = null;
 function BloquearElementosDinamicos(bloqueado) {
     for (var i = 0; i < ComponentesDinamicosJSON.length; i++) {
         $('#' + ComponentesDinamicosJSON[i].NombreColumna).data("kendoComboBox").enable(bloqueado);
@@ -361,6 +361,10 @@ function CrearGrid() {
             else {
                 this.closeCell();
             }
+            nextCell = {
+                cellIndex: e.container[0].cellIndex,
+                uid: e.model.uid,
+            };
         },
         dataBound: function (e) {
 
@@ -391,6 +395,15 @@ function CrearGrid() {
             }
             else {
                 $(".k-grid-content td").css("white-space", "nowrap");
+            }
+
+            if (nextCell != null) {
+                var grid = e.sender;
+                console.log("set focus to next cell", nextCell);
+                var nextCellIndex = nextCell.cellIndex;
+                var row = grid.items().filter("tr[data-uid=" + nextCell.uid + "]");
+                var cell = row.find("td:eq(" + nextCellIndex + ")");
+                grid.current(cell);
             }
         },
         beforeEdit: function (e) {

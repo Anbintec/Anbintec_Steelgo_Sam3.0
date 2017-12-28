@@ -478,13 +478,13 @@ namespace BackEndSAM.DataAcces.Pintura.PruebasPorLote
             }
         }
 
-        public object ObtenerDetalleSpool(int? ordentrabajospoolid,int? sistemapinturacolorid,string lenguaje)
+        public object ObtenerDetalleSpool(int? ordentrabajospoolid,int? sistemapinturacolorid,string lenguaje,int ProcesoPinturaID)
         {
             try
             {
                 using (SamContext ctx = new SamContext())
                 {
-                    List<Sam3_Pintura_InformacionSpool_Result> lista = ctx.Sam3_Pintura_InformacionSpool(ordentrabajospoolid, lenguaje, sistemapinturacolorid).ToList();
+                    List<Sam3_Pintura_InformacionSpool_Result> lista = ctx.Sam3_Pintura_InformacionSpool(ordentrabajospoolid, lenguaje, sistemapinturacolorid, ProcesoPinturaID).ToList();
                     List<BackEndSAM.Models.Pintura.PruebasPorLote.InformacionSpool> listaInformacionSpool= new List<BackEndSAM.Models.Pintura.PruebasPorLote.InformacionSpool>();
 
                   

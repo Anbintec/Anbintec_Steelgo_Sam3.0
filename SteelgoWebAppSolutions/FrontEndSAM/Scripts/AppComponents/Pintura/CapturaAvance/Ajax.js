@@ -186,7 +186,7 @@ function AjaxCargarLayoutGrid(sistemaPinturaProyectoId, procesoID, CargaCarroID)
 
 
             ////////////////////
-
+            
             options.dataSource = {
                 schema: {
                     model: {
