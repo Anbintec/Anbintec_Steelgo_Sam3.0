@@ -51,9 +51,11 @@ namespace BackEndSAM.Models.Pintura.OK
         public class Detalle
         {
             public string Prueba { get; set; }
+            public int ProcesoID { get; set; }
             public string UnidadMedida { get; set; }
             public double UnidadMinima { get; set; }
             public double UnidadMaxima { get; set; }
+            public string Color { get; set; }
         }
 
         public class Datos

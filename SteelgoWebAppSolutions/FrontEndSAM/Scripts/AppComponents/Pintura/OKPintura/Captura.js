@@ -46,7 +46,7 @@ function CargarGrid() {
                         IntermedioPrueba: { type: "string", editable: false },
                         FechaProcesoACAB: { type: "Date", editable: false },
                         AcabadoPrueba: { type: "string", editable: false },
-                        OkPintura: { type: "boolean", editable: false },                                        
+                        OkPintura: { type: "boolean", editable: false }                        
                     }
                 }
             },
@@ -187,10 +187,12 @@ function CargarGridPopUp() {
                 model: {
                     fields: {
                         Accion: { type: "number", editable: false },
+                        ProcesoID: { type: "int", editable: false },
                         Prueba: { type: "string", editable: false },
                         UnidadMedida: { type: "string", editable: false },
                         UnidadMinima: { type: "double", editable: false },
                         UnidadMaxima: { type: "double", editable: false },
+                        Color: { type: "string", editable: false }
                     }
                 }
             },
@@ -215,7 +217,8 @@ function CargarGridPopUp() {
                 { field: "Prueba", title: _dictionary.lblPrueba[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "20px" },
                 { field: "UnidadMedida", title: "U. Medida", filterable: getGridFilterableCellMaftec(), width: "20px" },
                 { field: "UnidadMinima", title: _dictionary.columnUnidadMinima[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), format: "{0:n2}", width: "20px", attributes: { style: "text-align:right;" } },
-                { field: "UnidadMaxima", title: _dictionary.columnUnidadMaxima[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), format: "{0:n2}", width: "20px", attributes: { style: "text-align:right;" } }
+                { field: "UnidadMaxima", title: _dictionary.columnUnidadMaxima[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), format: "{0:n2}", width: "20px", attributes: { style: "text-align:right;" } },
+                { field: "Color", title: _dictionary.lblColor[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec, width: "20px" }
         ]        
 
     });
@@ -225,8 +228,15 @@ function CargarGridPopUp() {
 function LlenarGridPopUp(data) {
     $("#gridPopUp").data('kendoGrid').dataSource.data([]);
     var ds = $("#gridPopUp").data("kendoGrid").dataSource;
+    var grid = $("#gridPopUp").data("kendoGrid");
+    //grid.hideColumn("Name");
     var array = data;
     for (var i = 0; i < array.length; i++) {
+        if (data[0].ProcesoID != 4) {
+            grid.hideColumn("Color");
+        } else {
+            grid.showColumn("Color");
+        }
         ds.add(array[i]);
     }
     $("#gridPopUp").data("kendoGrid").refresh();

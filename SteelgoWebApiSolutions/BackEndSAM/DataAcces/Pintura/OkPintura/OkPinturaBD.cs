@@ -133,10 +133,12 @@ namespace BackEndSAM.DataAcces.Pintura.OkPintura
                     {
                         ListaPruebas.Add(new Detalle
                         {
+                            ProcesoID = item.ProcesoID.GetValueOrDefault(),
                             Prueba = item.Prueba,
                             UnidadMedida = item.UnidadMedida,
                             UnidadMinima = item.UnidadMinima,
-                            UnidadMaxima = item.UnidadMaxima
+                            UnidadMaxima = item.UnidadMaxima,
+                            Color = item.Color
                         });
                     }
                     return ListaPruebas;
