@@ -92,6 +92,21 @@ function CargarGrid() {
     $("#grid").kendoGrid({
         autoBind: true,
         autoSync: true,
+        save: function (e) {
+            var focusedCellIndex = this.current()[0].cellIndex;
+            var dataItem = e.model;
+            var grid = this;
+            var nextDataItem = this.dataSource.at(this.dataSource.indexOf(dataItem) + 1);
+
+            this.refresh();
+            setTimeout(function () {
+                return function () {
+                    var focusedCell = $("#grid tr[data-uid='" + e.model.uid + "'] td:nth-child(" + (focusedCellIndex + 1) + ")");
+                    grid.select(focusedCell);
+                    grid.editCell(focusedCell);
+                }
+            }(), 10);
+        },
         edit: function (e) {
          
             var inputName = e.container.find('input');
@@ -114,8 +129,8 @@ function CargarGrid() {
         },
         change: function () {
             var dataItem = this.dataSource.view()[this.select().index()];
-            if (dataItem.Accion == 4)
-                dataItem.Accion = 2;
+            //if (dataItem.Accion == 4)
+            //    dataItem.Accion = 2;
         },
         dataSource: {
             data: '',
@@ -160,7 +175,7 @@ function CargarGrid() {
             pageSizes: [10, 25, 50, 100],
             info: false,
             input: false,
-            numeric: true
+            numeric: true,
         },
         filterable: getGridFilterableMaftec(),
         columns: [

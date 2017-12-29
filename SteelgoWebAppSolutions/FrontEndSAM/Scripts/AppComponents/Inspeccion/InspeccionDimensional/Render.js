@@ -10,6 +10,8 @@
                         // options.model.TemplateRender = _dictionary.NoExistenJuntasSel[$("#language").data("kendoDropDownList").value()];
                         options.model.TemplateRender = $("#language").data("kendoDropDownList").value() == "es-MX" ? "Existen " + options.model.ListaJuntasSeleccionadas.length + " Juntas" : "There are " + options.model.ListaJuntasSeleccionadas.length + " board";
                         this.dataSource.sync();
+                        if (options.model.Accion == 4)
+                            options.model.Accion = 2;
                     },
                     value: options.model.ListaJuntasSeleccionadas
                 }).data("kendoMultiSelect");
@@ -41,7 +43,8 @@ function RenderOptionResultado(container, options) {
                         options.model.TemplateRender = _dictionary.NoExistenJuntasSel[$("#language").data("kendoDropDownList").value()];
                        
                     }
-
+                    if (options.model.Accion == 4)
+                        options.model.Accion = 2;
                 }
                 else {
                     options.model.Resultado = "";
@@ -51,6 +54,7 @@ function RenderOptionResultado(container, options) {
                     options.model.ListaJuntasSeleccionadas = [];
                     options.model.TemplateRender = _dictionary.NoExistenJuntasSel[$("#language").data("kendoDropDownList").value()];
                     //options.model.Resultado = ObtenerDescCorrectaResultado(options.model.ListaResultados, options.model.ResultadoID);
+
                 }
                 $("#grid").data("kendoGrid").dataSource.sync();
             }
@@ -91,7 +95,8 @@ function RenderComboBoxDefectos(container, options) {
                     options.model.TIPO = dataItem.TIPO;
                     options.model.ListaJuntasSeleccionadas = [];
                     options.model.TemplateRender = _dictionary.NoExistenJuntasSel[$("#language").data("kendoDropDownList").value()];
-                   
+                    if (options.model.Accion == 4)
+                        options.model.Accion = 2;
                 }
                 else {
                     //options.model.Defectos = ObtenerDescCorrectaDefectos(options.model.ListaDefectos, options.model.DefectoID);
@@ -137,6 +142,8 @@ function RenderComboBoxInspector(container, options) {
                 if (dataItem != undefined) {
                     options.model.Inspector = dataItem.Codigo;
                     options.model.InspectorID = dataItem.ObreroID;
+                    if (options.model.Accion == 4)
+                        options.model.Accion = 2;
                 }
                 else {
                     options.model.Inspector = "";
@@ -207,7 +214,8 @@ function RenderDatePicker(container, options) {
                     options.model.FechaInspeccion = '';
                     this.value('');
                 }
-
+                if (options.model.Accion == 4)
+                    options.model.Accion = 2;
                 $("#grid").data("kendoGrid").dataSource.sync();
             }
         });
