@@ -102,7 +102,8 @@ namespace BackEndSAM.DataAcces.Pintura.OkPintura
                             FechaProcesoPRIM = item.FechaProcesoPRIM,
                             FechaProcesoINTER = item.FechaProcesoINTER,
                             FechaProcesoACAB = item.FechaProcesoACAB,
-                            OkPintura = item.OkPintura.GetValueOrDefault(),
+                            OkPintura = item.OkPintura.GetValueOrDefault(),              
+                            Hold = item.TieneHoldIngenieria.GetValueOrDefault(),              
                             Detalle = Lenguaje == "es-MX" ? "Ver Detalle" : "See Details"
                         });
                     }

@@ -26,7 +26,8 @@ namespace BackEndSAM.Models.Pintura.OK
                 FechaProcesoPRIM = "";
                 FechaProcesoINTER = "";
                 FechaProcesoACAB = "";
-                OkPintura = false;                
+                OkPintura = false;
+                Hold = false;      
             }
 
             public int SpoolWorkStatusID { get; set; }
@@ -44,7 +45,8 @@ namespace BackEndSAM.Models.Pintura.OK
             public string FechaProcesoPRIM { get; set; }
             public string FechaProcesoINTER { get; set; }
             public string FechaProcesoACAB { get; set; }            
-            public bool OkPintura { get; set; }            
+            public bool OkPintura { get; set; }     
+            public bool Hold { get; set; }       
             public string Detalle { get; set; }
         }
 

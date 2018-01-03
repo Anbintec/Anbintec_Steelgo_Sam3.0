@@ -92,12 +92,23 @@ function AjaxGetListaElementos(ProyectoID, NumControl) {
     $OkPintura.OKPintura.read({ token: Cookies.get("token"), Lenguaje: $("#language").val(), ProyectoID: ProyectoID, NumControl: NumControl, Muestra: $('input:radio[name=Muestra]:checked').val()}).done(function (data) {
         try {
             $("#grid").data("kendoGrid").dataSource.data([]);
-            var dataSource = $("#grid").data("kendoGrid").dataSource;
-            if (Error(data)) {
+            var dataSource = $("#grid").data("kendoGrid").dataSource;            
+            if (Error(data)) {                                
+                var msjHold = "";
                 $("#InputNumeroControl").val(SpoolContiene.toString().toUpperCase());
                 if (data.length > 0) {
                     for (var i = 0; i < data.length; i++) {
-                        dataSource.add(data[i]);
+                        if (data[i].Hold) {
+                            msjHold += data[i].NumeroControl + "\n";
+                        } else {
+                            if (!data[i].Hold) {
+                                dataSource.add(data[i]);
+                            }                            
+                        }
+                        //dataSource.add(data[i]);
+                    }                    
+                    if (msjHold != "") {                        
+                        displayNotify("", "Los siguientes Numeros de Control Tienen Hold: \n " + msjHold, "1");
                     }
                 } else {
                     displayNotify("NODATA", "", "1");
