@@ -54,7 +54,8 @@ namespace BackEndSAM.DataAcces
                                       join rel in ctx.Sam3_Rel_NumeroUnico_RelFC_RelB on rfi.Rel_FolioCuantificacion_ItemCode_ID equals rel.Rel_FolioCuantificacion_ItemCode_ID
                                       join nu in ctx.Sam3_NumeroUnico on rel.NumeroUnicoID equals nu.NumeroUnicoID
                                       join it in ctx.Sam3_ItemCode on nu.ItemCodeID equals it.ItemCodeID
-                                      where fc.Activo && rfi.Activo && it.Activo && nu.Activo && rel.Activo //&& nu.NumeroUnicoID == 10945
+                                      join nui in ctx.Sam3_NumeroUnicoInventario  on nu.NumeroUnicoID equals  nui.NumeroUnicoID 
+                                      where nui.Activo && fc.Activo && rfi.Activo && it.Activo && nu.Activo && rel.Activo //&& nu.NumeroUnicoID == 10945
                                       && fc.FolioCuantificacionID == folioCuantificacionID
                                       select new ItemCodeComplemento
                                       {
@@ -98,14 +99,14 @@ namespace BackEndSAM.DataAcces
                                           Cantidad = (from n in ctx.Sam3_NumeroUnico
                                                       where n.NumeroUnicoID == nu.NumeroUnicoID
                                                       select n).Count(),
-                                          MM = rel.MM.ToString(),
-                                          Colada = nu.Sam3_Colada.NumeroColada,
+                                          MM = nui.CantidadRecibida.ToString(),//rel.MM.ToString(),
+                                          Colada =(from c in ctx.Sam3_Colada where c.Activo && c.ColadaID== nu.ColadaID select c.NumeroColada ).FirstOrDefault(),  //nu.Sam3_Colada.NumeroColada,
                                           EstatusDocumental = nu.EstatusDocumental,
                                           EstatusFisico = nu.EstatusFisico,
-                                          TipoUso = nu.Sam3_TipoUso.Nombre,
+                                          TipoUso = (from c in ctx.Sam3_TipoUso where c.Activo && c.TipoUsoID == nu.TipoUsoID select c.Nombre).FirstOrDefault(),  //nu.Sam3_TipoUso.Nombre,
                                           RelFCID = rel.Rel_FolioCuantificacion_ItemCode_ID.ToString(),
                                           RelNUFCBID = rel.Rel_NumeroUnico_RelFC_RelB_ID.ToString(),
-                                          ColadaOriginal = nu.Sam3_Colada.NumeroColada,
+                                          ColadaOriginal = (from c in ctx.Sam3_Colada where c.Activo && c.ColadaID == nu.ColadaID select c.NumeroColada).FirstOrDefault(),//nu.Sam3_Colada.NumeroColada,
                                           TieneComplementoRecepcion = it.TieneComplementoRecepcion ? "Si" : "No",
                                           MTRID = nu.MTRID.ToString(),
                                           Diametro1ID = (from d2 in ctx.Sam3_Diametro
@@ -178,13 +179,13 @@ namespace BackEndSAM.DataAcces
                                                       where n.NumeroUnicoID == nu.NumeroUnicoID
                                                       select n).Count(),
                                           MM = rel.MM.ToString(),
-                                          Colada = nu.Sam3_Colada.NumeroColada,
+                                          Colada = (from c in ctx.Sam3_Colada where c.Activo && c.ColadaID == nu.ColadaID select c.NumeroColada).FirstOrDefault(), //nu.Sam3_Colada.NumeroColada,
                                           EstatusDocumental = nu.EstatusDocumental,
                                           EstatusFisico = nu.EstatusFisico,
-                                          TipoUso = nu.Sam3_TipoUso.Nombre,
+                                          TipoUso = (from c in ctx.Sam3_TipoUso where c.Activo && c.TipoUsoID == nu.TipoUsoID select c.Nombre).FirstOrDefault(),//nu.Sam3_TipoUso.Nombre,
                                           RelNUFCBID = rel.Rel_NumeroUnico_RelFC_RelB_ID.ToString(),
                                           RelBID = rel.Rel_Bulto_ItemCode_ID.ToString(),
-                                          ColadaOriginal = nu.Sam3_Colada.NumeroColada,
+                                          ColadaOriginal = (from c in ctx.Sam3_Colada where c.Activo && c.ColadaID == nu.ColadaID select c.NumeroColada).FirstOrDefault(), //nu.Sam3_Colada.NumeroColada,
                                           TieneComplementoRecepcion = it.TieneComplementoRecepcion ? "Si" : "No",
                                           Diametro1ID = (from d2 in ctx.Sam3_Diametro
                                                          where d2.Activo && d2.Valor == nu.Diametro1
@@ -2169,5 +2170,365 @@ namespace BackEndSAM.DataAcces
             }
         }
 
+        public object ReemplazarItemCode(EditarItemCodeMasDetalle datos, Sam3_Usuario usuario)
+        {
+            try
+            {
+                Sam3_Diametro diametro1;
+                Sam3_Diametro diametro2;
+                Diametro sam2_diametro1;
+                Diametro sam2_diametro2;
+                Sam3_ItemCode nuevoItemCode = null;
+                int sam2_ProyectoID = 0;
+                using (SamContext ctx = new SamContext())
+                {
+                    using (var ctx_tran = ctx.Database.BeginTransaction())
+                    {
+                        using (Sam2Context ctx2 = new Sam2Context())
+                        {
+                            using (var ctx2_tran = ctx2.Database.BeginTransaction())
+                            {
+                                #region diametros
+                                //Diametro1
+                                if (ctx.Sam3_Diametro.Where(x => x.Valor == datos.d1 && x.Activo).Any()) //Verificamos si existe el diametro
+                                {
+                                    diametro1 = ctx.Sam3_Diametro.Where(x => x.Valor == datos.d1 && x.Activo).AsParallel().SingleOrDefault();
+                                }
+                                else // el diametro no existe
+                                {
+                                    diametro1 = new Sam3_Diametro
+                                    {
+                                        Activo = true,
+                                        FechaModificacion = DateTime.Now,
+                                        UsuarioModificacion = usuario.UsuarioID,
+                                        Valor = datos.d1,
+                                        VerificadoPorCalidad = true
+                                    };
+                                    ctx.Sam3_Diametro.Add(diametro1);
+                                    ctx.SaveChanges();
+                                }
+
+                                //verificamos si existe equivalencia para el diametro en sam2
+                                if (ctx.Sam3_EquivalenciaDiametro.Where(x => x.Sam3_DiametroID == diametro1.DiametroID && x.Activo).Any())
+                                {
+                                    int sam2_diametroID = (from eq in ctx.Sam3_EquivalenciaDiametro
+                                                           where eq.Activo && eq.Sam3_DiametroID == diametro1.DiametroID
+                                                           select eq.Sam2_DiametroID.Value).SingleOrDefault();
+
+                                    sam2_diametro1 = ctx2.Diametro.Where(x => x.DiametroID == sam2_diametroID).AsParallel().SingleOrDefault();
+
+                                }
+                                else
+                                {
+                                    //si no existe la equivalencia hay que crear el diametro en sam2
+                                    if (!ctx.Sam3_Diametro.Where(x => x.Valor == diametro1.Valor).Any()) //verificamos si realmente no existe el diametro
+                                    {
+                                        sam2_diametro1 = new Diametro
+                                        {
+                                            Valor = diametro1.Valor,
+                                            FechaModificacion = DateTime.Now,
+                                            VerificadoPorCalidad = true
+                                        };
+
+                                        ctx2.Diametro.Add(sam2_diametro1);
+                                        ctx2.SaveChanges();
+
+                                        //guardamos la equivalencia
+                                        Sam3_EquivalenciaDiametro nuevaEquivalencia = new Sam3_EquivalenciaDiametro
+                                        {
+                                            Activo = true,
+                                            FechaModificacion = DateTime.Now,
+                                            Sam2_DiametroID = sam2_diametro1.DiametroID,
+                                            Sam3_DiametroID = diametro1.DiametroID,
+                                            UsuarioModificacion = usuario.UsuarioID
+                                        };
+                                        ctx.Sam3_EquivalenciaDiametro.Add(nuevaEquivalencia);
+                                        ctx.SaveChanges();
+                                    }
+                                    else
+                                    {
+                                        //Existe el diametro pero no la equivalencia
+                                        sam2_diametro1 = ctx2.Diametro.Where(x => x.Valor == diametro1.Valor).AsParallel().SingleOrDefault();
+
+                                        //guardamos la equivalencia
+                                        Sam3_EquivalenciaDiametro nuevaEquivalencia = new Sam3_EquivalenciaDiametro
+                                        {
+                                            Activo = true,
+                                            FechaModificacion = DateTime.Now,
+                                            Sam2_DiametroID = sam2_diametro1.DiametroID,
+                                            Sam3_DiametroID = diametro1.DiametroID,
+                                            UsuarioModificacion = usuario.UsuarioID
+                                        };
+                                        ctx.Sam3_EquivalenciaDiametro.Add(nuevaEquivalencia);
+                                        ctx.SaveChanges();
+                                    }
+                                }
+
+                                //Diametro 2
+                                if (ctx.Sam3_Diametro.Where(x => x.Valor == datos.d2 && x.Activo).Any()) //Verificamos si existe el diametro
+                                {
+                                    diametro2 = ctx.Sam3_Diametro.Where(x => x.Valor == datos.d2 && x.Activo).AsParallel().SingleOrDefault();
+                                }
+                                else // el diametro no existe
+                                {
+                                    diametro2 = new Sam3_Diametro
+                                    {
+                                        Activo = true,
+                                        FechaModificacion = DateTime.Now,
+                                        UsuarioModificacion = usuario.UsuarioID,
+                                        Valor = datos.d2,
+                                        VerificadoPorCalidad = true
+                                    };
+                                    ctx.Sam3_Diametro.Add(diametro2);
+                                    ctx.SaveChanges();
+                                }
+
+                                //verificamos si existe equivalencia para el diametro en sam2
+                                if (ctx.Sam3_EquivalenciaDiametro.Where(x => x.Sam3_DiametroID == diametro2.DiametroID && x.Activo).Any())
+                                {
+                                    int sam2_diametroID = (from eq in ctx.Sam3_EquivalenciaDiametro
+                                                           where eq.Activo && eq.Sam3_DiametroID == diametro2.DiametroID
+                                                           select eq.Sam2_DiametroID.Value).SingleOrDefault();
+
+                                    sam2_diametro2 = ctx2.Diametro.Where(x => x.DiametroID == sam2_diametroID).AsParallel().SingleOrDefault();
+
+                                }
+                                else
+                                {
+                                    //si no existe la equivalencia hay que crear el diametro en sam2
+                                    if (!ctx.Sam3_Diametro.Where(x => x.Valor == diametro2.Valor).Any()) //verificamos si realmente no existe el diametro
+                                    {
+                                        sam2_diametro2 = new Diametro
+                                        {
+                                            Valor = diametro2.Valor,
+                                            FechaModificacion = DateTime.Now,
+                                            VerificadoPorCalidad = true
+                                        };
+
+                                        ctx2.Diametro.Add(sam2_diametro2);
+                                        ctx2.SaveChanges();
+
+                                        //guardamos la equivalencia
+                                        Sam3_EquivalenciaDiametro nuevaEquivalencia = new Sam3_EquivalenciaDiametro
+                                        {
+                                            Activo = true,
+                                            FechaModificacion = DateTime.Now,
+                                            Sam2_DiametroID = sam2_diametro2.DiametroID,
+                                            Sam3_DiametroID = diametro2.DiametroID,
+                                            UsuarioModificacion = usuario.UsuarioID
+                                        };
+                                        ctx.Sam3_EquivalenciaDiametro.Add(nuevaEquivalencia);
+                                        ctx.SaveChanges();
+                                    }
+                                    else
+                                    {
+                                        //Existe el diametro pero no la equivalencia
+                                        sam2_diametro2 = ctx2.Diametro.Where(x => x.Valor == diametro2.Valor).AsParallel().SingleOrDefault();
+
+                                        //guardamos la equivalencia
+                                        Sam3_EquivalenciaDiametro nuevaEquivalencia = new Sam3_EquivalenciaDiametro
+                                        {
+                                            Activo = true,
+                                            FechaModificacion = DateTime.Now,
+                                            Sam2_DiametroID = sam2_diametro2.DiametroID,
+                                            Sam3_DiametroID = diametro2.DiametroID,
+                                            UsuarioModificacion = usuario.UsuarioID
+                                        };
+                                        ctx.Sam3_EquivalenciaDiametro.Add(nuevaEquivalencia);
+                                        ctx.SaveChanges();
+                                    }
+                                }
+
+                                if (diametro1 == null)
+                                {
+                                    throw new Exception("Error en la búsqueda del diametro 1");
+                                }
+                                if (diametro2 == null)
+                                {
+                                    throw new Exception("Error en la búsqueda del diametro 2");
+                                }
+                                #endregion
+
+                                #region rel ItemCode Diametros
+                                //recuperamos la informacion del Itemcode
+                                if (datos.ItemCodeID > 0)
+                                {
+                                    nuevoItemCode = ctx.Sam3_ItemCode.Where(x => x.ItemCodeID == datos.ItemCodeID).AsParallel().SingleOrDefault();
+                                }
+                                else
+                                {
+                                    if (datos.NumerosUnicos.Count() == 1)
+                                    {
+                                        int nuID = datos.NumerosUnicos[0];
+                                        nuevoItemCode = (from nu in ctx.Sam3_NumeroUnico
+                                                         join it in ctx.Sam3_ItemCode on nu.ItemCodeID equals it.ItemCodeID
+                                                         where nu.Activo && it.Activo
+                                                         && nu.NumeroUnicoID == nuID
+                                                         select it).AsParallel().Distinct().SingleOrDefault();
+                                    }
+                                }
+
+                                if (nuevoItemCode == null)
+                                {
+                                    throw new Exception("Error en la búsqueda de ItemCode");
+                                }
+
+                                //verificamos si existe la relacion de Itemcode con diametros, si no existe se crea una nueva
+                                if (!ctx.Sam3_Rel_ItemCode_Diametro.Where(x => x.ItemCodeID == nuevoItemCode.ItemCodeID && x.Diametro1ID == diametro1.DiametroID
+                                    && x.Diametro2ID == diametro2.DiametroID && x.Activo).Any())
+                                {
+                                    Sam3_Rel_ItemCode_Diametro nuevaRelITDiametros = new Sam3_Rel_ItemCode_Diametro
+                                    {
+                                        Activo = true,
+                                        Diametro1ID = diametro1.DiametroID,
+                                        Diametro2ID = diametro2.DiametroID,
+                                        ItemCodeID = nuevoItemCode.ItemCodeID,
+                                        FechaModificacion = DateTime.Now,
+                                        UsuarioModificacion = usuario.UsuarioID
+                                    };
+
+                                    ctx.Sam3_Rel_ItemCode_Diametro.Add(nuevaRelITDiametros);
+                                    ctx.SaveChanges();
+
+                                    //Llegados a este punto sabemos que no existe un Itemcode Steelgo para esta relacioón, pues acaba de ser creada, se envia un error
+                                    throw new Exception(string.Format("No existe un ItemCodeSteelgo asociado para el ItemCode: {0}, diametro1: {1}, diametro2: {2}",
+                                        nuevoItemCode.ItemCodeID, diametro1.Valor, diametro2.Valor));
+                                }
+                                else
+                                {
+                                    // si ya existe la relacion de Itemcode y diametros verificamos que tenga un ItemCodeSteelgo asociado
+                                    bool tieneICS = (from it in ctx.Sam3_ItemCode
+                                                     join rid in ctx.Sam3_Rel_ItemCode_Diametro on it.ItemCodeID equals rid.ItemCodeID
+                                                     join riit in ctx.Sam3_Rel_ItemCode_ItemCodeSteelgo on rid.Rel_ItemCode_Diametro_ID equals riit.Rel_ItemCode_Diametro_ID
+                                                     join rids in ctx.Sam3_Rel_ItemCodeSteelgo_Diametro on riit.Rel_ItemCodeSteelgo_Diametro_ID equals rids.Rel_ItemCodeSteelgo_Diametro_ID
+                                                     join ics in ctx.Sam3_ItemCodeSteelgo on rids.ItemCodeSteelgoID equals ics.ItemCodeSteelgoID
+                                                     join d1 in ctx.Sam3_Diametro on rids.Diametro1ID equals d1.DiametroID
+                                                     join d2 in ctx.Sam3_Diametro on rids.Diametro2ID equals d2.DiametroID
+                                                     where it.Activo && rid.Activo && riit.Activo && rids.Activo && ics.Activo && d1.Activo && d2.Activo
+                                                     && it.ItemCodeID == nuevoItemCode.ItemCodeID
+                                                     && d1.DiametroID == diametro1.DiametroID
+                                                     && d2.DiametroID == diametro2.DiametroID
+                                                     select ics).AsParallel().Any();
+
+                                    if (!tieneICS) // si no hay un itemCodeSteelgo asociado se envia un error
+                                    {
+                                        throw new Exception(string.Format("No existe un ItemCodeSteelgo asociado para el ItemCode: {0}, diametro1: {1}, diametro2: {2}",
+                                        nuevoItemCode.ItemCodeID, diametro1.Valor, diametro2.Valor));
+                                    }
+                                }
+                                #endregion
+
+                                #region Actualizar números únicos
+                                List<Sam3_NumeroUnico> lstNumeroUnicos = (from nu in ctx.Sam3_NumeroUnico
+                                                                          where nu.Activo
+                                                                          && datos.NumerosUnicos.Contains(nu.NumeroUnicoID)
+                                                                          select nu).Distinct().AsParallel().ToList();
+
+                                foreach (Sam3_NumeroUnico nu in lstNumeroUnicos)
+                                {
+                                    nu.NumeroUnicoCliente = datos.NumeroUnicoCliente;
+                                    nu.ItemCodeID = nuevoItemCode.ItemCodeID;
+                                    nu.Diametro1 = diametro1.Valor;
+                                    nu.Diametro2 = diametro2.Valor;
+                                    nu.FechaModificacion = DateTime.Now;
+                                    nu.UsuarioModificacion = usuario.UsuarioID;
+                                }
+
+                                //recuperamos el proyecto id de sam2 
+                                sam2_ProyectoID = (from eq in ctx.Sam3_EquivalenciaProyecto
+                                                   where eq.Activo && eq.Sam3_ProyectoID == nuevoItemCode.ProyectoID
+                                                   select eq.Sam2_ProyectoID).AsParallel().SingleOrDefault();
+
+                                //Buscamos los numeros unicos de sam2
+                                DatabaseManager.Sam2.ItemCode sam2_ItemCode;
+                                if (ctx.Sam3_EquivalenciaItemCode.Where(x => x.Activo && x.Sam3_ItemCodeID == nuevoItemCode.ItemCodeID).Any())
+                                {
+                                    int temp = (from eq in ctx.Sam3_EquivalenciaItemCode
+                                                where eq.Activo && eq.Sam3_ItemCodeID == nuevoItemCode.ItemCodeID
+                                                select eq.Sam2_ItemCodeID).AsParallel().SingleOrDefault();
+
+                                    sam2_ItemCode = ctx2.ItemCode.Where(x => x.Codigo == nuevoItemCode.Codigo && x.ProyectoID == sam2_ProyectoID).AsParallel().SingleOrDefault();
+                                }
+                                else
+                                {
+                                    // no existe quivalencia de ItemCode
+                                    sam2_ItemCode = ctx2.ItemCode.Where(x => x.Codigo == nuevoItemCode.Codigo && x.ProyectoID == sam2_ProyectoID).AsParallel().SingleOrDefault();
+                                    Sam3_EquivalenciaItemCode nuevaEquivalencia = new Sam3_EquivalenciaItemCode
+                                    {
+                                        Activo = true,
+                                        FechaModificacion = DateTime.Now,
+                                        Sam2_ItemCodeID = sam2_ItemCode.ItemCodeID,
+                                        Sam3_ItemCodeID = nuevoItemCode.ItemCodeID,
+                                        UsuarioModificacion = usuario.UsuarioID
+                                    };
+                                    ctx.Sam3_EquivalenciaItemCode.Add(nuevaEquivalencia);
+                                    ctx.SaveChanges();
+
+                                }
+
+                                if (sam2_ItemCode == null)
+                                {
+                                    throw new Exception("Error: el ItemCode: " + nuevoItemCode.Codigo + ", no se encuentra en SAM 2 o en la equivalencia");
+                                }
+
+                                List<int> sam2_NumerosUicos = (from eq in ctx.Sam3_EquivalenciaNumeroUnico
+                                                               where eq.Activo
+                                                               && datos.NumerosUnicos.Contains(eq.Sam3_NumeroUnicoID)
+                                                               select eq.Sam2_NumeroUnicoID).Distinct().AsParallel().ToList();
+
+                                List<NumeroUnico> lstSam2NumeroUnico = (from nu in ctx2.NumeroUnico
+                                                                        where sam2_NumerosUicos.Contains(nu.NumeroUnicoID)
+                                                                        select nu).Distinct().AsParallel().ToList();
+
+                                foreach (NumeroUnico nu in lstSam2NumeroUnico)
+                                {
+                                    nu.NumeroUnicoCliente = datos.NumeroUnicoCliente;
+                                    if (sam2_ItemCode.ItemCodeID > 0)
+                                    {
+                                        nu.ItemCodeID = sam2_ItemCode.ItemCodeID;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception("No se encontro el ItemCode en SAM 2");
+                                    }
+                                    nu.Diametro1 = sam2_diametro1.Valor;
+                                    nu.Diametro2 = sam2_diametro2.Valor;
+                                    nu.FechaModificacion = DateTime.Now;
+                                }
+
+                                #endregion
+
+                                ctx.SaveChanges();
+                                ctx2.SaveChanges();
+
+                                ctx_tran.Commit();
+                                ctx2_tran.Commit();
+                            } // fin tran sam 2
+                        }// fin sam2
+                    } // fin sam3 tran
+                } // fin ctx
+
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add("OK");
+                result.ReturnCode = 200;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                //-----------------Agregar mensaje al Log -----------------------------------------------
+                LoggerBd.Instance.EscribirLog(ex);
+                //-----------------Agregar mensaje al Log -----------------------------------------------
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
     }
 }

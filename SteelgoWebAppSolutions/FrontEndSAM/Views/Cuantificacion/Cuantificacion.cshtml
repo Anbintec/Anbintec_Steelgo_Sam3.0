@@ -225,7 +225,7 @@
         "grid": { 37: "MM", 38: "Colada", 39: "grid", 40: "grid" },
     };
 
-
+    var elementoSeleccionadoPackingList;
     //Mappeo de tipos de Controles
     //--   Tipos 0 -> Elemento HTML
     //--   Tipos 1 -> Elemento KendoAutocomplete
@@ -435,7 +435,7 @@
             $Colada.Colada.read({}, { itemcode: itc, token: Cookies.get("token"), paginaID: Cookies.get("navegacion"), idioma: $("#language").data("kendoDropDownList").value(), id: 0, mostrarOpcion: 0 }).done(function (data) {
                 console.log("data");
                 console.log(data);
-                alert("datos");
+               // alert("datos");
                 self.data[itc] = data;
                 self.recents = false;
                 self.get(itc, widget);
@@ -1508,7 +1508,13 @@
                 };
 
                 if (e.item.id == "AgregarITCS") {
+                   
+                   
+                    elementoSeleccionadoPackingList = filaseleccionada;
                     lastEditedCellID = filaseleccionada;
+
+                    console.log("elementoSeleccionadoPackingList");
+                    console.log(elementoSeleccionadoPackingList);
                     //if (typeof (filaseleccionada) != undefined) {
                     //if (!filaseleccionada) {
                     //    displayMessage("notificationslabel0086", "", '1');
@@ -1572,6 +1578,7 @@
             cargarItemCodeAutocomplete(lastEditedCellID, lastEditedCellID.ItemCodeID);
         }
     };
+   
 
     function CancelarInformacionItem(e) {
         if ($("#grid").data("kendoGrid").dataItem($(e.currentTarget).closest("tr")).TieneNU.toLowerCase() === "no") {
@@ -3302,16 +3309,17 @@
     };
 
     function cargarItemCodeAutocomplete(cell, value) {
-
+        
         if (value != "0" && value != "Bulto") {
-            $ItemCode.ItemCode.read({}, { itemCodeID: value, token: Cookies.get("token") }).done(function (data) {
+            $ItemCode.ItemCode.read({}, { itemCodeID: value, token: Cookies.get("token"), Colada: cell.Colada, MM: cell.MM, Cantidad:cell.Cantidad }).done(function (data) {
                 itemCodesJson = data;
                 if (itemCodesJson) {
                     if (itemCodesJson.ItemCodeID == value) {
                         //lastEditedCellID.ItemCode = itemCodesJson.ItemCode;
-                        cell.Colada = "";//coladaValue;//itemCodesJson.ColadaNombre;
+                        cell.Colada = itemCodesJson.ColadaNombre;//coladaValue;//itemCodesJson.ColadaNombre;
                         //lastEditedCellID.Cantidad = itemCodesJson.Cantidad;
-                        cell.MM = itemCodesJson.TipoPackingList == "2" ? "N/A" : "";// mmValue;//0; //itemCodesJson.MM;
+                        cell.Cantidad = itemCodesJson.Cantidad
+                        cell.MM = itemCodesJson.TipoPackingList == "2" ? "N/A" : itemCodesJson.MM;// mmValue;//0; //itemCodesJson.MM;
                         cell.DimensionPromedio = itemCodesJson.TipoPackingList == "2" ? "N/A" : "";
                         cell.Detallar = "No";
                         cell.Descripcion = itemCodesJson.Descripcion;

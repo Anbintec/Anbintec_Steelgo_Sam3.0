@@ -897,8 +897,11 @@
         var data = query.filter(filters).data;
         if($("#NumUnicoB").val()!=="" && $("#ItemCodeBusq").data("kendoComboBox").value()==="" && $("#d1Busq").data("kendoComboBox").value()==="" && $("#d2Busq").data("kendoComboBox").value()==="" && data.length>0){
             //if(sameData(data)){
+            
                 var dataTemp=[];
                 data.forEach(function (n) {
+                    console.log("n");
+                    console.log(n);
                     dataTemp.push({
                         itemCode: n.ItemCodeID,
                         d1: n.D1,
@@ -906,7 +909,13 @@
                         d2: n.D2,
                         d2id: n.Diametro2ID,
                         nu: n.NumeroUnicoID,
-                        nuc: ($("#NumUnicoB").val() !== "" ? $("#NumUnicoB").val() : n.NumeroUnicoCliente)
+                        nuc: ($("#NumUnicoB").val() !== "" ? $("#NumUnicoB").val() : n.NumeroUnicoCliente),
+                        Colada: n.Colada,
+                        ColadaID:n.ColadaID,
+                        EstatusFisico: n.EstatusFisico,
+                        EstatusDocumental: n.EstatusDocumental,
+                        Mtr: n.MTR,
+                        MTRID:n.MTRID
                     })
                 });
                 console.log( dataTemp);
@@ -1069,7 +1078,8 @@
             })
         } else {
 
-            $("#Mostrar").click()
+            //$("#Mostrar").click()
+            cargarGridPackingListEditado();
             displayMessage("notificationslabel0056", '', '0');
         }
     }
@@ -2232,6 +2242,8 @@
             });
         };
 
+       
+
         function EstatusFisicoAutocomplete(container, options) {
             $('<input id="EstatusFisicoAutocomplete" data-text-field="Nombre" data-value-field="EstatFisicoID" data-bind="value:' + options.field + '"/>')
                 .appendTo(container)
@@ -3037,10 +3049,10 @@
                 console.log(restarHoras(inicio, fin));
 
                 var inicioInserta = new Date();
-                console.log("aqui7")
+                
                 BotonAlta();
                 ocultarStatus();
-                console.log("aqui6")
+                
                 error = data[0];
                 for (var i = 0; i < data[1].length; i++) {
                     if (ErrorBool(data[1][i]))
@@ -3048,7 +3060,7 @@
                     else
                         cargarGridErrores(data[1][i]);
                 }
-                console.log("aqui5")
+                
                 ordenamientoGrid();
                 if (error) {
                     displayMessage("notificationslabel0051", error, '2');
@@ -3056,17 +3068,17 @@
                     loadingStop();
                     return;
                 }
-                console.log("aqui")
+                
                 //cicloGuardadoParcial(ListadoCuantificacion, i, idGuardado, error);
                 ObtenerDatosDelFolioCuantificacion();
 
                 cargarTituloFolio();
                 CargarLabelEstatus("En Proceso de Recepción");
-                console.log("aqui2")
+                
                 CambiarEstatus("En Proceso de Recepción");
                 AsignarPaginaActualCookie();
                 applySecurityPolicy(false);
-                console.log("aqui3")
+                
                 var finInserta = new Date();
                 console.log("Termino insertar la informacion en grid")
                 console.log(restarHoras(inicioInserta, finInserta));
@@ -3097,6 +3109,38 @@
 
         }
 
+        function cargarGridPackingListEditado() {
+            var datosGridEditado = $("#grid").data("kendoGrid").dataSource._data;
+            var cuantificacion = Cuantificacion.FolioCuantificacionID ? Cuantificacion.FolioCuantificacionID : "0";
+            $ComplementarRecepcion.ComplementarRecepcion.read({}, { folio: cuantificacion, token: Cookies.get("token") }).done(function (result) {
+                if (Error(result)) {
+                    CargarLabelEstatus(result[0]);
+                    if ($("#grid").data("kendoGrid")) {
+                        if (result.length) {
+
+                            for (var i = 0; i < result[1].length; i++) {
+                                for (var j = 0; j < datosGridEditado.length; j++) {
+                                    if (result[1][i].NumeroUnicoID == datosGridEditado[j].NumeroUnicoID) {
+                                        result[1][i].MM = datosGridEditado[j].MM == 0 ? "N/A" : datosGridEditado[j].MM;
+                                        result[1][i].Colada = datosGridEditado[j].Colada;
+                                        result[1][i].ColadaID = datosGridEditado[j].ColadaID;
+                                        result[1][i].EstatusFisico = datosGridEditado[j].EstatusFisico;
+                                        result[1][i].EstatusDocumental = datosGridEditado[j].EstatusDocumental;
+                                        result[1][i].Mtr = datosGridEditado[j].Mtr;
+                                        result[1][i].MTRID = datosGridEditado[j].MTRID;
+                                    }
+                                };
+                            };
+                            $("#grid").data("kendoGrid").dataSource.data(result[1]);
+
+                        } else {
+                            $("#grid").data("kendoGrid").dataSource.data([]);
+                        };
+                    };
+                }
+                //loadingStop();
+            });
+        };
 
     @section JavascriptDocumentReadyFunctions
     {

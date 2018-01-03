@@ -98,4 +98,19 @@ namespace BackEndSAM.Models
         public string NumeroUnicoCliente { get; set; }
         public int RelFCID { get; set; }
     }
+    public class EditarItemCodeMasDetalle
+    {
+        public List<int> NumerosUnicos { get; set; }
+        public int ItemCodeID { get; set; }
+        public decimal d1 { get; set; }
+        public decimal d2 { get; set; }
+        public string NumeroUnicoCliente { get; set; }
+        public int RelFCID { get; set; }
+        public string Colada { get; set; }
+        public int ColadaID { get; set; }
+        public string EstatusFisico { get; set; }
+        public string EstatusDocumental { get; set; }
+        public string Mtr { get; set; }
+        public int MTRID { get; set; }
+    }
 }

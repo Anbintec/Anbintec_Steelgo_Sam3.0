@@ -167,7 +167,7 @@ namespace BackEndSAM.Controllers
             {
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 Sam3_Usuario usuario = serializer.Deserialize<Sam3_Usuario>(payload);
-                EditarItemCode dat = serializer.Deserialize<EditarItemCode>(datos);
+                EditarItemCodeMasDetalle dat = serializer.Deserialize<EditarItemCodeMasDetalle>(datos);
                 return ComplementoRecepcionBd.Instance.ReemplazarItemCode(dat, usuario);
             }
             else

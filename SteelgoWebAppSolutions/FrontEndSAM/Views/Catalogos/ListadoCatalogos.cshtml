@@ -74,12 +74,12 @@
                         visible: "cedulasDiv",
                         editable: "#fconversion",
                         required: "#fconversion"
-                    }, 
+                    },
                     archivos:{
                         visible: "selectFilesDiv",
                         editable: "#selectFiles",
                         required: "#selectFiles"
-                    } 
+                    }
                 };
                 $model.properties = propers;
                 $model.listContainer.create = "#fcarga";
@@ -596,9 +596,9 @@
                                 options.model.Colada = data.Nombre;
                                 options.model.ItemCodeID=itemCodeID;
                             },
-                                dataTextField: "Nombre",
-                                dataValueField: "ColadaID"
-                            });
+                            dataTextField: "Nombre",
+                            dataValueField: "ColadaID"
+                        });
                     }
                 },
                 { field: "CantidadPiezas", title: _dictionary.ListadoCatalogos0048[$("#language").data("kendoDropDownList").value()],width:140 },
@@ -683,7 +683,7 @@
             console.log(data);
             $("[name='Colada_input']").data("kendoComboBox").dataSource.data(result);
         });
-        
+
     }
 
     function getUrl() {
@@ -693,92 +693,7 @@
         return $Catalogos.AdministracionCatalogos.urlNoId + "?catalogoID=" + catalogo + "&token=";
     }
 
-    function cargarInicialGrid(val) {
-        loadingStart();
-        removeGrid($("#grid"));
-        var catalogo = $("#listaCatalogos").data("kendoDropDownList").value() ? $("#listaCatalogos").data("kendoDropDownList").value() : getUrlParameter("catalog", null);
-        $("#grid").kendoGrid({
-            dataSource: getDataSourceGrid(catalogo),
-            autoHeight: true,
-            sortable: true,
-            scrollable: false,
-            columns: columnas[catalogo],
-            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
-            pageable: {
-                pageSizes: [10, 15, 20],
-                numeric: true,
-                buttonCount: 2
-            },
-            toolbar: ["create"],
-            editable: "inline",
-            save: function (e) {
-                var catalogo = $("#listaCatalogos").data("kendoDropDownList").value();
-                var grid = $("#grid").data("kendoGrid");
-                if (catalogo == "12")
-                {
-                    if ($("#ItemCode").data("kendoAutoComplete").value() == null || $("#ItemCode").data("kendoAutoComplete").value() == "") {
-                        displayMessage("notificationslabel0044", "", '1');
-                        e.preventDefault();
-                    }
-                    else if ($("[name='Colada']").data("kendoComboBox").value() == null || $("[name='Colada']").data("kendoComboBox").value() == "") {
-                        displayMessage("notificationslabel0107", "", '1');
-                        e.preventDefault();
-                    }
-
-                   
-                }
-
-                var data = getDataFromModel(modelos[catalogo].fields, e.model);
-                if (e.model.id !== null && e.model.id !== "") {
-                    var direccion = parseUrl(data, catalogo, "put");
-                    grid.options.dataSource.options.transport.update.url = direccion;
-                } else {
-                    data[modelos[catalogo].id] = "0";
-                    var direccion = parseUrl(data, catalogo, "post");
-                    grid.options.dataSource.options.transport.create.url = direccion;
-                }
-                applySecurityPolicy(false);
-            },
-            cancel: function (e) {
-                applySecurityPolicy(false);
-            },
-            remove: function (e) {
-                var catalogo = $("#listaCatalogos").data("kendoDropDownList").value();
-                var grid = $("#grid").data("kendoGrid");
-                var data = {};
-                for (f in modelos[catalogo].fields) {
-                    data[f] = e.model[f];
-                }
-                if (e.model.id !== null && e.model.id !== "") {
-                    var direccion = parseUrl(data, catalogo, "delete");
-                    grid.options.dataSource.options.transport.destroy.url = direccion;
-                } else {
-                    displayMessage("ListadoCatalogos0009", "", '2');
-                }
-                applySecurityPolicy(false);
-            },
-            dataBound: function (e) {
-                if (contadorDataBound == 0) {
-                    contadorDataBound++;
-                    var grid = $("#grid").data("kendoGrid");
-                    var catalogo = $("#listaCatalogos").data("kendoDropDownList").value() ? $("#listaCatalogos").data("kendoDropDownList").value() : getUrlParameter("catalog", null);
-                    if (catalogo != "3" && catalogo != 8) grid.options.columns.push({ command: { text: "Archivos", click: showFiles }, title: "Archivos", width: "80px", attributes:{"class":"command"} });
-                    grid.options.columns.push({ command: "edit", title: "Editar", width: "80px",attributes:{"class":"command"} });
-                    grid.options.columns.push({ command: "destroy", title: "Borrar", width: "80px",attributes:{"class":"command"} });
-                    regenerarGrid();
-                    checkTH($("#grid").data("kendoGrid"));
-                    quickHeadFilter($("#grid").data("kendoGrid"));
-                }
-               
-                if (ultimaInsercionFallida) {
-                    ultimaInsercionFallida = false;
-                    $("#grid tr:eq(1)").remove();
-                }
-                applySecurityPolicy(false);
-            }
-        });
-        loadingStop();
-    };
+   
 
     function getDataFromModel(fields, model) {
         var data = {};
@@ -1002,7 +917,7 @@
                 //$("#listaCatalogos").parent().parent().parent().append;
                 $('<div id="cedbtns" class="col-xs-12 col-sm-12 col-md-7 col-lg-7 row"><div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-3 cedulasDiv"><label id="" for="fconversion">' + g[0] + '</label><input id="fconversion" type="number" class="general-input"/></div><div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-3 selectFilesDiv"><label id="" >' + g[1] + '</label><input type="file" name="File Upload" id="files" class="hidden" accept=".csv"/><button id="selectFiles" class="btn btn-primary" type="button">' + g[2] + '</button></div><div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"><label id="" for="fcarga" class="hidden-xs">&nbsp;</label><div class="row"><div class="col-xs-6 col-sm-6 col-md-6 col-lg-4"><button id="fcarga" class="btn btn-primary" type="button"><span id="">' + g[3] + '</span></button></div><div class="col-xs-6 col-sm-6 col-md-6 col-lg-8"><a download="TemplateCed.csv" href="#" id="templateced" style="display:inline-block"><label id="" class="download">' + g[4] + '</label></a></div></div></div></div>').insertAfter($("#listaCatalogos").closest(".filter-section"))
 
-                
+
                 $Cedulas.Cedulas.read({}, { catalogoID: "11", token: Cookies.get("token") }).done(function (result) {
                     $("#fconversion").val(result);
                 });
@@ -1214,7 +1129,7 @@
             datos.forEach(function (d) {
                 //if (((d.Diametro1 == c.Diametro1) && (d.CedulaA == c.CedulaA)) || ((d.Diametro1 == c.Diametro1) && (d.CedulaB == c.CedulaB)) || ((d.Diametro1 == c.Diametro1) && (d.CedulaC == c.CedulaC)) || ((d.Diametro1 == c.Diametro1) && (d.CedulaIn == c.CedulaIn))) {
                 //    var tmp = $("#grid").data("kendoGrid").dataSource.data().filter(function(n){return n.dirty===false && n.CedulaA == c.CedulaA})
-                    
+
                 //    throw 1;
                 //}
                 if(!emptyCedulas(c)){
@@ -1359,9 +1274,9 @@
                         }
                     }
                 }else if(getIdByDE(c) !== undefined){
-					//ERROR
+                    //ERROR
                     throw -1;
-				}
+                }
             })
             return 0;
         } catch (e) {
@@ -1372,7 +1287,7 @@
             }
         }
     }
-    
+
     //Convert ced erasing "" to null
     function convertCed(c){
         for(var key in c){
@@ -1385,7 +1300,7 @@
     function cedIsDuplicated(n){
         return ((n.CedulaA===null && n.CedulaB===null && n.CedulaC===null) ? false : ($("#grid").data("kendoGrid").dataSource.data().filter(function(m){ return m.dirty===false && (n.CedulaA!==null ? parseFloat(n.CedulaA) : n.CedulaA)===m.CedulaA && (n.CedulaB!==null ? parseFloat(n.CedulaB) : n.CedulaB)===m.CedulaB && (n.CedulaC!==null ? parseFloat(n.CedulaC) : n.CedulaC)===m.CedulaC && (n.CedulaMM!==null ? parseFloat(n.CedulaMM) : n.CedulaMM) === m.CedulaMM}).length > 0))
     }
-    
+
     //Verifies if a cedula is empty
     function emptyCedulas(n){
         return n.CedulaA===null && n.CedulaB===null && n.CedulaC===null;
@@ -1505,8 +1420,114 @@
         $("#window").data("kendoWindow").title("Archivos");
         $("#window").data("kendoWindow").center().open();
     }
-    };
 
+    };
+    function cargarInicialGrid(val) {
+        loadingStart();
+        removeGrid($("#grid"));
+        var catalogo = $("#listaCatalogos").data("kendoDropDownList").value() ? $("#listaCatalogos").data("kendoDropDownList").value() : getUrlParameter("catalog", null);
+        $("#grid").kendoGrid({
+            dataBinding: function (e)
+            {
+                var gridListadoCatalogo = $("#grid").data("kendoGrid").dataSource;
+                if (gridListadoCatalogo._filter != undefined) {
+                    var cantidadRegistros = gridListadoCatalogo._data.length;
+
+                    if (gridListadoCatalogo._data[0].NumeroMTR == "") {
+                        $("#grid").data("kendoGrid").dataSource.remove($("#grid").data("kendoGrid").dataSource._data[0])
+                    }
+                }
+            },
+            dataSource: getDataSourceGrid(catalogo),
+            autoHeight: true,
+            sortable: true,
+            scrollable: false,
+            columns: columnas[catalogo],
+            filterable: getKendoGridFilterable($("#language").data("kendoDropDownList").value()),
+            pageable: {
+                pageSizes: [10, 15, 20],
+                numeric: true,
+                buttonCount: 2
+            },
+            toolbar: [{ name: "create" }],
+            editable: "inline",
+            save: function (e) {
+
+                var catalogo = $("#listaCatalogos").data("kendoDropDownList").value();
+                var grid = $("#grid").data("kendoGrid");
+                if (catalogo == "12") {
+                    if ($("#ItemCode").data("kendoAutoComplete").value() == null || $("#ItemCode").data("kendoAutoComplete").value() == "") {
+                        displayMessage("notificationslabel0044", "", '1');
+                        e.preventDefault();
+                    }
+                    else if ($("[name='Colada']").data("kendoComboBox").value() == null || $("[name='Colada']").data("kendoComboBox").value() == "") {
+                        displayMessage("notificationslabel0107", "", '1');
+                        e.preventDefault();
+                    }
+
+
+                }
+
+                var data = getDataFromModel(modelos[catalogo].fields, e.model);
+                if (e.model.id !== null && e.model.id !== "") {
+                    var direccion = parseUrl(data, catalogo, "put");
+                    grid.options.dataSource.options.transport.update.url = direccion;
+                } else {
+                    console.log("modelo guardado ");
+                    console.log(e.model);
+                    data[modelos[catalogo].id] = "0";
+                    var direccion = parseUrl(data, catalogo, "post");
+                    console.log("direccion que manda es :")
+                    console.log(direccion);
+                    grid.options.dataSource.options.transport.create.url = direccion;
+                }
+                applySecurityPolicy(false);
+            },
+            cancel: function (e) {
+                applySecurityPolicy(false);
+            },
+            remove: function (e) {
+                var catalogo = $("#listaCatalogos").data("kendoDropDownList").value();
+                var grid = $("#grid").data("kendoGrid");
+                var data = {};
+                for (f in modelos[catalogo].fields) {
+                    data[f] = e.model[f];
+                }
+                if (e.model.id !== null && e.model.id !== "") {
+                    var direccion = parseUrl(data, catalogo, "delete");
+                    grid.options.dataSource.options.transport.destroy.url = direccion;
+                } else {
+                    displayMessage("ListadoCatalogos0009", "", '2');
+                }
+                applySecurityPolicy(false);
+            },
+            dataBound: function (e) {
+
+                if (contadorDataBound == 0) {
+                    contadorDataBound++;
+                    var grid = $("#grid").data("kendoGrid");
+                    var catalogo = $("#listaCatalogos").data("kendoDropDownList").value() ? $("#listaCatalogos").data("kendoDropDownList").value() : getUrlParameter("catalog", null);
+                    if (catalogo != "3" && catalogo != 8) grid.options.columns.push({ command: { text: "Archivos", click: showFiles }, title: "Archivos", width: "80px", attributes: { "class": "command" } });
+                    grid.options.columns.push({ command: "edit", title: "Editar", width: "80px", attributes: { "class": "command" } });
+                    grid.options.columns.push({ command: "destroy", title: "Borrar", width: "80px", attributes: { "class": "command" } });
+                    regenerarGrid();
+                    checkTH($("#grid").data("kendoGrid"));
+                    quickHeadFilter($("#grid").data("kendoGrid"));
+                }
+
+                if (ultimaInsercionFallida) {
+                    ultimaInsercionFallida = false;
+                    $("#grid tr:eq(1)").remove();
+                }
+                
+                applySecurityPolicy(false);
+            }
+        });
+
+      
+        loadingStop();
+    };
+    
     @section JavascriptDocumentReadyFunctions {
     switch (_catalog) {
         case "9":
@@ -1562,7 +1583,7 @@
             $authorizationModel["ListadoCatalogos"] = $model;
             break;
     }
-    
+
     columnas = getColumnas();
     $(document).bind("ajaxStart", function () { }).bind("ajaxStop", function () { }).bind("ajaxError", function () { }).bind("ajaxSuccess", function () { });
     if (isInPopUp()) {
