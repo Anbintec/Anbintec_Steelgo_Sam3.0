@@ -287,3 +287,83 @@ function AjaxGuardarCaptura() {
     }
 
 };
+
+
+
+function AjaxObtenerWPSValidacion() {
+    loadingStart();
+    $WPS.WPS.read({ CodigoAsmeID: 1, token: Cookies.get("token") }).done(function (data) {
+        if (Error(data)) {
+
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].PWHT == 0) {
+                    if (data[i].CortoCircuito == 0) {
+
+                        sinPWHT += "if (" + data[i].LimInfEspTotal + " < EspesorTotalT  && EspesorTotalT < " + data[i].LimSupEspTotal + ") { \n";
+
+                        if (data[i].EspesorMinimo != null)
+                            sinPWHT += "espesores[0].EspesorMinimo = " + data[i].EspesorMinimo + ";\n";
+
+                        if (data[i].EspesorMaximo != null)
+                            sinPWHT += "espesores[0].EspesorMaximo = " + data[i].EspesorMaximo + ";\n";
+
+                        sinPWHT += "}\n";
+                    }
+                    else {
+                        sinPWHT += "if (" + data[i].LimInfEspTotal + " < EspesorTotalT  && EspesorTotalT < " + data[i].LimSupEspTotal + ") { \n";
+
+                        if (data[i].EspesorMinimo != null)
+                            sinPWHT += "espesores[0].EspesorMinimo = " + data[i].EspesorMinimo + ";\n";
+
+                        if (data[i].EspesorMaximo != null)
+                            sinPWHT += "espesores[0].EspesorMaximo = " + data[i].EspesorMaximo + ";\n";
+
+                        sinPWHT += "}\n";
+                    }
+
+                }
+                else {
+                    if (data[i].CortoCircuito == 0) {
+
+                        conPWHT += "if (" + data[i].LimInfEspTotal + " < EspesorTotalT  && EspesorTotalT < " + data[i].LimSupEspTotal + ") { \n";
+
+                        if (data[i].EspesorMinimo != null)
+                            conPWHT += "espesores[0].EspesorMinimo = " + data[i].EspesorMinimo + ";\n";
+
+                        if (data[i].EspesorMaximo != null)
+                            conPWHT += "espesores[0].EspesorMaximo = " + data[i].EspesorMaximo + ";\n";
+
+                        conPWHT += "}\n";
+
+                    }
+                    else {
+                        conPWHT += "if (" + data[i].LimInfEspTotal + " < EspesorTotalT  && EspesorTotalT < " + data[i].LimSupEspTotal + ") { \n";
+
+                        if (data[i].EspesorMinimo != null)
+                            conPWHT += "espesores[0].EspesorMinimo = " + data[i].EspesorMinimo + ";\n";
+
+                        if (data[i].EspesorMaximo != null)
+                            conPWHT += "espesores[0].EspesorMaximo = " + data[i].EspesorMaximo + ";\n";
+
+                        conPWHT += "}\n";
+                    }
+
+                }
+                conPWHT += "}\n";
+
+                cadWPSValidacion = "if (CVN && !bloquearCVN) { \n" +
+                                  "if (!PWHT) { \n "
+                                      + sinPWHT + "\n" +
+                                  " }" + '\n' +
+                                  " else {" + "\n"
+                                      + conPWHT + "\n" +
+                                  " }";
+
+            }
+
+            console.log(cadWPSValidacion);
+        }
+        loadingStop();
+    });
+};

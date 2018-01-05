@@ -3,6 +3,7 @@
     obtenerPQRAjax();
     Limpiar();
     opcionHabilitarView(false, "FieldSetView");
+    AjaxObtenerWPSValidacion();
 
 };
 suscribirEventos();

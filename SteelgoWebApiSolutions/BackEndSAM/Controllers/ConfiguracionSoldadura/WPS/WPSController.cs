@@ -193,6 +193,48 @@ namespace BackEndSAM.Controllers.ConfiguracionSoldadura.WPS
             }
         }
 
+        //Obtiene las configuraciones dinamicas para los WPS
+        [HttpGet]
+        public object GetConfiguracionWPS(int CodigoAsmeID, string token)
+        {
+            try
+            {
+                string payload = "";
+                string newToken = "";
+                bool totokenValido = ManageTokens.Instance.ValidateToken(token, out payload, out newToken);
+                if (totokenValido)
+                {
+                    JavaScriptSerializer serializer = new JavaScriptSerializer();
+                    Sam3_Usuario usuario = serializer.Deserialize<Sam3_Usuario>(payload);
+
+                    return WPSBd.Instance.ObtenerConfiguracionWPS(CodigoAsmeID);
+                }
+                else
+                {
+                    TransactionalInformation result = new TransactionalInformation();
+                    result.ReturnMessage.Add(payload);
+                    result.ReturnCode = 401;
+                    result.ReturnStatus = false;
+                    result.IsAuthenicated = false;
+                    return result;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+                return result;
+            }
+        }
+
+
         public static DataTable ToDataTable<T>(List<T> l_oItems)
         {
             DataTable oReturn = new DataTable(typeof(T).Name);

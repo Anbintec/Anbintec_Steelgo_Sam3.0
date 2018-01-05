@@ -2,11 +2,13 @@
 var resultadoJson;
 var win;
 var esNormal;
+var cadWPS = "";
 
 function changeLanguageCall() {
     document.title = _dictionary.WPSBreadcrumb[$("#language").data("kendoDropDownList").value()];
     CargarGrid();
     ObtenerJSONParaGrid();
+    AjaxObtenerWPSValidacion();
 };
 
 function CargarGrid() {

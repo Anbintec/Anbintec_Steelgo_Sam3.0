@@ -312,6 +312,43 @@ namespace BackEndSAM.DataAcces.ConfiguracionSoldadura
 
         }
 
+        public object ObtenerConfiguracionWPS(int codigoAsmeID)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {
+                    List<Sam3_Soldadura_WPS_GET_Configuracion_Result> result = ctx.Sam3_Soldadura_WPS_GET_Configuracion(codigoAsmeID).ToList();
+                    List<ConfiguracionWPS> listaDetalle = new List<ConfiguracionWPS>();
+
+                    foreach (Sam3_Soldadura_WPS_GET_Configuracion_Result item in result)
+                    {
+                        listaDetalle.Add(new ConfiguracionWPS
+                        {
+                            CodigoAsmeID = item.CodigoAsmeID,
+                            PWHT = item.PWHT,
+                            CortoCircuito = item.CortoCircuito,
+                            LimInfEspTotal = item.LimInfEspTotal,
+                            LimSupEspTotal = item.LimSupEspTotal,
+                            EspesorMinimo = item.EspesorMinimo,
+                            EspesorMaximo = item.EspesorMaximo
+                        });
+                    }
+                    return listaDetalle;
+                }
+            }
+            catch (Exception ex)
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
+
 
     }
 }

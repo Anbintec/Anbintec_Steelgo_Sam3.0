@@ -123,4 +123,16 @@ namespace BackEndSAM.Models.ConfiguracionSoldadura.WPS
         public double EspesorRaiz { get; set; }
         public double EspesorRelleno { get; set; }
     }
+
+
+    public class ConfiguracionWPS
+    {
+        public int CodigoAsmeID { get; set; }
+        public decimal LimInfEspTotal { get; set; }
+        public decimal LimSupEspTotal { get; set; }
+        public string EspesorMinimo { get; set; }
+        public string EspesorMaximo { get; set; }
+        public int PWHT { get; set; }
+        public int CortoCircuito { get; set; }
+    }
 }
