@@ -1119,26 +1119,32 @@ namespace BackEndSAM.DataAcces
                                                 #endregion
 
                                                 #region Actualizar Sam2
+                                                NumeroUnicoInventario nui = (from nuiSam2 in ctx2.NumeroUnicoInventario
+                                                                            where nuiSam2.NumeroUnicoID == actualizaNumSam2.NumeroUnicoID select nuiSam2).AsParallel().SingleOrDefault();
 
-                                                actualizaNumSam2.NumeroUnicoInventario.InventarioBuenEstado = buenEstado;
-                                                actualizaNumSam2.NumeroUnicoInventario.InventarioDisponibleCruce = disponibleCruce;
-                                                actualizaNumSam2.NumeroUnicoInventario.InventarioFisico = fisico;
-                                                actualizaNumSam2.NumeroUnicoInventario.CantidadRecibida = milimetros;
+
+                                                nui.InventarioBuenEstado = buenEstado;
+                                                nui.InventarioDisponibleCruce = disponibleCruce;
+                                                nui.InventarioFisico = fisico;
+                                                nui.CantidadRecibida = milimetros;
                                                 if (dañado)
                                                 {
-                                                    actualizaNumSam2.NumeroUnicoInventario.CantidadDanada = cantidadDañada;
+                                                    nui.CantidadDanada = cantidadDañada;
                                                 }
                                                 else
                                                 {
-                                                    actualizaNumSam2.NumeroUnicoInventario.CantidadDanada = 0;
+                                                    nui.CantidadDanada = 0;
                                                 }
 
-                                                actualizaNumSam2.NumeroUnicoInventario.FechaModificacion = DateTime.Now;
+                                                nui.FechaModificacion = DateTime.Now;
 
                                                 if (actualizaNU.Sam3_ItemCode.TipoMaterialID == 1) // tubo
                                                 {
-                                                    segmentoSam2 = actualizaNumSam2.NumeroUnicoSegmento.Where(x => x.Segmento == "A")
-                                                        .SingleOrDefault();
+                                                    List<NumeroUnicoSegmento> elementosNUS = (from nus in ctx2.NumeroUnicoSegmento
+                                                                                              where nus.NumeroUnicoID == actualizaNumSam2.NumeroUnicoID
+                                                                                              select nus).ToList();
+
+                                                    segmentoSam2 = (elementosNUS.Where(x => x.Segmento == "A")).SingleOrDefault(); 
                                                     segmentoSam2.InventarioBuenEstado = buenEstado;
                                                     segmentoSam2.InventarioDisponibleCruce = disponibleCruce;
                                                     segmentoSam2.InventarioFisico = fisico;

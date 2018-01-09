@@ -1508,8 +1508,8 @@
                 };
 
                 if (e.item.id == "AgregarITCS") {
-                   
-                   
+
+
                     elementoSeleccionadoPackingList = filaseleccionada;
                     lastEditedCellID = filaseleccionada;
 
@@ -1578,7 +1578,7 @@
             cargarItemCodeAutocomplete(lastEditedCellID, lastEditedCellID.ItemCodeID);
         }
     };
-   
+
 
     function CancelarInformacionItem(e) {
         if ($("#grid").data("kendoGrid").dataItem($(e.currentTarget).closest("tr")).TieneNU.toLowerCase() === "no") {
@@ -3309,18 +3309,19 @@
     };
 
     function cargarItemCodeAutocomplete(cell, value) {
-        
+
         if (value != "0" && value != "Bulto") {
-            $ItemCode.ItemCode.read({}, { itemCodeID: value, token: Cookies.get("token"), Colada: cell.Colada, MM: cell.MM, Cantidad:cell.Cantidad }).done(function (data) {
+            $ItemCode.ItemCode.read({}, { itemCodeID: value, token: Cookies.get("token"), Colada: cell.Colada, MM: (cell.MM=="N/A" ||cell.MM=="" || cell.MM==null ?0:cell.MM), Cantidad:cell.Cantidad }).done(function (data) {
                 itemCodesJson = data;
+				console.log(itemCodesJson);
                 if (itemCodesJson) {
                     if (itemCodesJson.ItemCodeID == value) {
                         //lastEditedCellID.ItemCode = itemCodesJson.ItemCode;
-                        cell.Colada = itemCodesJson.ColadaNombre;//coladaValue;//itemCodesJson.ColadaNombre;
+                        cell.Colada =(cell.Colada==""||cell.Colada==null)? itemCodesJson.ColadaNombre : cell.Colada ;//coladaValue;//itemCodesJson.ColadaNombre;
                         //lastEditedCellID.Cantidad = itemCodesJson.Cantidad;
-                        cell.Cantidad = itemCodesJson.Cantidad
-                        cell.MM = itemCodesJson.TipoPackingList == "2" ? "N/A" : itemCodesJson.MM;// mmValue;//0; //itemCodesJson.MM;
-                        cell.DimensionPromedio = itemCodesJson.TipoPackingList == "2" ? "N/A" : "";
+                        cell.Cantidad =itemCodesJson.Cantidad;
+                        cell.MM =(cell.MM==0||cell.MM==null)? (itemCodesJson.TipoPackingList == "2" ? "N/A" : itemCodesJson.MM):cell.MM;// mmValue;//0; //itemCodesJson.MM;
+                        cell.DimensionPromedio = itemCodesJson.TipoPackingList == "2" ? "N/A" : (itemCodesJson.Cantidad ==0?"":(itemCodesJson.MM/itemCodesJson.Cantidad));
                         cell.Detallar = "No";
                         cell.Descripcion = itemCodesJson.Descripcion;
                         cell.D1 = itemCodesJson.Diametro1;
@@ -3912,7 +3913,7 @@
         for (var i = 0; i < datasource.length; i++) {
 
             if ($('#vacios').is(":checked")) {
-                if (datasource[i].MM == "" || datasource[i].MM == undefined || datasource[i].MM == null || datasource[i].MM === 0 || parseInt(datasource[i].TipoMaterial) === 1) {
+                if (datasource[i].MM == "" || datasource[i].MM == undefined || datasource[i].MM == null || datasource[i].MM === 0 ) {
                     datasource[i].MM = value;
                 }
                 else if (parseInt(datasource[i].TipoMaterial) !== 1) {
