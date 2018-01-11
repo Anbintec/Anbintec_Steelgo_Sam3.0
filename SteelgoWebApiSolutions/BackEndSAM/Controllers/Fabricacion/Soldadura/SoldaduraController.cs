@@ -253,7 +253,7 @@ namespace BackEndSAM.Controllers.Fabricacion.Soldadura
                             //Proceso Raiz
                             ProcesoSoldaduraRaizID = item.ProcesoSoldaduraRaizID == null ? 0 : int.Parse(item.ProcesoSoldaduraRaizID.ToString()),
                             ProcesoSoldaduraRaiz = item.CodigoRaiz == null ? "" : item.CodigoRaiz,
-                            ListadoProcesoSoldaduraRaiz = ListadoProcesoSoldadura.Where(x => x.Codigo != "N/A").OrderBy(x => x.Codigo).ToList<ProcesoSoldadura>(),
+                            ListadoProcesoSoldaduraRaiz = item.AgrupadorJunta == "Filete" ? ListadoProcesoSoldadura.OrderBy(x => x.Codigo).ToList<ProcesoSoldadura>() : ListadoProcesoSoldadura.Where( x => x.Codigo != "N/A").OrderBy(x => x.Codigo).ToList<ProcesoSoldadura>(),
                             //Soldadores Raiz
                             ListaSoldadoresRaizCapturados = (List<Soldadores>)SoldaduraBD.Instance.ObtenerSoldadoresRaizCapturados(capturaDatosJson.IdOrdenTrabajo, capturaDatosJson.idVal, item.JuntaSoldaduraID.GetValueOrDefault(), 1),//el ultimo parametro es el tipo de soldadora o raiz o relleno.
                             ListadoSoldadoresRaiz = new List<ObreroSoldador>(),
