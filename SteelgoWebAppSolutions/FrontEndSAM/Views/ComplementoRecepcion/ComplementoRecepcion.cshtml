@@ -897,7 +897,7 @@
         var data = query.filter(filters).data;
         if($("#NumUnicoB").val()!=="" && $("#ItemCodeBusq").data("kendoComboBox").value()==="" && $("#d1Busq").data("kendoComboBox").value()==="" && $("#d2Busq").data("kendoComboBox").value()==="" && data.length>0){
             //if(sameData(data)){
-            
+
                 var dataTemp=[];
                 data.forEach(function (n) {
                     console.log("n");
@@ -919,12 +919,12 @@
                     })
                 });
                 console.log( dataTemp);
-                
+
                 postApply(dataTemp);
             //}
         }
         else {
-            
+
             var ItemCode={ic:data[0].ItemCode,icid:data[0].ItemCodeID}
             if(sameData(data)){
                 var bit1=$("#ItemCodeBusq").data("kendoComboBox").value()!=="" ? 4 : 0;
@@ -1063,7 +1063,7 @@
     }
 
     function postApply(arr) {
-        
+
         var params = arr.pop();
         console.log("obtiene parametro arr.pop()");
         console.log(params);
@@ -1429,7 +1429,8 @@
                 DescripcionIncidenciaMTR: { type: "string", editable: true },
                 ColadaOriginal: { type: "string", editable: false },
                 TieneComplementoRecepcion: { type: "string", editable: false },
-                CantidadPiezasMTR: { type: "string", editable: false }
+                CantidadPiezasMTR: { type: "string", editable: false },
+                TipoMaterialID: { type: "number", editable: false }
             }
         }
 
@@ -1523,7 +1524,7 @@
                     { field: "D1", template:d1Format, title: _dictionary.ComplementoRecepcion0028[$("#language").data("kendoDropDownList").value()], width: 80 },
                     { field: "D2", template:d2Format, title: _dictionary.ComplementoRecepcion0029[$("#language").data("kendoDropDownList").value()], width: 80 },
                     { field: "Cantidad", title: _dictionary.ComplementoRecepcion0030[$("#language").data("kendoDropDownList").value()], aggregates: ["sum"], footerTemplate: "Total SUM: #=sum#", groupFooterTemplate: "SUM: #=sum#", width: 120 },
-                    { field: "MM", title: _dictionary.ComplementoRecepcion0031[$("#language").data("kendoDropDownList").value()], width: 80, attributes: { "class": "MM" }, editor: genEditor },
+                    { field: "MM", title: _dictionary.ComplementoRecepcion0031[$("#language").data("kendoDropDownList").value()], width: 80, attributes: { "class": "MM" }, editor: editorMM, template: "<div > <span>#= TipoMaterialID == 2 ?'N/A': MM #</span></div>" },
                     { field: "Colada", title: _dictionary.ComplementoRecepcion0032[$("#language").data("kendoDropDownList").value()], width: 120 },
                     { field: "EstatusFisico", title: _dictionary.ComplementoRecepcion0034[$("#language").data("kendoDropDownList").value()], editor: EstatusFisicoAutocomplete, width: 160 },
                     { field: "EstatusDocumental", title: _dictionary.ComplementoRecepcion0035[$("#language").data("kendoDropDownList").value()], editor: EstatusDepartamentalAutocomplete, width: 200 },
@@ -1686,6 +1687,13 @@
 
         function genEditor(container,options){
             $("<input class='k-input k-textbox' data-bind='"+options.field+"'>").attr("name",options.field).on("blur",function(){options.model.modified=true;}).appendTo(container);
+        }
+        function editorMM(container, options) {
+
+            if (options.model.TipoMaterialID == 1)
+            {
+                $("<input class='k-input k-textbox' data-bind='" + options.field + "'>").attr("name", options.field).on("blur", function () { options.model.modified = true; }).appendTo(container);
+            }
         }
         function d1Format(dataitem){
             return kendo.toString(dataitem.D1, "n4")
@@ -2242,7 +2250,7 @@
             });
         };
 
-       
+
 
         function EstatusFisicoAutocomplete(container, options) {
             $('<input id="EstatusFisicoAutocomplete" data-text-field="Nombre" data-value-field="EstatFisicoID" data-bind="value:' + options.field + '"/>')
@@ -3049,10 +3057,10 @@
                 console.log(restarHoras(inicio, fin));
 
                 var inicioInserta = new Date();
-                
+
                 BotonAlta();
                 ocultarStatus();
-                
+
                 error = data[0];
                 for (var i = 0; i < data[1].length; i++) {
                     if (ErrorBool(data[1][i]))
@@ -3060,7 +3068,7 @@
                     else
                         cargarGridErrores(data[1][i]);
                 }
-                
+
                 ordenamientoGrid();
                 if (error) {
                     displayMessage("notificationslabel0051", error, '2');
@@ -3068,17 +3076,17 @@
                     loadingStop();
                     return;
                 }
-                
+
                 //cicloGuardadoParcial(ListadoCuantificacion, i, idGuardado, error);
                 ObtenerDatosDelFolioCuantificacion();
 
                 cargarTituloFolio();
                 CargarLabelEstatus("En Proceso de Recepción");
-                
+
                 CambiarEstatus("En Proceso de Recepción");
                 AsignarPaginaActualCookie();
                 applySecurityPolicy(false);
-                
+
                 var finInserta = new Date();
                 console.log("Termino insertar la informacion en grid")
                 console.log(restarHoras(inicioInserta, finInserta));

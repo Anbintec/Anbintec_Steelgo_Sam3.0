@@ -54,11 +54,12 @@ namespace BackEndSAM.DataAcces
                                       join rel in ctx.Sam3_Rel_NumeroUnico_RelFC_RelB on rfi.Rel_FolioCuantificacion_ItemCode_ID equals rel.Rel_FolioCuantificacion_ItemCode_ID
                                       join nu in ctx.Sam3_NumeroUnico on rel.NumeroUnicoID equals nu.NumeroUnicoID
                                       join it in ctx.Sam3_ItemCode on nu.ItemCodeID equals it.ItemCodeID
-                                      join nui in ctx.Sam3_NumeroUnicoInventario  on nu.NumeroUnicoID equals  nui.NumeroUnicoID 
+                                      join nui in ctx.Sam3_NumeroUnicoInventario on nu.NumeroUnicoID equals nui.NumeroUnicoID
                                       where nui.Activo && fc.Activo && rfi.Activo && it.Activo && nu.Activo && rel.Activo //&& nu.NumeroUnicoID == 10945
                                       && fc.FolioCuantificacionID == folioCuantificacionID
                                       select new ItemCodeComplemento
                                       {
+                                          TipoMaterialID = it.TipoMaterialID,
                                           NumeroUnicoID = nu.NumeroUnicoID.ToString(),
                                           NumeroUnico = nu.Prefijo + "-" + nu.Consecutivo,
                                           ItemCode = it.Codigo,
@@ -100,7 +101,7 @@ namespace BackEndSAM.DataAcces
                                                       where n.NumeroUnicoID == nu.NumeroUnicoID
                                                       select n).Count(),
                                           MM = nui.CantidadRecibida.ToString(),//rel.MM.ToString(),
-                                          Colada =(from c in ctx.Sam3_Colada where c.Activo && c.ColadaID== nu.ColadaID select c.NumeroColada ).FirstOrDefault(),  //nu.Sam3_Colada.NumeroColada,
+                                          Colada = (from c in ctx.Sam3_Colada where c.Activo && c.ColadaID == nu.ColadaID select c.NumeroColada).FirstOrDefault(),  //nu.Sam3_Colada.NumeroColada,
                                           EstatusDocumental = nu.EstatusDocumental,
                                           EstatusFisico = nu.EstatusFisico,
                                           TipoUso = (from c in ctx.Sam3_TipoUso where c.Activo && c.TipoUsoID == nu.TipoUsoID select c.Nombre).FirstOrDefault(),  //nu.Sam3_TipoUso.Nombre,
@@ -138,6 +139,7 @@ namespace BackEndSAM.DataAcces
                                       && fc.FolioCuantificacionID == folioCuantificacionID
                                       select new ItemCodeComplemento
                                       {
+                                          TipoMaterialID = it.TipoMaterialID,
                                           NumeroUnicoID = nu.NumeroUnicoID.ToString(),
                                           NumeroUnico = nu.Prefijo + "-" + nu.Consecutivo,
                                           ItemCode = it.Codigo,
@@ -308,6 +310,7 @@ namespace BackEndSAM.DataAcces
                                 && rel.Rel_NumeroUnico_RelFC_RelB_ID == RelNUFCBID
                                 select new ItemCodeComplemento
                                 {
+                                    TipoMaterialID = it.TipoMaterialID,
                                     NumeroUnico = nu.Prefijo + "-" + nu.Consecutivo,
                                     NumeroUnicoID = nu.NumeroUnicoID.ToString(),
                                     ItemCode = it.Codigo,
@@ -410,6 +413,7 @@ namespace BackEndSAM.DataAcces
                                 && rel.Rel_NumeroUnico_RelFC_RelB_ID == RelNUFCBID
                                 select new ItemCodeComplemento
                                 {
+                                    TipoMaterialID = it.TipoMaterialID,
                                     NumeroUnico = nu.Prefijo + "-" + nu.Consecutivo,
                                     NumeroUnicoID = nu.NumeroUnicoID.ToString(),
                                     ItemCode = it.Codigo,
@@ -553,6 +557,7 @@ namespace BackEndSAM.DataAcces
                                 && rel.Rel_NumeroUnico_RelFC_RelB_ID == RelNUFCBID
                                 select new ItemCodeComplemento
                                 {
+                                    TipoMaterialID = it.TipoMaterialID,
                                     NumeroUnico = nu.Prefijo + "-" + nu.Consecutivo,
                                     NumeroUnicoID = nu.NumeroUnicoID.ToString(),
                                     ItemCode = it.Codigo,
@@ -655,6 +660,7 @@ namespace BackEndSAM.DataAcces
                                 && rel.Rel_NumeroUnico_RelFC_RelB_ID == RelNUFCBID
                                 select new ItemCodeComplemento
                                 {
+                                    TipoMaterialID = it.TipoMaterialID,
                                     NumeroUnico = nu.Prefijo + "-" + nu.Consecutivo,
                                     NumeroUnicoID = nu.NumeroUnicoID.ToString(),
                                     ItemCode = it.Codigo,
@@ -1120,7 +1126,8 @@ namespace BackEndSAM.DataAcces
 
                                                 #region Actualizar Sam2
                                                 NumeroUnicoInventario nui = (from nuiSam2 in ctx2.NumeroUnicoInventario
-                                                                            where nuiSam2.NumeroUnicoID == actualizaNumSam2.NumeroUnicoID select nuiSam2).AsParallel().SingleOrDefault();
+                                                                             where nuiSam2.NumeroUnicoID == actualizaNumSam2.NumeroUnicoID
+                                                                             select nuiSam2).AsParallel().SingleOrDefault();
 
 
                                                 nui.InventarioBuenEstado = buenEstado;
@@ -1144,7 +1151,7 @@ namespace BackEndSAM.DataAcces
                                                                                               where nus.NumeroUnicoID == actualizaNumSam2.NumeroUnicoID
                                                                                               select nus).ToList();
 
-                                                    segmentoSam2 = (elementosNUS.Where(x => x.Segmento == "A")).SingleOrDefault(); 
+                                                    segmentoSam2 = (elementosNUS.Where(x => x.Segmento == "A")).SingleOrDefault();
                                                     segmentoSam2.InventarioBuenEstado = buenEstado;
                                                     segmentoSam2.InventarioDisponibleCruce = disponibleCruce;
                                                     segmentoSam2.InventarioFisico = fisico;
@@ -1742,6 +1749,7 @@ namespace BackEndSAM.DataAcces
                 LoggerBd.Instance.EscribirLog(ex);
                 //-----------------Agregar mensaje al Log -----------------------------------------------
                 itemCodeJson.TieneError = true;
+                itemCodeJson.DescripcionError = ex.Message;
                 return itemCodeJson;
             }
         }

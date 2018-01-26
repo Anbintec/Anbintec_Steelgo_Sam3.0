@@ -65,7 +65,7 @@ namespace BackEndSAM.Controllers
             }
         }
 
-        public object Put(int folio, string estatus , string token)
+        public object Put(int folio, string estatus, string token)
         {
             string payload = "";
             string newToken = "";
@@ -87,7 +87,7 @@ namespace BackEndSAM.Controllers
             }
         }
 
-        public object Put(BackEndSAM.Models.Captura elementos ,string tipoGuardado, string token)
+        public object Put(BackEndSAM.Models.Captura elementos, string tipoGuardado, string token)
         {
             string payload = "";
             string newToken = "";
@@ -111,7 +111,7 @@ namespace BackEndSAM.Controllers
                 {
                     ItemCodeComplemento item = (ItemCodeComplemento)ComplementoRecepcionBd.Instance.GuardarComplemento(Convert.ToInt32(tipoGuardado), list[i], usuario);
                     if (item.TieneError)
-                        stringbiuilderErrores.Append("," + item.ItemCode);
+                        stringbiuilderErrores.Append("," + item.ItemCode + " " + item.DescripcionError);
                     listElementos.Add(item);
                 }
 

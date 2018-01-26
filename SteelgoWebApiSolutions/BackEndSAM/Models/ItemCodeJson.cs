@@ -40,6 +40,7 @@ namespace BackEndSAM.Models
 
     public class ItemCodeComplemento
     {
+        public int TipoMaterialID { get; set; }
         public string NumeroUnicoID { get; set; }
         public string NumeroUnico { get; set; }
         public string NumeroUnicoCliente { get; set; }
@@ -74,6 +75,7 @@ namespace BackEndSAM.Models
         public string DescripcionIncidenciaMTR { get; set; }
         public int Diametro1ID { get; set; }
         public int Diametro2ID { get; set; }
+        public string DescripcionError { get; set; }
     }
 
 
