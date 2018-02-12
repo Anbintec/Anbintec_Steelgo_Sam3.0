@@ -102,16 +102,20 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                             OkCliente = item.OkCliente,
                             OkClienteEmbarque = item.OkClienteEmbarque,
                             OkClienteCarga = item.OKClienteCarga,
+                            RequiereOkDocumental = item.RequiereOkDocumental,
+                            OkDocumental = item.OkDocumental,
                             AprobadoAduanaAnt = item.AprobadoAduana,
                             AprobadoAduana = item.RequiereAduana ? item.AprobadoAduana : 1,
                             AprobadoAduanaDesc = item.RequiereAduana ? item.AprobadoAduanaDesc : "NA",
                             OkEmbarqueAnt = item.OkEmbarque,
                             OkEmbarque = item.OkEmbarque,
                             Enviar =
-                            !item.RequiereAduana && !item.RequierePapCliente && !item.RequiereRevisionCliente && !item.OkClienteEmbarque && !item.OkCliente && !item.OKClienteCarga && (item.Destino != "" && item.OkEmbarque) ? true : 
+                            !item.RequiereAduana && !item.RequierePapCliente && !item.RequiereRevisionCliente && !item.OkClienteEmbarque && !item.OkCliente && !item.OKClienteCarga && !item.RequiereOkDocumental && (item.Destino != "" && item.OkEmbarque) ? true : 
+                            !item.RequiereAduana && !item.RequierePapCliente && item.RequiereRevisionCliente && !item.OkClienteEmbarque && !item.OkCliente && !item.OKClienteCarga && !item.RequiereOkDocumental && (item.Destino != "" && item.OkEmbarque) ? true :
+                            !item.RequiereAduana && !item.RequierePapCliente && item.RequiereRevisionCliente && !item.OkClienteEmbarque && !item.OkCliente && !item.OKClienteCarga && (item.RequiereOkDocumental && item.OkDocumental) && (item.Destino != "" && item.OkEmbarque) ? true :
                             item.RequiereAduana ? (((item.FechaPermiso != null && item.FechaPermiso != "") && (item.SolicitudPermiso != null && item.SolicitudPermiso != "" ) && item.AprobadoAduana == 1) && item.Destino != "" && item.OkEmbarque ? true : false ) :
-                            !item.RequiereAduana ? item.Destino != "" && item.OkCliente && item.OkEmbarque ? true : false : 
-                            !item.RequiereAduana && item.Destino != "" && !item.OkCliente && item.OkEmbarque ? true : false,
+                            !item.RequiereAduana ? item.Destino != "" && item.OkCliente && item.OkEmbarque && (item.RequiereOkDocumental && item.OkDocumental) ? true : false : 
+                            !item.RequiereAduana && item.Destino != "" && !item.OkCliente && item.OkEmbarque && (item.OkDocumental && item.RequiereOkDocumental) ? true : false,
                             
                            
                             CapturaEnvioID = item.CapturaEnvioID.GetValueOrDefault(),

@@ -46,6 +46,8 @@ namespace BackEndSAM.Models.Embarque.ListadoEmbarque
         public string AprobadoAduanaDesc { get; set; }
         public bool OkEmbarqueAnt { get; set; }
         public bool OkEmbarque { get; set; }
+        public bool RequiereOkDocumental { get; set; }
+        public bool OkDocumental { get; set; }
         public bool Enviar { get; set; }
         public int CapturaEnvioID { get; set; }
         public bool ModificadoPorUsuario { get; set; }
@@ -73,6 +75,7 @@ namespace BackEndSAM.Models.Embarque.ListadoEmbarque
         public bool OkEmbarque { get; set; }
         public int EstatusCaptura { get; set; }
         public int BitacoraAduana { get; set; }
+        public bool OkDocumental { get; set; }
     }
     public class CapturaListadoEmbarque
     {

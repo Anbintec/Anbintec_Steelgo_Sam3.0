@@ -117,14 +117,13 @@ function SuscribirEventoGuardar() {
         if ($("#btnPendientes").hasClass("active")) {
             if ($('#Guardar').text() == _dictionary.lblGuardar[$("#language").data("kendoDropDownList").value()]) {
                 if (ds._data.length > 0) {
-                    AjaxGuardarCaptura(ds._data, 1);
+                    AjaxGuardarCaptura(ds._data, 1);                    
                 } else {
                     displayNotify("MensajeAdverteciaExcepcionGuardado", "", '2');
                 }
             } else if ($('#Guardar').text() == _dictionary.botonEditar[$("#language").data("kendoDropDownList").value()])
                 opcionHabilitarView(false, "");
-        }
-           
+        }        
     });
 }
 
@@ -136,18 +135,16 @@ function opcionHabilitarView(valor, name) {
         $("#Guardar").text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
         $("#btnGuardar").text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
         $("#Guardar1").text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
-        $('#btnGuardar1').text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);
+        $('#btnGuardar1').text(_dictionary.botonEditar[$("#language").data("kendoDropDownList").value()]);               
     }
     else {
         $("#btnPendientes").attr('disabled', false);
-        $("#btnTransito").attr('disabled', false);
-
+        $("#btnTransito").attr('disabled', false);        
         //$('#FieldSetView').find('*').attr('disabled', false);
         $("#Guardar").text(_dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]);
         $("#btnGuardar").text(_dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]);
         $("#Guardar1").text(_dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]);
         $('#btnGuardar1').text(_dictionary.botonGuardar[$("#language").data("kendoDropDownList").value()]);
-        $("#grid").data("kendoGrid").dataSource.sync();
-    }
-        
+        $("#grid").data("kendoGrid").dataSource.sync();               
+    }    
 }
