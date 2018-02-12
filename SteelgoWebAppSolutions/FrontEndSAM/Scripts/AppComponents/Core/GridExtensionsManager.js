@@ -98,6 +98,15 @@ function CustomisaGrid(elemento) {
                     $(".k-grid-content td").css("white-space", "nowrap");
 
                 }
+
+                //if ($("tbody td").css("white-space") == "nowrap") {
+                //    $("tbody td").css("white-space", "normal");
+                //}
+                //else {
+                //    $("tbody td").css("white-space", "nowrap");
+
+                //}
+
             }
         }
     });

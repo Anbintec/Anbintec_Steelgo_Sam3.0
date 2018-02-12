@@ -7689,8 +7689,8 @@ _dictionary = {
 	    "en-US": "Mix(gas)"
 	},
 	"lblRespaldo": {
-	    "es-MX": "Respaldo",
-	    "en-US": "Back"
+	    "es-MX": "Respaldo(gas)",
+	    "en-US": "Back(gas)"
 	},
 	"lblGrupoF": {
 	    "es-MX": "Grupo F Raiz",

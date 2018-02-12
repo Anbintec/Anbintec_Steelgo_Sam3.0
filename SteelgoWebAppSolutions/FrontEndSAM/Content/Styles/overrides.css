@@ -1107,7 +1107,7 @@
     color: #111111;
     font-weight: 100;
     border-bottom: 1px solid #CCCCCC;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 
 

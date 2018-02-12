@@ -14,14 +14,16 @@ CargaInicial();
 function ConvertirCombos() {
 
     $("#EspesorRelleno").kendoNumericTextBox({
-        format: "#",
-        decimals: 0,
+        //format: "#",
+        decimals: 2,
+        restrictDecimals: true,
         min: 0
     });
 
     $("#EspesorRaiz").kendoNumericTextBox({
-        format: "#",
-        decimals: 0,
+        //format: "#",
+        decimals: 2,
+        restrictDecimals: true,
         min: 0
     });
 
