@@ -477,7 +477,7 @@ function AjaxGuardarCaptura(ds, tipoGuardado, proveedorID) {
     if (cont > 0) {
         $PreparacionEmbarque.PreparacionEmbarque.create(Captura[0], {
             token: Cookies.get("token"), lenguaje: $("#language").val(), EmbarqueID: embarqueID,
-            NombreEmbarque: nombreEmbarque, NombreEmbarqueCliente: nombreEmbarqueCliente, TractoID: tractoID, ChoferID: choferID, TractoEnvioID: tractoEnvioID, ChoferEnvioID: choferEnvioID, ProveedorEnvioID: proveedorEnvioID, FechaCreacion: fechaCreacion
+            NombreEmbarque: nombreEmbarque, NombreEmbarqueCliente: nombreEmbarqueCliente, TractoID: tractoID, ChoferID: choferID, TractoEnvioID: (tractoEnvioID == null || tractoEnvioID == "") ? 0 : tractoEnvioID, ChoferEnvioID: (choferEnvioID == null || choferEnvioID == "") ? 0 : choferEnvioID, ProveedorEnvioID: (proveedorEnvioID == null || proveedorEnvioID == "") ? 0 : proveedorEnvioID, FechaCreacion: fechaCreacion
         }).done(function (data) {
             if (data.ReturnMessage.length > 0 && data.ReturnMessage[0] == "Ok") {
                 if (tipoGuardado == 1) {
