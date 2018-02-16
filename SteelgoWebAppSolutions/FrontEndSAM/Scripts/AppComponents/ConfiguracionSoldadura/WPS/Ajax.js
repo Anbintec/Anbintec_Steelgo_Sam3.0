@@ -291,6 +291,7 @@ function AjaxGuardarCaptura() {
 
 
 function AjaxObtenerWPSValidacion() {
+    var cadWPSValidacion;
     loadingStart();
     $WPS.WPS.read({ CodigoAsmeID: 1, token: Cookies.get("token") }).done(function (data) {
         if (Error(data)) {

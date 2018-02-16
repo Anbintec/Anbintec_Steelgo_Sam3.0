@@ -217,12 +217,12 @@ function suscribirEventoRellenoNombre() {
 
                     }
                     else {
-                        EspesoresRaiz = ObtenerEspesorCorrecto(parseFloat($("#PQRRaizNombre").data("kendoComboBox").dataItem($("#PQRRaizNombre").data("kendoComboBox").select()).EspesorRelleno) +
+                        EspesoresRaiz = ObtenerEspesorCorrecto(parseFloat($("#PQRRaizNombre").data("kendoComboBox").dataItem($("#PQRRaizNombre").data("kendoComboBox").select()).EspesorRaiz) +
                                                                   parseFloat(dataItem.EspesorRelleno),
                                                                   $('#PWHRelleno').is(':checked'), $('#CVNRelleno').is(':checked'), $("#PQRRaizNombre").data("kendoComboBox").dataItem($("#PQRRaizNombre").data("kendoComboBox").select()).CodigoRelleno,
                                                                   $('#QuitarCVN').is(':checked'));
-                        $("#EspesorMaximoWPS").text(parseFloat(EspesoresRaiz[0].EspesorMaximo));
-                        $("#EspesorMinimoWPS").text(parseFloat(EspesoresRaiz[0].EspesorMinimo));
+                        $("#EspesorMaximoWPS").text(parseFloat(EspesoresRaiz[0].EspesorMaximo.toFixed(3)));
+                        $("#EspesorMinimoWPS").text(parseFloat(EspesoresRaiz[0].EspesorMinimo.toFixed(3)));
 
 
 
@@ -230,13 +230,13 @@ function suscribirEventoRellenoNombre() {
                         EspesorMaximoRaiz = ObtenerEspesorCorrecto(parseFloat($("#PQRRaizNombre").data("kendoComboBox").dataItem($("#PQRRaizNombre").data("kendoComboBox").select()).EspesorRaiz),
                                                       $('#PWHRelleno').is(':checked'), $('#CVNRelleno').is(':checked'), $("#PQRRellenoNombre").data("kendoComboBox").dataItem($("#PQRRellenoNombre").data("kendoComboBox").select()).CodigoRelleno,
                                                       $('#QuitarCVN').is(':checked'));
-                        $("#EspesorRaiz").text(parseFloat(EspesorMaximoRaiz[0].EspesorMaximo));
+                        $("#EspesorRaiz").text(parseFloat(EspesorMaximoRaiz[0].EspesorMaximo.toFixed(3)));
 
 
                         EspesorMaximoRelleno = ObtenerEspesorCorrecto(parseFloat($("#PQRRellenoNombre").data("kendoComboBox").dataItem($("#PQRRellenoNombre").data("kendoComboBox").select()).EspesorRelleno),
                                                       $('#PWHRelleno').is(':checked'), $('#CVNRelleno').is(':checked'), $("#PQRRellenoNombre").data("kendoComboBox").dataItem($("#PQRRellenoNombre").data("kendoComboBox").select()).CodigoRelleno,
                                                       $('#QuitarCVN').is(':checked'));
-                        $("#EspesorRelleno").text(parseFloat(EspesorMaximoRelleno[0].EspesorMaximo));
+                        $("#EspesorRelleno").text(parseFloat(EspesorMaximoRelleno[0].EspesorMaximo.toFixed(3)));
 
                         if (dataItem.CVN == 1 && $("#PQRRaizNombre").data("kendoComboBox").dataItem($("#PQRRaizNombre").data("kendoComboBox").select()).CVN == 1) {
                             $('#QuitarCVN').prop("disabled", false);
