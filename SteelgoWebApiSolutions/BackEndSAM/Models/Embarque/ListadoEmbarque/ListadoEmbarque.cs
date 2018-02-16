@@ -91,6 +91,7 @@ namespace BackEndSAM.Models.Embarque.ListadoEmbarque
         public string FechaPermiso { get; set; }
         public int AprobadoAduana { get; set; }
         public int BitacoraAduana { get; set; }
+        public bool OkDocumental { get; set; }
     }
 
     public class DetalleListadoEmbarqueEnviado

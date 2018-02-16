@@ -306,7 +306,7 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                 using (SamContext ctx = new SamContext())
                 {
                     var oMyString = new ObjectParameter("Retorno", typeof(string));
-                    var resultSp = ctx.Sam3_Embarque_LE_GuardarEnvio(UsuarioID, Lenguaje, dtEnvio.EmbarqueID, dtEnvio.DestinoID, dtEnvio.SolicitudPermiso, dtEnvio.FechaPermiso, dtEnvio.AprobadoAduana, dtEnvio.BitacoraAduana, NumeroEmbarque, NumeroEmbarqueCliente, FechaEnvio, dtEnvio.ProyectoID, oMyString);
+                    var resultSp = ctx.Sam3_Embarque_LE_GuardarEnvio(UsuarioID, Lenguaje, dtEnvio.EmbarqueID, dtEnvio.DestinoID, dtEnvio.SolicitudPermiso, dtEnvio.FechaPermiso, dtEnvio.AprobadoAduana, dtEnvio.BitacoraAduana, NumeroEmbarque, NumeroEmbarqueCliente, FechaEnvio, dtEnvio.ProyectoID, dtEnvio.OkDocumental, oMyString);
                     var data = oMyString.Value.ToString();
 
                     TransactionalInformation result = new TransactionalInformation();
