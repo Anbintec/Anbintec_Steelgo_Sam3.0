@@ -331,7 +331,10 @@ namespace BackEndSAM.DataAcces.Pintura.PruebasPorLote
                             UnidadMaxima=item.UnidadMaxima,
                             UnidadMinima=item.UnidadMinima,
                             Accion =2,//es dos porque si ya existe entonces se actualiza.
-                            PruebaLoteID=item.PruebaLoteID
+                            PruebaLoteID=item.PruebaLoteID,
+                            Inspector=item.Inspector,
+                            InspectorID=item.InspectorID
+
                         };
                         listaDetallePruebasSpool.Add(objeto);
                     }

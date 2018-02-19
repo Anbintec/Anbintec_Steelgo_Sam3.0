@@ -147,6 +147,8 @@ namespace BackEndSAM.Models.Pintura.PruebasPorLote
         public double? UnidadMinima { get; set; }
         public string Medida { get; set; }
         public int PruebaLoteID { get; set; }
+        public int? InspectorID { get; set; }
+        public string Inspector { get; set; }
     }
 
 
@@ -165,5 +167,6 @@ namespace BackEndSAM.Models.Pintura.PruebasPorLote
         public bool ResultadoEvaluacion { get; set; }
         public int SistemaPinturaColorID { get; set; }
         public int PruebaLoteID { get; set; }
+        public int InspectorID { get; set; }
     }
 }

@@ -7,15 +7,41 @@ var CuadranteSpoolAnterior;
 var proyectoActualSeleccionado;
 var carroActualSeleccionado;
 
-function InsertarNuevoElemento()
-{
+function PlanchaSeleccionado(opcionSeleccionada) {
+
+    var dataSource = $("#grid").data("kendoGrid").dataSource;
+    var filters = dataSource.filter();
+    var allData = dataSource.data();
+    var query = new kendo.data.Query(allData);
+    var data = query.filter(filters).data;
+
+    for (var i = 0; i < data.length; i++) {
+        if ($('input:radio[name=LLena]:checked').val() === "Todos") {
+            if (opcionSeleccionada == "Si") {
+                data[i].Seleccionado = true;
+
+            } else if (opcionSeleccionada == "No") {
+                data[i].Seleccionado = false;
+            }
+        } else if ($('input:radio[name=LLena]:checked').val() === "Vacios") {
+            if (!data[i].Seleccionado) {
+                if (opcionSeleccionada == "Si") {
+                    data[i].Seleccionado = true;
+                }
+            }
+        }
+    }
+    $("#grid").data("kendoGrid").refresh();
+}
+
+function InsertarNuevoElemento() {
     if (!$('#chkCerrar').is(':checked')) {
         if ($('input:radio[name=TipoSeleccion]:checked').val() == "Spool" && ($("#InputID").val() == "" || $("#InputID").val() == "0")) {
             displayNotify("PinturaCargaSeleccionaSpool", "", '1');
         }
         else if ($('input:radio[name=TipoSeleccion]:checked').val() == "Spool" && $("#InputID").val() != "") {
             var valorBusqueda = $('input:radio[name=TipoSeleccion]:checked').val() == "Spool" ? $("#InputID").val() + '~' + "Spool" : $("#inputCodigo").val() + '~' + "Codigo";
-            if ($("#inputProyecto").data("kendoComboBox").select() != 0) {
+            if (proyectoActualSeleccionado != undefined && proyectoActualSeleccionado != null && proyectoActualSeleccionado.ProyectoID != 0) {
                 AjaxObtenerDetalleCargaCarro($("#inputCarro").data("kendoComboBox").select() == -1 ? 0 : $("#inputCarro").data("kendoComboBox").dataItem($("#inputCarro").data("kendoComboBox").select()).MedioTransporteID, $('input:radio[name=TipoVista]:checked').val(), valorBusqueda);
             }
             else
@@ -23,7 +49,7 @@ function InsertarNuevoElemento()
         }
         else if ($('input:radio[name=TipoSeleccion]:checked').val() == "Codigo" && $("#inputCodigo").val() != "") {
             var valorBusqueda = $('input:radio[name=TipoSeleccion]:checked').val() == "Spool" ? $("#InputID").val() + '~' + "Spool" : $("#inputCodigo").val() + '~' + "Codigo";
-            if ($("#inputProyecto").data("kendoComboBox").select() != 0) {
+            if (proyectoActualSeleccionado != undefined && proyectoActualSeleccionado != null && proyectoActualSeleccionado.ProyectoID != 0) {
                 AjaxObtenerDetalleCargaCarro($("#inputCarro").data("kendoComboBox").select() == -1 ? 0 : $("#inputCarro").data("kendoComboBox").dataItem($("#inputCarro").data("kendoComboBox").select()).MedioTransporteID, $('input:radio[name=TipoVista]:checked').val(), valorBusqueda);
             }
             else
@@ -39,7 +65,7 @@ function InsertarNuevoElemento()
 }
 
 function Limpiar() {
-   
+
     $("#labelM2").text("");
     $("#inputCarro").data("kendoComboBox").dataSource.data([]);
     $("#inputCarro").data("kendoComboBox").value("");
@@ -96,8 +122,7 @@ function LimpiarCargaCarro() {
 
 }
 
-function LimpiarInformacionAgregada()
-{
+function LimpiarInformacionAgregada() {
     $("#grid").data('kendoGrid').dataSource.data([]);
     $("#labelM2").text("");
     $("#labelToneladas").text("");
@@ -164,7 +189,9 @@ function CargaGrid() {
                         MedioTransporte: { type: "string", editable: false },
                         Seleccionado: { type: "boolean", editable: false },
                         EstatusCaptura: { type: "number", editable: false },
-                        EstatusCarga: { type: "boolean", editable: false }
+                        EstatusCarga: { type: "boolean", editable: false },
+                        PEQS: { type: "number", editable: false },
+                        PDIS: { type: "number", editable: false },
                     }
                 }
             },
@@ -182,7 +209,10 @@ function CargaGrid() {
             serverSorting: false,
             aggregate: [
                 { field: "Area", aggregate: "sum" },
-                { field: "Peso", aggregate: "sum" }
+                { field: "Peso", aggregate: "sum" },
+                { field: "PEQS", aggregate: "sum" },
+                { field: "PDIS", aggregate: "sum" }
+
             ]
         },
         navigatable: true,
@@ -204,10 +234,14 @@ function CargaGrid() {
             { field: "NumeroControl", title: _dictionary.columnNumeroControl[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec() },
             { field: "SistemaPintura", title: _dictionary.columnSistemaPintura[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec() },
             { field: "ColorPintura", title: _dictionary.columnColor[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), template: "<span>  #= ColorPintura==''||ColorPintura==null ? 'N/A' : ColorPintura #</span></div>", attributes: { style: "text-align:center;" } },
-            { field: "Cuadrante", title: _dictionary.columnCuadrante[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec()},
-            { field: "Area", title: _dictionary.columnM2[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), attributes: { style: "text-align:right;" }, aggregates: ["sum"], footerTemplate: "<div style='text-align:right;'>SUM: #= kendo.toString(sum, 'n') #</div>"},
+            { field: "Cuadrante", title: _dictionary.columnCuadrante[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec() },
+
+            { field: "PEQS", title: _dictionary.AutorizacionPeticionHeaderPeqs[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), attributes: { style: "text-align:right;" }, aggregates: ["sum"], footerTemplate: "<div style='text-align:right;'>SUM: #= kendo.toString(sum, 'n') #</div>" },
+            { field: "PDIS", title: _dictionary.lblPdi[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), attributes: { style: "text-align:right;" }, aggregates: ["sum"], footerTemplate: "<div style='text-align:right;'>SUM: #= kendo.toString(sum, 'n') #</div>" },
+
+            { field: "Area", title: _dictionary.columnM2[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), attributes: { style: "text-align:right;" }, aggregates: ["sum"], footerTemplate: "<div style='text-align:right;'>SUM: #= kendo.toString(sum, 'n') #</div>" },
             { field: "Peso", title: _dictionary.columnPeso[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), attributes: { style: "text-align:right;" }, aggregates: ["sum"], footerTemplate: "<div style='text-align:right;'>SUM: #= kendo.toString(sum, 'n') #</div>" },
-            { field: "MedioTransporte", title: _dictionary.columnMedioTransporte[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec()  },
+            { field: "MedioTransporte", title: _dictionary.columnMedioTransporte[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec() },
             {
                 field: "Seleccionado", title: _dictionary.columnSeleccionado[$("#language").data("kendoDropDownList").value()], filterable: {
                     multi: true,
@@ -219,7 +253,7 @@ function CargaGrid() {
                     dataSource: [{ Seleccionado: true }, { Seleccionado: false }]
                 }, template: '<input  #= Seleccionado ? "checked=checked" : "" # class="chkbx" #= Accion==2? "type=hidden":"type=checkbox" #  ></input>', attributes: { style: "text-align:center;" }
             },
-            { command: { text: _dictionary.botonDescarga[$("#language").data("kendoDropDownList").value()], click: eliminarCaptura }, title: _dictionary.columnDescargar[$("#language").data("kendoDropDownList").value()], attributes: { style: "text-align:center;" }}
+            { command: { text: _dictionary.botonDescarga[$("#language").data("kendoDropDownList").value()], click: eliminarCaptura }, title: _dictionary.columnDescargar[$("#language").data("kendoDropDownList").value()], attributes: { style: "text-align:center;" } }
         ],
         dataBound: function (e) {
             var ds = $("#grid").data("kendoGrid");
@@ -259,7 +293,7 @@ function CargaGrid() {
             }
             else {
                 displayNotify("PinturaCargaCarroCerrar", "", '1');
-                
+
                 if ($(this)[0].checked) {
                     $(this)[0].checked = false;
                 }
@@ -285,7 +319,7 @@ function eliminarCaptura(e) {
         if (!$("#chkCerrar")[0].checked) {
             var filterValue = $(e.currentTarget).val();
             dataItem = $("#grid").data("kendoGrid").dataItem($(e.currentTarget).closest("tr"));
-            AjaxCargarZona($("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select()).PatioID,dataItem);
+            AjaxCargarZona($("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select()).PatioID, dataItem);
             CuadranteSpoolAnterior = dataItem.CuadranteAnteriorID;
         }
         else {

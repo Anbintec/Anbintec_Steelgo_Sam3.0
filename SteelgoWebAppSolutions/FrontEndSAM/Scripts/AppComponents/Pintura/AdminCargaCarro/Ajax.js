@@ -196,7 +196,7 @@ function AjaxObtenerDetalleCargaCarro(MedioTransporteID, tipoEscenario, valorBus
                             for (var i = 0; i < array.length; i++) {
                                 if (!validarInformacion(array[i])) {
                                     if (array[i].CarroID == 0) {
-                                        if (array[i].PatioID != -99) {
+                                        if (array[i].PatioID != -99 && array[i].PatioID != 11) {
                                             if (sistemaPinturaID == 0) {
                                                 if (array[i].SistemaPinturaID == 0 || array[i].SistemaPinturaID == undefined) {
                                                     displayNotify("", _dictionary.PinturaCargaCarroSinSpools[$("#language").data("kendoDropDownList").value()], '1');

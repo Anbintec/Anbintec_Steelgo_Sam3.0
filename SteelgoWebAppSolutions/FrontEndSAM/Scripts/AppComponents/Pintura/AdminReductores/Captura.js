@@ -1,12 +1,12 @@
 ﻿var ListaCatalogoReductores = null;
-
+var arrayUnidadesMedida = [];
 function changeLanguageCall() {
 
     CargarGrid();
     AjaxDetalleGridReductores();
     AjaxObtenerCatalogoReductores();
     mostrarConfirmacionVentanaModal();
-
+    AjaxObtenerCatalogoUnidadesMedida();
     document.title = _dictionary.CapturaAdminReductoresTituloPagina[$("#language").data("kendoDropDownList").value()];
 };
 
@@ -35,7 +35,7 @@ function CargarGrid() {
                         Reductor: { type: "string", editable: true },
                         Lote: { type: "string", editable: true },
                         Cantidad: { type: "number", editable: true, validation: { min: 0, required: false } },
-                        Unidad: { type: "string", editable: false },
+                        Unidad: { type: "string", editable: true },
                         RowOk: { type: "boolean", editable: false },
                         Accion: { type: "number", editable: false },
                         AdminReductoresID: { type: "number", editable: false }
@@ -74,7 +74,7 @@ function CargarGrid() {
             { field: "Reductor", title: _dictionary.columnReductor[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "150px", editor: renderReductor },
             { field: "Lote", title: _dictionary.columnLote[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "80px", attributes: { style: "text-align:left;" }, editor: RenderLote },
             { field: "Cantidad", title: _dictionary.columnCantidad[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "80px", attributes: { style: "text-align:right;" }, editor: renderCantidad },
-            { field: "Unidad", title: _dictionary.columnUnidad[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "50px", attributes: { style: "text-align:left;" } },
+            { field: "Unidad", title: _dictionary.columnUnidad[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "50px", attributes: { style: "text-align:left;" }, editor: RenderUnidad },
             { command: { text: _dictionary.botonCancelar[$("#language").data("kendoDropDownList").value()], click: eliminarCaptura }, title: _dictionary.columnELM[$("#language").data("kendoDropDownList").value()], width: "40px", attributes: { style: "text-align:center;" } }//,
             //{ command: { text: _dictionary.botonLimpiar[$("#language").data("kendoDropDownList").value()], click: limpiarCaptura }, title: _dictionary.columnLimpiar[$("#language").data("kendoDropDownList").value()], width: "40px", attributes: { style: "text-align:center;" } }
         ],

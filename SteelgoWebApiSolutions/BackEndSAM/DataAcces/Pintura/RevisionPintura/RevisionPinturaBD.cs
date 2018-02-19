@@ -261,8 +261,8 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
                             ListaColorPintura = (List<ColorPintura>)SistemaPinturaAplicableBD.Instance.ObtieneListadoColorPintura(item.SistemaPinturaID.GetValueOrDefault(), lenguaje,item.ProyectoID.GetValueOrDefault()),
                             CargaCarroID=item.CargaCarroID,
                             CarroID=item.CarroID,
-                            CuadranteID=item.CuadranteID
-
+                            CuadranteID=item.CuadranteID,
+                            IDOCLIENTE=item.IDOCliente
                         });
                     }
                     return listaRevisionSpool;

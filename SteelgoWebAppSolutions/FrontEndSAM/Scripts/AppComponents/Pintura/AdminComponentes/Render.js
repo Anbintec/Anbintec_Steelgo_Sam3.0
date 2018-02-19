@@ -15,6 +15,28 @@ function RenderLote(container, options) {
     };
 }
 
+function RenderUnidad(container, options) {
+    if ($('#Guardar').text() == _dictionary.MensajeGuardar[$("#language").data("kendoDropDownList").value()]) {
+        $('<input  data-text-field="Unidad" data-value-field="UnidadID" data-bind="value:' + options.field + '"/>')
+       .appendTo(container)
+       .kendoComboBox({
+           suggest: true,
+           delay: 10,
+           filter: "contains",
+           autoBind: true,
+           dataSource: arrayUnidadesMedida,
+           template: "<i class=\"fa fa-#=data.Unidad.toLowerCase()#\"></i> #=data.Unidad#",
+           change: function (e) {
+               dataItem = this.dataItem(e.sender.selectedIndex);
+               if (dataItem != undefined && dataItem.UnidadID != 0) {
+                   options.model.UnidadID = dataItem.UnidadID;
+                   options.model.Unidad = dataItem.Unidad;
+               }
+               $("#grid").data("kendoGrid").dataSource.sync();
+           }
+       });
+    };
+}
 
 function Cantidad(container, options) {
     var inputCantidad = $('<input name="' + options.field + '"/>')
@@ -48,7 +70,7 @@ function renderComponente(container, options) {
                 if (dataItem != undefined && dataItem.ComponenteID != 0) {
                     options.model.Componente = dataItem.Componente;
                     options.model.ComponenteID = dataItem.ComponenteID;
-                    options.model.Unidad = dataItem.Unidad;
+                    //options.model.Unidad = dataItem.Unidad;
                     options.model.Accion = options.model.Accion == 0 ? 1 : options.model.Accion;
                 }
                 else {
@@ -56,7 +78,7 @@ function renderComponente(container, options) {
                     options.model.ComponenteID = 0;
                     options.model.Unidad = "";
                     options.model.Accion = options.model.Accion == 2 ? 2 : options.model.Accion;
-                
+
                 }
                 $("#grid").data("kendoGrid").dataSource.sync();
             }

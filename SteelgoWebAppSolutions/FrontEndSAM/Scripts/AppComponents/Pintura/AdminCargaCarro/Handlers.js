@@ -20,6 +20,61 @@ function SuscribirEventos() {
     SuscribirEventoCuadrante();
     suscribirEventoDescargarCarro();
     SuscribirEventoEliminaRegistro();
+    SuscribirEventoPlanchar();
+}
+
+function SuscribirEventoPlanchar() {
+    $("#btnPlanchar").click(function (e) {
+        e.preventDefault();
+        var seleccionado = $('input:radio[name=SelectTodos]:checked').val();
+        if ($("#grid").data("kendoGrid").dataSource._data.length > 0) {
+            if ($('input:radio[name=LLena]:checked').val() === "Todos") {
+                ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                    iframe: true,
+                    title: _dictionary.TituloPopupCancelar[$("#language").data("kendoDropDownList").value()],
+                    visible: false,
+                    width: "auto",
+                    height: "auto",
+                    modal: true,
+                    draggable: false,
+                    resizable: false,
+                    animation: {
+                        close: false,
+                        open: false
+                    },
+                    actions: []
+                }).data("kendoWindow");
+
+                ventanaConfirm.content("<center>" + _dictionary.MensajeAdvertenciaPlancharTodos[$("#language").data("kendoDropDownList").value()] + "</center>" +
+                              "</br><center><button class='confirm_yes btn btn-blue' id='yesButton'>" + _dictionary.lblSi[$("#language").data("kendoDropDownList").value()]
+                         + "</button><button class='confirm_yes btn btn-blue' id='noButton'>" + _dictionary.lblNo[$("#language").data("kendoDropDownList").value()]
+                         + "</button></center>");
+
+                ventanaConfirm.open().center();
+
+                $("#yesButton").click(function (handler) {
+                    ventanaConfirm.close();
+                    loadingStart();
+
+                    PlanchaSeleccionado(seleccionado);
+                    loadingStop();
+                });
+                $("#noButton").click(function (handler) {
+                    ventanaConfirm.close();
+                });
+            }
+            else if ($('input:radio[name=LLena]:checked').val() === "Vacios") {
+                loadingStart();
+
+                PlanchaSeleccionado(seleccionado);
+
+
+                loadingStop();
+            } else {
+                displayNotify("MensajeErrorTipoPlanchado", "", '2');
+            }
+        }
+    });
 }
 
 function SuscribirEventoEliminaRegistro() {
@@ -447,6 +502,7 @@ function eventoCambioTipoEscenario() {
 
     if ($('input:radio[name=TipoVista]:checked').val() == "Escritorio") {
         $("#AgregarSpoolManual").css('display', 'none');
+        $("#PlanchadoEscenarioEscritorio").css('display', 'block');
         $("#grid").data("kendoGrid").showColumn("Prioridad");
         $("#grid").data("kendoGrid").showColumn("MedioTransporte");
         $("#grid").data("kendoGrid").showColumn("Seleccionado");
@@ -455,6 +511,7 @@ function eventoCambioTipoEscenario() {
     }
     else if ($('input:radio[name=TipoVista]:checked').val() == "Patio") {
         $("#AgregarSpoolManual").css('display', 'block');
+        $("#PlanchadoEscenarioEscritorio").css('display', 'none');
         $("#grid").data("kendoGrid").hideColumn("Prioridad");
         $("#grid").data("kendoGrid").hideColumn("MedioTransporte");
         $("#grid").data("kendoGrid").hideColumn("Seleccionado");

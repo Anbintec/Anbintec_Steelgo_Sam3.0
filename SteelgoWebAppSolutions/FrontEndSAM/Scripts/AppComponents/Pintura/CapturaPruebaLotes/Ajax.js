@@ -1,4 +1,20 @@
-﻿function AjaxCargarCamposPredeterminados() {
+﻿var TipoObrero = "Inspector pintura";
+var TipoConsultaObrero = 2;
+
+function AjaxObtenerListaInspector() {
+    loadingStart();
+    $Obrero.Obrero.read({ idProyecto: 0, tipo: TipoConsultaObrero, token: Cookies.get("token"), TipoObrero: TipoObrero }).done(function (data) {
+        if (Error(data)) {
+            $("#inputInspector").data("kendoComboBox").value("");
+            $("#inputInspector").data("kendoComboBox").dataSource.data(data);
+            loadingStop();
+        }
+    });
+
+}
+
+
+function AjaxCargarCamposPredeterminados() {
     loadingStart();
     var TipoMuestraPredeterminadoID = 4079;
     $CamposPredeterminados.CamposPredeterminados.read({ token: Cookies.get("token"), lenguaje: $("#language").val(), id: TipoMuestraPredeterminadoID }).done(function (data) {
@@ -209,12 +225,12 @@ function ajaxGuardar(data, guardarYNuevo) {
     var index = 0;
     for (var i = 0; i < data.length; i++) {
         $("#grid").data("kendoGrid").dataSource._data[i].RowOk = true;
-        if ((data[i].ListaDetallePruebas == undefined || data[i].ListaDetallePruebas == null || data[i].ListaDetallePruebas == "") && data[i].PruebasEjecutadas == 0) {
+        if ((data[i].InspectorID == "" || data[i].InspectorID == 0 || data[i].InspectorID == undefined || data[i].InspectorID == null || data[i].ListaDetallePruebas == undefined || data[i].ListaDetallePruebas == null || data[i].ListaDetallePruebas == "") && data[i].PruebasEjecutadas == 0) {
             $("#grid").data("kendoGrid").dataSource._data[i].RowOk = false;
         }
 
         for (var j = 0; j < (data[i].ListaDetallePruebas == null ? 0 : data[i].ListaDetallePruebas.length) ; j++) {
-            ListaDetalles[index] = { Accion: "", SpoolID: "", ProyectoProcesoPruebaID: "", UnidadMedida: "", FechaPrueba: "", ResultadoEvaluacion: "", Estatus: 1, SistemaPinturaColorID: "",PruebaLoteID:"" };
+            ListaDetalles[index] = { Accion: "", SpoolID: "", ProyectoProcesoPruebaID: "", UnidadMedida: "", FechaPrueba: "", ResultadoEvaluacion: "", Estatus: 1, SistemaPinturaColorID: "",PruebaLoteID:"", InspectorID:"" };
             ListaDetalles[index].Accion = (data[i].ListaDetallePruebas[j].Accion == undefined || data[i].ListaDetallePruebas[j].Accion == 0 || data[i].ListaDetallePruebas[j].Accion == null) ? 1 : data[i].ListaDetallePruebas[j].Accion;
             ListaDetalles[index].SpoolID = data[i].SpoolID;
             ListaDetalles[index].ProyectoProcesoPruebaID = data[i].ProyectoProcesoPruebaID;
@@ -224,6 +240,7 @@ function ajaxGuardar(data, guardarYNuevo) {
             ListaDetalles[index].SistemaPinturaColorID = $("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID != 4 ? 0 : $("#inputColor").data("kendoComboBox").dataItem($("#inputColor").data("kendoComboBox").select()).SistemaPinturaColorID;
             ListaDetalles[index].PruebaLoteID = (data[i].ListaDetallePruebas[j].Accion == undefined || data[i].ListaDetallePruebas[j].Accion == 0 || data[i].ListaDetallePruebas[j].Accion == null) ? $("#inputLote").data("kendoComboBox").dataItem($("#inputLote").data("kendoComboBox").select()).LoteID : data[i].ListaDetallePruebas[j].PruebaLoteID;
             ListaDetalles[index].LoteID = $("#inputLote").data("kendoComboBox").dataItem($("#inputLote").data("kendoComboBox").select()).LoteID;
+            ListaDetalles[index].InspectorID = data[i].InspectorID;
             index++;
         }
     }
@@ -315,11 +332,11 @@ function ajaxGuardar(data, guardarYNuevo) {
 
 function ajaxBuscarPorLote() {
 
-    if ($("#inputProyecto").data("kendoComboBox").select() > 0) {
-        if ($("#inputProceso").data("kendoComboBox").select() > 0) {
-            if ($("#inputSistemaPintura").data("kendoComboBox").select() > 0) {
+    if ($("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select()).ProyectoID > 0) {
+        if ($("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID > 0) {
+            if ($("#inputSistemaPintura").data("kendoComboBox").dataItem($("#inputSistemaPintura").data("kendoComboBox").select()).SistemaPinturaID > 0) {
                 if ($("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID == 4 ? $("#inputColor").data("kendoComboBox").select() > 0 : true) {
-                    if ($("#inputPrueba").data("kendoComboBox").select() > 0) {
+                    if ($("#inputPrueba").data("kendoComboBox").dataItem($("#inputPrueba").data("kendoComboBox").select()).PruebaProcesoPinturaID > 0) {
                         if ($("#inputLote").data("kendoComboBox").dataItem($("#inputLote").data("kendoComboBox").select()) != undefined && $("#inputLote").data("kendoComboBox").dataItem($("#inputLote").data("kendoComboBox").select()).LoteID != 0) {
                             loadingStart();
                             $PruebasPorLote.PruebasPorLote.read({ token: Cookies.get("token"), procesoPinturaID: $("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID, sistemaPinturaProyectoID: $("#inputSistemaPintura").data("kendoComboBox").dataItem($("#inputSistemaPintura").data("kendoComboBox").select()).SistemaPinturaProyectoID, pruebaProcesoPinturaID: $("#inputPrueba").data("kendoComboBox").dataItem($("#inputPrueba").data("kendoComboBox").select()).PruebaProcesoPinturaID, sistemaPinturaColorID: ($("#inputColor").data("kendoComboBox").select() <= 0) ? 0 : $("#inputColor").data("kendoComboBox").dataItem($("#inputColor").data("kendoComboBox").select()).SistemaPinturaColorID, loteID: $("#inputLote").data("kendoComboBox").dataItem($("#inputLote").data("kendoComboBox").select()).LoteID, lenguaje: $("#language").val(), todosSinCaptura: ($('input:radio[name=Muestra]:checked').val() == "Todos" ? 1 : 0) }).done(function (array) {

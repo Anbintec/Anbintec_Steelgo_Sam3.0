@@ -15,6 +15,28 @@ function RenderLote(container, options) {
     };
 }
 
+function RenderUnidad(container, options) {
+    if ($('#Guardar').text() == _dictionary.MensajeGuardar[$("#language").data("kendoDropDownList").value()]) {
+        $('<input  data-text-field="Unidad" data-value-field="UnidadID" data-bind="value:' + options.field + '"/>')
+       .appendTo(container)
+       .kendoComboBox({
+           suggest: true,
+           delay: 10,
+           filter: "contains",
+           autoBind: true,
+           dataSource: arrayUnidadesMedida,
+           template: "<i class=\"fa fa-#=data.Unidad.toLowerCase()#\"></i> #=data.Unidad#",
+           change: function (e) {
+               dataItem = this.dataItem(e.sender.selectedIndex);
+               if (dataItem != undefined && dataItem.UnidadID != 0) {
+                   options.model.UnidadID = dataItem.UnidadID;
+                   options.model.Unidad = dataItem.Unidad;
+               }
+               $("#grid").data("kendoGrid").dataSource.sync();
+           }
+       });
+    };
+}
 
 function renderCantidad(container, options) {
     var inputCantidad = $('<input name="' + options.field + '"/>')
@@ -47,7 +69,7 @@ function renderReductor(container, options) {
                 if (dataItem != undefined && dataItem.ReductorID != 0) {
                     options.model.Reductor = dataItem.Reductor;
                     options.model.ReductorID = dataItem.ReductorID;
-                    options.model.Unidad = dataItem.Unidad;
+                    //options.model.Unidad = dataItem.Unidad;
                     options.model.Accion = options.model.Accion == 0 ? 1 : options.model.Accion;
                 }
                 else {

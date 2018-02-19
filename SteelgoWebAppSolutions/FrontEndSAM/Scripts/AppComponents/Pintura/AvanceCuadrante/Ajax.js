@@ -323,7 +323,7 @@ function AjaxAgregarSpool(ordenTrabajoSpoolID) {
                     if (!existeSpool(array[i].Spool, ds)) {
                         //
                         if (array[i].CarroID == 0 || array[i].CarroID == undefined) {
-                            if (array[i].PatioID != 7) {
+                            if (array[i].PatioID != -99 && array[i].PatioID != 11 &&  array[i].PatioID != 12) {
                                 if (sistemaPinturaID == 0) {
                                     if (array[i].SistemaPinturaID == 0 || array[i].SistemaPinturaID == undefined) {
                                         displayNotify("", _dictionary.PinturaCargaCarroSinSpools[$("#language").data("kendoDropDownList").value()], '1');

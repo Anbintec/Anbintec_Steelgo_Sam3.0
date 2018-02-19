@@ -1,4 +1,15 @@
-﻿function AjaxDetalleGridComponentes() {
+﻿function AjaxObtenerCatalogoUnidadesMedida()
+{
+    loadingStart();
+    $PinturaGeneral.PinturaGeneral.read({ token: Cookies.get("token"), lenguaje: $("#language").val(), valor: 1, otrovalor :1}).done(function (array) {
+        if (Error(array)) {
+            arrayUnidadesMedida = array;
+        }
+        loadingStop();
+    });
+}
+
+function AjaxDetalleGridComponentes() {
     loadingStart();
 
     $AdminComponentes.AdminComponentes.read({ token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (array) {
@@ -32,12 +43,13 @@ function AjaxGuardar(arregloCaptura, tipoGuardar) {
     Captura[0] = { Detalles: "" };
     ListaDetalles = [];
     for (index = 0; index < arregloCaptura.length; index++) {
-        ListaDetalles[index] = { ComponenteID: "", Lote: "", Cantidad: "", Accion: "", AdminComponentesID: "" };
+        ListaDetalles[index] = { ComponenteID: "", Lote: "", Cantidad: "", Accion: "", AdminComponentesID: "", UnidadID: "" };
         ListaDetalles[index].ComponenteID = arregloCaptura[index].ComponenteID;
         ListaDetalles[index].Lote = arregloCaptura[index].Lote;
         ListaDetalles[index].Cantidad = arregloCaptura[index].Cantidad;
         ListaDetalles[index].Accion = arregloCaptura[index].Accion;
         ListaDetalles[index].AdminComponentesID = arregloCaptura[index].AdminComponentesID;
+        ListaDetalles[index].UnidadID = arregloCaptura[index].UnidadID;
     }
     Captura[0].Detalles = ListaDetalles;
 

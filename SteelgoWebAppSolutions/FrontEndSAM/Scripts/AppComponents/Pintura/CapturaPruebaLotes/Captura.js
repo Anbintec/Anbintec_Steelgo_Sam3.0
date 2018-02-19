@@ -21,6 +21,38 @@ function isInArray(date, dates) {
 	return false;
 }
 
+function PlanchaInspector() {
+    var dataSource = $("#gridPopUp").data("kendoGrid").dataSource;
+    var filters = dataSource.filter();
+    var allData = dataSource.data();
+    var query = new kendo.data.Query(allData);
+    var data = query.filter(filters).data;
+
+    for (var i = 0; i < data.length; i++) {
+        if ($('input:radio[name=LLena]:checked').val() === "Todos") {
+            if ($("#inputInspector").data("kendoComboBox").text() != "") {
+                data[i].InspectorID = $("#inputInspector").val();
+                data[i].Inspector = $("#inputInspector").data("kendoComboBox").text();
+                if (data[i].Accion == 4)
+                    data[i].Accion = 2;
+            }
+
+        }
+        else {
+            if (data[i].Inspector == "" || data[i].Inspector == undefined || data[i].Inspector == null) {
+                if ($("#inputInspector").data("kendoComboBox").text() != "") {
+                    data[i].InspectorID = $("#inputInspector").val();
+                    data[i].Inspector = $("#inputInspector").data("kendoComboBox").text();
+                    if (data[i].Accion == 4)
+                        data[i].Accion = 2;
+                }
+            }
+        }
+    }
+    $("#gridPopUp").data("kendoGrid").dataSource.sync();
+}
+
+
 function sumarPruebasTotalesPorSpool()
 {
     var numeroPruebas = 0;
@@ -102,9 +134,7 @@ function changeLanguageCall() {
 	CargarGrid();
 	CargarGridPopUp();
 	AjaxCargarCamposPredeterminados();
-	//$("#inputFechaLote").data("kendoDatePicker").setOptions({
-	//	format: _dictionary.FormatoFecha2[$("#language").data("kendoDropDownList").value()]
-	//});
+	setTimeout(function () { AjaxObtenerListaInspector() }, 1000);
 }
 
 function CargarGrid() {
@@ -254,6 +284,7 @@ function CargarGridPopUp() {
                                dataSource: [{ ResultadoEvaluacion: true }, { ResultadoEvaluacion: false }]
                            }, template: "#= ResultadoEvaluacion ? 'Si' : 'No' #", width: "15px", attributes: { style: "text-align:center;" }
                        },
+                       { field: "Inspector", title: _dictionary.DimensionalVisualHeaderInspectorDimesional[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), editor: RenderComboBoxInspector, width: "30px" },
                       { command: { text: _dictionary.botonCancelar[$("#language").data("kendoDropDownList").value()], click: eliminarCaptura }, title: _dictionary.columnELM[$("#language").data("kendoDropDownList").value()], width: "10px", attributes: { style: "text-align:center;" } }
         ],
         dataBound: function () {

@@ -129,7 +129,7 @@ function PlancharTrabajadores(arregloCaptura) {
             data[i].ListaObrerosSeleccionados = dataShotBlast;
             data[i].plantillaObrero = _dictionary.CapturaAvancePintoresShotblastExistentes[$("#language").data("kendoDropDownList").value()] + arregloCaptura[i].ListaObrerosSeleccionados.length;
         }
-       
+
     }
     else {
         for (var i = 0; i < data.length; i++) {
@@ -161,16 +161,16 @@ function Limpiar() {
     $("#InputPintor").val("");
     $("#InputSistemaPintura").val("");
     $("#InputPinturaComponenteComposicion").val("");
-	$("#grid").data('kendoGrid').dataSource.data([]);
+    $("#grid").data('kendoGrid').dataSource.data([]);
 
 
-	for (var i = 0; i < ComponentesDinamicosJSON.length; i++) {
-		$('#' + ComponentesDinamicosJSON[i].NombreColumna).data("kendoComboBox").value("");
-	}
+    for (var i = 0; i < ComponentesDinamicosJSON.length; i++) {
+        $('#' + ComponentesDinamicosJSON[i].NombreColumna).data("kendoComboBox").value("");
+    }
 
-	for (var i = 0; i < ReductoresDinamicosJSON.length; i++) {
-		$('#' + ReductoresDinamicosJSON[i].NombreColumna).data("kendoComboBox").value("");
-	}
+    for (var i = 0; i < ReductoresDinamicosJSON.length; i++) {
+        $('#' + ReductoresDinamicosJSON[i].NombreColumna).data("kendoComboBox").value("");
+    }
 
 }
 
@@ -233,19 +233,19 @@ function CambiarProcesoPintura() {
     if (!editado) {
         LimpiarDespuesCambioProcesoPintura();
         procesoPinturaSeleccionadoAnterior = $('input:radio[name=ProcesoPintura]:checked').val();
-		AjaxCargarProyecto();
-		if (procesoPinturaSeleccionadoAnterior == 4)
-			$('#divColor').show();
-		else
-		    $('#divColor').hide();
+        AjaxCargarProyecto();
+        if (procesoPinturaSeleccionadoAnterior == 4)
+            $('#divColor').show();
+        else
+            $('#divColor').hide();
 
-		if ($('input:radio[name=ProcesoPintura]:checked').val() != 4) {
-		    $("#lblTrabajador").text(_dictionary.columnShotblastero[$("#language").data("kendoDropDownList").value()])
-		}
-		else {
+        if ($('input:radio[name=ProcesoPintura]:checked').val() != 4) {
+            $("#lblTrabajador").text(_dictionary.columnShotblastero[$("#language").data("kendoDropDownList").value()])
+        }
+        else {
 
-		    $("#lblTrabajador").text(_dictionary.columnPintor[$("#language").data("kendoDropDownList").value()])
-		}
+            $("#lblTrabajador").text(_dictionary.columnPintor[$("#language").data("kendoDropDownList").value()])
+        }
     }
     else {
         ventanaConfirmEdicionCambioProcesoPintura.open().center();
@@ -282,12 +282,12 @@ function BuscarDetalle() {
         var dataItemCuadrante = $("#inputCuadrante").data("kendoComboBox").dataItem($("#inputCuadrante").data("kendoComboBox").select());
         var dataItemSP = $("#inputSistemaPintura").data("kendoComboBox").dataItem($("#inputSistemaPintura").data("kendoComboBox").select());
         var dataItemColor = $("#inputColor").data("kendoComboBox").dataItem($("#inputColor").data("kendoComboBox").select());
-        if ($("#inputProyecto").data("kendoComboBox").select() > 0) {
+        if (LineaCaptura.proyectoIDSeleccionado != "" && LineaCaptura.proyectoIDSeleccionado != undefined && LineaCaptura.proyectoIDSeleccionado != null && LineaCaptura.proyectoIDSeleccionado > 0) {
             if ($("#inputZona").data("kendoComboBox").select() > 0) {
                 if ($("#inputCuadrante").data("kendoComboBox").select() > 0) {
                     if ($("#inputSistemaPintura").data("kendoComboBox").select() > 0) {
                         if (!($('input:radio[name=ProcesoPintura]:checked').val() == "4" && $("#inputColor").data("kendoComboBox").select() <= 0)) {
-                            AjaxCargarLayoutGrid(dataItemCuadrante.CuadranteID, dataItemSP.SistemaPinturaProyectoID,$('input:radio[name=ProcesoPintura]:checked').val() == "4" ? dataItemColor.SistemaPinturaColorID:0, $("#language").val(), $('input:radio[name=ProcesoPintura]:checked').val(), $('input:radio[name=Muestra]:checked').val());
+                            AjaxCargarLayoutGrid(dataItemCuadrante.CuadranteID, dataItemSP.SistemaPinturaProyectoID, $('input:radio[name=ProcesoPintura]:checked').val() == "4" ? dataItemColor.SistemaPinturaColorID : 0, $("#language").val(), $('input:radio[name=ProcesoPintura]:checked').val(), $('input:radio[name=Muestra]:checked').val());
                         }
                         else {
                             displayNotify("CapturaAvanceCuadranteNoColor", "", '1');
@@ -375,7 +375,7 @@ function CrearGrid() {
                 for (var i = 0; i < gridData.length; i++) {
                     var currentUid = gridData[i].uid;
                     var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
-                   // ajaxObtenerListadoObrerosGuardados(gridData[i], gridData[i].SpoolID, $('input:radio[name=ProcesoPintura]:checked').val())
+                    // ajaxObtenerListadoObrerosGuardados(gridData[i], gridData[i].SpoolID, $('input:radio[name=ProcesoPintura]:checked').val())
                     if (gridData[i].RowOk == false) {
                         grid.table.find("tr[data-uid='" + currentUid + "']").removeClass("k-alt");
                         grid.table.find("tr[data-uid='" + currentUid + "']").addClass("kRowError");
@@ -388,7 +388,7 @@ function CrearGrid() {
                 }
             }
 
-            
+
 
             if (esNormal) {
                 $(".k-grid-content td").css("white-space", "normal");
@@ -411,14 +411,14 @@ function CrearGrid() {
             var fieldName = this.thead.find("th").eq(columnIndex).data("field");
             //if (fieldName == "ListaObrerosSeleccionados")
             //e.preventDefault();
-         //   setTimeout(
-         //function () {
-         //    if ($('#Guardar').text() == _dictionary.lblGuardar[$("#language").data("kendoDropDownList").value()]) {
-         //        if ((e.model.ListaObrerosSeleccionados == undefined || e.model.ListaObrerosSeleccionados == "" || e.model.ListaObrerosSeleccionados == null) && (e.model.ListaObrerosGuargados == undefined || e.model.ListaObrerosGuargados == null || e.model.ListaObrerosGuargados == "")) {
-         //            ajaxObtenerListadoObrerosGuardados(e.model, e.model.SpoolID, $('input:radio[name=ProcesoPintura]:checked').val())
-         //        }
-         //    }
-         //}, 1000);
+            //   setTimeout(
+            //function () {
+            //    if ($('#Guardar').text() == _dictionary.lblGuardar[$("#language").data("kendoDropDownList").value()]) {
+            //        if ((e.model.ListaObrerosSeleccionados == undefined || e.model.ListaObrerosSeleccionados == "" || e.model.ListaObrerosSeleccionados == null) && (e.model.ListaObrerosGuargados == undefined || e.model.ListaObrerosGuargados == null || e.model.ListaObrerosGuargados == "")) {
+            //            ajaxObtenerListadoObrerosGuardados(e.model, e.model.SpoolID, $('input:radio[name=ProcesoPintura]:checked').val())
+            //        }
+            //    }
+            //}, 1000);
 
 
         },

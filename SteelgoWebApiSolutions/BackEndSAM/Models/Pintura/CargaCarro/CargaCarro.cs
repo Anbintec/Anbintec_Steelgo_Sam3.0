@@ -36,6 +36,8 @@ namespace BackEndSAM.Models.Pintura.CargaCarro
         public string CuadranteMedioTransporte { get; set; }
         public string ColorPintura { get; set; }
         public int PinturaSpoolID { get; set; }
+        public decimal? PDIS { get; set; }
+        public decimal? PEQS { get; set; }
 
     }
 
@@ -78,6 +80,8 @@ namespace BackEndSAM.Models.Pintura.CargaCarro
         public bool Seleccionado { get; set; }
         public int? ZonaAnteriorID { get; set; }
         public bool? NoPintable { get; set; }
+        public decimal? PDIS { get; set; }
+        public decimal? PEQS { get; set; }
     }
 
   

@@ -9,6 +9,7 @@ var DatosLotes = '';
 function changeLanguageCall() {
     SuscribirEventos();
     CargarGrid();
+    setTimeout(function () { AjaxObtenerListaInspector() }, 1000);
 }
 
 function TryParseInt(str, defaultValue) {
@@ -41,6 +42,32 @@ function Limpiar()
     $("#grid").data("kendoGrid").dataSource.data([]);
     $('#InformacionSpoolDiv').hide();
     
+}
+
+function PlanchaInspector() {
+    var dataSource = $("#grid").data("kendoGrid").dataSource;
+    var filters = dataSource.filter();
+    var allData = dataSource.data();
+    var query = new kendo.data.Query(allData);
+    var data = query.filter(filters).data;
+
+    for (var i = 0; i < data.length; i++) {
+        if ($('input:radio[name=LLena]:checked').val() === "Todos") {
+            if ($("#inputInspector").data("kendoComboBox").text() != "") {
+                data[i].InspectorID = $("#inputInspector").val();
+                data[i].Inspector = $("#inputInspector").data("kendoComboBox").text();
+            }
+        }
+        else {
+            if (data[i].Inspector == "" || data[i].Inspector == undefined || data[i].Inspector == null) {
+                if ($("#inputInspector").data("kendoComboBox").text() != "") {
+                    data[i].InspectorID = $("#inputInspector").val();
+                    data[i].Inspector = $("#inputInspector").data("kendoComboBox").text();
+                }
+            }
+        }
+    }
+    $("#grid").data("kendoGrid").dataSource.sync();
 }
 
 function CargarGrid() {
@@ -102,6 +129,7 @@ function CargarGrid() {
                            dataSource: [{ OkPND: true }, { OkPND: false }]
                        }, template: "#= ResultadoEvaluacion ? 'Si' : 'No' #", width: "30px", attributes: { style: "text-align:center;" }
                    },
+                   { field: "Inspector", title: _dictionary.DimensionalVisualHeaderInspectorDimesional[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), editor: RenderComboBoxInspector, width: "30px" },
                   { command: { text: _dictionary.botonCancelar[$("#language").data("kendoDropDownList").value()], click: eliminarCaptura }, title: _dictionary.columnELM[$("#language").data("kendoDropDownList").value()], width: "10px", attributes: { style: "text-align:center;" } }
         ],
         editable: true,
@@ -148,6 +176,29 @@ function CargarGrid() {
         else {
             displayNotify("SpoolSinLote", "", '1');
             return false;
+        }
+    });
+
+    $("#grid table").on("keydown", function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            if (CantidadLotes > 0) {
+                for (var i = 0; i < CantidadLotes ; i++) {
+                    var dataSource = $("#grid").data("kendoGrid").dataSource;
+
+                    var total = $("#grid").data("kendoGrid").dataSource.data().length;
+                    var nuevoDato = { Lote: DatosLotes.split(',')[i], ResultadoEvaluacion: false }
+
+                    $("#grid").data("kendoGrid").dataSource.insert(total, nuevoDato);
+                    $("#grid").data("kendoGrid").dataSource.page(dataSource.totalPages());
+
+                }
+                return false;
+            }
+            else {
+                displayNotify("SpoolSinLote", "", '1');
+                return false;
+            }
         }
     });
     CustomisaGrid($("#grid"));

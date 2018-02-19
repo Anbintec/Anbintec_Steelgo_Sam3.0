@@ -98,7 +98,9 @@ function CargarGrid() {
                         Area: { type: "number", editable: false },
                         GenerarRevision: { type: "boolean", editable: true },
                         Comentario: { type: "string", editable: true },
-                        Version: { type: "number", editable: false }
+                        Version: { type: "number", editable: false },
+                        IDOCliente: { type: "string", editable: true }
+                        
                     }
                 }
             },
@@ -145,7 +147,9 @@ function CargarGrid() {
             }, width: "110px", template: "<input name='fullyPaid' class='ob-paid' type='checkbox' #= GenerarRevision ? 'checked=checked':'' #/>", width: "100px", attributes: { style: "text-align:center;" }
             },
             { field: "Comentario", title: _dictionary.HeaderComentario[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "110px", editor: renderComentario },
-            { field: "Version", title: _dictionary.columnVersion[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "110px", attributes: { style: "text-align:center;" } },
+            { field: "IDOCliente", title: _dictionary.HeaderIDOCLIENTE[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "110px" },
+            
+           { field: "Version", title: _dictionary.columnVersion[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "110px", attributes: { style: "text-align:center;" } },
 			{ command: { text: _dictionary.botonDescarga[$("#language").data("kendoDropDownList").value()], click: eliminarCaptura }, title: _dictionary.columnDescargar[$("#language").data("kendoDropDownList").value()], attributes: { style: "text-align:center;" }, width: "90px" }
         ],
         beforeEdit: function (e) {

@@ -1,4 +1,5 @@
 ﻿using BackEndSAM.DataAcces.Pintura.RevisionPintura;
+using BackEndSAM.Models.Pintura.AdminReductores;
 using BackEndSAM.Models.Pintura.PinturaGeneral;
 using DatabaseManager.Constantes;
 using DatabaseManager.Sam3;
@@ -33,6 +34,43 @@ namespace BackEndSAM.DataAcces.Pintura.PinturaGeneral
                 return _instance;
             }
         }
+
+        public object obtenerListaUnidadMedida(string leguaje)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {
+                    List<Sam3_Pintura_Get_UnidadMedida_Result> listaComponentes = ctx.Sam3_Pintura_Get_UnidadMedida(leguaje).ToList();
+
+                    List<UnidadesMedida> listaUnidadMedida = new List<UnidadesMedida>();
+                    if (listaComponentes.Count > 0)
+                        listaUnidadMedida.Add(new UnidadesMedida());
+
+                    foreach (Sam3_Pintura_Get_UnidadMedida_Result item in listaComponentes)
+                    {
+                        UnidadesMedida unidad = new UnidadesMedida
+                        {
+                            Unidad = item.Unidad,
+                            UnidadID = item.UnidadMedidaID
+                        };
+                        listaUnidadMedida.Add(unidad);
+                    }
+                    return listaUnidadMedida;
+                }
+            }
+            catch (Exception ex)
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
+
 
         public object ObtenerMedioTransporte(string lenguaje, int proyectoID)
         {

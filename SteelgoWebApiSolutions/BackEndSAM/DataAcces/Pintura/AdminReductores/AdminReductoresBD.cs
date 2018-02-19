@@ -40,6 +40,7 @@ namespace BackEndSAM.DataAcces.Pintura.AdminReductores
                 {
                     List<Sam3_Pintura_AdminReductores_Get_Detalle_Result> lista = ctx.Sam3_Pintura_AdminReductores_Get_Detalle(lenguaje).ToList();
                     List<DetalleGrid> detalleGrid = new List<DetalleGrid>();
+                    List<BackEndSAM.Models.Pintura.AdminReductores.UnidadesMedida> listaUnidadMedida = (List<BackEndSAM.Models.Pintura.AdminReductores.UnidadesMedida>)obtenerListaUnidadMedida(lenguaje);
                     foreach (Sam3_Pintura_AdminReductores_Get_Detalle_Result item in lista)
                     {
                         DetalleGrid detalle = new DetalleGrid
@@ -51,7 +52,9 @@ namespace BackEndSAM.DataAcces.Pintura.AdminReductores
                             RowOk = false,
                             Unidad = item.Unidad,
                             Accion = 2,
-                            AdminReductoresID = item.AdminReductoresID
+                            AdminReductoresID = item.AdminReductoresID,
+                            UnidadID = item.UnidadMedidaID,
+                            ListaUnidadesMedida = listaUnidadMedida
                         };
                         detalleGrid.Add(detalle);
                     }
@@ -71,6 +74,43 @@ namespace BackEndSAM.DataAcces.Pintura.AdminReductores
                 return result;
             }
         }
+
+        public object obtenerListaUnidadMedida(string leguaje)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {
+                    List<Sam3_Pintura_Get_UnidadMedida_Result> listaComponentes = ctx.Sam3_Pintura_Get_UnidadMedida(leguaje).ToList();
+
+                    List<UnidadesMedida> listaUnidadMedida = new List<UnidadesMedida>();
+                    if (listaComponentes.Count > 0)
+                        listaUnidadMedida.Add(new UnidadesMedida());
+
+                    foreach (Sam3_Pintura_Get_UnidadMedida_Result item in listaComponentes)
+                    {
+                        UnidadesMedida unidad = new UnidadesMedida
+                        {
+                            Unidad = item.Unidad,
+                            UnidadID = item.UnidadMedidaID
+                        };
+                        listaUnidadMedida.Add(unidad);
+                    }
+                    return listaUnidadMedida;
+                }
+            }
+            catch (Exception ex)
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
+
 
         public object ObtenerCatalogoReductores(string lenguaje)
         {

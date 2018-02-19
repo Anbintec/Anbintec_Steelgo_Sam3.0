@@ -1,22 +1,22 @@
 ﻿var ListaCatalogoComponentes = null;
-
+var arrayUnidadesMedida = [];
 function changeLanguageCall() {
 
     CargarGrid();
     AjaxDetalleGridComponentes();
     AjaxObtenerCatalogoComponentes();
     mostrarConfirmacionVentanaModal();
-   
+    AjaxObtenerCatalogoUnidadesMedida();
     document.title = _dictionary.CapturaAdminComponentesTituloPagina[$("#language").data("kendoDropDownList").value()];
 };
 
 setTimeout(function () { suscribirEventos(); }, 100);
 
- 
+
 function CargarGrid() {
     $("#grid").kendoGrid({
         edit: function (e) {
-           
+
 
             if ($('#Guardar').text() != _dictionary.lblGuardar[$("#language").data("kendoDropDownList").value()]) {
                 this.closeCell();
@@ -34,8 +34,8 @@ function CargarGrid() {
                     fields: {
                         Componente: { type: "string", editable: true },
                         Lote: { type: "string", editable: true },
-                        Cantidad: { type: "number", editable: true},
-                        Unidad: { type: "string", editable: false },
+                        Cantidad: { type: "number", editable: true },
+                        Unidad: { type: "string", editable: true },
                         RowOk: { type: "boolean", editable: false },
                         Accion: { type: "number", editable: false },
                         AdminComponentesID: { type: "number", editable: false }
@@ -73,8 +73,8 @@ function CargarGrid() {
         columns: [
             { field: "Componente", title: _dictionary.columnComponente[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "150px", editor: renderComponente },
             { field: "Lote", title: _dictionary.columnLote[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "80px", attributes: { style: "text-align:left;" }, editor: RenderLote },
-            { field: "Cantidad", title: _dictionary.columnCantidad[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), editor: Cantidad, width: "80px", attributes: { style: "text-align:right;" }},
-            { field: "Unidad", title: _dictionary.columnUnidad[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "50px", attributes: { style: "text-align:left;" } },
+            { field: "Cantidad", title: _dictionary.columnCantidad[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), editor: Cantidad, width: "80px", attributes: { style: "text-align:right;" } },
+            { field: "Unidad", title: _dictionary.columnUnidad[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "50px", attributes: { style: "text-align:left;" }, editor: RenderUnidad },
             { command: { text: _dictionary.botonCancelar[$("#language").data("kendoDropDownList").value()], click: eliminarCaptura }, title: _dictionary.columnELM[$("#language").data("kendoDropDownList").value()], width: "40px", attributes: { style: "text-align:center;" } }//,
             //{ command: { text: _dictionary.botonLimpiar[$("#language").data("kendoDropDownList").value()], click: limpiarCaptura }, title: _dictionary.columnLimpiar[$("#language").data("kendoDropDownList").value()], width: "40px", attributes: { style: "text-align:center;" } }
         ],
@@ -87,10 +87,10 @@ function CargarGrid() {
                 if (!gridData[i].RowOk) {
                     grid.table.find("tr[data-uid='" + currentUid + "']").css("background-color", "#ffffff");
                 }
-                else  {
+                else {
                     grid.table.find("tr[data-uid='" + currentUid + "']").css("background-color", "#ffcccc");
                 }
-               
+
 
             }
         },
@@ -129,7 +129,7 @@ function ValidarValoresRepetidos(data) {
     for (var i = 0; i < data.length; i++) {
         fila = 0;
         data[i].RowOk = false;
-  
+
         for (var j = 0; j < data.length; j++) {
             if ((data[i].ComponenteID == data[j].ComponenteID && data[i].Lote == data[j].Lote && data[i].Cantidad == data[j].Cantidad && data[i].Unidad == data[j].Unidad) && (data[i].Accion == 1 || data[i].Accion == 2 || data[i].Accion == undefined))
                 fila++;

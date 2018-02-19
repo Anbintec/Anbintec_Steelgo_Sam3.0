@@ -387,7 +387,7 @@ function Limpiar() {
     $("#divComboProyecto").css("display", "none");
     $("#divMultiselectProyecto").css("display", "block");
     $("#inputNoAplicable").prop("checked", false);
-    $("#inputNombre").attr('disabled', false);
+    
 }
 
 
@@ -619,7 +619,7 @@ function opcionHabilitarView(valor, name) {
     }
     else {
         $('#FieldSetView').find('*').attr('disabled', false);
-        $("#inputNombre").attr('disabled', true);
+        $("#inputNombre").attr('disabled', false);
         
         if($("#inputNoAplicable").is(':checked'))
             $("#inputColor").data("kendoMultiSelect").enable(false);

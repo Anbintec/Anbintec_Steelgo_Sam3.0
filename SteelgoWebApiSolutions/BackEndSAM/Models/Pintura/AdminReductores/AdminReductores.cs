@@ -11,10 +11,24 @@ namespace BackEndSAM.Models.Pintura.AdminReductores
         public string Reductor { get; set; }
         public string Lote { get; set; }
         public int? Cantidad { get; set; }
-        public string Unidad { get; set; }
         public bool RowOk { get; set; }
         public int Accion { get; set; }
         public int AdminReductoresID { get; set; }
+        public int UnidadID { get; set; }
+        public string Unidad { get; set; }
+        public List<UnidadesMedida> ListaUnidadesMedida { get; set; }
+    }
+
+    public class UnidadesMedida
+    {
+        public int UnidadID { get; set; }
+        public string Unidad { get; set; }
+
+        public UnidadesMedida()
+        {
+            this.Unidad = "";
+            this.UnidadID = 0;
+        }
     }
 
     public class Reductores
@@ -37,6 +51,7 @@ namespace BackEndSAM.Models.Pintura.AdminReductores
         public int Cantidad { get; set; }
         public int Accion { get; set; }
         public int AdminReductoresID { get; set; }
+        public int UnidadID { get; set; }
     }
 
     public class Captura

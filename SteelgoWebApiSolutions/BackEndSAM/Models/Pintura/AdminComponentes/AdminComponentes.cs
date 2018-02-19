@@ -11,10 +11,24 @@ namespace BackEndSAM.Models.Pintura.AdminComponentes
         public string Componente { get; set; }
         public string Lote { get; set; }
         public int? Cantidad { get; set; }
+        public int UnidadID { get; set; }
         public string Unidad { get; set; }
+        public List<UnidadesMedida> ListaUnidadesMedida { get; set; }
         public bool RowOk { get; set; }
         public int Accion { get; set; }
         public int AdminComponentesID { get; set; }
+    }
+
+    public class UnidadesMedida
+    {
+        public int UnidadID { get; set; }
+        public string Unidad { get; set; }
+
+        public UnidadesMedida()
+        {
+            this.Unidad = "";
+            this.UnidadID = 0;
+        }
     }
 
     public class Componentes
@@ -30,7 +44,8 @@ namespace BackEndSAM.Models.Pintura.AdminComponentes
         }
     }
 
-    public class ComponenteAgregado {
+    public class ComponenteAgregado
+    {
         public int? ComponenteAgregadoID { get; set; }
         public int? ComponenteID { get; set; }
         public string Nombre { get; set; }
@@ -47,6 +62,7 @@ namespace BackEndSAM.Models.Pintura.AdminComponentes
         public int Cantidad { get; set; }
         public int Accion { get; set; }
         public int AdminComponentesID { get; set; }
+        public int UnidadID { get; set; }
     }
 
     public class Captura

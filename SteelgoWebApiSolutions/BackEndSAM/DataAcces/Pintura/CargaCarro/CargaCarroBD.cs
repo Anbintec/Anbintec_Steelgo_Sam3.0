@@ -58,7 +58,9 @@ namespace BackEndSAM.DataAcces.Pintura.CargaCarro
                             NombreMedioTransporte = item.NombreMedioTransporte,
                             CuadranteMedioTransporte = item.Cuadrante,
                             ColorPintura = item.ColorPintura,
-                            PinturaSpoolID = item.PinturaSpoolID.GetValueOrDefault()
+                            PinturaSpoolID = item.PinturaSpoolID.GetValueOrDefault(),
+                            PDIS=item.PDIS,
+                            PEQS=item.PEQS
                         });
                     }
                     return ListadoDetalleSpool;
@@ -110,7 +112,9 @@ namespace BackEndSAM.DataAcces.Pintura.CargaCarro
                             ZonaAnteriorID=item.ZonaAnteriorID,
                             CarroID = item.CarroID,
                             MedioTransporte = item.MedioTransporte,
-                            NoPintable=item.NoPintable
+                            NoPintable=item.NoPintable,
+                            PDIS = item.PDIS,
+                            PEQS = item.PEQS
                         });
                         
 
@@ -162,7 +166,9 @@ namespace BackEndSAM.DataAcces.Pintura.CargaCarro
                             CarroCerrado = item.CarroCerrado.GetValueOrDefault(),
                             Seleccionado = item.EstatusCarga.GetValueOrDefault(),
                             EstatusCaptura = 0,
-                            ZonaAnteriorID = item.ZonaAnteriorID
+                            ZonaAnteriorID = item.ZonaAnteriorID,
+                            PDIS = item.PDIS,
+                            PEQS = item.PEQS
                         });
                     }
 

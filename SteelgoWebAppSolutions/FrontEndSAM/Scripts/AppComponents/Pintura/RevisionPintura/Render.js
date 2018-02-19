@@ -46,7 +46,7 @@ function renderSistemaPintura(container, options) {
 					dataItem = this.dataItem(e.sender.selectedIndex);
 					if (dataItem != undefined && dataItem.SistemaPinturaID != undefined) {
 						options.model.SistemaPinturaID = dataItem.SistemaPinturaID;
-						options.model.SistemaPintura = dataItem.NombreSistemaPintura;
+						options.model.SistemaPintura = dataItem.Nombre;
 						options.model.NoPintable = dataItem.NoPintable;
 
 
@@ -56,7 +56,7 @@ function renderSistemaPintura(container, options) {
 
 
 						if (dataItem.SistemaPinturaID != 0 && !dataItem.NoPintable) {
-							AjaxCargarColorPinturaRender(dataItem.SistemaPinturaID, options);
+						    AjaxCargarColorPinturaRender(dataItem.SistemaPinturaID, options);
 						}
 						else
 							$("#grid").data("kendoGrid").refresh();

@@ -152,12 +152,14 @@ function AjaxGuardar(arregloCaptura, tipoGuardar) {
     for (index = 0; index < arregloCaptura.length; index++) {
         arregloCaptura[index].RowOk = true;
         if (arregloCaptura[index].GenerarRevision) {
-            ListaDetalles[row] = { Accion: "", SpoolID: "",SistemaPinturaID:"",SistemaPinturaColorID:"", ComentarioID: "", Estatus: 1 };
+            ListaDetalles[row] = { Accion: "", SpoolID: "",SistemaPinturaID:"",SistemaPinturaColorID:"", ComentarioID: "", Estatus: 1,IDOCLIENTE:"" };
             ListaDetalles[row].Accion = arregloCaptura[index].Accion;
             ListaDetalles[row].SpoolID = arregloCaptura[index].SpoolID;
             ListaDetalles[row].SistemaPinturaID = arregloCaptura[index].SistemaPinturaID;
             ListaDetalles[row].ComentarioID = arregloCaptura[index].ComentarioID;
             ListaDetalles[row].SistemaPinturaColorID = arregloCaptura[index].SistemaPinturaColorID;
+            ListaDetalles[row].IDOCLIENTE = arregloCaptura[index].IDOCliente;
+            
 
             if (arregloCaptura[index].ComentarioID == "" || arregloCaptura[index].ComentarioID == null || arregloCaptura[index].ComentarioID == undefined|| arregloCaptura[index].ComentarioID == 0) {
                 ListaDetalles[row].Estatus = 0;
@@ -169,6 +171,10 @@ function AjaxGuardar(arregloCaptura, tipoGuardar) {
                 arregloCaptura[index].RowOk = false;
             }
             if (arregloCaptura[index].SistemaPinturaID == "" || arregloCaptura[index].SistemaPinturaID == null || arregloCaptura[index].SistemaPinturaID == undefined || arregloCaptura[index].SistemaPinturaID == 0) {
+                ListaDetalles[row].Estatus = 0;
+                arregloCaptura[index].RowOk = false;
+            }
+            if (arregloCaptura[index].IDOCliente == "" || arregloCaptura[index].IDOCliente == null || arregloCaptura[index].IDOCliente == undefined || arregloCaptura[index].IDOCliente == 0) {
                 ListaDetalles[row].Estatus = 0;
                 arregloCaptura[index].RowOk = false;
             }
@@ -307,8 +313,8 @@ function AjaxCambiarAccionAModificacion() {
     });
 }
 
-function AjaxCargarColorPinturaRender(sistemaPinturaID, options) {
-    $SistemaPinturaAplicable.SistemaPinturaAplicable.read({ token: Cookies.get("token"), SistemaPinturaID: sistemaPinturaID, Lenguaje: $("#language").val() }).done(function (data) {
+function AjaxCargarColorPinturaRender(SistemaPinturaID, options) {
+    $SistemaPinturaAplicable.SistemaPinturaAplicable.read({ token: Cookies.get("token"), SistemaPinturaID: SistemaPinturaID, Lenguaje: $("#language").val() , proyectoID: $("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select()).ProyectoID}).done(function (data) {
         if (data.length > 0) {
             options.model.ListaColorPintura = data;
             $("#grid").data("kendoGrid").refresh();
@@ -331,17 +337,31 @@ function AjaxObtenerCatalogosPlanchado()
     });
 }
 
-function AjaxCargarColorPinturaPlanchado(sistemaPinturaProyectoID) {
-    $AvanceCuadrante.AvanceCuadrante.read({ token: Cookies.get("token"), sistemaPinturaProyectoID: sistemaPinturaProyectoID, lenguaje: $("#language").val() }).done(function (data) {
-        if (data.length > 0) {
-            $("#inputPlanchadoColor").data("kendoComboBox").value("");
-            $("#inputPlanchadoColor").data("kendoComboBox").dataSource.data([]);
+function AjaxCargarColorPinturaPlanchado(sistemaPinturaID) {
+    $("#inputPlanchadoColor").data("kendoComboBox").value("");
+    $("#inputPlanchadoColor").data("kendoComboBox").text("");
+    $("#inputPlanchadoColor").data("kendoComboBox").dataSource.data([]);
+
+    $SistemaPinturaAplicable.SistemaPinturaAplicable.read({ token: Cookies.get("token"), SistemaPinturaID: sistemaPinturaID, Lenguaje: $("#language").val(), proyectoID: $("#inputProyecto").data("kendoComboBox").dataItem($("#inputProyecto").data("kendoComboBox").select()).ProyectoID }).done(function (data) {
+        if (data.length > 1) {
             $("#inputPlanchadoColor").data("kendoComboBox").dataSource.data(data);
-            $("#grid").data("kendoGrid").refresh();
+
+            var cpid = 0;
+
+            if (data.length < 3) {
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].SistemaPinturaColorID != 0) {
+                        cpid = data[i].SistemaPinturaColorID;
+                    }
+                }
+            }
+
+            $("#inputPlanchadoColor").data("kendoComboBox").value(cpid);
+            
         }
     });
 
-   
+    
 }
 
 function AjaxCargarZona(patioID, dataItem) {

@@ -13,14 +13,13 @@ function RenderNumeroComponentes(container, options) {
             format: "#",
             min: 0,
             change: function (e) {
-                if (numeroPlacasComponentesElemento.NumeroComponentes>0 && this.value() <= options.model.ListadoComponentes.length - 1) {
+                if (numeroPlacasComponentesElemento.NumeroComponentes > 0 && this.value() <= options.model.ListadoComponentes.length - 1) {
                     if (numeroPlacasComponentesElemento.NumeroComponentes != null && numeroPlacasComponentesElemento.NumeroComponentes != this.value()) {
                         dataItemRender = options.model;
                         ventanaNumeroComponentes.open().center();
                     }
                 }
-                else if (numeroPlacasComponentesElemento.NumeroComponentes==0 && this.value() <= options.model.ListadoComponentes.length - 1)
-                {
+                else if (numeroPlacasComponentesElemento.NumeroComponentes == 0 && this.value() <= options.model.ListadoComponentes.length - 1) {
                     dataItemRender = options.model;
                     agregarComponentesAutomaticos();
                 }
@@ -77,7 +76,7 @@ function renderComboboxNombreComponente(container, options) {
 
 function RenderReductores(container, options) {
     if (options.model.ListadoReductores.length > 1) {
-        
+
         $('<input required data-text-field="Reductor" id=' + options.model.uid + ' data-value-field="ReductorID" data-bind="value:' + options.field + '"/>')
                .appendTo(container)
                .kendoComboBox({
@@ -111,7 +110,7 @@ function RenderReductores(container, options) {
     }
     else
         displayNotify("NoHayReductores", "", '1');
-        
+
 }
 function comboBoxPruebas(container, options) {
     var dataItem;
@@ -135,18 +134,20 @@ function comboBoxPruebas(container, options) {
                     for (var i = 0; i < $("#gridPopUp").data("kendoGrid").dataSource._data.length; i++) {
                         if (options.model.PruebaProcesoPinturaID == $("#gridPopUp").data("kendoGrid").dataSource._data[i].PruebaProcesoPinturaID) {
                             numeroVecesExiste++;
-                            
+
                         }
                     }
 
-                    if (numeroVecesExiste > 1)
-                    {
+                    if (numeroVecesExiste > 1) {
                         options.model.PruebaProcesoPinturaID.PruebaProcesoPinturaID = 0;
                         options.model.ProyectoProcesoPrueba = "";
                         displayNotify("CapturaSistemaPinturaAgregarPruebas", "", "1");
                         var dataSource = $("#gridPopUp").data("kendoGrid").dataSource;
                         dataSource.remove(options.model);
 
+                    }
+                    if (dataItem.Nombre == 'Limpieza especificada') {
+                        options.model.UnidadMaxima = 999999;
                     }
                 }
                 $("#gridPopUp").data("kendoGrid").dataSource.sync();

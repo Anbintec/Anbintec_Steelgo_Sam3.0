@@ -43,12 +43,15 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
         public List<UnidadMedida> listadoUnidadesMedida { get; set; }
         public List<PruebasProcesos> listadoPruebasProceso { get; set; }
         public List<DetallePruebas> listadoPruebasDetalle { get; set; }
-       
+        public string potlife { get; set; }
+        public string curado { get; set; }
+        public string retoque { get; set; }
+        public bool? ConfiguracionLote { get; set; }
     }
 
-   
 
-   
+
+
     public class UnidadMedida
     {
         public UnidadMedida()
@@ -165,7 +168,7 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
         public List<SPProyecto> ListaSPProyecto { get; set; }
         public List<SPColor> ListaSPColor { get; set; }
         public List<SPProyectoProceso> ListaSPProyectoProceso { get; set; }
-        
+
     }
 
     public class SPNuevo
@@ -174,7 +177,8 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
         public int Accion { get; set; }
     }
 
-    public class SPProyecto {
+    public class SPProyecto
+    {
         public int ProyectoID { get; set; }
         public int Accion { get; set; }
         public int NoPintable { get; set; }
@@ -197,6 +201,10 @@ namespace BackEndSAM.Models.Pintura.SistemaPintura
         public int ProyectoID { get; set; }
         public int NumeroComponentes { get; set; }
         public int ReductorID { get; set; }
+        public string curadoTemp { get; set; }
+        public string potlife { get; set; }
+        public string retoquetemp { get; set; }
+        public bool ConfiguracionLote { get; set; }
         public List<SPProyectoProcesoComponentes> ListaDetalleComponentesAgregados { get; set; }
         public List<SPProyectoProcesoPrueba> ListadoPruebas { get; set; }
     }

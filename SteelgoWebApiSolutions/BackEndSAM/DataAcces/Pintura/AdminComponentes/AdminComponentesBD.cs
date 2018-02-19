@@ -42,6 +42,7 @@ namespace BackEndSAM.DataAcces.Pintura.AdminComponentes
                 {
                     List<Sam3_Pintura_AdminComponentes_Get_Detalle_Result> lista = ctx.Sam3_Pintura_AdminComponentes_Get_Detalle(lenguaje).ToList();
                     List<DetalleGrid> detalleGrid = new List<DetalleGrid>();
+                    List<UnidadesMedida> listaUnidadMedida = (List<UnidadesMedida>)obtenerListaUnidadMedida(lenguaje);
                     foreach (Sam3_Pintura_AdminComponentes_Get_Detalle_Result item in lista)
                     {
                         DetalleGrid detalle = new DetalleGrid
@@ -53,13 +54,51 @@ namespace BackEndSAM.DataAcces.Pintura.AdminComponentes
                             RowOk = false,
                             Unidad = item.Unidad,
                             Accion = 2,
-                            AdminComponentesID = item.AdminComponentesID
+                            AdminComponentesID = item.AdminComponentesID,
+                            UnidadID = item.UnidadMedidaID,
+                            ListaUnidadesMedida = listaUnidadMedida
                         };
                         detalleGrid.Add(detalle);
                     }
 
 
                     return detalleGrid;
+                }
+            }
+            catch (Exception ex)
+            {
+                TransactionalInformation result = new TransactionalInformation();
+                result.ReturnMessage.Add(ex.Message);
+                result.ReturnCode = 500;
+                result.ReturnStatus = false;
+                result.IsAuthenicated = true;
+
+                return result;
+            }
+        }
+
+        public object obtenerListaUnidadMedida(string leguaje)
+        {
+            try
+            {
+                using (SamContext ctx = new SamContext())
+                {
+                    List<Sam3_Pintura_Get_UnidadMedida_Result> listaComponentes = ctx.Sam3_Pintura_Get_UnidadMedida(leguaje).ToList();
+
+                    List<UnidadesMedida> listaUnidadMedida = new List<UnidadesMedida>();
+                    if (listaComponentes.Count > 0)
+                        listaUnidadMedida.Add(new UnidadesMedida());
+
+                    foreach (Sam3_Pintura_Get_UnidadMedida_Result item in listaComponentes)
+                    {
+                        UnidadesMedida unidad = new UnidadesMedida
+                        {
+                            Unidad = item.Unidad,
+                            UnidadID = item.UnidadMedidaID
+                        };
+                        listaUnidadMedida.Add(unidad);
+                    }
+                    return listaUnidadMedida;
                 }
             }
             catch (Exception ex)
@@ -198,7 +237,7 @@ namespace BackEndSAM.DataAcces.Pintura.AdminComponentes
                         {
                             ProyectoProcesoComponenteID = item.ProyectoProcesoComponenteID,
                             Accion = 2,
-                            ComponenteAgregadoID = numeroComponente+1,
+                            ComponenteAgregadoID = numeroComponente + 1,
                             ComponenteID = item.ComponenteID,
                             Nombre = item.Nombre,
                             ListadoComponentes = listadoComponentes
@@ -206,26 +245,26 @@ namespace BackEndSAM.DataAcces.Pintura.AdminComponentes
                         numeroComponente++;
                         listaComponentesAgregados.Add(componentesAgregados);
                     };
-                    
+
                     return listaComponentesAgregados;
                 }
 
 
             }
-            
+
             catch (Exception ex)
             {
                 TransactionalInformation result = new TransactionalInformation();
-        result.ReturnMessage.Add(ex.Message);
+                result.ReturnMessage.Add(ex.Message);
                 result.ReturnCode = 500;
                 result.ReturnStatus = false;
                 result.IsAuthenicated = true;
 
                 return result;
             }
-}
+        }
 
-        public object ValidarComponente(int ComponenteID,string Lote,int Cantidad)
+        public object ValidarComponente(int ComponenteID, string Lote, int Cantidad)
         {
             try
             {

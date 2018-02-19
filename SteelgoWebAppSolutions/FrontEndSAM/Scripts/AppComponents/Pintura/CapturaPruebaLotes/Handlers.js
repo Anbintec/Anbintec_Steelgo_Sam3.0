@@ -12,8 +12,77 @@
     SuscribirEventoColor();
     SuscribirEventoVentanaPopupPruebas();
     suscribirEventoWindowsConfirmaCapturaSinCambiarTipoBusqueda();
+    SuscribirEventoInspector();
+    SuscribirEventoAplicar();
 }
 
+function SuscribirEventoAplicar() {
+
+    $('#btnAplicarCapturaRapida').click(function (e) {
+        e.preventDefault();
+
+        if ($('input:radio[name=LLena]:checked').val() === "Todos") {
+            ventanaConfirm = $("#ventanaConfirm").kendoWindow({
+                iframe: true,
+                title: _dictionary.CapturaAvanceTitulo[$("#language").data("kendoDropDownList").value()],
+                visible: false, //the window will not appear before its .open method is called
+                width: "auto",
+                height: "auto",
+                modal: true,
+                actions: [],
+                animation: {
+                    close: false,
+                    open: false
+                }
+            }).data("kendoWindow");
+
+            ventanaConfirm.content(_dictionary.CapturaMensajeArmadoPlancharTodos[$("#language").data("kendoDropDownList").value()] +
+                         "</br><center><button class='confirm_yes btn btn-blue' id='yesButton'>" + _dictionary.lblSi[$("#language").data("kendoDropDownList").value()] + "</button><button class='confirm_yes btn btn-blue' id='noButton'>" + _dictionary.lblNo[$("#language").data("kendoDropDownList").value()] + "</button></center>");
+
+            ventanaConfirm.open().center();
+
+            $("#yesButton").click(function (handler) {
+                if ($("#inputInspector").val() != "") PlanchaInspector();
+                ventanaConfirm.close();
+            });
+            $("#noButton").click(function (handler) {
+                ventanaConfirm.close();
+            });
+        }
+        else {
+            if ($("#inputInspector").val() != "") PlanchaInspector();
+        }
+    });
+}
+
+function SuscribirEventoInspector() {
+    $('#inputInspector').kendoComboBox({
+        dataTextField: "Codigo",
+        dataValueField: "ObreroID",
+        suggest: true,
+        filter: "contains",
+        index: 3,
+        delay: 10,
+        change: function (e) {
+            dataItem = this.dataItem(e.sender.selectedIndex);
+            if (dataItem == undefined) {
+                $("#inputInspector").data("kendoComboBox").value("");
+            }
+        }
+    });
+    $('#inputInspector').closest('.k-widget').keydown(function (e) {
+        if (e.keyCode == 13) {
+            if ($("#inputInspector").data("kendoComboBox").dataItem($("#inputInspector").data("kendoComboBox").select()) != undefined) {
+                //PlanchaInspector();
+            }
+            else {
+                $("#inputInspector").data("kendoComboBox").value("");
+            }
+        }
+    });
+
+
+}
 
 function suscribirEventoWindowsConfirmaCapturaSinCambiarTipoBusqueda() {
     ventanaConfirmEdicionSinTipoBusqueda = $("#ventanaConfirmCaptura").kendoWindow({
