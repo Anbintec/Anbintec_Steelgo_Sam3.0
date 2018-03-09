@@ -384,6 +384,13 @@ function isEditable(fieldName, model) {
             return false;
 
     }
+    if (fieldName === "MetrosLote") {
+
+        if(model.ConfiguracionLote)
+            return false;
+
+    }
+
 
     return true; // default to editable
 }
@@ -548,7 +555,7 @@ function CargarGridPopUp() {
         beforeEdit: function (e) {
             var columnIndex = this.cellIndex(e.container);
             var fieldName = this.thead.find("th").eq(columnIndex).data("field");
-            if (!isEditable(fieldName, e.model)) {
+            if (!isEditablePopup(fieldName, e.model)) {
                 e.preventDefault();
             }
         }
@@ -570,7 +577,7 @@ function CargarGridPopUp() {
     CustomisaGrid($("#gridPopUp"));
 };
 
-function isEditable(fieldName, model) {
+function isEditablePopup(fieldName, model) {
     if (fieldName === "UnidadMaxima" && model.ProyectoProcesoPrueba == 'Limpieza especificada') {
         return false;
     }

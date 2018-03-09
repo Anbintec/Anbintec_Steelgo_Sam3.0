@@ -134,7 +134,7 @@ function CargarGrid() {
         ],
         editable: true,
         navigatable: true,
-        toolbar: [{ name: "create" }],
+       // toolbar: [{ name: "create" }],
         dataBound: function () {
             var grid = $("#grid").data("kendoGrid");
             var gridData = grid.dataSource.view();
