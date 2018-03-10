@@ -204,7 +204,27 @@ function CargarGrid() {
     CustomisaGrid($("#grid"));
 }
 
-
+function Buscar()
+{
+    if ($("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).Valor != "" || $("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).Valor != 0) {
+        if ($("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID > 0) {
+            if ($("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID == 4 ? $("#inputColor").data("kendoComboBox").select() > 0 : true) {
+                if ($("#inputPrueba").data("kendoComboBox").dataItem($("#inputPrueba").data("kendoComboBox").select()).ProyectoProcesoPruebaID > 0) {
+                    AjaxObtenerPruebasSpoolID($("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).SpoolID, $("#inputPrueba").data("kendoComboBox").dataItem($("#inputPrueba").data("kendoComboBox").select()).ProyectoProcesoPruebaID, $("#inputProceso").data("kendoComboBox").dataItem($("#inputProceso").data("kendoComboBox").select()).ProcesoPinturaID != 4 ? 0 : $("#inputColor").data("kendoComboBox").dataItem($("#inputColor").data("kendoComboBox").select()).SistemaPinturaColorID);
+                    AjaxMostrarInformacionSpool($("#inputPrueba").data("kendoComboBox").dataItem($("#inputPrueba").data("kendoComboBox").select()).UnidadMedida, $("#inputPrueba").data("kendoComboBox").dataItem($("#inputPrueba").data("kendoComboBox").select()).UnidadMinima, $("#inputPrueba").data("kendoComboBox").dataItem($("#inputPrueba").data("kendoComboBox").select()).UnidadMaxima);
+                }
+                else
+                    displayNotify("PinturaNoPrueba", "", '1');
+            }
+            else
+                displayNotify("CapturaAvanceCuadranteNoColor", "", '1');
+        }
+        else
+            displayNotify("SistemaPinturaMensajeReqProcesoPintura", "", '1');
+    }
+    else
+        displayNotify("Despacho0028", "", '1');
+}
 
 function eliminarCaptura(e) {
     e.preventDefault();
