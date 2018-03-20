@@ -262,7 +262,8 @@ namespace BackEndSAM.DataAcces.Pintura.RevisionPintura
                             CargaCarroID=item.CargaCarroID,
                             CarroID=item.CarroID,
                             CuadranteID=item.CuadranteID,
-                            IDOCLIENTE=item.IDOCliente
+                            IDOCLIENTE=item.IDOCliente,
+                            FechaIDOCliente=item.fechaIDOCLIENTE
                         });
                     }
                     return listaRevisionSpool;

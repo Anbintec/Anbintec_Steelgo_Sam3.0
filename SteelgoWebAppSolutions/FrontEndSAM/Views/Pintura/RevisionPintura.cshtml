@@ -56,28 +56,9 @@
     </div>
     @*Filtros de Búsqueda*@
     <div class="row" id="FieldSetView">
-        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2" style="left: 16px;">
-            <div id="tipoVista" class="btn-group " data-toggle="buttons" role="group">
-                <label>&nbsp;</label>
-                <div class="btn btn-primary" id="styleSpool">
-                    <input type="radio" name="TipoBusqueda" style="width:auto;" value="spool" /><span id="SistemaPinturaAplicableSpool"></span>
-                </div>
-                <div class="btn btn-primary" id="styleNc">
-                    <input type="radio" name="TipoBusqueda" style="width:auto;" value="nc" /><span id="SistemaPinturaAplicableNC"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="divProyecto" style="left: 12px;">
-            <label id="lblProyecto" class="security_required"></label>
-            <input id="inputProyecto" />
-        </div>
-        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2" id="divSpool">
-            <label id="lblSpoolContiene" class="security_required"></label>
-            <input id="inputSpool" class="general-input" />
-        </div>
-        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2" id="divNc">
-            <label id="lblNcContiene" class="security_required"></label>
-            <input id="inputNc" class="general-input" />
+        <div class="row col-xs-12 col-sm-2 col-md-2 col-lg-4" id="InputIDDiv">
+            <label id="lblSpoolID"></label>
+            <input style="width:43%" id="InputOrdenTrabajo" class="general-input" />-<input id="InputID" placeholder="ID" style="width:44%; "   />
         </div>
         <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
             <label id="">&nbsp;</label>
@@ -95,12 +76,12 @@
             <label id="labelPlanchadoColor">&nbsp;</label>
             <input id="inputPlanchadoColor" type="text" />
         </div>
-        <div class="col-sm-2 col-md-2 col-lg-2" id="TodosDiv">
+        @*<div class="col-sm-2 col-md-2 col-lg-2" id="TodosDiv">
             <label id="lblGenerarRevision"></label>
             <input type="radio" id="SelectTodosSi" name="SelectTodos" style="width:auto;" value="Si" /><span id="lblSi"></span><br />
             <input type="radio" id="SelectTodosNo" name="SelectTodos" style="width:auto;" value="No" /><span id="lblNo"></span><br />
             <input type="radio" id="SelectTodosNinguno" name="SelectTodos" style="width:auto;" value="Ninguno" /><span id="lblNinguno"></span>
-        </div>
+        </div>*@
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
             <label id="labelPlanchadoMotivo">&nbsp;</label>
             <input id="inputPlanchadoMotivo" type="text" />

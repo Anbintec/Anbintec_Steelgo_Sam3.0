@@ -1,6 +1,30 @@
 ﻿var datoSeleccionado;
 var tipoBusquedaSeleccionada;
 
+
+
+function AjaxObtenerSpoolID() {
+
+    var OrdenTrabajoOrigianl = $("#InputOrdenTrabajo").val();
+    $Armado.Armado.read({ ordenTrabajo: $("#InputOrdenTrabajo").val(), tipo: '1', token: Cookies.get("token"), lenguaje: $("#language").val() }).done(function (data) {
+        dataSpoolArray = data;
+        if (Error(data)) {
+            if (data.OrdenTrabajo != "") {
+                $("#InputOrdenTrabajo").val(data.OrdenTrabajo);
+            }
+            else {
+                $("#InputOrdenTrabajo").val(OrdenTrabajoOrigianl);
+                displayNotify("CapturaArmadoMensajeOrdenTrabajoNoEncontrada", "", '1');
+            }
+
+            $("#InputID").data("kendoComboBox").dataSource.data(data.idStatus);
+            $("#InputID").data("kendoComboBox").enable(true);
+            $("#InputID").data("kendoComboBox").input.focus();
+        }
+    });
+}
+
+
 function AjaxCargarCamposPredeterminados() {
     var TipoMuestraPredeterminadoID = 3073;
     $CamposPredeterminados.CamposPredeterminados.read({ token: Cookies.get("token"), lenguaje: $("#language").val(), id: TipoMuestraPredeterminadoID }).done(function (data) {
@@ -48,7 +72,7 @@ function AjaxCargaProyecto() {
 
 function AjaxEjecutarBusquedaSpoolConSP()
 {
-    $RevisionPintura.RevisionPintura.read({ token: Cookies.get("token"), lenguaje: $("#language").val(), proyectoid: $("#inputProyecto").data("kendoComboBox").value(), dato: datoSeleccionado, tipoBusqueda: tipoBusquedaSeleccionada }).done(function (data) {
+    $RevisionPintura.RevisionPintura.read({ token: Cookies.get("token"), lenguaje: $("#language").val(), proyectoid: $("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).ProyectoID, dato: datoSeleccionado, tipoBusqueda: tipoBusquedaSeleccionada }).done(function (data) {
         var array = data;
         var elementosModificados = "";
         $("#grid").data("kendoGrid").dataSource.data([]);
@@ -105,7 +129,7 @@ function AjaxEjecutarBusquedaSpoolConSPDespuesDescarga() {
 
 function AjaxConsultarSpoolsConSP(tipoBusquedaSeleccionada, datoSeleccionado) {
     
-    $RevisionPintura.RevisionPintura.read({ token: Cookies.get("token"), proyectoid: $("#inputProyecto").data("kendoComboBox").value(), dato: datoSeleccionado, tipoBusqueda: tipoBusquedaSeleccionada }).done(function (numeroData) {
+    $RevisionPintura.RevisionPintura.read({ token: Cookies.get("token"), proyectoid: $("#InputID").data("kendoComboBox").dataItem($("#InputID").data("kendoComboBox").select()).ProyectoID, dato: datoSeleccionado, tipoBusqueda: tipoBusquedaSeleccionada }).done(function (numeroData) {
         if (numeroData > 0 && numeroData < 100) {
             AjaxEjecutarBusquedaSpoolConSP();
         }
@@ -151,14 +175,15 @@ function AjaxGuardar(arregloCaptura, tipoGuardar) {
     var row = 0;
     for (index = 0; index < arregloCaptura.length; index++) {
         arregloCaptura[index].RowOk = true;
-        if (arregloCaptura[index].GenerarRevision) {
-            ListaDetalles[row] = { Accion: "", SpoolID: "",SistemaPinturaID:"",SistemaPinturaColorID:"", ComentarioID: "", Estatus: 1,IDOCLIENTE:"" };
+        //if (arregloCaptura[index].GenerarRevision) {
+            ListaDetalles[row] = { Accion: "", SpoolID: "", SistemaPinturaID: "", SistemaPinturaColorID: "", ComentarioID: "", Estatus: 1, IDOCLIENTE: "", FechaIDOCliente:"" };
             ListaDetalles[row].Accion = arregloCaptura[index].Accion;
             ListaDetalles[row].SpoolID = arregloCaptura[index].SpoolID;
             ListaDetalles[row].SistemaPinturaID = arregloCaptura[index].SistemaPinturaID;
             ListaDetalles[row].ComentarioID = arregloCaptura[index].ComentarioID;
             ListaDetalles[row].SistemaPinturaColorID = arregloCaptura[index].SistemaPinturaColorID;
             ListaDetalles[row].IDOCLIENTE = arregloCaptura[index].IDOCliente;
+            ListaDetalles[row].FechaIDOCliente = arregloCaptura[index].FechaIDOCliente;
             
 
             if (arregloCaptura[index].ComentarioID == "" || arregloCaptura[index].ComentarioID == null || arregloCaptura[index].ComentarioID == undefined|| arregloCaptura[index].ComentarioID == 0) {
@@ -179,7 +204,7 @@ function AjaxGuardar(arregloCaptura, tipoGuardar) {
                 arregloCaptura[index].RowOk = false;
             }
             row++;
-        }
+        //}
     };
     Captura[0].Detalles = ListaDetalles;
 

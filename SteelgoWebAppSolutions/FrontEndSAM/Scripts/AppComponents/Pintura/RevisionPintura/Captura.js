@@ -18,7 +18,7 @@ function changeLanguageCall() {
     //$('input[value="spool"]').prop("checked", true);
     CargarGrid();
     AjaxCargarCamposPredeterminados();
-    AjaxCargaProyecto();
+   // AjaxCargaProyecto();
     document.title = _dictionary.RevisionPinturaHeader[$("#language").data("kendoDropDownList").value()];
 }
 
@@ -35,6 +35,18 @@ function ArregloListadoSpoolsCapturados() {
         JsonCaptura[i].SistemaPinturaColorID = data[i].SistemaPinturaColorID;
     }
     return JsonCaptura;
+}
+
+function TryParseInt(str, defaultValue) {
+    var retValue = defaultValue;
+    if (str !== null) {
+        if (str.length > 0) {
+            if (!isNaN(str)) {
+                retValue = parseInt(str);
+            }
+        }
+    }
+    return retValue;
 }
 
 function CargarGrid() {
@@ -132,24 +144,25 @@ function CargarGrid() {
         },
         columns: [
            { field: "NombreSpool", title: _dictionary.columnSpool[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "140px" },
-            { field: "NumeroControl", title: _dictionary.columnNumeroControl2[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "130px" },
+            //{ field: "NumeroControl", title: _dictionary.columnNumeroControl2[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "130px" },
             { field: "SistemaPintura", title: _dictionary.columnSistemaPintura[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "100px", width: "95px", editor: renderSistemaPintura, attributes: { style: "text-align:left;" } },
             { field: "Color", title: _dictionary.columnColor[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "120px", editor: renderColor },
             { field: "Area", title: _dictionary.columnArea[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "110px", attributes: { style: "text-align:right;" } },
-            { field: "GenerarRevision", title: _dictionary.columnRevision[$("#language").data("kendoDropDownList").value()], filterable: {
-                multi: true,
-                messages: {
-                    isTrue: _dictionary.lblVerdadero[$("#language").data("kendoDropDownList").value()],
-                    isFalse: _dictionary.lblFalso[$("#language").data("kendoDropDownList").value()],
-                    style: "max-width:100px;"
-                },
-                dataSource: [{ GenerarRevision: true }, { GenerarRevision: false }]
-            }, width: "110px", template: "<input name='fullyPaid' class='ob-paid' type='checkbox' #= GenerarRevision ? 'checked=checked':'' #/>", width: "100px", attributes: { style: "text-align:center;" }
-            },
+            //{ field: "GenerarRevision", title: _dictionary.columnRevision[$("#language").data("kendoDropDownList").value()], filterable: {
+            //    multi: true,
+            //    messages: {
+            //        isTrue: _dictionary.lblVerdadero[$("#language").data("kendoDropDownList").value()],
+            //        isFalse: _dictionary.lblFalso[$("#language").data("kendoDropDownList").value()],
+            //        style: "max-width:100px;"
+            //    },
+            //    dataSource: [{ GenerarRevision: true }, { GenerarRevision: false }]
+            //}, width: "110px", template: "<input name='fullyPaid' class='ob-paid' type='checkbox' #= GenerarRevision ? 'checked=checked':'' #/>", width: "100px", attributes: { style: "text-align:center;" }
+            //,
             { field: "Comentario", title: _dictionary.HeaderComentario[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "110px", editor: renderComentario },
             { field: "IDOCliente", title: _dictionary.HeaderIDOCLIENTE[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "110px" },
+            { field: "FechaIDOCliente", title: _dictionary.HeaderFechaIDOCLIENTE[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "110px" },
             
-           { field: "Version", title: _dictionary.columnVersion[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "110px", attributes: { style: "text-align:center;" } },
+           //{ field: "Version", title: _dictionary.columnVersion[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellNumberMaftec(), width: "110px", attributes: { style: "text-align:center;" } },
 			{ command: { text: _dictionary.botonDescarga[$("#language").data("kendoDropDownList").value()], click: eliminarCaptura }, title: _dictionary.columnDescargar[$("#language").data("kendoDropDownList").value()], attributes: { style: "text-align:center;" }, width: "90px" }
         ],
         beforeEdit: function (e) {

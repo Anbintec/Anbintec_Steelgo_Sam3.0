@@ -13268,9 +13268,12 @@ _dictionary = {
     },
     //#endregion
     //#region Inicia modulo RevisionPintura
-
+    "HeaderFechaIDOCLIENTE": {
+        "es-MX": "Fecha IDO",
+        "en-US": "IDO DATE"
+    },
     "HeaderIDOCLIENTE": {
-        "es-MX": "iDO",
+        "es-MX": "IDO",
         "en-US": "IDO"
     },
     "BusquedaSinAvance": {

@@ -86,6 +86,7 @@ namespace BackEndSAM.Models.Pintura.PinturaGeneral
 
         public string IDOCLIENTE { get; set; }
 
+        public string FechaIDOCliente { get; set; }
         public PinturaRevision()
         {
             this.Accion = 0;
@@ -103,6 +104,7 @@ namespace BackEndSAM.Models.Pintura.PinturaGeneral
             this.CarroID = 0;
             this.CuadranteID = 0;
             this.IDOCLIENTE = "";
+            this.FechaIDOCliente = "";
         }
     }
 
@@ -131,6 +133,7 @@ namespace BackEndSAM.Models.Pintura.PinturaGeneral
         public int ComentarioID { get; set; }
         public int SistemaPinturaColorID { get; set; }
         public string IDOCLIENTE { get; set; }
+        public string fechaIDOCLIENTE { get; set; }
     }
 
     
