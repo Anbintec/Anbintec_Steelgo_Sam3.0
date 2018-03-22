@@ -81,10 +81,11 @@ function ObtenerTractoYChoferEnvio(data) {
     if (data.length > 0) {
         if (data.length == 1) {
             for (var i = 0; i < data[0].ListaProveedorEnvio.length; i++) {
-                if (data[0].ListaDatosEmbarque[0].ProveedorEnvioID == data[0].ListaProveedorEnvio[i].ProveedorEnvioID) {
+                //if (data[0].ListaDatosEmbarque[0].ProveedorEnvioID == data[0].ListaProveedorEnvio[i].ProveedorEnvioID) {
                     $("#ProveedorEnvio").data("kendoComboBox").dataSource.data(data[0].ListaProveedorEnvio);
                     $("#ProveedorEnvio").data("kendoComboBox").value(data[0].ListaProveedorEnvio[i].ProveedorEnvioID);
-                }
+                    $("#ProveedorEnvio").data("kendoComboBox").trigger("change");
+                //}
             }
             for (var j = 0; j < data[0].ListaDatosEmbarque[0].ListaTractoEnvio.length; j++) {
                 if (data[0].ListaDatosEmbarque[0].TractoEnvioID == data[0].ListaDatosEmbarque[0].ListaTractoEnvio[j].TractoEnvioID) {

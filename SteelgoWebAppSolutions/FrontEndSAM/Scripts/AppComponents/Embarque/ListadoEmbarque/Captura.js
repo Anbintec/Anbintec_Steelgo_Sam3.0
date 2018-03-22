@@ -37,8 +37,8 @@ function CargarGrid() {
                 if (event.isDefaultPrevented) return;
             }
 
-            editCell.call(this, cell);            
-        };        
+            editCell.call(this, cell);
+        };
     })(kendo.ui.Grid.fn.editCell);
 
     $("#grid").kendoGrid({
@@ -59,7 +59,7 @@ function CargarGrid() {
             //}(), 100);            
         },
 
-        edit: function (e) {            
+        edit: function (e) {
             var inputName = e.container.find('input');
             inputName.select();
 
@@ -72,7 +72,7 @@ function CargarGrid() {
             }
             else {
                 esNormal = false;
-            }            
+            }
         },
         dataSource: {
             schema: {
@@ -105,8 +105,6 @@ function CargarGrid() {
                         AprobadoAduanaDesc: { type: "string", editable: true },
                         OkCliente: { type: "boolean", editable: true },
                         OkEmbarque: { type: "boolean", editable: false },
-                        RequiereOkDocumental: { type: "boolean", editable: false },
-                        OkDocumental: { type: "boolean", editable: false },
                         OkClienteCarga: { type: "boolean", editable: false },
                         RequierePermisoAduana: { type: "boolean", editable: false },
                         RequiereRevisionCliente: { type: "boolean", editable: false },
@@ -136,15 +134,15 @@ function CargarGrid() {
                     //} else {
                     //    e.items[0].Enviar = false;
                     //}
-                }                
+                }
             }
-        },        
+        },
         navigatable: true,
-        editable: true,        
+        editable: true,
         autoHeight: true,
         autoWidth: true,
         sortable: true,
-        scrollable: true,        
+        scrollable: true,
         pageable: {
             refresh: false,
             pageSizes: [10, 25, 50, 100],
@@ -162,8 +160,9 @@ function CargarGrid() {
                 field: "PapelesCliente", title: _dictionary.columnPapCliente[$("#language").data("kendoDropDownList").value()], filterable: false, template: "<center><button  type='button' class='btn btn-blue imprimirPapelesCliente' #= RequierePapCliente == false ? 'disabled' : '' #> <span>" +
                   _dictionary.lblImprimir[$("#language").data("kendoDropDownList").value()] + "</span></button></center>", width: "140px"
             },
-            { field: "PapelesAduana", title: _dictionary.columnPapAduana[$("#language").data("kendoDropDownList").value()], filterable: false, template: "<center><button  type='button' class='btn btn-blue imprimirPapelesAduana' #= RequierePermisoAduana == false ?  'disabled': '' # > <span>" +
-                  _dictionary.lblImprimir[$("#language").data("kendoDropDownList").value()] + "</span></button></center>", width: "140px"
+            {
+                field: "PapelesAduana", title: _dictionary.columnPapAduana[$("#language").data("kendoDropDownList").value()], filterable: false, template: "<center><button  type='button' class='btn btn-blue imprimirPapelesAduana' #= RequierePermisoAduana == false ?  'disabled': '' # > <span>" +
+                    _dictionary.lblImprimir[$("#language").data("kendoDropDownList").value()] + "</span></button></center>", width: "140px"
             },
             { field: "FolioSolicitudPermiso", title: _dictionary.columnSolicitudPermiso[$("#language").data("kendoDropDownList").value()], filterable: getGridFilterableCellMaftec(), width: "140px" },
             { field: "FechaSolicitudPermiso", title: _dictionary.columnFechaPermiso[$("#language").data("kendoDropDownList").value()], filterable: getKendoGridFilterableDateMaftec(), editor: RenderDatePicker, format: _dictionary.FormatoFecha[$("#language").data("kendoDropDownList").value()], width: "150px" },
@@ -191,17 +190,6 @@ function CargarGrid() {
                 }, template: '<input type="checkbox" class="chk-OkEmbarque" #= OkEmbarque ? "checked=checked" : "" # class="chkbx" ></input>', width: "150px", attributes: { style: "text-align:center;" }
             },
             {
-                field: "RequiereOkDocumental", title: $("#language").data("kendoDropDownList").value() == "es-MX" ? "OK Documental" : "Documental OK", filterable: {
-                    multi: true,
-                    messages: {
-                        isTrue: _dictionary.lblVerdadero[$("#language").data("kendoDropDownList").value()],
-                        isFalse: _dictionary.lblFalso[$("#language").data("kendoDropDownList").value()],
-                        style: "max-width:100px;"
-                    },
-                    dataSource: [{ RequiereOkDocumental: true }, { RequiereOkDocumental: false }]
-                }, template: '<input type="checkbox" class="chk-RequiereOkDocumental" class="chkbx" #= !RequiereOkDocumental ? "disabled = disabled" : "" # #=OkDocumental ? "checked = checked" : "" #></input>', width: "150px", attributes: { style: "text-align:center;" }
-            },
-            {
                 field: "Enviar", title: _dictionary.columnEnviar[$("#language").data("kendoDropDownList").value()], filterable: false, template: "<center><button  type='button' class='btn btn-blue enviarEmbarque#=Cont # botonEnviar ' Style='display: #= Enviar == true ?'block;' : 'none;' #' ><span>" +
                    _dictionary.botonEnviar[$("#language").data("kendoDropDownList").value()] + "</span></button></center>", width: "100px"
             },
@@ -216,15 +204,15 @@ function CargarGrid() {
         },
         beforeEdit: function (e) {
             var columnIndex = this.cellIndex(e.container);
-            var fieldName = this.thead.find("th").eq(columnIndex).data("field");            
-            if (!isEditable(fieldName, e.model)) {                               
-                e.preventDefault();                
-            }           
+            var fieldName = this.thead.find("th").eq(columnIndex).data("field");
+            if (!isEditable(fieldName, e.model)) {
+                e.preventDefault();
+            }
         }
-        
+
     });
-    
-    $("#grid").on("change",  ":checkbox", function (e) {
+
+    $("#grid").on("change", ":checkbox", function (e) {
         if ($(this)[0].className == "chk-OkEmbarque" || $(this)[0].name == "OkEmbarque") {
             if ($('#Guardar').text() == _dictionary.lblGuardar[$("#language").data("kendoDropDownList").value()]) {
                 var grid = $("#grid").data("kendoGrid");
@@ -242,16 +230,16 @@ function CargarGrid() {
                             dataItem.ModificadoPorUsuario = true;
                     }
                     var clase = ".enviarEmbarque" + dataItem.Cont;
-                    if (SetValueEnviar(dataItem)){
+                    if (SetValueEnviar(dataItem)) {
                         dataItem.Enviar = true;
-                        
+
                         $(clase).css("display", "block");
-                    }                        
+                    }
                     else {
                         dataItem.Enviar = false;
                         $(clase).css("display", "none");
                     }
-                        
+
                 } else {
                     if (e.target.checked)
                         $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).OkEmbarque = false;
@@ -264,7 +252,7 @@ function CargarGrid() {
                     $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).OkEmbarque = false;
                 else
                     $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).OkEmbarque = true;
-            }            
+            }
             //$("#grid").data("kendoGrid").dataSource.sync();            
         } else if ($(this)[0].className == "chk-OkCliente" || $(this)[0].name == "OkCliente") {
             if ($('#Guardar').text() == _dictionary.lblGuardar[$("#language").data("kendoDropDownList").value()]) {
@@ -304,49 +292,9 @@ function CargarGrid() {
                     $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).OkCliente = false;
                 else
                     $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).OkCliente = true;
-            }                                               
+            }
             //$("#grid").data("kendoGrid").dataSource.sync();
-        } else if ($(this)[0].className == "chk-RequiereOkDocumental" || $(this)[0].name == "RequiereOkDocumental") {
-            if ($('#Guardar').text() == _dictionary.lblGuardar[$("#language").data("kendoDropDownList").value()]) {
-                var grid = $("#grid").data("kendoGrid");
-                var dataItem = grid.dataItem($(e.target).closest("tr"));
-                if (dataItem.EstatusEmbarqueID != 2) {
-
-                    //if ($(this)[0].checked) {
-                    //    dataItem.OkDocumental = true;
-
-                    //    if (dataItem.Accion == 1)
-                    //        dataItem.ModificadoPorUsuario = true;
-                    //}
-                    //else {
-                    //    dataItem.OkDocumental = false;
-                    //    if (dataItem.Accion == 2)
-                    //        dataItem.ModificadoPorUsuario = true;
-                    //}
-                    dataItem.OkDocumental = $(this)[0].checked;
-                    var clase = ".enviarEmbarque" + dataItem.Cont;
-                    if (SetValueEnviar(dataItem)) {
-                        dataItem.Enviar = true;
-                        $(clase).css("display", "block");
-                    }
-                    else {
-                        dataItem.Enviar = false;
-                        $(clase).css("display", "none");
-                    }
-                } else {
-                    if (e.target.checked)
-                        $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).RequiereOkDocumental = false;
-                    else
-                        $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).RequiereOkDocumental = true;
-                }
-            }
-            else {
-                if (e.target.checked)
-                    $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).RequiereOkDocumental = false;
-                else
-                    $("#grid").data("kendoGrid").dataItem($(e.target).closest("tr")).RequiereOkDocumental = true;
-            }
-        }       
+        }
     });
 
     CustomisaGrid($("#grid"));
@@ -354,12 +302,12 @@ function CargarGrid() {
 function functionChange(e) {
     if (e.items.length > 0) {
         if (SetValueEnviar(e.items[0])) {
-            e.items[0].Enviar = true;            
+            e.items[0].Enviar = true;
         } else {
-            e.items[0].Enviar = false;            
+            e.items[0].Enviar = false;
         }
         //$("#grid").data("kendoGrid").dataSource.sync();
-    }    
+    }
 }
 
 function isEditable(fieldName, model) {
@@ -402,10 +350,10 @@ function SetValueEnviar(obj) {
     var obligado = false;
     if (obj != undefined) {
         if (obj.RequierePermisoAduana) {
-            if ((obj.FechaSolicitudPermiso != null && obj.FechaSolicitudPermiso != "") && (obj.FolioSolicitudPermiso != null && obj.FolioSolicitudPermiso != "" && obj.FolioSolicitudPermiso.toString().trim()) && obj.AprobadoAduanaDesc == ($("#language").val() == "es-MX" ? "Aprobado" : "Approved")) {                
+            if ((obj.FechaSolicitudPermiso != null && obj.FechaSolicitudPermiso != "") && (obj.FolioSolicitudPermiso != null && obj.FolioSolicitudPermiso != "" && obj.FolioSolicitudPermiso.toString().trim()) && obj.AprobadoAduanaDesc == ($("#language").val() == "es-MX" ? "Aprobado" : "Approved")) {
                 aduana = true;
                 obligado = true;
-            }else{
+            } else {
                 aduana = false;
                 obligado = true;
             }
@@ -419,89 +367,76 @@ function SetValueEnviar(obj) {
         } else {
             campos = false;
         }
-      
-        
-        if (aduana && !obj.RequiereOkDocumental && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+
+
+        if (aduana && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (aduana && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+        } else if (aduana && obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (aduana && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+        } else if (aduana && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (aduana && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+        } else if (aduana && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (aduana && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && obj.OkClienteCarga && campos) {
-            retorno = true;
-        } else if (aduana && (obj.RequiereOkDocumental && obj.OkDocumental) && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
-            retorno = true;
-        } else if (aduana && (obj.RequiereOkDocumental && obj.OkDocumental) && !obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos){
-            retorno = true;        
-        } else if (aduana && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequiereRevisionCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequierePapCliente && obj.OkClienteCarga && campos) {
-            retorno = true;
-        } else if (aduana && (obj.RequiereOkDocumental && obj.OkDocumental) && !obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !obj.RequiereRevisionCliente && campos) {
+        } else if (aduana && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && obj.OkClienteCarga && campos) {
             retorno = true;
         }
-        else if (aduana && obligado && !obj.RequiereOkDocumental && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+        else if (aduana && obligado && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (aduana && obligado && !obj.RequiereOkDocumental && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+        } else if (aduana && obligado && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (aduana && obligado && !obj.RequiereOkDocumental && !obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
-            retorno = true;
-        }
-        else if (aduana && obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
-            retorno = true;
-        } else if (aduana && obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
-            retorno = true;
-        } else if (aduana && obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
-            retorno = true;
-        } else if (aduana && obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && obj.OkClienteCarga && campos) {
-            retorno = true;
-        } else if (aduana && obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && obj.RequiereRevisionCliente && (obj.OkClienteEmbarque && obj.OkCliente) && campos) {
-            retorno = true;
-        } else if (aduana && obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && obj.OkClienteCarga && (obj.OkClienteEmbarque && obj.OkCliente) && campos) {
-            retorno = true;
-        } else if (aduana && obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequiereRevisionCliente && obj.OkClienteCarga && (obj.OkClienteEmbarque && obj.OkCliente) && campos) {
-            retorno = true;
-        } else if (aduana && obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && obj.RequiereRevisionCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && campos) {
-            retorno = true;
-        } else if (aduana && obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && obj.OkClienteCarga && (!obj.OkClienteEmbarque && !obj.OkCliente) && campos) {
-            retorno = true;
-        } else if (aduana && obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequiereRevisionCliente && obj.OkClienteCarga && (!obj.OkClienteEmbarque && !obj.OkCliente) && campos) {
+        } else if (aduana && obligado && !obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
         }
-        else if (!aduana && !obligado && !obj.RequiereOkDocumental && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+        else if (aduana && obligado && obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (!aduana && !obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+        } else if (aduana && obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (!aduana && !obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+        } else if (aduana && obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (!aduana && !obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
+        } else if (aduana && obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (!aduana && !obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && obj.OkClienteCarga && campos) {
+        } else if (aduana && obligado && obj.RequierePapCliente && obj.RequiereRevisionCliente && (obj.OkClienteEmbarque && obj.OkCliente) && campos) {
             retorno = true;
-        } else if (!aduana && !obligado && !obj.RequiereOkDocumental && obj.RequiereRevisionCliente && campos){
+        } else if (aduana && obligado && obj.RequierePapCliente && obj.OkClienteCarga && (obj.OkClienteEmbarque && obj.OkCliente) && campos) {
             retorno = true;
-        } else if (aduana && obligado && (obj.RequiereOkDocumental && obj.OkDocumental) && obj.RequiereRevisionCliente && campos && (obj.OkClienteEmbarque && obj.OkCliente) ){
+        } else if (aduana && obligado && obj.RequiereRevisionCliente && obj.OkClienteCarga && (obj.OkClienteEmbarque && obj.OkCliente) && campos) {
             retorno = true;
-        } else if (obj.RequierePapCliente && !aduana && !obligado && campos && (obj.RequiereOkDocumental && obj.OkDocumental)) {
+        } else if (aduana && obligado && obj.RequierePapCliente && obj.RequiereRevisionCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && campos) {
             retorno = true;
-        } else if (obj.RequiereRevisionCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos && (obj.RequiereOkDocumental && obj.OkDocumental)) {
+        } else if (aduana && obligado && obj.RequierePapCliente && obj.OkClienteCarga && (!obj.OkClienteEmbarque && !obj.OkCliente) && campos) {
             retorno = true;
-        } else if ((obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos && (obj.RequiereOkDocumental && obj.OkDocumental)) {
+        } else if (aduana && obligado && obj.RequiereRevisionCliente && obj.OkClienteCarga && (!obj.OkClienteEmbarque && !obj.OkCliente) && campos) {
             retorno = true;
-        } else if (obj.OkClienteCarga && (obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos && (obj.RequiereOkDocumental && obj.OkDocumental)) {
+        }
+        else if (!aduana && !obligado && !obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (obj.OkClienteCarga && (!obj.OkClienteEmbarque && !obj.OkCliente) && !aduana && !obligado && campos && (obj.RequiereOkDocumental && obj.OkDocumental)) {
+        } else if (!aduana && !obligado && obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } 
-        else if (!obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos && (obj.RequiereOkDocumental && obj.OkDocumental)) {
+        } else if (!aduana && !obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (!obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !aduana && !obligado && campos && (obj.RequiereOkDocumental && obj.OkDocumental)) {
+        } else if (!aduana && !obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && !obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (!obj.RequiereRevisionCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !aduana && !obligado && campos && (obj.RequiereOkDocumental && obj.OkDocumental)) {
+        } else if (!aduana && !obligado && obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && obj.RequiereRevisionCliente && obj.OkClienteCarga && campos) {
             retorno = true;
-        } else if (obj.RequiereRevisionCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !aduana && !obligado && campos && (obj.RequiereOkDocumental && obj.OkDocumental)) {
+        } else if (obj.RequierePapCliente && !aduana && !obligado && campos) {
             retorno = true;
-        }        
+        } else if (obj.RequiereRevisionCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } else if ((obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } else if (obj.OkClienteCarga && (obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } else if (obj.OkClienteCarga && (!obj.OkClienteEmbarque && !obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        }
+        else if (!obj.RequierePapCliente && (obj.OkClienteEmbarque && obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } else if (!obj.RequierePapCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        } else if (!obj.RequiereRevisionCliente && (!obj.OkClienteEmbarque && !obj.OkCliente) && !aduana && !obligado && campos) {
+            retorno = true;
+        }
+
     }
     return retorno;
 }
