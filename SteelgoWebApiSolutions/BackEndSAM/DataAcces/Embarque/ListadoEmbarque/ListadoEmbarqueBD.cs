@@ -45,7 +45,8 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
 
                     foreach (Sam3_Embarque_LE_Get_ListadoDestinos_Result item in result)
                     {
-                        listaDetalle.Add(new ListadoDestino {
+                        listaDetalle.Add(new ListadoDestino
+                        {
                             DestinoID = item.DestinoID,
                             Destino = item.Nombre
                         });
@@ -54,7 +55,8 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                     return listaDetalle;
                 }
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 TransactionalInformation result = new TransactionalInformation();
                 result.ReturnMessage.Add(ex.Message);
@@ -74,13 +76,13 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                 {
                     List<DetalleOpcionValidacion> listado = (List<DetalleOpcionValidacion>)OpcionValidacionBD.Instance.ObtenerListaOpcionValidacion(Lenguaje);
 
-                    List<Sam3_Embarque_LE_Get_ListadoEmbarque_Result> result = ctx.Sam3_Embarque_LE_Get_ListadoEmbarque(Lenguaje , EstatusEmbarque, UsuarioID).ToList();
+                    List<Sam3_Embarque_LE_Get_ListadoEmbarque_Result> result = ctx.Sam3_Embarque_LE_Get_ListadoEmbarque(Lenguaje, EstatusEmbarque, UsuarioID).ToList();
                     List<DetalleListadoEmbarque> listaDetalle = new List<DetalleListadoEmbarque>();
-                    var cont = 0;            
+                    var cont = 0;
                     foreach (Sam3_Embarque_LE_Get_ListadoEmbarque_Result item in result)
-                    {                        
+                    {
                         listaDetalle.Add(new DetalleListadoEmbarque
-                        {                        
+                        {
                             listaDestino = (List<ListadoDestino>)ListadoEmbarqueBD.Instance.ObtenerListaDestinos(item.ProyectoID.GetValueOrDefault()),
                             EmbarqueID = item.EmbarqueID,
                             Embarque = item.Embarque,
@@ -102,22 +104,18 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                             OkCliente = item.OkCliente,
                             OkClienteEmbarque = item.OkClienteEmbarque,
                             OkClienteCarga = item.OKClienteCarga,
-                            RequiereOkDocumental = item.RequiereOkDocumental,
-                            OkDocumental = item.OkDocumental,
                             AprobadoAduanaAnt = item.AprobadoAduana,
                             AprobadoAduana = item.RequiereAduana ? item.AprobadoAduana : 1,
                             AprobadoAduanaDesc = item.RequiereAduana ? item.AprobadoAduanaDesc : "NA",
                             OkEmbarqueAnt = item.OkEmbarque,
                             OkEmbarque = item.OkEmbarque,
                             Enviar =
-                            !item.RequiereAduana && !item.RequierePapCliente && !item.RequiereRevisionCliente && !item.OkClienteEmbarque && !item.OkCliente && !item.OKClienteCarga && !item.RequiereOkDocumental && (item.Destino != "" && item.OkEmbarque) ? true : 
-                            !item.RequiereAduana && !item.RequierePapCliente && item.RequiereRevisionCliente && !item.OkClienteEmbarque && !item.OkCliente && !item.OKClienteCarga && !item.RequiereOkDocumental && (item.Destino != "" && item.OkEmbarque) ? true :
-                            !item.RequiereAduana && !item.RequierePapCliente && item.RequiereRevisionCliente && !item.OkClienteEmbarque && !item.OkCliente && !item.OKClienteCarga && (item.RequiereOkDocumental && item.OkDocumental) && (item.Destino != "" && item.OkEmbarque) ? true :
-                            item.RequiereAduana ? (((item.FechaPermiso != null && item.FechaPermiso != "") && (item.SolicitudPermiso != null && item.SolicitudPermiso != "" ) && item.AprobadoAduana == 1) && item.Destino != "" && item.OkEmbarque ? true : false ) :
-                            !item.RequiereAduana ? item.Destino != "" && item.OkCliente && item.OkEmbarque && (item.RequiereOkDocumental && item.OkDocumental) ? true : false : 
-                            !item.RequiereAduana && item.Destino != "" && !item.OkCliente && item.OkEmbarque && (item.OkDocumental && item.RequiereOkDocumental) ? true : false,
-                            
-                           
+                            !item.RequiereAduana && !item.RequierePapCliente && !item.RequiereRevisionCliente && !item.OkClienteEmbarque && !item.OkCliente && !item.OKClienteCarga && (item.Destino != "" && item.OkEmbarque) ? true :
+                            item.RequiereAduana ? (((item.FechaPermiso != null && item.FechaPermiso != "") && (item.SolicitudPermiso != null && item.SolicitudPermiso != "") && item.AprobadoAduana == 1) && item.Destino != "" && item.OkEmbarque ? true : false) :
+                            !item.RequiereAduana ? item.Destino != "" && item.OkCliente && item.OkEmbarque ? true : false :
+                            !item.RequiereAduana && item.Destino != "" && !item.OkCliente && item.OkEmbarque ? true : false,
+
+
                             CapturaEnvioID = item.CapturaEnvioID.GetValueOrDefault(),
                             ModificadoPorUsuario = false,
                             RowOk = true,
@@ -207,11 +205,11 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                             Embarque = item.Embarque,
                             EmbarqueEstatusID = item.EmbarqueEstatusID,
                             ProyectoID = item.ProyectoID,
-                            Proyecto = item.Proyecto,                            
+                            Proyecto = item.Proyecto,
                             DestinoID = item.DestinoID,
                             Destino = item.Destino,
                             FolioSolicitudPermiso = item.RequiereAduana.GetValueOrDefault() ? item.SolicitudPermiso : "NA",
-                            Planas = item.Planas,                            
+                            Planas = item.Planas,
                             FechaSolicitudPermiso = item.RequiereAduana.GetValueOrDefault() ? item.FechaPermiso.ToString() : "NA",
                             RequierePapCliente = item.RequierePapCliente,
                             RequierePermisoAduana = item.RequiereAduana,
@@ -219,7 +217,7 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                             OkEmbarque = item.OkEmbarque,
                             AprobadoAduana = item.RequiereAduana.GetValueOrDefault() ? item.AprobadoAduana.GetValueOrDefault() : 1,
                             AprobadoAduanaDesc = item.RequiereAduana.GetValueOrDefault() ? item.AprobadoAduanaDesc : "NA",
-                            OkCliente = item.OkCliente,                                                        
+                            OkCliente = item.OkCliente,
                             CapturaEnvioID = item.CapturaEnvioID
                         });
                     }
@@ -277,7 +275,7 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                 ObjetosSQL _SQL = new ObjetosSQL();
                 string[,] parametros = { { "@UsuarioID", UsuarioID.ToString() }, { "@Lenguaje", Lenguaje } };
 
-               _SQL.Ejecuta(Stords.GUARDARCAPTURALISTADOEMBARQUE, dtDetalle, "@TTEmbarqueListado", parametros);
+                _SQL.Ejecuta(Stords.GUARDARCAPTURALISTADOEMBARQUE, dtDetalle, "@TTEmbarqueListado", parametros);
 
                 TransactionalInformation result = new TransactionalInformation();
                 result.ReturnMessage.Add("Ok");
@@ -306,12 +304,12 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                 using (SamContext ctx = new SamContext())
                 {
                     var oMyString = new ObjectParameter("Retorno", typeof(string));
-                    var resultSp = ctx.Sam3_Embarque_LE_GuardarEnvio(UsuarioID, Lenguaje, dtEnvio.EmbarqueID, dtEnvio.DestinoID, dtEnvio.SolicitudPermiso, dtEnvio.FechaPermiso, dtEnvio.AprobadoAduana, dtEnvio.BitacoraAduana, NumeroEmbarque, NumeroEmbarqueCliente, FechaEnvio, dtEnvio.ProyectoID, dtEnvio.OkDocumental, oMyString);
+                    var resultSp = ctx.Sam3_Embarque_LE_GuardarEnvio(UsuarioID, Lenguaje, dtEnvio.EmbarqueID, dtEnvio.DestinoID, dtEnvio.SolicitudPermiso, dtEnvio.FechaPermiso, dtEnvio.AprobadoAduana, dtEnvio.BitacoraAduana, NumeroEmbarque, NumeroEmbarqueCliente, FechaEnvio, dtEnvio.ProyectoID, oMyString);
                     var data = oMyString.Value.ToString();
 
                     TransactionalInformation result = new TransactionalInformation();
 
-                    if (data!= "AMBOS EXISTEN" && data!= "NE EXISTE" && data!= "NEC EXISTE")
+                    if (data != "AMBOS EXISTEN" && data != "NE EXISTE" && data != "NEC EXISTE")
                     {
                         result.ReturnMessage.Add("Ok");
                     }
