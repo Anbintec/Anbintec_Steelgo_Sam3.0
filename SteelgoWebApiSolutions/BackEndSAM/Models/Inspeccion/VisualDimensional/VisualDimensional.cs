@@ -49,6 +49,7 @@ namespace BackEndSAM.Models.Inspeccion.VisualDimensional
 
         public string Localizacion { get; set; }
         public bool? RevisionNU  { get; set; }
+        public int JuntaWorkStatusID { get; set; }
 
     }
     public class Inspector

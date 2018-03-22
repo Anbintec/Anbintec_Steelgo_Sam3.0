@@ -92,7 +92,9 @@ namespace BackEndSAM.Controllers.Inspeccion.VisualDimensional
                         //EtiquetaMaterial2 = item.EtiquetaMaterial2,
                         
                         Localizacion = item.Localizacion,
-                        RevisionNU = item.RevisionNU
+                        RevisionNU = item.RevisionNU,
+                        JuntaWorkStatusID = item.JuntaWorkStatusID
+
                     };
 
                     listaDetalleDatos.Add(detalleDatos);
