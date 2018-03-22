@@ -207,6 +207,7 @@ namespace BackEndSAM.Models.Inspeccion.VisualDimensional
         public string ResultadoID { get; set; }
         public string TallerID { get; set; }
         public int JuntaSpoolID { get; set; }
+        public int JuntaWorkStatusID { get; set; }
         public List<BackEndSAM.Models.Armado.NumerosUnicos> ListaNumeroUnicoAsignado { get; set; }
 
     }

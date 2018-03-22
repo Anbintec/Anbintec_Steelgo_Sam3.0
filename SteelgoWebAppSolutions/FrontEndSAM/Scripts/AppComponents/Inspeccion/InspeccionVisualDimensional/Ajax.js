@@ -430,7 +430,8 @@ function ajaxObtenerJSonGrid() {
                 editado = false;
 
             for (var i = 0; i < array.length; i++) {
-                if (ExisteJunta(array[i].JuntaID)) {
+                //if (ExisteJunta(array[i].JuntaID)) {
+                if (true) {
                     JuntasAgregadas.push(array[i].Junta);
                     array[i].NumeroUnico1 = array[i].NumeroUnico1 == "" ? DatoDefaultNumeroUnico1() : array[i].NumeroUnico1;
                     array[i].NumeroUnico2 = array[i].NumeroUnico2 == "" ? DatoDefaultNumeroUnico2() : array[i].NumeroUnico2;
@@ -568,7 +569,7 @@ function ajaxGuardado(jSonCaptura, tipoGuardar) {
             $("#grid").data("kendoGrid").dataSource._data[index].RowOk = true;
             $("#grid").data("kendoGrid").dataSource._data[index].NUOk = true;
 
-            ListaDetalleGuardarInspeccionVisual[index] = { Accion: "", DefectosID: "", ObreroID: "", FechaInspeccion: "", ResultadoID: "", TallerID: "", JuntaSpoolID: "", ListaNumeroUnicoAsignado: "" };
+            ListaDetalleGuardarInspeccionVisual[index] = { Accion: "", DefectosID: "", ObreroID: "", FechaInspeccion: "", ResultadoID: "", TallerID: "", JuntaSpoolID: "",JuntaWorkStatusID: "", ListaNumeroUnicoAsignado: "" };
             ListaDetalleGuardarInspeccionVisual[index].Accion = jSonCaptura[index].Accion;
             ListaDetalleGuardarInspeccionVisual[index].DefectosID = jSonCaptura[index].DefectosID == null ? 0 : jSonCaptura[index].DefectosID;
             ListaDetalleGuardarInspeccionVisual[index].ObreroID = (jSonCaptura[index].InspectorID == null || jSonCaptura[index].InspectorID == "") ? 0 : jSonCaptura[index].InspectorID;
@@ -576,6 +577,7 @@ function ajaxGuardado(jSonCaptura, tipoGuardar) {
             ListaDetalleGuardarInspeccionVisual[index].ResultadoID = jSonCaptura[index].ResultadoID == null ? 0 : jSonCaptura[index].ResultadoID;
             ListaDetalleGuardarInspeccionVisual[index].TallerID = jSonCaptura[index].TallerID == null ? 0 : jSonCaptura[index].TallerID;
             ListaDetalleGuardarInspeccionVisual[index].JuntaSpoolID = jSonCaptura[index].JuntaID == null ? 0 : jSonCaptura[index].JuntaID;
+            ListaDetalleGuardarInspeccionVisual[index].JuntaSpoolID = jSonCaptura[index].JuntaWorkStatusID == null ? 0 : jSonCaptura[index].JuntaWorkStatusID;
 
             ObjetoNumeroUnicoAsignado = []
             ObjetoNumeroUnicoAsignado[0] = { Accion: "", JuntaID: "", NumeroUnico1ID: "", NumeroUnico2ID: "" }
