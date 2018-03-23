@@ -18,13 +18,14 @@ function AjaxValidarNumerosUnicos(arregloCaptura, tipoGuardar) {
     var RequiereValidarNU;
     var numUnicosIncorrectosCliente = false;
     for (index = 0; index < arregloCaptura.length; index++) {
-        ListaDetalles[index] = { JuntaSpoolID: "", NumeroUnico1ID: "", NumeroUnico2ID: "", Localizacion1: "", Localizacion2: "" };
+        ListaDetalles[index] = { JuntaSpoolID: "", NumeroUnico1ID: "", NumeroUnico2ID: "", Localizacion1: "", Localizacion2: "", JuntaWorkStatusID: "" };
         if (RequiereValidarNU == undefined) {
             RequiereValidarNU = arregloCaptura[index].RevisionNU;
         }
 
         $("#grid").data("kendoGrid").dataSource._data[index].NUOk = true;
         ListaDetalles[index].JuntaSpoolID = arregloCaptura[index].JuntaID;
+        ListaDetalles[index].JuntaWorkStatusID = arregloCaptura[index].JuntaWorkStatusID;
         ListaDetalles[index].NumeroUnico1ID = arregloCaptura[index].NumeroUnico1ID;
         ListaDetalles[index].NumeroUnico2ID = arregloCaptura[index].NumeroUnico2ID;
         ListaDetalles[index].Localizacion1 = arregloCaptura[index].Localizacion.split("-")[0];
@@ -385,9 +386,10 @@ function ajaxObtenerJSonGridDespuesGuardar(rowsVisualDimensional) {
 
             var ExistenJuntasGrid = [];
             var JuntasAgregadas = [];
-            for (var j = 0; j < rowsVisualDimensional.length; j++) {
+            //for (var j = 0; j < rowsVisualDimensional.length; j++) {
                 for (var i = 0; i < array.length; i++) {
-                    if (array[i].JuntaID == rowsVisualDimensional[j].JuntaID) {
+                    //if (array[i].JuntaID == rowsVisualDimensional[j].JuntaID) {
+                    if (true) {
                         JuntasAgregadas.push(array[i].Junta);
                         array[i].NumeroUnico1 = array[i].NumeroUnico1 == "" ? DatoDefaultNumeroUnico1() : array[i].NumeroUnico1;
                         array[i].NumeroUnico2 = array[i].NumeroUnico2 == "" ? DatoDefaultNumeroUnico2() : array[i].NumeroUnico2;
@@ -399,7 +401,7 @@ function ajaxObtenerJSonGridDespuesGuardar(rowsVisualDimensional) {
                         ds.add(array[i]);
                     }
                 }
-            }
+            //}
 
 
             //deshabilitaSpool();
@@ -577,7 +579,7 @@ function ajaxGuardado(jSonCaptura, tipoGuardar) {
             ListaDetalleGuardarInspeccionVisual[index].ResultadoID = jSonCaptura[index].ResultadoID == null ? 0 : jSonCaptura[index].ResultadoID;
             ListaDetalleGuardarInspeccionVisual[index].TallerID = jSonCaptura[index].TallerID == null ? 0 : jSonCaptura[index].TallerID;
             ListaDetalleGuardarInspeccionVisual[index].JuntaSpoolID = jSonCaptura[index].JuntaID == null ? 0 : jSonCaptura[index].JuntaID;
-            ListaDetalleGuardarInspeccionVisual[index].JuntaSpoolID = jSonCaptura[index].JuntaWorkStatusID == null ? 0 : jSonCaptura[index].JuntaWorkStatusID;
+            ListaDetalleGuardarInspeccionVisual[index].JuntaWorkStatusID = jSonCaptura[index].JuntaWorkStatusID == null ? 0 : jSonCaptura[index].JuntaWorkStatusID;
 
             ObjetoNumeroUnicoAsignado = []
             ObjetoNumeroUnicoAsignado[0] = { Accion: "", JuntaID: "", NumeroUnico1ID: "", NumeroUnico2ID: "" }
