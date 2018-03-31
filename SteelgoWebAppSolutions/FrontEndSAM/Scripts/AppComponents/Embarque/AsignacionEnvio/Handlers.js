@@ -57,19 +57,55 @@ function suscribirEventoEmbarque() {
         index: 3,
         change: function (e) {            
             var ds = this.dataSource._data;
+            var dataItem = this.dataItem(e.sender.selectedIndex);
+            var encontrado = 0;
             if (ds != undefined) {
                 if (ds.length > 0) {
-                    if (ds.length == 1) {
-                        /*LLENO DATOS DE PROVEEDOR, TRACTO Y CHOFER DEL EMBARQUE*/
-                        $("#Proveedor").data("kendoComboBox").dataSource.data(ds[0].ListaDatosEmbarque);
-                        $("#Proveedor").data("kendoComboBox").value(ds[0].ListaDatosEmbarque[0].ProveedorID);
-                        $("#Tracto").data("kendoComboBox").dataSource.data(ds[0].ListaDatosEmbarque);
-                        $("#Tracto").data("kendoComboBox").value(ds[0].ListaDatosEmbarque[0].TractoID);
-                        $("#Chofer").data("kendoComboBox").dataSource.data(ds[0].ListaDatosEmbarque);
-                        $("#Chofer").data("kendoComboBox").value(ds[0].ListaDatosEmbarque[0].ChoferID);
-                        /*LLENO DATOS DE PROVEEDOR, TRACTO Y CHOFER DE ENVIO*/
-                        ObtenerTractoYChoferEnvio(ds);
+                    for (var i = 0; i < ds.length; i++) {
+                        if (encontrado == 0) {
+                            if (dataItem.EmbarqueID === ds[i].EmbarqueID) {
+                                encontrado = encontrado + 1;
+                                if (ds[i].ListaDatosEmbarque.length > 0) {
+                                    $("#Proveedor").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
+                                    $("#Proveedor").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].ProveedorID);
+                                    $("#Tracto").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
+                                    $("#Tracto").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].TractoID);
+                                    $("#Chofer").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
+                                    $("#Chofer").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].ChoferID);
+
+                                    /*LLENO SI TIENE PROVEEDOR, TRACTO Y CHOFER DE ENVIO POR DEFAULT*/
+                                    if (ds[i].ListaDatosEmbarque[0].ProveedorEnvioID != undefined) {
+                                        $("#ProveedorEnvio").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
+                                        $("#ProveedorEnvio").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].ProveedorEnvioID);
+                                        $("#ProveedorEnvio").data("kendoComboBox").trigger("change");
+                                    }
+                                    
+                                    /*LLENO DATOS DE PROVEEDOR, TRACTO Y CHOFER DE ENVIO*/
+                                    ObtenerTractoYChoferEnvio(ds);
+                                    
+                                } else {
+                                    $("#Proveedor").data("kendoComboBox").dataSource.data([]);
+                                    $("#Proveedor").data("kendoComboBox").value("");
+                                    $("#Tracto").data("kendoComboBox").dataSource.data([]);
+                                    $("#Tracto").data("kendoComboBox").value("");
+                                    $("#Chofer").data("kendoComboBox").dataSource.data([]);
+                                    $("#Chofer").data("kendoComboBox").value("");
+                                    ObtenerTractoYChoferEnvio(ds);
+                                }                                                              
+                            }
+                        }
                     }
+                    //if (ds.length == 1) {
+                        ///*LLENO DATOS DE PROVEEDOR, TRACTO Y CHOFER DEL EMBARQUE*/
+                        //$("#Proveedor").data("kendoComboBox").dataSource.data(ds[0].ListaDatosEmbarque);
+                        //$("#Proveedor").data("kendoComboBox").value(ds[0].ListaDatosEmbarque[0].ProveedorID);
+                        //$("#Tracto").data("kendoComboBox").dataSource.data(ds[0].ListaDatosEmbarque);
+                        //$("#Tracto").data("kendoComboBox").value(ds[0].ListaDatosEmbarque[0].TractoID);
+                        //$("#Chofer").data("kendoComboBox").dataSource.data(ds[0].ListaDatosEmbarque);
+                        //$("#Chofer").data("kendoComboBox").value(ds[0].ListaDatosEmbarque[0].ChoferID);
+                        ///*LLENO DATOS DE PROVEEDOR, TRACTO Y CHOFER DE ENVIO*/
+                        //ObtenerTractoYChoferEnvio(ds);
+                    //}
                 }                
             }
         }
@@ -104,9 +140,49 @@ function ObtenerTractoYChoferEnvio(data) {
             data[0].ListaDatosEmbarque[0].ListaTractoEnvio.splice(0, 0, { TractoEnvioID: -1, TractoEnvio: _dictionary.EmarquePreparacionAgregarTractoEnvio[$("#language").data("kendoDropDownList").value()] });
             data[0].ListaDatosEmbarque[0].ListaChoferEnvio.splice(0, 0, { ChoferEnvioID: -1, ChoferEnvio: _dictionary.EmarquePreparacionAgregarChoferEnvio[$("#language").data("kendoDropDownList").value()] });            
         } else {
-            $("#ProveedorEnvio").data("kendoComboBox").dataSource.data(data[0].ListaProveedorEnvio);
-            $("#TractoEnvio").data("kendoComboBox").dataSource.data(data[0].ListaDatosEmbarque[0].ListaTractoEnvio);
-            $("#ChoferEnvio").data("kendoComboBox").dataSource.data(data[0].ListaDatosEmbarque[0].ListaChoferEnvio);
+            //
+            //data[0].ListaDatosEmbarque[0].ListaChoferEnvio.splice(0, 0, { ChoferEnvioID: -1, ChoferEnvio: _dictionary.EmarquePreparacionAgregarChoferEnvio[$("#language").data("kendoDropDownList").value()] });           
+            
+            if (data[0].ListaProveedorEnvio[0] != undefined) {
+                var tiene = 0;
+                for (var i = 0; i < data[0].ListaProveedorEnvio.length; i++) {
+                    if (data[0].ListaProveedorEnvio[i].ProveedorEnvioID == -1) {
+                        tiene = tiene + 1;
+                    }
+                }
+                if (tiene == 0) {
+                    data[0].ListaProveedorEnvio.splice(0, 0, { ProveedorEnvioID: -1, ProveedorEnvio: _dictionary.EmarquePreparacionAgregarProveedorEnvio[$("#language").data("kendoDropDownList").value()] });
+                }                
+                $("#ProveedorEnvio").data("kendoComboBox").dataSource.data(data[0].ListaProveedorEnvio);
+            }
+
+
+            if (data[0].ListaDatosEmbarque[0] != undefined)
+            {
+                var tiene = 0;
+                for (var i = 0; i < data[0].ListaDatosEmbarque[0].ListaTractoEnvio.length; i++) {
+                    if (data[0].ListaDatosEmbarque[0].ListaTractoEnvio[0].TractoEnvioID == -1) {
+                        tiene = tiene + 1;
+                    }
+                }
+                if (tiene == 0) {
+                    data[0].ListaDatosEmbarque[0].ListaTractoEnvio.splice(0, 0, { TractoEnvioID: -1, TractoEnvio: _dictionary.EmarquePreparacionAgregarTractoEnvio[$("#language").data("kendoDropDownList").value()] });
+                }
+                $("#TractoEnvio").data("kendoComboBox").dataSource.data(data[0].ListaDatosEmbarque[0].ListaTractoEnvio);
+            }
+
+            if (data[0].ListaDatosEmbarque[0] != undefined) {
+                var tiene = 0;
+                for (var i = 0; i < data[0].ListaDatosEmbarque[0].ListaChoferEnvio.length; i++) {
+                    if (data[0].ListaDatosEmbarque[0].ListaChoferEnvio[0].ChoferEnvioID == -1) {
+                        tiene = tiene + 1;
+                    }
+                }
+                if (tiene == 0) {
+                    data[0].ListaDatosEmbarque[0].ListaChoferEnvio.splice(0, 0, { ChoferEnvioID: -1, ChoferEnvio: _dictionary.EmarquePreparacionAgregarChoferEnvio[$("#language").data("kendoDropDownList").value()] });
+                }
+                $("#ChoferEnvio").data("kendoComboBox").dataSource.data(data[0].ListaDatosEmbarque[0].ListaChoferEnvio);
+            }           
         }        
     }
 }

@@ -88,15 +88,24 @@ function AjaxGetTractoEnvio(ProveedorID, nuevoTracto) {
                     $("#TractoEnvio").data("kendoComboBox").dataSource.data(data);
                     $("#TractoEnvio").data("kendoComboBox").value(TractoEnvioID);
                     $("#TractoEnvio").data("kendoComboBox").select(1);
-                    $("#TractoEnvio").data("kendoComboBox").trigger("change");
+                    $("#TractoEnvio").data("kendoComboBox").trigger("change");                    
+                }
+            } if (data.length == 2) {                
+                for (var i = 0; i < data.length; i++) {
+                    TractoEnvioID = data[i].TractoEnvioID;
+                    $("#TractoEnvio").data("kendoComboBox").dataSource.data(data);
+                    $("#TractoEnvio").data("kendoComboBox").value(TractoEnvioID);
+                    $("#TractoEnvio").data("kendoComboBox").select(2);
+                    $("#TractoEnvio").data("kendoComboBox").trigger("change");                    
                 }
             } else {
+
                 for (var j = 0; j < data.length; j++) {
                     TractoEnvioID = data[j].TractoEnvioID;
                 }
                 $("#TractoEnvio").data("kendoComboBox").dataSource.data(data);
                 $("#TractoEnvio").data("kendoComboBox").value(TractoEnvioID);
-            }            
+            }
             data.splice(0, 0, { TractoEnvioID: -1, TractoEnvio: _dictionary.EmarquePreparacionAgregarTractoEnvio[$("#language").data("kendoDropDownList").value()] });
             $("#TractoEnvio").data("kendoComboBox").dataSource.data(data);            
         } else {
@@ -104,8 +113,9 @@ function AjaxGetTractoEnvio(ProveedorID, nuevoTracto) {
             $("#TractoEnvio").data("kendoComboBox").dataSource.data(data);
             $("#TractoEnvio").data("kendoComboBox").value("");
         }
-        loadingStop();
+        
     });
+    loadingStop();
 }
 
 function AjaxGetChoferesEnvio(proveedorID, nuevoChofer) {
@@ -115,12 +125,22 @@ function AjaxGetChoferesEnvio(proveedorID, nuevoChofer) {
         if (data.length > 0) {
             var ChoferEnvioID = 0;            
             if (data.length == 1) {
+                data.splice(0, 0, { ChoferEnvioID: -1, ChoferEnvio: _dictionary.EmarquePreparacionAgregarChoferEnvio[$("#language").data("kendoDropDownList").value()] });
+                for (var i = 0; i < data.length; i++) {
+                    ChoferEnvioID = data[i].ChoferEnvioID;                    
+                    $("#ChoferEnvio").data("kendoComboBox").dataSource.data(data);
+                    $("#ChoferEnvio").data("kendoComboBox").value(ChoferEnvioID);
+                    $("#ChoferEnvio").data("kendoComboBox").select(1);
+                    
+                }                
+            } else if (data.length == 2) {
+                data.splice(0, 0, { ChoferEnvioID: -1, ChoferEnvio: _dictionary.EmarquePreparacionAgregarChoferEnvio[$("#language").data("kendoDropDownList").value()] });
                 for (var i = 0; i < data.length; i++) {
                     ChoferEnvioID = data[i].ChoferEnvioID;
                     $("#ChoferEnvio").data("kendoComboBox").dataSource.data(data);
                     $("#ChoferEnvio").data("kendoComboBox").value(ChoferEnvioID);
-                    $("#ChoferEnvio").data("kendoComboBox").select(1);
-                }                
+                    $("#ChoferEnvio").data("kendoComboBox").select(2);
+                }
             } else {
                 for (var j = 0; j < data.length; j++) {
                     ChoferEnvioID = data[j].ChoferEnvioID;

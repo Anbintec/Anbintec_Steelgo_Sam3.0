@@ -244,8 +244,9 @@ function AjaxObtenerEmbarque(ProveedorID, nombreEmbarque) {
             $("#Embarque").data("kendoComboBox").value(EmbarqueID);
             $("#Embarque").data("kendoComboBox").trigger("change");
         }
-        loadingStop();
+       
     });
+    loadingStop();
 }
 
 
