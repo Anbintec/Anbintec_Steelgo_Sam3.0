@@ -37,7 +37,7 @@ function SuscribirEventoProyecto() {
                 LimpiarSelectProyecto();
                 if (dataItem.ProyectoID != 0) {                    
                     AjaxGetEmbarques(dataItem.ProyectoID);
-                    //AjaxGetProveedoresEnvio(dataItem.ProyectoID);
+                    AjaxGetProveedoresEnvio(dataItem.ProyectoID);
                 }
             }
             else {
@@ -63,35 +63,37 @@ function suscribirEventoEmbarque() {
                 if (ds.length > 0) {
                     for (var i = 0; i < ds.length; i++) {
                         if (encontrado == 0) {
-                            if (dataItem.EmbarqueID === ds[i].EmbarqueID) {
-                                encontrado = encontrado + 1;
-                                if (ds[i].ListaDatosEmbarque.length > 0) {
-                                    $("#Proveedor").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
-                                    $("#Proveedor").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].ProveedorID);
-                                    $("#Tracto").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
-                                    $("#Tracto").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].TractoID);
-                                    $("#Chofer").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
-                                    $("#Chofer").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].ChoferID);
+                            if (dataItem != undefined) {
+                                if (dataItem.EmbarqueID === ds[i].EmbarqueID) {
+                                    encontrado = encontrado + 1;
+                                    if (ds[i].ListaDatosEmbarque.length > 0) {
+                                        $("#Proveedor").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
+                                        $("#Proveedor").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].ProveedorID);
+                                        $("#Tracto").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
+                                        $("#Tracto").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].TractoID);
+                                        $("#Chofer").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
+                                        $("#Chofer").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].ChoferID);
 
-                                    /*LLENO SI TIENE PROVEEDOR, TRACTO Y CHOFER DE ENVIO POR DEFAULT*/
-                                    if (ds[i].ListaDatosEmbarque[0].ProveedorEnvioID != undefined) {
-                                        $("#ProveedorEnvio").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
-                                        $("#ProveedorEnvio").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].ProveedorEnvioID);
-                                        $("#ProveedorEnvio").data("kendoComboBox").trigger("change");
+                                        /*LLENO SI TIENE PROVEEDOR, TRACTO Y CHOFER DE ENVIO POR DEFAULT*/
+                                        if (ds[i].ListaDatosEmbarque[0].ProveedorEnvioID != undefined) {
+                                            $("#ProveedorEnvio").data("kendoComboBox").dataSource.data(ds[i].ListaDatosEmbarque);
+                                            $("#ProveedorEnvio").data("kendoComboBox").value(ds[i].ListaDatosEmbarque[0].ProveedorEnvioID);
+                                            $("#ProveedorEnvio").data("kendoComboBox").trigger("change");
+                                        }
+
+                                        /*LLENO DATOS DE PROVEEDOR, TRACTO Y CHOFER DE ENVIO*/
+                                        ObtenerTractoYChoferEnvio(ds);
+
+                                    } else {
+                                        $("#Proveedor").data("kendoComboBox").dataSource.data([]);
+                                        $("#Proveedor").data("kendoComboBox").value("");
+                                        $("#Tracto").data("kendoComboBox").dataSource.data([]);
+                                        $("#Tracto").data("kendoComboBox").value("");
+                                        $("#Chofer").data("kendoComboBox").dataSource.data([]);
+                                        $("#Chofer").data("kendoComboBox").value("");
+                                        ObtenerTractoYChoferEnvio(ds);
                                     }
-                                    
-                                    /*LLENO DATOS DE PROVEEDOR, TRACTO Y CHOFER DE ENVIO*/
-                                    ObtenerTractoYChoferEnvio(ds);
-                                    
-                                } else {
-                                    $("#Proveedor").data("kendoComboBox").dataSource.data([]);
-                                    $("#Proveedor").data("kendoComboBox").value("");
-                                    $("#Tracto").data("kendoComboBox").dataSource.data([]);
-                                    $("#Tracto").data("kendoComboBox").value("");
-                                    $("#Chofer").data("kendoComboBox").dataSource.data([]);
-                                    $("#Chofer").data("kendoComboBox").value("");
-                                    ObtenerTractoYChoferEnvio(ds);
-                                }                                                              
+                                }
                             }
                         }
                     }

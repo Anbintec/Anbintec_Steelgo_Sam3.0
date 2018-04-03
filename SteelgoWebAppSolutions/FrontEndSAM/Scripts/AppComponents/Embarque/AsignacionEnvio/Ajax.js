@@ -35,7 +35,7 @@ function AjaxGetEmbarques(ProyectoID) {
             if (data.length == 1) {                
                 $("#Embarque").data("kendoComboBox").dataSource.data(data);
                 $("#Embarque").data("kendoComboBox").value(data[0].EmbarqueID);
-                $("#Embarque").data("kendoComboBox").select(1);
+                $("#Embarque").data("kendoComboBox").select(0);
                 $("#Embarque").data("kendoComboBox").trigger("change");
             } else {
                 for (var i = 0; i < data.length; i++) {
@@ -60,15 +60,33 @@ function AjaxGetProveedoresEnvio(proyectoID) {
         if (data.length > 0) {
             $("#ProveedorEnvio").data("kendoComboBox").dataSource.data(data);
             if (data.length == 1) {                
-                if (data[i].ProveedorEnvioID != 0) {                    
-                    $("#ProveedorEnvio").data("kendoComboBox").dataSource.data(data);
-                    $("#ProveedorEnvio").data("kendoComboBox").value(data[0].ProveedorEnvioID);
-                    $("#ProveedorEnvio").data("kendoComboBox").select(1);
-                    $("#ProveedorEnvio").data("kendoComboBox").trigger("change");
+                if (data[i].ProveedorEnvioID != 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        ProveedorId = data[i].ProveedorEnvioID;
+                        $("#ProveedorEnvio").data("kendoComboBox").dataSource.data(data);
+                        $("#ProveedorEnvio").data("kendoComboBox").value(ProveedorId);
+                        $("#ProveedorEnvio").data("kendoComboBox").select(1);
+                        $("#ProveedorEnvio").data("kendoComboBox").trigger("change");
+                    }                    
                 }                
+            } else if (data.length == 2) {
+                if (data[i].ProveedorEnvioID != 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        ProveedorId = data[i].ProveedorEnvioID;
+                        $("#ProveedorEnvio").data("kendoComboBox").dataSource.data(data);
+                        $("#ProveedorEnvio").data("kendoComboBox").value(ProveedorId);
+                        $("#ProveedorEnvio").data("kendoComboBox").select(2);
+                        $("#ProveedorEnvio").data("kendoComboBox").trigger("change");
+                    }                    
+                }
             } else {
+                for (var i = 0; i < data.length; i++) {
+                    ProveedorId = data[i].ProveedorEnvioID;
+                }
+
                 $("#ProveedorEnvio").data("kendoComboBox").dataSource.data(data);
-                //$("#ProveedorEnvio").data("kendoComboBox").trigger("change");
+                $("#ProveedorEnvio").data("kendoComboBox").value(ProveedorId);
+                $("#ProveedorEnvio").data("kendoComboBox").trigger("change");
             }
             data.splice(0, 0, { ProveedorEnvioID: -1, ProveedorEnvio: _dictionary.EmarquePreparacionAgregarProveedorEnvio[$("#language").data("kendoDropDownList").value()] });
         }        
@@ -163,7 +181,8 @@ function GuardarNuevoProveedorEnvio() {
     $Proveedores.Proveedores.read({ token: Cookies.get("token"), NombreProveedor: $("#inputNombreNuevoProveedorEnvio").val(), ProyectoID: $("#Proyecto").data("kendoComboBox").value(), Descripcion: "", Direccion: "", Telefono: "", TipoProveedor: 2 }).done(function (data) {
         if (Error(data)) {
             if (data.ReturnMessage.length > 0 && data.ReturnMessage[0] == "Ok") {
-                AjaxGetEmbarques($("#Proyecto").data("kendoComboBox").value());
+                AjaxGetProveedoresEnvio($("#Proyecto").data("kendoComboBox").value());
+                //AjaxGetEmbarques($("#Proyecto").data("kendoComboBox").value());
                 //AjaxEmbarqueCargaProveedores($("#Proyecto").data("kendoComboBox").value(), $("#inputNombreNuevoProveedor").val());
                 windowNewProvider.close();
                 displayNotify("MensajeGuardadoExistoso", "", "0");
