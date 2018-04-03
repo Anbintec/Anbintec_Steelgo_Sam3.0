@@ -210,7 +210,7 @@ namespace BackEndSAM.DataAcces.Embarque.ListadoEmbarque
                             Destino = item.Destino,
                             FolioSolicitudPermiso = item.RequiereAduana.GetValueOrDefault() ? item.SolicitudPermiso : "NA",
                             Planas = item.Planas,
-                            FechaSolicitudPermiso = item.RequiereAduana.GetValueOrDefault() ? item.FechaPermiso.ToString() : "NA",
+                            FechaSolicitudPermiso = item.RequiereAduana.GetValueOrDefault() ? item.FechaPermiso : "NA",
                             RequierePapCliente = item.RequierePapCliente,
                             RequierePermisoAduana = item.RequiereAduana,
                             RequiereRevisionCliente = item.RequiereRevisionCliente,
